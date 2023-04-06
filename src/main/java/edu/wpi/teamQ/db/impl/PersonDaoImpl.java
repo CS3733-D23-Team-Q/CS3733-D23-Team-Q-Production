@@ -33,7 +33,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
 
   public boolean updateRow(Integer IDNum, Person personWithNewChanges) {
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     String newFN = personWithNewChanges.getFirstName();
     String newLN = personWithNewChanges.getLastName();
     String newTitle = personWithNewChanges.getTitle();
@@ -73,7 +73,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
 
   public boolean deleteRow(Integer IDNum) {
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "DELETE FROM person WHERE IDNum = ?";
       PreparedStatement pst = con.prepareStatement(query);
@@ -103,7 +103,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     int PhoneNumber = a.getPhoneNumber();
     String username = a.getUsername();
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query =
           "INSERT INTO person (IDNum, FirstName, LastName, Title, PhoneNumber, username) VALUES(?,?,?,?,?,?)";
@@ -136,7 +136,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
   }
 
   public boolean populate() {
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "SELECT * FROM person";
       Statement st = con.createStatement();

@@ -58,7 +58,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
      * @return true if successfully deleted
      */
     public boolean deleteRow(Integer edgeID) {
-        try (Connection conn = connect();
+        try (Connection conn = GenDao.connect();
              PreparedStatement stmt =
                      conn.prepareStatement("DELETE FROM \"edge\" WHERE \"edgeID\" = ?")) {
             stmt.setInt(1, edgeID);
@@ -78,7 +78,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
      * @return true if successful
      */
     public boolean addRow(Edge e) {
-        try (Connection conn = connect();
+        try (Connection conn = GenDao.connect();
              PreparedStatement stmt =
                      conn.prepareStatement(
                              "INSERT INTO edge(\"edgeID\", \"startNode\", \"endNode\") VALUES (?, ?, ?)")) {
@@ -97,7 +97,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
     public boolean populate() {
         NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
         try {
-            Connection conn = connect();
+            Connection conn = GenDao.connect();
             Statement stm = conn.createStatement();
             ResultSet rst = stm.executeQuery("Select * From \"edge\"");
             while (rst.next()) {

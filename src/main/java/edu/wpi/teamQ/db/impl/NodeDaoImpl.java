@@ -66,7 +66,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
    * @return true if successfully deleted
    */
   public boolean deleteRow(Integer nodeID) {
-    try (Connection conn = connect();
+    try (Connection conn = GenDao.connect();
          PreparedStatement stmt =
             conn.prepareStatement("DELETE FROM \"node\" WHERE \"nodeID\" = ?")) {
       stmt.setInt(1, nodeID);
@@ -86,7 +86,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
    * @return true if successful
    */
   public boolean addRow(Node n) {
-    try (Connection conn = connect();
+    try (Connection conn = GenDao.connect();
          PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"flowerRequest\"(\"nodeID\", xcoord, ycoord, floor, building) VALUES (?, ?, ?, ?, ?)")) {
@@ -105,7 +105,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
   @Override
   public boolean populate() {
     try {
-      Connection conn = connect();
+      Connection conn = GenDao.connect();
       PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"node\"");
       ResultSet rs = pst.executeQuery();
       while (rs.next()) {

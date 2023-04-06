@@ -55,7 +55,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
    * @return true if successfully deleted
    */
   public boolean deleteRow(Integer nodeID) {
-    try (Connection connection = connect();
+    try (Connection connection = GenDao.connect();
          PreparedStatement st =
             connection.prepareStatement(
                 "DELETE FROM \"conferenceRequest\" WHERE \"requestID\" = ?")) {;
@@ -78,7 +78,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
    * @return true if successful
    */
   public boolean addRow(Location l) {
-    try (Connection conn = connect();
+    try (Connection conn = GenDao.connect();
          PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"conferenceRequest\"(\"nodeID\", \"longName\", \"shortName\", \"nodeType\") VALUES (?, ?, ?, ?)")) {
@@ -95,7 +95,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
 
   public boolean populate() {
     try {
-      Connection conn = connect();
+      Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"locationName\"");
       while (rst.next()) {

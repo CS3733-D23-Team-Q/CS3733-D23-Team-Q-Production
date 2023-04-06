@@ -41,7 +41,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
 
   public boolean updateRow(String uname, Account accountWithNewChanges) {
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     String newPass = accountWithNewChanges.getPassword();
     String newEmail = accountWithNewChanges.getEmail();
     int newq1 = accountWithNewChanges.getSecurityQuestion1();
@@ -83,7 +83,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
 
   public boolean deleteRow(String uname) {
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "DELETE FROM account WHERE username = ?";
       PreparedStatement pst = con.prepareStatement(query);
@@ -114,7 +114,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     String a1 = a.getSecurityAnswer1();
     String a2 = a.getSecurityAnswer2();
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query =
           "INSERT INTO account (username, password, email, security_question_1, security_question_2, security_answer_1, security_answer_2) VALUES(?,?,?,?,?,?,?)";
@@ -148,7 +148,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   }
 
   public boolean populate() {
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "SELECT * FROM account";
       Statement st = con.createStatement();
@@ -198,7 +198,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
 
   public int getQuestionId(String question) {
     int q = 0;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "SELECT id FROM security_question WHERE question = ?";
       PreparedStatement pst = con.prepareStatement(query);

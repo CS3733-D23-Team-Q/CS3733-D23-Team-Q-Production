@@ -36,7 +36,7 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
 
   public boolean updateRow(Integer id, Question questionWithNewChanges) {
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     String question = questionWithNewChanges.getQuestion();
     try {
       String query = "UPDATE security_question SET question = ? WHERE id = ?";
@@ -62,7 +62,7 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
 
   public boolean deleteRow(Integer id) {
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "DELETE FROM security_question WHERE id = ?";
       PreparedStatement pst = con.prepareStatement(query);
@@ -92,7 +92,7 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
   public boolean addRow(Question q) {
     String question = q.getQuestion();
     boolean result = false;
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "INSERT INTO security_question (question) VALUES(?)";
       PreparedStatement pst = con.prepareStatement(query);
@@ -114,7 +114,7 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
   }
 
   public boolean populate() {
-    Connection con = connect();
+    Connection con = GenDao.connect();
     try {
       String query = "SELECT * FROM security_question";
       Statement st = con.createStatement();

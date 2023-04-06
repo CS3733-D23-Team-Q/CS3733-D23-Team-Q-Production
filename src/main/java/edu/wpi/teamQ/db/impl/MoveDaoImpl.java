@@ -63,7 +63,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
      * @return true if successfully deleted
      */
     public boolean deleteRow(Integer moveID) {
-        try (Connection connection = connect();
+        try (Connection connection = GenDao.connect();
              PreparedStatement st =
                      connection.prepareStatement("DELETE FROM move WHERE \"moveID\" = ?")) {
             ;
@@ -86,7 +86,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
      * @return true if successful
      */
     public boolean addRow(Move m) {
-        try (Connection conn = connect();
+        try (Connection conn = GenDao.connect();
              PreparedStatement stmt =
                      conn.prepareStatement(
                              "INSERT INTO move(\"nodeID\", \"longName\", \"date\") VALUES (?, ?, ?)")) {
@@ -111,7 +111,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
     @Override
     public boolean populate() {
         try {
-            Connection conn = connect();
+            Connection conn = GenDao.connect();
             Statement stm = conn.createStatement();
             ResultSet rst = stm.executeQuery("Select * From move");
 

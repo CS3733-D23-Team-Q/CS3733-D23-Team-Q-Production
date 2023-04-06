@@ -66,7 +66,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
      * @return true if successfully deleted
      */
     public boolean deleteRow(Integer requestID) {
-        try (Connection conn = connect();
+        try (Connection conn = GenDao.connect();
              PreparedStatement stmt =
                      conn.prepareStatement("DELETE FROM \"flowerRequest\" WHERE \"requestID\" = ?")) {
             stmt.setInt(1, requestID);
@@ -86,7 +86,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
      * @return true if successful
      */
     public boolean addRow(FlowerRequest request) {
-        try (Connection conn = connect();
+        try (Connection conn = GenDao.connect();
              PreparedStatement stmt =
                      conn.prepareStatement(
                              "INSERT INTO \"flowerRequest\"(\"requester\", \"progress\", \"assignee\", \"specialInstructions\", \"note\", \"typeOfFlower\", \"bouquetSize\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
@@ -110,7 +110,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     @Override
     public boolean populate() {
         try {
-            Connection conn = connect();
+            Connection conn = GenDao.connect();
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"flowerRequest\"");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

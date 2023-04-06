@@ -65,7 +65,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
    * @return true if successfully deleted
    */
   public boolean deleteRow(Integer requestID) {
-    try (Connection connection = connect();
+    try (Connection connection = GenDao.connect();
          PreparedStatement st =
             connection.prepareStatement(
                 "DELETE FROM \"conferenceRequest\" WHERE \"requestID\" = ?")) {;
@@ -88,7 +88,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
    * @return true if successful
    */
   public boolean addRow(ConferenceRequest request) {
-    try (Connection conn = connect();
+    try (Connection conn = GenDao.connect();
          PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"specialInstructions\", \"time\", \"foodChoice\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
@@ -111,7 +111,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
   @Override
   public boolean populate() {
     try {
-      Connection conn = connect();
+      Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"conferenceRequest\"");
       while (rst.next()) {
