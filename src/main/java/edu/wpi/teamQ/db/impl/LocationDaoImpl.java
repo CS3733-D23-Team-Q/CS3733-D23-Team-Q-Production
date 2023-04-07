@@ -1,11 +1,18 @@
 package edu.wpi.teamQ.db.impl;
 
 import edu.wpi.teamQ.db.dao.GenDao;
+import edu.wpi.teamQ.db.obj.Edge;
 import edu.wpi.teamQ.db.obj.Location;
+import edu.wpi.teamQ.db.obj.Move;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LocationDaoImpl implements GenDao<Location, Integer> {
   private List<Location> locations = new ArrayList<Location>();
@@ -137,5 +144,52 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
    */
   public List<Location> getAllRows() {
     return locations;
+  }
+
+  public boolean toCSV(String filename) {
+    try {
+      File myObj = new File(filename);
+      if (myObj.createNewFile()) {
+        System.out.println("File created: " + myObj.getName());
+      }
+      FileWriter myWriter = new FileWriter(filename);
+      for (int i = 0; i < locations.size(); i++) {
+        Location l = locations.get(i);
+        myWriter.write(
+                l.getNodeID()
+                        + ','
+                        + l.getLongName()
+                        + ','
+                        + l.getShortName()
+                        + ','
+                        + l.getNodeType()
+                        + "\n");
+      }
+      myWriter.close();
+      System.out.println("Successfully wrote to the file.");
+      return true;
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+      return false;
+    }
+  }
+
+  public boolean importCSV(String filename) {
+    NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
+    try {
+      File f = new File(filename);
+      Scanner myReader = new Scanner(f);
+      while (myReader.hasNextLine()) {
+        String row = myReader.nextLine();
+        String[] vars = row.split(",");
+        Location l = new Location(Integer.parseInt(vars[0]), vars[1], vars[2], vars[3]);
+        addRow(l);
+      }
+      myReader.close();
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+    return true;
   }
 }
