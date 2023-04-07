@@ -12,10 +12,10 @@ public class Qdb {
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance();
   private ServiceRequestDaoImpl serviceRequestTable =
       ServiceRequestDaoImpl.getInstance(conferenceRequestTable, flowerRequestTable);
-  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance();
-  private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
-  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance();
+  public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+  public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
 
   private static Qdb single_instance = null;
