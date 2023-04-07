@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ServiceRequestDaoImpl {
-    ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
+    private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
     private GenDao conferenceRequestTable;
     private GenDao flowerRequestsTable;
 
