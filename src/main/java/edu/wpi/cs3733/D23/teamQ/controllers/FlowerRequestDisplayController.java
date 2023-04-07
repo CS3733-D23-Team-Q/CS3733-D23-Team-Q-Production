@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 
-public class FlowerRequestDisplayController {
+public class FlowerRequestDisplayController implements IController {
   @FXML Button resetButton;
   @FXML Button backButton;
   @FXML Button submitButton;

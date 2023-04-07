@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-public class EditProfileController {
+public class EditProfileController implements IController {
   @FXML private MFXButton ProfilePage_ChangePic_Button;
 
   @FXML private MFXButton ProfilePage_Done_Button;

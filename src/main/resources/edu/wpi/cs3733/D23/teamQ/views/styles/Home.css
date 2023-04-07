@@ -10,6 +10,8 @@
 }
 .button-navigate
 {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3966af;
     -fx-background-color: #F1F1F1;
 }
 .button-login
@@ -32,7 +34,7 @@
     -fx-font-weight: bold;
 }
 .button-navigate:focused{
-    -fx-font-size: 16;
+    -fx-font-size: 16px;
 }
 .button-login:hover{
     -fx-background-color: #2f7da6;

@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class ProfilePageController {
+public class ProfilePageController implements IController {
 
   Qdb qdb = Qdb.getInstance();
 

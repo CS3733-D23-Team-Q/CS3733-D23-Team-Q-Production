@@ -16,7 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ListServiceRequestController {
+public class ListServiceRequestController implements IController {
   @FXML Button homeButton;
   @FXML MenuItem homeItem;
   @FXML MenuItem exitItem;

@@ -31,10 +31,6 @@ public class Qdb {
     return accountTable.retrieveRow(username);
   }
 
-  public int getAccountIndex(String username) {
-    return accountTable.getIndex(username);
-  }
-
   public ArrayList<Account> retrieveAccounts(String email) {
     return (ArrayList<Account>) accountTable.retrieveRows(email);
   }
@@ -49,6 +45,14 @@ public class Qdb {
 
   public boolean addAccount(Account a) {
     return accountTable.addRow(a);
+  }
+
+  public int getAccountIndex(String username) {
+    return accountTable.getIndex(username);
+  }
+
+  public List<Integer> getAccountIndexes(String email) {
+    return accountTable.getIndexes(email);
   }
 
   public ArrayList<Account> retrieveAllAccounts() {
@@ -223,11 +227,19 @@ public class Qdb {
     return questionTable.deleteRow(ID);
   }
 
+  public ArrayList<Question> retrieveAllQuestions() {
+    return (ArrayList<Question>) questionTable.getAllRows();
+  }
+
   public boolean addQuestion(Question q) {
     return questionTable.addRow(q);
   }
 
-  public ArrayList<Question> retrieveAllQuestions() {
-    return (ArrayList<Question>) questionTable.getAllRows();
+  public int getQuestionIndex(int ID) {
+    return questionTable.getIndex(ID);
+  }
+
+  public int getQuestionIndex(String question) {
+    return questionTable.getIndex(question);
   }
 }

@@ -5,7 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
-public class OfficeSuppliesRequestController {
+public class OfficeSuppliesRequestController implements IController {
   @FXML private MFXButton navigateFromOffiButton;
 
   public void initialize() {

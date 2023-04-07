@@ -16,9 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-public class CreateAccountController extends SecondaryStage {
+public class CreateAccountController extends SecondaryStage implements IController {
   Qdb qdb = Qdb.getInstance();
+  static Stage stage;
   Alert alert = new Alert();
   Confirm confirm = new Confirm();
   @FXML ChoiceBox<String> questionChoice1 = new ChoiceBox<>();
@@ -42,8 +44,12 @@ public class CreateAccountController extends SecondaryStage {
   @FXML Label a2Alert;
   @FXML ImageView a2AlertImage;
 
+  public CreateAccountController() throws IOException {}
+
   public static void display() throws IOException {
-    display(Screen.CREATE_ACCOUNT);
+    stage = newStage(Screen.CREATE_ACCOUNT);
+    stage.show();
+    stage.centerOnScreen();
   }
 
   @FXML
@@ -180,7 +186,7 @@ public class CreateAccountController extends SecondaryStage {
         break;
       case 2:
         alert.setLabelAlert(
-            "Please enter a password within the range 7-15 with at least one uppercase letter and one special character",
+            "Please enter a password within the range 7-15 with at least one uppercase letter, one number, one special character",
             passwordAlert,
             passwordAlertImage);
         break;
@@ -285,10 +291,10 @@ public class CreateAccountController extends SecondaryStage {
               qdb.retrieveQuestion(question1).getId(),
               qdb.retrieveQuestion(question2).getId(),
               answer1,
-              answer2);
+              answer2,
+              false);
       qdb.addAccount(a);
-      super.stage.setScene(confirm.getScene(stage, "Confirmation", "Account created successful!"));
-      stage.centerOnScreen();
+      confirm.setScene(stage, "Confirmation", "Account created successful!");
     }
   }
 

@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
@@ -28,7 +29,7 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
     /* primaryStage is generally only used if one of your components require the stage to display */
     App.primaryStage = primaryStage;
-    primaryStage.setTitle("Home Page");
+    primaryStage.setTitle("Login Page");
 
     final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/Root.fxml"));
     final AnchorPane root = loader.load();
@@ -44,9 +45,12 @@ public class App extends Application {
                 .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
                 .toExternalForm());
     primaryStage.show();
-    primaryStage.setFullScreen(true);
+    Rectangle2D screenBounds = javafx.stage.Screen.getPrimary().getVisualBounds();
+    primaryStage.setX(screenBounds.getMinX());
+    primaryStage.setY(screenBounds.getMinY());
+    primaryStage.setWidth(screenBounds.getWidth());
+    primaryStage.setHeight(screenBounds.getHeight());
     Navigation.navigate(Screen.LOGIN);
-    // primaryStage.centerOnScreen();
   }
 
   @Override

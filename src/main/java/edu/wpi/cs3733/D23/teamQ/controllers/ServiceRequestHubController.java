@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 
-public class ServiceRequestHubController {
+public class ServiceRequestHubController implements IController {
   @FXML Button ccrButton;
   @FXML Button mdButton;
   @FXML Button frdButton;
