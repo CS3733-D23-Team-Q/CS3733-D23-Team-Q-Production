@@ -58,7 +58,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     try (Connection connection = GenDao.connect();
          PreparedStatement st =
             connection.prepareStatement(
-                "DELETE FROM \"conferenceRequest\" WHERE \"requestID\" = ?")) {;
+                "DELETE FROM \"locationName\" WHERE \"nodeID\" = ?")) {;
       st.setInt(1, nodeID);
       st.executeUpdate();
     } catch (SQLException e) {
@@ -81,7 +81,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     try (Connection conn = GenDao.connect();
          PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"conferenceRequest\"(\"nodeID\", \"longName\", \"shortName\", \"nodeType\") VALUES (?, ?, ?, ?)")) {
+                "INSERT INTO \"locationName\"(\"nodeID\", \"longName\", \"shortName\", \"nodeType\") VALUES (?, ?, ?, ?)")) {
       stmt.setInt(1, l.getNodeID());
       stmt.setString(2, l.getLongName());
       stmt.setString(3, l.getShortName());
