@@ -12,14 +12,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class LocationController {
 
-  @FXML private Button homeButton;
+  private int nodeIDedit;
+
+  private String newLongName;
+
+  private String newShortName;
+
+  private String newNodeType;
+
+  @FXML private TextField LongNameInput;
+
+  @FXML private TextField NodeTypeInput;
+
+  @FXML private TextField ShortNameInput;
+
+  @FXML private TextField NodeIDEdit;
 
   @FXML private TableColumn<Location, String> LongName;
 
@@ -120,5 +135,121 @@ public class LocationController {
   @FXML
   void nodeClicked(ActionEvent event) {
     Navigation.navigate(Screen.Node_Table);
+  }
+
+  @FXML
+  void setClicked(MouseEvent event) {
+    /*test
+    Location locationex1 = new Location(10, "test1", "test1", "test1");
+    Qdb.getInstance().locationTable.updateRow(10, locationex1);
+    locationname.setItems(locations());
+
+     */
+    if (NodeController.isNumber(NodeIDEdit.getText())) {
+
+      if (LongNameInput.getText() != "") {
+        if (ShortNameInput.getText() != "") {
+          if (NodeTypeInput.getText() != "") {
+            nodeIDedit = Integer.parseInt(NodeIDEdit.getText());
+            if (nodeIDExistLocation(nodeIDedit)) {
+              newLongName = LongNameInput.getText();
+              newNodeType = NodeTypeInput.getText();
+              newShortName = ShortNameInput.getText();
+
+              Qdb.getInstance()
+                  .locationTable
+                  .updateRow(
+                      nodeIDedit, new Location(nodeIDedit, newLongName, newShortName, newNodeType));
+
+              locationname.setItems(locations());
+            } else {
+              // Call Alert "This nodeID does not exist"
+            }
+          } else {
+            // Call Alert "Please input the correct NodeType"
+          }
+
+        } else {
+          // Call Alert "Please input the correct ShortName"
+        }
+
+      } else {
+        // Call Alert "Please input the correct LongName"
+      }
+
+    } else {
+      // Call Alert "Please input the correct nodeID"
+    }
+  }
+
+  @FXML
+  void addClicked(MouseEvent event) {
+    /*test
+    Location locationex = new Location(10, "test", "test", "test");
+    Qdb.getInstance().locationTable.addRow(locationex);
+    locationname.setItems(locations());
+
+     */
+
+    if (NodeController.isNumber(NodeIDEdit.getText())) {
+      if (LongNameInput.getText() != "") {
+        if (ShortNameInput.getText() != "") {
+          if (NodeTypeInput.getText() != "") {
+            nodeIDedit = Integer.parseInt(NodeIDEdit.getText());
+            if (!nodeIDExistLocation(nodeIDedit)) {
+              newLongName = LongNameInput.getText();
+              newNodeType = NodeTypeInput.getText();
+              newShortName = ShortNameInput.getText();
+
+              Qdb.getInstance()
+                  .locationTable
+                  .addRow(new Location(nodeIDedit, newLongName, newShortName, newNodeType));
+
+              locationname.setItems(locations());
+            } else {
+              // Call Alert "This nodeID exists."
+            }
+          } else {
+            // Call Alert "Please input the correct NodeType"
+          }
+
+        } else {
+          // Call Alert "Please input the correct ShortName"
+        }
+
+      } else {
+        // Call Alert "Please input the correct LongName"
+      }
+
+    } else {
+      // Call Alert "Please input the correct nodeID"
+    }
+  }
+
+  @FXML
+  void deleteClicked(MouseEvent event) {
+    if (NodeController.isNumber(NodeIDEdit.getText())) {
+      nodeIDedit = Integer.parseInt(NodeIDEdit.getText());
+
+      if (nodeIDExistLocation(nodeIDedit)) {
+        Qdb.getInstance().locationTable.deleteRow(nodeIDedit);
+        locationname.setItems(locations());
+
+        // Here to call confirm
+      } else {
+        // here to call alert "This nodeID does not exist
+      }
+
+    } else {
+      // Here to call alert "Please input the correct nodeID"
+
+    }
+  }
+
+  public boolean nodeIDExistLocation(int nodeID) {
+    for (int i = 0; i < Qdb.getInstance().locationTable.getAllRows().size(); i++) {
+      if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
+    }
+    return false;
   }
 }

@@ -95,29 +95,28 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label prefHeight="15.0" prefWidth="405.0" text="Please input the nodeID of the node to edit" />
                   <Label text="Please input the information of the node to add or set" GridPane.rowIndex="2" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="XInput" prefHeight="23.0" prefWidth="107.0" style="-fx-background-color: #BBBBB];">
+                        <TextField fx:id="XInput" prefHeight="23.0" prefWidth="107.0" promptText="Xcoord" style="-fx-background-color: #BBBBB];">
                            <effect>
                               <Glow level="0.48" />
                            </effect>
                         </TextField>
-                        <TextField fx:id="YInput" prefHeight="23.0" prefWidth="105.0">
+                        <TextField fx:id="YInput" prefHeight="23.0" prefWidth="105.0" promptText="Ycoord">
                            <effect>
                               <Glow level="0.48" />
                            </effect>
                         </TextField>
-                        <TextField fx:id="FloorInput" prefHeight="23.0" prefWidth="101.0">
+                        <TextField fx:id="FloorInput" prefHeight="23.0" prefWidth="101.0" promptText="Floor">
                            <effect>
                               <Glow level="0.48" />
                            </effect>
                         </TextField>
-                        <TextField fx:id="BuildingInput" prefHeight="23.0" prefWidth="101.0">
+                        <TextField fx:id="BuildingInput" prefHeight="23.0" prefWidth="101.0" promptText="Building">
                            <effect>
                               <Glow level="0.48" />
                            </effect>
@@ -126,7 +125,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="NodeIDInput" prefHeight="23.0" prefWidth="87.0">
+                        <TextField fx:id="NodeIDInput" prefHeight="23.0" prefWidth="87.0" promptText="NodeID">
                            <effect>
                               <Glow level="0.48" />
                            </effect>
@@ -134,16 +133,8 @@
                      </children>
                   </HBox>
                   <Button mnemonicParsing="false" onMouseClicked="#AddClicked" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button mnemonicParsing="false" onMouseClicked="#SetClicked" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                     <children>
-                        <Label prefHeight="15.0" prefWidth="103.0" text="Xcoord" />
-                        <Label prefHeight="15.0" prefWidth="103.0" text="Ycoord" />
-                        <Label prefHeight="15.0" prefWidth="94.0" text="Floor" />
-                        <Label prefHeight="15.0" prefWidth="88.0" text="Building" />
-                     </children>
-                  </HBox>
                </children>
             </GridPane>
          </children>

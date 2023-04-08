@@ -14,7 +14,9 @@ import java.util.Scanner;
 public class MoveDaoImpl implements GenDao<Move, Integer> {
   private List<Move> moves = new ArrayList<>();
   private int nextID = 0;
+
   private NodeDaoImpl nodeTable;
+
   private static MoveDaoImpl single_instance = null;
 
   public static synchronized MoveDaoImpl getInstance(NodeDaoImpl nodeTable) {

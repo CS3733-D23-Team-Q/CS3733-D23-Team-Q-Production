@@ -148,25 +148,32 @@ public class NodeController {
 
   @FXML
   void AddClicked(MouseEvent event) throws SQLException {
+    /* test
+    Node nodeexample = new Node(1, 1, 1, "test", "test");
+    Qdb.getInstance().nodeTable.addRow(nodeexample);
+     */
+
     /*
-    if (BuildingInput != null) {
-      if (FloorInput != null) {
+    if (BuildingInput.getText() != "") {
+      if (FloorInput.getText() != "") {
         if (isNumber(NodeIDInput.getText())) {
           if (isNumber(XInput.getText())) {
             if (isNumber(YInput.getText())) {
             */
+    /*
+       nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
+       //      if (!nodeIDExist(nodeIDEdit)) {
+       newBuilding = BuildingInput.getText();
+       newFloor = FloorInput.getText();
+       newXcoord = Integer.parseInt(XInput.getText());
+       newYcoord = Integer.parseInt(YInput.getText());
 
-    nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
-    //      if (!nodeIDExist(nodeIDEdit)) {
-    newBuilding = BuildingInput.getText();
-    newFloor = FloorInput.getText();
-    newXcoord = Integer.parseInt(XInput.getText());
-    newYcoord = Integer.parseInt(YInput.getText());
+       Qdb.getInstance()
+           .nodeTable
+           .addRow(new Node(nodeIDEdit, newXcoord, newYcoord, newFloor, newBuilding));
+       node.setItems(nodes());
 
-    Qdb.getInstance()
-        .nodeTable
-        .addRow(new Node(nodeIDEdit, newXcoord, newYcoord, newFloor, newBuilding));
-    node.setItems(nodes());
+    */
     /*   } else {
                 // Here to call alert "This nodeID exists, please use another one
               }

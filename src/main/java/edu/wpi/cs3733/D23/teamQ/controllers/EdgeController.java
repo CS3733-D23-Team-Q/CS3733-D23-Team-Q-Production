@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.application.Platform;
@@ -13,9 +14,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class EdgeController {
+
+  private int newEdgeID;
+  private Node newEndNode;
+  private Node newStartNode;
+
+  @FXML private TextField EdgeIDInput;
+
+  @FXML private TextField EndNodeInput;
+
+  @FXML private TextField StartNodeInput;
 
   @FXML private TableView<Edge> edge;
 
@@ -97,4 +110,13 @@ public class EdgeController {
   void nodeClicked(ActionEvent event) {
     Navigation.navigate(Screen.Node_Table);
   }
+
+  @FXML
+  void AddClicked(MouseEvent event) {}
+
+  @FXML
+  void DeleteClicked(MouseEvent event) {}
+
+  @FXML
+  void SetClicked(MouseEvent event) {}
 }
