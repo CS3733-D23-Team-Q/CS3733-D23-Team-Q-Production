@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Qdb {
+  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
+  private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+  private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+  private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
   private ConferenceRequestDaoImpl conferenceRequestTable = ConferenceRequestDaoImpl.getInstance();
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance();
   private ServiceRequestDaoImpl serviceRequestTable =
       ServiceRequestDaoImpl.getInstance(conferenceRequestTable, flowerRequestTable);
-  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
-  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
-  private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
 
   private static Qdb single_instance = null;
 
