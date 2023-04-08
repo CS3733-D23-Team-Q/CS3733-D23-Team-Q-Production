@@ -1,9 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +66,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   public boolean deleteRow(Integer requestID) {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
-            connection.prepareStatement(
-                "DELETE FROM \"mealRequest\" WHERE \"requestID\" = ?")) {;
+            connection.prepareStatement("DELETE FROM \"mealRequest\" WHERE \"requestID\" = ?")) {;
       st.setInt(1, requestID);
       st.executeUpdate();
     } catch (SQLException e) {

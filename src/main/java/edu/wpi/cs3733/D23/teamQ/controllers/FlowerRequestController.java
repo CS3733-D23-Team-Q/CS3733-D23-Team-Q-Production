@@ -47,6 +47,7 @@ public class FlowerRequestController {
 
   @FXML
   public void resetButtonClicked() {
+    assigneeField.clear();
     roomNumberField.clear();
     noteField.clear();
     specialInstructionsField.clear();
@@ -67,6 +68,7 @@ public class FlowerRequestController {
     }
     FlowerRequest newFR =
         new FlowerRequest(
+                0,
             "temp user",
             0,
             assigneeField.getText(),

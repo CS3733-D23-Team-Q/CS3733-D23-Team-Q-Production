@@ -2,13 +2,13 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.PatientTransportRequest;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRequest, Integer> {
-  private List<PatientTransportRequest> patientTransportRequests = new ArrayList<PatientTransportRequest>();
+  private List<PatientTransportRequest> patientTransportRequests =
+      new ArrayList<PatientTransportRequest>();
   private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 

@@ -2,13 +2,13 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
-  private List<OfficeSuppliesRequest> officeSuppliesRequests = new ArrayList<OfficeSuppliesRequest>();
+  private List<OfficeSuppliesRequest> officeSuppliesRequests =
+      new ArrayList<OfficeSuppliesRequest>();
   private int nextID = 0;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
 
@@ -97,7 +97,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       stmt.setString(3, request.getAssignee());
       stmt.setString(4, request.getSpecialInstructions());
       stmt.setString(5, request.getItem());
-      stmt.setString(6, request.getQuantity());
+      stmt.setInt(6, request.getQuantity());
       stmt.setString(7, request.getRoomNumber());
       stmt.executeUpdate();
     } catch (SQLException ex) {
@@ -124,7 +124,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
                 rst.getString("roomNum"),
                 rst.getString("specialInstructions"),
                 rst.getString("item"),
-                rst.getString("quantity")));
+                rst.getInt("quantity")));
       }
       conn.close();
       stm.close();

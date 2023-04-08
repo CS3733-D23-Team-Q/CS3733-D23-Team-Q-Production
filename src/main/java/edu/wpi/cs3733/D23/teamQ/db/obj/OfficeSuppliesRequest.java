@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class OfficeSuppliesRequest extends ServiceRequest {
   private String item;
-  private String quantity;
+  private int quantity;
 
   public OfficeSuppliesRequest(
       int requestID,
@@ -17,7 +17,7 @@ public class OfficeSuppliesRequest extends ServiceRequest {
       String roomNumber,
       String specialInstructions,
       String item,
-      String quantity) {
+      int quantity) {
     super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
     this.item = item;
     this.quantity = quantity;
@@ -30,7 +30,7 @@ public class OfficeSuppliesRequest extends ServiceRequest {
       String roomNumber,
       String specialInstructions,
       String item,
-      String quantity) {
+      int quantity) {
     super(0, requester, progress, assignee, roomNumber, specialInstructions);
     this.item = item;
     this.quantity = quantity;
