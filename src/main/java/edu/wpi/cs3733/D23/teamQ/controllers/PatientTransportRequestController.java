@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.PatientTransportRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -19,8 +18,8 @@ public class PatientTransportRequestController {
   @FXML private MFXTextField roomNumberField;
   @FXML private MFXTextField dateTimeField;
   ObservableList<String> itemList =
-          FXCollections.observableArrayList(
-                  "stretcher", "manual wheelchair", "motorized wheelchair", "walker", "crutches");
+      FXCollections.observableArrayList(
+          "stretcher", "manual wheelchair", "motorized wheelchair", "walker", "crutches");
   @FXML private ChoiceBox itemField;
   @FXML private MFXTextField specialInstructionsField;
 
@@ -56,15 +55,15 @@ public class PatientTransportRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     PatientTransportRequest newPTR =
-            new PatientTransportRequest(
-                    0,
-                    "temp user",
-                    0,
-                    assigneeField.getText(),
-                    roomNumberField.getText(),
-                    specialInstructionsField.getText(),
-                    (String)itemField.getValue());
-    //qdb.addConferenceRequest(newPTR);
+        new PatientTransportRequest(
+            0,
+            "temp user",
+            0,
+            assigneeField.getText(),
+            roomNumberField.getText(),
+            specialInstructionsField.getText(),
+            (String) itemField.getValue());
+    // qdb.addConferenceRequest(newPTR);
     Navigation.navigate(Screen.HOME);
   }
 

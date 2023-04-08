@@ -18,8 +18,7 @@ public class FurnitureDeliveryRequestController {
   @FXML private MFXTextField roomNumberField;
   @FXML private MFXTextField dateTimeField;
   ObservableList<String> itemList =
-          FXCollections.observableArrayList(
-                  "desk", "desk chair", "couch", "examination table");
+      FXCollections.observableArrayList("Desk", "Desk Chair", "Couch", "Examination Table");
   @FXML private ChoiceBox itemField;
   @FXML private MFXTextField specialInstructionsField;
 
@@ -33,7 +32,7 @@ public class FurnitureDeliveryRequestController {
 
   @FXML
   public void initialize() {
-    this.itemField.setValue("Select Patient Transport");
+    this.itemField.setValue("Select Furniture Item");
     this.itemField.setItems(itemList);
   }
 
@@ -43,7 +42,7 @@ public class FurnitureDeliveryRequestController {
     roomNumberField.clear();
     dateTimeField.clear();
     specialInstructionsField.clear();
-    itemField.setValue("Select Patient Transport");
+    itemField.setValue("Select Furniture Item");
   }
 
   @FXML
@@ -55,15 +54,15 @@ public class FurnitureDeliveryRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     FurnitureRequest newFR =
-            new FurnitureRequest(
-                    0,
-                    "temp user",
-                    0,
-                    assigneeField.getText(),
-                    roomNumberField.getText(),
-                    specialInstructionsField.getText(),
-                    (String)itemField.getValue());
-    //qdb.addConferenceRequest(newFR);
+        new FurnitureRequest(
+            0,
+            "temp user",
+            0,
+            assigneeField.getText(),
+            roomNumberField.getText(),
+            specialInstructionsField.getText(),
+            (String) itemField.getValue());
+    // qdb.addConferenceRequest(newFR);
     Navigation.navigate(Screen.HOME);
   }
 

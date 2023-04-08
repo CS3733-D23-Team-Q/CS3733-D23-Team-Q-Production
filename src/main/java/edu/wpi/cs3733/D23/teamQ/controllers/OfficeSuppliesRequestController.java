@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -17,11 +16,11 @@ import javafx.scene.control.MenuItem;
 public class OfficeSuppliesRequestController {
   @FXML private MFXTextField assigneeField;
   @FXML private MFXTextField roomNumberField;
-  @FXML private MFXTextField noteField;
   @FXML private MFXTextField specialInstructionsField;
   @FXML private ChoiceBox itemField;
   ObservableList<String> itemList =
-          FXCollections.observableArrayList("Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");
+      FXCollections.observableArrayList(
+          "Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");
   @FXML private ChoiceBox quantityField;
   ObservableList<String> quantityList = FXCollections.observableArrayList("1", "2", "5", "10");
 
@@ -33,11 +32,6 @@ public class OfficeSuppliesRequestController {
 
   @FXML MenuItem profileItem;
 
-  /**
-   * Initializes the Flower Request Choice Box's Switches screens to the Home page when Cancel
-   * Button is pressed Clears fields when Clears Filters is pressed Switches screens to Flower
-   * Request Submission page when Submit Button is pressed Gets values from the Flower Request Data
-   */
   @FXML
   public void initialize() {
     this.itemField.setValue("Select Item");
@@ -50,7 +44,6 @@ public class OfficeSuppliesRequestController {
   public void resetButtonClicked() {
     assigneeField.clear();
     roomNumberField.clear();
-    noteField.clear();
     specialInstructionsField.clear();
     itemField.setValue("Select Item");
     quantityField.setValue("Select Quantity");
@@ -64,20 +57,20 @@ public class OfficeSuppliesRequestController {
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-    if (((String) quantityField.getValue()).equals("Number of Bouquets")) {
+    if (((String) quantityField.getValue()).equals("Select Quantity")) {
       quantityField.setValue("0");
     }
     OfficeSuppliesRequest newOSR =
-            new OfficeSuppliesRequest(
-                    0,
-                    "temp user",
-                    0,
-                    assigneeField.getText(),
-                    roomNumberField.getText(),
-                    specialInstructionsField.getText(),
-                    (String) itemField.getValue(),
-                    Integer.parseInt((String) quantityField.getValue()));
-    //qdb.addFlowerRequest(newOSR);
+        new OfficeSuppliesRequest(
+            0,
+            "temp user",
+            0,
+            assigneeField.getText(),
+            roomNumberField.getText(),
+            specialInstructionsField.getText(),
+            (String) itemField.getValue(),
+            Integer.parseInt((String) quantityField.getValue()));
+    // qdb.addFlowerRequest(newOSR);
     Navigation.navigate(Screen.HOME);
   }
 
