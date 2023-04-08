@@ -30,18 +30,18 @@ public class Star extends Edge {
         return closedList;
       }
       Node currentNode = openList.get(0);
-      if (currentNode.getEdges().size() == 0) {
-        System.out.println("The node " + currentNode.getNodeID() + "has no edges.");
+      if (currentNode.getEdges().size() == 0) { // check for edgeless nodes
+        System.out.println("The node " + currentNode.getNodeID() + " has no edges.");
       }
-      int bestWeight = 1000000000;
+      int bestWeight =
+          1000000000; // setting some temp variables used to calculate and find the best weight
+      // (shortest distance)
       Edge bestEdge = null;
       List<Edge> edgeClone = currentNode.getEdges();
       ArrayList<Edge> trueClone = new ArrayList<Edge>();
       Node deadNode = null;
-      for (Edge index : edgeClone) {
-        trueClone.add(
-            index); // loop to create duplicate arraylist of edges contained in currentNode
-      }
+      // loop to create duplicate arraylist of edges contained in currentNode
+      trueClone.addAll(edgeClone);
       for (Edge thisEdge : trueClone) {
         if (thisEdge.getWeight() < bestWeight && !deadList.contains(thisEdge.getEndNode())) {
           bestWeight = thisEdge.getWeight();
