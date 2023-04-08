@@ -162,7 +162,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     return mealRequests;
   }
 
-  public List<MealRequest> listConferenceRequests(String username) {
+  public List<MealRequest> listMealRequests(String username) {
     List<MealRequest> list = new ArrayList<MealRequest>();
     for (MealRequest request : mealRequests) {
       if (request.getRequester().equals(username)) {}

@@ -158,7 +158,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
     return furnitureRequests;
   }
 
-  public List<FurnitureRequest> listConferenceRequests(String username) {
+  public List<FurnitureRequest> listFurnitureRequests(String username) {
     List<FurnitureRequest> list = new ArrayList<FurnitureRequest>();
     for (FurnitureRequest request : furnitureRequests) {
       if (request.getRequester().equals(username)) {}

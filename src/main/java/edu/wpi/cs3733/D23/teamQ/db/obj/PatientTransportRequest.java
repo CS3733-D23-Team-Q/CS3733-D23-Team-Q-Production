@@ -6,8 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PatientTransportRequest extends ServiceRequest {
-  private String dateTime;
-  private String foodChoice;
+  private String item;
 
   public PatientTransportRequest(
       int requestID,
@@ -16,11 +15,9 @@ public class PatientTransportRequest extends ServiceRequest {
       String assignee,
       String roomNumber,
       String specialInstructions,
-      String dateTime,
-      String foodChoice) {
+      String item) {
     super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
-    this.dateTime = dateTime;
-    this.foodChoice = foodChoice;
+    this.item = item;
   }
 
   public PatientTransportRequest(
@@ -29,11 +26,9 @@ public class PatientTransportRequest extends ServiceRequest {
       String assignee,
       String roomNumber,
       String specialInstructions,
-      String dateTime,
-      String foodChoice) {
+      String item) {
     super(0, requester, progress, assignee, roomNumber, specialInstructions);
-    this.dateTime = dateTime;
-    this.foodChoice = foodChoice;
+    this.item = item;
   }
 
   public int progressToInt(Progress progress) {
