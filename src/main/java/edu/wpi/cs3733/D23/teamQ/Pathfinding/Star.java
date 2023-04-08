@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D23.teamQ.Pathfinding;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Star extends Edge {
 
@@ -37,12 +36,12 @@ public class Star extends Edge {
           1000000000; // setting some temp variables used to calculate and find the best weight
       // (shortest distance)
       Edge bestEdge = null;
-      List<Edge> edgeClone = currentNode.getEdges();
-      ArrayList<Edge> trueClone = new ArrayList<Edge>();
+      //  List<Edge> edgeClone = currentNode.getEdges();
+      // ArrayList<Edge> trueClone = new ArrayList<Edge>();
       Node deadNode = null;
       // loop to create duplicate arraylist of edges contained in currentNode
-      trueClone.addAll(edgeClone);
-      for (Edge thisEdge : trueClone) {
+      // trueClone.addAll(edgeClone);
+      for (Edge thisEdge : currentNode.getEdges()) {
         if (thisEdge.getWeight() < bestWeight && !deadList.contains(thisEdge.getEndNode())) {
           bestWeight = thisEdge.getWeight();
           bestEdge = thisEdge;
