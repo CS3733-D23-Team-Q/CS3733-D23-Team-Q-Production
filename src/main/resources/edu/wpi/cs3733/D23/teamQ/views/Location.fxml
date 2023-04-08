@@ -32,8 +32,10 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
-        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="497.3333282470703" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="465.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="1000.0" spacing="380.0" style="-fx-background-color: #142A53;" GridPane.columnSpan="10">
@@ -69,7 +71,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <TableView fx:id="locationname" prefHeight="422.0" prefWidth="790.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TableView fx:id="locationname" prefHeight="421.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="NodeID" prefWidth="75.0" text="NodeID" />
                 <TableColumn fx:id="LongName" prefWidth="75.0" text="LongName" />
@@ -82,8 +84,8 @@
         </TableView>
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="680.0" minWidth="10.0" prefWidth="680.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="118.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -92,7 +94,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Input NodeID" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
                   <TextField fx:id="LongNameInput" promptText="LongName" />
@@ -102,7 +103,9 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label text="New Information" />
+                  <Label prefHeight="27.0" prefWidth="98.0" text="New Information" />
+                  <ImageView fx:id="image2" fitHeight="17.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" translateX="30.0" />
+                  <Label fx:id="InformationAlert" prefHeight="21.0" prefWidth="350.0" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -113,6 +116,13 @@
             <Button mnemonicParsing="false" onMouseClicked="#deleteClicked" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onMouseClicked="#addClicked" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onMouseClicked="#setClicked" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="79.0" text="Input NodeID" />
+                  <ImageView fx:id="image" fitHeight="22.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" />
+                  <Label fx:id="nodeIDAlert" prefHeight="22.0" prefWidth="324.0" translateX="50.0" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
     </children>

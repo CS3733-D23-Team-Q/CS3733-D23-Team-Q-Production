@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -12,13 +13,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class LocationController {
+
+  Alert alert = new Alert();
+
+  @FXML private Label nodeIDAlert;
+
+  @FXML private Label InformationAlert;
+
+  @FXML private ImageView image;
+
+  @FXML private ImageView image2;
 
   private int nodeIDedit;
 
@@ -152,6 +165,8 @@ public class LocationController {
           if (NodeTypeInput.getText() != "") {
             nodeIDedit = Integer.parseInt(NodeIDEdit.getText());
             if (nodeIDExistLocation(nodeIDedit)) {
+              alert.clearLabelAlert(InformationAlert, image2);
+              alert.clearLabelAlert(nodeIDAlert, image);
               newLongName = LongNameInput.getText();
               newNodeType = NodeTypeInput.getText();
               newShortName = ShortNameInput.getText();
@@ -163,21 +178,31 @@ public class LocationController {
 
               locationname.setItems(locations());
             } else {
+              alert.setLabelAlert("This nodeID does not exist.", nodeIDAlert, image);
+              alert.clearLabelAlert(InformationAlert, image2);
               // Call Alert "This nodeID does not exist"
             }
           } else {
+            alert.setLabelAlert("Please input the correct node type.", InformationAlert, image2);
+            alert.clearLabelAlert(nodeIDAlert, image);
             // Call Alert "Please input the correct NodeType"
           }
 
         } else {
+          alert.setLabelAlert("Please input the correct short name.", InformationAlert, image2);
+          alert.clearLabelAlert(nodeIDAlert, image);
           // Call Alert "Please input the correct ShortName"
         }
 
       } else {
+        alert.setLabelAlert("Please input the correct long name", InformationAlert, image2);
+        alert.clearLabelAlert(nodeIDAlert, image);
         // Call Alert "Please input the correct LongName"
       }
 
     } else {
+      alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+      alert.clearLabelAlert(InformationAlert, image2);
       // Call Alert "Please input the correct nodeID"
     }
   }
@@ -197,6 +222,8 @@ public class LocationController {
           if (NodeTypeInput.getText() != "") {
             nodeIDedit = Integer.parseInt(NodeIDEdit.getText());
             if (!nodeIDExistLocation(nodeIDedit)) {
+              alert.clearLabelAlert(InformationAlert, image2);
+              alert.clearLabelAlert(nodeIDAlert, image);
               newLongName = LongNameInput.getText();
               newNodeType = NodeTypeInput.getText();
               newShortName = ShortNameInput.getText();
@@ -207,21 +234,30 @@ public class LocationController {
 
               locationname.setItems(locations());
             } else {
-              // Call Alert "This nodeID exists."
+              alert.setLabelAlert("This nodeID already exists", nodeIDAlert, image);
+              alert.clearLabelAlert(InformationAlert, image2);
             }
           } else {
+            alert.setLabelAlert("Please input the correct node type", InformationAlert, image2);
+            alert.clearLabelAlert(nodeIDAlert, image);
             // Call Alert "Please input the correct NodeType"
           }
 
         } else {
+          alert.setLabelAlert("Please input the correct short name", InformationAlert, image2);
+          alert.clearLabelAlert(nodeIDAlert, image);
           // Call Alert "Please input the correct ShortName"
         }
 
       } else {
+        alert.setLabelAlert("Please input the correct long name", InformationAlert, image2);
+        alert.clearLabelAlert(nodeIDAlert, image);
         // Call Alert "Please input the correct LongName"
       }
 
     } else {
+      alert.setLabelAlert("Please input the correct nodeID", nodeIDAlert, image);
+      alert.clearLabelAlert(InformationAlert, image2);
       // Call Alert "Please input the correct nodeID"
     }
   }
@@ -232,17 +268,20 @@ public class LocationController {
       nodeIDedit = Integer.parseInt(NodeIDEdit.getText());
 
       if (nodeIDExistLocation(nodeIDedit)) {
+        alert.clearLabelAlert(InformationAlert, image2);
+        alert.clearLabelAlert(nodeIDAlert, image);
         Qdb.getInstance().locationTable.deleteRow(nodeIDedit);
         locationname.setItems(locations());
 
         // Here to call confirm
       } else {
-        // here to call alert "This nodeID does not exist
+        alert.setLabelAlert("This nodeID does not exist", nodeIDAlert, image);
+        alert.clearLabelAlert(InformationAlert, image2);
       }
 
     } else {
-      // Here to call alert "Please input the correct nodeID"
-
+      alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+      alert.clearLabelAlert(InformationAlert, image2);
     }
   }
 
