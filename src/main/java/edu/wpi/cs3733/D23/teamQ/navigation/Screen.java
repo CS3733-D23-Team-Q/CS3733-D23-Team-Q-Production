@@ -18,7 +18,9 @@ public enum Screen {
   FLOWER_REQUEST_SUBMISSION("views.FlowerRequestSubmission.fxml", "Flower Request Submission"),
   CONFERENCE_ROOM_REQUEST_DISPLAY(
       "views/ConferenceRoomRequestDisplay.fxml", "Conference Room Request Display"),
+  CONFERENCE_ROOM_EDIT("views/ConferenceRoomRequestEdit.fxml", "Conference Room Request Edit"),
   FLOWER_REQUEST_DISPLAY("views/FlowerRequestDisplay.fxml", "Flower Request Display"),
+  FLOWER_REQUEST_EDIT("views/FlowerRequestEdit.fxml", "Flower Request Edit"),
   MEAL_REQUEST("views/MealDeliveryRequest.fxml", "Meal Request"),
   OFFICE_SUPPLIES_REQUEST("views/OfficeSuppliesRequest.fxml", "Office Supplies Request"),
   FURNITURE_REQUEST("views/FurnitureDeliveryRequest.fxml", "Furniture Request"),

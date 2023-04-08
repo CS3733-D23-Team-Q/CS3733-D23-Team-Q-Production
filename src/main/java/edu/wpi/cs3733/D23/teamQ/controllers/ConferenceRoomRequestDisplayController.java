@@ -49,7 +49,7 @@ public class ConferenceRoomRequestDisplayController {
   }
 
   @FXML
-  public void submitButtonClicked() {}
+  public void submitButtonClicked() {Navigation.navigate(Screen.CONFERENCE_ROOM_EDIT);}
 
   @FXML
   public void homeItemClicked() {

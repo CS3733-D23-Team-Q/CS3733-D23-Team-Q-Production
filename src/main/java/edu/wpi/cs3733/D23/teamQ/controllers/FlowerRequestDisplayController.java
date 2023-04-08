@@ -52,7 +52,9 @@ public class FlowerRequestDisplayController {
   }
 
   @FXML
-  public void submitButtonClicked() {}
+  public void submitButtonClicked() {
+    Navigation.navigate(Screen.FLOWER_REQUEST_EDIT);
+  }
 
   @FXML
   public void homeItemClicked() {
