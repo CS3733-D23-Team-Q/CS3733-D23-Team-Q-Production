@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="700.0" minWidth="1350.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FlowerRequestSubmissionController">
+   <bottom>
+      <MFXButton fx:id="FlowerRequestSubmission_HomeButton" style="-fx-background-color: #002d59;" text="Home" textFill="WHITE" translateY="-30.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #002d59; -fx-background-radius: 15;" text="Congratulations, your flower delivery has been submitted!!!!" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </center>
+</BorderPane>
