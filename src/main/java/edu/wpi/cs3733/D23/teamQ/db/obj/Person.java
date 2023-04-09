@@ -2,33 +2,33 @@ package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 public class Person {
   private int IDNum;
-  private String FirstName;
-  private String LastName;
-  private String Title;
-  private int PhoneNumber;
+  private String firstName;
+  private String lastName;
+  private String title;
+  private int phoneNumber;
   private String username;
 
   public Person(
       int IDNum,
-      String Firstname,
-      String LastName,
-      String Title,
-      int PhoneNumber,
+      String firstName,
+      String lastName,
+      String title,
+      int phoneNumber,
       String username) {
     this.IDNum = IDNum;
-    this.FirstName = FirstName;
-    this.LastName = LastName;
-    this.Title = Title;
-    this.PhoneNumber = PhoneNumber;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.title = title;
+    this.phoneNumber = phoneNumber;
     this.username = username;
   }
 
-  public Person(String Firstname, String LastName, String Title, int PhoneNumber, String username) {
+  public Person(String firstName, String lastName, String title, int phoneNumber, String username) {
 
-    this.FirstName = FirstName;
-    this.LastName = LastName;
-    this.Title = Title;
-    this.PhoneNumber = PhoneNumber;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.title = title;
+    this.phoneNumber = phoneNumber;
     this.username = username;
   }
 
@@ -41,35 +41,35 @@ public class Person {
   }
 
   public String getFirstName() {
-    return FirstName;
+    return firstName;
   }
 
   public void setFirstName(String FirstName) {
-    this.FirstName = FirstName;
+    this.firstName = FirstName;
   }
 
   public String getLastName() {
-    return LastName;
+    return lastName;
   }
 
   public void setLastName(String LastName) {
-    this.LastName = LastName;
+    this.lastName = LastName;
   }
 
   public String getTitle() {
-    return Title;
+    return title;
   }
 
   public void setTitle(String Title) {
-    this.Title = Title;
+    this.title = Title;
   }
 
   public int getPhoneNumber() {
-    return PhoneNumber;
+    return phoneNumber;
   }
 
   public void setPhone(int PhoneNumber) {
-    this.PhoneNumber = PhoneNumber;
+    this.phoneNumber = PhoneNumber;
   }
 
   public String getUsername() {

@@ -11,13 +11,13 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
   private int nextID = 0;
   private static FurnitureRequestDaoImpl single_instance = null;
 
-  public static synchronized FurnitureRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new FurnitureRequestDaoImpl();
+  public static synchronized FurnitureRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new FurnitureRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private FurnitureRequestDaoImpl() {
+  private FurnitureRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
     if (furnitureRequests.size() != 0) {
       nextID = furnitureRequests.get(furnitureRequests.size() - 1).getRequestID() + 1;

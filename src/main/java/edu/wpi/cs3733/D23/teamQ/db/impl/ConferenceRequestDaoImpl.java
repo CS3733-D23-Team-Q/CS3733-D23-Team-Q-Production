@@ -11,13 +11,13 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
   private int nextID = 0;
   private static ConferenceRequestDaoImpl single_instance = null;
 
-  public static synchronized ConferenceRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new ConferenceRequestDaoImpl();
+  public static synchronized ConferenceRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new ConferenceRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private ConferenceRequestDaoImpl() {
+  private ConferenceRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
     if (conferenceRequests.size() != 0) {
       nextID = conferenceRequests.get(conferenceRequests.size() - 1).getRequestID() + 1;

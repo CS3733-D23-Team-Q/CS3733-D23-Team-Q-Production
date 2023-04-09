@@ -12,13 +12,13 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   private int nextID = 0;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
 
-  public static synchronized OfficeSuppliesRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new OfficeSuppliesRequestDaoImpl();
+  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new OfficeSuppliesRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private OfficeSuppliesRequestDaoImpl() {
+  private OfficeSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
     if (officeSuppliesRequests.size() != 0) {
       nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;

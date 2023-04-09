@@ -12,13 +12,13 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
-  public static synchronized PatientTransportRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl();
+  public static synchronized PatientTransportRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private PatientTransportRequestDaoImpl() {
+  private PatientTransportRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
     if (patientTransportRequests.size() != 0) {
       nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
