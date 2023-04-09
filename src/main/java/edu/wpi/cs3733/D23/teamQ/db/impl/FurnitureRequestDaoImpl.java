@@ -8,8 +8,8 @@ import java.util.List;
 
 public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer> {
   private List<FurnitureRequest> furnitureRequests = new ArrayList<FurnitureRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
+  private int nextID = 0;
   private static FurnitureRequestDaoImpl single_instance = null;
 
   public static synchronized FurnitureRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
@@ -19,8 +19,8 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
   }
 
   private FurnitureRequestDaoImpl(NodeDaoImpl nodeTable) {
-    populate();
     this.nodeTable = nodeTable;
+    populate();
     if (furnitureRequests.size() != 0) {
       nextID = furnitureRequests.get(furnitureRequests.size() - 1).getRequestID() + 1;
     }
@@ -50,11 +50,27 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, FurnitureRequest newRequest) {
-    int index = this.getIndex(requestID);
-    furnitureRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+         PreparedStatement st =
+                 connection.prepareStatement(
+                         "UPDATE \"furnitureRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
+                                 + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setString(7, newRequest.getItem());
+      st.setInt(8, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    //furnitureRequests
 
     return true;
   }
@@ -92,13 +108,13 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"furnitureRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"roomNum\") VALUES ( ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"furnitureRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"item\") VALUES ( ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getItem());
-      stmt.setInt(6, request.getNode().getNodeID());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setString(6, request.getItem());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -121,7 +137,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                nodeTable.retrieveRow(rst.getInt("node")),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("item")));
       }

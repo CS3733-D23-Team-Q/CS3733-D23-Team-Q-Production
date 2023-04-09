@@ -56,10 +56,38 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, FlowerRequest newRequest) {
-    deleteRow(requestID);
-    addRow(newRequest);
+    try (Connection connection = GenDao.connect();
+         PreparedStatement st =
+                 connection.prepareStatement(
+                         "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"roomNum\" = ? "
+                                 + "WHERE \"requestID\" = ?")) {
+
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setString(5, newRequest.getSpecialInstructions());
+      st.setString(6, newRequest.getNote());
+      st.setString(7, newRequest.getFlowerType());
+      st.setInt(8, newRequest.getNumberOfBouquets());
+      st.setString(9, newRequest.getRoomNumber());
+      st.setInt(10, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
     int index = this.getIndex(requestID);
-    flowerRequests.set(index, newRequest);
+    flowerRequests.get(index).setRequester(newRequest.getRequester());
+    flowerRequests.get(index).setProgress(newRequest.getProgress());
+    flowerRequests.get(index).setAssignee(newRequest.getAssignee());
+    flowerRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    flowerRequests.get(index).setNote(newRequest.getNote());
+    flowerRequests.get(index).setFlowerType(newRequest.getFlowerType());
+    flowerRequests.get(index).setNumberOfBouquets(newRequest.getNumberOfBouquets());
+    flowerRequests.get(index).setRoomNumber(newRequest.getRoomNumber());
+
     return true;
   }
 
