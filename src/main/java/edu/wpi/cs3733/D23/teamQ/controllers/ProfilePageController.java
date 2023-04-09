@@ -11,7 +11,7 @@ public class ProfilePageController {
 
   Qdb qdb = Qdb.getInstance();
 
-  @FXML private Button Edit_Profile;
+  @FXML private Button ProfilePage_Edit_Button;
 
   @FXML private Label Email_Display;
 
@@ -64,7 +64,12 @@ public class ProfilePageController {
 
     this.Username_Display.setText(username);
 
-    this.Edit_Profile.setOnMouseClicked(event -> Navigation.navigate(Screen.EDIT_PROFILE));
+    //    this.ProfilePage_Edit_Button.setOnMouseClicked(
+    //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
     this.ProfilePage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+  }
+
+  public void EditPressed() {
+    Navigation.navigate(Screen.EDIT_PROFILE);
   }
 }
