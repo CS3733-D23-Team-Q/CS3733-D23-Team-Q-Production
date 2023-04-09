@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Person;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.fxml.FXML;
@@ -38,7 +37,6 @@ public class ProfilePageController {
     String email = LoginController.getLoginEmail();
 
     Qdb qdb = Qdb.getInstance();
-    qdb.addPerson(new Person(1, null, null, null, 0, "admin"));
 
     this.ID_Number_Display.setText(String.valueOf(qdb.retrievePerson(username).getIDNum()));
     if (qdb.retrievePerson(username).getFirstName() == null) {
