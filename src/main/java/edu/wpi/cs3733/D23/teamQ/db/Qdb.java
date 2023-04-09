@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D23.teamQ.db;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class Qdb {
         return conferenceRequestTable.retrieveRow(requestID);
     }
 
-    public boolean updateConferenceRequest(int requestID, ConferenceRequest cr) {
+    public boolean updateConferenceRequest(int requestID, ConferenceRequest cr) throws SQLException {
         return conferenceRequestTable.updateRow(requestID, cr);
     }
 
