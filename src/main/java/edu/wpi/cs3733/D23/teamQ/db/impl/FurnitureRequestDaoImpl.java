@@ -51,10 +51,10 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
    */
   public boolean updateRow(Integer requestID, FurnitureRequest newRequest) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"furnitureRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
-                                 + "WHERE \"requestID\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"furnitureRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
       st.setString(2, newRequest.getRequester());
@@ -70,7 +70,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
       e.printStackTrace();
     }
 
-    //furnitureRequests
+    // furnitureRequests
 
     return true;
   }

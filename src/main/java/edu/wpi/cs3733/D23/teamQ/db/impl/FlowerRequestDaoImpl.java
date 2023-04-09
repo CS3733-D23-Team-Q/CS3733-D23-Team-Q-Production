@@ -2,9 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
-import org.postgresql.ssl.NonValidatingFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,10 +54,10 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
    */
   public boolean updateRow(Integer requestID, FlowerRequest newRequest) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"roomNum\" = ? "
-                                 + "WHERE \"requestID\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"roomNum\" = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
       st.setString(2, newRequest.getRequester());
@@ -70,7 +67,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       st.setString(6, newRequest.getNote());
       st.setString(7, newRequest.getFlowerType());
       st.setInt(8, newRequest.getNumberOfBouquets());
-      st.setString(9, newRequest.getRoomNumber());
+      st.setInt(9, newRequest.getNode().getNodeID());
       st.setInt(10, requestID);
 
       st.executeUpdate();
@@ -86,7 +83,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     flowerRequests.get(index).setNote(newRequest.getNote());
     flowerRequests.get(index).setFlowerType(newRequest.getFlowerType());
     flowerRequests.get(index).setNumberOfBouquets(newRequest.getNumberOfBouquets());
-    flowerRequests.get(index).setRoomNumber(newRequest.getRoomNumber());
+    flowerRequests.get(index).setNode(newRequest.getNode());
 
     return true;
   }
