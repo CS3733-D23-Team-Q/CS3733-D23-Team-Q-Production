@@ -35,6 +35,7 @@ public class Star extends Edge {
       int bestWeight =
           1000000000; // setting some temp variables used to calculate and find the best weight
       // (shortest distance)
+      int relativeWeight = 100000;
       Edge bestEdge = null;
       //  List<Edge> edgeClone = currentNode.getEdges();
       // ArrayList<Edge> trueClone = new ArrayList<Edge>();
@@ -42,9 +43,14 @@ public class Star extends Edge {
       // loop to create duplicate arraylist of edges contained in currentNode
       // trueClone.addAll(edgeClone);
       for (Edge thisEdge : currentNode.getEdges()) {
-        if (thisEdge.getWeight() < bestWeight && !deadList.contains(thisEdge.getEndNode())) {
-          bestWeight = thisEdge.getWeight();
+        int relativeXDist = Math.abs(thisEdge.getStartNode().getXCoord() - target.getXCoord());
+        int relativeYDist = Math.abs(thisEdge.getStartNode().getYCoord() - target.getYCoord());
+        relativeWeight =
+            (int) Math.sqrt(relativeXDist * relativeXDist + relativeYDist * relativeYDist);
+        if (relativeWeight < bestWeight && !deadList.contains(thisEdge.getEndNode())) {
+          bestWeight = relativeWeight;
           bestEdge = thisEdge;
+          System.out.println("I picked node " + bestEdge.getEndNode());
         }
       }
       if (currentNode.getEdges().size() == 0) {
