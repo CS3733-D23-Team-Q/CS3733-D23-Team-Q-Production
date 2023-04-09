@@ -11,7 +11,7 @@ public class ServiceRequest {
   private Progress progress;
   private String requester;
   private String assignee;
-  private String roomNumber;
+  private Node node;
   private String specialInstructions;
 
   public enum Progress {
@@ -25,7 +25,7 @@ public class ServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions) {
     this.requestID = requestID;
     if (progress == 0) {
@@ -39,7 +39,7 @@ public class ServiceRequest {
     }
     this.requester = requester;
     this.assignee = assignee;
-    this.roomNumber = roomNumber;
+    this.node = node;
     this.specialInstructions = specialInstructions;
   }
 }

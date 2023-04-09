@@ -15,11 +15,11 @@ public class OfficeSuppliesRequest extends ServiceRequest implements IServiceReq
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String item,
       int quantity) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions);
     this.item = item;
     this.quantity = quantity;
   }
@@ -28,11 +28,11 @@ public class OfficeSuppliesRequest extends ServiceRequest implements IServiceReq
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String item,
       int quantity) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions);
     this.item = item;
     this.quantity = quantity;
   }
