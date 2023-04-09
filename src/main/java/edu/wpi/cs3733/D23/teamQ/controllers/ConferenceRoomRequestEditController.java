@@ -55,7 +55,7 @@ public class ConferenceRoomRequestEditController {
     Qdb qdb = Qdb.getInstance();
     ConferenceRequest newCCR =
         new ConferenceRequest(
-            0,
+            ListServiceRequestController.getConferenceRequest().getRequestID(),
             "temp user",
             0,
             assigneeField.getText(),
@@ -63,7 +63,8 @@ public class ConferenceRoomRequestEditController {
             specialInstructionsField.getText(),
             dateTimeField.getText(),
             (String) foodField.getValue());
-    qdb.updateConferenceRequest(ListServiceRequestController.getConferenceRequest().getRequestID(),newCCR);
+    qdb.updateConferenceRequest(
+        ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
     Navigation.navigate(Screen.HOME);
   }
 
