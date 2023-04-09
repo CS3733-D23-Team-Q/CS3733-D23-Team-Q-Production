@@ -107,7 +107,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     Connection con = GenDao.connect();
     try {
       String query =
-          "INSERT INTO person (IDNum, FirstName, LastName, Title, PhoneNumber, username) VALUES(?,?,?,?,?,?)";
+          "INSERT INTO person (\"IDNum\", \"firstName\", \"lastName\", title, \"phoneNumber\", username) VALUES(?,?,?,?,?,?)";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setInt(1, IDNum);
       pst.setString(2, FirstName);
@@ -128,6 +128,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+
     return result;
   }
 
@@ -146,15 +147,16 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
         Person a;
         a =
             new Person(
-                rs.getInt("IDNumber"),
-                rs.getString("FirstName"),
-                rs.getString("LastName"),
-                rs.getString("Title"),
-                rs.getInt("PhoneNumber"),
-                accountTable.retrieveRow(rs.getString("username")));
+                rs.getInt("IDNum"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("title"),
+                rs.getInt("phoneNumber"),
+                rs.getString("username"));
         People.add(a);
       }
       con.close();
+
       st.close();
       return true;
     } catch (Exception e) {
