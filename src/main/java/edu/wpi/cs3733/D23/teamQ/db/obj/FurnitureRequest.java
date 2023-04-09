@@ -14,10 +14,10 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String item) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions);
     this.item = item;
   }
 
@@ -25,10 +25,10 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String item) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions);
     this.item = item;
   }
 

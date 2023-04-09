@@ -15,11 +15,11 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String dateTime,
       String foodChoice) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions);
     this.dateTime = dateTime;
     this.foodChoice = foodChoice;
   }
@@ -28,11 +28,11 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String dateTime,
       String foodChoice) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions);
     this.dateTime = dateTime;
     this.foodChoice = foodChoice;
   }
