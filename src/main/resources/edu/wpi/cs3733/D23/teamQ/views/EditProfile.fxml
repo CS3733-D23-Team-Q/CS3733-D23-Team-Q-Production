@@ -74,7 +74,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
                                 <MFXButton fx:id="ProfileEditPage_Home_Button" style="-fx-background-color: #002d59; -fx-background-radius: 10;" text="Home" textFill="WHITE" />
-                        <MFXButton fx:id="ProfileEditPage_Done_Button" style="-fx-background-color: #002d59; -fx-background-radius: 10;" text="Done" textFill="WHITE" />
+                        <MFXButton fx:id="ProfileEditPage_Done_Button" onAction="#DonePressed" style="-fx-background-color: #002d59; -fx-background-radius: 10;" text="Done" textFill="WHITE" />
                             </children>
                         </HBox>
                     </children>
