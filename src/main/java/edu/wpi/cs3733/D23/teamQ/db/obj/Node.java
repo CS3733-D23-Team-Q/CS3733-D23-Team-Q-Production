@@ -23,12 +23,13 @@ public class Node {
   private int weight;
   Node parent = null;
 
-  public Node(int nodeID, int xCoord, int yCoord, String floor, String building) {
+  public Node(int nodeID, int xCoord, int yCoord, String floor, String building, Location l) {
     this.nodeID = nodeID;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.floor = floor;
     this.building = building;
+    this.location = l;
 
     String x = Integer.toString(xCoord);
     String y = Integer.toString(yCoord);
@@ -43,7 +44,7 @@ public class Node {
     this.edges = new ArrayList<Edge>();
   }
 
-  public String nodeToString() {
+  public String toString() {
     return "nodeID: "
         + this.nodeID
         + ", xCoord: "
@@ -54,8 +55,6 @@ public class Node {
         + this.floor
         + ", building: "
         + this.building
-        + ", edges: "
-        + this.edges
         + ", location: "
         + this.location;
   }

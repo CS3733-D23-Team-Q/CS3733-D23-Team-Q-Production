@@ -6,35 +6,40 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ConferenceRequest extends ServiceRequest implements IServiceRequest {
-  private String dateTime;
-  private String foodChoice;
+public class MealRequest extends ServiceRequest implements IServiceRequest {
+  private String drink;
+  private String entree;
+  private String side;
 
-  public ConferenceRequest(
+  public MealRequest(
       int requestID,
       String requester,
       int progress,
       String assignee,
       String roomNumber,
       String specialInstructions,
-      String dateTime,
-      String foodChoice) {
+      String drink,
+      String entree,
+      String side) {
     super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
-    this.dateTime = dateTime;
-    this.foodChoice = foodChoice;
+    this.drink = drink;
+    this.entree = entree;
+    this.side = side;
   }
 
-  public ConferenceRequest(
+  public MealRequest(
       String requester,
       int progress,
       String assignee,
       String roomNumber,
       String specialInstructions,
-      String dateTime,
-      String foodChoice) {
+      String drink,
+      String entree,
+      String side) {
     super(0, requester, progress, assignee, roomNumber, specialInstructions);
-    this.dateTime = dateTime;
-    this.foodChoice = foodChoice;
+    this.drink = drink;
+    this.entree = entree;
+    this.side = side;
   }
 
   public int progressToInt(Progress progress) {

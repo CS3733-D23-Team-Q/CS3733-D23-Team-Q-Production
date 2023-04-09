@@ -39,6 +39,7 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void resetButtonClicked() {
+    assigneeField.clear();
     roomNumberField.clear();
     dateTimeField.clear();
     specialInstructionsField.clear();

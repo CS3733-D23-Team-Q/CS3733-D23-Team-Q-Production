@@ -14,7 +14,7 @@ public class ServiceRequest {
   private String roomNumber;
   private String specialInstructions;
 
-  enum Progress {
+  public enum Progress {
     BLANK,
     PROCESSING,
     DONE
