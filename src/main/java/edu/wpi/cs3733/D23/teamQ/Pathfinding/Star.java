@@ -21,7 +21,7 @@ public class Star extends Edge {
     ArrayList<Node> closedList = new ArrayList<Node>();
     ArrayList<Node> openList = new ArrayList<Node>();
     ArrayList<Node> deadList = new ArrayList<Node>();
-
+    String targetFloor = target.getFloor();
     openList.add(start);
     while (openList.isEmpty() == false) {
       if (openList.get(0).equals(target)) {
@@ -43,14 +43,20 @@ public class Star extends Edge {
       // loop to create duplicate arraylist of edges contained in currentNode
       // trueClone.addAll(edgeClone);
       for (Edge thisEdge : currentNode.getEdges()) {
+        /*  if (!thisEdge.getEndNode().getFloor().equalsIgnoreCase(targetFloor)) {
+          continue;
+        }*/
         int relativeXDist = Math.abs(thisEdge.getStartNode().getXCoord() - target.getXCoord());
         int relativeYDist = Math.abs(thisEdge.getStartNode().getYCoord() - target.getYCoord());
         relativeWeight =
             (int) Math.sqrt(relativeXDist * relativeXDist + relativeYDist * relativeYDist);
-        if (relativeWeight < bestWeight && !deadList.contains(thisEdge.getEndNode())) {
+        if (relativeWeight < bestWeight
+            && !deadList.contains(thisEdge.getEndNode())
+            && !closedList.contains(thisEdge.getEndNode())) {
           bestWeight = relativeWeight;
           bestEdge = thisEdge;
           System.out.println("I picked node " + bestEdge.getEndNode());
+          System.out.println("The current node has edges" + currentNode.getEdges());
         }
       }
       if (currentNode.getEdges().size() == 0) {
@@ -58,8 +64,15 @@ public class Star extends Edge {
         deadList.add(deadNode);
         openList.add(closedList.get(closedList.size() - 1));
       }
-      if (bestEdge == null) {
+      /* if (bestEdge == null) {
         bestEdge = currentNode.getEdges().get(0);
+      }*/
+      // I need a fallback process that gets any untraversed node if no good node has been found, to
+      // avoid an infinite loop of two nodes choosing each other
+      for (Edge chosen : currentNode.getEdges()) {
+        if (!closedList.contains(chosen)) {
+          bestEdge = chosen;
+        }
       }
       closedList.add(
           bestEdge.getStartNode()); // at this point, the best weight has been found, now we need to
