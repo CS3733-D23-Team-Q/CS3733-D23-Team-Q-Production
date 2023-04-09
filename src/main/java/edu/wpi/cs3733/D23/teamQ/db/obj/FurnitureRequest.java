@@ -1,11 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class FurnitureRequest extends ServiceRequest {
+public class FurnitureRequest extends ServiceRequest implements IServiceRequest {
   private String item;
 
   public FurnitureRequest(

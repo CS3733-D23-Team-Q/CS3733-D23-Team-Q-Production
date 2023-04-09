@@ -11,13 +11,13 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private int nextID = 0;
   private static MealRequestDaoImpl single_instance = null;
 
-  public static synchronized MealRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new MealRequestDaoImpl();
+  public static synchronized MealRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new MealRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private MealRequestDaoImpl() {
+  private MealRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
     if (mealRequests.size() != 0) {
       nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;

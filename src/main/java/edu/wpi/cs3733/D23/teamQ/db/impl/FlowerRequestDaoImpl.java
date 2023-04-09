@@ -2,6 +2,9 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
+import org.postgresql.ssl.NonValidatingFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +17,13 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
   private int nextID = 0;
   private static FlowerRequestDaoImpl single_instance = null;
 
-  public static synchronized FlowerRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new FlowerRequestDaoImpl();
+  public static synchronized FlowerRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new FlowerRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private FlowerRequestDaoImpl() {
+  private FlowerRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
     if (flowerRequests.size() != 0) {
       nextID = flowerRequests.get(flowerRequests.size() - 1).getRequestID() + 1;
