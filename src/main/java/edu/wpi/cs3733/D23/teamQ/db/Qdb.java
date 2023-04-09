@@ -123,6 +123,10 @@ public class Qdb {
     return edgeTable.addRow(e);
   }
 
+  public List<Edge> getEdges(int nodeID) {
+    return edgeTable.getEdges(nodeID);
+  }
+
   public ArrayList<Edge> retrieveAllEdges() {
     return (ArrayList<Edge>) edgeTable.getAllRows();
   }

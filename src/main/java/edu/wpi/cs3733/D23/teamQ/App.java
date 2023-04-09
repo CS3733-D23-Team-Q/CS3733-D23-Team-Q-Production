@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -35,7 +34,7 @@ public class App extends Application {
     final AnchorPane root = loader.load();
 
     App.rootPane = root;
-    primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));
+    // primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));
     final Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     scene
