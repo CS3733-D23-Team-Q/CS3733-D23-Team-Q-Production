@@ -47,12 +47,35 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
    * @param newRequest new conferenceRequest being inserted
    * @return true if successful
    */
-  public boolean updateRow(Integer requestID, ConferenceRequest newRequest) {
-    int index = this.getIndex(requestID);
-    conferenceRequests.set(index, newRequest);
+  public boolean updateRow(Integer requestID, ConferenceRequest newRequest) throws SQLException {
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"conferenceRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, time = ?, \"foodChoice\" = ?, \"roomNum\" = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setString(5, newRequest.getSpecialInstructions());
+      st.setString(6, newRequest.getDateTime());
+      st.setString(7, newRequest.getFoodChoice());
+      st.setString(8, newRequest.getRoomNumber());
+      st.setInt(9, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    int index = this.getIndex(requestID);
+    conferenceRequests.get(index).setRequester(newRequest.getRequester());
+    conferenceRequests.get(index).setProgress(newRequest.getProgress());
+    conferenceRequests.get(index).setAssignee(newRequest.getAssignee());
+    conferenceRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    conferenceRequests.get(index).setDateTime(newRequest.getDateTime());
+    conferenceRequests.get(index).setFoodChoice(newRequest.getFoodChoice());
+    conferenceRequests.get(index).setRoomNumber(newRequest.getRoomNumber());
 
     return true;
   }
