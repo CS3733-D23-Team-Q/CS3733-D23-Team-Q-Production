@@ -66,7 +66,8 @@ public class ProfilePageController {
 
     this.Username_Display.setText(username);
 
-
+    //    this.ProfilePage_Edit_Button.setOnMouseClicked(
+    //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
     this.ProfilePage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
   }
 
