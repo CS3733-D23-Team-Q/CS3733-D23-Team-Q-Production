@@ -48,11 +48,25 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, FurnitureRequest newRequest) {
-    int index = this.getIndex(requestID);
-    furnitureRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+         PreparedStatement st =
+                 connection.prepareStatement(
+                         "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
+                                 + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      //st.setString(5, newRequest.getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setString(7, newRequest.getItem());
+      st.setInt(8, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     return true;
   }
