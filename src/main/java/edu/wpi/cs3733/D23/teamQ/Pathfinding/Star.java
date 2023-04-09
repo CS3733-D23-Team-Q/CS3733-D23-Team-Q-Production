@@ -21,7 +21,7 @@ public class Star extends Edge {
     ArrayList<Node> closedList = new ArrayList<Node>();
     ArrayList<Node> openList = new ArrayList<Node>();
     ArrayList<Node> deadList = new ArrayList<Node>();
-    boolean noElevators = true;
+    boolean noElevators = true; // used to determine whether to ignore elevators
     String targetFloor = target.getFloor();
     if (!targetFloor.equalsIgnoreCase(start.getFloor())) {
       noElevators = false;
@@ -50,12 +50,13 @@ public class Star extends Edge {
         /*  if (!thisEdge.getEndNode().getFloor().equalsIgnoreCase(targetFloor)) {
           continue;
         }*/
-        int relativeXDist = Math.abs(thisEdge.getEndNode().getXCoord() - target.getXCoord());
-        int relativeYDist = Math.abs(thisEdge.getEndNode().getYCoord() - target.getYCoord());
+        int relativeXDist = Math.abs(target.getXCoord() - thisEdge.getEndNode().getXCoord());
+        int relativeYDist = Math.abs(target.getYCoord() - thisEdge.getEndNode().getYCoord());
         relativeWeight =
             (int) Math.sqrt(relativeXDist * relativeXDist + relativeYDist * relativeYDist);
         if (relativeWeight < bestWeight
-            && thisEdge.getEndNode().getFloor().equalsIgnoreCase(targetFloor)
+            && !thisEdge.getEndNode().getLocation().getNodeType().equalsIgnoreCase("ELEV")
+            // && thisEdge.getEndNode().getFloor().equalsIgnoreCase(targetFloor)
             && !deadList.contains(thisEdge.getEndNode())
             && !closedList.contains(thisEdge.getEndNode())) {
           bestWeight = relativeWeight;
@@ -68,10 +69,10 @@ public class Star extends Edge {
           System.out.println("And the target node was " + target);
           System.out.println();
           if (closedList.size() != 0) {
-            System.out.println(
-                "And the closed list contains node " + closedList);
+            System.out.println("And the closed list contains node " + closedList);
           }
           System.out.println();
+          System.out.println("And the weight was" + bestWeight);
         }
       }
       if (currentNode.getEdges().size() == 0) {
@@ -87,13 +88,25 @@ public class Star extends Edge {
       if (bestEdge == null) {
         for (Edge chosen : currentNode.getEdges()) {
           if (!closedList.contains(chosen.getEndNode())
-              && chosen.getEndNode().getFloor().equalsIgnoreCase(targetFloor)) {
+              //  && chosen.getEndNode().getFloor().equalsIgnoreCase(targetFloor)
+              && !chosen
+                  .getEndNode()
+                  .getLocation()
+                  .getNodeType()
+                  .equalsIgnoreCase("ELEV")) { // get node type
             bestEdge = chosen;
           }
         }
       }
-      closedList.add(currentNode); // at this point, the best weight has been found, now we need to
-      // match the edge
+      if (bestEdge == null) { // This scenario most likely happens when we are near an elevator
+        for (Edge fin : currentNode.getEdges()) {
+          if (!closedList.contains(fin.getStartNode())
+              && !fin.getStartNode().getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
+            bestEdge = fin;
+          }
+        }
+      }
+      closedList.add(currentNode);
       openList.remove(currentNode);
       openList.add(bestEdge.getEndNode());
     }
