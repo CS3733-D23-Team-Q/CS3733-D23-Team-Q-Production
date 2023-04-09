@@ -15,6 +15,7 @@ import java.util.List;
 public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
   private List<FlowerRequest> flowerRequests = new ArrayList<FlowerRequest>();
   private int nextID = 0;
+  private NodeDaoImpl nodeTable;
   private static FlowerRequestDaoImpl single_instance = null;
 
   public static synchronized FlowerRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
@@ -25,6 +26,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
 
   private FlowerRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
+    this.nodeTable = nodeTable;
     if (flowerRequests.size() != 0) {
       nextID = flowerRequests.get(flowerRequests.size() - 1).getRequestID() + 1;
     }
@@ -99,7 +101,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       stmt.setString(5, request.getNote());
       stmt.setString(6, request.getFlowerType());
       stmt.setInt(7, request.getNumberOfBouquets());
-      stmt.setString(8, request.getRoomNumber());
+      stmt.setInt(8, request.getNode().getNodeID());
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -122,7 +124,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
                 rs.getString("requester"),
                 rs.getInt("progress"),
                 rs.getString("assignee"),
-                rs.getString("roomNum"),
+                nodeTable.retrieveRow(rs.getInt("node")),
                 rs.getString("specialInstructions"),
                 rs.getString("note"),
                 rs.getString("typeOfFlower"),

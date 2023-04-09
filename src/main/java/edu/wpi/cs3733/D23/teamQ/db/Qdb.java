@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D23.teamQ.db;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class Qdb {
         return conferenceRequestTable.retrieveRow(requestID);
     }
 
-    public boolean updateConferenceRequest(int requestID, ConferenceRequest cr) throws SQLException {
+    public boolean updateConferenceRequest(int requestID, ConferenceRequest cr) {
         return conferenceRequestTable.updateRow(requestID, cr);
     }
 
@@ -235,5 +234,85 @@ public class Qdb {
 
     public ArrayList<Question> retrieveAllQuestions() {
         return (ArrayList<Question>) questionTable.getAllRows();
+    }
+
+    public MealRequest retrieveMealRequest(int requestID) {
+        return mealRequestTable.retrieveRow(requestID);
+    }
+
+    public boolean updateMealRequest(int requestID, MealRequest mr) {
+        return mealRequestTable.updateRow(requestID, mr);
+    }
+
+    public boolean deleteMealRequest(int requestID) {
+        return mealRequestTable.deleteRow(requestID);
+    }
+
+    public boolean addMealRequest(MealRequest mr) {
+        return mealRequestTable.addRow(mr);
+    }
+
+    public ArrayList<MealRequest> retrieveAllMealRequests() {
+        return (ArrayList<MealRequest>) mealRequestTable.getAllRows();
+    }
+
+    public FurnitureRequest retrieveFurnitureRequest(int requestID) {
+        return furnitureRequestTable.retrieveRow(requestID);
+    }
+
+    public boolean updateFurnitureRequest(int requestID, FurnitureRequest fr) {
+        return furnitureRequestTable.updateRow(requestID, fr);
+    }
+
+    public boolean deleteFurnitureRequest(int requestID) {
+        return furnitureRequestTable.deleteRow(requestID);
+    }
+
+    public boolean addFurnitureRequest(FurnitureRequest fr) {
+        return furnitureRequestTable.addRow(fr);
+    }
+
+    public ArrayList<FurnitureRequest> retrieveAllFurnitureRequests() {
+        return (ArrayList<FurnitureRequest>) furnitureRequestTable.getAllRows();
+    }
+
+    public PatientTransportRequest retrievePatientTransportRequest(int requestID) {
+        return patientTransportRequestTable.retrieveRow(requestID);
+    }
+
+    public boolean updatePatientTransportRequest(int requestID, PatientTransportRequest ptr) {
+        return patientTransportRequestTable.updateRow(requestID, ptr);
+    }
+
+    public boolean deletePatientTransportRequest(int requestID) {
+        return patientTransportRequestTable.deleteRow(requestID);
+    }
+
+    public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
+        return patientTransportRequestTable.addRow(ptr);
+    }
+
+    public ArrayList<PatientTransportRequest> retrieveAllPatientTransportRequests() {
+        return (ArrayList<PatientTransportRequest>) patientTransportRequestTable.getAllRows();
+    }
+
+    public OfficeSuppliesRequest retrieveOfficeSuppliesRequest(int requestID) {
+        return officeSuppliesRequestTable.retrieveRow(requestID);
+    }
+
+    public boolean updateOfficeSuppliesRequest(int requestID, OfficeSuppliesRequest osr) {
+        return officeSuppliesRequestTable.updateRow(requestID, osr);
+    }
+
+    public boolean deleteOfficeSuppliesRequest(int requestID) {
+        return officeSuppliesRequestTable.deleteRow(requestID);
+    }
+
+    public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
+        return officeSuppliesRequestTable.addRow(osr);
+    }
+
+    public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
+        return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
     }
 }
