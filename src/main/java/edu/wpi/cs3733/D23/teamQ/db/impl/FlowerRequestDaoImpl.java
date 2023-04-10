@@ -60,15 +60,18 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester());
-      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setInt(2, newRequest.getNode().getNodeID());
+      st.setString(3, newRequest.getRequester());
       st.setString(4, newRequest.getAssignee());
       st.setString(5, newRequest.getSpecialInstructions());
-      st.setString(6, newRequest.getNote());
-      st.setString(7, newRequest.getFlowerType());
-      st.setInt(8, newRequest.getNumberOfBouquets());
-      st.setInt(9, newRequest.getNode().getNodeID());
-      st.setInt(10, newRequest.get;
+      st.setDate(6, newRequest.getDate());
+      st.setString(7, newRequest.getTime());
+      st.setString(8, newRequest.getNote());
+      st.setString(9, newRequest.getFlowerType());
+      st.setInt(10, newRequest.getNumberOfBouquets());
+      st.setInt(11, newRequest.getProgress().ordinal());
+
+
 
 
       st.executeUpdate();
@@ -77,14 +80,16 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     }
 
     int index = this.getIndex(requestID);
+    flowerRequests.get(index).setNode(newRequest.getNode());
     flowerRequests.get(index).setRequester(newRequest.getRequester());
-    flowerRequests.get(index).setProgress(newRequest.getProgress());
     flowerRequests.get(index).setAssignee(newRequest.getAssignee());
     flowerRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    flowerRequests.get(index).setDate(newRequest.getDate());
+    flowerRequests.get(index).setTime(newRequest.getTime());
     flowerRequests.get(index).setNote(newRequest.getNote());
     flowerRequests.get(index).setFlowerType(newRequest.getFlowerType());
     flowerRequests.get(index).setNumberOfBouquets(newRequest.getNumberOfBouquets());
-    flowerRequests.get(index).setNode(newRequest.getNode());
+    flowerRequests.get(index).setProgress(newRequest.getProgress());
 
     return true;
   }
@@ -119,15 +124,17 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"flowerRequest\"(\"requester\", \"progress\", \"assignee\", \"specialInstructions\", \"note\", \"typeOfFlower\", \"bouquetSize\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
+                "INSERT INTO \"flowerRequest\"(\"nodeID\", requester, assignee, \"specialInstructions\", date, time, note, \"typeOfFlower\", \"bouquetSize\", progress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+      stmt.setInt(1, request.getNode().getNodeID());
+      stmt.setString(2, request.getRequester());
       stmt.setString(3, request.getAssignee());
       stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getNote());
-      stmt.setString(6, request.getFlowerType());
-      stmt.setInt(7, request.getNumberOfBouquets());
-      stmt.setInt(8, request.getNode().getNodeID());
+      stmt.setDate(5, request.getDate());
+      stmt.setString(6, request.getTime());
+      stmt.setString(7, request.getNote());
+      stmt.setString(8, request.getFlowerType());
+      stmt.setInt(9, request.getNumberOfBouquets());
+      stmt.setInt(10, request.progressToInt(request.getProgress()));
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
