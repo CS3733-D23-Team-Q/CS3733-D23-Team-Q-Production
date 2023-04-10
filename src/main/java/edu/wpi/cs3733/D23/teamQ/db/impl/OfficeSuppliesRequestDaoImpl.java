@@ -10,6 +10,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   private List<OfficeSuppliesRequest> officeSuppliesRequests =
       new ArrayList<OfficeSuppliesRequest>();
   private int nextID = 0;
+  private NodeDaoImpl nodeTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
 
   public static synchronized OfficeSuppliesRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
@@ -20,6 +21,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
 
   private OfficeSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
+    this.nodeTable = nodeTable;
     if (officeSuppliesRequests.size() != 0) {
       nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;
     }
@@ -91,14 +93,14 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"quantity\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"quantity\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
       stmt.setString(4, request.getSpecialInstructions());
       stmt.setString(5, request.getItem());
       stmt.setInt(6, request.getQuantity());
-      stmt.setString(7, request.getRoomNumber());
+      stmt.setInt(7, request.getNode().getNodeID());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -113,7 +115,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try {
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
-      ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");
+      ResultSet rst = stm.executeQuery("Select * From \"officeSupplies\"");
       while (rst.next()) {
         officeSuppliesRequests.add(
             new OfficeSuppliesRequest(
@@ -121,7 +123,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                rst.getString("roomNum"),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("item"),
                 rst.getInt("quantity")));

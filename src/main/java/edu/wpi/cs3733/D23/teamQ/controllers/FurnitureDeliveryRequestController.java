@@ -59,7 +59,7 @@ public class FurnitureDeliveryRequestController {
             "temp user",
             0,
             assigneeField.getText(),
-            roomNumberField.getText(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
             (String) itemField.getValue());
     // qdb.addConferenceRequest(newFR);

@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
-import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,14 +22,32 @@ public class ServiceRequestDaoImpl {
   private static ServiceRequestDaoImpl single_instance = null;
 
   public static synchronized ServiceRequestDaoImpl getInstance(
-      ConferenceRequestDaoImpl conferenceRequestTable, FlowerRequestDaoImpl flowerRequestTable, MealRequestDaoImpl mealRequests, FurnitureRequestDaoImpl furnitureRequests, OfficeSuppliesRequestDaoImpl officeSuppliesRequests, PatientTransportRequestDaoImpl patientTransportRequests) {
+      ConferenceRequestDaoImpl conferenceRequestTable,
+      FlowerRequestDaoImpl flowerRequestTable,
+      MealRequestDaoImpl mealRequests,
+      FurnitureRequestDaoImpl furnitureRequests,
+      OfficeSuppliesRequestDaoImpl officeSuppliesRequests,
+      PatientTransportRequestDaoImpl patientTransportRequests) {
     if (single_instance == null)
-      single_instance = new ServiceRequestDaoImpl(conferenceRequestTable, flowerRequestTable, mealRequests, furnitureRequests, officeSuppliesRequests, patientTransportRequests);
+      single_instance =
+          new ServiceRequestDaoImpl(
+              conferenceRequestTable,
+              flowerRequestTable,
+              mealRequests,
+              furnitureRequests,
+              officeSuppliesRequests,
+              patientTransportRequests);
 
     return single_instance;
   }
 
-  private ServiceRequestDaoImpl(GenDao conferenceRequests, GenDao flowerRequests, GenDao mealRequests, GenDao furnitureRequests, GenDao officeSuppliesRequests, GenDao patientTransportRequests) {
+  private ServiceRequestDaoImpl(
+      GenDao conferenceRequests,
+      GenDao flowerRequests,
+      GenDao mealRequests,
+      GenDao furnitureRequests,
+      GenDao officeSuppliesRequests,
+      GenDao patientTransportRequests) {
     this.conferenceRequestTable = conferenceRequests;
     this.flowerRequestTable = flowerRequests;
     this.mealRequestTable = mealRequests;
@@ -48,7 +63,8 @@ public class ServiceRequestDaoImpl {
     List<MealRequest> mealRequests = mealRequestTable.getAllRows();
     List<FurnitureRequest> furnitureRequests = furnitureRequestTable.getAllRows();
     List<OfficeSuppliesRequest> officeSuppliesRequests = officeSuppliesRequestTable.getAllRows();
-    List<PatientTransportRequest> patientTransportRequests = patientTransportRequestTable.getAllRows();
+    List<PatientTransportRequest> patientTransportRequests =
+        patientTransportRequestTable.getAllRows();
 
     serviceRequests.addAll(flowerRequests);
     serviceRequests.addAll(conferenceRequests);

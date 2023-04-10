@@ -9,6 +9,7 @@ import java.util.List;
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
   private int nextID = 0;
+  private NodeDaoImpl nodeTable;
   private static MealRequestDaoImpl single_instance = null;
 
   public static synchronized MealRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
@@ -19,6 +20,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
 
   private MealRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
+    this.nodeTable = nodeTable;
     if (mealRequests.size() != 0) {
       nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;
     }
@@ -89,15 +91,16 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"specialInstructions\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getDrink());
-      stmt.setString(6, request.getEntree());
-      stmt.setString(7, request.getSide());
-      stmt.setString(8, request.getRoomNumber());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setString(6, request.getDrink());
+      stmt.setString(7, request.getEntree());
+      stmt.setString(8, request.getSide());
+      stmt.setInt(9, request.getNode().getNodeID());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -120,7 +123,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                rst.getString("roomNum"),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("drink"),
                 rst.getString("entree"),

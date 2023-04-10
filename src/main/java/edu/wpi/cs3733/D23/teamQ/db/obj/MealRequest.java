@@ -16,12 +16,12 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String drink,
       String entree,
       String side) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions);
     this.drink = drink;
     this.entree = entree;
     this.side = side;
@@ -31,12 +31,12 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String drink,
       String entree,
       String side) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions);
     this.drink = drink;
     this.entree = entree;
     this.side = side;

@@ -9,6 +9,7 @@ import java.util.List;
 public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRequest, Integer> {
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
+  private NodeDaoImpl nodeTable;
   private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
@@ -20,6 +21,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
 
   private PatientTransportRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
+    this.nodeTable = nodeTable;
     if (patientTransportRequests.size() != 0) {
       nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
     }
@@ -91,13 +93,13 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
       stmt.setString(4, request.getSpecialInstructions());
       stmt.setString(5, request.getItem());
-      stmt.setString(6, request.getRoomNumber());
+      stmt.setInt(6, request.getNode().getNodeID());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -120,7 +122,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                rst.getString("roomNum"),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("item")));
       }

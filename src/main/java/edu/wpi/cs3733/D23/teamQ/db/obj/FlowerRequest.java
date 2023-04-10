@@ -16,12 +16,12 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String note,
       String flowerType,
       int numberOfBouquets) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions);
     this.note = note;
     this.flowerType = flowerType;
     this.numberOfBouquets = numberOfBouquets;
@@ -31,12 +31,12 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String note,
       String flowerType,
       int numberOfBouquets) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions);
     this.note = note;
     this.flowerType = flowerType;
     this.numberOfBouquets = numberOfBouquets;
