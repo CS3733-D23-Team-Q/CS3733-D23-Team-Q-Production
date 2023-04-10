@@ -10,7 +10,7 @@ public class Person {
 
   public Person(
       int IDNum,
-      String Firstname,
+      String FirstName,
       String LastName,
       String Title,
       int PhoneNumber,
@@ -23,7 +23,7 @@ public class Person {
     this.username = username;
   }
 
-  public Person(String Firstname, String LastName, String Title, int PhoneNumber, String username) {
+  public Person(String FirstName, String LastName, String Title, int PhoneNumber, String username) {
 
     this.FirstName = FirstName;
     this.LastName = LastName;
