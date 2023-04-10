@@ -119,7 +119,7 @@ public class Star2 {
       if(current.equals(end)){
         return path;
       }
-      if(current.getEdges().size()  != 0){
+      if(current.getEdges().size() == 0){
         System.out.println("This node is a dead end " + current);
       }
       if(!visitedList.contains(current.getEdges().get(0).getEndNode())){
