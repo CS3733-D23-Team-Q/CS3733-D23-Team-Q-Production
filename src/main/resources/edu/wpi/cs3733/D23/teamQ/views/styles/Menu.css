@@ -6,13 +6,10 @@
     -fx-graphic-text-gap: 24;
 }
 .mfx-button:hover {
-    -fx-background-color: #0167b1;
-    -fx-text-fill: #f1f1f1;
-}
-
-.mfx-button:pressed {
     -fx-background-color: #f1f1f1;
     -fx-text-fill: #012d5a;
 }
+
+
 
 
