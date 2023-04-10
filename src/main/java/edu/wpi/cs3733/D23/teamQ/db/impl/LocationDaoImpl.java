@@ -168,10 +168,9 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
-    } catch(Exception e) {
+    } catch (Exception e) {
       return false;
     }
-
   }
 
   public boolean importCSV(String filename) {
