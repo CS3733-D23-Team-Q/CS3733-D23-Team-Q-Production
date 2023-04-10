@@ -62,17 +62,17 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="foodField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <ChoiceBox fx:id="flowerTypeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Boquets (In Dozens)">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Bouquets (In Dozens)">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXTextField fx:id="bouquetChoiceField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Number of Boquets (In Dozens)" />
+                  <MFXTextField fx:id="bouquetChoiceField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Number of Bouquets (In Dozens)" />
                </children>
             </VBox>
             <VBox>
@@ -103,7 +103,7 @@
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                  <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>

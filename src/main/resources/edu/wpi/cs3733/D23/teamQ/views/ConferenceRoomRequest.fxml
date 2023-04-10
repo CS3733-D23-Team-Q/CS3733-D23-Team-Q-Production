@@ -93,7 +93,7 @@
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                  <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>

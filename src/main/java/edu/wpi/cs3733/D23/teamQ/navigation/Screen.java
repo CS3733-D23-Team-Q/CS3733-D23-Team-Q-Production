@@ -13,6 +13,7 @@ public enum Screen {
   SIGNAGE("views/Signage.fxml", "Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
+  SERVICE_PLACEHOLDER("views/ServiceRequestPlaceholder.fxml", "Placeholder"),
   CONFERENCE_ROOM_REQUEST("views/ConferenceRoomRequest.fxml", "Conference Room Request"),
   FLOWER_REQUEST("views/FlowerRequest.fxml", "Flower Request"),
   FLOWER_REQUEST_SUBMISSION("views.FlowerRequestSubmission.fxml", "Flower Request Submission"),
