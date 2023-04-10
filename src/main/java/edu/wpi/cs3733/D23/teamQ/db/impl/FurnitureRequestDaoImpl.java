@@ -70,7 +70,13 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
       e.printStackTrace();
     }
 
-    // furnitureRequests
+    int index = this.getIndex(requestID);
+    furnitureRequests.get(index).setRequester(newRequest.getRequester());
+    furnitureRequests.get(index).setProgress(newRequest.getProgress());
+    furnitureRequests.get(index).setAssignee(newRequest.getAssignee());
+    furnitureRequests.get(index).setNode(newRequest.getNode());
+    furnitureRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    furnitureRequests.get(index).setItem(newRequest.getItem());
 
     return true;
   }

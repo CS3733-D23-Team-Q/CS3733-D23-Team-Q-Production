@@ -193,6 +193,8 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch(Exception e) {
+      return false;
     }
   }
 
@@ -208,9 +210,11 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
         // addRow(m);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 }
