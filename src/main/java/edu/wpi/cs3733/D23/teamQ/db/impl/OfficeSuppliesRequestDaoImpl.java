@@ -93,7 +93,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"quantity\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"quantity\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
@@ -123,7 +123,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                nodeTable.retrieveRow(rst.getInt("node")),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("item"),
                 rst.getInt("quantity")));

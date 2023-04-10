@@ -93,7 +93,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
@@ -122,7 +122,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                nodeTable.retrieveRow(rst.getInt("node")),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("item")));
       }
