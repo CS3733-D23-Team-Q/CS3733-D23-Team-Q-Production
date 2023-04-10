@@ -15,7 +15,7 @@
    <children>
       <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="240.0" spacing="12.0" stylesheets="@styles/Menu.css">
          <children>
-            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="240.0" spacing="24.0">
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="240.0" spacing="18.0">
                <children>
                   <ImageView fitHeight="62.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,9 +33,9 @@
                </padding>
             </HBox>
             <Line endX="237.0" stroke="#f1f1f1" strokeWidth="3.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" stylesheets="@styles/Menu.css" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0" stylesheets="@styles/Menu.css" VBox.vgrow="ALWAYS">
                <children>
-                  <MFXButton fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#homeClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1">
+                  <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#homeClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -44,7 +44,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="people" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#peopleClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="People" textFill="#f1f1f1">
+                  <MFXButton fx:id="people" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#peopleClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="People" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -53,7 +53,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="navigation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#navigationClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleAnimationSpeed="0.0" rippleColor="#f1f1f1" text="Navigation" textFill="#f1f1f1">
+                  <MFXButton fx:id="navigation" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#navigationClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleAnimationSpeed="0.0" rippleColor="#f1f1f1" text="Navigation" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,7 +62,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="servicerequests" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#srClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Service Requests" textFill="#f1f1f1">
+                  <MFXButton fx:id="servicerequests" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#srClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Service Requests" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -71,7 +71,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="statistics" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#statisticsClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Statistics" textFill="#f1f1f1">
+                  <MFXButton fx:id="statistics" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#statisticsClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Statistics" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +80,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="settings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#settingsClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Settings" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
+                  <MFXButton fx:id="settings" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#settingsClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Settings" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -91,7 +91,7 @@
                   </MFXButton>
                </children>
             </VBox>
-            <MFXButton fx:id="signout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#signoutClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1">
+            <MFXButton fx:id="signout" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#signoutClicked" prefHeight="40.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -1,10 +1,10 @@
 .mfx-button {
     -fx-background-color: #012d5a;
     -fx-font-family: Roboto;
-    -fx-font-size: 20;
+    -fx-font-size: 16;
     -fx-text-fill: #f1f1f1;
+    -fx-graphic-text-gap: 24;
 }
-
 .mfx-button:hover {
     -fx-background-color: #0167b1;
     -fx-text-fill: #f1f1f1;
