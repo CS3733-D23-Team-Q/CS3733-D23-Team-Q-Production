@@ -172,7 +172,6 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
   }
 
   public boolean importCSV(String filename) {
-    NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
     try {
       File f = new File(filename);
       Scanner myReader = new Scanner(f);

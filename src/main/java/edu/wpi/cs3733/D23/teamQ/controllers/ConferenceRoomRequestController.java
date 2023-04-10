@@ -39,6 +39,7 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void resetButtonClicked() {
+    assigneeField.clear();
     roomNumberField.clear();
     dateTimeField.clear();
     specialInstructionsField.clear();
@@ -59,7 +60,7 @@ public class ConferenceRoomRequestController {
             "temp user",
             0,
             assigneeField.getText(),
-            roomNumberField.getText(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
             dateTimeField.getText(),
             (String) foodField.getValue());

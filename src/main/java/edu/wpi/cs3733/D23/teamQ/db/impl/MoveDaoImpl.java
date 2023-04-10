@@ -36,23 +36,23 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
   /**
    * returns a move given a nodeID
    *
-   * @param nodeID of move being retrieved
+   * @param moveID of move being retrieved
    * @return a move with the given nodeID
    */
-  public Move retrieveRow(Integer nodeID) {
-    int index = this.getIndex(nodeID);
+  public Move retrieveRow(Integer moveID) {
+    int index = this.getIndex(moveID);
     return moves.get(index);
   }
 
   /**
    * updates move in list with a new move
    *
-   * @param nodeID nodeID of Move being replaced
+   * @param moveID moveID of Move being replaced
    * @param newMove new location being inserted
    * @return true if successful
    */
-  public boolean updateRow(Integer nodeID, Move newMove) {
-    int index = this.getIndex(nodeID);
+  public boolean updateRow(Integer moveID, Move newMove) {
+    int index = this.getIndex(moveID);
     moves.set(index, newMove);
     return true;
   }
@@ -198,14 +198,14 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
    * @return true if successfully imported, false otherwise
    */
   public boolean importCSV(String filename) {
-    NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
+
     try {
       File f = new File(filename);
       Scanner myReader = new Scanner(f);
       while (myReader.hasNextLine()) {
         String row = myReader.nextLine();
         String[] vars = row.split(",");
-        Move m = new Move(nodeDao.retrieveRow(Integer.parseInt(vars[0])), vars[1], vars[2]);
+        Move m = new Move(nodeTable.retrieveRow(Integer.parseInt(vars[0])), vars[1], vars[2]);
         addRow(m);
       }
       myReader.close();
