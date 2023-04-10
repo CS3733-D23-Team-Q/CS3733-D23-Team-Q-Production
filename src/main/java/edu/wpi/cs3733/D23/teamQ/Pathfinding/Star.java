@@ -27,6 +27,7 @@ public class Star extends Edge {
       noElevators = false;
     }
     openList.add(start);
+    closedList.add(start);
     while (!openList.isEmpty()) {
       if (openList.get(0).equals(target)) {
         closedList.add(openList.get(0)); // line to add current node to closed list
@@ -36,10 +37,10 @@ public class Star extends Edge {
       if (currentNode.getEdges().size() == 0) { // check for edgeless nodes
         System.out.println("The node " + currentNode.getNodeID() + " has no edges.");
       }
-      int bestWeight =
-          1000000000; // setting some temp variables used to calculate and find the best weight
+      double bestWeight =
+          1000000000.0; // setting some temp variables used to calculate and find the best weight
       // (shortest distance)
-      int relativeWeight = 100000;
+      double relativeWeight = 100000.0;
       Edge bestEdge = null;
       //  List<Edge> edgeClone = currentNode.getEdges();
       // ArrayList<Edge> trueClone = new ArrayList<Edge>();
@@ -50,10 +51,9 @@ public class Star extends Edge {
         /*  if (!thisEdge.getEndNode().getFloor().equalsIgnoreCase(targetFloor)) {
           continue;
         }*/
-        int relativeXDist = Math.abs(target.getXCoord() - thisEdge.getEndNode().getXCoord());
-        int relativeYDist = Math.abs(target.getYCoord() - thisEdge.getEndNode().getYCoord());
-        relativeWeight =
-            (int) Math.sqrt(relativeXDist * relativeXDist + relativeYDist * relativeYDist);
+        double relativeXDist = Math.abs(target.getXCoord() - thisEdge.getEndNode().getXCoord());
+        double relativeYDist = Math.abs(target.getYCoord() - thisEdge.getEndNode().getYCoord());
+        relativeWeight = Math.sqrt(relativeXDist * relativeXDist + relativeYDist * relativeYDist);
         if (relativeWeight < bestWeight
             && !thisEdge.getEndNode().getLocation().getNodeType().equalsIgnoreCase("ELEV")
             // && thisEdge.getEndNode().getFloor().equalsIgnoreCase(targetFloor)
@@ -76,9 +76,14 @@ public class Star extends Edge {
         }
       }
       if (currentNode.getEdges().size() == 0) {
+        if (currentNode.equals(target)) {
+          closedList.add(currentNode);
+          return closedList;
+        }
         deadNode = currentNode;
         deadList.add(deadNode);
         openList.add(closedList.get(closedList.size() - 1));
+        System.out.println("Dead node was found at " + currentNode);
       }
       /* if (bestEdge == null) {
         bestEdge = currentNode.getEdges().get(0);
@@ -95,16 +100,37 @@ public class Star extends Edge {
                   .getNodeType()
                   .equalsIgnoreCase("ELEV")) { // get node type
             bestEdge = chosen;
+            System.out.println(
+                "The non-elevator node fallback was triggered by the edge " + chosen);
           }
         }
       }
       if (bestEdge == null) { // This scenario most likely happens when we are near an elevator
         for (Edge fin : currentNode.getEdges()) {
           if (!closedList.contains(fin.getStartNode())
-              && !fin.getStartNode().getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
+              && !closedList.contains(fin.getEndNode())
+              && fin.getEndNode().getFloor().equalsIgnoreCase(targetFloor)) {
             bestEdge = fin;
+            System.out.println();
+            System.out.println("The any-node-on-same-floor fallback was triggered by edge " + fin);
           }
         }
+      }
+      if (bestEdge == null) {
+        for (Edge indicator : currentNode.getEdges()) {
+          if (!closedList.contains(indicator.getStartNode())) {
+            closedList.add(currentNode);
+            openList.remove(currentNode);
+            openList.add(indicator.getStartNode());
+            System.out.println();
+            System.out.println(
+                "The untraversed Node is a start node fallback was triggered by edge "
+                    + indicator
+                    + " And added node "
+                    + indicator.getStartNode());
+          }
+        }
+        continue;
       }
       closedList.add(currentNode);
       openList.remove(currentNode);
