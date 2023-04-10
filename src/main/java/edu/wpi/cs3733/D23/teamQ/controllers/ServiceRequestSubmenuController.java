@@ -21,6 +21,11 @@ public class ServiceRequestSubmenuController {
     Navigation.navigate(Screen.LIST_REQUESTS);
   }
 
+  @FXML
+  public void srsmExited() {
+    setVisible(false);
+  }
+
   public void setVisible(boolean v) {
     servicerequestSM.toFront();
     servicerequestSM.setVisible(v);

@@ -21,6 +21,11 @@ public class SignoutSubmenuController {
     Platform.exit();
   }
 
+  @FXML
+  public void sosmExited() {
+    setVisible(false);
+  }
+
   public void setVisible(boolean v) {
     signoutSM.toFront();
     signoutSM.setVisible(v);

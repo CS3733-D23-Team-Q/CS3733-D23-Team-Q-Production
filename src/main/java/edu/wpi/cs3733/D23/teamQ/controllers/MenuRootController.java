@@ -23,8 +23,7 @@ public class MenuRootController {
   @FXML SignoutSubmenuController signoutSMController;
 
   @FXML
-  public void initialize() {
-  }
+  public void initialize() {}
 
   @FXML
   public void homeClicked() {
@@ -34,60 +33,60 @@ public class MenuRootController {
   @FXML
   public void peopleEntered() {
     peopleSMController.setVisible(true);
-  }
-
-  @FXML
-  public void peopleExited() {
-    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
   }
 
   @FXML
   public void navEntered() {
+    peopleSMController.setVisible(false);
     navigationSMController.setVisible(true);
-  }
-
-  @FXML
-  public void navExited() {
-    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
   }
 
   @FXML
   public void srEntered() {
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
     servicerequestSMController.setVisible(true);
-  }
-
-  @FXML
-  public void srExited() {
-    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
   }
 
   @FXML
   public void statEntered() {
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
     statisticsSMController.setVisible(true);
-  }
-
-  @FXML
-  public void statExited() {
-    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
   }
 
   @FXML
   public void setEntered() {
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
     settingsSMController.setVisible(true);
-  }
-
-  @FXML
-  public void setExited() {
-    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
   }
 
   @FXML
   public void soEntered() {
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
     signoutSMController.setVisible(true);
-  }
-
-  @FXML
-  public void soExited() {
-    signoutSMController.setVisible(false);
   }
 }

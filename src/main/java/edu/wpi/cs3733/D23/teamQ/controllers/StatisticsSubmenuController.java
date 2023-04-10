@@ -25,6 +25,11 @@ public class StatisticsSubmenuController {
     // Navigation.navigate(Screen.Statistics);
   }
 
+  @FXML
+  public void stsmExited() {
+    setVisible(false);
+  }
+
   public void setVisible(boolean v) {
     statisticsSM.toFront();
     statisticsSM.setVisible(v);

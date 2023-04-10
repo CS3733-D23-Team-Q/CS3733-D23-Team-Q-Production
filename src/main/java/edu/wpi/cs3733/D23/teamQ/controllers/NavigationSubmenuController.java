@@ -22,6 +22,11 @@ public class NavigationSubmenuController {
     Navigation.navigate(Screen.MAP_EDITOR);
   }
 
+  @FXML
+  public void nsmExited() {
+    setVisible(false);
+  }
+
   public void setVisible(boolean v) {
     navigationSM.toFront();
     navigationSM.setVisible(v);

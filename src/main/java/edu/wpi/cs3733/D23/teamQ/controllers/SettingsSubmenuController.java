@@ -27,6 +27,11 @@ public class SettingsSubmenuController {
     Navigation.navigate(Screen.HELP);
   }
 
+  @FXML
+  public void sesmExited() {
+    setVisible(false);
+  }
+
   public void setVisible(boolean v) {
     settingsSM.toFront();
     settingsSM.setVisible(v);

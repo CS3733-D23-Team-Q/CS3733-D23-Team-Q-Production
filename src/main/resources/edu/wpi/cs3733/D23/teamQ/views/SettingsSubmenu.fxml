@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="settingsSM" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="207.0" prefWidth="192.0" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SettingsSubmenuController">
+<VBox fx:id="settingsSM" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#sesmExited" prefHeight="207.0" prefWidth="192.0" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SettingsSubmenuController">
    <children>
       <MFXButton fx:id="aSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#aSettingsClicked" prefHeight="53.0" prefWidth="160.0" text="Account Settings" />
       <MFXButton fx:id="dSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#dSettingsClicked" prefHeight="53.0" prefWidth="160.0" text="Display Settings" />
