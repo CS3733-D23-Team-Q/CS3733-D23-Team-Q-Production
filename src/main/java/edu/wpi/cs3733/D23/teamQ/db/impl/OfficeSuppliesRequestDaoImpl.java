@@ -51,11 +51,34 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, OfficeSuppliesRequest newRequest) {
-    int index = this.getIndex(requestID);
-    officeSuppliesRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"officeSupplies\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, item = ?, quantity = ?, \"specialInstructions\" = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getItem());
+      st.setInt(7, newRequest.getQuantity());
+      st.setString(8, newRequest.getSpecialInstructions());
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    int index = this.getIndex(requestID);
+    officeSuppliesRequests.get(index).setRequester(newRequest.getRequester());
+    officeSuppliesRequests.get(index).setProgress(newRequest.getProgress());
+    officeSuppliesRequests.get(index).setAssignee(newRequest.getAssignee());
+    officeSuppliesRequests.get(index).setNode(newRequest.getNode());
+    officeSuppliesRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    officeSuppliesRequests.get(index).setItem(newRequest.getItem());
+    officeSuppliesRequests.get(index).setQuantity(newRequest.getQuantity());
 
     return true;
   }

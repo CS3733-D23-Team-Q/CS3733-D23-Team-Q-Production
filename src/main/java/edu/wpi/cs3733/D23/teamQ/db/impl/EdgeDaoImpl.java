@@ -173,6 +173,8 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch(Exception e) {
+      return false;
     }
   }
 
@@ -191,10 +193,12 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
         addRow(e);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 
   /**
@@ -206,7 +210,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
   public List<Edge> getEdges(int nodeID) {
     List<Edge> edgeList = new ArrayList<>();
     for (Edge edge : edges) {
-      if (edge.getStartNode().getNodeID() == nodeID || edge.getStartNode().getNodeID() == nodeID) {
+      if (edge.getStartNode().getNodeID() == nodeID || edge.getEndNode().getNodeID() == nodeID) {
         edgeList.add(edge);
       }
     }
