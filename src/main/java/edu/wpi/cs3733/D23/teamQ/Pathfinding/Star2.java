@@ -106,4 +106,37 @@ public class Star2 {
     path.removeAll(path);
     return path;
   }
+
+  public static ArrayList<Node> DFS(Node start, Node end) {
+    ArrayList<Node> visitedList = new ArrayList<Node>(); // list of visited nodes
+    ArrayList<Node> openList = new ArrayList<Node>();
+    ArrayList<Node> path = new ArrayList<Node>(); // path list if I need it
+
+    openList.add(start);
+    path.add(start);
+    while (!openList.isEmpty()){
+      Node current = openList.get(0);
+      if(current.equals(end)){
+        return path;
+      }
+      if(current.getEdges().size()  != 0){
+        System.out.println("This node is a dead end " + current);
+      }
+      if(!visitedList.contains(current.getEdges().get(0).getEndNode())){
+              openList.add(current.getEdges().get(0).getEndNode());
+              path.add(current);
+              visitedList.add(current);
+      }
+      else if(!visitedList.contains(current.getEdges().get(0).getStartNode())) {
+        openList.add(current.getEdges().get(0).getStartNode());
+        path.add(current);
+        visitedList.add(current);
+      }
+
+
+    }
+
+
+    return path;
+  }
 }
