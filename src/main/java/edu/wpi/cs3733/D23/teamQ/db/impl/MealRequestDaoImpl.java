@@ -50,11 +50,36 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, MealRequest newRequest) {
-    int index = this.getIndex(requestID);
-    mealRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+         PreparedStatement st =
+                 connection.prepareStatement(
+                         "UPDATE \"mealRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, drink = ?, entree = ?, side = ? "
+                                 + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setString(7, newRequest.getDrink());
+      st.setString(8, newRequest.getEntree());
+      st.setString(9, newRequest.getSide());
+      st.setInt(10, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    int index = this.getIndex(requestID);
+    mealRequests.get(index).setRequester(newRequest.getRequester());
+    mealRequests.get(index).setProgress(newRequest.getProgress());
+    mealRequests.get(index).setAssignee(newRequest.getAssignee());
+    mealRequests.get(index).setNode(newRequest.getNode());
+    mealRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    mealRequests.get(index).setDrink(newRequest.getDrink());
+    mealRequests.get(index).setEntree(newRequest.getEntree());
+    mealRequests.get(index).setSide(newRequest.getSide());
 
     return true;
   }
