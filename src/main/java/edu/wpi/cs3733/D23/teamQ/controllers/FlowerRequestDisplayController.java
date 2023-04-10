@@ -15,23 +15,15 @@ public class FlowerRequestDisplayController {
           FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
 
   @FXML MFXButton deleteButton;
-
   @FXML MFXButton backButton;
-
   @FXML MFXButton updateButton;
 
   @FXML ChoiceBox assigneeField;
-
   @FXML ChoiceBox roomNumberField;
-
   @FXML MFXDatePicker dateField;
-
   @FXML MFXTextField timeField;
-
   @FXML ChoiceBox flowerTypeField;
-
   @FXML MFXTextField bouquetChoiceField;
-
   @FXML MFXTextField specialInstructionsField;
 
   @FXML

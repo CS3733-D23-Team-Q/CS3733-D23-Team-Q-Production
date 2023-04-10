@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -11,16 +12,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
 public class ConferenceRoomRequestController {
-  @FXML MFXTextField assigneeField;
-  @FXML MFXTextField roomNumberField;
+
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
+  @FXML ChoiceBox foodField;
+  @FXML MFXTextField specialInstructionsField;
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
           "Brunch spread", "Dinner spread", "Snack spread", "No food");
-  @FXML ChoiceBox foodField;
-  @FXML MFXTextField specialInstructionsField;
-
   @FXML Button resetButton;
   @FXML Button cancelButton;
   @FXML Button submitButton;
@@ -33,12 +34,6 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void resetButtonClicked() {
-    assigneeField.clear();
-    roomNumberField.clear();
-    dateField.clear();
-    timeField.clear();
-    foodField.setValue("No food");
-    specialInstructionsField.clear();
   }
 
   @FXML

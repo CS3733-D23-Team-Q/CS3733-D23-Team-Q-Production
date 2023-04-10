@@ -15,14 +15,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 
 public class FurnitureDeliveryRequestController {
-  @FXML MFXTextField assigneeField;
-  @FXML MFXTextField roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
+  @FXML MFXTextField specialInstructionsField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList("Desk", "Desk Chair", "Couch", "Examination Table");
   @FXML ChoiceBox itemRequestedField;
-  @FXML MFXTextField specialInstructionsField;
 
   @FXML Button resetButton;
   @FXML Button cancelButton;
@@ -44,6 +44,7 @@ public class FurnitureDeliveryRequestController {
 
   @FXML
   public void submitButtonClicked() {
+    /*
     Qdb qdb = Qdb.getInstance();
     FurnitureRequest newFR =
             new FurnitureRequest(
@@ -56,5 +57,7 @@ public class FurnitureDeliveryRequestController {
                     (String) itemRequestedField.getValue());
     // qdb.addConferenceRequest(newFR);
     Navigation.navigate(Screen.HOME);
+
+     */
   }
 }

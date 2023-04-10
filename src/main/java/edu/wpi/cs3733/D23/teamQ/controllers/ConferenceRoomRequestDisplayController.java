@@ -21,17 +21,11 @@ public class ConferenceRoomRequestDisplayController {
   @FXML MFXButton backButton;
 
   @FXML MFXButton updateButton;
-
   @FXML ChoiceBox assigneeField;
-
   @FXML ChoiceBox roomNumberField;
-
   @FXML MFXDatePicker dateField;
-
   @FXML MFXTextField timeField;
-
   @FXML ChoiceBox foodField;
-
   @FXML MFXTextField specialInstructionsField;
 
   @FXML

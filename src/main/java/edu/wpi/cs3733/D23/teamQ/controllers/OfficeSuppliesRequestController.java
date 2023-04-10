@@ -15,8 +15,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 
 public class OfficeSuppliesRequestController {
-  @FXML MFXTextField assigneeField;
-  @FXML MFXTextField roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
@@ -39,16 +39,11 @@ public class OfficeSuppliesRequestController {
 
   @FXML
   public void resetButtonClicked() {
-    assigneeField.clear();
-    roomNumberField.clear();
-    specialInstructionsField.clear();
-    itemRequestedField.setValue("Select Item");
-    quantityField.clear();
   }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
+
   }
 
   @FXML

@@ -11,15 +11,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
 public class FlowerRequestController {
-  @FXML MFXTextField assigneeField;
-  @FXML MFXTextField roomNumberField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox flowerChoiceField;
+  @FXML ChoiceBox flowerTypeField;
+  @FXML MFXTextField bouquetChoiceField;
+  @FXML MFXTextField specialInstructionsField;
   ObservableList<String> TypeOfFlowers =
       FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
-  @FXML MFXTextField bouquetChoiceField;
 
   @FXML MFXButton resetButton;
   @FXML MFXButton cancelButton;
@@ -32,17 +32,13 @@ public class FlowerRequestController {
    */
   @FXML
   public void initialize() {
-    this.flowerChoiceField.setValue("Select Flower");
-    this.flowerChoiceField.setItems(TypeOfFlowers);
+    this.flowerTypeField.setValue("Select Flower");
+    this.flowerTypeField.setItems(TypeOfFlowers);
   }
 
   @FXML
   public void resetButtonClicked() {
-    assigneeField.clear();
-    roomNumberField.clear();
-    specialInstructionsField.clear();
-    flowerChoiceField.setValue("Select Flower");
-    bouquetChoiceField.clear();
+
   }
 
   @FXML

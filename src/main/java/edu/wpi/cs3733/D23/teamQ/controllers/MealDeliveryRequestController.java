@@ -9,18 +9,20 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 
 public class MealDeliveryRequestController {
-  @FXML MFXTextField assigneeField;
-  @FXML MFXTextField roomNumberField;
+  @FXML
+  ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
+  @FXML MFXTextField specialInstructionsField;
 
-  @FXML private MFXTextField drinkField;
-  @FXML private MFXTextField entreeField;
-  @FXML private MFXTextField sideField;
-  @FXML private MFXTextField specialInstructionsField;
+  @FXML ChoiceBox drinkField;
+  @FXML ChoiceBox entreeField;
+  @FXML ChoiceBox sideField;
 
   @FXML Button resetButton;
   @FXML Button cancelButton;
@@ -32,11 +34,6 @@ public class MealDeliveryRequestController {
 
   @FXML
   public void resetButtonClicked() {
-    roomNumberField.clear();
-    drinkField.clear();
-    entreeField.clear();
-    sideField.clear();
-    specialInstructionsField.clear();
   }
 
   @FXML
@@ -45,6 +42,7 @@ public class MealDeliveryRequestController {
 
   @FXML
   public void submitButtonClicked() {
+    /*
     Qdb qdb = Qdb.getInstance();
     MealRequest newMR =
             new MealRequest(
@@ -59,5 +57,7 @@ public class MealDeliveryRequestController {
                     sideField.getText());
     // qdb.addMealRequest(newMR);
     Navigation.navigate(Screen.HOME);
+
+     */
   }
 }
