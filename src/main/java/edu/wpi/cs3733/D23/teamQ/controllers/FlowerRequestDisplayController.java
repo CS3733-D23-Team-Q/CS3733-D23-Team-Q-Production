@@ -4,10 +4,15 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
 public class FlowerRequestDisplayController {
+
+  ObservableList<String> TypeOfFlowers =
+          FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
 
   @FXML MFXButton deleteButton;
 
@@ -16,8 +21,6 @@ public class FlowerRequestDisplayController {
   @FXML MFXButton updateButton;
 
   @FXML ChoiceBox assigneeField;
-
-  // NEED TO SET ALL THE CHOICE BOXES
 
   @FXML ChoiceBox roomNumberField;
 
@@ -33,6 +36,8 @@ public class FlowerRequestDisplayController {
 
   @FXML
   public void initialize() {
+    flowerTypeField.setItems(TypeOfFlowers);
+
     assigneeField.setValue(ListServiceRequestController.getFlowerRequest().getAssignee());
     roomNumberField.setValue(ListServiceRequestController.getFlowerRequest().getRoomNumber());
     // dateField.setValue(ListServiceRequestController.getFlowerRequest().getDate);
