@@ -56,7 +56,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"roomNum\" = ? "
+                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, time = ?, date = ?,  note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"nodeID\" = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -64,11 +64,13 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       st.setInt(3, newRequest.getProgress().ordinal());
       st.setString(4, newRequest.getAssignee());
       st.setString(5, newRequest.getSpecialInstructions());
-      st.setString(6, newRequest.getNote());
-      st.setString(7, newRequest.getFlowerType());
-      st.setInt(8, newRequest.getNumberOfBouquets());
-      st.setInt(9, newRequest.getNode().getNodeID());
-      st.setInt(10, requestID);
+      st.setInt(6, newRequest.getTime());
+      st.setDate(7, newRequest.getDate());
+      st.setString(8, newRequest.getNote());
+      st.setString(9, newRequest.getFlowerType());
+      st.setInt(10, newRequest.getNumberOfBouquets());
+      st.setInt(11, newRequest.getNode().getNodeID());
+      st.setInt(12, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {

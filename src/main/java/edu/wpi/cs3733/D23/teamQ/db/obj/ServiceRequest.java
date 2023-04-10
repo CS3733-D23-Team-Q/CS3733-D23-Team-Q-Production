@@ -13,6 +13,8 @@ public class ServiceRequest {
   private String assignee;
   private Node node;
   private String specialInstructions;
+  int time;
+  Date date;
 
   public enum Progress {
     BLANK,
@@ -26,7 +28,7 @@ public class ServiceRequest {
       int progress,
       String assignee,
       Node node,
-      String specialInstructions) {
+      String specialInstructions, int time, Date date) {
     this.requestID = requestID;
     if (progress == 0) {
       this.progress = Progress.BLANK;
@@ -41,5 +43,7 @@ public class ServiceRequest {
     this.assignee = assignee;
     this.node = node;
     this.specialInstructions = specialInstructions;
+    this.time=time;
+    this.date=date;
   }
 }
