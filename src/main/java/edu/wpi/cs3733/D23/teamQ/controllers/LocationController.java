@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import java.io.IOException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -286,14 +287,24 @@ public class LocationController {
   }
 
   @FXML
-  void ExportClicked(MouseEvent event) {
+  void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    Qdb.getInstance().nodeTable.toCSV(path);
+    boolean success = Qdb.getInstance().locationTable.toCSV(path);
+    if (success) {
+      Alert.alertBox("Export Successfully", "Export Successfully");
+    } else {
+      Alert.alertBox("Failed Export", "Failed Export");
+    }
   }
 
   @FXML
-  void ImportClicked(MouseEvent event) {
+  void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    Qdb.getInstance().nodeTable.importCSV(path);
+    boolean success = Qdb.getInstance().locationTable.importCSV(path);
+    if (success) {
+      Alert.alertBox("Import Successfully", "Import Successfully");
+    } else {
+      Alert.alertBox("Failed Import", "Failed Import");
+    }
   }
 }

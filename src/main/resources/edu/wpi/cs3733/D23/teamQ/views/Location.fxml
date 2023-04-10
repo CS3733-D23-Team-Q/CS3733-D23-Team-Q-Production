@@ -98,9 +98,9 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <TextField fx:id="LongNameInput" prefHeight="41.0" prefWidth="161.0" promptText="LongName" />
-                  <TextField fx:id="ShortNameInput" prefHeight="41.0" prefWidth="161.0" promptText="ShortName" />
-                  <TextField fx:id="NodeTypeInput" prefHeight="41.0" prefWidth="161.0" promptText="NodeType" />
+                  <TextField fx:id="LongNameInput" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="101.0" promptText="LongName" />
+                  <TextField fx:id="ShortNameInput" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="101.0" promptText="ShortName" />
+                  <TextField fx:id="NodeTypeInput" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="101.0" promptText="NodeType" />
                </children>
             </HBox>
             <HBox prefHeight="17.0" prefWidth="680.0" GridPane.rowIndex="2">
@@ -112,7 +112,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="NodeIDEdit" prefHeight="32.0" prefWidth="161.0" promptText="NodeID" />
+                  <TextField fx:id="NodeIDEdit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="101.0" promptText="NodeID" />
                </children>
             </HBox>
             <Button mnemonicParsing="false" onMouseClicked="#deleteClicked" prefHeight="23.0" prefWidth="64.0" stylesheets="@styles/Home.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />

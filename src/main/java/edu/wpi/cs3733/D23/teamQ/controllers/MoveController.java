@@ -1,10 +1,11 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import java.io.IOException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,21 +21,32 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class MoveController {
-
-  private String path;
-
-  @FXML private TextField ImportPath;
+  /*
 
   private int newNodeID;
   private String newLongName;
   private Node newNode;
   private String newDate;
 
-  @FXML private TextField DateInput;
+   */
 
-  @FXML private TextField LongNameInput;
+  private String path;
 
-  @FXML private TextField NodeIDInput;
+  @FXML private TextField ImportPath;
+
+  @FXML private TableColumn<Move, Number> MoveID;
+  /*
+
+  @FXML
+  private TextField DateInput;
+
+  @FXML
+  private TextField LongNameInput;
+
+  @FXML
+  private TextField NodeIDInput;
+
+   */
 
   @FXML private TableView<Move> move;
 
@@ -46,16 +58,26 @@ public class MoveController {
 
   /** used to put Moves from database arraylist to observablelist */
   public ObservableList<Move> moves() {
-    ObservableList<Move> move = FXCollections.observableArrayList();
+    ObservableList<Move> movelist = FXCollections.observableArrayList();
     for (int i = 0; i < Qdb.getInstance().moveTable.getAllRows().size(); i++) {
-      move.add(Qdb.getInstance().moveTable.getAllRows().get(i));
+      movelist.add(Qdb.getInstance().moveTable.getAllRows().get(i));
     }
-    return move;
+    return movelist;
   }
 
   public void initialize() {
 
-    /** input the moveId to the table */
+    /** input the moveID to the table */
+    MoveID.setCellValueFactory(
+        new Callback<TableColumn.CellDataFeatures<Move, Number>, ObservableValue<Number>>() {
+          @Override
+          public ObservableValue<Number> call(TableColumn.CellDataFeatures<Move, Number> param) {
+            SimpleIntegerProperty moveids = new SimpleIntegerProperty(param.getValue().getMoveID());
+            return moveids;
+          }
+        });
+
+    /** input the nodeId to the table */
     nodeID.setCellValueFactory(
         new Callback<TableColumn.CellDataFeatures<Move, Number>, ObservableValue<Number>>() {
           @Override
@@ -82,8 +104,8 @@ public class MoveController {
         new Callback<TableColumn.CellDataFeatures<Move, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(TableColumn.CellDataFeatures<Move, String> param) {
-            SimpleStringProperty date = new SimpleStringProperty(param.getValue().getDate());
-            return date;
+            SimpleStringProperty dates = new SimpleStringProperty(param.getValue().getDate());
+            return dates;
           }
         });
 
@@ -119,6 +141,7 @@ public class MoveController {
     Navigation.navigate(Screen.Node_Table);
   }
 
+  /*
   @FXML
   void AddClicked(MouseEvent event) {
     Move moveex = new Move(10, Qdb.getInstance().nodeTable.retrieveRow(1), "test", "test");
@@ -157,15 +180,26 @@ public class MoveController {
     return false;
   }
 
+   */
   @FXML
-  void ExportClicked(MouseEvent event) {
+  void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    Qdb.getInstance().nodeTable.toCSV(path);
+    boolean success = Qdb.getInstance().moveTable.toCSV(path);
+    if (success) {
+      Alert.alertBox("Export Successfully", "Export Successfully");
+    } else {
+      Alert.alertBox("Failed Export", "Failed Export");
+    }
   }
 
   @FXML
-  void ImportClicked(MouseEvent event) {
+  void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    Qdb.getInstance().nodeTable.importCSV(path);
+    boolean success = Qdb.getInstance().moveTable.importCSV(path);
+    if (success) {
+      Alert.alertBox("Import Successfully", "Import Successfully");
+    } else {
+      Alert.alertBox("Failed Import", "Failed Import");
+    }
   }
 }

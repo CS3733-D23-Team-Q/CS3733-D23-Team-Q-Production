@@ -35,8 +35,8 @@
     <rowConstraints>
         <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
         <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="418.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
@@ -102,8 +102,8 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="XInput" prefHeight="23.0" prefWidth="107.0" promptText="Xcoord" />
-                        <TextField fx:id="YInput" prefHeight="23.0" prefWidth="105.0" promptText="Ycoord">
+                        <TextField fx:id="XInput" prefHeight="23.0" prefWidth="101.0" promptText="Xcoord" />
+                        <TextField fx:id="YInput" prefHeight="23.0" prefWidth="101.0" promptText="Ycoord">
                            <effect>
                               <Glow level="0.48" />
                            </effect>
@@ -122,7 +122,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="NodeIDInput" prefHeight="23.0" prefWidth="87.0" promptText="NodeID">
+                        <TextField fx:id="NodeIDInput" prefHeight="23.0" prefWidth="101.0" promptText="NodeID">
                            <effect>
                               <Glow level="0.48" />
                            </effect>

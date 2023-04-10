@@ -1,10 +1,11 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import java.io.IOException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
@@ -21,18 +22,24 @@ import javafx.util.Callback;
 public class EdgeController {
 
   private String path;
+  /*
 
   private int newEdgeID;
   private Node newEndNode;
   private Node newStartNode;
 
+   */
+
   @FXML private TextField ImportPath;
+  /*
 
   @FXML private TextField EdgeIDInput;
 
   @FXML private TextField EndNodeInput;
 
   @FXML private TextField StartNodeInput;
+
+   */
 
   @FXML private TableView<Edge> edge;
 
@@ -116,14 +123,24 @@ public class EdgeController {
   }
 
   @FXML
-  void ExportClicked(MouseEvent event) {
+  void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    Qdb.getInstance().nodeTable.toCSV(path);
+    boolean success = Qdb.getInstance().edgeTable.toCSV(path);
+    if (success) {
+      Alert.alertBox("Export Successfully", "Export Successfully");
+    } else {
+      Alert.alertBox("Failed Export", "Failed Export");
+    }
   }
 
   @FXML
-  void ImportClicked(MouseEvent event) {
+  void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    Qdb.getInstance().nodeTable.importCSV(path);
+    boolean success = Qdb.getInstance().edgeTable.importCSV(path);
+    if (success) {
+      Alert.alertBox("Import Successfully", "Import Successfully");
+    } else {
+      Alert.alertBox("Failed Import", "Failed Import");
+    }
   }
 }
