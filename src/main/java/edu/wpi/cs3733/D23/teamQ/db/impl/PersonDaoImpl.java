@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PersonDaoImpl implements GenDao<Person, Integer> {
 
@@ -41,13 +42,14 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
 
     try {
       String query =
-          "UPDATE person SET firstName = ?, lastName = ?, title = ?, phoneNumber= ?, username=? WHERE IDNum = ?";
+          "UPDATE person SET \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\"= ?, username=? WHERE \"IDNum\" = ?";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setString(1, newFN);
       pst.setString(2, newLN);
       pst.setString(3, newTitle);
       pst.setInt(4, newPN);
       pst.setString(5, newUN);
+      pst.setInt(6, IDNum);
 
       int rs = pst.executeUpdate();
       if (rs == 1) {
@@ -167,10 +169,11 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     Person b = new Person(null, null, null, 0, UN);
     for (int i = 0; i < People.size(); i++) {
       Person a = People.get(i);
-      if (a.getUsername() == UN) {
+      if (Objects.equals(a.getUsername(), UN)) {
         return a;
       }
     }
+    addRow(b);
     return b;
   }
 

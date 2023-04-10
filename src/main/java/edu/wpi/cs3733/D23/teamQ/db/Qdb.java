@@ -20,8 +20,6 @@ public class Qdb {
 
   private static Qdb single_instance = null;
 
-  private Qdb() {}
-
   public static synchronized Qdb getInstance() {
     if (single_instance == null) single_instance = new Qdb();
     return single_instance;
