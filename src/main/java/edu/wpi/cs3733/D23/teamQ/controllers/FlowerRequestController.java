@@ -14,17 +14,14 @@ public class FlowerRequestController {
   @FXML MFXTextField assigneeField;
   @FXML MFXTextField roomNumberField;
   @FXML MFXTextField specialInstructionsField;
-  @FXML
-  MFXDatePicker dateField;
-  @FXML
-  MFXTextField timeField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
   @FXML ChoiceBox flowerChoiceField;
   ObservableList<String> TypeOfFlowers =
       FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
   @FXML MFXTextField bouquetChoiceField;
 
-  @FXML
-  MFXButton resetButton;
+  @FXML MFXButton resetButton;
   @FXML MFXButton cancelButton;
   @FXML MFXButton submitButton;
 
@@ -55,22 +52,22 @@ public class FlowerRequestController {
 
   @FXML
   public void submitButtonClicked() {
-//    Qdb qdb = Qdb.getInstance();
-//    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
-//      bouquetChoiceField.setValue("0");
-//    }
-//    FlowerRequest newFR =
-//        new FlowerRequest(
-//            0,
-//            "temp user",
-//            0,
-//            assigneeField.getText(),
-//            roomNumberField.getText(),
-//            specialInstructionsField.getText(),
-//            noteField.getText(),
-//            (String) flowerChoiceField.getValue(),
-//            Integer.parseInt((String) bouquetChoiceField.getValue()));
-//    qdb.addFlowerRequest(newFR);
-//    Navigation.navigate(Screen.HOME);
+    //    Qdb qdb = Qdb.getInstance();
+    //    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
+    //      bouquetChoiceField.setValue("0");
+    //    }
+    //    FlowerRequest newFR =
+    //        new FlowerRequest(
+    //            0,
+    //            "temp user",
+    //            0,
+    //            assigneeField.getText(),
+    //            roomNumberField.getText(),
+    //            specialInstructionsField.getText(),
+    //            noteField.getText(),
+    //            (String) flowerChoiceField.getValue(),
+    //            Integer.parseInt((String) bouquetChoiceField.getValue()));
+    //    qdb.addFlowerRequest(newFR);
+    //    Navigation.navigate(Screen.HOME);
   }
 }

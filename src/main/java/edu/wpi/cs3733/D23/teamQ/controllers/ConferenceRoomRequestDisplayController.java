@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -10,7 +11,7 @@ public class ConferenceRoomRequestDisplayController {
 
   // NEED TO SET ALL THE CHOICE BOXES
 
-  @FXML MFXButton cancelButton;
+  @FXML MFXButton deleteButton;
 
   @FXML MFXButton backButton;
 
@@ -40,11 +41,31 @@ public class ConferenceRoomRequestDisplayController {
   }
 
   @FXML
-  public void cancelButtonClicked() {}
+  public void deleteButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
+    qdb.deleteConferenceRequest(ListServiceRequestController.getConferenceRequest().getRequestID());
+  }
 
   @FXML
   public void backButtonClicked() {}
 
+  // Update with proper date and time
   @FXML
-  public void updateButtonClicked() {}
+  public void updateButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
+    /*
+    ConferenceRequest newCCR =
+            new ConferenceRequest(
+                    ListServiceRequestController.getConferenceRequest().getRequestID(),
+                    "temp user",
+                    0,
+                    (String) assigneeField.getValue(),
+                    (String) roomNumberField.getValue(),
+                    specialInstructionsField.getText(),
+                    dateTimeField.getText(),
+                    (String) foodField.getValue());
+    qdb.updateConferenceRequest(
+            ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
+     */
+  }
 }

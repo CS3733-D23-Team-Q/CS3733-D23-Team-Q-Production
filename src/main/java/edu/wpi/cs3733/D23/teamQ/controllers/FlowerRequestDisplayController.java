@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -8,7 +9,7 @@ import javafx.scene.control.ChoiceBox;
 
 public class FlowerRequestDisplayController {
 
-  @FXML MFXButton cancelButton;
+  @FXML MFXButton deleteButton;
 
   @FXML MFXButton backButton;
 
@@ -44,11 +45,33 @@ public class FlowerRequestDisplayController {
   }
 
   @FXML
-  public void cancelButtonClicked() {}
+  public void deleteButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
+    qdb.deleteFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID());
+  }
 
   @FXML
   public void backButtonClicked() {}
 
   @FXML
-  public void updateButtonClicked() {}
+  public void updateButtonClicked() {
+    /*
+    Qdb qdb = Qdb.getInstance();
+
+    FlowerRequest newFR = new FlowerRequest(
+            //ListServiceRequestController.getFlowerRequest().getRequestID(),
+            "temp requester",
+            0,
+            "temp assignee",
+            (String) roomNumberField.getValue(),
+            (String) specialInstructionsField.getText(),
+            "",
+            (String) flowerTypeField.getValue(),
+            Integer.parseInt((String) bouquetChoiceField.getValue()));
+
+
+    qdb.updateFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID(), )
+
+     */
+  }
 }
