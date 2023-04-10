@@ -24,7 +24,7 @@ public class ConferenceRoomRequestController {
   @FXML private MFXTextField specialInstructionsField;
 
   @FXML Button resetButton;
-  @FXML Button backButton;
+  @FXML Button cancelButton;
   @FXML Button submitButton;
 
   @FXML MenuItem homeItem;
@@ -47,7 +47,7 @@ public class ConferenceRoomRequestController {
   }
 
   @FXML
-  public void backButtonClicked() {
+  public void cancelButtonClicked() {
     Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
   }
 
