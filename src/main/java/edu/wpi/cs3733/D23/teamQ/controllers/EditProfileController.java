@@ -4,18 +4,15 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Person;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class EditProfileController {
 
-
   @FXML private MFXTextField ProfileEditPage_Email_TextField;
 
   @FXML private MFXTextField ProfileEditPage_FirstName_TextField;
-
 
   @FXML private MFXTextField ProfileEditPage_IDNumber_TextField;
 
@@ -25,13 +22,11 @@ public class EditProfileController {
 
   @FXML private MFXTextField ProfileEditPage_Title_TextField;
 
-
   @FXML private MFXTextField ProfileEditPage_Username_TextField;
 
   @FXML
   private void initialize() {
     String username = LoginController.getLoginUsername();
-
 
     String email = LoginController.getLoginEmail();
 
@@ -48,9 +43,6 @@ public class EditProfileController {
 
     this.ProfileEditPage_Username_TextField.setText(username);
   }
-
-
-
 
   @FXML
   public void DonePressed(ActionEvent event) {
