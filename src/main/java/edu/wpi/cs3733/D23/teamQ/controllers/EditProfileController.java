@@ -11,11 +11,11 @@ import javafx.fxml.FXML;
 
 public class EditProfileController {
 
+
   @FXML private MFXTextField ProfileEditPage_Email_TextField;
 
   @FXML private MFXTextField ProfileEditPage_FirstName_TextField;
 
-  @FXML private MFXButton ProfileEditPage_Home_Button;
 
   @FXML private MFXTextField ProfileEditPage_IDNumber_TextField;
 
@@ -25,11 +25,13 @@ public class EditProfileController {
 
   @FXML private MFXTextField ProfileEditPage_Title_TextField;
 
+
   @FXML private MFXTextField ProfileEditPage_Username_TextField;
 
   @FXML
   private void initialize() {
     String username = LoginController.getLoginUsername();
+
 
     String email = LoginController.getLoginEmail();
 
@@ -47,8 +49,11 @@ public class EditProfileController {
     this.ProfileEditPage_Username_TextField.setText(username);
   }
 
+
+
+
   @FXML
-  void DonePressed(ActionEvent event) {
+  public void DonePressed(ActionEvent event) {
     String username = LoginController.getLoginUsername();
 
     String email = LoginController.getLoginEmail();
