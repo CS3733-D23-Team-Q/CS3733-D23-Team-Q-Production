@@ -26,6 +26,7 @@ public class PathfindingController {
   boolean ready4Second;
   Node start;
   Node target;
+  List<Line> previousPath;
   @FXML Pane root;
   @FXML Group parent;
   @FXML ImageView map;
@@ -33,6 +34,7 @@ public class PathfindingController {
   @FXML
   public void initialize() throws IOException {
     ready4Second = false;
+    previousPath = new ArrayList<>();
     // ImageView view = new ImageView(getClass().getResource("/L1.png").toExternalForm());
     // view.setFitWidth(1000);
     // view.setFitHeight(680);
@@ -40,10 +42,12 @@ public class PathfindingController {
     javafx.scene.Node node = parent;
     GesturePane pane = new GesturePane(node);
     root.getChildren().add(pane);
+
+    /*
     Node start = qdb.retrieveNode(100);
     Node target = qdb.retrieveNode(130);
-
-    // drawLines(start, target);
+    drawLines(start, target);
+     */
 
     pane.setOnMouseClicked(
         e -> {
@@ -87,8 +91,9 @@ public class PathfindingController {
             } else {
               target = n;
               ready4Second = false;
+              removeLines(previousPath);
               try {
-                drawLines(start, target);
+                previousPath = drawLines(start, target);
               } catch (IOException ex) {
                 throw new RuntimeException(ex);
               }
@@ -98,6 +103,33 @@ public class PathfindingController {
     }
   }
 
+  public List<Line> addLines(List<Node> path) {
+    List<Line> lines = new ArrayList<>();
+    for (int i = path.size() - 1; i >= 1; i--) {
+      Node n = path.get(i);
+      Node next = path.get(i - 1);
+      int x1 = n.getXCoord() / 5;
+      int y1 = n.getYCoord() / 5;
+      int x2 = next.getXCoord() / 5;
+      int y2 = next.getYCoord() / 5;
+      Line line = new Line(x1, y1, x2, y2);
+      line.setStyle("-fx-stroke: blue;");
+      line.setStrokeWidth(3);
+      parent.getChildren().add(line);
+      lines.add(line);
+    }
+    return lines;
+  }
+
+  public void removeLines(List<Line> lines) {
+    if (lines.size() > 0) {
+      for (Line line : lines) {
+        parent.getChildren().remove(line);
+      }
+    }
+  }
+
+  /*
   public void addLine(Node n, Node next) {
     int x1 = n.getXCoord() / 5;
     int y1 = n.getYCoord() / 5;
@@ -110,18 +142,24 @@ public class PathfindingController {
     parent.getChildren().add(line);
     // root.getChildren().add(parent);
   }
+   */
 
-  public void drawLines(Node start, Node target) throws IOException {
+  public List<Line> drawLines(Node start, Node target) throws IOException {
     List<Node> path = Star2.aStar(start, target);
+    List<Line> lines = new ArrayList<>();
     if (path.size() > 0) {
+      lines = addLines(path);
+      /*
       for (int i = path.size() - 1; i >= 1; i--) { // change to i++ when calling the exist one
         Node n = path.get(i);
         Node next = path.get(i - 1);
         addLine(n, next);
         // map.toBack();
       }
+       */
     } else {
       alert.alertBox("No solution", "Failed to find a path");
     }
+    return lines;
   }
 }
