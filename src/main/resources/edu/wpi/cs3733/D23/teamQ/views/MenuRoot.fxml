@@ -5,11 +5,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <HBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuRootController">
    <children>
@@ -44,7 +44,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="people" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#peopleClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="People" textFill="#f1f1f1">
+                  <MFXButton fx:id="people" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#peopleEntered" onMouseExited="#peopleExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="People" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -53,7 +53,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="navigation" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#navigationClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleAnimationSpeed="0.0" rippleColor="#f1f1f1" text="Navigation" textFill="#f1f1f1">
+                  <MFXButton fx:id="navigation" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#navEntered" onMouseExited="#navExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleAnimationSpeed="0.0" rippleColor="#f1f1f1" text="Navigation" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,7 +62,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="servicerequests" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#srClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Service Requests" textFill="#f1f1f1">
+                  <MFXButton fx:id="servicerequest" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#srEntered" onMouseExited="#srExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Service Requests" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -71,7 +71,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="statistics" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#statisticsClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Statistics" textFill="#f1f1f1">
+                  <MFXButton fx:id="statistics" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#statEntered" onMouseExited="#statExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Statistics" textFill="#f1f1f1">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +80,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="settings" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#settingsClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Settings" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
+                  <MFXButton fx:id="settings" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#setEntered" onMouseExited="#setExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Settings" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -91,7 +91,7 @@
                   </MFXButton>
                </children>
             </VBox>
-            <MFXButton fx:id="signout" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#signoutClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1" VBox.vgrow="NEVER">
+            <MFXButton fx:id="signout" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#soEntered" onMouseExited="#soExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1" VBox.vgrow="NEVER">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -105,15 +105,15 @@
             <Insets bottom="12.0" top="12.0" />
          </padding>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
             <fx:include fx:id="peopleSM" source="PeopleSubmenu.fxml" visible="false" />
             <fx:include fx:id="navigationSM" source="NavigationSubmenu.fxml" visible="false" />
-            <fx:include fx:id="servicerequestSM" source="ServiceRequestSubmenu.fxml" visible="false"/>
+            <fx:include fx:id="servicerequestSM" source="ServiceRequestSubmenu.fxml" visible="false" />
             <fx:include fx:id="statisticsSM" source="StatisticsSubmenu.fxml" visible="false" />
             <fx:include fx:id="settingsSM" source="SettingsSubmenu.fxml" visible="false" />
             <fx:include fx:id="signoutSM" source="SignoutSubmenu.fxml" visible="false" />
          </children>
-      </VBox>
+      </StackPane>
    </children>
 </HBox>

@@ -4,8 +4,10 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 
 public class SignoutSubmenuController {
+  @FXML VBox signoutSM;
   @FXML MFXButton signout;
   @FXML MFXButton exit;
 
@@ -17,5 +19,10 @@ public class SignoutSubmenuController {
   @FXML
   public void exitClicked() {
     Platform.exit();
+  }
+
+  public void setVisible(boolean v) {
+    signoutSM.toFront();
+    signoutSM.setVisible(v);
   }
 }

@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
@@ -11,57 +10,84 @@ public class MenuRootController {
   @FXML MFXButton home;
   @FXML MFXButton people;
   @FXML MFXButton navigation;
-  @FXML MFXButton servicerequests;
+  @FXML MFXButton servicerequest;
   @FXML MFXButton statistics;
   @FXML MFXButton settings;
   @FXML MFXButton signout;
   @FXML VBox mainPane;
-  @FXML VBox peopleSM;
+  @FXML PeopleSubmenuController peopleSMController;
+  @FXML NavigationSubmenuController navigationSMController;
+  @FXML ServiceRequestSubmenuController servicerequestSMController;
+  @FXML StatisticsSubmenuController statisticsSMController;
+  @FXML SettingsSubmenuController settingsSMController;
+  @FXML SignoutSubmenuController signoutSMController;
 
   @FXML
-  public void initialize() {}
+  public void initialize() {
+  }
 
   @FXML
   public void homeClicked() {
-    peopleSM.toFront();
-    peopleSM.setVisible(true);
-    System.out.println(peopleSM.isVisible());
     Navigation.navigate(Screen.HOME);
   }
 
   @FXML
-  public void peopleClicked() {
-    // people.setStyle("-fx-background-color: #f1f1f1");
-    Navigation.navigate(Screen.PROFILE_PAGE);
+  public void peopleEntered() {
+    peopleSMController.setVisible(true);
   }
 
   @FXML
-  public void navigationClicked() {
-    // navigation.setStyle("-fx-background-color: #f1f1f1");
-    Navigation.navigate(Screen.PATH_TEXT);
+  public void peopleExited() {
+    peopleSMController.setVisible(false);
   }
 
   @FXML
-  public void srClicked() {
-    // servicerequests.setStyle("-fx-background-color: #f1f1f1");
-    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
+  public void navEntered() {
+    navigationSMController.setVisible(true);
   }
 
   @FXML
-  public void statisticsClicked() {
-    // statistics.setStyle("-fx-background-color: #f1f1f1");
-    Platform.exit();
+  public void navExited() {
+    navigationSMController.setVisible(false);
   }
 
   @FXML
-  public void settingsClicked() {
-    // settings.setStyle("-fx-background-color: #f1f1f1");
-    Navigation.navigate(Screen.HELP);
+  public void srEntered() {
+    servicerequestSMController.setVisible(true);
   }
 
   @FXML
-  public void signoutClicked() {
-    // signout.setStyle("-fx-background-color: #f1f1f1");
-    Navigation.logout();
+  public void srExited() {
+    servicerequestSMController.setVisible(false);
+  }
+
+  @FXML
+  public void statEntered() {
+    statisticsSMController.setVisible(true);
+  }
+
+  @FXML
+  public void statExited() {
+    statisticsSMController.setVisible(false);
+  }
+
+  @FXML
+  public void setEntered() {
+    settingsSMController.setVisible(true);
+  }
+
+  @FXML
+  public void setExited() {
+    settingsSMController.setVisible(false);
+  }
+
+  @FXML
+  public void soEntered() {
+    signoutSMController.setVisible(true);
+  }
+
+  @FXML
+  public void soExited() {
+    signoutSMController.setVisible(false);
   }
 }
