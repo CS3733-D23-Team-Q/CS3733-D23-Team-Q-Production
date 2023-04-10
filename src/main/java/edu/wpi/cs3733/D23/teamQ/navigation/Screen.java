@@ -9,7 +9,6 @@ public enum Screen {
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),
   MAP_EDITOR("views/MapEditor.fxml", "Map Editor"),
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
-  PATH_FINDING("views/Pathfinding.fxml", "Pathfinding"),
 
   SIGNAGE("views/Signage.fxml", "Signage"),
   HELP("views/Help.fxml", "Help"),
@@ -28,8 +27,10 @@ public enum Screen {
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
   PROFILE_PAGE("views/ProfilePage.fxml", "Profile Page"),
 
-  CONFIRM("views/Confirm.fxml", "Confirm"),
-  ALERT("views/Alert.fxml", "Alert");
+  Move_Table("views/Move.fxml", "MoveTable"),
+  Node_Table("views/Node.fxml", "MoveTable"),
+  LocationName_Table("views/Location.fxml", "LocationNameTable"),
+  Edge_Table("views/Edge.fxml", "EdgeTable");
 
   private final String filename;
   private final String title;

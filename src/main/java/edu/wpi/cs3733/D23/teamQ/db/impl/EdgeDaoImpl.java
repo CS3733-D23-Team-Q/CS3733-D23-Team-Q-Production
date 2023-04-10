@@ -94,23 +94,21 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
 
   @Override
   public boolean populate() {
-    NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
     try {
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"edge\"");
       while (rst.next()) {
-        Edge e =
-            new Edge(
-                rst.getInt("edgeID"),
-                nodeDao.retrieveRow(rst.getInt("startNode")),
-                nodeDao.retrieveRow(rst.getInt("endNode")));
-        edges.add(e);
-
         Node startNode = nodeTable.retrieveRow(rst.getInt("startNode"));
         Node endNode = nodeTable.retrieveRow(rst.getInt("endNode"));
-        startNode.addBranch(e);
-        endNode.addBranch(e);
+        Edge e = new Edge(rst.getInt("edgeID"), startNode, endNode);
+        edges.add(e);
+        try {
+          startNode.addBranch(e);
+          endNode.addBranch(e);
+        } catch (Exception ex) {
+          System.out.println(ex.getMessage());
+        }
       }
       conn.close();
       stm.close();
@@ -175,6 +173,8 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch (Exception e) {
+      return false;
     }
   }
 
@@ -193,10 +193,12 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
         addRow(e);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 
   /**

@@ -23,7 +23,7 @@ public class Edge {
 
   public Edge() {}
 
-  public String edgeToString() {
+  public String toString() {
     return "edgeID: "
         + this.edgeID
         + ", startNode: "
