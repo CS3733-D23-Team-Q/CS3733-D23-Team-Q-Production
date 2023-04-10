@@ -20,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
-public class MapEditorController implements IController {
+public class MapEditorTableController implements IController {
   Qdb qdb = Qdb.getInstance();
   @FXML private MenuItem exitItem;
 

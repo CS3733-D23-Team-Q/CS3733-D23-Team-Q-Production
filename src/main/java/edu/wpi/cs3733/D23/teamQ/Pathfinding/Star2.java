@@ -64,8 +64,13 @@ public class Star2 {
       List<Edge> edges = current.getEdges();
       List<Node> neighbors = new ArrayList<>();
       for (Edge e : edges) {
-        Node n = e.getEndNode();
-        neighbors.add(n);
+        Node n1 = e.getStartNode();
+        Node n2 = e.getEndNode();
+        if (n1.equals(current)) {
+          neighbors.add(n2);
+        } else {
+          neighbors.add(n1);
+        }
       }
       for (int j = 0; j < neighbors.size(); j++) {
         Node neighbor = neighbors.get(j);

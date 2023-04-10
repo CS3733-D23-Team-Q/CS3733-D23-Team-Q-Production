@@ -90,7 +90,8 @@ public class PathfindingController {
             // double cursorx = e.getX() + 3;
             // double cursory = e.getY() + 3;
             // parent.getChildren().remove(text);
-            text = new Text(x + 3, y + 3, n.getBuilding());
+            String nodeid = "";
+            text = new Text(x + 3, y + 3, nodeid + n.getNodeID());
             text.setStyle("-fx-font-size: 8px;");
             parent.getChildren().add(text);
           });
@@ -121,8 +122,10 @@ public class PathfindingController {
   public List<Line> addLines(List<Node> path) {
     List<Line> lines = new ArrayList<>();
     for (int i = path.size() - 1; i >= 1; i--) {
+      // for (int i = 0; i < path.size() - 1; i++) {
       Node n = path.get(i);
       Node next = path.get(i - 1);
+      // Node next = path.get(i + 1);
       int x1 = n.getXCoord() / 5;
       int y1 = n.getYCoord() / 5;
       int x2 = next.getXCoord() / 5;
