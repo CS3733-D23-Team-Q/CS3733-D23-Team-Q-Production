@@ -152,12 +152,7 @@ public class LocationController {
 
   @FXML
   void setClicked(MouseEvent event) {
-    /*test
-    Location locationex1 = new Location(10, "test1", "test1", "test1");
-    Qdb.getInstance().locationTable.updateRow(10, locationex1);
-    locationname.setItems(locations());
 
-     */
     if (NodeController.isNumber(NodeIDEdit.getText())) {
 
       if (LongNameInput.getText() != "") {
@@ -209,12 +204,7 @@ public class LocationController {
 
   @FXML
   void addClicked(MouseEvent event) {
-    /*test
-    Location locationex = new Location(10, "test", "test", "test");
-    Qdb.getInstance().locationTable.addRow(locationex);
-    locationname.setItems(locations());
 
-     */
 
     if (NodeController.isNumber(NodeIDEdit.getText())) {
       if (LongNameInput.getText() != "") {

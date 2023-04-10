@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -13,13 +14,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class NodeController {
+  Alert alert = new Alert();
 
   private int nodeIDEdit;
 
@@ -31,6 +35,13 @@ public class NodeController {
 
   private int newYcoord;
 
+  @FXML private ImageView image;
+
+  @FXML private ImageView image2;
+
+  @FXML private Label InformationAlert;
+
+  @FXML private Label nodeIDAlert;
   @FXML private TextField BuildingInput;
 
   @FXML private TextField FloorInput;
@@ -149,56 +160,75 @@ public class NodeController {
   @FXML
   void AddClicked(MouseEvent event) throws SQLException {
 
-    Node nodeexample =
-        new Node(
-            1, 1, 1, "test", "test", Qdb.getInstance().nodeTable.retrieveRow(100).getLocation());
-    Qdb.getInstance().nodeTable.addRow(nodeexample);
-    node.setItems(nodes());
-
-    /*
     if (BuildingInput.getText() != "") {
       if (FloorInput.getText() != "") {
         if (isNumber(NodeIDInput.getText())) {
           if (isNumber(XInput.getText())) {
             if (isNumber(YInput.getText())) {
-            */
-    /*
-       nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
-       //      if (!nodeIDExist(nodeIDEdit)) {
-       newBuilding = BuildingInput.getText();
-       newFloor = FloorInput.getText();
-       newXcoord = Integer.parseInt(XInput.getText());
-       newYcoord = Integer.parseInt(YInput.getText());
 
-       Qdb.getInstance()
-           .nodeTable
-           .addRow(new Node(nodeIDEdit, newXcoord, newYcoord, newFloor, newBuilding));
-       node.setItems(nodes());
+              nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
+              if (!nodeIDExist(nodeIDEdit)) {
+                if (locationExist(nodeIDEdit)) {
+                  alert.clearLabelAlert(InformationAlert, image2);
+                  alert.clearLabelAlert(nodeIDAlert, image);
+                  newBuilding = BuildingInput.getText();
+                  newFloor = FloorInput.getText();
+                  newXcoord = Integer.parseInt(XInput.getText());
+                  newYcoord = Integer.parseInt(YInput.getText());
 
-    */
-    /*   } else {
+                  Qdb.getInstance()
+                      .nodeTable
+                      .addRow(
+                          new Node(
+                              nodeIDEdit,
+                              newXcoord,
+                              newYcoord,
+                              newFloor,
+                              newBuilding,
+                              Qdb.getInstance().locationTable.retrieveRow(nodeIDEdit)));
+                  node.setItems(nodes());
+                } else {
+                  alert.setLabelAlert(
+                      "The location of this nodeID does not exist.", nodeIDAlert, image);
+                  alert.clearLabelAlert(InformationAlert, image2);
+                }
+
+              } else {
+                alert.setLabelAlert(
+                    "This nodeID exists, please use another one.", nodeIDAlert, image);
+                alert.clearLabelAlert(InformationAlert, image2);
+
                 // Here to call alert "This nodeID exists, please use another one
               }
 
             } else {
+              alert.setLabelAlert("Please input the correct Y-coord.", InformationAlert, image2);
+              alert.clearLabelAlert(nodeIDAlert, image);
               // Call Alert "Please input the correct Y-coord"
             }
 
           } else {
+
+            alert.setLabelAlert("Please input the correct X-coord.", InformationAlert, image2);
+            alert.clearLabelAlert(nodeIDAlert, image);
             // Call Alert "Please input the  correct X-coord"
           }
         } else {
+          alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+          alert.clearLabelAlert(InformationAlert, image2);
           // Call Alert "Please input the correct nodeID"
         }
       } else {
+        alert.setLabelAlert("Please input the correct floor", InformationAlert, image2);
+        alert.clearLabelAlert(nodeIDAlert, image);
         // Call Alert "Please input the correct Floor"
       }
     } else {
+      alert.setLabelAlert("Please input the correct building", InformationAlert, image2);
+      alert.clearLabelAlert(nodeIDAlert, image);
       // Call Alert "Please input the correct Building"
 
     }
-
-            */
   }
 
   @FXML
@@ -208,16 +238,22 @@ public class NodeController {
       nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
 
       if (nodeIDExist(nodeIDEdit)) {
+        alert.clearLabelAlert(InformationAlert, image2);
+        alert.clearLabelAlert(nodeIDAlert, image);
 
         Qdb.getInstance().nodeTable.deleteRow(nodeIDEdit);
         node.setItems(nodes());
 
         // Here to call confirm
       } else {
+        alert.setLabelAlert("This nodeID does not exist.", nodeIDAlert, image);
+        alert.clearLabelAlert(InformationAlert, image2);
         // here to call alert "This nodeID does not exist
       }
 
     } else {
+      alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+      alert.clearLabelAlert(InformationAlert, image2);
       // Here to call alert "Please input the correct nodeID"
 
     }
@@ -225,6 +261,7 @@ public class NodeController {
 
   @FXML
   void SetClicked(MouseEvent event) throws SQLException {
+
     if (BuildingInput != null) {
       if (FloorInput != null) {
         if (isNumber(NodeIDInput.getText())) {
@@ -232,42 +269,63 @@ public class NodeController {
             if (isNumber(YInput.getText())) {
               nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
               if (nodeIDExist(nodeIDEdit)) {
-                newBuilding = BuildingInput.getText();
-                newFloor = FloorInput.getText();
-                newXcoord = Integer.parseInt(XInput.getText());
-                newYcoord = Integer.parseInt(YInput.getText());
+                if (locationExist(nodeIDEdit)) {
+                  alert.clearLabelAlert(InformationAlert, image2);
+                  alert.clearLabelAlert(nodeIDAlert, image);
+                  newBuilding = BuildingInput.getText();
+                  newFloor = FloorInput.getText();
+                  newXcoord = Integer.parseInt(XInput.getText());
+                  newYcoord = Integer.parseInt(YInput.getText());
 
-                Qdb.getInstance()
-                    .nodeTable
-                    .updateRow(
-                        nodeIDEdit,
-                        new Node(
-                            nodeIDEdit,
-                            newXcoord,
-                            newYcoord,
-                            newFloor,
-                            newBuilding,
-                            Qdb.getInstance().nodeTable.retrieveRow(nodeIDEdit).getLocation()));
+                  Qdb.getInstance()
+                      .nodeTable
+                      .updateRow(
+                          nodeIDEdit,
+                          new Node(
+                              nodeIDEdit,
+                              newXcoord,
+                              newYcoord,
+                              newFloor,
+                              newBuilding,
+                              Qdb.getInstance().locationTable.retrieveRow(nodeIDEdit)));
 
-                node.setItems(nodes());
+                  node.setItems(nodes());
+
+                } else {
+                  alert.setLabelAlert(
+                      "The location of this nodeID does not exist.", nodeIDAlert, image);
+                  alert.clearLabelAlert(InformationAlert, image2);
+                }
               } else {
+                alert.setLabelAlert("This nodeID does not exist.", nodeIDAlert, image);
+                alert.clearLabelAlert(InformationAlert, image2);
                 // Here to call alert "This nodeID does not exist"
               }
 
             } else {
+              alert.setLabelAlert("Please input the correct Y-coord.", InformationAlert, image2);
+              alert.clearLabelAlert(nodeIDAlert, image);
               // Call Alert "Please input the correct Y-coord"
             }
 
           } else {
+            alert.setLabelAlert("Please input the correct X-coord.", InformationAlert, image2);
+            alert.clearLabelAlert(nodeIDAlert, image);
             // Call Alert "Please input the  correct X-coord"
           }
         } else {
+          alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+          alert.clearLabelAlert(InformationAlert, image2);
           // Call Alert "Please input the correct nodeID"
         }
       } else {
+        alert.setLabelAlert("Please input the correct floor", InformationAlert, image2);
+        alert.clearLabelAlert(nodeIDAlert, image);
         // Call Alert "Please input the correct Floor"
       }
     } else {
+      alert.setLabelAlert("Please input the correct building", InformationAlert, image2);
+      alert.clearLabelAlert(nodeIDAlert, image);
       // Call Alert "Please input the correct Building"
 
     }
@@ -286,6 +344,13 @@ public class NodeController {
   public static boolean nodeIDExist(int nodeID) {
     for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
       if (nodeID == Qdb.getInstance().nodeTable.getAllRows().get(i).getNodeID()) return true;
+    }
+    return false;
+  }
+
+  public boolean locationExist(int nodeID) {
+    for (int i = 0; i < Qdb.getInstance().locationTable.getAllRows().size(); i++) {
+      if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
     }
     return false;
   }

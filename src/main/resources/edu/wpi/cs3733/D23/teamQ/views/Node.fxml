@@ -87,8 +87,8 @@
          <children>
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="631.0" minWidth="10.0" prefWidth="631.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="167.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -97,8 +97,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="15.0" prefWidth="405.0" text="Please input the nodeID of the node to edit" />
-                  <Label text="Please input the information of the node to add or set" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
                         <TextField fx:id="XInput" prefHeight="23.0" prefWidth="107.0" promptText="Xcoord" style="-fx-background-color: #BBBBB];">
@@ -135,6 +133,21 @@
                   <Button mnemonicParsing="false" onMouseClicked="#AddClicked" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button mnemonicParsing="false" onMouseClicked="#SetClicked" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="23.0" prefWidth="269.0" text="Please input the nodeID of the node to edit" />
+                        <ImageView fx:id="image" fitHeight="23.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="nodeIDAlert" prefHeight="23.0" prefWidth="238.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label prefHeight="42.0" prefWidth="312.0" text="Please input the information of the node to add or set" />
+                        <ImageView fx:id="image2" fitHeight="17.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="InformationAlert" prefHeight="25.0" prefWidth="330.0" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>

@@ -6,23 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Qdb {
-<<<<<<< HEAD
-  private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
-  private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private ConferenceRequestDaoImpl conferenceRequestTable = ConferenceRequestDaoImpl.getInstance();
-  private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance();
-  private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(conferenceRequestTable, flowerRequestTable);
-  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance();
+
+  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+
+  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
   public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
   public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
-  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
-=======
-  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
-  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
->>>>>>> origin/development
+
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
   private PersonDaoImpl personTable = PersonDaoImpl.getInstance(accountTable);
