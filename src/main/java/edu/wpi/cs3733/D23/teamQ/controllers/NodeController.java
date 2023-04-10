@@ -369,7 +369,7 @@ public class NodeController {
     if (success) {
       Alert.alertBox("Export Successfully", "Export Successfully");
     } else {
-      Alert.alertBox("Failed Export", "Failed Export");
+      Alert.alertBox("Failed to Export", "Failed to Export");
     }
   }
 
@@ -380,7 +380,12 @@ public class NodeController {
     if (success) {
       Alert.alertBox("Import Successfully", "Import Successfully");
     } else {
-      Alert.alertBox("Failed Import", "Failed Import");
+      Alert.alertBox("Failed to Import", "Failed to Import");
     }
+  }
+
+  @FXML
+  void BackClicked(ActionEvent event) {
+    Navigation.navigate(Screen.MAP_EDITOR);
   }
 }

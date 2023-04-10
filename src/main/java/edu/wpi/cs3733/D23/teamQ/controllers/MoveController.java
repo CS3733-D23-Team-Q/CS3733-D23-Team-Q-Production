@@ -82,9 +82,9 @@ public class MoveController {
         new Callback<TableColumn.CellDataFeatures<Move, Number>, ObservableValue<Number>>() {
           @Override
           public ObservableValue<Number> call(TableColumn.CellDataFeatures<Move, Number> param) {
-            SimpleIntegerProperty moveIDs =
+            SimpleIntegerProperty nodeIDs =
                 new SimpleIntegerProperty(param.getValue().getNode().getNodeID());
-            return moveIDs;
+            return nodeIDs;
           }
         });
 
@@ -188,7 +188,7 @@ public class MoveController {
     if (success) {
       Alert.alertBox("Export Successfully", "Export Successfully");
     } else {
-      Alert.alertBox("Failed Export", "Failed Export");
+      Alert.alertBox("Failed to Export", "Failed to Export");
     }
   }
 
@@ -199,7 +199,12 @@ public class MoveController {
     if (success) {
       Alert.alertBox("Import Successfully", "Import Successfully");
     } else {
-      Alert.alertBox("Failed Import", "Failed Import");
+      Alert.alertBox("Failed to Import", "Failed to Import");
     }
+  }
+
+  @FXML
+  void BackClicked(ActionEvent event) {
+    Navigation.navigate(Screen.MAP_EDITOR);
   }
 }

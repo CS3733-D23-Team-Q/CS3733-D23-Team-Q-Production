@@ -64,6 +64,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#nodeClicked" text="Node Table" />
                   <MenuItem mnemonicParsing="false" onAction="#edgeClicked" text="Edge Table" />
                   <MenuItem mnemonicParsing="false" onAction="#locationClicked" text="Location Name Table" />
+                  <MenuItem mnemonicParsing="false" onAction="#BackClicked" text="Back" />
                   <MenuItem mnemonicParsing="false" onAction="#homeClicked" text="Home" />
                   <MenuItem mnemonicParsing="false" onAction="#ExitClicked" text="Exit" />
                </items>
@@ -81,7 +82,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <GridPane alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <columnConstraints>
             <ColumnConstraints maxWidth="633.0" minWidth="10.0" prefWidth="240.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="633.0" minWidth="10.0" prefWidth="204.0" />
@@ -95,7 +96,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="122.0" text="Please input the path" />
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="122.0" text="Please input the path" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

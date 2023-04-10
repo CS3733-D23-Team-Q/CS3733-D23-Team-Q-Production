@@ -66,6 +66,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#nodeClicked" text="Node Table" />
                   <MenuItem mnemonicParsing="false" onAction="#edgeClicked" text="Edge Table" />
                   <MenuItem mnemonicParsing="false" onAction="#moveClicked" text="Move Table" />
+                  <MenuItem mnemonicParsing="false" onAction="#BackClicked" text="Back" />
                   <MenuItem mnemonicParsing="false" onAction="#homeClicked" text="Home" />
                   <MenuItem mnemonicParsing="false" onAction="#exitClicked" text="Exit" />
                </items>

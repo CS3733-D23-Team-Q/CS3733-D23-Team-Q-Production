@@ -307,4 +307,9 @@ public class LocationController {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
   }
+
+  @FXML
+  void BackClicked(ActionEvent event) {
+    Navigation.navigate(Screen.MAP_EDITOR);
+  }
 }
