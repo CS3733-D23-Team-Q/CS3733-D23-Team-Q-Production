@@ -107,8 +107,7 @@ public class Star extends Edge {
       }
       if (bestEdge == null) { // This scenario most likely happens when we are near an elevator
         for (Edge fin : currentNode.getEdges()) {
-          if (!closedList.contains(fin.getStartNode())
-              && !closedList.contains(fin.getEndNode())
+          if (!closedList.contains(fin.getEndNode())
               && fin.getEndNode().getFloor().equalsIgnoreCase(targetFloor)) {
             bestEdge = fin;
             System.out.println();
