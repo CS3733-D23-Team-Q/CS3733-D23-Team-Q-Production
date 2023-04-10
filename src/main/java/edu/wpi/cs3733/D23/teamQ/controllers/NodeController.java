@@ -148,10 +148,12 @@ public class NodeController {
 
   @FXML
   void AddClicked(MouseEvent event) throws SQLException {
-    /* test
-    Node nodeexample = new Node(1, 1, 1, "test", "test");
+
+    Node nodeexample =
+        new Node(
+            1, 1, 1, "test", "test", Qdb.getInstance().nodeTable.retrieveRow(100).getLocation());
     Qdb.getInstance().nodeTable.addRow(nodeexample);
-     */
+    node.setItems(nodes());
 
     /*
     if (BuildingInput.getText() != "") {
@@ -239,8 +241,15 @@ public class NodeController {
                     .nodeTable
                     .updateRow(
                         nodeIDEdit,
-                        new Node(nodeIDEdit, newXcoord, newYcoord, newFloor, newBuilding));
-                // Navigation.navigate(Screen.Node_Table);
+                        new Node(
+                            nodeIDEdit,
+                            newXcoord,
+                            newYcoord,
+                            newFloor,
+                            newBuilding,
+                            Qdb.getInstance().nodeTable.retrieveRow(nodeIDEdit).getLocation()));
+
+                node.setItems(nodes());
               } else {
                 // Here to call alert "This nodeID does not exist"
               }
