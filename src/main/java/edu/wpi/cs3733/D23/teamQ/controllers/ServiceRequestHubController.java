@@ -13,13 +13,6 @@ public class ServiceRequestHubController {
   @FXML Button frdButton;
   @FXML Button fedButton;
   @FXML Button ospButton;
-  @FXML Button ptButton;
-
-  @FXML Button homeButton;
-
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
-  @FXML MenuItem profileItem;
 
   @FXML
   public void initialize() {};
@@ -47,30 +40,5 @@ public class ServiceRequestHubController {
   @FXML
   public void ospButtonClicked() {
     Navigation.navigate(Screen.OFFICE_SUPPLIES_REQUEST);
-  }
-
-  @FXML
-  public void ptButtonClicked() {
-    Navigation.navigate(Screen.PATIENT_TRANSPORT_REQUEST);
-  }
-
-  @FXML
-  public void homeButtonClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
   }
 }
