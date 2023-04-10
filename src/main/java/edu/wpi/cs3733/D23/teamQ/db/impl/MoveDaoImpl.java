@@ -186,6 +186,8 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch(Exception e) {
+      return false;
     }
   }
 
@@ -196,7 +198,6 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
    * @return true if successfully imported, false otherwise
    */
   public boolean importCSV(String filename) {
-
     try {
       File f = new File(filename);
       Scanner myReader = new Scanner(f);
@@ -207,9 +208,12 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
         addRow(m);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
+
   }
 }
