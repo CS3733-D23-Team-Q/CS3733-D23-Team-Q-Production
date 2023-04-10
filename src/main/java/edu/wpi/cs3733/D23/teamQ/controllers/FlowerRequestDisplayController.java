@@ -31,7 +31,8 @@ public class FlowerRequestDisplayController {
 
   @FXML
   public void initialize() {
-    roomNumberField.setText(ListServiceRequestController.getFlowerRequest().getRoomNumber());
+    roomNumberField.setText(
+        "" + ListServiceRequestController.getFlowerRequest().getNode().getNodeID());
     flowerNoteField.setText(ListServiceRequestController.getFlowerRequest().getNote());
     flowerChoiceField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
     numberBouquetField.setText(
