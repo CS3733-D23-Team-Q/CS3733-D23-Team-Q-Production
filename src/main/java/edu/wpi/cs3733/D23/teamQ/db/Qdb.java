@@ -6,17 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Qdb {
-  private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
-  private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private ConferenceRequestDaoImpl conferenceRequestTable = ConferenceRequestDaoImpl.getInstance();
-  private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance();
-  private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(conferenceRequestTable, flowerRequestTable);
-  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance();
+  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
   private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
   private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
-  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
+  private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
+  private PersonDaoImpl personTable = PersonDaoImpl.getInstance(accountTable);
+  private ConferenceRequestDaoImpl conferenceRequestTable =
+      ConferenceRequestDaoImpl.getInstance(nodeTable);
+  private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
+  private MealRequestDaoImpl mealRequestTable = MealRequestDaoImpl.getInstance(nodeTable);
+  private FurnitureRequestDaoImpl furnitureRequestTable =
+      FurnitureRequestDaoImpl.getInstance(nodeTable);
+  private PatientTransportRequestDaoImpl patientTransportRequestTable =
+      PatientTransportRequestDaoImpl.getInstance(nodeTable);
+  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable =
+      OfficeSuppliesRequestDaoImpl.getInstance(nodeTable);
+  private ServiceRequestDaoImpl serviceRequestTable =
+      ServiceRequestDaoImpl.getInstance(
+          conferenceRequestTable,
+          flowerRequestTable,
+          mealRequestTable,
+          furnitureRequestTable,
+          officeSuppliesRequestTable,
+          patientTransportRequestTable);
 
   private static Qdb single_instance = null;
 
@@ -241,5 +255,85 @@ public class Qdb {
 
   public int getQuestionIndex(String question) {
     return questionTable.getIndex(question);
+  }
+
+  public MealRequest retrieveMealRequest(int requestID) {
+    return mealRequestTable.retrieveRow(requestID);
+  }
+
+  public boolean updateMealRequest(int requestID, MealRequest mr) {
+    return mealRequestTable.updateRow(requestID, mr);
+  }
+
+  public boolean deleteMealRequest(int requestID) {
+    return mealRequestTable.deleteRow(requestID);
+  }
+
+  public boolean addMealRequest(MealRequest mr) {
+    return mealRequestTable.addRow(mr);
+  }
+
+  public ArrayList<MealRequest> retrieveAllMealRequests() {
+    return (ArrayList<MealRequest>) mealRequestTable.getAllRows();
+  }
+
+  public FurnitureRequest retrieveFurnitureRequest(int requestID) {
+    return furnitureRequestTable.retrieveRow(requestID);
+  }
+
+  public boolean updateFurnitureRequest(int requestID, FurnitureRequest fr) {
+    return furnitureRequestTable.updateRow(requestID, fr);
+  }
+
+  public boolean deleteFurnitureRequest(int requestID) {
+    return furnitureRequestTable.deleteRow(requestID);
+  }
+
+  public boolean addFurnitureRequest(FurnitureRequest fr) {
+    return furnitureRequestTable.addRow(fr);
+  }
+
+  public ArrayList<FurnitureRequest> retrieveAllFurnitureRequests() {
+    return (ArrayList<FurnitureRequest>) furnitureRequestTable.getAllRows();
+  }
+
+  public PatientTransportRequest retrievePatientTransportRequest(int requestID) {
+    return patientTransportRequestTable.retrieveRow(requestID);
+  }
+
+  public boolean updatePatientTransportRequest(int requestID, PatientTransportRequest ptr) {
+    return patientTransportRequestTable.updateRow(requestID, ptr);
+  }
+
+  public boolean deletePatientTransportRequest(int requestID) {
+    return patientTransportRequestTable.deleteRow(requestID);
+  }
+
+  public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
+    return patientTransportRequestTable.addRow(ptr);
+  }
+
+  public ArrayList<PatientTransportRequest> retrieveAllPatientTransportRequests() {
+    return (ArrayList<PatientTransportRequest>) patientTransportRequestTable.getAllRows();
+  }
+
+  public OfficeSuppliesRequest retrieveOfficeSuppliesRequest(int requestID) {
+    return officeSuppliesRequestTable.retrieveRow(requestID);
+  }
+
+  public boolean updateOfficeSuppliesRequest(int requestID, OfficeSuppliesRequest osr) {
+    return officeSuppliesRequestTable.updateRow(requestID, osr);
+  }
+
+  public boolean deleteOfficeSuppliesRequest(int requestID) {
+    return officeSuppliesRequestTable.deleteRow(requestID);
+  }
+
+  public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
+    return officeSuppliesRequestTable.addRow(osr);
+  }
+
+  public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
+    return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
 }
