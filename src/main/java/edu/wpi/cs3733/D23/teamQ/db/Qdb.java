@@ -12,7 +12,7 @@ public class Qdb {
   private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private PersonDaoImpl personTable = PersonDaoImpl.getInstance(accountTable);
+  private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(nodeTable);
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);

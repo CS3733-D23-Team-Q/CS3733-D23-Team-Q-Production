@@ -193,7 +193,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
-    } catch(Exception e) {
+    } catch (Exception e) {
       return false;
     }
   }

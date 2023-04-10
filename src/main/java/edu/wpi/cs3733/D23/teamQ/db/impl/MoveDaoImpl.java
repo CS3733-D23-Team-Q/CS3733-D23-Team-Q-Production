@@ -186,7 +186,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
-    } catch(Exception e) {
+    } catch (Exception e) {
       return false;
     }
   }
@@ -214,6 +214,5 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
     } catch (Exception e) {
       return false;
     }
-
   }
 }

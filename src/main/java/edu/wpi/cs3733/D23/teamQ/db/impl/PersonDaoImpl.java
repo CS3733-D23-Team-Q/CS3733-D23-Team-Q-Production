@@ -15,16 +15,14 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
   private List<Person> People = new ArrayList<Person>();
 
   private static PersonDaoImpl single_instance = null;
-  private AccountDaoImpl accountTable;
 
-  public static synchronized PersonDaoImpl getInstance(AccountDaoImpl accountTable) {
-    if (single_instance == null) single_instance = new PersonDaoImpl(accountTable);
+  public static synchronized PersonDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new PersonDaoImpl();
 
     return single_instance;
   }
 
-  private PersonDaoImpl(AccountDaoImpl accountTable) {
-    this.accountTable = accountTable;
+  private PersonDaoImpl() {
     populate();
   }
 
@@ -40,7 +38,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     String newLN = personWithNewChanges.getLastName();
     String newTitle = personWithNewChanges.getTitle();
     int newPN = personWithNewChanges.getPhoneNumber();
-    String newUN = personWithNewChanges.getAccount().getUsername();
+    String newUN = personWithNewChanges.getUsername();
 
     try {
       String query =
@@ -62,7 +60,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
         People.get(index).setLastName(newLN);
         People.get(index).setTitle(newTitle);
         People.get(index).setPhoneNumber(newPN);
-        People.get(index).setAccount(accountTable.retrieveRow(newUN));
+        People.get(index).setUsername(newUN);
         System.out.println("Updated successfully!");
 
       } else {
@@ -106,7 +104,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     String LastName = a.getLastName();
     String Title = a.getTitle();
     int PhoneNumber = a.getPhoneNumber();
-    String username = a.getAccount().getUsername();
+    String username = a.getUsername();
     boolean result = false;
     Connection con = GenDao.connect();
     try {
@@ -170,7 +168,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
   }
 
   public Person getPersonWithUsername(String UN) {
-    Person b = new Person(null, null, null, 0, accountTable.retrieveRow(UN));
+    Person b = new Person(null, null, null, 0, UN);
     for (int i = 0; i < People.size(); i++) {
       Person a = People.get(i);
       if (Objects.equals(a.getUsername(), UN)) {
