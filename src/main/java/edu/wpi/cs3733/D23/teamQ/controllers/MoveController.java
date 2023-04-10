@@ -21,6 +21,10 @@ import javafx.util.Callback;
 
 public class MoveController {
 
+  private String path;
+
+  @FXML private TextField ImportPath;
+
   private int newNodeID;
   private String newLongName;
   private Node newNode;
@@ -151,5 +155,17 @@ public class MoveController {
         return true;
     }
     return false;
+  }
+
+  @FXML
+  void ExportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.toCSV(path);
+  }
+
+  @FXML
+  void ImportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.importCSV(path);
   }
 }

@@ -20,9 +20,9 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.NodeController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="629.6666870117188" minWidth="10.0" prefWidth="111.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="798.0" minWidth="10.0" prefWidth="798.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="576.3333129882812" minWidth="10.0" prefWidth="91.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="629.6666870117188" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="867.0" minWidth="10.0" prefWidth="858.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="576.3333129882812" minWidth="10.0" prefWidth="42.0" />
         <ColumnConstraints />
         <ColumnConstraints />
         <ColumnConstraints />
@@ -34,8 +34,10 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
-        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="441.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="418.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="1000.0" spacing="380.0" style="-fx-background-color: #142A53;" GridPane.columnSpan="10">
@@ -83,12 +85,13 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="631.0" minWidth="10.0" prefWidth="631.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="167.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="646.0" minWidth="10.0" prefWidth="610.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="59.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="169.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -99,11 +102,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="XInput" prefHeight="23.0" prefWidth="107.0" promptText="Xcoord" style="-fx-background-color: #BBBBB];">
-                           <effect>
-                              <Glow level="0.48" />
-                           </effect>
-                        </TextField>
+                        <TextField fx:id="XInput" prefHeight="23.0" prefWidth="107.0" promptText="Xcoord" />
                         <TextField fx:id="YInput" prefHeight="23.0" prefWidth="105.0" promptText="Ycoord">
                            <effect>
                               <Glow level="0.48" />
@@ -130,24 +129,27 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onMouseClicked="#AddClicked" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onMouseClicked="#SetClicked" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#AddClicked" prefHeight="23.0" prefWidth="55.0" stylesheets="@styles/Home.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" prefHeight="23.0" prefWidth="58.0" stylesheets="@styles/Home.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onMouseClicked="#SetClicked" prefHeight="23.0" prefWidth="56.0" stylesheets="@styles/Home.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="269.0" text="Please input the nodeID of the node to edit" />
-                        <ImageView fx:id="image" fitHeight="23.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="nodeIDAlert" prefHeight="23.0" prefWidth="238.0" />
+                        <Label prefHeight="23.0" prefWidth="150.0" text="Please input the nodeID" />
+                        <ImageView fx:id="image" fitHeight="23.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="nodeIDAlert" prefHeight="23.0" prefWidth="433.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="42.0" prefWidth="312.0" text="Please input the information of the node to add or set" />
-                        <ImageView fx:id="image2" fitHeight="17.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="InformationAlert" prefHeight="25.0" prefWidth="330.0" />
+                        <Label prefHeight="25.0" prefWidth="178.0" text="Please input the information" />
+                        <ImageView fx:id="image2" fitHeight="17.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="InformationAlert" prefHeight="25.0" prefWidth="443.0" />
                      </children>
                   </HBox>
+                  <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" prefHeight="23.0" prefWidth="86.0" text="Import CSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="88.0" text="Export CSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label prefHeight="14.0" prefWidth="172.0" text="Please input the path " GridPane.columnIndex="2" />
+                  <TextField fx:id="ImportPath" prefHeight="23.0" prefWidth="117.0" promptText="Path" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

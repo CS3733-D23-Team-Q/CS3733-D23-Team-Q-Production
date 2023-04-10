@@ -20,9 +20,13 @@ import javafx.util.Callback;
 
 public class EdgeController {
 
+  private String path;
+
   private int newEdgeID;
   private Node newEndNode;
   private Node newStartNode;
+
+  @FXML private TextField ImportPath;
 
   @FXML private TextField EdgeIDInput;
 
@@ -112,11 +116,14 @@ public class EdgeController {
   }
 
   @FXML
-  void AddClicked(MouseEvent event) {}
+  void ExportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.toCSV(path);
+  }
 
   @FXML
-  void DeleteClicked(MouseEvent event) {}
-
-  @FXML
-  void SetClicked(MouseEvent event) {}
+  void ImportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.importCSV(path);
+  }
 }

@@ -38,9 +38,7 @@ public class MapEditorController {
   }
 
   @FXML
-  void MapClicked(MouseEvent event) {
-    Navigation.navigate(Screen.Map);
-  }
+  void MapClicked(MouseEvent event) {}
 
   @FXML
   void MoveClicked(MouseEvent event) {

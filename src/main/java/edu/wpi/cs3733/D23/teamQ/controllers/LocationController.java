@@ -25,6 +25,10 @@ public class LocationController {
 
   Alert alert = new Alert();
 
+  private String path;
+
+  @FXML private TextField ImportPath;
+
   @FXML private Label nodeIDAlert;
 
   @FXML private Label InformationAlert;
@@ -279,5 +283,17 @@ public class LocationController {
       if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
     }
     return false;
+  }
+
+  @FXML
+  void ExportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.toCSV(path);
+  }
+
+  @FXML
+  void ImportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.importCSV(path);
   }
 }

@@ -25,6 +25,8 @@ import javafx.util.Callback;
 public class NodeController {
   Alert alert = new Alert();
 
+  private String path;
+
   private int nodeIDEdit;
 
   private String newBuilding;
@@ -34,6 +36,8 @@ public class NodeController {
   private int newXcoord;
 
   private int newYcoord;
+
+  @FXML private TextField ImportPath;
 
   @FXML private ImageView image;
 
@@ -189,7 +193,9 @@ public class NodeController {
                   node.setItems(nodes());
                 } else {
                   alert.setLabelAlert(
-                      "The location of this nodeID does not exist.", nodeIDAlert, image);
+                      "The location does not exist, please create a new location with this nodeID",
+                      nodeIDAlert,
+                      image);
                   alert.clearLabelAlert(InformationAlert, image2);
                 }
 
@@ -353,5 +359,17 @@ public class NodeController {
       if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
     }
     return false;
+  }
+
+  @FXML
+  void ExportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.toCSV(path);
+  }
+
+  @FXML
+  void ImportClicked(MouseEvent event) {
+    path = ImportPath.getText();
+    Qdb.getInstance().nodeTable.importCSV(path);
   }
 }
