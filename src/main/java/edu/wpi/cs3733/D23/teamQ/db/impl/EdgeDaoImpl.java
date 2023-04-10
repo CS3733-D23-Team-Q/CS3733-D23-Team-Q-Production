@@ -206,7 +206,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
   public List<Edge> getEdges(int nodeID) {
     List<Edge> edgeList = new ArrayList<>();
     for (Edge edge : edges) {
-      if (edge.getStartNode().getNodeID() == nodeID || edge.getStartNode().getNodeID() == nodeID) {
+      if (edge.getStartNode().getNodeID() == nodeID || edge.getEndNode().getNodeID() == nodeID) {
         edgeList.add(edge);
       }
     }

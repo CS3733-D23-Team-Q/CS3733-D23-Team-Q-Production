@@ -51,10 +51,10 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
    */
   public boolean updateRow(Integer requestID, MealRequest newRequest) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"mealRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, drink = ?, entree = ?, side = ? "
-                                 + "WHERE \"requestID\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"mealRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, drink = ?, entree = ?, side = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
       st.setString(2, newRequest.getRequester());
