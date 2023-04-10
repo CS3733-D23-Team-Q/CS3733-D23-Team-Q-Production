@@ -205,7 +205,6 @@ public class LocationController {
   @FXML
   void addClicked(MouseEvent event) {
 
-
     if (NodeController.isNumber(NodeIDEdit.getText())) {
       if (LongNameInput.getText() != "") {
         if (ShortNameInput.getText() != "") {

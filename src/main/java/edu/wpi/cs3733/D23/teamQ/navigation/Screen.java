@@ -30,7 +30,9 @@ public enum Screen {
   Move_Table("views/Move.fxml", "MoveTable"),
   Node_Table("views/Node.fxml", "MoveTable"),
   LocationName_Table("views/Location.fxml", "LocationNameTable"),
-  Edge_Table("views/Edge.fxml", "EdgeTable");
+  Edge_Table("views/Edge.fxml", "EdgeTable"),
+
+  Map("views/Map.fxml", "Map");
 
   private final String filename;
   private final String title;
