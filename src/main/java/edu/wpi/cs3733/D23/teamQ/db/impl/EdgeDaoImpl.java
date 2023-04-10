@@ -173,7 +173,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
-    } catch(Exception e) {
+    } catch (Exception e) {
       return false;
     }
   }
