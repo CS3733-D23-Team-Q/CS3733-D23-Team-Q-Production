@@ -42,13 +42,23 @@ public class EditProfileController {
     this.ProfileEditPage_FirstName_TextField.setText(qdb.retrievePerson(username).getFirstName());
     this.ProfileEditPage_LastName_TextField.setText(qdb.retrievePerson(username).getLastName());
     this.ProfileEditPage_Email_TextField.setText(email);
+
     this.ProfileEditPage_PhoneNumber_TextField.setText(
         String.valueOf(qdb.retrievePerson(username).getPhoneNumber()));
+
+    if (qdb.retrievePerson(username).getPhoneNumber() != 0) {
+      this.ProfileEditPage_PhoneNumber_TextField.setText(
+          String.valueOf(qdb.retrievePerson(username).getPhoneNumber()));
+    } else {
+      this.ProfileEditPage_PhoneNumber_TextField.setText(String.valueOf(" "));
+    }
+
     this.ProfileEditPage_Username_TextField.setText(username);
+    this.ProfileEditPage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
   }
 
   @FXML
-  void DonePressed(ActionEvent event) {
+  public void DonePressed(ActionEvent event) {
     String username = LoginController.getLoginUsername();
 
     String email = LoginController.getLoginEmail();
@@ -65,7 +75,5 @@ public class EditProfileController {
 
     qdb.updatePerson(qdb.retrievePerson(username).getIDNum(), newProfile);
     Navigation.navigate(Screen.PROFILE_PAGE);
-
-
   }
 }
