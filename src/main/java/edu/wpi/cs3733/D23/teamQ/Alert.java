@@ -32,7 +32,7 @@ public class Alert extends SecondaryStage {
     type.setStyle(null);
   }
 
-  public static void alertBox(String title, String message) throws IOException {
+  public void alertBox(String title, String message) throws IOException {
     AlertController ac = (AlertController) Navigation.getController(Screen.ALERT);
     ac.setMessage(message);
     Stage stage = newStage(title, Screen.ALERT);

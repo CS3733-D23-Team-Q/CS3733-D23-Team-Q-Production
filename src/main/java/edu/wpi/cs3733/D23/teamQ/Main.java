@@ -10,14 +10,15 @@ public class Main {
   public static void main(String[] args) {
     Qdb.getInstance();
     Qdb qdb = Qdb.getInstance();
-    // App.launch(App.class, args);
-    Node ns = qdb.retrieveNode(100);
-    Node ne = qdb.retrieveNode(130);
-    List<Node> nodes = Star2.aStar(ns, ne);
-    System.out.println(nodes.size());
-    for (Node n : nodes) {
-      System.out.println(n.getNodeID());
-    }
+    App.launch(App.class, args);
+    //    Node ns = qdb.retrieveNode(100);
+    //    Node ne = qdb.retrieveNode(130);
+    //    List<Node> nodes = Star2.aStar(ns, ne);
+    //    System.out.println(nodes.size());
+    //    for (Node n : nodes) {
+    //      System.out.println(n.getYCoord());
+    //      // System.out.println(n.getXCoord());
+    //    }
     /*
     System.out.println(Star2.heuristic(qdb.retrieveNode(100), qdb.retrieveNode(125)));
     System.out.println(ns.equals(ne));
@@ -34,6 +35,34 @@ public class Main {
       System.out.println(n.getNodeID());
     }
     System.out.println(ns.getF());
+     */
+    Node start = qdb.retrieveNode(100);
+    Node target = qdb.retrieveNode(130);
+    List<Node> path = Star2.aStar(start, target);
+    for (int i = path.size() - 1; i >= 1; i--) {
+      Node n = path.get(i);
+      Node next = path.get(i - 1);
+      int x1 = n.getXCoord();
+      int y1 = n.getYCoord();
+      int x2 = next.getXCoord();
+      int y2 = next.getYCoord();
+      // map.toBack();
+    }
+    /*
+    Node start = qdb.retrieveNode(100);
+    Node target = qdb.retrieveNode(130);
+    List<Node> path = Star2.aStar(start, target);
+    for (int i = path.size() - 1; i >= 1; i--) {
+      Node n = path.get(i);
+      Node next = path.get(i - 1);
+      int x1 = n.getXCoord();
+      int y1 = n.getYCoord();
+      int x2 = next.getXCoord();
+      int y2 = next.getYCoord();
+      System.out.println(y1);
+      System.out.println(y2);
+      // map.toBack();
+    }
      */
   }
 
