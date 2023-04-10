@@ -6,12 +6,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import java.sql.SQLException;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,7 +33,6 @@ public class ListServiceRequestController {
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
   }
 
-
   @FXML
   public void rowSelected() {
     if (qdb.retrieveFlowerRequest(
@@ -56,7 +51,6 @@ public class ListServiceRequestController {
       Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
     }
   }
-
 
   public static ConferenceRequest getConferenceRequest() {
     return conferenceRequest;
