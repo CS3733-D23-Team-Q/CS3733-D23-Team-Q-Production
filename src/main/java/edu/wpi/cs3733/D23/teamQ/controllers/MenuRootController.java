@@ -15,13 +15,9 @@ public class MenuRootController {
   @FXML MFXButton statistics;
   @FXML MFXButton settings;
   @FXML MFXButton signout;
-  @FXML VBox mainPane;
-  @FXML VBox peoplePane;
 
   @FXML
   public void initialize() {
-    mainPane.setVisible(true);
-    peoplePane.setVisible(false);
   }
 
   @FXML
@@ -31,8 +27,6 @@ public class MenuRootController {
 
   @FXML
   public void peopleClicked() {
-    // eoplePane.setAlignment(Pos.CENTER_RIGHT);
-    peoplePane.setVisible(true);
     Navigation.navigate(Screen.PROFILE_PAGE);
   }
 
