@@ -46,6 +46,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
       String query =
           "UPDATE person SET \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\"= ?, username=? WHERE \"IDNum\" = ?";
       PreparedStatement pst = con.prepareStatement(query);
+
       pst.setString(1, newFN);
       pst.setString(2, newLN);
       pst.setString(3, newTitle);
@@ -63,6 +64,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
         People.get(index).setPhoneNumber(newPN);
         People.get(index).setAccount(accountTable.retrieveRow(newUN));
         System.out.println("Updated successfully!");
+
       } else {
         System.out.println("Failed to update.");
       }

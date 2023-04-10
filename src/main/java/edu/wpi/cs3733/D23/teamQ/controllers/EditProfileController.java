@@ -62,9 +62,10 @@ public class EditProfileController {
             ProfileEditPage_Title_TextField.getText(),
             Integer.parseInt(ProfileEditPage_PhoneNumber_TextField.getText()),
             username);
+
     qdb.updatePerson(qdb.retrievePerson(username).getIDNum(), newProfile);
     Navigation.navigate(Screen.PROFILE_PAGE);
 
-    System.out.println(qdb.retrievePerson(username).getIDNum());
+
   }
 }
