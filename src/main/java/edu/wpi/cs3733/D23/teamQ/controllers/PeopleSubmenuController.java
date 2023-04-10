@@ -6,18 +6,16 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
 public class PeopleSubmenuController {
-    @FXML
-    MFXButton profile;
-    @FXML
-    MFXButton directory;
+  @FXML MFXButton profile;
+  @FXML MFXButton directory;
 
-    @FXML
-    public void profileClicked() {
-        Navigation.navigate(Screen.PROFILE_PAGE);
-    }
+  @FXML
+  public void profileClicked() {
+    Navigation.navigate(Screen.PROFILE_PAGE);
+  }
 
-    @FXML
-    public void directoryClicked() {
-        //Navigation.navigate(Screen.Directory);
-    }
+  @FXML
+  public void directoryClicked() {
+    // Navigation.navigate(Screen.Directory);
+  }
 }

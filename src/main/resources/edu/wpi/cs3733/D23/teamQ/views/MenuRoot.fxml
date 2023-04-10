@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
+
 <VBox fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuRootController">
    <children>
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="240.0" spacing="18.0">

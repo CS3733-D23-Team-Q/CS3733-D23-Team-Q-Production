@@ -6,17 +6,16 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class SignoutSubmenuController {
-    @FXML
-    MFXButton signout;
-    @FXML
-    MFXButton exit;
+  @FXML MFXButton signout;
+  @FXML MFXButton exit;
 
-    @FXML
-    public void signoutClicked() {
-        Navigation.logout();
-    }
-    @FXML
-    public void exitClicked() {
-        Platform.exit();
-    }
+  @FXML
+  public void signoutClicked() {
+    Navigation.logout();
+  }
+
+  @FXML
+  public void exitClicked() {
+    Platform.exit();
+  }
 }

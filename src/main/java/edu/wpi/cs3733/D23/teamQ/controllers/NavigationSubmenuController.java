@@ -6,19 +6,17 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
 public class NavigationSubmenuController {
-    @FXML
-    MFXButton pathfinder;
+  @FXML MFXButton pathfinder;
 
-    @FXML
-    MFXButton editor;
+  @FXML MFXButton editor;
 
-    @FXML
-    public void pathfinderClicked() {
-        Navigation.navigate(Screen.PATH_TEXT);
-    }
+  @FXML
+  public void pathfinderClicked() {
+    Navigation.navigate(Screen.PATH_TEXT);
+  }
 
-    @FXML
-    public void editorClicked() {
-        Navigation.navigate(Screen.MAP_EDITOR);
-    }
+  @FXML
+  public void editorClicked() {
+    Navigation.navigate(Screen.MAP_EDITOR);
+  }
 }

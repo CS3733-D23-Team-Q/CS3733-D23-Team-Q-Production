@@ -6,18 +6,16 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
 public class ServiceRequestSubmenuController {
-    @FXML
-    MFXButton create;
-    @FXML
-    MFXButton edit;
+  @FXML MFXButton create;
+  @FXML MFXButton edit;
 
-    @FXML
-    public void createClicked() {
-        Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
-    }
-    @FXML
-    public void editClicked() {
-        Navigation.navigate(Screen.LIST_REQUESTS);
-    }
+  @FXML
+  public void createClicked() {
+    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
+  }
 
+  @FXML
+  public void editClicked() {
+    Navigation.navigate(Screen.LIST_REQUESTS);
+  }
 }
