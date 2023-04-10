@@ -1,5 +1,6 @@
 .hbox {
     -fx-background-color: #f1f1f1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
 }
 
 .mfx-button {

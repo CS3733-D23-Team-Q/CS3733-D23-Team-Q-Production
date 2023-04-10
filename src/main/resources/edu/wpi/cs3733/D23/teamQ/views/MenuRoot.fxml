@@ -4,8 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -105,15 +105,15 @@
             <Insets bottom="12.0" top="12.0" />
          </padding>
       </VBox>
-      <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+      <AnchorPane prefHeight="200.0" prefWidth="192.0">
          <children>
-            <fx:include fx:id="peopleSM" source="PeopleSubmenu.fxml" visible="false" />
-            <fx:include fx:id="navigationSM" source="NavigationSubmenu.fxml" visible="false" />
-            <fx:include fx:id="servicerequestSM" source="ServiceRequestSubmenu.fxml" visible="false" />
-            <fx:include fx:id="statisticsSM" source="StatisticsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="settingsSM" source="SettingsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="signoutSM" source="SignoutSubmenu.fxml" visible="false" />
+            <fx:include fx:id="peopleSM" layoutY="169.0" source="PeopleSubmenu.fxml" visible="false" />
+            <fx:include fx:id="navigationSM" layoutY="233.0" source="NavigationSubmenu.fxml" visible="false" />
+            <fx:include fx:id="servicerequestSM" layoutY="297.0" source="ServiceRequestSubmenu.fxml" visible="false" />
+            <fx:include fx:id="statisticsSM" layoutY="361.0" source="StatisticsSubmenu.fxml" visible="false" />
+            <fx:include fx:id="settingsSM" layoutY="425.0" source="SettingsSubmenu.fxml" visible="false" />
+            <fx:include fx:id="signoutSM" layoutY="764.0" source="SignoutSubmenu.fxml" visible="false" />
          </children>
-      </StackPane>
+      </AnchorPane>
    </children>
 </HBox>
