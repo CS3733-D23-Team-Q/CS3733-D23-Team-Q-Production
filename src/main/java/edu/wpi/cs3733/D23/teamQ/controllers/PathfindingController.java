@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.*;
 
@@ -27,6 +28,7 @@ public class PathfindingController {
   Node start;
   Node target;
   List<Line> previousPath;
+  Text text;
   @FXML Pane root;
   @FXML Group parent;
   @FXML ImageView map;
@@ -77,13 +79,25 @@ public class PathfindingController {
       node.setLayoutX(x);
       node.setLayoutY(y);
       node.setStyle(
-          "-fx-background-radius: 5em;"
-              + "-fx-min-width: 3px;"
-              + "-fx-min-height: 3px;"
-              + "-fx-max-width: 3px;"
-              + "-fx-max-height: 3px;"
+          "-fx-background-radius: 5em;" // 5
+              + "-fx-min-width: 6px;" // 3
+              + "-fx-min-height: 6px;"
+              + "-fx-max-width: 6px;"
+              + "-fx-max-height: 6px;"
               + "-fx-background-insets: 0px;");
-      node.setOnAction(
+      node.setOnMouseEntered(
+          e -> {
+            // double cursorx = e.getX();
+            // double cursory = e.getY();
+            // parent.getChildren().remove(text);
+            text = new Text(x, y, n.getBuilding());
+            parent.getChildren().add(text);
+          });
+      node.setOnMouseExited(
+          e -> {
+            text.setText("");
+          });
+      node.setOnMouseClicked(
           e -> {
             if (!ready4Second) {
               ready4Second = true;
