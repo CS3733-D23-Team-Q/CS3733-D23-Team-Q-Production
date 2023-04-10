@@ -14,14 +14,16 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
   private List<Person> People = new ArrayList<Person>();
 
   private static PersonDaoImpl single_instance = null;
+  private AccountDaoImpl accountTable;
 
-  public static synchronized PersonDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new PersonDaoImpl();
+  public static synchronized PersonDaoImpl getInstance(AccountDaoImpl accountTable) {
+    if (single_instance == null) single_instance = new PersonDaoImpl(accountTable);
 
     return single_instance;
   }
 
-  private PersonDaoImpl() {
+  private PersonDaoImpl(AccountDaoImpl accountTable) {
+    this.accountTable = accountTable;
     populate();
   }
 
@@ -37,7 +39,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     String newLN = personWithNewChanges.getLastName();
     String newTitle = personWithNewChanges.getTitle();
     int newPN = personWithNewChanges.getPhoneNumber();
-    String newUN = personWithNewChanges.getUsername();
+    String newUN = personWithNewChanges.getAccount().getUsername();
 
     try {
       String query =
@@ -56,8 +58,8 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
         People.get(index).setFirstName(newFN);
         People.get(index).setLastName(newLN);
         People.get(index).setTitle(newTitle);
-        People.get(index).setPhone(newPN);
-        People.get(index).setUsername(newUN);
+        People.get(index).setPhoneNumber(newPN);
+        People.get(index).setAccount(accountTable.retrieveRow(newUN));
         System.out.println("Updated successfully!");
       } else {
         System.out.println("Failed to update.");
@@ -100,7 +102,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     String LastName = a.getLastName();
     String Title = a.getTitle();
     int PhoneNumber = a.getPhoneNumber();
-    String username = a.getUsername();
+    String username = a.getAccount().getUsername();
     boolean result = false;
     Connection con = GenDao.connect();
     try {
@@ -149,7 +151,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
                 rs.getString("LastName"),
                 rs.getString("Title"),
                 rs.getInt("PhoneNumber"),
-                rs.getString("username"));
+                accountTable.retrieveRow(rs.getString("username")));
         People.add(a);
       }
       con.close();
@@ -162,10 +164,10 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
   }
 
   public Person getPersonWithUsername(String UN) {
-    Person b = new Person(null, null, null, 0, UN);
+    Person b = new Person(null, null, null, 0, accountTable.retrieveRow(UN));
     for (int i = 0; i < People.size(); i++) {
       Person a = People.get(i);
-      if (a.getUsername() == UN) {
+      if (a.getAccount().getUsername() == UN) {
         return a;
       }
     }

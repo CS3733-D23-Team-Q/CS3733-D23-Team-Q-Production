@@ -11,8 +11,8 @@ public class Qdb {
   private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
   private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
-  private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
+  private PersonDaoImpl personTable = PersonDaoImpl.getInstance(accountTable);
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(nodeTable);
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
