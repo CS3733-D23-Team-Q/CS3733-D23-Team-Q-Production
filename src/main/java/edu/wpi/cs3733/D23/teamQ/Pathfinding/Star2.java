@@ -10,15 +10,6 @@ public class Star2 {
   static Qdb qdb = Qdb.getInstance();
 
   public static void addEdges(Node n) {
-    /*
-    ArrayList<Node> nodes = qdb.retrieveAllNodes();
-    for (Node n : nodes) {
-      int nodeID = n.getNodeID();
-      List<Edge> edges = qdb.getEdges(nodeID);
-      n.setEdges(edges);
-    }
-    return nodes;
-     */
     int nodeID = n.getNodeID();
     List<Edge> edges = qdb.getEdges(nodeID);
     n.setEdges(edges);
@@ -50,7 +41,6 @@ public class Star2 {
       }
       Node current = openSet.get(winner);
       if (current.equals(target)) {
-        // path.add(current);
         path.add(current);
         while (current.getParent() != null) {
           path.add(current.getParent());
@@ -87,21 +77,12 @@ public class Star2 {
             }
           }
           if (newPath) {
-            // neighbor.setG(tempG);
             double h = heuristic(neighbor, target);
             neighbor.setF(tempG + h);
             neighbor.setParent(current);
           }
         }
       }
-      /*
-      Node temp = current;
-      path.add(temp);
-      while (temp.getParent() != null) {
-        path.add(temp.getParent());
-        temp = temp.getParent();
-      }
-       */
     }
     path.removeAll(path);
     return path;

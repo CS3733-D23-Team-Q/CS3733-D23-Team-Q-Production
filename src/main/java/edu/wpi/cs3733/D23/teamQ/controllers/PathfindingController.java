@@ -37,19 +37,10 @@ public class PathfindingController {
   public void initialize() throws IOException {
     ready4Second = false;
     previousPath = new ArrayList<>();
-    // ImageView view = new ImageView(getClass().getResource("/L1.png").toExternalForm());
-    // view.setFitWidth(1000);
-    // view.setFitHeight(680);
     addButtons();
     javafx.scene.Node node = parent;
     GesturePane pane = new GesturePane(node);
     root.getChildren().add(pane);
-
-    /*
-    Node start = qdb.retrieveNode(100);
-    Node target = qdb.retrieveNode(130);
-    drawLines(start, target);
-     */
 
     pane.setOnMouseClicked(
         e -> {
@@ -87,9 +78,6 @@ public class PathfindingController {
               + "-fx-background-insets: 0px;");
       node.setOnMouseEntered(
           e -> {
-            // double cursorx = e.getX() + 3;
-            // double cursory = e.getY() + 3;
-            // parent.getChildren().remove(text);
             String nodeid = "";
             text = new Text(x + 3, y + 3, nodeid + n.getNodeID());
             text.setStyle("-fx-font-size: 8px;");
@@ -97,7 +85,7 @@ public class PathfindingController {
           });
       node.setOnMouseExited(
           e -> {
-            text.setText("");
+            parent.getChildren().remove(text);
           });
       node.setOnMouseClicked(
           e -> {
@@ -147,34 +135,11 @@ public class PathfindingController {
     }
   }
 
-  /*
-  public void addLine(Node n, Node next) {
-    int x1 = n.getXCoord() / 5;
-    int y1 = n.getYCoord() / 5;
-    int x2 = next.getXCoord() / 5;
-    int y2 = next.getYCoord() / 5;
-    Line line = new Line(x1, y1, x2, y2);
-    line.setStyle("-fx-stroke: blue;");
-    line.setStrokeWidth(3);
-    // line.toFront();
-    parent.getChildren().add(line);
-    // root.getChildren().add(parent);
-  }
-   */
-
   public List<Line> drawLines(Node start, Node target) throws IOException {
     List<Node> path = Star2.aStar(start, target);
     List<Line> lines = new ArrayList<>();
     if (path.size() > 0) {
       lines = addLines(path);
-      /*
-      for (int i = path.size() - 1; i >= 1; i--) { // change to i++ when calling the exist one
-        Node n = path.get(i);
-        Node next = path.get(i - 1);
-        addLine(n, next);
-        // map.toBack();
-      }
-       */
     } else {
       alert.alertBox("No solution", "Failed to find a path");
     }
