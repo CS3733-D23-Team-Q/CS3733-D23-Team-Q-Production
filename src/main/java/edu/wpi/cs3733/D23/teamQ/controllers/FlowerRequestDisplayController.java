@@ -2,35 +2,44 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 
 public class FlowerRequestDisplayController {
-  @FXML Button resetButton;
-  @FXML Button backButton;
-  @FXML Button submitButton;
-
-  @FXML Label roomNumberField;
-
-  @FXML Label flowerChoiceField;
-
-  @FXML Label numberBouquetField;
-
-  @FXML Label flowerNoteField;
-
-  @FXML Label specialInstructionsField;
-
-  @FXML Label assigneeField;
-
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
-  @FXML MenuItem profileItem;
 
   @FXML
-  public void initialize() {
+  MFXButton cancelButton;
+
+  @FXML MFXButton backButton;
+
+  @FXML MFXButton updateButton;
+
+  @FXML
+  ChoiceBox assigneeField;
+
+  @FXML ChoiceBox roomNumberField;
+
+  @FXML
+  MFXDatePicker dateField;
+
+  @FXML
+  MFXTextField timeField;
+
+  @FXML ChoiceBox flowerTypeField;
+
+  @FXML MFXTextField bouquetChoiceField;
+
+  @FXML MFXTextField specialInstructionsField;
+
+  @FXML
+  public void initialize() {/*
     roomNumberField.setText(ListServiceRequestController.getFlowerRequest().getRoomNumber());
     flowerNoteField.setText(ListServiceRequestController.getFlowerRequest().getNote());
     flowerChoiceField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
@@ -39,33 +48,15 @@ public class FlowerRequestDisplayController {
     assigneeField.setText(ListServiceRequestController.getFlowerRequest().getAssignee());
     specialInstructionsField.setText(
         ListServiceRequestController.getFlowerRequest().getSpecialInstructions());
+        */
   }
 
   @FXML
-  public void resetButtonClicked() {
-    Navigation.navigate(Screen.LIST_REQUESTS);
-  }
+  public void cancelButtonClicked() {}
 
   @FXML
-  public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
+  public void backButtonClicked() {}
 
   @FXML
-  public void submitButtonClicked() {}
-
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
-  }
+  public void updateButtonClicked() {}
 }
