@@ -23,25 +23,28 @@ public class PathfindingController {
   Qdb qdb = Qdb.getInstance();
   // Stage stage = App.getPrimaryStage();
   Alert alert = new Alert();
+  boolean ready4Second;
+  Node start;
+  Node target;
   @FXML Pane root;
   @FXML Group parent;
   @FXML ImageView map;
 
   @FXML
   public void initialize() throws IOException {
+    ready4Second = false;
     // ImageView view = new ImageView(getClass().getResource("/L1.png").toExternalForm());
     // view.setFitWidth(1000);
     // view.setFitHeight(680);
-
     addButtons();
-
     javafx.scene.Node node = parent;
     GesturePane pane = new GesturePane(node);
     root.getChildren().add(pane);
-    // addButtons();
     Node start = qdb.retrieveNode(100);
     Node target = qdb.retrieveNode(130);
-    drawLines(start, target);
+
+    // drawLines(start, target);
+
     pane.setOnMouseClicked(
         e -> {
           if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
@@ -76,6 +79,21 @@ public class PathfindingController {
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
               + "-fx-background-insets: 0px;");
+      node.setOnAction(
+          e -> {
+            if (!ready4Second) {
+              ready4Second = true;
+              start = n;
+            } else {
+              target = n;
+              ready4Second = false;
+              try {
+                drawLines(start, target);
+              } catch (IOException ex) {
+                throw new RuntimeException(ex);
+              }
+            }
+          });
       parent.getChildren().add(node);
     }
   }
