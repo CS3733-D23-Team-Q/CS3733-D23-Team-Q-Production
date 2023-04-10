@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="900.0" prefWidth="848.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.views.SubmissionPage">
+<AnchorPane prefHeight="900.0" prefWidth="848.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SubmissionController">
    <children>
       <HBox alignment="CENTER" layoutY="50.0" prefHeight="100.0" prefWidth="848.0">
          <children>

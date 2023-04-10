@@ -17,47 +17,29 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListServiceRequestController {
-  @FXML Button homeButton;
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
   @FXML TableView<ServiceRequest> tableView;
   @FXML TableColumn<ServiceRequest, Integer> requestID;
   @FXML TableColumn<ServiceRequest, Integer> progress;
-  @FXML TableColumn<ServiceRequest, String> requester;
-  @FXML TableColumn<ServiceRequest, String> assignee;
   @FXML TableColumn<ServiceRequest, String> roomNumber;
-  @FXML TableColumn<ServiceRequest, String> specialInstructions;
-
-  @FXML Button selectButton;
-  @FXML MenuItem profileItem;
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
 
   Qdb qdb = Qdb.getInstance();
 
-  public ListServiceRequestController() throws SQLException {}
+  public ListServiceRequestController() {}
 
   @FXML
   public void initialize() {
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
-    requester.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("requester"));
-    assignee.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assignee"));
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("roomNumber"));
-    specialInstructions.setCellValueFactory(
-        new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
-
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
   }
 
-  @FXML
-  public void homeButtonClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
 
   @FXML
-  public void selectButtonClicked() {
+  public void rowSelected() {
     if (qdb.retrieveFlowerRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
         != null) {
@@ -75,15 +57,6 @@ public class ListServiceRequestController {
     }
   }
 
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
 
   public static ConferenceRequest getConferenceRequest() {
     return conferenceRequest;
@@ -91,10 +64,5 @@ public class ListServiceRequestController {
 
   public static FlowerRequest getFlowerRequest() {
     return flowerRequest;
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
   }
 }

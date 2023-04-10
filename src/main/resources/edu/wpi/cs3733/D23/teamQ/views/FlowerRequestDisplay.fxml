@@ -62,7 +62,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="foodField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <ChoiceBox fx:id="flowerTypeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox>
@@ -103,7 +103,7 @@
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                  <MFXButton fx:id="updateButton" onAction="#updateButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
