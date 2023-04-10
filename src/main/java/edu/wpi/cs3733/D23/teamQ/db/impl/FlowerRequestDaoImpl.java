@@ -56,7 +56,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"roomNum\" = ? "
+                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, progress = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -68,7 +68,8 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       st.setString(7, newRequest.getFlowerType());
       st.setInt(8, newRequest.getNumberOfBouquets());
       st.setInt(9, newRequest.getNode().getNodeID());
-      st.setInt(10, requestID);
+      st.setInt(10, newRequest.get;
+
 
       st.executeUpdate();
     } catch (SQLException e) {
