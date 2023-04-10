@@ -2,10 +2,15 @@
     -fx-background-color: #012d5a;
     -fx-font-family: Roboto;
     -fx-font-size: 20;
-    -fx-color: #f1f1f1;
+    -fx-text-fill: #f1f1f1;
 }
 
 .mfx-button:hover {
+    -fx-background-color: #0167b1;
+    -fx-text-fill: #f1f1f1;
+}
+
+.mfx-button:pressed {
     -fx-background-color: #f1f1f1;
-    -fx-color: #012d5a
+    -fx-text-fill: #012d5a;
 }
