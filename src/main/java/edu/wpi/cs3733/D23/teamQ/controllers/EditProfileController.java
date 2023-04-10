@@ -34,17 +34,20 @@ public class EditProfileController {
 
     Qdb qdb = Qdb.getInstance();
     this.ProfileEditPage_Title_TextField.setText(qdb.retrievePerson(username).getTitle());
-    this.ProfileEditPage_IDNumber_TextField.setText(String.valueOf(qdb.retrievePerson(username).getIDNum()));
+    this.ProfileEditPage_IDNumber_TextField.setText(
+        String.valueOf(qdb.retrievePerson(username).getIDNum()));
     this.ProfileEditPage_FirstName_TextField.setText(qdb.retrievePerson(username).getFirstName());
     this.ProfileEditPage_LastName_TextField.setText(qdb.retrievePerson(username).getLastName());
     this.ProfileEditPage_Email_TextField.setText(email);
-    this.ProfileEditPage_PhoneNumber_TextField.setText(String.valueOf(qdb.retrievePerson(username).getPhoneNumber()));
+    if (qdb.retrievePerson(username).getPhoneNumber() != 0) {
+      this.ProfileEditPage_PhoneNumber_TextField.setText(
+          String.valueOf(qdb.retrievePerson(username).getPhoneNumber()));
+    } else {
+      this.ProfileEditPage_PhoneNumber_TextField.setText(String.valueOf(" "));
+    }
     this.ProfileEditPage_Username_TextField.setText(username);
   }
 
   @FXML
-  void DonePressed(ActionEvent event)
-  {
-
-  }
+  void DonePressed(ActionEvent event) {}
 }
