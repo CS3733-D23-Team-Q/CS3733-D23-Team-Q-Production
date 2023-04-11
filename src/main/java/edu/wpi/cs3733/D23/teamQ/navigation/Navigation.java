@@ -24,8 +24,8 @@ public class Navigation {
       //                  .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
       //                  .toExternalForm());
       Node n = loader.load();
-      App.getRootAnchor().getChildren().clear();
-      App.getRootAnchor().getChildren().add(n);
+      App.getRootCenter().getChildren().clear();
+      App.getRootCenter().getChildren().add(n);
       AnchorPane.setTopAnchor(n, 0.0);
       AnchorPane.setLeftAnchor(n, 0.0);
       AnchorPane.setRightAnchor(n, 0.0);
@@ -53,8 +53,8 @@ public class Navigation {
       //                  .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
       //                  .toExternalForm());
       Node n = loader.load();
-      App.getRootAnchor().getChildren().clear();
-      App.getRootAnchor().getChildren().add(n);
+      App.getRootCenter().getChildren().clear();
+      App.getRootCenter().getChildren().add(n);
       AnchorPane.setTopAnchor(n, 0.0);
       AnchorPane.setLeftAnchor(n, 0.0);
       AnchorPane.setRightAnchor(n, 0.0);

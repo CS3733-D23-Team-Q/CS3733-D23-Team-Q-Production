@@ -19,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
 
   @Setter @Getter private static Stage primaryStage;
-  @Setter @Getter private static AnchorPane rootAnchor;
+  @Setter @Getter private static AnchorPane rootCenter;
+  @Setter @Getter private static AnchorPane rootRight;
   @Setter @Getter private static RootController rController;
   @Setter @Getter private static BorderPane rootBorder;
 
@@ -37,7 +38,7 @@ public class App extends Application {
     final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/Root.fxml"));
     rootBorder = loader.load();
     rController = loader.getController();
-    App.rootAnchor = rController.rootAnchor;
+    App.rootCenter = rController.rootCenter;
     primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));
     final Scene scene = new Scene(rootBorder);
     primaryStage.setScene(scene);
@@ -51,6 +52,7 @@ public class App extends Application {
     primaryStage.setFullScreen(true);
     rController.showMenu(false);
     rootBorder.setLeft(null);
+    rootBorder.setRight(null);
     Navigation.navigate(Screen.LOGIN);
     // primaryStage.centerOnScreen();
   }
