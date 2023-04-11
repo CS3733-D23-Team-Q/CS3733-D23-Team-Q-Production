@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class MenuRootController {
   @FXML MFXButton home;
@@ -15,6 +16,7 @@ public class MenuRootController {
   @FXML MFXButton settings;
   @FXML MFXButton signout;
   @FXML AnchorPane mainPane;
+  @FXML VBox menuPane;
   @FXML AnchorPane subPane;
   @FXML PeopleSubmenuController peopleSMController;
   @FXML NavigationSubmenuController navigationSMController;
@@ -25,6 +27,14 @@ public class MenuRootController {
 
   @FXML
   public void initialize() {}
+
+  @FXML
+  public void menuPaneExited() {}
+
+  @FXML
+  public void subPaneExited() {
+    closeAll();
+  }
 
   @FXML
   public void homeClicked() {
