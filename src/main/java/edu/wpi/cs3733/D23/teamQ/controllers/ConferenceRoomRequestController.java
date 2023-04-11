@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -33,8 +32,7 @@ public class ConferenceRoomRequestController {
   }
 
   @FXML
-  public void resetButtonClicked() {
-  }
+  public void resetButtonClicked() {}
 
   @FXML
   public void cancelButtonClicked() {

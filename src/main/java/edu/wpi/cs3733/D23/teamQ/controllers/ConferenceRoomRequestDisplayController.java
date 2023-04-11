@@ -11,10 +11,9 @@ import javafx.scene.control.ChoiceBox;
 
 public class ConferenceRoomRequestDisplayController {
 
-
   ObservableList<String> foodOptionsList =
-          FXCollections.observableArrayList(
-                  "Brunch spread", "Dinner spread", "Snack spread", "No food");
+      FXCollections.observableArrayList(
+          "Brunch spread", "Dinner spread", "Snack spread", "No food");
 
   @FXML MFXButton deleteButton;
 
@@ -33,7 +32,7 @@ public class ConferenceRoomRequestDisplayController {
     this.foodField.setItems(foodOptionsList);
 
     assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getRoomNumber());
+    // roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getRoomNumber());
     // dateField.setValue(ListServiceRequestController.getConferenceRequest().getDate);
     // timeField.setText(ListServiceRequestController.getConferenceRequest().getTime);
     foodField.setValue(ListServiceRequestController.getConferenceRequest().getFoodChoice());

@@ -12,7 +12,7 @@ import javafx.scene.control.ChoiceBox;
 public class FlowerRequestDisplayController {
 
   ObservableList<String> TypeOfFlowers =
-          FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
+      FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
 
   @FXML MFXButton deleteButton;
   @FXML MFXButton backButton;
@@ -31,7 +31,7 @@ public class FlowerRequestDisplayController {
     flowerTypeField.setItems(TypeOfFlowers);
 
     assigneeField.setValue(ListServiceRequestController.getFlowerRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getFlowerRequest().getRoomNumber());
+    // roomNumberField.setValue(ListServiceRequestController.getFlowerRequest().getRoomNumber());
     // dateField.setValue(ListServiceRequestController.getFlowerRequest().getDate);
     // timeField.setText(ListServiceRequestController.getFlowerRequest().getTime);
     flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
