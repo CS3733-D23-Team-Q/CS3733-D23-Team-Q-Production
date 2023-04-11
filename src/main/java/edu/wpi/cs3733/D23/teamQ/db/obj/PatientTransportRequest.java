@@ -4,6 +4,8 @@ import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 public class PatientTransportRequest extends ServiceRequest implements IServiceRequest {
@@ -16,8 +18,10 @@ public class PatientTransportRequest extends ServiceRequest implements IServiceR
       String assignee,
       Node node,
       String specialInstructions,
+      Date date,
+      String time,
       String item) {
-    super(requestID, requester, progress, assignee, node, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
     this.item = item;
   }
 
@@ -27,8 +31,10 @@ public class PatientTransportRequest extends ServiceRequest implements IServiceR
       String assignee,
       Node node,
       String specialInstructions,
+      Date date,
+      String time,
       String item) {
-    super(0, requester, progress, assignee, node, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions, date, time);
     this.item = item;
   }
 
