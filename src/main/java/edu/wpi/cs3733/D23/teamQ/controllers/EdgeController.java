@@ -6,7 +6,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -94,6 +93,7 @@ public class EdgeController {
     edge.setItems(edges());
   }
 
+  /*
   @FXML
   void exitClicked(ActionEvent event) {
     Platform.exit();
@@ -121,6 +121,8 @@ public class EdgeController {
   void nodeClicked(ActionEvent event) {
     Navigation.navigate(Screen.Node_Table);
   }
+
+   */
 
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {

@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,15 +13,15 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
 
   public ConferenceRequest(
       int requestID,
-      String requester,
-      int progress,
-      String assignee,
       Node node,
+      String requester,
+      String assignee,
+      int progress,
       String specialInstructions,
-      String dateTime,
+      Date date,
+      String time,
       String foodChoice) {
-    super(requestID, requester, progress, assignee, node, specialInstructions);
-    this.dateTime = dateTime;
+    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
     this.foodChoice = foodChoice;
   }
 
@@ -30,10 +31,10 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String assignee,
       Node node,
       String specialInstructions,
-      String dateTime,
+      Date date,
+      String time,
       String foodChoice) {
-    super(0, requester, progress, assignee, node, specialInstructions);
-    this.dateTime = dateTime;
+    super(0, requester, progress, assignee, node, specialInstructions, date, time);
     this.foodChoice = foodChoice;
   }
 
