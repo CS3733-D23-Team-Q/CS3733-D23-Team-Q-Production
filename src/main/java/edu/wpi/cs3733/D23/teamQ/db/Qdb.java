@@ -231,7 +231,7 @@ public class Qdb {
     return (ArrayList<Person>) personTable.getAllRows();
   }
 
-  public ObservableList<String> getAllNames(){
+  public ObservableList<String> getAllNames() {
     return personTable.getAllNames();
   }
 

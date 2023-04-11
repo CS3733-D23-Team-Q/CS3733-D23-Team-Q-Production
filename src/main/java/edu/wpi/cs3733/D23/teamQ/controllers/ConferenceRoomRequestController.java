@@ -9,13 +9,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 
 public class ConferenceRoomRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML
-  ComboBox assigneeField;
+  @FXML ComboBox assigneeField;
   @FXML ComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
@@ -30,6 +28,8 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void initialize() {
+    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setValue(qdb.getAllNames());
     this.roomNumberField.setValue("Select a Conference Room");
     String[] conf = {"CONF"};
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
