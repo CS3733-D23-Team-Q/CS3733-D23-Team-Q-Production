@@ -71,9 +71,6 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       st.setString(10, newRequest.getFlowerType());
       st.setInt(111, newRequest.getNumberOfBouquets());
 
-
-
-
       st.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();

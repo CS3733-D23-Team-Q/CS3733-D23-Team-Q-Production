@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -43,20 +45,18 @@ public class ConferenceRoomRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
 
-
-//    ConferenceRequest newCCR =
-//        new ConferenceRequest(
-//            0,
-//            "temp user",
-//            0,
-//            assigneeField.getText(),
-//            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-//            specialInstructionsField.getText(),
-//            // add for date
-//            // add for time
-//            (String) foodField.getValue());
-//    qdb.addConferenceRequest(newCCR);
-
+    //    ConferenceRequest newCCR =
+    //        new ConferenceRequest(
+    //            0,
+    //            "temp user",
+    //            0,
+    //            assigneeField.getText(),
+    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+    //            specialInstructionsField.getText(),
+    //            // add for date
+    //            // add for time
+    //            (String) foodField.getValue());
+    //    qdb.addConferenceRequest(newCCR);
 
     Navigation.navigate(Screen.HOME);
   }
