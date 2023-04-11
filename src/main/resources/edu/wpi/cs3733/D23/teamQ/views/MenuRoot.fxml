@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuRootController">
    <children>
-      <VBox fx:id="menuPane" prefHeight="900.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="menuPane" prefHeight="800.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="66.0" prefWidth="240.0" spacing="18.0" VBox.vgrow="ALWAYS">
                <children>
@@ -105,7 +105,7 @@
             <Insets bottom="12.0" top="12.0" />
          </padding>
       </VBox>
-      <AnchorPane fx:id="subPane" layoutX="240.0" prefHeight="900.0" prefWidth="0.0" style="-fx-background-color: #f1f1f1;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-192.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="subPane" layoutX="240.0" prefHeight="800.0" prefWidth="0.0" style="-fx-background-color: #f1f1f1;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-192.0" AnchorPane.topAnchor="0.0">
          <children>
             <fx:include fx:id="peopleSM" layoutY="174.0" source="PeopleSubmenu.fxml" visible="false" />
             <fx:include fx:id="navigationSM" layoutY="243.0" source="NavigationSubmenu.fxml" visible="false" />

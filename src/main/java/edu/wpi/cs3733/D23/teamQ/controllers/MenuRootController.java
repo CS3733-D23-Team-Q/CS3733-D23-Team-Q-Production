@@ -72,32 +72,34 @@ public class MenuRootController {
 
   @FXML
   public void peopleExited() {
-
+    System.out.println("people " + peopleHovered());
   }
 
   @FXML
   public void navExited() {
-
+    System.out.println("nav " + navHovered());
   }
 
   @FXML
   public void srExited() {
-
+    System.out.println("sr " + srHovered());
   }
 
   @FXML
   public void statExited() {
-
+    System.out.println("stat " + statHovered());
   }
 
   @FXML
   public void setExited() {
-
+    System.out.println("set " + setHovered());
   }
 
   @FXML
   public void soExited() {
-
+    if (!soHovered()) {
+      showSOSM(false);
+    } else showSOSM(false);
   }
 
   public void setVisible(boolean v) {
@@ -162,6 +164,42 @@ public class MenuRootController {
     statisticsSMController.setVisible(false);
     settingsSMController.setVisible(false);
     signoutSMController.setVisible(v);
+  }
+
+  @FXML
+  public boolean peopleHovered() {
+    return people.isHover() || peopleSMController.peopleSM.isHover() || mainPane.isHover();
+  }
+
+  @FXML
+  public boolean navHovered() {
+    return navigation.isHover()
+        || navigationSMController.navigationSM.isHover()
+        || mainPane.isHover();
+  }
+
+  @FXML
+  public boolean srHovered() {
+    return servicerequest.isHover()
+        || servicerequestSMController.servicerequestSM.isHover()
+        || mainPane.isHover();
+  }
+
+  @FXML
+  public boolean statHovered() {
+    return statistics.isHover()
+        || statisticsSMController.statisticsSM.isHover()
+        || mainPane.isHover();
+  }
+
+  @FXML
+  public boolean setHovered() {
+    return settings.isHover() || settingsSMController.settingsSM.isHover() || mainPane.isHover();
+  }
+
+  @FXML
+  public boolean soHovered() {
+    return signout.isHover() || signoutSMController.signoutSM.isHover() || mainPane.isHover();
   }
 }
 
