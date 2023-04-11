@@ -1,78 +1,53 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ChoiceBox;
 
 public class MealDeliveryRequestController {
-  @FXML private MFXTextField assigneeField;
-  @FXML private MFXTextField roomNumberField;
-  @FXML private MFXTextField drinkField;
-  @FXML private MFXTextField entreeField;
-  @FXML private MFXTextField sideField;
-  @FXML private MFXTextField specialInstructionsField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
+  @FXML MFXTextField specialInstructionsField;
+
+  @FXML ChoiceBox drinkField;
+  @FXML ChoiceBox entreeField;
+  @FXML ChoiceBox sideField;
 
   @FXML Button resetButton;
-  @FXML Button backButton;
+  @FXML Button cancelButton;
   @FXML Button submitButton;
-
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
-  @FXML MenuItem profileItem;
 
   @FXML
   public void initialize() {}
 
   @FXML
-  public void resetButtonClicked() {
-    roomNumberField.clear();
-    drinkField.clear();
-    entreeField.clear();
-    sideField.clear();
-    specialInstructionsField.clear();
-  }
+  public void resetButtonClicked() {}
 
   @FXML
-  public void backButtonClicked() {
-    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
-  }
+  public void cancelButtonClicked() {}
 
   @FXML
   public void submitButtonClicked() {
+    /*
     Qdb qdb = Qdb.getInstance();
     MealRequest newMR =
-        new MealRequest(
-            0,
-            "temp user",
-            0,
-            assigneeField.getText(),
-            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-            specialInstructionsField.getText(),
-            drinkField.getText(),
-            entreeField.getText(),
-            sideField.getText());
+            new MealRequest(
+                    0,
+                    "temp user",
+                    0,
+                    assigneeField.getText(),
+                    roomNumberField.getText(),
+                    specialInstructionsField.getText(),
+                    drinkField.getText(),
+                    entreeField.getText(),
+                    sideField.getText());
     // qdb.addMealRequest(newMR);
     Navigation.navigate(Screen.HOME);
-  }
 
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
+     */
   }
 }

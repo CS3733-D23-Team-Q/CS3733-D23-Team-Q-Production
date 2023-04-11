@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Qdb {
-  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
-  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+
+  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+
+  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
+  public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+  public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private PersonDaoImpl personTable = PersonDaoImpl.getInstance(accountTable);
+  private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(nodeTable);
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
@@ -33,8 +36,6 @@ public class Qdb {
           patientTransportRequestTable);
 
   private static Qdb single_instance = null;
-
-  private Qdb() {}
 
   public static synchronized Qdb getInstance() {
     if (single_instance == null) single_instance = new Qdb();
