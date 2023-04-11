@@ -99,7 +99,6 @@ public class MenuRootController {
 
   @FXML
   public void soEntered() {
-    Navigation.logout();
     peopleSMController.setVisible(false);
     navigationSMController.setVisible(false);
     servicerequestSMController.setVisible(false);
