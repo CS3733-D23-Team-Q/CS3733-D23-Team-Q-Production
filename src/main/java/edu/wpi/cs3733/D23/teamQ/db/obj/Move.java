@@ -18,6 +18,7 @@ public class Move {
   }
 
   public Move(int moveID, Node node, String longName, String date) {
+    this.moveID = moveID;
     this.node = node;
     this.longName = longName;
     this.date = date;

@@ -51,11 +51,33 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, PatientTransportRequest newRequest) {
-    int index = this.getIndex(requestID);
-    patientTransportRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"patientTransportRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setString(7, newRequest.getItem());
+      st.setInt(8, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    int index = this.getIndex(requestID);
+    patientTransportRequests.get(index).setRequester(newRequest.getRequester());
+    patientTransportRequests.get(index).setProgress(newRequest.getProgress());
+    patientTransportRequests.get(index).setAssignee(newRequest.getAssignee());
+    patientTransportRequests.get(index).setNode(newRequest.getNode());
+    patientTransportRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    patientTransportRequests.get(index).setItem(newRequest.getItem());
 
     return true;
   }
