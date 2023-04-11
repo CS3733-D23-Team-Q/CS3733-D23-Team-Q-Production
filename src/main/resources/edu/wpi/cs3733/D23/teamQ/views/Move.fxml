@@ -105,8 +105,8 @@
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" text="ImportCSV" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" stylesheets="@styles/MapEditor.css" text="ImportCSV" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="25.0" prefWidth="81.0" stylesheets="@styles/MapEditor.css" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
     </children>

@@ -130,9 +130,9 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onMouseClicked="#AddClicked" prefHeight="23.0" prefWidth="55.0" stylesheets="@styles/Home.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" prefHeight="23.0" prefWidth="58.0" stylesheets="@styles/Home.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onMouseClicked="#SetClicked" prefHeight="23.0" prefWidth="56.0" stylesheets="@styles/Home.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#AddClicked" prefHeight="23.0" prefWidth="55.0" stylesheets="@styles/MapEditor.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" prefHeight="23.0" prefWidth="58.0" stylesheets="@styles/MapEditor.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onMouseClicked="#SetClicked" prefHeight="23.0" prefWidth="56.0" stylesheets="@styles/MapEditor.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label prefHeight="23.0" prefWidth="150.0" text="Please input the nodeID" />
@@ -147,10 +147,11 @@
                         <Label fx:id="InformationAlert" prefHeight="25.0" prefWidth="443.0" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" prefHeight="23.0" prefWidth="86.0" text="Import CSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="88.0" text="Export CSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" prefHeight="23.0" prefWidth="86.0" stylesheets="@styles/MapEditor.css" text="Import CSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="88.0" stylesheets="@styles/MapEditor.css" text="Export CSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Label prefHeight="14.0" prefWidth="172.0" text="Please input the path " GridPane.columnIndex="2" />
                   <TextField fx:id="ImportPath" prefHeight="23.0" prefWidth="117.0" promptText="Path" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

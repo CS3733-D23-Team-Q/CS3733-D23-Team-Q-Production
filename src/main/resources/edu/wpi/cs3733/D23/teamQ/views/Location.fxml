@@ -33,8 +33,8 @@
     <rowConstraints>
         <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="43.0" vgrow="NEVER" />
         <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="419.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="109.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="564.3333358764648" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
     </rowConstraints>
@@ -116,9 +116,9 @@
                   <TextField fx:id="NodeIDEdit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="101.0" promptText="NodeID" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onMouseClicked="#deleteClicked" prefHeight="23.0" prefWidth="64.0" stylesheets="@styles/Home.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="23.0" prefWidth="63.0" stylesheets="@styles/Home.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onMouseClicked="#setClicked" prefHeight="23.0" prefWidth="64.0" stylesheets="@styles/Home.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onMouseClicked="#deleteClicked" prefHeight="23.0" prefWidth="64.0" stylesheets="@styles/MapEditor.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="23.0" prefWidth="63.0" stylesheets="@styles/MapEditor.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#setClicked" prefHeight="23.0" prefWidth="64.0" stylesheets="@styles/MapEditor.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox prefHeight="32.0" prefWidth="667.0">
                <children>
                   <Label prefHeight="48.0" prefWidth="79.0" text="Input NodeID" />
@@ -126,10 +126,10 @@
                   <Label fx:id="nodeIDAlert" prefHeight="84.0" prefWidth="324.0" translateX="50.0" />
                </children>
             </HBox>
-            <Label text="Please in put the path" GridPane.columnIndex="2" />
+            <Label text="Please input the path" GridPane.columnIndex="2" />
             <TextField fx:id="ImportPath" promptText="Path" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" text="ImportCSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="78.0" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" stylesheets="@styles/MapEditor.css" text="ImportCSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="78.0" stylesheets="@styles/MapEditor.css" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
     </children>
