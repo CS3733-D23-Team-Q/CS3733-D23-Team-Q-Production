@@ -13,7 +13,7 @@ public class ServiceRequestSubmenuController {
 
   @FXML
   public void createClicked() {
-    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
+    Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST);
   }
 
   @FXML

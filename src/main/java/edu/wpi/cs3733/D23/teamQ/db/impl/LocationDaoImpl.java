@@ -2,9 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class LocationDaoImpl implements GenDao<Location, Integer> {
   private List<Location> locations = new ArrayList<Location>();
@@ -176,9 +175,9 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     }
   }
 
-  public ObservableList<String> getAllLongNames(){
+  public ObservableList<String> getAllLongNames() {
     ObservableList<String> longNames = FXCollections.observableArrayList();
-    for (Location l : locations){
+    for (Location l : locations) {
       longNames.add(l.getLongName());
     }
     return longNames;
