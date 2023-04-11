@@ -51,11 +51,34 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, OfficeSuppliesRequest newRequest) {
-    int index = this.getIndex(requestID);
-    officeSuppliesRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"officeSupplies\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, item = ?, quantity = ?, \"specialInstructions\" = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getItem());
+      st.setInt(7, newRequest.getQuantity());
+      st.setString(8, newRequest.getSpecialInstructions());
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    int index = this.getIndex(requestID);
+    officeSuppliesRequests.get(index).setRequester(newRequest.getRequester());
+    officeSuppliesRequests.get(index).setProgress(newRequest.getProgress());
+    officeSuppliesRequests.get(index).setAssignee(newRequest.getAssignee());
+    officeSuppliesRequests.get(index).setNode(newRequest.getNode());
+    officeSuppliesRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    officeSuppliesRequests.get(index).setItem(newRequest.getItem());
+    officeSuppliesRequests.get(index).setQuantity(newRequest.getQuantity());
 
     return true;
   }
@@ -93,14 +116,16 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"quantity\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getItem());
-      stmt.setInt(6, request.getQuantity());
-      stmt.setInt(7, request.getNode().getNodeID());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setDate(6, request.getDate());
+      stmt.setString(7, request.getTime());
+      stmt.setString(8, request.getItem());
+      stmt.setInt(9, request.getQuantity());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -115,7 +140,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try {
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
-      ResultSet rst = stm.executeQuery("Select * From \"officeSupplies\"");
+      ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");
       while (rst.next()) {
         officeSuppliesRequests.add(
             new OfficeSuppliesRequest(
@@ -125,6 +150,8 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
                 rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
+                rst.getDate("date"),
+                rst.getString("time"),
                 rst.getString("item"),
                 rst.getInt("quantity")));
       }

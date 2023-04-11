@@ -51,11 +51,33 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, PatientTransportRequest newRequest) {
-    int index = this.getIndex(requestID);
-    patientTransportRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"patientTransportRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setString(7, newRequest.getItem());
+      st.setInt(8, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    int index = this.getIndex(requestID);
+    patientTransportRequests.get(index).setRequester(newRequest.getRequester());
+    patientTransportRequests.get(index).setProgress(newRequest.getProgress());
+    patientTransportRequests.get(index).setAssignee(newRequest.getAssignee());
+    patientTransportRequests.get(index).setNode(newRequest.getNode());
+    patientTransportRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    patientTransportRequests.get(index).setItem(newRequest.getItem());
 
     return true;
   }
@@ -93,13 +115,15 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"transport\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getItem());
-      stmt.setInt(6, request.getNode().getNodeID());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setDate(6, request.getDate());
+      stmt.setString(7, request.getTime());
+      stmt.setString(8, request.getItem());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -124,6 +148,8 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
                 rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
+                rst.getDate("date"),
+                rst.getString("time"),
                 rst.getString("item")));
       }
       conn.close();
