@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ;
 
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +44,7 @@ public class App extends Application {
                 .toExternalForm());
     primaryStage.show();
     primaryStage.setFullScreen(true);
-    Navigation.navigate(Screen.LOGIN);
+    Navigation.logout();
     // primaryStage.centerOnScreen();
   }
 

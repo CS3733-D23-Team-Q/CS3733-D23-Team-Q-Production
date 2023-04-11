@@ -59,7 +59,7 @@ public class OfficeSuppliesRequestController {
             "temp user",
             0,
             assigneeField.getText(),
-            roomNumberField.getText(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
             (String) itemField.getValue(),
             Integer.parseInt((String) quantityField.getValue()));

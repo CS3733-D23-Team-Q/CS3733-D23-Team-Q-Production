@@ -38,7 +38,6 @@ public class FlowerRequestController {
 
   @FXML
   public void resetButtonClicked() {
-
   }
 
   @FXML

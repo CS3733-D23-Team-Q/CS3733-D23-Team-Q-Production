@@ -9,17 +9,19 @@ import java.util.List;
 public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRequest, Integer> {
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
+  private NodeDaoImpl nodeTable;
   private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
-  public static synchronized PatientTransportRequestDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl();
+  public static synchronized PatientTransportRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private PatientTransportRequestDaoImpl() {
+  private PatientTransportRequestDaoImpl(NodeDaoImpl nodeTable) {
     populate();
+    this.nodeTable = nodeTable;
     if (patientTransportRequests.size() != 0) {
       nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
     }
@@ -49,11 +51,33 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
    * @return true if successful
    */
   public boolean updateRow(Integer requestID, PatientTransportRequest newRequest) {
-    int index = this.getIndex(requestID);
-    patientTransportRequests.set(index, newRequest);
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"patientTransportRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, item = ? "
+                    + "WHERE \"requestID\" = ?")) {
 
-    deleteRow(requestID);
-    addRow(newRequest);
+      st.setInt(1, requestID);
+      st.setString(2, newRequest.getRequester());
+      st.setInt(3, newRequest.getProgress().ordinal());
+      st.setString(4, newRequest.getAssignee());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setString(7, newRequest.getItem());
+      st.setInt(8, requestID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    int index = this.getIndex(requestID);
+    patientTransportRequests.get(index).setRequester(newRequest.getRequester());
+    patientTransportRequests.get(index).setProgress(newRequest.getProgress());
+    patientTransportRequests.get(index).setAssignee(newRequest.getAssignee());
+    patientTransportRequests.get(index).setNode(newRequest.getNode());
+    patientTransportRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    patientTransportRequests.get(index).setItem(newRequest.getItem());
 
     return true;
   }
@@ -91,13 +115,13 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"roomNum\") VALUES (?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"specialInstructions\", \"transport\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
       stmt.setString(4, request.getSpecialInstructions());
       stmt.setString(5, request.getItem());
-      stmt.setString(6, request.getRoomNumber());
+      stmt.setInt(6, request.getNode().getNodeID());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -120,7 +144,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
                 rst.getString("requester"),
                 rst.getInt("progress"),
                 rst.getString("assignee"),
-                rst.getString("roomNum"),
+                nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getString("item")));
       }

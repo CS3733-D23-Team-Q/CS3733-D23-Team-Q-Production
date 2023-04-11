@@ -16,14 +16,16 @@ import java.util.Scanner;
 
 public class NodeDaoImpl implements GenDao<Node, Integer> {
   private List<Node> nodes = new ArrayList<>();
+  private LocationDaoImpl locationTable;
   private static NodeDaoImpl single_instance = null;
 
-  private NodeDaoImpl() {
+  private NodeDaoImpl(LocationDaoImpl locationTable) {
+    this.locationTable = locationTable;
     populate();
   }
 
-  public static synchronized NodeDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new NodeDaoImpl();
+  public static synchronized NodeDaoImpl getInstance(LocationDaoImpl locationTable) {
+    if (single_instance == null) single_instance = new NodeDaoImpl(locationTable);
 
     return single_instance;
   }
@@ -88,7 +90,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"flowerRequest\"(\"nodeID\", xcoord, ycoord, floor, building) VALUES (?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"node\"(\"nodeID\", xcoord, ycoord, floor, building) VALUES (?, ?, ?, ?, ?)")) {
       stmt.setInt(1, n.getNodeID());
       stmt.setInt(2, n.getXCoord());
       stmt.setInt(3, n.getYCoord());
@@ -108,13 +110,15 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"node\"");
       ResultSet rs = pst.executeQuery();
       while (rs.next()) {
+        int nodeID = rs.getInt("nodeID");
         nodes.add(
             new Node(
-                rs.getInt("nodeID"),
+                nodeID,
                 rs.getInt("xcoord"),
                 rs.getInt("ycoord"),
                 rs.getString("floor"),
-                rs.getString("building")));
+                rs.getString("building"),
+                locationTable.retrieveRow(nodeID)));
       }
       conn.close();
       pst.close();
@@ -189,6 +193,8 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch (Exception e) {
+      return false;
     }
   }
 
@@ -199,14 +205,22 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       while (myReader.hasNextLine()) {
         String row = myReader.nextLine();
         String[] vars = row.split(",");
-        // Node m = new Node(Integer.parseInt(vars[0]), Integer.parseInt(vars[1]),
-        // Integer.parseInt(vars[2]), vars[3], vars[4], vars[5], vars[6]);
-        // addRow(m);
+        Node m =
+            new Node(
+                Integer.parseInt(vars[0]),
+                Integer.parseInt(vars[1]),
+                Integer.parseInt(vars[2]),
+                vars[3],
+                vars[4],
+                locationTable.retrieveRow(Integer.parseInt(vars[0])));
+        addRow(m);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 }

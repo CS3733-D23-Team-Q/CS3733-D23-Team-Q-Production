@@ -168,11 +168,12 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch (Exception e) {
+      return false;
     }
   }
 
   public boolean importCSV(String filename) {
-    NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
     try {
       File f = new File(filename);
       Scanner myReader = new Scanner(f);
@@ -183,9 +184,11 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
         addRow(l);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 }

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PersonDaoImpl implements GenDao<Person, Integer> {
 
@@ -41,13 +42,15 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
 
     try {
       String query =
-          "UPDATE person SET firstName = ?, lastName = ?, title = ?, phoneNumber= ?, username=? WHERE IDNum = ?";
+          "UPDATE person SET \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\"= ?, username=? WHERE \"IDNum\" = ?";
       PreparedStatement pst = con.prepareStatement(query);
+
       pst.setString(1, newFN);
       pst.setString(2, newLN);
       pst.setString(3, newTitle);
       pst.setInt(4, newPN);
       pst.setString(5, newUN);
+      pst.setInt(6, IDNum);
 
       int rs = pst.executeUpdate();
       if (rs == 1) {
@@ -56,9 +59,10 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
         People.get(index).setFirstName(newFN);
         People.get(index).setLastName(newLN);
         People.get(index).setTitle(newTitle);
-        People.get(index).setPhone(newPN);
+        People.get(index).setPhoneNumber(newPN);
         People.get(index).setUsername(newUN);
         System.out.println("Updated successfully!");
+
       } else {
         System.out.println("Failed to update.");
       }
@@ -105,7 +109,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     Connection con = GenDao.connect();
     try {
       String query =
-          "INSERT INTO person (IDNum, FirstName, LastName, Title, PhoneNumber, username) VALUES(?,?,?,?,?,?)";
+          "INSERT INTO person (\"IDNum\", \"firstName\", \"lastName\", title, \"phoneNumber\", username) VALUES(?,?,?,?,?,?)";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setInt(1, IDNum);
       pst.setString(2, FirstName);
@@ -126,6 +130,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+
     return result;
   }
 
@@ -144,15 +149,16 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
         Person a;
         a =
             new Person(
-                rs.getInt("IDNumber"),
-                rs.getString("FirstName"),
-                rs.getString("LastName"),
-                rs.getString("Title"),
-                rs.getInt("PhoneNumber"),
+                rs.getInt("IDNum"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("title"),
+                rs.getInt("phoneNumber"),
                 rs.getString("username"));
         People.add(a);
       }
       con.close();
+
       st.close();
       return true;
     } catch (Exception e) {
@@ -165,10 +171,11 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     Person b = new Person(null, null, null, 0, UN);
     for (int i = 0; i < People.size(); i++) {
       Person a = People.get(i);
-      if (a.getUsername() == UN) {
+      if (Objects.equals(a.getUsername(), UN)) {
         return a;
       }
     }
+    addRow(b);
     return b;
   }
 
