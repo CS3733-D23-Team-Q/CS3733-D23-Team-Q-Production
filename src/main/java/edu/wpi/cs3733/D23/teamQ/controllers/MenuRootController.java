@@ -70,6 +70,36 @@ public class MenuRootController {
     showSOSM(true);
   }
 
+  @FXML
+  public void peopleExited() {
+
+  }
+
+  @FXML
+  public void navExited() {
+
+  }
+
+  @FXML
+  public void srExited() {
+
+  }
+
+  @FXML
+  public void statExited() {
+
+  }
+
+  @FXML
+  public void setExited() {
+
+  }
+
+  @FXML
+  public void soExited() {
+
+  }
+
   public void setVisible(boolean v) {
     mainPane.setVisible(v);
   }
