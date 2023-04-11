@@ -103,7 +103,7 @@
             <Label text="Please input the path" GridPane.columnIndex="2" />
             <TextField fx:id="ImportPath" promptText="Path" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" stylesheets="@styles/MapEditor.css" text="ImportCSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="78.0" stylesheets="@styles/MapEditor.css" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="25.0" prefWidth="83.0" stylesheets="@styles/MapEditor.css" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
     </children>
