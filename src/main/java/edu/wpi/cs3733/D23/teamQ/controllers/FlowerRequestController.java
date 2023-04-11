@@ -74,6 +74,8 @@ public class FlowerRequestController {
             assigneeField.getText(),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
+            //for date textfield or button,
+                // for time textfield or button,
             noteField.getText(),
             (String) flowerChoiceField.getValue(),
             Integer.parseInt((String) bouquetChoiceField.getValue()));

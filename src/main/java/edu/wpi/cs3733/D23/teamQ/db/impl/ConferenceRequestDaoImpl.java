@@ -53,18 +53,18 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"conferenceRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, time = ?, \"foodChoice\" = ?, \"roomNum\" = ? "
+                "UPDATE \"conferenceRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, date = ?, time = ?, \"foodChoice\" = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
       st.setString(2, newRequest.getRequester());
       st.setInt(3, newRequest.getProgress().ordinal());
       st.setString(4, newRequest.getAssignee());
-      st.setString(5, newRequest.getSpecialInstructions());
-      st.setString(6, newRequest.getDateTime());
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setDate(7, newRequest.getDate());
+      st.setString(8, newRequest.getTime());
       st.setString(7, newRequest.getFoodChoice());
-      st.setInt(8, newRequest.getNode().getNodeID());
-      st.setInt(9, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {
@@ -74,10 +74,11 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     conferenceRequests.get(index).setRequester(newRequest.getRequester());
     conferenceRequests.get(index).setProgress(newRequest.getProgress());
     conferenceRequests.get(index).setAssignee(newRequest.getAssignee());
-    conferenceRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
-    conferenceRequests.get(index).setDateTime(newRequest.getDateTime());
-    conferenceRequests.get(index).setFoodChoice(newRequest.getFoodChoice());
     conferenceRequests.get(index).setNode(newRequest.getNode());
+    conferenceRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    conferenceRequests.get(index).setDate(newRequest.getDate());
+    conferenceRequests.get(index).setTime(newRequest.getTime());
+    conferenceRequests.get(index).setFoodChoice(newRequest.getFoodChoice());
 
     return true;
   }
