@@ -175,10 +175,12 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     }
   }
 
-  public ObservableList<String> getAllLongNames() {
+  public ObservableList<String> getAllLongNames(String nodeType) {
     ObservableList<String> longNames = FXCollections.observableArrayList();
     for (Location l : locations) {
-      longNames.add(l.getLongName());
+      if (l.getNodeType().equals(nodeType)) {
+        longNames.add(l.getLongName());
+      }
     }
     return longNames;
   }
