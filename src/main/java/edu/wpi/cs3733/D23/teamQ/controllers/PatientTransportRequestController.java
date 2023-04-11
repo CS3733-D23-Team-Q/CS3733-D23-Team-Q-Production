@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.PatientTransportRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -55,20 +54,17 @@ public class PatientTransportRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
 
-
-//    PatientTransportRequest newPTR =
-//        new PatientTransportRequest(
-//            0,
-//            "temp user",
-//            0,
-//            assigneeField.getText(),
-//            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-//            specialInstructionsField.getText(),
-//            // date
-//                // time
-//            (String) itemField.getValue());
-
-
+    //    PatientTransportRequest newPTR =
+    //        new PatientTransportRequest(
+    //            0,
+    //            "temp user",
+    //            0,
+    //            assigneeField.getText(),
+    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+    //            specialInstructionsField.getText(),
+    //            // date
+    //                // time
+    //            (String) itemField.getValue());
 
     // qdb.addConferenceRequest(newPTR);
     Navigation.navigate(Screen.HOME);

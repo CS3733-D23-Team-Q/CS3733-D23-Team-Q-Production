@@ -14,7 +14,7 @@
             <Image url="@../../../../../../01_thefirstfloor.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" prefHeight="900.0" prefWidth="400.0">
+      <VBox alignment="CENTER" prefHeight="900.0" prefWidth="400.0" style="-fx-background-color: #f1f1f1;">
          <children>
             <Label text="Notifications" textFill="#142a53">
                <font>

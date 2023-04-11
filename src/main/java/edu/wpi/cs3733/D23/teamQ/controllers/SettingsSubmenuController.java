@@ -8,17 +8,11 @@ import javafx.scene.layout.VBox;
 
 public class SettingsSubmenuController {
   @FXML VBox settingsSM;
-  @FXML MFXButton aSettings;
-  @FXML MFXButton dSettings;
+  @FXML MFXButton settings;
   @FXML MFXButton help;
 
   @FXML
-  public void aSettingsClicked() {
-    Navigation.navigate(Screen.HELP);
-  }
-
-  @FXML
-  public void dSettingsClicked() {
+  public void settingsClicked() {
     Navigation.navigate(Screen.HELP);
   }
 
