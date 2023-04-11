@@ -30,14 +30,22 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void initialize() {
+    this.roomNumberField.setValue("Select a Conference Room");
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.foodField.setValue("Select Food Option");
     this.foodField.setItems(foodOptionsList);
-    this.roomNumberField.setValue("Select a Conference Room");
-    this.roomNumberField.setItems(qdb.getAllLongNames("CONF"));
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+    assigneeField.setValue("Select an Assignee");
+    roomNumberField.setValue("Select a Location");
+    dateField.clear();
+    timeField.clear();
+    foodField.setValue("Select Food Option");
+    specialInstructionsField.clear();
+  }
 
   @FXML
   public void cancelButtonClicked() {
