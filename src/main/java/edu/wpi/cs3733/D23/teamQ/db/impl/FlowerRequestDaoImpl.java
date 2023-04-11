@@ -56,19 +56,23 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"specialInstructions\" = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?, \"roomNum\" = ? "
+                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, date = ?, time = ?, note = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?"
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
       st.setString(2, newRequest.getRequester());
       st.setInt(3, newRequest.getProgress().ordinal());
       st.setString(4, newRequest.getAssignee());
-      st.setString(5, newRequest.getSpecialInstructions());
-      st.setString(6, newRequest.getNote());
-      st.setString(7, newRequest.getFlowerType());
-      st.setInt(8, newRequest.getNumberOfBouquets());
-      st.setInt(9, newRequest.getNode().getNodeID());
-      st.setInt(10, requestID);
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setDate(7, newRequest.getDate());
+      st.setString(8, newRequest.getTime());
+      st.setString(9, newRequest.getNote());
+      st.setString(10, newRequest.getFlowerType());
+      st.setInt(111, newRequest.getNumberOfBouquets());
+
+
+
 
       st.executeUpdate();
     } catch (SQLException e) {
@@ -79,11 +83,13 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     flowerRequests.get(index).setRequester(newRequest.getRequester());
     flowerRequests.get(index).setProgress(newRequest.getProgress());
     flowerRequests.get(index).setAssignee(newRequest.getAssignee());
+    flowerRequests.get(index).setNode(newRequest.getNode());
     flowerRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    flowerRequests.get(index).setDate(newRequest.getDate());
+    flowerRequests.get(index).setTime(newRequest.getTime());
     flowerRequests.get(index).setNote(newRequest.getNote());
     flowerRequests.get(index).setFlowerType(newRequest.getFlowerType());
     flowerRequests.get(index).setNumberOfBouquets(newRequest.getNumberOfBouquets());
-    flowerRequests.get(index).setNode(newRequest.getNode());
 
     return true;
   }
@@ -118,15 +124,17 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"flowerRequest\"(\"requester\", \"progress\", \"assignee\", \"specialInstructions\", \"note\", \"typeOfFlower\", \"bouquetSize\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"flowerRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", date, time, note, \"typeOfFlower\", \"bouquetSize\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getNote());
-      stmt.setString(6, request.getFlowerType());
-      stmt.setInt(7, request.getNumberOfBouquets());
-      stmt.setInt(8, request.getNode().getNodeID());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setDate(6, request.getDate());
+      stmt.setString(7, request.getTime());
+      stmt.setString(8, request.getNote());
+      stmt.setString(9, request.getFlowerType());
+      stmt.setInt(10, request.getNumberOfBouquets());
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -148,9 +156,11 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
                 rs.getInt("requestID"),
                 rs.getString("requester"),
                 rs.getInt("progress"),
-                rs.getString("assignee"),
+                rs.getString("assigneee"),
                 nodeTable.retrieveRow(rs.getInt("nodeID")),
                 rs.getString("specialInstructions"),
+                rs.getDate("date"),
+                rs.getString("time"),
                 rs.getString("note"),
                 rs.getString("typeOfFlower"),
                 rs.getInt("bouquetSize")));

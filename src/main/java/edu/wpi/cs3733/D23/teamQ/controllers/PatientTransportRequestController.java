@@ -54,15 +54,22 @@ public class PatientTransportRequestController {
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-    PatientTransportRequest newPTR =
-        new PatientTransportRequest(
-            0,
-            "temp user",
-            0,
-            assigneeField.getText(),
-            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-            specialInstructionsField.getText(),
-            (String) itemField.getValue());
+
+
+//    PatientTransportRequest newPTR =
+//        new PatientTransportRequest(
+//            0,
+//            "temp user",
+//            0,
+//            assigneeField.getText(),
+//            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+//            specialInstructionsField.getText(),
+//            // date
+//                // time
+//            (String) itemField.getValue());
+
+
+
     // qdb.addConferenceRequest(newPTR);
     Navigation.navigate(Screen.HOME);
   }

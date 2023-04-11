@@ -41,18 +41,38 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void submitButtonClicked() {
-    //    Qdb qdb = Qdb.getInstance();
-    //    ConferenceRequest newCCR =
-    //        new ConferenceRequest(
-    //            0,
-    //            "temp user",
-    //            0,
-    //            assigneeField.getText(),
-    //            roomNumberField.getText(),
-    //            specialInstructionsField.getText(),
-    //            dateTimeField.getText(),
-    //            (String) foodField.getValue());
-    //    qdb.addConferenceRequest(newCCR);
-    //    Navigation.navigate(Screen.HOME);
+    Qdb qdb = Qdb.getInstance();
+
+
+//    ConferenceRequest newCCR =
+//        new ConferenceRequest(
+//            0,
+//            "temp user",
+//            0,
+//            assigneeField.getText(),
+//            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+//            specialInstructionsField.getText(),
+//            // add for date
+//            // add for time
+//            (String) foodField.getValue());
+//    qdb.addConferenceRequest(newCCR);
+
+
+    Navigation.navigate(Screen.HOME);
+  }
+
+  @FXML
+  public void homeItemClicked() {
+    Navigation.navigate(Screen.HOME);
+  }
+
+  @FXML
+  public void exitItemClicked() {
+    Platform.exit();
+  }
+
+  @FXML
+  public void profileItemClicked() {
+    Navigation.navigate(Screen.PROFILE_PAGE);
   }
 }

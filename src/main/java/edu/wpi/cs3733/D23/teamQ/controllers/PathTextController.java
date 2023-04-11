@@ -38,7 +38,7 @@ public class PathTextController {
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME2);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
