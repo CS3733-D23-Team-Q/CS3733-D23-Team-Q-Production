@@ -11,9 +11,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="900.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuRootController">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuRootController">
    <children>
-      <VBox fx:id="mainPane" prefHeight="900.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" HBox.hgrow="ALWAYS">
+      <AnchorPane fx:id="subPane" layoutX="240.0" prefHeight="900.0" prefWidth="0.0" style="-fx-background-color: #012d5a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <fx:include fx:id="peopleSM" layoutY="174.0" source="PeopleSubmenu.fxml" visible="false" />
+            <fx:include fx:id="navigationSM" layoutY="243.0" source="NavigationSubmenu.fxml" visible="false" />
+            <fx:include fx:id="servicerequestSM" layoutY="312.0" source="ServiceRequestSubmenu.fxml" visible="false" />
+            <fx:include fx:id="statisticsSM" layoutY="381.0" source="StatisticsSubmenu.fxml" visible="false" />
+            <fx:include fx:id="settingsSM" layoutY="450.0" source="SettingsSubmenu.fxml" visible="false" />
+            <fx:include fx:id="signoutSM" layoutY="900.0" source="SignoutSubmenu.fxml" visible="false" />
+         </children>
+      </AnchorPane>
+      <VBox fx:id="menuPane" prefHeight="900.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="66.0" prefWidth="240.0" spacing="18.0" VBox.vgrow="ALWAYS">
                <children>
@@ -35,7 +45,7 @@
             <Line endX="237.0" stroke="#f1f1f1" strokeWidth="3.0" VBox.vgrow="ALWAYS" />
             <VBox prefHeight="128.0" prefWidth="240.0" spacing="16.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" VBox.vgrow="ALWAYS">
                <children>
-                  <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#homeClicked" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
+                  <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#homeClicked" onMouseEntered="#homeEntered" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -105,15 +115,5 @@
             <Insets bottom="12.0" top="12.0" />
          </padding>
       </VBox>
-      <AnchorPane prefHeight="200.0" prefWidth="192.0" HBox.hgrow="ALWAYS">
-         <children>
-            <fx:include fx:id="peopleSM" layoutY="169.0" source="PeopleSubmenu.fxml" visible="false" />
-            <fx:include fx:id="navigationSM" layoutY="233.0" source="NavigationSubmenu.fxml" visible="false" />
-            <fx:include fx:id="servicerequestSM" layoutY="297.0" source="ServiceRequestSubmenu.fxml" visible="false" />
-            <fx:include fx:id="statisticsSM" layoutY="361.0" source="StatisticsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="settingsSM" layoutY="425.0" source="SettingsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="signoutSM" layoutY="764.0" source="SignoutSubmenu.fxml" visible="false" />
-         </children>
-      </AnchorPane>
    </children>
-</HBox>
+</AnchorPane>

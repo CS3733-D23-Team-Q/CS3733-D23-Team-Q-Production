@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -9,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -60,9 +63,16 @@ public class LoginController {
     }
   }
 
-  public void passwordReact(String enteredPassword, String actualPassword) {
+  public void passwordReact(String enteredPassword, String actualPassword) throws IOException {
     if (enteredPassword.equals(actualPassword)) {
       alert.clearLabelAlert(loginAlert, alertImage);
+      Screen menuScreen = Screen.MENU_PANE;
+      final String filename = menuScreen.getFilename();
+      final var resource = App.class.getResource(filename);
+      final FXMLLoader loader = new FXMLLoader(resource);
+      Node n = loader.load();
+      App.getRootBorder().setLeft(n);
+      App.getRController().showMenu(true);
       Navigation.navigate(Screen.HOME);
       loginUsername = usernameField.getText();
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
