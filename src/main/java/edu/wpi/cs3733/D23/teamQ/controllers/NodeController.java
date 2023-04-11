@@ -7,7 +7,6 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import java.sql.SQLException;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -134,6 +133,7 @@ public class NodeController {
     /** set the node tableview */
     node.setItems(nodes());
   }
+  /*
 
   @FXML
   void edgeClicked(ActionEvent event) {
@@ -161,6 +161,8 @@ public class NodeController {
   public void exitClicked(ActionEvent actionEvent) {
     Platform.exit();
   }
+
+   */
 
   @FXML
   void AddClicked(MouseEvent event) throws SQLException {
