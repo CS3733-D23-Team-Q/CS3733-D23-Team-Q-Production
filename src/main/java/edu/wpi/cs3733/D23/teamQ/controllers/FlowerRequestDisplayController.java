@@ -1,72 +1,74 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import javafx.application.Platform;
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ChoiceBox;
 
 public class FlowerRequestDisplayController {
-  @FXML Button resetButton;
-  @FXML Button backButton;
-  @FXML Button submitButton;
 
-  @FXML Label roomNumberField;
+  ObservableList<String> TypeOfFlowers =
+          FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
 
-  @FXML Label flowerChoiceField;
+  @FXML MFXButton deleteButton;
+  @FXML MFXButton backButton;
+  @FXML MFXButton updateButton;
 
-  @FXML Label numberBouquetField;
-
-  @FXML Label flowerNoteField;
-
-  @FXML Label specialInstructionsField;
-
-  @FXML Label assigneeField;
-
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
-  @FXML MenuItem profileItem;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
+  @FXML ChoiceBox flowerTypeField;
+  @FXML MFXTextField bouquetChoiceField;
+  @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
-    roomNumberField.setText(
-        "" + ListServiceRequestController.getFlowerRequest().getNode().getNodeID());
-    flowerNoteField.setText(ListServiceRequestController.getFlowerRequest().getNote());
-    flowerChoiceField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
-    numberBouquetField.setText(
+    flowerTypeField.setItems(TypeOfFlowers);
+
+    assigneeField.setValue(ListServiceRequestController.getFlowerRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getFlowerRequest().getRoomNumber());
+    // dateField.setValue(ListServiceRequestController.getFlowerRequest().getDate);
+    // timeField.setText(ListServiceRequestController.getFlowerRequest().getTime);
+    flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
+    bouquetChoiceField.setText(
         String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
-    assigneeField.setText(ListServiceRequestController.getFlowerRequest().getAssignee());
     specialInstructionsField.setText(
         ListServiceRequestController.getFlowerRequest().getSpecialInstructions());
   }
 
   @FXML
-  public void resetButtonClicked() {
-    Navigation.navigate(Screen.LIST_REQUESTS);
+  public void deleteButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
+    qdb.deleteFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID());
   }
 
   @FXML
-  public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
+  public void backButtonClicked() {}
 
   @FXML
-  public void submitButtonClicked() {}
+  public void updateButtonClicked() {
+    /*
+    Qdb qdb = Qdb.getInstance();
 
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
+    FlowerRequest newFR = new FlowerRequest(
+            //ListServiceRequestController.getFlowerRequest().getRequestID(),
+            "temp requester",
+            0,
+            "temp assignee",
+            (String) roomNumberField.getValue(),
+            (String) specialInstructionsField.getText(),
+            "",
+            (String) flowerTypeField.getValue(),
+            Integer.parseInt((String) bouquetChoiceField.getValue()));
 
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
 
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
+    qdb.updateFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID(), )
+
+     */
   }
 }

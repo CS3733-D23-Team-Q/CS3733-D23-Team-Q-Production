@@ -102,18 +102,18 @@
       </VBox>
       <HBox layoutX="1.0" layoutY="714.0" prefHeight="100.0" prefWidth="848.0" spacing="400.0">
          <children>
-            <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
+            <MFXButton fx:id="deleteButton" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Delete" textFill="WHITE">
                <font>
                   <Font name="Roboto" size="16.0" />
                </font>
             </MFXButton>
             <HBox spacing="20.0">
                <children>
-                  <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
+                  <MFXButton fx:id="backButton" onAction="#backButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Back">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                  <MFXButton fx:id="updateButton" onAction="#updateButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
