@@ -61,6 +61,8 @@ public class FurnitureDeliveryRequestController {
             assigneeField.getText(),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
+            //for date,
+                // for time
             (String) itemField.getValue());
     // qdb.addConferenceRequest(newFR);
     Navigation.navigate(Screen.HOME);

@@ -62,7 +62,8 @@ public class ConferenceRoomRequestController {
             assigneeField.getText(),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
-            dateTimeField.getText(),
+            // add for date
+            // add for time
             (String) foodField.getValue());
     qdb.addConferenceRequest(newCCR);
     Navigation.navigate(Screen.HOME);

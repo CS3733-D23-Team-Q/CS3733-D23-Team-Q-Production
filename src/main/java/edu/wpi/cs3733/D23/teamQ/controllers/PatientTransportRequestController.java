@@ -62,6 +62,8 @@ public class PatientTransportRequestController {
             assigneeField.getText(),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
+            // date
+                // time
             (String) itemField.getValue());
     // qdb.addConferenceRequest(newPTR);
     Navigation.navigate(Screen.HOME);

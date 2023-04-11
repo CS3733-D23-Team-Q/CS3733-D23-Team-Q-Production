@@ -54,6 +54,8 @@ public class MealDeliveryRequestController {
             assigneeField.getText(),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
+                // for date
+                // for time
             drinkField.getText(),
             entreeField.getText(),
             sideField.getText());

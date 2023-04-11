@@ -68,6 +68,8 @@ public class OfficeSuppliesRequestController {
             assigneeField.getText(),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
+            //for date
+                //for time
             (String) itemField.getValue(),
             Integer.parseInt((String) quantityField.getValue()));
     // qdb.addFlowerRequest(newOSR);

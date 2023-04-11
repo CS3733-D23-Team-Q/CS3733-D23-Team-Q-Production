@@ -116,14 +116,15 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"specialInstructions\", \"time\", \"foodChoice\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", date, time, \"foodChoice\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getDateTime());
-      stmt.setString(6, request.getFoodChoice());
-      stmt.setInt(7, request.getNode().getNodeID());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setDate(6, request.getDate());
+      stmt.setString(7, request.getTime());
+      stmt.setString(8, request.getFoodChoice());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -143,11 +144,12 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
         conferenceRequests.add(
             new ConferenceRequest(
                 rst.getInt("requestID"),
-                rst.getString("requester"),
-                rst.getInt("progress"),
-                rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                rst.getString("requester"),
+                rst.getString("assignee"),
+                rst.getInt("progress"),
                 rst.getString("specialInstructions"),
+                rst.getDate("date"),
                 rst.getString("time"),
                 rst.getString("foodChoice")));
       }
