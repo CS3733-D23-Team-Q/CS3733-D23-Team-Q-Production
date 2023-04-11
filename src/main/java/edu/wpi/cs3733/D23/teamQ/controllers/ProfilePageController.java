@@ -11,7 +11,7 @@ public class ProfilePageController {
 
   Qdb qdb = Qdb.getInstance();
 
-  @FXML private Button Edit_Profile;
+  @FXML private Button ProfilePage_Edit_Button;
 
   @FXML private Label Email_Display;
 
@@ -30,12 +30,14 @@ public class ProfilePageController {
 
   @FXML
   private void initialize() {
+
     // DO ONE FOR PROFILE IMAGE AS WELL NEXT TIME
     String username = LoginController.getLoginUsername();
 
     String email = LoginController.getLoginEmail();
 
     Qdb qdb = Qdb.getInstance();
+
     this.ID_Number_Display.setText(String.valueOf(qdb.retrievePerson(username).getIDNum()));
     if (qdb.retrievePerson(username).getFirstName() == null) {
       this.First_Name_Display.setText("empty");
@@ -62,7 +64,12 @@ public class ProfilePageController {
 
     this.Username_Display.setText(username);
 
-    this.Edit_Profile.setOnMouseClicked(event -> Navigation.navigate(Screen.EDIT_PROFILE));
+    //    this.ProfilePage_Edit_Button.setOnMouseClicked(
+    //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
     this.ProfilePage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+  }
+
+  public void EditPressed() {
+    Navigation.navigate(Screen.EDIT_PROFILE);
   }
 }

@@ -168,6 +168,8 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch (Exception e) {
+      return false;
     }
   }
 
@@ -182,9 +184,11 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
         addRow(l);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 }

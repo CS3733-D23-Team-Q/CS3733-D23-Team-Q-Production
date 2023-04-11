@@ -60,7 +60,7 @@ public class ConferenceRoomRequestController {
             "temp user",
             0,
             assigneeField.getText(),
-            roomNumberField.getText(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
             dateTimeField.getText(),
             (String) foodField.getValue());

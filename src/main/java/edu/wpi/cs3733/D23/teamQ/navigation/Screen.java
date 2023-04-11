@@ -25,6 +25,11 @@ public enum Screen {
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
   PROFILE_PAGE("views/ProfilePage.fxml", "Profile Page"),
+
+  Move_Table("views/Move.fxml", "MoveTable"),
+  Node_Table("views/Node.fxml", "MoveTable"),
+  LocationName_Table("views/Location.fxml", "LocationNameTable"),
+  Edge_Table("views/Edge.fxml", "EdgeTable"),
   MENU_PANE("views/MenuRoot.fxml", "Menu Pane");
 
   private final String filename;

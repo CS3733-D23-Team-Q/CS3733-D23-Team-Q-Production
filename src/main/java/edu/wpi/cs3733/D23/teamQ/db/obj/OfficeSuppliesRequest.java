@@ -1,11 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class OfficeSuppliesRequest extends ServiceRequest {
+public class OfficeSuppliesRequest extends ServiceRequest implements IServiceRequest {
   private String item;
   private int quantity;
 
@@ -14,11 +15,11 @@ public class OfficeSuppliesRequest extends ServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String item,
       int quantity) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
+    super(requestID, requester, progress, assignee, node, specialInstructions);
     this.item = item;
     this.quantity = quantity;
   }
@@ -27,11 +28,11 @@ public class OfficeSuppliesRequest extends ServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
       String item,
       int quantity) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
+    super(0, requester, progress, assignee, node, specialInstructions);
     this.item = item;
     this.quantity = quantity;
   }

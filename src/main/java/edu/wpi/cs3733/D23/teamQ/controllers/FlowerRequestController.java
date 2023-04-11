@@ -72,7 +72,7 @@ public class FlowerRequestController {
             "temp user",
             0,
             assigneeField.getText(),
-            roomNumberField.getText(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
             specialInstructionsField.getText(),
             noteField.getText(),
             (String) flowerChoiceField.getValue(),

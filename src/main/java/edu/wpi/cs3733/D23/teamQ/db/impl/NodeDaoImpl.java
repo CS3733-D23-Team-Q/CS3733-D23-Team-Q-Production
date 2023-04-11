@@ -193,6 +193,8 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch (Exception e) {
+      return false;
     }
   }
 
@@ -203,14 +205,22 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       while (myReader.hasNextLine()) {
         String row = myReader.nextLine();
         String[] vars = row.split(",");
-        // Node m = new Node(Integer.parseInt(vars[0]), Integer.parseInt(vars[1]),
-        // Integer.parseInt(vars[2]), vars[3], vars[4], vars[5], vars[6]);
-        // addRow(m);
+        Node m =
+            new Node(
+                Integer.parseInt(vars[0]),
+                Integer.parseInt(vars[1]),
+                Integer.parseInt(vars[2]),
+                vars[3],
+                vars[4],
+                locationTable.retrieveRow(Integer.parseInt(vars[0])));
+        addRow(m);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 }
