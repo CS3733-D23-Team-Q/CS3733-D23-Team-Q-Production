@@ -30,9 +30,9 @@
       </StackPane>
       <VBox alignment="CENTER" minWidth="-Infinity" prefHeight="843.0" prefWidth="250.0" spacing="2.0" style="-fx-background-color: #ffffffff;" HBox.hgrow="NEVER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateY="-250.0" VBox.vgrow="ALWAYS">
+            <ImageView fitHeight="92.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true" translateY="-250.0" VBox.vgrow="ALWAYS">
                <image>
-                  <Image url="@../../../../../../logo.png" />
+                  <Image url="@../../../../../../download-removebg-preview.png" />
                </image>
             </ImageView>
             <TextField fx:id="usernameField" onKeyPressed="#usernameFieldEntered" promptText="Username or Email" VBox.vgrow="ALWAYS">
