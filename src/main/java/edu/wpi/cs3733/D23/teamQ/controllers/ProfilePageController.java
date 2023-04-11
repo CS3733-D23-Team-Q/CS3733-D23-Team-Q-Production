@@ -26,7 +26,7 @@ public class ProfilePageController {
   @FXML private Label Title_Display;
 
   @FXML private Label Username_Display;
-  @FXML private Button ProfilePage_Home_Button;
+  private Button ProfilePage_Home_Button;
 
   @FXML
   private void initialize() {
@@ -66,7 +66,7 @@ public class ProfilePageController {
 
     //    this.ProfilePage_Edit_Button.setOnMouseClicked(
     //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
-    this.ProfilePage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    //    this.ProfilePage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
   }
 
   public void EditPressed() {
