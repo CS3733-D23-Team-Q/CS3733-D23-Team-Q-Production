@@ -39,23 +39,28 @@ public class OfficeSuppliesRequestController {
   @FXML
   public void submitButtonClicked() {
     /*
-    Qdb qdb = Qdb.getInstance();
-    if (((String) quantityField.getValue()).equals("Select Quantity")) {
-      quantityField.setValue("0");
-    }
-    OfficeSuppliesRequest newOSR =
-        new OfficeSuppliesRequest(
-            0,
-            "temp user",
-            0,
-            assigneeField.getText(),
-            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-            specialInstructionsField.getText(),
-            (String) itemField.getValue(),
-            Integer.parseInt((String) quantityField.getValue()));
-    // qdb.addFlowerRequest(newOSR);
-    Navigation.navigate(Screen.HOME);
+        Qdb qdb = Qdb.getInstance();
+        if (((String) quantityField.getValue()).equals("Select Quantity")) {
+          quantityField.setValue("0");
+        }
 
-     */
+    //    OfficeSuppliesRequest newOSR =
+    //        new OfficeSuppliesRequest(
+    //            0,
+    //            "temp user",
+    //            0,
+    //            assigneeField.getText(),
+    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+    //            specialInstructionsField.getText(),
+    //            //for date
+    //                //for time
+    //            (String) itemField.getValue(),
+    //            Integer.parseInt((String) quantityField.getValue()));
+
+
+        // qdb.addFlowerRequest(newOSR);
+        Navigation.navigate(Screen.HOME);
+
+         */
   }
 }
