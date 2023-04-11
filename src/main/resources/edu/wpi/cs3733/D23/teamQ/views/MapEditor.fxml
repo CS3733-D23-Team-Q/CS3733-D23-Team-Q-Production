@@ -26,8 +26,8 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="507.66666412353516" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="56.000030517578125" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="543.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="564.3333358764648" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
         <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="31.0" prefWidth="1000.0" spacing="380.0" style="-fx-background-color: #142A53;" GridPane.columnSpan="10">
@@ -110,11 +110,6 @@
                         <Image url="@../../../../../../Home.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="homeButton" graphicTextGap="17.0" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="43.0" prefWidth="98.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Home" textFill="#3966af" HBox.hgrow="ALWAYS">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
             </children>
         </HBox>
     </children>
