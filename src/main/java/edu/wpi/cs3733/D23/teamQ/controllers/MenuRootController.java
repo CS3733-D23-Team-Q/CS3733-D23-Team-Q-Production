@@ -26,7 +26,14 @@ public class MenuRootController {
   @FXML SignoutSubmenuController signoutSMController;
 
   @FXML
-  public void initialize() {}
+  public void initialize() {
+    peopleSMController.setRootController(this);
+    navigationSMController.setRootController(this);
+    servicerequestSMController.setRootController(this);
+    statisticsSMController.setRootController(this);
+    settingsSMController.setRootController(this);
+    signoutSMController.setRootController(this);
+  }
 
   @FXML
   public void menuPaneExited() {}
@@ -42,7 +49,9 @@ public class MenuRootController {
   }
 
   @FXML
-  public void homeEntered() {}
+  public void homeEntered() {
+    closeAll();
+  }
 
   @FXML
   public void peopleEntered() {
@@ -180,6 +189,7 @@ public class MenuRootController {
 
   public void closeAll() {
     subPane.setVisible(false);
+    peopleSMController.setVisible(false);
     navigationSMController.setVisible(false);
     servicerequestSMController.setVisible(false);
     statisticsSMController.setVisible(false);
