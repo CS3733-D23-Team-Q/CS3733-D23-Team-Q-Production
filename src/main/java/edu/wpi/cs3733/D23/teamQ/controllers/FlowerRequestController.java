@@ -10,14 +10,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 
 public class FlowerRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML
+  ComboBox assigneeField;
+  @FXML ComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox flowerTypeField;
+  @FXML ComboBox flowerTypeField;
   @FXML MFXTextField bouquetChoiceField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> TypeOfFlowers =
@@ -34,14 +36,22 @@ public class FlowerRequestController {
    */
   @FXML
   public void initialize() {
+    this.roomNumberField.setValue("Select a Location");
+    this.roomNumberField.setValue(qdb.getAllLongNames());
     this.flowerTypeField.setValue("Select Flower");
     this.flowerTypeField.setItems(TypeOfFlowers);
-    this.roomNumberField.setValue("Select a Location");
-//    this.roomNumberField.setValue(qdb.getAllLongNames());
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+    assigneeField.setValue("Select an Assignee");
+    roomNumberField.setValue("Select a Location");
+    dateField.clear();
+    timeField.clear();
+    flowerTypeField.setValue("Select Flower");
+    bouquetChoiceField.clear();
+    specialInstructionsField.clear();
+  }
 
   @FXML
   public void cancelButtonClicked() {
