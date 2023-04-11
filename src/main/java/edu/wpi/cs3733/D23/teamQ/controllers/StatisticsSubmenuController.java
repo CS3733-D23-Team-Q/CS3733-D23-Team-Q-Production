@@ -7,22 +7,10 @@ import javafx.scene.layout.VBox;
 public class StatisticsSubmenuController {
   @FXML VBox statisticsSM;
   @FXML MFXButton statistics;
-  @FXML MFXButton temp1;
-  @FXML MFXButton temp2;
   @FXML MenuRootController mrc;
 
   @FXML
   public void statisticsClicked() {
-    // Navigation.navigate(Screen.Statistics);
-  }
-
-  @FXML
-  public void temp1Clicked() {
-    // Navigation.navigate(Screen.Statistics);
-  }
-
-  @FXML
-  public void temp2Clicked() {
     // Navigation.navigate(Screen.Statistics);
   }
 
