@@ -33,7 +33,6 @@ public class MenuRootController {
 
   @FXML
   public void homeEntered() {
-    peopleSMController.setVisible(false);
     navigationSMController.setVisible(false);
     servicerequestSMController.setVisible(false);
     statisticsSMController.setVisible(false);
@@ -43,71 +42,102 @@ public class MenuRootController {
 
   @FXML
   public void peopleEntered() {
-    peopleSMController.setVisible(true);
-    navigationSMController.setVisible(false);
-    servicerequestSMController.setVisible(false);
-    statisticsSMController.setVisible(false);
-    settingsSMController.setVisible(false);
-    signoutSMController.setVisible(false);
-    //    TranslateTransition tt = new TranslateTransition();
-    //    javafx.util.Duration duration = Duration.millis(200);
-    //    tt.setToX(432);
-    //    tt.setDuration(duration);
-    //    tt.setNode(subPane);
-    //    tt.play();
+    showPeopleSM(true);
   }
 
   @FXML
   public void navEntered() {
-    peopleSMController.setVisible(false);
-    navigationSMController.setVisible(true);
-    servicerequestSMController.setVisible(false);
-    statisticsSMController.setVisible(false);
-    settingsSMController.setVisible(false);
-    signoutSMController.setVisible(false);
+    showNavSM(true);
   }
 
   @FXML
   public void srEntered() {
-    peopleSMController.setVisible(false);
-    navigationSMController.setVisible(false);
-    servicerequestSMController.setVisible(true);
-    statisticsSMController.setVisible(false);
-    settingsSMController.setVisible(false);
-    signoutSMController.setVisible(false);
+    showSRSM(true);
   }
 
   @FXML
   public void statEntered() {
-    peopleSMController.setVisible(false);
-    navigationSMController.setVisible(false);
-    servicerequestSMController.setVisible(false);
-    statisticsSMController.setVisible(true);
-    settingsSMController.setVisible(false);
-    signoutSMController.setVisible(false);
+    showStatSM(true);
   }
 
   @FXML
   public void setEntered() {
-    peopleSMController.setVisible(false);
-    navigationSMController.setVisible(false);
-    servicerequestSMController.setVisible(false);
-    statisticsSMController.setVisible(false);
-    settingsSMController.setVisible(true);
-    signoutSMController.setVisible(false);
+    showSetSM(true);
   }
 
   @FXML
   public void soEntered() {
-    peopleSMController.setVisible(false);
-    navigationSMController.setVisible(false);
-    servicerequestSMController.setVisible(false);
-    statisticsSMController.setVisible(false);
-    settingsSMController.setVisible(false);
-    signoutSMController.setVisible(true);
+    showSOSM(true);
   }
 
   public void setVisible(boolean v) {
     mainPane.setVisible(v);
   }
+
+  public void showPeopleSM(boolean v) {
+    subPane.setVisible(v);
+    peopleSMController.setVisible(v);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
+  }
+
+  public void showNavSM(boolean v) {
+    subPane.setVisible(v);
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(v);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
+  }
+
+  public void showSRSM(boolean v) {
+    subPane.setVisible(v);
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(v);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
+  }
+
+  public void showStatSM(boolean v) {
+    subPane.setVisible(v);
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(v);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
+  }
+
+  public void showSetSM(boolean v) {
+    subPane.setVisible(v);
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(v);
+    signoutSMController.setVisible(false);
+  }
+
+  public void showSOSM(boolean v) {
+    subPane.setVisible(v);
+    peopleSMController.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(v);
+  }
 }
+
+//    TranslateTransition tt = new TranslateTransition();
+//    javafx.util.Duration duration = Duration.millis(200);
+//    tt.setToX(432);
+//    tt.setDuration(duration);
+//    tt.setNode(subPane);
+//    tt.play();
