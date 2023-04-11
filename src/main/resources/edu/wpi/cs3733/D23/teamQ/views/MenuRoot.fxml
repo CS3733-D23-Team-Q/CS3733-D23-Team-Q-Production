@@ -112,7 +112,7 @@
             <fx:include fx:id="servicerequestSM" layoutY="312.0" source="ServiceRequestSubmenu.fxml" visible="false" />
             <fx:include fx:id="statisticsSM" layoutY="381.0" source="StatisticsSubmenu.fxml" visible="false" />
             <fx:include fx:id="settingsSM" layoutY="450.0" source="SettingsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="signoutSM" layoutY="900.0" source="SignoutSubmenu.fxml" visible="false" />
+            <fx:include fx:id="signoutSM" layoutY="933.0" source="SignoutSubmenu.fxml" visible="false" />
          </children>
       </AnchorPane>
    </children>
