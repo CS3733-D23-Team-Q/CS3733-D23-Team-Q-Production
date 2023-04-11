@@ -1,82 +1,39 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Person {
   private int IDNum;
-  private String FirstName;
-  private String LastName;
-  private String Title;
-  private int PhoneNumber;
-  private String username;
+  private String firstName;
+  private String lastName;
+  private String title;
+  private int phoneNumber;
+  private Account account;
 
   public Person(
       int IDNum,
-      String Firstname,
-      String LastName,
-      String Title,
-      int PhoneNumber,
-      String username) {
+      String firstName,
+      String lastName,
+      String title,
+      int phoneNumber,
+      Account account) {
     this.IDNum = IDNum;
-    this.FirstName = FirstName;
-    this.LastName = LastName;
-    this.Title = Title;
-    this.PhoneNumber = PhoneNumber;
-    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.title = title;
+    this.phoneNumber = phoneNumber;
+    this.account = account;
   }
 
-  public Person(String Firstname, String LastName, String Title, int PhoneNumber, String username) {
+  public Person(String firstName, String lastName, String title, int phoneNumber, Account account) {
 
-    this.FirstName = FirstName;
-    this.LastName = LastName;
-    this.Title = Title;
-    this.PhoneNumber = PhoneNumber;
-    this.username = username;
-  }
-
-  public int getIDNum() {
-    return IDNum;
-  }
-
-  public void setIDNum(int IDNum) {
-    this.IDNum = IDNum;
-  }
-
-  public String getFirstName() {
-    return FirstName;
-  }
-
-  public void setFirstName(String FirstName) {
-    this.FirstName = FirstName;
-  }
-
-  public String getLastName() {
-    return LastName;
-  }
-
-  public void setLastName(String LastName) {
-    this.LastName = LastName;
-  }
-
-  public String getTitle() {
-    return Title;
-  }
-
-  public void setTitle(String Title) {
-    this.Title = Title;
-  }
-
-  public int getPhoneNumber() {
-    return PhoneNumber;
-  }
-
-  public void setPhone(int PhoneNumber) {
-    this.PhoneNumber = PhoneNumber;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String UN) {
-    this.username = UN;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.title = title;
+    this.phoneNumber = phoneNumber;
+    this.account = account;
   }
 }
