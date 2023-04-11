@@ -1,36 +1,29 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuItem;
 
 public class FlowerRequestController {
-  @FXML private MFXTextField assigneeField;
-  @FXML private MFXTextField roomNumberField;
-  @FXML private MFXTextField noteField;
-  @FXML private MFXTextField specialInstructionsField;
-  @FXML private ChoiceBox flowerChoiceField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
+  @FXML ChoiceBox flowerTypeField;
+  @FXML MFXTextField bouquetChoiceField;
+  @FXML MFXTextField specialInstructionsField;
   ObservableList<String> TypeOfFlowers =
       FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
-  @FXML private ChoiceBox bouquetChoiceField;
-  ObservableList<String> NumOfBouquets = FXCollections.observableArrayList("1", "2", "3", "4", "5");
 
-  @FXML Button resetButton;
-  @FXML Button backButton;
-  @FXML Button submitButton;
-
-  @FXML MenuItem homeItem;
-
-  @FXML MenuItem profileItem;
+  @FXML MFXButton resetButton;
+  @FXML MFXButton cancelButton;
+  @FXML MFXButton submitButton;
 
   /**
    * Initializes the Flower Request Choice Box's Switches screens to the Home page when Cancel
@@ -39,60 +32,36 @@ public class FlowerRequestController {
    */
   @FXML
   public void initialize() {
-    this.flowerChoiceField.setValue("Select Flower");
-    this.flowerChoiceField.setItems(TypeOfFlowers);
-    this.bouquetChoiceField.setValue("Number of Bouquets");
-    this.bouquetChoiceField.setItems(NumOfBouquets);
+    this.flowerTypeField.setValue("Select Flower");
+    this.flowerTypeField.setItems(TypeOfFlowers);
   }
 
   @FXML
-  public void resetButtonClicked() {
-    assigneeField.clear();
-    roomNumberField.clear();
-    noteField.clear();
-    specialInstructionsField.clear();
-    flowerChoiceField.setValue("Select Flower");
-    bouquetChoiceField.setValue("Number of Bouquets");
-  }
+  public void resetButtonClicked() {}
 
   @FXML
-  public void backButtonClicked() {
-    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
+  public void cancelButtonClicked() {
+    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
   public void submitButtonClicked() {
-    Qdb qdb = Qdb.getInstance();
-    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
-      bouquetChoiceField.setValue("0");
-    }
-    FlowerRequest newFR =
-        new FlowerRequest(
-            0,
-            "temp user",
-            0,
-            assigneeField.getText(),
-            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-            specialInstructionsField.getText(),
-            noteField.getText(),
-            (String) flowerChoiceField.getValue(),
-            Integer.parseInt((String) bouquetChoiceField.getValue()));
-    qdb.addFlowerRequest(newFR);
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
+    //    Qdb qdb = Qdb.getInstance();
+    //    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
+    //      bouquetChoiceField.setValue("0");
+    //    }
+    //    FlowerRequest newFR =
+    //        new FlowerRequest(
+    //            0,
+    //            "temp user",
+    //            0,
+    //            assigneeField.getText(),
+    //            roomNumberField.getText(),
+    //            specialInstructionsField.getText(),
+    //            noteField.getText(),
+    //            (String) flowerChoiceField.getValue(),
+    //            Integer.parseInt((String) bouquetChoiceField.getValue()));
+    //    qdb.addFlowerRequest(newFR);
+    //    Navigation.navigate(Screen.HOME);
   }
 }

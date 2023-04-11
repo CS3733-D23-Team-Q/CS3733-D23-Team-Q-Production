@@ -1,0 +1,21 @@
+.hbox {
+    -fx-background-color: #f1f1f1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+.mfx-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: #012d5a;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.mfx-button:hover {
+    -fx-background-color: #012d5a;
+    -fx-text-fill: #f1f1f1;
+}
+
+
