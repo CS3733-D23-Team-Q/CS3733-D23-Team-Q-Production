@@ -167,6 +167,5 @@
          </image>
       </ImageView>
       <Button fx:id="GMEButton" mnemonicParsing="false" onAction="#GMEButtonClicked" prefHeight="36.0" prefWidth="234.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Graphical Map Editor" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" GridPane.rowSpan="3" />
-      <Button fx:id="loadingButton" mnemonicParsing="false" onAction="#loadingButtonClicked" prefHeight="25.0" prefWidth="109.0" text="loading" GridPane.columnIndex="7" GridPane.rowIndex="8" />
    </children>
 </GridPane>

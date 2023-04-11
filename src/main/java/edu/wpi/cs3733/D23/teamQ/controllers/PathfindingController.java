@@ -14,7 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -29,7 +29,7 @@ public class PathfindingController {
   Node target;
   List<Line> previousPath;
   Text text;
-  @FXML Pane root;
+  @FXML AnchorPane root;
   @FXML Group parent;
   @FXML ImageView map;
 

@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -17,13 +16,6 @@ public class Home2Controller extends HomeController {
 
   @FXML MenuItem pathfindingMenu;
   @FXML MenuItem profileItem;
-
-  @FXML Button loadingButton;
-
-  @FXML
-  public void loadingButtonClicked() throws IOException {
-    ProgressBarController.display();
-  }
 
   @FXML
   public void initialize() {}

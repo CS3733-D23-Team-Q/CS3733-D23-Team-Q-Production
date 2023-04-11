@@ -28,6 +28,9 @@ public class GraphicalMapEditorController {
   @FXML Pane root;
   @FXML Group parent;
   @FXML ImageView map;
+  @FXML Button addButton;
+  @FXML Button editButton;
+  @FXML Button deleteButton;
 
   @FXML
   public void initialize() throws IOException {
@@ -90,6 +93,29 @@ public class GraphicalMapEditorController {
           e -> {
             parent.getChildren().remove(text);
           });
+      final Delta dragDelta = new Delta();
+      /*
+      node.setOnMousePressed(
+          e -> {
+            //dragDelta.x = node.getLayoutX() - e.getSceneX();
+            //dragDelta.y = node.getLayoutY() - e.getSceneY();
+              dragDelta.x = node.getLayoutX() - e.getSceneX();
+            node.setCursor(Cursor.MOVE);
+          });
+      node.setOnMouseReleased(
+          e -> {
+            node.setCursor(Cursor.HAND);
+          });
+      node.setOnMouseDragged(
+          e -> {
+            node.setLayoutX(e.getSceneX());
+            node.setLayoutY(e.getSceneY());
+          });
+      node.setOnMouseEntered(
+          e -> {
+            node.setCursor(Cursor.HAND);
+          });
+       */
       /*
       node.setOnMouseClicked(
               e -> {
@@ -98,5 +124,9 @@ public class GraphicalMapEditorController {
        */
       parent.getChildren().add(node);
     }
+  }
+
+  class Delta {
+    double x, y;
   }
 }
