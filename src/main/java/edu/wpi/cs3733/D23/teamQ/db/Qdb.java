@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D23.teamQ.db;
 
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,6 +178,10 @@ public class Qdb {
 
   public ArrayList<Location> retrieveAllLocations() {
     return (ArrayList<Location>) locationTable.getAllRows();
+  }
+
+  public ObservableList<String> getAllLongNames(String nodeType){
+    return locationTable.getAllLongNames(nodeType);
   }
 
   public Move retrieveMove(int moveID) {
