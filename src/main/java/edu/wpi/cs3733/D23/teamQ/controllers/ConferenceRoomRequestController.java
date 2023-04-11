@@ -10,14 +10,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 
 public class ConferenceRoomRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML
+  ComboBox assigneeField;
+  @FXML ComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox foodField;
+  @FXML ComboBox foodField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
@@ -31,9 +33,7 @@ public class ConferenceRoomRequestController {
     this.foodField.setValue("Select Food Option");
     this.foodField.setItems(foodOptionsList);
     this.roomNumberField.setValue("Select a Conference Room");
-
     this.roomNumberField.setItems(qdb.getAllLongNames("CONF"));
-    System.out.println(qdb.getAllLongNames("CONF"));
   }
 
   @FXML

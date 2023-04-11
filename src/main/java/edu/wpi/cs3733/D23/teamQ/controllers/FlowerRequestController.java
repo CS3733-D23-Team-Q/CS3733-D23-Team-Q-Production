@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
 public class FlowerRequestController {
+  Qdb qdb = Qdb.getInstance();
   @FXML ChoiceBox assigneeField;
   @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
@@ -34,6 +36,8 @@ public class FlowerRequestController {
   public void initialize() {
     this.flowerTypeField.setValue("Select Flower");
     this.flowerTypeField.setItems(TypeOfFlowers);
+    this.roomNumberField.setValue("Select a Location");
+//    this.roomNumberField.setValue(qdb.getAllLongNames());
   }
 
   @FXML
@@ -46,7 +50,6 @@ public class FlowerRequestController {
 
   @FXML
   public void submitButtonClicked() {
-    //    Qdb qdb = Qdb.getInstance();
     //    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
     //      bouquetChoiceField.setValue("0");
     //    }
