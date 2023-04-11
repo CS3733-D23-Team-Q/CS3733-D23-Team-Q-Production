@@ -11,7 +11,7 @@ public class Person {
   private String lastName;
   private String title;
   private int phoneNumber;
-  private Account account;
+  private String username;
 
   public Person(
       int IDNum,
@@ -19,21 +19,21 @@ public class Person {
       String lastName,
       String title,
       int phoneNumber,
-      Account account) {
+      String username) {
     this.IDNum = IDNum;
     this.firstName = firstName;
     this.lastName = lastName;
     this.title = title;
     this.phoneNumber = phoneNumber;
-    this.account = account;
+    this.username = username;
   }
 
-  public Person(String firstName, String lastName, String title, int phoneNumber, Account account) {
+  public Person(String firstName, String lastName, String title, int phoneNumber, String username) {
 
     this.firstName = firstName;
     this.lastName = lastName;
     this.title = title;
     this.phoneNumber = phoneNumber;
-    this.account = account;
+    this.username = username;
   }
 }
