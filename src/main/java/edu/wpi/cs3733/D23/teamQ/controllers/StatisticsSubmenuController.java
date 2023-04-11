@@ -9,6 +9,7 @@ public class StatisticsSubmenuController {
   @FXML MFXButton statistics;
   @FXML MFXButton temp1;
   @FXML MFXButton temp2;
+  @FXML MenuRootController mrc;
 
   @FXML
   public void statisticsClicked() {
@@ -27,11 +28,15 @@ public class StatisticsSubmenuController {
 
   @FXML
   public void stsmExited() {
-    setVisible(false);
+    mrc.showStatSM(false);
   }
 
   public void setVisible(boolean v) {
     statisticsSM.toFront();
     statisticsSM.setVisible(v);
+  }
+
+  public void setRootController(MenuRootController mrc) {
+    this.mrc = mrc;
   }
 }

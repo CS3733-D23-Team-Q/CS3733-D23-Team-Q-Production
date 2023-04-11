@@ -11,6 +11,7 @@ public class PeopleSubmenuController {
   @FXML VBox peopleSM;
   @FXML MFXButton profile;
   @FXML MFXButton directory;
+  @FXML MenuRootController mrc;
 
   @FXML
   public void profileClicked() {
@@ -24,11 +25,15 @@ public class PeopleSubmenuController {
 
   @FXML
   public void psmExited() {
-    setVisible(false);
+    mrc.showPeopleSM(false);
   }
 
   public void setVisible(boolean v) {
     peopleSM.toFront();
     peopleSM.setVisible(v);
+  }
+
+  public void setRootController(MenuRootController mrc) {
+    this.mrc = mrc;
   }
 }
