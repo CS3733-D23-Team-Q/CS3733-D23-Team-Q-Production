@@ -231,6 +231,10 @@ public class Qdb {
     return (ArrayList<Person>) personTable.getAllRows();
   }
 
+  public ObservableList<String> getAllNames(){
+    return personTable.getAllNames();
+  }
+
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }
