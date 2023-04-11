@@ -31,8 +31,4 @@ public class PeopleSubmenuController {
     peopleSM.toFront();
     peopleSM.setVisible(v);
   }
-
-  public boolean isHovered() {
-    return peopleSM.isHover();
-  }
 }

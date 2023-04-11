@@ -32,74 +32,76 @@ public class MenuRootController {
   }
 
   @FXML
-  public void homeEntered() {
-    navigationSMController.setVisible(false);
-    servicerequestSMController.setVisible(false);
-    statisticsSMController.setVisible(false);
-    settingsSMController.setVisible(false);
-    signoutSMController.setVisible(false);
-  }
+  public void homeEntered() {}
 
   @FXML
   public void peopleEntered() {
-    showPeopleSM(true);
+    if (peopleHovered()) showPeopleSM(true);
   }
 
   @FXML
   public void navEntered() {
-    showNavSM(true);
+    if (navHovered()) showNavSM(true);
   }
 
   @FXML
   public void srEntered() {
-    showSRSM(true);
+    if (srHovered()) showSRSM(true);
   }
 
   @FXML
   public void statEntered() {
-    showStatSM(true);
+    if (statHovered()) showStatSM(true);
   }
 
   @FXML
   public void setEntered() {
-    showSetSM(true);
+    if (setHovered()) showSetSM(true);
   }
 
   @FXML
   public void soEntered() {
-    showSOSM(true);
+    if (soHovered()) showSOSM(true);
   }
 
   @FXML
   public void peopleExited() {
-    System.out.println("people " + peopleHovered());
+    if (!peopleHovered()) showPeopleSM(false);
+    else showPeopleSM(true);
   }
 
   @FXML
   public void navExited() {
-    System.out.println("nav " + navHovered());
+    if (!navHovered()) showNavSM(false);
+    else showNavSM(true);
   }
 
   @FXML
   public void srExited() {
-    System.out.println("sr " + srHovered());
+    if (!srHovered()) {
+      showSRSM(false);
+    } else showSRSM(true);
   }
 
   @FXML
   public void statExited() {
-    System.out.println("stat " + statHovered());
+    if (!statHovered()) {
+      showStatSM(false);
+    } else showStatSM(true);
   }
 
   @FXML
   public void setExited() {
-    System.out.println("set " + setHovered());
+    if (!setHovered()) {
+      showSetSM(false);
+    } else showSetSM(true);
   }
 
   @FXML
   public void soExited() {
     if (!soHovered()) {
       showSOSM(false);
-    } else showSOSM(false);
+    } else showSOSM(true);
   }
 
   public void setVisible(boolean v) {
@@ -164,6 +166,15 @@ public class MenuRootController {
     statisticsSMController.setVisible(false);
     settingsSMController.setVisible(false);
     signoutSMController.setVisible(v);
+  }
+
+  public void closeAll() {
+    subPane.setVisible(false);
+    navigationSMController.setVisible(false);
+    servicerequestSMController.setVisible(false);
+    statisticsSMController.setVisible(false);
+    settingsSMController.setVisible(false);
+    signoutSMController.setVisible(false);
   }
 
   @FXML
