@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +18,17 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String assignee,
       Node node,
       String specialInstructions,
+<<<<<<< Updated upstream
       String dateTime,
       String foodChoice) {
     super(requestID, requester, progress, assignee, node, specialInstructions);
     this.dateTime = dateTime;
+=======
+      Date date,
+      String time,
+      String foodChoice) {
+    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
+>>>>>>> Stashed changes
     this.foodChoice = foodChoice;
   }
 

@@ -43,6 +43,7 @@ public class MealDeliveryRequestController {
   @FXML
   public void submitButtonClicked() {
     /*
+<<<<<<< Updated upstream
     Qdb qdb = Qdb.getInstance();
     MealRequest newMR =
             new MealRequest(
@@ -57,7 +58,27 @@ public class MealDeliveryRequestController {
                     sideField.getText());
     // qdb.addMealRequest(newMR);
     Navigation.navigate(Screen.HOME);
+=======
+        Qdb qdb = Qdb.getInstance();
 
-     */
+    //    MealRequest newMR =
+    //        new MealRequest(
+    //            0,
+    //            "temp user",
+    //            0,
+    //            assigneeField.getText(),
+    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+    //            specialInstructionsField.getText(),
+    //                // for date
+    //                // for time
+    //            drinkField.getText(),
+    //            entreeField.getText(),
+    //            sideField.getText());
+
+        // qdb.addMealRequest(newMR);
+        Navigation.navigate(Screen.HOME);
+>>>>>>> Stashed changes
+
+         */
   }
 }

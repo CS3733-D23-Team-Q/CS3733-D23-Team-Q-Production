@@ -63,12 +63,22 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       st.setString(2, newRequest.getRequester());
       st.setInt(3, newRequest.getProgress().ordinal());
       st.setString(4, newRequest.getAssignee());
+<<<<<<< Updated upstream
       st.setString(5, newRequest.getSpecialInstructions());
       st.setString(6, newRequest.getNote());
       st.setString(7, newRequest.getFlowerType());
       st.setInt(8, newRequest.getNumberOfBouquets());
       st.setInt(9, newRequest.getNode().getNodeID());
       st.setInt(10, requestID);
+=======
+      st.setInt(5, newRequest.getNode().getNodeID());
+      st.setString(6, newRequest.getSpecialInstructions());
+      st.setDate(7, newRequest.getDate());
+      st.setString(8, newRequest.getTime());
+      st.setString(9, newRequest.getNote());
+      st.setString(10, newRequest.getFlowerType());
+      st.setInt(111, newRequest.getNumberOfBouquets());
+>>>>>>> Stashed changes
 
       st.executeUpdate();
     } catch (SQLException e) {
