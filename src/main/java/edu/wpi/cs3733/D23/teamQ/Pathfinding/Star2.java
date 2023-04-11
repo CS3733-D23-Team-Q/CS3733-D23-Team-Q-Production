@@ -115,6 +115,8 @@ public class Star2 {
     path.add(start);
     while (!openList.isEmpty()) {
       Node current = openList.get(0);
+      // in case the end node is on a diff floor
+
       if (current.equals(end)) {
         return path;
       }
@@ -158,6 +160,8 @@ public class Star2 {
       if (current.equals(end)) {
         return path;
       }
+      // write in elevator specifications
+
       double lowestLocalCost = 10000000.0;
       Node chosen = null;
       for (Edge thisOne : current.getEdges()) {
