@@ -70,8 +70,8 @@ public class PathfindingController {
       node.setLayoutX(x);
       node.setLayoutY(y);
       node.setStyle(
-          "-fx-background-radius: 5em;" // 5
-              + "-fx-min-width: 3px;" // 3
+          "-fx-background-radius: 5em;"
+              + "-fx-min-width: 3px;"
               + "-fx-min-height: 3px;"
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
@@ -95,10 +95,12 @@ public class PathfindingController {
             } else {
               target = n;
               ready4Second = false;
-              removeLines(previousPath);
               try {
+                removeLines(previousPath);
+                // previousPath = new ArrayList<>();
+                // progress bar of generating a new path
                 previousPath = drawLines(start, target);
-              } catch (IOException ex) {
+              } catch (Exception ex) {
                 throw new RuntimeException(ex);
               }
             }

@@ -7,9 +7,11 @@ public enum Screen {
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),
-  MAP_EDITOR("views/MapEditor.fxml", "Map Editor"),
+  MAP_EDITOR_TABLE("views/MapEditorTable.fxml", "Map Editor Table"),
+  GRAPHICAL_MAP_EDITOR("views/GraphicalMapEditor.fxml", "Graphical Map Editor"),
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
-  PATH_FINDING("views/Pathfinding.fxml", "Pathfinding"),
+  PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
+  PROGRESS_BAR("views/ProgressBar.fxml", "Loading"),
 
   SIGNAGE("views/Signage.fxml", "Signage"),
   HELP("views/Help.fxml", "Help"),

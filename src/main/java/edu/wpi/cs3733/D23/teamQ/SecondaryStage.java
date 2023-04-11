@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -21,7 +22,7 @@ public class SecondaryStage {
     stage.setTitle(title);
 
     final FXMLLoader loader = new FXMLLoader(App.class.getResource(filename));
-    final VBox root = loader.load();
+    final Parent root = loader.load();
     final Scene scene = new Scene(root);
 
     scene

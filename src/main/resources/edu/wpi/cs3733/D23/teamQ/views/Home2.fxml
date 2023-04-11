@@ -31,8 +31,8 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="39.40001678466797" minHeight="10.0" prefHeight="39.40001678466797" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="48.199989318847656" minHeight="10.0" prefHeight="44.59998321533203" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -99,17 +99,17 @@
             <Insets left="20.0" right="20.0" />
          </padding>
       </TextField>
-      <Button fx:id="MEButton" graphicTextGap="17.0" mnemonicParsing="false" onAction="#MEButtonClicked" prefHeight="43.0" prefWidth="134.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Map Editor" textFill="#3966af" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2">
+      <Button fx:id="METButton" graphicTextGap="17.0" mnemonicParsing="false" onAction="#METButtonClicked" prefHeight="43.0" prefWidth="213.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Map Editor Table" textFill="#3966af" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <ImageView fx:id="CRImage" fitHeight="82.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
+      <ImageView fx:id="CRImage" fitHeight="78.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <image>
-            <Image url="@../../../../../../Map.png" />
+            <Image url="@../../../../../../Table.png" />
          </image>
       </ImageView>
-      <Button fx:id="PFButton" graphicTextGap="17.0" mnemonicParsing="false" onAction="#PFButtonClicked" prefHeight="44.0" prefWidth="139.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Pathfinding" textFill="#3966af" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
+      <Button fx:id="PFButton" graphicTextGap="17.0" mnemonicParsing="false" onAction="#PFButtonClicked" prefHeight="44.0" prefWidth="157.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Pathfinding" textFill="#3966af" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <font>
             <Font size="16.0" />
          </font>
@@ -128,7 +128,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem fx:id="mapEditorMenu" mnemonicParsing="false" onAction="#MEButtonClicked" text="Map Editor" />
+                  <MenuItem fx:id="mapEditorMenu" mnemonicParsing="false" onAction="#GMEButtonClicked" text="Map Editor" />
                   <MenuItem fx:id="pathfindingMenu" mnemonicParsing="false" onAction="#PFButtonClicked" text="Pathfinding" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitMenuClicked" text="Exit" />
                </items>
@@ -161,5 +161,12 @@
             <Insets bottom="2.0" />
          </GridPane.margin>
       </MenuBar>
+      <ImageView fitHeight="82.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.rowSpan="3">
+         <image>
+            <Image url="@../../../../../../Map.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="GMEButton" mnemonicParsing="false" onAction="#GMEButtonClicked" prefHeight="36.0" prefWidth="234.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Graphical Map Editor" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" GridPane.rowSpan="3" />
+      <Button fx:id="loadingButton" mnemonicParsing="false" onAction="#loadingButtonClicked" prefHeight="25.0" prefWidth="109.0" text="loading" GridPane.columnIndex="7" GridPane.rowIndex="8" />
    </children>
 </GridPane>
