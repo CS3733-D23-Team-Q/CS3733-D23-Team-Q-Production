@@ -138,7 +138,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try {
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
-      ResultSet rst = stm.executeQuery("Select * From \"officeSupplies\"");
+      ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");
       while (rst.next()) {
         officeSuppliesRequests.add(
             new OfficeSuppliesRequest(
