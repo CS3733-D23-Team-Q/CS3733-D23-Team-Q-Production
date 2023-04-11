@@ -179,8 +179,12 @@ public class Qdb {
     return (ArrayList<Location>) locationTable.getAllRows();
   }
 
-  public ObservableList<String> getAllLongNames(String nodeType) {
-    return locationTable.getAllLongNames(nodeType);
+  public ObservableList<String> getAllLongNames(String[] nodeTypes) {
+    return locationTable.getAllLongNames(nodeTypes);
+  }
+
+  public ObservableList<String> getAllLongNames() {
+    return locationTable.getAllLongNames();
   }
 
   public Move retrieveMove(int moveID) {
