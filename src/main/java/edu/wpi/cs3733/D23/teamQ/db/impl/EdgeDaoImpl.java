@@ -159,11 +159,11 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
       for (int i = 0; i < edges.size(); i++) {
         Edge e = edges.get(i);
         myWriter.write(
-            e.getEdgeID()
+            String.valueOf(e.getEdgeID())
                 + ','
-                + e.getStartNode().getNodeID()
+                + String.valueOf(e.getStartNode().getNodeID())
                 + ','
-                + e.getEndNode().getNodeID()
+                + String.valueOf(e.getEndNode().getNodeID())
                 + "\n");
       }
       myWriter.close();
