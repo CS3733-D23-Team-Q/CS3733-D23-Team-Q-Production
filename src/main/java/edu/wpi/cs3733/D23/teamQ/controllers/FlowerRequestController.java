@@ -46,22 +46,43 @@ public class FlowerRequestController {
 
   @FXML
   public void submitButtonClicked() {
-    //    Qdb qdb = Qdb.getInstance();
-    //    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
-    //      bouquetChoiceField.setValue("0");
-    //    }
-    //    FlowerRequest newFR =
-    //        new FlowerRequest(
-    //            0,
-    //            "temp user",
-    //            0,
-    //            assigneeField.getText(),
-    //            roomNumberField.getText(),
-    //            specialInstructionsField.getText(),
-    //            noteField.getText(),
-    //            (String) flowerChoiceField.getValue(),
-    //            Integer.parseInt((String) bouquetChoiceField.getValue()));
-    //    qdb.addFlowerRequest(newFR);
-    //    Navigation.navigate(Screen.HOME);
+    Qdb qdb = Qdb.getInstance();
+    if (((String) bouquetChoiceField.getValue()).equals("Number of Bouquets")) {
+      bouquetChoiceField.setValue("0");
+    }
+
+
+//    FlowerRequest newFR =
+//        new FlowerRequest(
+//            0,
+//            "temp user",
+//            0,
+//            assigneeField.getText(),
+//            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+//            specialInstructionsField.getText(),
+//            //for date textfield or button,
+//                // for time textfield or button,
+//            noteField.getText(),
+//            (String) flowerChoiceField.getValue(),
+//            Integer.parseInt((String) bouquetChoiceField.getValue()));
+
+
+//    qdb.addFlowerRequest(newFR);
+    Navigation.navigate(Screen.HOME);
+  }
+
+  @FXML
+  public void homeItemClicked() {
+    Navigation.navigate(Screen.HOME);
+  }
+
+  @FXML
+  public void exitItemClicked() {
+    Platform.exit();
+  }
+
+  @FXML
+  public void profileItemClicked() {
+    Navigation.navigate(Screen.PROFILE_PAGE);
   }
 }
