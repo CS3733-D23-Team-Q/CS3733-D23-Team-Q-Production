@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Qdb {
-
-  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
-
-  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
-
+  private LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  private NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
+  private EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+  private MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
   private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
@@ -134,6 +131,14 @@ public class Qdb {
     return edgeTable.addRow(e);
   }
 
+  public boolean edgesToCSV(String filename) {
+    return edgeTable.toCSV(filename);
+  }
+
+  public boolean edgesFromCSV(String filename) {
+    return edgeTable.importCSV(filename);
+  }
+
   public ArrayList<Edge> retrieveAllEdges() {
     return (ArrayList<Edge>) edgeTable.getAllRows();
   }
@@ -158,6 +163,14 @@ public class Qdb {
     return (ArrayList<Node>) nodeTable.getAllRows();
   }
 
+  public boolean nodesToCSV(String filename) {
+    return nodeTable.toCSV(filename);
+  }
+
+  public boolean nodesFromCSV(String filename) {
+    return nodeTable.importCSV(filename);
+  }
+
   public Location retrieveLocation(int nodeID) {
     return locationTable.retrieveRow(nodeID);
   }
@@ -178,6 +191,14 @@ public class Qdb {
     return (ArrayList<Location>) locationTable.getAllRows();
   }
 
+  public boolean locationsToCSV(String filename) {
+    return locationTable.toCSV(filename);
+  }
+
+  public boolean locationsFromCSV(String filename) {
+    return locationTable.importCSV(filename);
+  }
+
   public Move retrieveMove(int moveID) {
     return moveTable.retrieveRow(moveID);
   }
@@ -196,6 +217,14 @@ public class Qdb {
 
   public ArrayList<Move> retrieveAllMoves() {
     return (ArrayList<Move>) moveTable.getAllRows();
+  }
+
+  public boolean movesToCSV(String filename) {
+    return moveTable.toCSV(filename);
+  }
+
+  public boolean movesFromCSV(String filename) {
+    return moveTable.importCSV(filename);
   }
 
   public Person retrievePerson(int ID) {

@@ -72,8 +72,8 @@ public class NodeController {
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Node> nodes() {
     ObservableList<Node> node = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
-      node.add(Qdb.getInstance().nodeTable.getAllRows().get(i));
+    for (int i = 0; i < Qdb.getInstance().retrieveAllNodes().size(); i++) {
+      node.add(Qdb.getInstance().retrieveAllNodes().get(i));
     }
     return node;
   }
@@ -182,15 +182,14 @@ public class NodeController {
                   newYcoord = Integer.parseInt(YInput.getText());
 
                   Qdb.getInstance()
-                      .nodeTable
-                      .addRow(
+                      .addNode(
                           new Node(
                               nodeIDEdit,
                               newXcoord,
                               newYcoord,
                               newFloor,
                               newBuilding,
-                              Qdb.getInstance().locationTable.retrieveRow(nodeIDEdit)));
+                              Qdb.getInstance().retrieveLocation(nodeIDEdit)));
                   node.setItems(nodes());
                 } else {
                   alert.setLabelAlert(
@@ -248,7 +247,7 @@ public class NodeController {
         alert.clearLabelAlert(InformationAlert, image2);
         alert.clearLabelAlert(nodeIDAlert, image);
 
-        Qdb.getInstance().nodeTable.deleteRow(nodeIDEdit);
+        Qdb.getInstance().deleteNode(nodeIDEdit);
         node.setItems(nodes());
 
         // Here to call confirm
@@ -285,8 +284,7 @@ public class NodeController {
                   newYcoord = Integer.parseInt(YInput.getText());
 
                   Qdb.getInstance()
-                      .nodeTable
-                      .updateRow(
+                      .updateNode(
                           nodeIDEdit,
                           new Node(
                               nodeIDEdit,
@@ -294,7 +292,7 @@ public class NodeController {
                               newYcoord,
                               newFloor,
                               newBuilding,
-                              Qdb.getInstance().locationTable.retrieveRow(nodeIDEdit)));
+                              Qdb.getInstance().retrieveLocation(nodeIDEdit)));
 
                   node.setItems(nodes());
 
@@ -349,15 +347,15 @@ public class NodeController {
   }
 
   public static boolean nodeIDExist(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
-      if (nodeID == Qdb.getInstance().nodeTable.getAllRows().get(i).getNodeID()) return true;
+    for (int i = 0; i < Qdb.getInstance().retrieveAllNodes().size(); i++) {
+      if (nodeID == Qdb.getInstance().retrieveAllNodes().get(i).getNodeID()) return true;
     }
     return false;
   }
 
   public boolean locationExist(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().locationTable.getAllRows().size(); i++) {
-      if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
+    for (int i = 0; i < Qdb.getInstance().retrieveAllLocations().size(); i++) {
+      if (nodeID == Qdb.getInstance().retrieveAllLocations().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -365,7 +363,7 @@ public class NodeController {
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().nodeTable.toCSV(path);
+    boolean success = Qdb.getInstance().nodesToCSV(path);
     if (success) {
       Alert.alertBox("Export Successfully", "Export Successfully");
     } else {
@@ -376,7 +374,7 @@ public class NodeController {
   @FXML
   void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().nodeTable.importCSV(path);
+    boolean success = Qdb.getInstance().nodesFromCSV(path);
     if (success) {
       Alert.alertBox("Import Successfully", "Import Successfully");
     } else {

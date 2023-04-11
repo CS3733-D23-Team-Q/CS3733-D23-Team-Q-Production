@@ -1,10 +1,9 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.Date;
 
 @Getter
 @Setter
@@ -21,8 +20,7 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String specialInstructions,
       Date date,
       String time,
-      String foodChoice
-      ) {
+      String foodChoice) {
     super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
     this.foodChoice = foodChoice;
   }

@@ -59,8 +59,8 @@ public class MoveController {
   /** used to put Moves from database arraylist to observablelist */
   public ObservableList<Move> moves() {
     ObservableList<Move> movelist = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().moveTable.getAllRows().size(); i++) {
-      movelist.add(Qdb.getInstance().moveTable.getAllRows().get(i));
+    for (int i = 0; i < Qdb.getInstance().retrieveAllMoves().size(); i++) {
+      movelist.add(Qdb.getInstance().retrieveAllMoves().get(i));
     }
     return movelist;
   }
@@ -184,7 +184,7 @@ public class MoveController {
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().moveTable.toCSV(path);
+    boolean success = Qdb.getInstance().movesToCSV(path);
     if (success) {
       Alert.alertBox("Export Successfully", "Export Successfully");
     } else {
@@ -195,7 +195,7 @@ public class MoveController {
   @FXML
   void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().moveTable.importCSV(path);
+    boolean success = Qdb.getInstance().movesFromCSV(path);
     if (success) {
       Alert.alertBox("Import Successfully", "Import Successfully");
     } else {

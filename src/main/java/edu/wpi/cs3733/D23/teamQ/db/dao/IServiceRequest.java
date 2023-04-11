@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.db.dao;
 
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
-
 import java.sql.Date;
 
 public interface IServiceRequest {

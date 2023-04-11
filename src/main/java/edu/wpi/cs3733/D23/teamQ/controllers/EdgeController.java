@@ -52,8 +52,8 @@ public class EdgeController {
   /** used to put Edges from database arraylist to observablelist */
   public ObservableList<Edge> edges() {
     ObservableList<Edge> edge = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().edgeTable.getAllRows().size(); i++) {
-      edge.add(Qdb.getInstance().edgeTable.getAllRows().get(i));
+    for (int i = 0; i < Qdb.getInstance().retrieveAllEdges().size(); i++) {
+      edge.add(Qdb.getInstance().retrieveAllEdges().get(i));
     }
     return edge;
   }
@@ -125,7 +125,7 @@ public class EdgeController {
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().edgeTable.toCSV(path);
+    boolean success = Qdb.getInstance().edgesToCSV(path);
     if (success) {
       Alert.alertBox("Export Successfully", "Export Successfully");
     } else {
@@ -136,7 +136,7 @@ public class EdgeController {
   @FXML
   void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().edgeTable.importCSV(path);
+    boolean success = Qdb.getInstance().edgesFromCSV(path);
     if (success) {
       Alert.alertBox("Import Successfully", "Import Successfully");
     } else {
