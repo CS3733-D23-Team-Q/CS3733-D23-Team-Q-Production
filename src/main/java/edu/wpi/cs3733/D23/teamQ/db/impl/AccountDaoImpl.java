@@ -195,4 +195,32 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     }
     return is;
   }
+
+  public String getEmailWithUsername(String AUsername) {
+    String TheEmail = "";
+    for (int i = 0; i < accounts.size(); i++) {
+      if (accounts.get(i).getUsername().equals(AUsername)) {
+        TheEmail = accounts.get(i).getEmail();
+      }
+    }
+    return TheEmail;
+  }
+
+  public int getQuestionId(String question) {
+    int q = 0;
+    Connection con = GenDao.connect();
+    try {
+      String query = "SELECT id FROM security_question WHERE question = ?";
+      PreparedStatement pst = con.prepareStatement(query);
+      pst.setString(1, question);
+      ResultSet rs = pst.executeQuery();
+      rs.next();
+      q = rs.getInt(1);
+      con.close();
+      pst.close();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return q;
+  }
 }

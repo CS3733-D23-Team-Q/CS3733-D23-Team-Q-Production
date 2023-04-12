@@ -9,10 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class PersonDaoImpl implements GenDao<Person, Integer> {
 
-  private List<Person> People = new ArrayList<Person>();
+  private List<Person> people = new ArrayList<Person>();
 
   private static PersonDaoImpl single_instance = null;
 
@@ -28,7 +30,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
 
   public Person retrieveRow(Integer IDNum) {
     int index = this.getIndex(IDNum);
-    return People.get(index);
+    return people.get(index);
   }
 
   public boolean updateRow(Integer IDNum, Person personWithNewChanges) {
@@ -56,11 +58,11 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
       if (rs == 1) {
         result = true;
         int index = this.getIndex(IDNum);
-        People.get(index).setFirstName(newFN);
-        People.get(index).setLastName(newLN);
-        People.get(index).setTitle(newTitle);
-        People.get(index).setPhoneNumber(newPN);
-        People.get(index).setUsername(newUN);
+        people.get(index).setFirstName(newFN);
+        people.get(index).setLastName(newLN);
+        people.get(index).setTitle(newTitle);
+        people.get(index).setPhoneNumber(newPN);
+        people.get(index).setUsername(newUN);
         System.out.println("Updated successfully!");
 
       } else {
@@ -85,7 +87,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
       if (rs == 1) {
         result = true;
         int index = this.getIndex(IDNum);
-        People.remove(index);
+        people.remove(index);
         System.out.println("Person deleted successful!");
       } else {
         System.out.println("Failed to delete your Person.");
@@ -120,7 +122,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
-        People.add(a);
+        people.add(a);
         System.out.println("Person created successful!");
       } else {
         System.out.println("Failed to create your person.");
@@ -136,7 +138,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
 
   @Override
   public List<Person> getAllRows() {
-    return People;
+    return people;
   }
 
   public boolean populate() {
@@ -155,7 +157,7 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
                 rs.getString("title"),
                 rs.getInt("phoneNumber"),
                 rs.getString("username"));
-        People.add(a);
+        people.add(a);
       }
       con.close();
 
@@ -167,10 +169,18 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
     return false;
   }
 
+  public ObservableList<String> getAllNames() {
+    ObservableList<String> names = FXCollections.observableArrayList();
+    for (Person p : people) {
+      names.add(p.getFirstName() + " " + p.getLastName() + ", " + p.getTitle());
+    }
+    return names;
+  }
+
   public Person getPersonWithUsername(String UN) {
     Person b = new Person(null, null, null, 0, UN);
-    for (int i = 0; i < People.size(); i++) {
-      Person a = People.get(i);
+    for (int i = 0; i < people.size(); i++) {
+      Person a = people.get(i);
       if (Objects.equals(a.getUsername(), UN)) {
         return a;
       }
@@ -182,8 +192,8 @@ public class PersonDaoImpl implements GenDao<Person, Integer> {
   public void test() {}
 
   public int getIndex(int IDNum) {
-    for (int i = 0; i < People.size(); i++) {
-      Person a = People.get(i);
+    for (int i = 0; i < people.size(); i++) {
+      Person a = people.get(i);
       if (a.getIDNum() == (IDNum)) {
         return i;
       }

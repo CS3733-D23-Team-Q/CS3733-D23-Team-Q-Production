@@ -1,16 +1,14 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
+import edu.wpi.cs3733.D23.teamQ.Confirm;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -130,10 +128,11 @@ public class EdgeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().edgeTable.toCSV(path);
     if (success) {
-      alert.alertBox("Export Successfully", "Export Successfully");
+      Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
       alert.alertBox("Failed to Export", "Failed to Export");
     }
+    edge.setItems(edges());
   }
 
   @FXML
@@ -141,14 +140,18 @@ public class EdgeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().edgeTable.importCSV(path);
     if (success) {
-      Alert.alertBox("Import Successfully", "Import Successfully");
+      Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
+    edge.setItems(edges());
   }
+  /*
 
   @FXML
   void BackClicked(ActionEvent event) {
     Navigation.navigate(Screen.MAP_EDITOR_TABLE);
   }
+
+   */
 }
