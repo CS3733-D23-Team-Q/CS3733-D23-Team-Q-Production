@@ -114,7 +114,7 @@ public class MenuRootController {
 
   @FXML
   public void peopleExited() {
-    peopleIcon.setImage(new Image(App.class.getResourceAsStream("people.png")));
+    peopleIcon.setImage(new Image(App.class.getResourceAsStream("People.png")));
     if (!peopleHovered()) showPeopleSM(false);
     else showPeopleSM(true);
   }
