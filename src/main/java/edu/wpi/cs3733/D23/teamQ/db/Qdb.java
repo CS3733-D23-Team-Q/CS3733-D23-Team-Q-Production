@@ -354,4 +354,8 @@ public class Qdb {
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
+
+  public int getNodeFromLocation(String lName) {
+    return locationTable.getNodeFromLocation(lName);
+  }
 }

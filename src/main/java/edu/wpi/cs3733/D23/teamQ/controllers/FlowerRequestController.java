@@ -74,7 +74,7 @@ public class FlowerRequestController {
             LoginController.getLoginUsername(),
             0,
             assigneeField.getSelectedItem().toString(),
-            qdb.retrieveNode(Integer.parseInt(roomNumberField.getSelectedItem().toString())),
+            qdb.retrieveNode(qdb.getNodeFromLocation(roomNumberField.getSelectedItem().toString())),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
