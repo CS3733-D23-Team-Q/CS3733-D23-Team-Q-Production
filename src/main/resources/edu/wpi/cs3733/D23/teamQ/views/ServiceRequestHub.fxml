@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="900.0" prefWidth="512.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ServiceRequestHubController">
+<AnchorPane prefHeight="900.0" prefWidth="512.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles/SRHub.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ServiceRequestHubController">
    <children>
       <VBox layoutX="17.0" layoutY="17.0" spacing="48.0">
          <children>
@@ -22,27 +22,27 @@
             </StackPane>
             <VBox spacing="24.0">
                <children>
-                  <MFXButton fx:id="ccrButton" onAction="#ccrButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-background-color: #F1F1F1; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="New Conference Room Request">
+                  <MFXButton fx:id="ccrButton" onAction="#ccrButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Conference Room Request">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="frdButton" onAction="#frdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-background-color: #F1F1F1; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="New Flower Delivery Request">
+                  <MFXButton fx:id="frdButton" onAction="#frdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Flower Delivery Request">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="ospButton" onAction="#ospButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-background-color: #F1F1F1; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="New Office Supply Request">
+                  <MFXButton fx:id="ospButton" onAction="#ospButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Office Supply Request">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="fedButton" onAction="#fedButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-background-color: #F1F1F1; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="New Furniture Request">
+                  <MFXButton fx:id="fedButton" onAction="#fedButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Furniture Request">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="mdButton" onAction="#mdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-background-color: #F1F1F1; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="New Meal Delivery Request">
+                  <MFXButton fx:id="mdButton" onAction="#mdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Meal Delivery Request">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font></MFXButton>
