@@ -68,6 +68,7 @@ public class Navigation {
 
   public static void logout() {
     App.getRootBorder().setLeft(null);
+    App.getRootBorder().setRight(null);
     Screen loginScreen = Screen.LOGIN;
     final String filename = loginScreen.getFilename();
     final String title = loginScreen.getTitle();

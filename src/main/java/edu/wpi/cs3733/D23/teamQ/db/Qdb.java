@@ -358,7 +358,7 @@ public class Qdb {
   public int getNodeFromLocation(String lName) {
     return locationTable.getNodeFromLocation(lName);
   }
-  
+
   public String getEmailWithAUsername(String username) {
     return accountTable.getEmailWithUsername(username);
   }
