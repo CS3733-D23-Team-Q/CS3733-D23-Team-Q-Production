@@ -15,7 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
@@ -25,7 +25,7 @@ public class GraphicalMapEditorController {
   // Stage stage = App.getPrimaryStage();
   Alert alert = new Alert();
   Text text;
-  @FXML Pane root;
+  @FXML AnchorPane root;
   @FXML Group parent;
   @FXML ImageView map;
   @FXML Button addButton;
