@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -30,15 +32,15 @@ public class FlowerRequestDisplayController {
   public void initialize() {
     flowerTypeField.setItems(TypeOfFlowers);
 
-    assigneeField.setValue(ListServiceRequestController.getFlowerRequest().getAssignee());
+     assigneeField.setValue(ListServiceRequestController.getFlowerRequest().getAssignee());
     // roomNumberField.setValue(ListServiceRequestController.getFlowerRequest().getRoomNumber());
     // dateField.setValue(ListServiceRequestController.getFlowerRequest().getDate);
     // timeField.setText(ListServiceRequestController.getFlowerRequest().getTime);
-    flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
-    bouquetChoiceField.setText(
-        String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
-    specialInstructionsField.setText(
-        ListServiceRequestController.getFlowerRequest().getSpecialInstructions());
+    // flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
+    // bouquetChoiceField.setText(
+    //    String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
+    // specialInstructionsField.setText(
+    //    ListServiceRequestController.getFlowerRequest().getSpecialInstructions());
   }
 
   @FXML
@@ -48,7 +50,9 @@ public class FlowerRequestDisplayController {
   }
 
   @FXML
-  public void backButtonClicked() {}
+  public void backButtonClicked() {
+    Navigation.navigate(Screen.HOME);
+  }
 
   @FXML
   public void updateButtonClicked() {

@@ -29,18 +29,18 @@ public class ListServiceRequestController {
   public void initialize() {
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
-    roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("roomNumber"));
+    roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
   }
 
   @FXML
   public void rowSelected() {
-    if (qdb.retrieveFlowerRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
-        != null) {
-      flowerRequest =
-          qdb.retrieveFlowerRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+    if(qdb.retrieveFlowerRequest(
+      tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+       != null) {
+       flowerRequest =
+        qdb.retrieveFlowerRequest(
+          tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
       Navigation.navigate(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
