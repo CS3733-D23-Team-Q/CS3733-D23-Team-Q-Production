@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FurnitureDeliveryRequestController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FurnitureDeliveryRequestDisplayController">
    <children>
       <VBox prefHeight="558.0" prefWidth="848.0" spacing="30.0">
          <children>
@@ -93,7 +93,7 @@
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton fx:id="submitButton" onAction="#updateButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Update" textFill="WHITE">
+                  <MFXButton fx:id="updateButton" onAction="#updateButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>

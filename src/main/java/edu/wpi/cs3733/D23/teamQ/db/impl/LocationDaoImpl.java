@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class LocationDaoImpl implements GenDao<Location, Integer> {
   private List<Location> locations = new ArrayList<Location>();
@@ -142,6 +144,26 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     return locations;
   }
 
+  public ObservableList<String> getAllLongNames() {
+    ObservableList<String> longNames = FXCollections.observableArrayList();
+    for (Location l : locations) {
+      longNames.add(l.getLongName());
+    }
+    return longNames;
+  }
+
+  public ObservableList<String> getAllLongNames(String[] nodeTypes) {
+    ObservableList<String> longNames = FXCollections.observableArrayList();
+    for (Location l : locations) {
+      for (String type : nodeTypes) {
+        if (type.equals(l.getNodeType())) {
+          longNames.add(l.getLongName());
+        }
+      }
+    }
+    return longNames;
+  }
+
   public boolean toCSV(String filename) {
     try {
       File myObj = new File(filename);
@@ -190,5 +212,15 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     } catch (Exception e) {
       return false;
     }
+  }
+
+  public int getNodeFromLocation(String lName) {
+    int id = 0;
+    for (int i = 0; i < locations.size(); i++) {
+      if (lName.equals(locations.get(i).getLongName())) {
+        id = locations.get(i).getNodeID();
+      }
+    }
+    return id;
   }
 }

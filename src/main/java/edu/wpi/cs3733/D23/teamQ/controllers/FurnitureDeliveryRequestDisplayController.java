@@ -1,11 +1,10 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
@@ -13,30 +12,30 @@ import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
-public class FlowerRequestDisplayController {
+public class FurnitureDeliveryRequestDisplayController {
 
-  ObservableList<String> TypeOfFlowers =
-      FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
+  ObservableList<String> TypeOfFurniture =
+      FXCollections.observableArrayList("Desk", "Desk Chair", "Couch", "Examination Table");
 
   @FXML MFXButton deleteButton;
   @FXML MFXButton backButton;
   @FXML MFXButton updateButton;
 
-  @FXML MFXComboBox assigneeField;
-  @FXML MFXComboBox roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML MFXComboBox flowerTypeField;
-  @FXML MFXTextField bouquetChoiceField;
+  @FXML ChoiceBox furnitureChoiceField;
+  @FXML MFXTextField itemRequestedField;
   @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
-    flowerTypeField.setItems(TypeOfFlowers);
-
-    assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getNode());
+    furnitureChoiceField.setItems(TypeOfFurniture);
+    assigneeField.setValue(ListServiceRequestController.getFurnitureRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getFurnitureRequest().getNode());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear(),
@@ -45,20 +44,18 @@ public class FlowerRequestDisplayController {
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
-    flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
-    bouquetChoiceField.setText(
-        String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
+    furnitureChoiceField.setValue(ListServiceRequestController.getFurnitureRequest().getItem());
   }
 
   @FXML
   public void deleteButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-    qdb.deleteFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID());
+    qdb.deleteFurnitureRequest(ListServiceRequestController.getFurnitureRequest().getRequestID());
   }
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -66,20 +63,19 @@ public class FlowerRequestDisplayController {
 
     Qdb qdb = Qdb.getInstance();
 
-    FlowerRequest newFR =
-        new FlowerRequest(
-            ListServiceRequestController.getFlowerRequest().getRequestID(),
+    FurnitureRequest newFurR =
+        new FurnitureRequest(
+            ListServiceRequestController.getFurnitureRequest().getRequestID(),
             "temp requester",
             0,
             "temp assignee",
-            ListServiceRequestController.getFlowerRequest().getNode(),
+            ListServiceRequestController.getFurnitureRequest().getNode(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            "",
-            (String) flowerTypeField.getValue(),
-            Integer.parseInt((String) bouquetChoiceField.getText()));
+            (String) furnitureChoiceField.getValue());
 
-    qdb.updateFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID(), newFR);
+    qdb.updateFurnitureRequest(
+        ListServiceRequestController.getFurnitureRequest().getRequestID(), newFurR);
   }
 }

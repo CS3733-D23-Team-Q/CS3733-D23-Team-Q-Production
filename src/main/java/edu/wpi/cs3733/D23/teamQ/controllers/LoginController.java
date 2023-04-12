@@ -113,7 +113,7 @@ public class LoginController extends SecondaryStage implements IController {
     }
   }
 
-  public String getUsername() {
+  public static String getUsername() {
     return user;
   }
 
