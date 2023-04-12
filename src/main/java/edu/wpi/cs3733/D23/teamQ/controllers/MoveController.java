@@ -6,7 +6,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -112,6 +111,7 @@ public class MoveController {
     /** set the move tableview */
     move.setItems(moves());
   }
+  /*
 
   @FXML
   void ExitClicked(ActionEvent event) {
@@ -140,6 +140,8 @@ public class MoveController {
   void nodeClicked(ActionEvent event) {
     Navigation.navigate(Screen.Node_Table);
   }
+
+   */
 
   /*
   @FXML

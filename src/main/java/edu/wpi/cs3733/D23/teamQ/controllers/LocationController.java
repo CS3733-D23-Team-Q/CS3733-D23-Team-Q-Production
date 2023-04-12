@@ -6,7 +6,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -127,6 +126,7 @@ public class LocationController {
     locationname.setItems(locations());
   }
 
+  /*
   @FXML
   void exitClicked(ActionEvent event) {
     Platform.exit();
@@ -154,6 +154,8 @@ public class LocationController {
   void nodeClicked(ActionEvent event) {
     Navigation.navigate(Screen.Node_Table);
   }
+
+   */
 
   @FXML
   void setClicked(MouseEvent event) {
