@@ -38,7 +38,11 @@ public class ConferenceRoomRequestController {
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+    this.foodField.setValue("Select Food Option");
+    this.foodField.setItems(foodOptionsList);
+
+  }
 
   @FXML
   public void cancelButtonClicked() {
