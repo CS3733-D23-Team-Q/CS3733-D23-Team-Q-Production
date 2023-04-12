@@ -15,7 +15,7 @@ public class NavigationSubmenuController {
 
   @FXML
   public void pathfinderClicked() {
-    Navigation.navigate(Screen.PATH_TEXT);
+    Navigation.navigate(Screen.PATH_FINDING);
   }
 
   @FXML
