@@ -55,6 +55,7 @@ public class Navigation {
       //                  .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
       //                  .toExternalForm());
       Node n = loader.load();
+      App.getRootRight().getChildren().clear();
       App.getRootBorder().setRight(n);
       AnchorPane.setTopAnchor(n, 0.0);
       AnchorPane.setLeftAnchor(n, 0.0);

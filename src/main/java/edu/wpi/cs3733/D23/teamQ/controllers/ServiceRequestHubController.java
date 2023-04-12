@@ -22,21 +22,21 @@ public class ServiceRequestHubController implements IController {
 
   @FXML
   public void mdButtonClicked() {
-    Navigation.navigate(Screen.MEAL_REQUEST);
+    Navigation.navigateRight(Screen.MEAL_REQUEST);
   }
 
   @FXML
   public void frdButtonClicked() {
-    Navigation.navigate(Screen.FLOWER_REQUEST);
+    Navigation.navigateRight(Screen.FLOWER_REQUEST);
   }
 
   @FXML
   public void fedButtonClicked() {
-    Navigation.navigate(Screen.FURNITURE_REQUEST);
+    Navigation.navigateRight(Screen.FURNITURE_REQUEST);
   }
 
   @FXML
   public void ospButtonClicked() {
-    Navigation.navigate(Screen.OFFICE_SUPPLIES_REQUEST);
+    Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST);
   }
 }

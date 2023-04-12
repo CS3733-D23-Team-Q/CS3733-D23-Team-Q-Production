@@ -39,11 +39,12 @@ public class FlowerRequestController {
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+  }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML

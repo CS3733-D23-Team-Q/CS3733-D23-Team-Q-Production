@@ -14,11 +14,13 @@ public class ServiceRequestSubmenuController {
 
   @FXML
   public void createClicked() {
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
     Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
   }
 
   @FXML
   public void editClicked() {
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
     Navigation.navigate(Screen.LIST_REQUESTS);
   }
 
