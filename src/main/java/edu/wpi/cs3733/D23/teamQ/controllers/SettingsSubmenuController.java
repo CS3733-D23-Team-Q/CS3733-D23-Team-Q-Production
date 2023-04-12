@@ -14,7 +14,7 @@ public class SettingsSubmenuController {
 
   @FXML
   public void settingsClicked() {
-    Navigation.navigate(Screen.HELP);
+    Navigation.navigate(Screen.SETTINGS);
   }
 
   @FXML
