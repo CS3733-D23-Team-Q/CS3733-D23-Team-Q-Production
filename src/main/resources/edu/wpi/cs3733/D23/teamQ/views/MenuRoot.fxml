@@ -109,10 +109,10 @@
       <AnchorPane fx:id="subPane" layoutX="240.0" onMouseExited="#subPaneExited" prefHeight="800.0" prefWidth="0.0" style="-fx-background-color: #f1f1f1;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-192.0" AnchorPane.topAnchor="0.0">
          <children>
             <fx:include fx:id="peopleSM" layoutY="174.0" source="PeopleSubmenu.fxml" visible="false" />
-            <fx:include fx:id="navigationSM" layoutY="243.0" source="NavigationSubmenu.fxml" visible="false" />
-            <fx:include fx:id="servicerequestSM" layoutY="312.0" source="ServiceRequestSubmenu.fxml" visible="false" />
-            <fx:include fx:id="statisticsSM" layoutY="381.0" source="StatisticsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="settingsSM" layoutY="450.0" source="SettingsSubmenu.fxml" visible="false" />
+            <fx:include fx:id="navigationSM" layoutY="238.0" source="NavigationSubmenu.fxml" visible="false" />
+            <fx:include fx:id="servicerequestSM" layoutY="307.0" source="ServiceRequestSubmenu.fxml" visible="false" />
+            <fx:include fx:id="statisticsSM" layoutY="376.0" source="StatisticsSubmenu.fxml" visible="false" />
+            <fx:include fx:id="settingsSM" layoutY="445.0" source="SettingsSubmenu.fxml" visible="false" />
             <fx:include fx:id="signoutSM" layoutY="933.0" source="SignoutSubmenu.fxml" visible="false" />
          </children>
       </AnchorPane>
