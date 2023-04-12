@@ -33,10 +33,15 @@ public class FlowerRequestDisplayController {
 
   @FXML
   public void initialize() {
-    flowerTypeField.setItems(TypeOfFlowers);
+    Qdb qdb = Qdb.getInstance();
+    this.assigneeField.setItems(qdb.getAllNames());
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
+    this.flowerTypeField.setItems(TypeOfFlowers);
 
-    assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getNode());
+    assigneeField.setText(ListServiceRequestController.getConferenceRequest().getAssignee());
+    roomNumberField.setText(
+        ListServiceRequestController.getConferenceRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear(),
@@ -45,7 +50,7 @@ public class FlowerRequestDisplayController {
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
-    flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
+    flowerTypeField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
     bouquetChoiceField.setText(
         String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
   }
