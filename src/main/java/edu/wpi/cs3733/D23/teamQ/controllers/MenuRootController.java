@@ -1,9 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -18,6 +21,14 @@ public class MenuRootController {
   @FXML AnchorPane mainPane;
   @FXML VBox menuPane;
   @FXML AnchorPane subPane;
+  @FXML ImageView homeIcon;
+  @FXML ImageView peopleIcon;
+  @FXML ImageView navigationIcon;
+  @FXML ImageView srIcon;
+  @FXML ImageView statisticsIcon;
+  @FXML ImageView settingsIcon;
+  @FXML ImageView exitIcon;
+  Image homeBlue;
   @FXML PeopleSubmenuController peopleSMController;
   @FXML NavigationSubmenuController navigationSMController;
   @FXML ServiceRequestSubmenuController servicerequestSMController;
@@ -50,6 +61,7 @@ public class MenuRootController {
 
   @FXML
   public void homeEntered() {
+    //homeIcon.setImage(new Image(App.class.getResourceAsStream("../HomeBlue.png")));
     closeAll();
   }
 

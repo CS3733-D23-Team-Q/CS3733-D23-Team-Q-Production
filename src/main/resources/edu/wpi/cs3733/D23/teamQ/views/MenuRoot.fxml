@@ -37,7 +37,7 @@
                <children>
                   <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#homeClicked" onMouseEntered="#homeEntered" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="homeIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Home.png" />
                            </image>
@@ -46,7 +46,7 @@
                   </MFXButton>
                   <MFXButton fx:id="people" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#peopleEntered" onMouseExited="#peopleExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="People" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="peopleIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../People.png" />
                            </image>
@@ -55,7 +55,7 @@
                   </MFXButton>
                   <MFXButton fx:id="navigation" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#navEntered" onMouseExited="#navExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleAnimationSpeed="0.0" rippleColor="#f1f1f1" text="Navigation" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="navigationIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Map.png" />
                            </image>
@@ -64,7 +64,7 @@
                   </MFXButton>
                   <MFXButton fx:id="servicerequest" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#srEntered" onMouseExited="#srExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Service Requests" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="srIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../ServiceRequests.png" />
                            </image>
@@ -73,7 +73,7 @@
                   </MFXButton>
                   <MFXButton fx:id="statistics" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#statEntered" onMouseExited="#statExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Statistics" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="statisticsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Statistics.png" />
                            </image>
@@ -82,7 +82,7 @@
                   </MFXButton>
                   <MFXButton fx:id="settings" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#setEntered" onMouseExited="#setExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Settings" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="settingsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Settings.png" />
                            </image>
@@ -93,7 +93,7 @@
             </VBox>
             <MFXButton fx:id="signout" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#soEntered" onMouseExited="#soExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="exitIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../Exit.png" />
                      </image>
