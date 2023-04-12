@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
-public class ConferenceRoomRequestDisplayController implements IController {
+public class MealDeliveryRequestDisplayController {
 
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
@@ -29,25 +29,28 @@ public class ConferenceRoomRequestDisplayController implements IController {
   @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox foodField;
   @FXML MFXTextField specialInstructionsField;
+
+  @FXML ChoiceBox drinkField;
+  @FXML ChoiceBox entreeField;
+  @FXML ChoiceBox sideField;
 
   @FXML
   public void initialize() {
 
-    this.foodField.setItems(foodOptionsList);
-
-    assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getNode());
+    assigneeField.setValue(ListServiceRequestController.getMealRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getMealRequest().getNode());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
-            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
-    foodField.setValue(ListServiceRequestController.getConferenceRequest().getFoodChoice());
+            ListServiceRequestController.getMealRequest().getDate().getYear(),
+            ListServiceRequestController.getMealRequest().getDate().getMonth(),
+            ListServiceRequestController.getMealRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getMealRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getMealRequest().getSpecialInstructions());
+    drinkField.setValue(ListServiceRequestController.getMealRequest().getDrink());
+    entreeField.setValue(ListServiceRequestController.getMealRequest().getEntree());
+    sideField.setValue(ListServiceRequestController.getMealRequest().getSide());
   }
 
   @FXML
@@ -66,18 +69,19 @@ public class ConferenceRoomRequestDisplayController implements IController {
   public void updateButtonClicked() {
     Qdb qdb = Qdb.getInstance();
 
-    ConferenceRequest newCCR =
-        new ConferenceRequest(
-            ListServiceRequestController.getConferenceRequest().getRequestID(),
-            ListServiceRequestController.getConferenceRequest().getNode(),
-            "temp user",
-            (String) assigneeField.getValue(),
+    MealRequest newMR =
+        new MealRequest(
+            ListServiceRequestController.getMealRequest().getRequestID(),
+            "Temp",
             0,
+            "assignee",
+            ListServiceRequestController.getConferenceRequest().getNode(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            (String) foodField.getValue());
-    qdb.updateConferenceRequest(
-        ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
+            (String) drinkField.getValue(),
+            (String) entreeField.getValue(),
+            (String) sideField.getValue());
+    qdb.updateMealRequest(ListServiceRequestController.getMealRequest().getRequestID(), newMR);
   }
 }
