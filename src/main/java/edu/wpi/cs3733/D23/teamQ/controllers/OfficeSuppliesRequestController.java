@@ -77,7 +77,7 @@ public class OfficeSuppliesRequestController {
             (String) itemRequestedField.getValue(),
             Integer.parseInt((String) quantityField.getText()));
 
-     qdb.addOfficeSuppliesRequest(newOSR);
+    qdb.addOfficeSuppliesRequest(newOSR);
     Navigation.navigate(Screen.HOME);
   }
 }
