@@ -36,6 +36,8 @@ public enum Screen {
   LocationName_Table("views/Location.fxml", "LocationNameTable"),
   Edge_Table("views/Edge.fxml", "EdgeTable"),
   MENU_PANE("views/MenuRoot.fxml", "Menu Pane"),
+
+  DIRECTORY("views/Directory.fxml", "Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics");
 
   private final String filename;
