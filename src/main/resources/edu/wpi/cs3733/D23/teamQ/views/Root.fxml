@@ -11,6 +11,6 @@
       <AnchorPane fx:id="rootCenter" />
    </center>
    <right>
-      <AnchorPane fx:id="rootRight" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="rootRight" />
    </right>
 </BorderPane>

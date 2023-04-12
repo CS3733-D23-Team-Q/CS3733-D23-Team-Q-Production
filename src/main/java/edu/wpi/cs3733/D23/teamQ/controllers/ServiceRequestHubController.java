@@ -17,7 +17,7 @@ public class ServiceRequestHubController implements IController {
 
   @FXML
   public void ccrButtonClicked() {
-    Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST);
+    Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST);
   }
 
   @FXML

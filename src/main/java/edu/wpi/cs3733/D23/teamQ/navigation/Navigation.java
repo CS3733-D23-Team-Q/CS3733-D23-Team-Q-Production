@@ -27,8 +27,35 @@ public class Navigation {
       //                  .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
       //                  .toExternalForm());
       Node n = loader.load();
+      App.getRootBorder().setRight(null);
       App.getRootCenter().getChildren().clear();
       App.getRootCenter().getChildren().add(n);
+      AnchorPane.setTopAnchor(n, 0.0);
+      AnchorPane.setLeftAnchor(n, 0.0);
+      AnchorPane.setRightAnchor(n, 0.0);
+      AnchorPane.setBottomAnchor(n, 0.0);
+    } catch (IOException | NullPointerException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void navigateRight(final Screen screen) {
+    final String filename = screen.getFilename();
+
+    try {
+      final var resource = App.class.getResource(filename);
+      final FXMLLoader loader = new FXMLLoader(resource);
+
+      //      Stage primaryStage = App.getPrimaryStage();
+      //      final Scene scene = new Scene(loader.load());
+      //      scene
+      //          .getStylesheets()
+      //          .add(
+      //              Navigation.class
+      //                  .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
+      //                  .toExternalForm());
+      Node n = loader.load();
+      App.getRootBorder().setRight(n);
       AnchorPane.setTopAnchor(n, 0.0);
       AnchorPane.setLeftAnchor(n, 0.0);
       AnchorPane.setRightAnchor(n, 0.0);
