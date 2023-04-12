@@ -8,11 +8,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 public class DirectoryController {
@@ -27,18 +25,7 @@ public class DirectoryController {
 
   @FXML private TableColumn<Person, String> Title;
 
-  @FXML private ImageView menuImage;
-
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Person> Person;
-
-  @FXML
-  void BackClicked(ActionEvent event) {}
-
-  @FXML
-  void exitClicked(ActionEvent event) {}
-
-  @FXML
-  void homeClicked(ActionEvent event) {}
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Person> People() {

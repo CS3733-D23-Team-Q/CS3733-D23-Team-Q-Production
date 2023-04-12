@@ -18,7 +18,8 @@ public class PeopleSubmenuController {
   }
 
   @FXML
-  public void directoryClicked() { Navigation.navigate(Screen.DIRECTORY);
+  public void directoryClicked() {
+    Navigation.navigate(Screen.DIRECTORY);
   }
 
   @FXML
