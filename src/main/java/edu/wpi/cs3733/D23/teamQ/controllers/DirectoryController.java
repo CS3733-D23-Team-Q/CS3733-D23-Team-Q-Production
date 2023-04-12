@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -93,4 +94,18 @@ public class DirectoryController {
     /** set the information tableview */
     Person.setItems(People());
   }
+
+  public void mapClicked(ActionEvent actionEvent) {}
+
+  public void edgeClicked(ActionEvent actionEvent) {}
+
+  public void locationClicked(ActionEvent actionEvent) {}
+
+  public void moveClicked(ActionEvent actionEvent) {}
+
+  public void BackClicked(ActionEvent actionEvent) {}
+
+  public void homeClicked(ActionEvent actionEvent) {}
+
+  public void exitClicked(ActionEvent actionEvent) {}
 }
