@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-<<<<<<< HEAD
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -86,6 +85,4 @@ public class MealDeliveryRequestDisplayController {
     qdb.updateMealRequest(ListServiceRequestController.getMealRequest().getRequestID(), newMR);
   }
 }
-=======
-public class MealDeliveryRequestDisplayController {}
->>>>>>> 7d06f8d07e6c9c6f19b8f883846a520afcb0c160
+
