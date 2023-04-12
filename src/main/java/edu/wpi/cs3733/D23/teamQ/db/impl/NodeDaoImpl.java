@@ -171,19 +171,15 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       for (int i = 0; i < nodes.size(); i++) {
         Node n = nodes.get(i);
         myWriter.write(
-            n.getNodeID()
+            String.valueOf(n.getNodeID())
                 + ','
-                + n.getXCoord()
+                + String.valueOf(n.getXCoord())
                 + ','
-                + n.getYCoord()
+                + String.valueOf(n.getYCoord())
                 + ','
                 + n.getFloor()
                 + ','
                 + n.getBuilding()
-                + ','
-                + n.getEdges()
-                + ','
-                + n.getLocation()
                 + "\n");
       }
       myWriter.close();
@@ -218,8 +214,10 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       myReader.close();
       return true;
     } catch (FileNotFoundException e) {
+      System.out.println(e.getMessage());
       return false;
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return false;
     }
   }

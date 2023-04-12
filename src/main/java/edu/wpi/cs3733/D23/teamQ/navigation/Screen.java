@@ -7,8 +7,10 @@ public enum Screen {
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),
-  MAP_EDITOR("views/MapEditor.fxml", "Map Editor"),
+  MAP_EDITOR_TABLE("views/MapEditor.fxml", "Map Editor Table"),
+  GRAPHICAL_MAP_EDITOR("views/GraphicalMapEditor.fxml", "Graphical Map Editor"),
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
+  PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
   SIGNAGE("views/Signage.fxml", "Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
@@ -27,12 +29,16 @@ public enum Screen {
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
   PROFILE_PAGE("views/ProfilePage.fxml", "Profile Page"),
 
+  CONFIRM("views/Confirm.fxml", "Confirm"),
+  ALERT("views/Alert.fxml", "Alert"),
   Move_Table("views/Move.fxml", "MoveTable"),
   Node_Table("views/Node.fxml", "MoveTable"),
   LocationName_Table("views/Location.fxml", "LocationNameTable"),
   Edge_Table("views/Edge.fxml", "EdgeTable"),
   MENU_PANE("views/MenuRoot.fxml", "Menu Pane"),
-  DIRECTORY("views/Directory.fxml", "Directory");
+
+  DIRECTORY("views/Directory.fxml", "Directory"),
+  STATISTICS("views/Statistics.fxml", "Statistics");
 
   private final String filename;
   private final String title;

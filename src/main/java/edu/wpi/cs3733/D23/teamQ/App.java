@@ -19,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
 
   @Setter @Getter private static Stage primaryStage;
-  @Setter @Getter private static AnchorPane rootAnchor;
+  @Setter @Getter private static AnchorPane rootCenter;
+  @Setter @Getter private static AnchorPane rootRight;
   @Setter @Getter private static RootController rController;
   @Setter @Getter private static BorderPane rootBorder;
 
@@ -32,12 +33,12 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
     /* primaryStage is generally only used if one of your components require the stage to display */
     App.primaryStage = primaryStage;
-    primaryStage.setTitle("Home Page");
+    primaryStage.setTitle("Login Page");
 
     final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/Root.fxml"));
     rootBorder = loader.load();
     rController = loader.getController();
-    App.rootAnchor = rController.rootAnchor;
+    App.rootCenter = rController.rootCenter;
     primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));
     final Scene scene = new Scene(rootBorder);
     primaryStage.setScene(scene);
@@ -48,11 +49,18 @@ public class App extends Application {
                 .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
                 .toExternalForm());
     primaryStage.show();
+    /*
+    Rectangle2D screenBounds = javafx.stage.Screen.getPrimary().getVisualBounds();
+    primaryStage.setX(screenBounds.getMinX());
+    primaryStage.setY(screenBounds.getMinY());
+    primaryStage.setWidth(screenBounds.getWidth());
+    primaryStage.setHeight(screenBounds.getHeight());
+               */
     primaryStage.setFullScreen(true);
     rController.showMenu(false);
     rootBorder.setLeft(null);
+    rootBorder.setRight(null);
     Navigation.navigate(Screen.LOGIN);
-    // primaryStage.centerOnScreen();
   }
 
   @Override

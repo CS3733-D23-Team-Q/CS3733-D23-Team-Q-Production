@@ -170,9 +170,9 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       for (int i = 0; i < moves.size(); i++) {
         Move m = moves.get(i);
         myWriter.write(
-            m.getMoveID()
+            String.valueOf(m.getMoveID())
                 + ','
-                + m.getNode().getNodeID()
+                + String.valueOf(m.getNode().getNodeID())
                 + ','
                 + m.getLongName()
                 + ','

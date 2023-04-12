@@ -1,18 +1,15 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
+import edu.wpi.cs3733.D23.teamQ.Confirm;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -112,6 +109,7 @@ public class MoveController {
     /** set the move tableview */
     move.setItems(moves());
   }
+  /*
 
   @FXML
   void ExitClicked(ActionEvent event) {
@@ -140,6 +138,8 @@ public class MoveController {
   void nodeClicked(ActionEvent event) {
     Navigation.navigate(Screen.Node_Table);
   }
+
+   */
 
   /*
   @FXML
@@ -186,10 +186,11 @@ public class MoveController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().moveTable.toCSV(path);
     if (success) {
-      Alert.alertBox("Export Successfully", "Export Successfully");
+      Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
       Alert.alertBox("Failed to Export", "Failed to Export");
     }
+    move.setItems(moves());
   }
 
   @FXML
@@ -197,14 +198,17 @@ public class MoveController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().moveTable.importCSV(path);
     if (success) {
-      Alert.alertBox("Import Successfully", "Import Successfully");
+      Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
+    move.setItems(moves());
   }
+  /*
+   @FXML
+   void BackClicked(ActionEvent event) {
+     Navigation.navigate(Screen.MAP_EDITOR);
+   }
 
-  @FXML
-  void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR);
-  }
+  */
 }

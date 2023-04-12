@@ -1,9 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -18,6 +21,14 @@ public class MenuRootController {
   @FXML AnchorPane mainPane;
   @FXML VBox menuPane;
   @FXML AnchorPane subPane;
+  @FXML VBox spacer;
+  @FXML ImageView homeIcon;
+  @FXML ImageView peopleIcon;
+  @FXML ImageView navigationIcon;
+  @FXML ImageView srIcon;
+  @FXML ImageView statisticsIcon;
+  @FXML ImageView settingsIcon;
+  @FXML ImageView exitIcon;
   @FXML PeopleSubmenuController peopleSMController;
   @FXML NavigationSubmenuController navigationSMController;
   @FXML ServiceRequestSubmenuController servicerequestSMController;
@@ -26,7 +37,14 @@ public class MenuRootController {
   @FXML SignoutSubmenuController signoutSMController;
 
   @FXML
-  public void initialize() {}
+  public void initialize() {
+    peopleSMController.setRootController(this);
+    navigationSMController.setRootController(this);
+    servicerequestSMController.setRootController(this);
+    statisticsSMController.setRootController(this);
+    settingsSMController.setRootController(this);
+    signoutSMController.setRootController(this);
+  }
 
   @FXML
   public void menuPaneExited() {}
@@ -37,57 +55,80 @@ public class MenuRootController {
   }
 
   @FXML
+  public void spacerEntered() {
+    closeAll();
+  }
+
+  @FXML
   public void homeClicked() {
     Navigation.navigate(Screen.HOME);
   }
 
   @FXML
-  public void homeEntered() {}
+  public void homeEntered() {
+    homeIcon.setImage(new Image(App.class.getResourceAsStream("HomeBlue.png")));
+    closeAll();
+  }
 
   @FXML
   public void peopleEntered() {
+    peopleIcon.setImage(new Image(App.class.getResourceAsStream("PeopleBlue.png")));
     if (peopleHovered()) showPeopleSM(true);
   }
 
   @FXML
   public void navEntered() {
+
+    navigationIcon.setImage(new Image(App.class.getResourceAsStream("MapBlue.png")));
     if (navHovered()) showNavSM(true);
   }
 
   @FXML
   public void srEntered() {
+    srIcon.setImage(new Image(App.class.getResourceAsStream("ServiceRequestsBlue.png")));
     if (srHovered()) showSRSM(true);
   }
 
   @FXML
   public void statEntered() {
+    statisticsIcon.setImage(new Image(App.class.getResourceAsStream("StatisticsBlue.png")));
     if (statHovered()) showStatSM(true);
   }
 
   @FXML
   public void setEntered() {
+    settingsIcon.setImage(new Image(App.class.getResourceAsStream("SettingsBlue.png")));
     if (setHovered()) showSetSM(true);
   }
 
   @FXML
   public void soEntered() {
+    exitIcon.setImage(new Image(App.class.getResourceAsStream("ExitBlue.png")));
     if (soHovered()) showSOSM(true);
   }
 
   @FXML
+  public void homeExited() {
+    homeIcon.setImage(new Image(App.class.getResourceAsStream("Home.png")));
+  }
+
+  @FXML
   public void peopleExited() {
+    peopleIcon.setImage(new Image(App.class.getResourceAsStream("people.png")));
     if (!peopleHovered()) showPeopleSM(false);
     else showPeopleSM(true);
   }
 
   @FXML
   public void navExited() {
+    navigationIcon.setImage(new Image(App.class.getResourceAsStream("Map.png")));
     if (!navHovered()) showNavSM(false);
     else showNavSM(true);
   }
 
   @FXML
   public void srExited() {
+    srIcon.setImage(new Image(App.class.getResourceAsStream("ServiceRequests.png")));
     if (!srHovered()) {
       showSRSM(false);
     } else showSRSM(true);
@@ -95,6 +136,7 @@ public class MenuRootController {
 
   @FXML
   public void statExited() {
+    statisticsIcon.setImage(new Image(App.class.getResourceAsStream("Statistics.png")));
     if (!statHovered()) {
       showStatSM(false);
     } else showStatSM(true);
@@ -102,6 +144,7 @@ public class MenuRootController {
 
   @FXML
   public void setExited() {
+    settingsIcon.setImage(new Image(App.class.getResourceAsStream("Settings.png")));
     if (!setHovered()) {
       showSetSM(false);
     } else showSetSM(true);
@@ -109,6 +152,7 @@ public class MenuRootController {
 
   @FXML
   public void soExited() {
+    exitIcon.setImage(new Image(App.class.getResourceAsStream("Exit.png")));
     if (!soHovered()) {
       showSOSM(false);
     } else showSOSM(true);
@@ -180,6 +224,7 @@ public class MenuRootController {
 
   public void closeAll() {
     subPane.setVisible(false);
+    peopleSMController.setVisible(false);
     navigationSMController.setVisible(false);
     servicerequestSMController.setVisible(false);
     statisticsSMController.setVisible(false);

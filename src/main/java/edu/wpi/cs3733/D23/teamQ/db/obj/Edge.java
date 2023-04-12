@@ -38,4 +38,12 @@ public class Edge {
     int weight = (int) Math.sqrt(xDist * xDist + yDist * yDist);
     return weight;
   }
+
+  public Node getStartNode() {
+    return startNode;
+  }
+
+  public Node getEndNode() {
+    return endNode;
+  }
 }

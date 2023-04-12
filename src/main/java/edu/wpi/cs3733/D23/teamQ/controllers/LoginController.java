@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.App;
+import edu.wpi.cs3733.D23.teamQ.SecondaryStage;
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -20,9 +22,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lombok.Getter;
 
-public class LoginController {
+public class LoginController extends SecondaryStage implements IController {
   AccountDaoImpl dao = AccountDaoImpl.getInstance();
+  static String user;
   Alert alert = new Alert();
+  Qdb qdb = Qdb.getInstance();
   @FXML Label loginAlert;
   @FXML ImageView alertImage;
   @FXML TextField usernameField;
@@ -63,8 +67,36 @@ public class LoginController {
     }
   }
 
-  public void passwordReact(String enteredPassword, String actualPassword) throws IOException {
+  @FXML
+  public void loginButtonClicked() throws IOException {
+    String username = usernameField.getText();
+    String enteredPassword = passwordField.getText();
+    String actualPassword = "";
+    if (qdb.getAccountIndex(username) != -1) {
+      alert.clearLabelAlert(loginAlert, alertImage);
+      Account a = qdb.retrieveAccount(username);
+      actualPassword = a.getPassword();
+      passwordReact(username, enteredPassword, actualPassword);
+    } else if (!qdb.getAccountIndexes(username).isEmpty()) {
+      alert.clearLabelAlert(loginAlert, alertImage);
+      List<Account> as = qdb.retrieveAccounts(username);
+      for (Account a : as) {
+        actualPassword = a.getPassword();
+        username = a.getUsername();
+        passwordReact(username, enteredPassword, actualPassword);
+      }
+    } else {
+      alert.setLabelAlert("User doesn't exist", loginAlert, alertImage);
+    }
+  }
+
+  public void passwordReact(String username, String enteredPassword, String actualPassword)
+      throws IOException {
     if (enteredPassword.equals(actualPassword)) {
+      user = username;
+      Account a = qdb.retrieveAccount(username);
+      a.setActive(true);
+      qdb.updateAccount(username, a);
       alert.clearLabelAlert(loginAlert, alertImage);
       Screen menuScreen = Screen.MENU_PANE;
       final String filename = menuScreen.getFilename();
@@ -76,32 +108,13 @@ public class LoginController {
       Navigation.navigate(Screen.HOME);
       loginUsername = usernameField.getText();
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
-
     } else {
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }
   }
 
-  @FXML
-  public void loginButtonClicked() throws IOException {
-    String username = usernameField.getText();
-    String enteredPassword = passwordField.getText();
-    String actualPassword = "";
-    if (dao.getIndex(username) != -1) {
-      alert.clearLabelAlert(loginAlert, alertImage);
-      Account a = dao.retrieveRow(username);
-      actualPassword = a.getPassword();
-      passwordReact(enteredPassword, actualPassword);
-    } else if (!dao.getIndexes(username).isEmpty()) {
-      alert.clearLabelAlert(loginAlert, alertImage);
-      List<Account> as = dao.retrieveRows(username);
-      for (Account a : as) {
-        actualPassword = a.getPassword();
-        passwordReact(enteredPassword, actualPassword);
-      }
-    } else {
-      alert.setLabelAlert("User doesn't exist", loginAlert, alertImage);
-    }
+  public String getUsername() {
+    return user;
   }
 
   @FXML
