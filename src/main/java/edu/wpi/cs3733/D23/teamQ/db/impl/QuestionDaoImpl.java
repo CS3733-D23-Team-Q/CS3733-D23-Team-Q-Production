@@ -2,10 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Question;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +10,14 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
   private List<Question> questions = new ArrayList<Question>();
   private static QuestionDaoImpl single_instance = null;
 
-  private QuestionDaoImpl() {
-    populate();
-  }
-
   public static synchronized QuestionDaoImpl getInstance() {
     if (single_instance == null) single_instance = new QuestionDaoImpl();
 
     return single_instance;
+  }
+
+  private QuestionDaoImpl() {
+    populate();
   }
 
   public Question retrieveRow(Integer id) {
@@ -132,7 +129,7 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
     return false;
   }
 
-  public int getIndex(int id) {
+  public int getIndex(Integer id) {
     for (int i = 0; i < questions.size(); i++) {
       Question q = questions.get(i);
       if (q.getId() == id) {
@@ -145,7 +142,7 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
   public int getIndex(String question) {
     for (int i = 0; i < questions.size(); i++) {
       Question q = questions.get(i);
-      if (q.getQuestion() == question) {
+      if (q.getQuestion().equals(question)) {
         return i;
       }
     }

@@ -15,12 +15,12 @@ public class NavigationSubmenuController {
 
   @FXML
   public void pathfinderClicked() {
-    Navigation.navigate(Screen.PATH_TEXT);
+    Navigation.navigate(Screen.PATH_FINDING);
   }
 
   @FXML
   public void editorClicked() {
-    Navigation.navigate(Screen.MAP_EDITOR);
+    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
   }
 
   @FXML

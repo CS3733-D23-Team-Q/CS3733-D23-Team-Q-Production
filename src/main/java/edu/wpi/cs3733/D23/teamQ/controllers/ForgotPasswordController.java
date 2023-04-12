@@ -13,14 +13,15 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-public class ForgotPasswordController extends SecondaryStage {
+public class ForgotPasswordController extends SecondaryStage implements IController {
   Qdb qdb = Qdb.getInstance();
   CreateAccountController CAController = new CreateAccountController();
   Alert alert = new Alert();
   Confirm confirm = new Confirm();
-  @FXML ChoiceBox questionChoice1;
-  @FXML ChoiceBox questionChoice2;
+  @FXML ChoiceBox<String> questionChoice1;
+  @FXML ChoiceBox<String> questionChoice2;
   @FXML TextField usernameField;
   @FXML Label usernameAlert;
   @FXML ImageView usernameAlertImage;
@@ -34,8 +35,12 @@ public class ForgotPasswordController extends SecondaryStage {
   @FXML ImageView CPAlertImage;
   @FXML Button CPButton;
 
+  public ForgotPasswordController() throws IOException {}
+
   public static void display() throws IOException {
-    display(Screen.FORGOT_PASSWORD);
+    Stage stage = newStage(Screen.FORGOT_PASSWORD);
+    stage.show();
+    stage.centerOnScreen();
   }
 
   @FXML
@@ -52,13 +57,7 @@ public class ForgotPasswordController extends SecondaryStage {
   }
 
   public void newPasswordReact(
-      String username,
-      String newPassword,
-      String repassword,
-      int question1,
-      int question2,
-      String answer1,
-      String answer2)
+      String username, String newPassword, String repassword, String answer1, String answer2)
       throws IOException {
     Account a = qdb.retrieveAccount(username);
     String oldPassword = a.getPassword();
@@ -67,18 +66,12 @@ public class ForgotPasswordController extends SecondaryStage {
           "Please enter a different password from the old one", NPAlert, NPAlertImage);
     } else {
       alert.clearLabelAlert(NPAlert, NPAlertImage);
-      passwordReact(username, newPassword, repassword, question1, question2, answer1, answer2);
+      passwordReact(username, newPassword, repassword, answer1, answer2);
     }
   }
 
   public void passwordReact(
-      String username,
-      String newPassword,
-      String repassword,
-      int question1,
-      int question2,
-      String answer1,
-      String answer2)
+      String username, String newPassword, String repassword, String answer1, String answer2)
       throws IOException {
     switch (CAController.validPassword(newPassword)) {
       case 0:
@@ -86,11 +79,11 @@ public class ForgotPasswordController extends SecondaryStage {
         break;
       case 1:
         alert.clearLabelAlert(NPAlert, NPAlertImage);
-        repasswordReact(username, newPassword, repassword, question1, question2, answer1, answer2);
+        repasswordReact(username, newPassword, repassword, answer1, answer2);
         break;
       case 2:
         alert.setLabelAlert(
-            "Please enter a password within the range 7-15 with at least one uppercase letter and one special character",
+            "Please enter a password within the range 7-15 with at least one uppercase letter, one number, one special character",
             NPAlert,
             NPAlertImage);
         break;
@@ -98,51 +91,55 @@ public class ForgotPasswordController extends SecondaryStage {
   }
 
   public void repasswordReact(
-      String username,
-      String newPassword,
-      String repassword,
-      int question1,
-      int question2,
-      String answer1,
-      String answer2)
+      String username, String newPassword, String repassword, String answer1, String answer2)
       throws IOException {
     if (newPassword.equals(repassword)) {
       alert.clearLabelAlert(CPAlert, CPAlertImage);
-      securityQAReact(username, newPassword, repassword, question1, question2, answer1, answer2);
+      securityQReact(username, newPassword, repassword, answer1, answer2);
     } else {
       alert.setLabelAlert("Password doesn't match", CPAlert, CPAlertImage);
     }
   }
 
-  public void securityQAReact(
-      String username,
-      String newPassword,
-      String repassword,
-      int question1,
-      int question2,
-      String answer1,
-      String answer2)
+  public void securityQReact(
+      String username, String newPassword, String repassword, String answer1, String answer2)
       throws IOException {
+    String question1 = questionChoice1.getValue();
+    String question2 = questionChoice2.getValue();
+    if (qdb.getQuestionIndex(question1) != -1 || qdb.getQuestionIndex(question2) != -1) {
+      securityAReact(username, newPassword, repassword, answer1, answer2);
+    } else {
+      alert.setFieldAlert(answer1Field);
+      alert.setFieldAlert(answer2Field);
+      alert.alertBox("Failed to reset password", "One or more answers are wrong.");
+    }
+  }
+
+  public void securityAReact(
+      String username, String newPassword, String repassword, String answer1, String answer2)
+      throws IOException {
+    String question1 = questionChoice1.getValue();
+    String question2 = questionChoice2.getValue();
+    int question1id = qdb.retrieveQuestion(question1).getId();
+    int question2id = qdb.retrieveQuestion(question2).getId();
     Account a = qdb.retrieveAccount(username);
     int actualq1 = a.getSecurityQuestion1();
     int actualq2 = a.getSecurityQuestion2();
     String actuala1 = a.getSecurityAnswer1();
     String actuala2 = a.getSecurityAnswer2();
-    if (question1 == actualq1
-        && question2 == actualq2
+    if (question1id == actualq1
+        && question2id == actualq2
         && answer1.equals(actuala1)
         && answer2.equals(actuala2)) {
-      answer1Field.setStyle(null);
-      answer2Field.setStyle(null);
+      alert.clearFieldAlert(answer1Field);
+      alert.clearFieldAlert(answer2Field);
       a.setPassword(newPassword);
       qdb.updateAccount(username, a);
       Navigation.navigate(Screen.LOGIN);
-      super.stage.setScene(
-          confirm.getScene(super.stage, "Confirmation", "Password reset successful!"));
-      super.stage.centerOnScreen();
+      confirm.setScene(stage, "Confirmation", "Password reset successful!");
     } else {
-      answer1Field.setStyle("-fx-text-box-border: #AA3A47;");
-      answer2Field.setStyle("-fx-text-box-border: #AA3A47;");
+      alert.setFieldAlert(answer1Field);
+      alert.setFieldAlert(answer2Field);
       alert.alertBox("Failed to reset password", "One or more answers are wrong.");
     }
   }
@@ -151,13 +148,11 @@ public class ForgotPasswordController extends SecondaryStage {
     String username = usernameField.getText();
     String newPassword = NPField.getText();
     String repassword = CPField.getText();
-    int question1 = qdb.retrieveQuestion((String) questionChoice1.getValue()).getId();
-    int question2 = qdb.retrieveQuestion((String) questionChoice2.getValue()).getId();
     String answer1 = answer1Field.getText();
     String answer2 = answer2Field.getText();
     if (qdb.getAccountIndex(username) != -1) {
       alert.clearLabelAlert(usernameAlert, usernameAlertImage);
-      newPasswordReact(username, newPassword, repassword, question1, question2, answer1, answer2);
+      newPasswordReact(username, newPassword, repassword, answer1, answer2);
     } else {
       alert.setLabelAlert("Username doesn't exist", usernameAlert, usernameAlertImage);
     }
