@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -20,11 +21,12 @@ public class ConferenceRoomRequestDisplayController implements IController {
   @FXML MFXButton backButton;
 
   @FXML MFXButton updateButton;
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML
+  MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox foodField;
+  @FXML MFXComboBox foodField;
   @FXML MFXTextField specialInstructionsField;
 
   @FXML
