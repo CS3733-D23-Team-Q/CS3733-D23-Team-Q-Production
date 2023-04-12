@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Person;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,7 +15,7 @@ import javafx.util.Callback;
 
 public class DirectoryController {
 
-  @FXML private TableColumn<Account, String> Email;
+  @FXML private TableColumn<edu.wpi.cs3733.D23.teamQ.db.obj.Person, String> Email;
 
   @FXML private TableColumn<Person, String> FirstName;
 
@@ -72,10 +71,12 @@ public class DirectoryController {
 
     /** input the Email to the table */
     Email.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
+        new Callback<TableColumn.CellDataFeatures<Person, String>, ObservableValue<String>>() {
           @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty email = new SimpleStringProperty(param.getValue().getEmail());
+          public ObservableValue<String> call(TableColumn.CellDataFeatures<Person, String> param) {
+            SimpleStringProperty email =
+                new SimpleStringProperty(
+                    Qdb.getInstance().getEmailWithAUsername(param.getValue().getUsername()));
             return email;
           }
         });

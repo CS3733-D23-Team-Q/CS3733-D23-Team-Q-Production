@@ -195,6 +195,16 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     return is;
   }
 
+  public String getEmailWithUsername(String AUsername) {
+    String TheEmail = "";
+    for (int i = 0; i < accounts.size(); i++) {
+      if (accounts.get(i).getUsername().equals(AUsername)) {
+        TheEmail = accounts.get(i).getEmail();
+      }
+    }
+    return TheEmail;
+  }
+
   public int getQuestionId(String question) {
     int q = 0;
     Connection con = GenDao.connect();

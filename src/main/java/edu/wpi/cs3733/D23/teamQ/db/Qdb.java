@@ -325,4 +325,8 @@ public class Qdb {
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
+
+  public String getEmailWithAUsername(String username) {
+    return accountTable.getEmailWithUsername(username);
+  }
 }
