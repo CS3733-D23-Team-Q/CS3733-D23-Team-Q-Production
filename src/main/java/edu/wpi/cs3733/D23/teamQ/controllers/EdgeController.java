@@ -21,6 +21,7 @@ import javafx.util.Callback;
 public class EdgeController {
 
   private String path;
+  Alert alert = new Alert();
   /*
 
   private int newEdgeID;
@@ -129,9 +130,9 @@ public class EdgeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().edgeTable.toCSV(path);
     if (success) {
-      Alert.alertBox("Export Successfully", "Export Successfully");
+      alert.alertBox("Export Successfully", "Export Successfully");
     } else {
-      Alert.alertBox("Failed to Export", "Failed to Export");
+      alert.alertBox("Failed to Export", "Failed to Export");
     }
   }
 
@@ -148,6 +149,6 @@ public class EdgeController {
 
   @FXML
   void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR);
+    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
   }
 }
