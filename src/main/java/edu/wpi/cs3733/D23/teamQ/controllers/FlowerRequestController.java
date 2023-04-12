@@ -84,7 +84,7 @@ public class FlowerRequestController {
 
     qdb.addFlowerRequest(newFR);
 
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
