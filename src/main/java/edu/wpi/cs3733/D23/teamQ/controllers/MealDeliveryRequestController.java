@@ -48,7 +48,16 @@ public class MealDeliveryRequestController {
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+    assigneeField.setValue("Select an Assignee");
+    roomNumberField.setValue("Select a Location");
+    dateField.clear();
+    timeField.clear();
+    drinkField.setValue("Select Drink");
+    entreeField.setValue("Select an Entree");
+    sideField.setValue("Select a Side");
+    specialInstructionsField.clear();
+  }
 
   @FXML
   public void cancelButtonClicked() {}
