@@ -82,7 +82,7 @@
          <children>
             <ImageView fitHeight="53.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Home.png" />
+                  <Image url="@../Home.png" />
                </image>
             </ImageView>
             <Button fx:id="homeButton" graphicTextGap="17.0" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="43.0" prefWidth="98.0" styleClass="button-navigate" stylesheets="@styles/Home.css" text="Home" textFill="#3966af" HBox.hgrow="ALWAYS">
