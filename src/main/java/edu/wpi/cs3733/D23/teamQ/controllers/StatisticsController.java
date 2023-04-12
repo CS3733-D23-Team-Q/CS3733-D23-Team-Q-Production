@@ -12,8 +12,8 @@ public class StatisticsController {
 
   @FXML
   public void initialize() {
-    users.setText("Total users: " + qdb.retrieveAllAccounts().size());
+    users.setText("Total users: " + qdb.retrieveAllPeople().size());
     nodes.setText("Total nodes: " + qdb.retrieveAllNodes().size());
-    requests.setText("Total request: " + qdb.retrieveAllServiceRequests().size());
+    requests.setText("Total requests: " + qdb.retrieveAllServiceRequests().size());
   }
 }

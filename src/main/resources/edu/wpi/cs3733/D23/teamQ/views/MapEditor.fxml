@@ -71,7 +71,7 @@
                         <Image url="@../../../../../../Location.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="mealImage1" fitHeight="129.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="mealImage1" fitHeight="93.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../../../../Map.png" />
                     </image>
@@ -107,7 +107,7 @@
             <children>
                 <ImageView fitHeight="53.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../../Home.png" />
+                        <Image url="@../Home.png" />
                     </image>
                 </ImageView>
             </children>

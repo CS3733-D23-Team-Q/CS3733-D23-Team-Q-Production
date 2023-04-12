@@ -20,9 +20,9 @@ public class App extends Application {
 
   @Setter @Getter private static Stage primaryStage;
   @Setter @Getter private static AnchorPane rootCenter;
-  @Setter @Getter private static AnchorPane rootRight;
   @Setter @Getter private static RootController rController;
   @Setter @Getter private static BorderPane rootBorder;
+  @Setter @Getter private static AnchorPane rootRight;
 
   @Override
   public void init() {
@@ -39,6 +39,7 @@ public class App extends Application {
     rootBorder = loader.load();
     rController = loader.getController();
     App.rootCenter = rController.rootCenter;
+    App.rootRight = rController.rootRight;
     primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));
     final Scene scene = new Scene(rootBorder);
     primaryStage.setScene(scene);

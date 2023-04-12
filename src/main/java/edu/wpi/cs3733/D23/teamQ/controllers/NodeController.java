@@ -1,10 +1,9 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
+import edu.wpi.cs3733.D23.teamQ.Confirm;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,7 +11,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -368,10 +366,11 @@ public class NodeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().nodeTable.toCSV(path);
     if (success) {
-      Alert.alertBox("Export Successfully", "Export Successfully");
+      Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
       Alert.alertBox("Failed to Export", "Failed to Export");
     }
+    node.setItems(nodes());
   }
 
   @FXML
@@ -379,14 +378,17 @@ public class NodeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().nodeTable.importCSV(path);
     if (success) {
-      Alert.alertBox("Import Successfully", "Import Successfully");
+      Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
+    node.setItems(nodes());
   }
+  /*
+   @FXML
+   void BackClicked(ActionEvent event) {
+     Navigation.navigate(Screen.MAP_EDITOR);
+   }
 
-  @FXML
-  void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
-  }
+  */
 }
