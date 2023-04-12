@@ -1,0 +1,45 @@
+.button-menu
+{
+    -fx-background-color: #142A53;
+    -fx-font-size: 14px;
+    -fx-color: #142A53;
+}
+.button-slider
+{
+    -fx-background-color: #F1F1F1;
+}
+.button-navigate
+{
+    -fx-font-size: 16px;
+    -fx-text-fill: #3966af;
+    -fx-background-color: #F1F1F1;
+}
+.button-login
+{
+    -fx-background-color: #3492D5;
+}
+.button-forgot
+{
+    -fx-background-color: #B3BBC0;
+}
+.button:hover
+{
+    -fx-background-color: #0096C9;
+}
+.button-slider:hover{
+    -fx-background-color: #E7BE45;
+}
+.button-navigate:hover{
+    -fx-background-color: #F1F1F1;
+    -fx-font-weight: bold;
+}
+.button-navigate:focused{
+    -fx-font-size: 16px;
+}
+.button-login:hover{
+    -fx-background-color: #2f7da6;
+}
+.button-forgot:hover{
+    -fx-background-color: #B3BBC0;
+    -fx-underline: false;
+}
