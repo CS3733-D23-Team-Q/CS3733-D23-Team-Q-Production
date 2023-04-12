@@ -21,6 +21,7 @@ public class MenuRootController {
   @FXML AnchorPane mainPane;
   @FXML VBox menuPane;
   @FXML AnchorPane subPane;
+  @FXML VBox spacer;
   @FXML ImageView homeIcon;
   @FXML ImageView peopleIcon;
   @FXML ImageView navigationIcon;
@@ -28,7 +29,6 @@ public class MenuRootController {
   @FXML ImageView statisticsIcon;
   @FXML ImageView settingsIcon;
   @FXML ImageView exitIcon;
-  Image homeBlue;
   @FXML PeopleSubmenuController peopleSMController;
   @FXML NavigationSubmenuController navigationSMController;
   @FXML ServiceRequestSubmenuController servicerequestSMController;
@@ -51,6 +51,11 @@ public class MenuRootController {
 
   @FXML
   public void subPaneExited() {
+    closeAll();
+  }
+
+  @FXML
+  public void spacerEntered() {
     closeAll();
   }
 

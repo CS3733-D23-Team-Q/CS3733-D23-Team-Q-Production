@@ -89,6 +89,7 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
+                  <VBox fx:id="spacer" maxHeight="1.7976931348623157E308" onMouseEntered="#spacerEntered" prefHeight="122.0" prefWidth="240.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <MFXButton fx:id="signout" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#soEntered" onMouseExited="#soExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
