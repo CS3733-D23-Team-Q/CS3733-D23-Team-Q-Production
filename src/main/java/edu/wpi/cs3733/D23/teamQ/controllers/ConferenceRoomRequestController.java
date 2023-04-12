@@ -66,6 +66,7 @@ public class ConferenceRoomRequestController {
             (String) assigneeField.getValue(),
             qdb.retrieveNode(qdb.getNodeFromLocation((String) roomNumberField.getValue())),
             specialInstructionsField.getText(),
+            // FIX THIS
             Date.valueOf(dateField.getCurrentDate()),
             timeField.getText(),
             (String) foodField.getValue());
