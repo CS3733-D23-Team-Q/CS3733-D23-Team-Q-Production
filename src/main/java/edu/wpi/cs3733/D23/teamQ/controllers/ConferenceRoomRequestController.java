@@ -17,7 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import java.sql.Date;
 
 public class ConferenceRoomRequestController {
-
+  Qdb qdb = Qdb.getInstance();
   @FXML ChoiceBox assigneeField;
   @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
@@ -33,15 +33,23 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void initialize() {
+    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setValue(qdb.getAllNames());
+    this.roomNumberField.setValue("Select a Conference Room");
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.foodField.setValue("Select Food Option");
     this.foodField.setItems(foodOptionsList);
   }
 
   @FXML
   public void resetButtonClicked() {
-    this.foodField.setValue("Select Food Option");
-    this.foodField.setItems(foodOptionsList);
-
+    assigneeField.setValue("Select an Assignee");
+    roomNumberField.setValue("Select a Location");
+    dateField.clear();
+    timeField.clear();
+    foodField.setValue("Select Food Option");
+    specialInstructionsField.clear();
   }
 
   @FXML

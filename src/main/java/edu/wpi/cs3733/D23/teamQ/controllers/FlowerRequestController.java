@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
 public class FlowerRequestController {
+  Qdb qdb = Qdb.getInstance();
   @FXML MFXComboBox assigneeField;
   @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
@@ -36,12 +37,24 @@ public class FlowerRequestController {
    */
   @FXML
   public void initialize() {
+    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setValue(qdb.getAllNames());
+    this.roomNumberField.setValue("Select a Location");
+    this.roomNumberField.setValue(qdb.getAllLongNames());
     this.flowerTypeField.setValue("Select Flower");
     this.flowerTypeField.setItems(TypeOfFlowers);
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+    assigneeField.setValue("Select an Assignee");
+    roomNumberField.setValue("Select a Location");
+    dateField.clear();
+    timeField.clear();
+    flowerTypeField.setValue("Select Flower");
+    bouquetChoiceField.clear();
+    specialInstructionsField.clear();
+  }
 
   @FXML
   public void cancelButtonClicked() {
