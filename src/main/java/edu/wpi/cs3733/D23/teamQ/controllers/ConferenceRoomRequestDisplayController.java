@@ -7,13 +7,12 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
+import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-
-import java.sql.Date;
-import java.time.LocalDate;
 
 public class ConferenceRoomRequestDisplayController implements IController {
 
@@ -40,10 +39,15 @@ public class ConferenceRoomRequestDisplayController implements IController {
 
     assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
     roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getNode());
-    dateField.setValue(LocalDate.of(ListServiceRequestController.getConferenceRequest().getDate().getYear(),ListServiceRequestController.getConferenceRequest().getDate().getMonth(), ListServiceRequestController.getConferenceRequest().getDate().getDay()));
+    dateField.setValue(
+        LocalDate.of(
+            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
+            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
+            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     foodField.setValue(ListServiceRequestController.getConferenceRequest().getFoodChoice());
-    specialInstructionsField.setText(ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+    specialInstructionsField.setText(
+        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
   }
 
   @FXML
@@ -54,7 +58,8 @@ public class ConferenceRoomRequestDisplayController implements IController {
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);}
+    Navigation.navigate(Screen.HOME);
+  }
 
   // Update with proper date and time
   @FXML
@@ -62,18 +67,17 @@ public class ConferenceRoomRequestDisplayController implements IController {
     Qdb qdb = Qdb.getInstance();
 
     ConferenceRequest newCCR =
-            new ConferenceRequest(
-                    ListServiceRequestController.getConferenceRequest().getRequestID(),
-                    ListServiceRequestController.getConferenceRequest().getNode(),
-                    "temp user",
-                    (String) assigneeField.getValue(),
-                    0,
-                    specialInstructionsField.getText(),
-                    Date.valueOf(dateField.getValue()),
-                    timeField.getText(),
-                    (String) foodField.getValue());
+        new ConferenceRequest(
+            ListServiceRequestController.getConferenceRequest().getRequestID(),
+            ListServiceRequestController.getConferenceRequest().getNode(),
+            "temp user",
+            (String) assigneeField.getValue(),
+            0,
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            (String) foodField.getValue());
     qdb.updateConferenceRequest(
-            ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
-
+        ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
   }
 }
