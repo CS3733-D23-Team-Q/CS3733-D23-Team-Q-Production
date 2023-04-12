@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.SecondaryStage;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import lombok.Getter;
 
 public class LoginController extends SecondaryStage implements IController {
+  AccountDaoImpl dao = AccountDaoImpl.getInstance();
   static String user;
   Alert alert = new Alert();
   Qdb qdb = Qdb.getInstance();
@@ -104,6 +106,8 @@ public class LoginController extends SecondaryStage implements IController {
       App.getRootBorder().setLeft(n);
       App.getRController().showMenu(true);
       Navigation.navigate(Screen.HOME);
+      loginUsername = usernameField.getText();
+      loginEmail = dao.retrieveRow(loginUsername).getEmail();
     } else {
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }

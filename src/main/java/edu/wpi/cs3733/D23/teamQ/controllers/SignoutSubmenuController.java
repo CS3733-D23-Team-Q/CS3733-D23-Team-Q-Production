@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.awt.*;
 import javafx.application.Platform;
@@ -17,8 +15,9 @@ public class SignoutSubmenuController {
 
   @FXML
   public void signoutClicked() {
-    App.getRController().showMenu(false);
-    Navigation.navigate(Screen.LOGIN);
+    //    App.getRController().showMenu(false);
+    //    Navigation.navigate(Screen.LOGIN);
+    Navigation.logout();
   }
 
   @FXML

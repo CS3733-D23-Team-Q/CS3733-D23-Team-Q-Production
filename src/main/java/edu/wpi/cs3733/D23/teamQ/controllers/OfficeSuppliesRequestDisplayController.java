@@ -1,11 +1,10 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
@@ -13,30 +12,32 @@ import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
-public class FlowerRequestDisplayController {
+public class OfficeSuppliesRequestDisplayController {
 
-  ObservableList<String> TypeOfFlowers =
-      FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
+  ObservableList<String> officeItemList =
+      FXCollections.observableArrayList(
+          "Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");
 
   @FXML MFXButton deleteButton;
   @FXML MFXButton backButton;
   @FXML MFXButton updateButton;
 
-  @FXML MFXComboBox assigneeField;
-  @FXML MFXComboBox roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML MFXComboBox flowerTypeField;
-  @FXML MFXTextField bouquetChoiceField;
+  @FXML ChoiceBox itemRequestedField;
+  @FXML MFXTextField quantityField;
   @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
-    flowerTypeField.setItems(TypeOfFlowers);
+    itemRequestedField.setItems(officeItemList);
 
-    assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getNode());
+    assigneeField.setValue(ListServiceRequestController.getOfficeRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getOfficeRequest().getNode());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear(),
@@ -45,15 +46,14 @@ public class FlowerRequestDisplayController {
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
-    flowerTypeField.setValue(ListServiceRequestController.getFlowerRequest().getFlowerType());
-    bouquetChoiceField.setText(
-        String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
+    quantityField.setText(
+        String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
   }
 
   @FXML
   public void deleteButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-    qdb.deleteFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID());
+    qdb.deleteOfficeSuppliesRequest(ListServiceRequestController.getOfficeRequest().getRequestID());
   }
 
   @FXML
@@ -66,20 +66,20 @@ public class FlowerRequestDisplayController {
 
     Qdb qdb = Qdb.getInstance();
 
-    FlowerRequest newFR =
-        new FlowerRequest(
-            ListServiceRequestController.getFlowerRequest().getRequestID(),
+    OfficeSuppliesRequest newOR =
+        new OfficeSuppliesRequest(
+            ListServiceRequestController.getOfficeRequest().getRequestID(),
             "temp requester",
             0,
             "temp assignee",
-            ListServiceRequestController.getFlowerRequest().getNode(),
+            ListServiceRequestController.getOfficeRequest().getNode(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            "",
-            (String) flowerTypeField.getValue(),
-            Integer.parseInt((String) bouquetChoiceField.getText()));
+            (String) itemRequestedField.getValue(),
+            Integer.parseInt((String) quantityField.getText()));
 
-    qdb.updateFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID(), newFR);
+    qdb.updateOfficeSuppliesRequest(
+        ListServiceRequestController.getFlowerRequest().getRequestID(), newOR);
   }
 }
