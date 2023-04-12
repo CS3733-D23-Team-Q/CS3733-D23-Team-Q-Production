@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
 public class OfficeSuppliesRequestController {
+  Qdb qdb = Qdb.getInstance();
   @FXML ChoiceBox assigneeField;
   @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
@@ -33,6 +34,10 @@ public class OfficeSuppliesRequestController {
 
   @FXML
   public void initialize() {
+    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setItems(qdb.getAllNames());
+    this.roomNumberField.setValue("Select a Location");
+    this.roomNumberField.setItems(qdb.getAllLongNames());
     this.itemRequestedField.setValue("Select Item");
     this.itemRequestedField.setItems(itemList);
 

@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 public class Qdb {
 
@@ -64,6 +65,10 @@ public class Qdb {
 
   public int getAccountIndex(String username) {
     return accountTable.getIndex(username);
+  }
+
+  public ObservableList<String> getAllNames() {
+    return personTable.getAllNames();
   }
 
   public List<Integer> getAccountIndexes(String email) {
@@ -184,6 +189,14 @@ public class Qdb {
 
   public ArrayList<Location> retrieveAllLocations() {
     return (ArrayList<Location>) locationTable.getAllRows();
+  }
+
+  public ObservableList<String> getAllLongNames(String[] nodeTypes) {
+    return locationTable.getAllLongNames(nodeTypes);
+  }
+
+  public ObservableList<String> getAllLongNames() {
+    return locationTable.getAllLongNames();
   }
 
   public Move retrieveMove(int moveID) {
@@ -342,6 +355,10 @@ public class Qdb {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
 
+  public int getNodeFromLocation(String lName) {
+    return locationTable.getNodeFromLocation(lName);
+  }
+  
   public String getEmailWithAUsername(String username) {
     return accountTable.getEmailWithUsername(username);
   }
