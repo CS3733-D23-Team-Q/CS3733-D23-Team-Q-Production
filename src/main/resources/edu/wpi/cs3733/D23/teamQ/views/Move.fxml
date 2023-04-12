@@ -69,12 +69,12 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="122.0" text="Please input the path" />
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="161.0" text="Please input the filename" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="ImportPath" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="161.0" promptText="Path" />
+                  <TextField fx:id="ImportPath" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="23.0" prefWidth="161.0" promptText="Filename" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

@@ -66,12 +66,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="147.0" text="Please input the path" GridPane.columnIndex="1" />
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="147.0" text="Please input the filename" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" prefHeight="23.0" prefWidth="93.0" stylesheets="@styles/MapEditor.css" text="ImportCSV" GridPane.columnIndex="2" />
             <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="93.0" stylesheets="@styles/MapEditor.css" text="ExportCSV" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="ImportPath" prefHeight="23.0" prefWidth="163.0" promptText="Path" />
+                  <TextField fx:id="ImportPath" prefHeight="23.0" prefWidth="163.0" promptText="Filename" />
                </children>
             </HBox>
          </children>

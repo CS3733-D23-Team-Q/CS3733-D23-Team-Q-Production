@@ -171,7 +171,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
       for (int i = 0; i < nodes.size(); i++) {
         Node n = nodes.get(i);
         myWriter.write(
-                String.valueOf(n.getNodeID())
+            String.valueOf(n.getNodeID())
                 + ','
                 + String.valueOf(n.getXCoord())
                 + ','
