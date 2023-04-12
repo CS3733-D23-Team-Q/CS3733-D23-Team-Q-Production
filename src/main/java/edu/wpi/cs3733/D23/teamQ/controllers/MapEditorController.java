@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 
-public class MapEditorTableController {
+public class MapEditorController {
 
   @FXML private Button Edge;
 
