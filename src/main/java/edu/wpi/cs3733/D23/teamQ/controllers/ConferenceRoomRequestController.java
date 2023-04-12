@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -13,14 +14,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
+import java.sql.Date;
+
 public class ConferenceRoomRequestController {
 
-  @FXML
-  MFXComboBox assigneeField;
-  @FXML MFXComboBox roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML MFXComboBox foodField;
+  @FXML ChoiceBox foodField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
@@ -36,7 +38,11 @@ public class ConferenceRoomRequestController {
   }
 
   @FXML
-  public void resetButtonClicked() {}
+  public void resetButtonClicked() {
+    this.foodField.setValue("Select Food Option");
+    this.foodField.setItems(foodOptionsList);
+
+  }
 
   @FXML
   public void cancelButtonClicked() {
@@ -47,21 +53,17 @@ public class ConferenceRoomRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
 
-    //    ConferenceRequest newCCR =
-    //        new ConferenceRequest(
-    //            0,
-    //            "temp user",
-    //            0,
-    //            assigneeField.getText(),
-    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-    //            specialInstructionsField.getText(),
-    //            // add for date
-    //            // add for time
-    //            (String) foodField.getValue());
-    //    qdb.addConferenceRequest(newCCR);
-
-    Navigation.navigate(Screen.HOME);
-  }
+        ConferenceRequest cr = new ConferenceRequest(
+                LoginController.getLoginUsername(),
+                0,
+                (String)assigneeField.getValue(),
+                qdb.retrieveNode(Integer.parseInt((String)roomNumberField.getValue())),
+                specialInstructionsField.getText(),
+                Date.valueOf(dateField.getCurrentDate()),
+                timeField.getText(),
+                (String)foodField.getValue());
+        Navigation.navigate(Screen.HOME);
+    }
 
   @FXML
   public void homeItemClicked() {
