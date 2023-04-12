@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -26,15 +25,15 @@ public class MealDeliveryRequestDisplayController {
   @FXML MFXButton backButton;
 
   @FXML MFXButton updateButton;
-    @FXML ChoiceBox assigneeField;
-    @FXML ChoiceBox roomNumberField;
-    @FXML MFXDatePicker dateField;
-    @FXML MFXTextField timeField;
-    @FXML MFXTextField specialInstructionsField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
+  @FXML MFXTextField specialInstructionsField;
 
-    @FXML ChoiceBox drinkField;
-    @FXML ChoiceBox entreeField;
-    @FXML ChoiceBox sideField;
+  @FXML ChoiceBox drinkField;
+  @FXML ChoiceBox entreeField;
+  @FXML ChoiceBox sideField;
 
   @FXML
   public void initialize() {
@@ -71,18 +70,18 @@ public class MealDeliveryRequestDisplayController {
     Qdb qdb = Qdb.getInstance();
 
     MealRequest newMR =
-        new MealRequest(ListServiceRequestController.getMealRequest().getRequestID(),
-                "Temp",
-                0,
-                "assignee",
-                ListServiceRequestController.getConferenceRequest().getNode(),
-                specialInstructionsField.getText(),
-                Date.valueOf(dateField.getValue()),
-                timeField.getText(),
-                (String)drinkField.getValue(),
-                (String)entreeField.getValue(),
-                (String)sideField.getValue());
-    qdb.updateMealRequest(
-        ListServiceRequestController.getMealRequest().getRequestID(), newMR);
+        new MealRequest(
+            ListServiceRequestController.getMealRequest().getRequestID(),
+            "Temp",
+            0,
+            "assignee",
+            ListServiceRequestController.getConferenceRequest().getNode(),
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            (String) drinkField.getValue(),
+            (String) entreeField.getValue(),
+            (String) sideField.getValue());
+    qdb.updateMealRequest(ListServiceRequestController.getMealRequest().getRequestID(), newMR);
   }
 }

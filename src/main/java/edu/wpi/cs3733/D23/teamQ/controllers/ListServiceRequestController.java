@@ -2,6 +2,10 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.collections.ObservableList;
@@ -18,10 +22,11 @@ public class ListServiceRequestController {
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
+
   private static MealRequest mealRequest;
   private static OfficeSuppliesRequest officeSuppliesRequest;
-  private static FurnitureRequest furnitureRequest;
 
+  private static FurnitureRequest furnitureRequest;
 
   Qdb qdb = Qdb.getInstance();
 
@@ -43,6 +48,7 @@ public class ListServiceRequestController {
       flowerRequest =
           qdb.retrieveFlowerRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+
       Navigation.navigate(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
@@ -62,11 +68,15 @@ public class ListServiceRequestController {
     return flowerRequest;
   }
 
-  public static MealRequest getMealRequest(){return mealRequest;}
+  public static MealRequest getMealRequest() {
+    return mealRequest;
+  }
 
-  public static OfficeSuppliesRequest getOfficeSuppliesRequest(){return officeSuppliesRequest;}
+  public static OfficeSuppliesRequest getOfficeSuppliesRequest() {
+    return officeSuppliesRequest;
+  }
 
-  public static FurnitureRequest getFurnitureRequest(){return furnitureRequest;}
-
-
+  public static FurnitureRequest getFurnitureRequest() {
+    return furnitureRequest;
+  }
 }
