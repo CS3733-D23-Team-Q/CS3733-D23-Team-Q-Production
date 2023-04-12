@@ -1,5 +1,9 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -7,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+
+import java.sql.Date;
 
 public class FurnitureDeliveryRequestController {
   @FXML ChoiceBox assigneeField;
@@ -36,24 +42,22 @@ public class FurnitureDeliveryRequestController {
 
   @FXML
   public void submitButtonClicked() {
-    /*
-        Qdb qdb = Qdb.getInstance();
+    Qdb qdb = Qdb.getInstance();
 
-    //    FurnitureRequest newFR =
-    //        new FurnitureRequest(
-    //            0,
-    //            "temp user",
-    //            0,
-    //            assigneeField.getText(),
-    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-    //            specialInstructionsField.getText(),
-    //            //for date,
-    //                // for time
-    //            (String) itemField.getValue());
+    FurnitureRequest newFR = new FurnitureRequest(
+            LoginController.getLoginUsername(),
+            0,
+            assigneeField.getValue().toString(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getValue().toString())),
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            itemRequestedField.getValue().toString()
+    );
 
-        // qdb.addConferenceRequest(newFR);
-        Navigation.navigate(Screen.HOME);
+    qdb.addFurnitureRequest(newFR);
+    Navigation.navigate(Screen.HOME);
 
-         */
+
   }
 }
