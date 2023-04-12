@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ProfilePageController">
    <children>
       <Label layoutX="270.0" layoutY="318.0" text="Title">
@@ -100,10 +99,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="1061.0" layoutY="776.0" mnemonicParsing="false" style="-fx-background-color: #012D5A;" text="Edit Profile" textFill="WHITE">
+      <Button fx:id="ProfilePage_Edit_Button" layoutX="1029.0" layoutY="782.0" mnemonicParsing="false" onAction="#EditPressed" style="-fx-background-color: #012D5A;" text="Edit Profile" textFill="WHITE">
          <padding>
             <Insets bottom="15.0" left="40.0" right="40.0" top="15.0" />
          </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>
