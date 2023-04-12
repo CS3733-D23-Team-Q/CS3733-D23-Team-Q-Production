@@ -57,13 +57,19 @@ public class PathfindingController {
 
   public void addButtons() {
     List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> L1nodes = new ArrayList<>();
+    List<Node> ffNodes = new ArrayList<>();
     for (Node n : nodes) {
-      if (n.getFloor().equals("L1")) {
-        L1nodes.add(n);
+      /*
+      int nodeID = n.getNodeID();
+      Location location = qdb.retrieveLocation(nodeID);
+      String name = location.getShortName();
+      Pattern pattern = Pattern.compile("(?i).*hall.*");
+       */
+      if (n.getFloor().equals("1")) { // && !pattern.matcher(name).matches()) {
+        ffNodes.add(n);
       }
     }
-    for (Node n : L1nodes) {
+    for (Node n : ffNodes) {
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
       Button node = new Button();
