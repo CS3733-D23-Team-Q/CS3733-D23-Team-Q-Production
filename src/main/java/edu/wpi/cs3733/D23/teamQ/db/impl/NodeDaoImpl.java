@@ -208,7 +208,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
                 Integer.parseInt(vars[2]),
                 vars[3],
                 vars[4],
-                locationTable.retrieveRow(Integer.parseInt(vars[0])));
+                null);
         addRow(m);
       }
       myReader.close();
