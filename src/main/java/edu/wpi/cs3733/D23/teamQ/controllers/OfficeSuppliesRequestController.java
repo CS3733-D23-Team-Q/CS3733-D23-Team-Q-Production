@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
 public class OfficeSuppliesRequestController {
+  Qdb qdb = Qdb.getInstance();
   @FXML ChoiceBox assigneeField;
   @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
@@ -26,6 +28,10 @@ public class OfficeSuppliesRequestController {
 
   @FXML
   public void initialize() {
+    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setItems(qdb.getAllNames());
+    this.roomNumberField.setValue("Select a Location");
+    this.roomNumberField.setItems(qdb.getAllLongNames());
     this.itemRequestedField.setValue("Select Item");
     this.itemRequestedField.setItems(itemList);
   }
