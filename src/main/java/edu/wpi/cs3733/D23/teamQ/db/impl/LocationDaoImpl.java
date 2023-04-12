@@ -213,4 +213,14 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
       return false;
     }
   }
+
+  public int getNodeFromLocation(String lName) {
+    int id = 0;
+    for (int i = 0; i < locations.size(); i++) {
+      if (lName.equals(locations.get(i).getLongName())) {
+        id = locations.get(i).getNodeID();
+      }
+    }
+    return id;
+  }
 }
