@@ -2,10 +2,13 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+<<<<<<< HEAD
 import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
+=======
+>>>>>>> 7d06f8d07e6c9c6f19b8f883846a520afcb0c160
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.collections.ObservableList;
@@ -23,11 +26,14 @@ public class ListServiceRequestController {
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
 
+<<<<<<< HEAD
   private static MealRequest mealRequest;
   private static OfficeSuppliesRequest officeSuppliesRequest;
 
   private static FurnitureRequest furnitureRequest;
 
+=======
+>>>>>>> 7d06f8d07e6c9c6f19b8f883846a520afcb0c160
   Qdb qdb = Qdb.getInstance();
 
   public ListServiceRequestController() {}
@@ -48,7 +54,10 @@ public class ListServiceRequestController {
       flowerRequest =
           qdb.retrieveFlowerRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7d06f8d07e6c9c6f19b8f883846a520afcb0c160
       Navigation.navigate(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
@@ -68,6 +77,7 @@ public class ListServiceRequestController {
     return flowerRequest;
   }
 
+<<<<<<< HEAD
   public static MealRequest getMealRequest() {
     return mealRequest;
   }
@@ -78,5 +88,13 @@ public class ListServiceRequestController {
 
   public static FurnitureRequest getFurnitureRequest() {
     return furnitureRequest;
+=======
+  public static FurnitureRequest getFurnitureRequest() {
+    return furnitureRequest;
+  }
+
+  public static OfficeSuppliesRequest getOfficeRequest(){
+    return 
+>>>>>>> 7d06f8d07e6c9c6f19b8f883846a520afcb0c160
   }
 }
