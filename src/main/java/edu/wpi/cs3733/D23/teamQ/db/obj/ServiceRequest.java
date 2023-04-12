@@ -13,6 +13,7 @@ public class ServiceRequest {
   private String requester;
   private String assignee;
   private Node node;
+  private int nodeID;
   private String specialInstructions;
   private Date date;
   private String time;
@@ -48,5 +49,6 @@ public class ServiceRequest {
     this.specialInstructions = specialInstructions;
     this.date = date;
     this.time = time;
+    this.nodeID = node.getNodeID();
   }
 }

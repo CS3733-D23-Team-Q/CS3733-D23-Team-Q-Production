@@ -19,8 +19,8 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   }
 
   private MealRequestDaoImpl(NodeDaoImpl nodeTable) {
-    populate();
     this.nodeTable = nodeTable;
+    populate();
     if (mealRequests.size() != 0) {
       nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;
     }
