@@ -8,21 +8,18 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-
-import java.sql.Date;
 
 public class FlowerRequestController {
   @FXML MFXComboBox assigneeField;
   @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML
-  MFXComboBox flowerTypeField;
+  @FXML MFXComboBox flowerTypeField;
   @FXML MFXTextField bouquetChoiceField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> TypeOfFlowers =
@@ -58,37 +55,21 @@ public class FlowerRequestController {
     //          bouquetChoiceField.setValue("0");
     //        }
 
-    FlowerRequest newFR = new FlowerRequest(
-                    LoginController.getLoginUsername(),
-                    0,
-                    assigneeField.getValue(),
-                    qdb.retrieveNode(Integer.parseInt((String) roomNumberField.getValue())),
-                    specialInstructionsField.getText(),
-                    Date.valueOf(dateField.getValue()),
-                    timeField.getText(),
-                    "",
-                    flowerTypeField.getValue(),
-                    bouquetChoiceField.getText());
-
-    //
-    //
-    //
-    //    )
-
-    //        FlowerRequest newFR =
-    //            new FlowerRequest(
-    //                LoginController.getLoginUsername(),
-    //                0,
-    //                assigneeField.getText(),
-    //                qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-    //                specialInstructionsField.getText(),
-    //                //for date textfield or button,
-    //                    // for time textfield or button,
-    //                noteField.getText(),
-    //                (String) flowerChoiceField.getValue(),
-    //                Integer.parseInt((String) bouquetChoiceField.getValue()));
+    FlowerRequest newFR =
+        new FlowerRequest(
+            LoginController.getLoginUsername(),
+            0,
+            assigneeField.getSelectedItem().toString(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getSelectedItem().toString())),
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            "",
+            flowerTypeField.getSelectedItem().toString(),
+            Integer.parseInt(bouquetChoiceField.getText()));
 
     qdb.addFlowerRequest(newFR);
+
     Navigation.navigate(Screen.HOME);
   }
 
