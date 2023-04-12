@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 
-public class HelpController {
+public class HelpController implements IController {
   @FXML Button homeButton;
   @FXML MenuItem homeItem;
   @FXML MenuItem exitItem;

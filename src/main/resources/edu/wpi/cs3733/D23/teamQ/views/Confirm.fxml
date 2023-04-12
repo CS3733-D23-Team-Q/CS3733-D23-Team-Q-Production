@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ConfirmController">
+   <children>
+      <ImageView fitHeight="57.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Confirm.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="confirmLabel" style="-fx-font-weight: bold;" />
+      <Button fx:id="okButton" mnemonicParsing="false" onAction="#okButtonClicked" style="-fx-background-color: #3865AD;" text="Confirm" textFill="WHITE" />
+   </children>
+</VBox>

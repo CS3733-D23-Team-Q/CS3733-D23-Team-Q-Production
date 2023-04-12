@@ -312,6 +312,6 @@ public class LocationController {
 
   @FXML
   void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR);
+    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
   }
 }

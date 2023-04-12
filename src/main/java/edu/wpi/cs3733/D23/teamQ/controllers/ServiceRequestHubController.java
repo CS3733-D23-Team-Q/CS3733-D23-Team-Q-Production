@@ -5,7 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class ServiceRequestHubController {
+public class ServiceRequestHubController implements IController {
   @FXML Button ccrButton;
   @FXML Button mdButton;
   @FXML Button frdButton;

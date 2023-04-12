@@ -33,6 +33,7 @@ public class Star extends Edge {
       }
 
       Edge m = null;
+      Star2.addEdges(n);
       for (int i = 0; i < n.getEdges().size(); i++) {
         m = n.getEdges().get(i);
         Edge next = null;
