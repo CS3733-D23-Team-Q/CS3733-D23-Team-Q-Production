@@ -7,22 +7,20 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-
-import java.sql.Date;
 
 public class ConferenceRoomRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox foodField;
+  @FXML MFXComboBox foodField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
@@ -34,7 +32,7 @@ public class ConferenceRoomRequestController {
   @FXML
   public void initialize() {
     this.assigneeField.setValue("Select an Assignee");
-    this.assigneeField.setValue(qdb.getAllNames());
+    this.assigneeField.setItems(qdb.getAllNames());
     this.roomNumberField.setValue("Select a Conference Room");
     String[] conf = {"CONF"};
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
@@ -61,19 +59,20 @@ public class ConferenceRoomRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
 
-        ConferenceRequest cr = new ConferenceRequest(
-                LoginController.getLoginUsername(),
-                0,
-                (String)assigneeField.getValue(),
-                qdb.retrieveNode(Integer.parseInt((String)roomNumberField.getValue())),
-                specialInstructionsField.getText(),
-                Date.valueOf(dateField.getCurrentDate()),
-                timeField.getText(),
-                (String)foodField.getValue());
+    ConferenceRequest cr =
+        new ConferenceRequest(
+            LoginController.getLoginUsername(),
+            0,
+            (String) assigneeField.getValue(),
+            qdb.retrieveNode(Integer.parseInt((String) roomNumberField.getValue())),
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getCurrentDate()),
+            timeField.getText(),
+            (String) foodField.getValue());
 
-        qdb.addConferenceRequest(cr);
-        Navigation.navigate(Screen.HOME);
-    }
+    qdb.addConferenceRequest(cr);
+    Navigation.navigate(Screen.HOME);
+  }
 
   @FXML
   public void homeItemClicked() {

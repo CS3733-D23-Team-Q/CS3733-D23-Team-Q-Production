@@ -2,10 +2,9 @@ package edu.wpi.cs3733.D23.teamQ.db;
 
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 public class Qdb {
 

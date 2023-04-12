@@ -8,7 +8,6 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 
 public class ConferenceRoomRequestDisplayController implements IController {
 
@@ -21,8 +20,7 @@ public class ConferenceRoomRequestDisplayController implements IController {
   @FXML MFXButton backButton;
 
   @FXML MFXButton updateButton;
-  @FXML
-  MFXComboBox assigneeField;
+  @FXML MFXComboBox assigneeField;
   @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;

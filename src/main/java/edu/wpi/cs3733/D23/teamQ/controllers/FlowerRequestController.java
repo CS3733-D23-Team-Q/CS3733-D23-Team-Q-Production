@@ -38,9 +38,10 @@ public class FlowerRequestController {
   @FXML
   public void initialize() {
     this.assigneeField.setValue("Select an Assignee");
-    this.assigneeField.setValue(qdb.getAllNames());
+    this.assigneeField.setItems(qdb.getAllNames());
     this.roomNumberField.setValue("Select a Location");
-    this.roomNumberField.setValue(qdb.getAllLongNames());
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.flowerTypeField.setValue("Select Flower");
     this.flowerTypeField.setItems(TypeOfFlowers);
   }

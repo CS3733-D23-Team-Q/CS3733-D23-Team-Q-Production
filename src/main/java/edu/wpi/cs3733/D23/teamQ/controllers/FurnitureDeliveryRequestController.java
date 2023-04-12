@@ -6,13 +6,12 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-
-import java.sql.Date;
 
 public class FurnitureDeliveryRequestController {
   @FXML ChoiceBox assigneeField;
@@ -44,7 +43,8 @@ public class FurnitureDeliveryRequestController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
 
-    FurnitureRequest newFR = new FurnitureRequest(
+    FurnitureRequest newFR =
+        new FurnitureRequest(
             LoginController.getLoginUsername(),
             0,
             assigneeField.getValue().toString(),
@@ -52,12 +52,9 @@ public class FurnitureDeliveryRequestController {
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            itemRequestedField.getValue().toString()
-    );
+            itemRequestedField.getValue().toString());
 
     qdb.addFurnitureRequest(newFR);
     Navigation.navigate(Screen.HOME);
-
-
   }
 }
