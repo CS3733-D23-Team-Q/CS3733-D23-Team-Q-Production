@@ -34,18 +34,22 @@ public class ConferenceRoomRequestDisplayController implements IController {
 
   @FXML
   public void initialize() {
-
+    Qdb qdb = Qdb.getInstance();
+    this.assigneeField.setItems(qdb.getAllNames());
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.foodField.setItems(foodOptionsList);
 
-    assigneeField.setValue(ListServiceRequestController.getConferenceRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getConferenceRequest().getNode());
+    assigneeField.setText(ListServiceRequestController.getConferenceRequest().getAssignee());
+    roomNumberField.setText(
+        ListServiceRequestController.getConferenceRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear(),
             ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
             ListServiceRequestController.getConferenceRequest().getDate().getDay()));
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
-    foodField.setValue(ListServiceRequestController.getConferenceRequest().getFoodChoice());
+    foodField.setText(ListServiceRequestController.getConferenceRequest().getFoodChoice());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
   }
@@ -54,6 +58,7 @@ public class ConferenceRoomRequestDisplayController implements IController {
   public void deleteButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     qdb.deleteConferenceRequest(ListServiceRequestController.getConferenceRequest().getRequestID());
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
@@ -79,5 +84,6 @@ public class ConferenceRoomRequestDisplayController implements IController {
             (String) foodField.getValue());
     qdb.updateConferenceRequest(
         ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
+    Navigation.navigateRight(Screen.HOME);
   }
 }

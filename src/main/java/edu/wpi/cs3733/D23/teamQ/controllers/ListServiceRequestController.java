@@ -48,35 +48,35 @@ public class ListServiceRequestController {
       flowerRequest =
           qdb.retrieveFlowerRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.FLOWER_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
         != null) {
       conferenceRequest =
           qdb.retrieveConferenceRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
     } else if (qdb.retrieveMealRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
         != null) {
       mealRequest =
           qdb.retrieveMealRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.MEAL_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.MEAL_REQUEST_DISPLAY);
     } else if (qdb.retrieveOfficeSuppliesRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
         != null) {
       officeSuppliesRequest =
           qdb.retrieveOfficeSuppliesRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
     } else if (qdb.retrieveFurnitureRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
         != null) {
       furnitureRequest =
           qdb.retrieveFurnitureRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.FURNITURE_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
     }
   }
 
