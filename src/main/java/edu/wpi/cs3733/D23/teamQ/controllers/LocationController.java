@@ -3,15 +3,12 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -297,6 +294,7 @@ public class LocationController {
     } else {
       Alert.alertBox("Failed to Export", "Failed to Export");
     }
+    locationname.setItems(locations());
   }
 
   @FXML
@@ -308,10 +306,13 @@ public class LocationController {
     } else {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
+    locationname.setItems(locations());
   }
+  /*
+   @FXML
+   void BackClicked(ActionEvent event) {
+     Navigation.navigate(Screen.MAP_EDITOR);
+   }
 
-  @FXML
-  void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR);
-  }
+  */
 }
