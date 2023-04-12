@@ -70,6 +70,8 @@ public class ConferenceRoomRequestController {
                 Date.valueOf(dateField.getCurrentDate()),
                 timeField.getText(),
                 (String)foodField.getValue());
+
+        qdb.addConferenceRequest(cr);
         Navigation.navigate(Screen.HOME);
     }
 
