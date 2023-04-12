@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
+import edu.wpi.cs3733.D23.teamQ.Confirm;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.io.IOException;
@@ -365,7 +366,7 @@ public class NodeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().nodeTable.toCSV(path);
     if (success) {
-      Alert.alertBox("Export Successfully", "Export Successfully");
+      Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
       Alert.alertBox("Failed to Export", "Failed to Export");
     }
@@ -377,7 +378,7 @@ public class NodeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().nodeTable.importCSV(path);
     if (success) {
-      Alert.alertBox("Import Successfully", "Import Successfully");
+      Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
