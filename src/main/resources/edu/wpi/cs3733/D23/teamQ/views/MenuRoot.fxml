@@ -35,11 +35,11 @@
             <Line endX="237.0" stroke="#f1f1f1" strokeWidth="3.0" VBox.vgrow="ALWAYS" />
             <VBox prefHeight="128.0" prefWidth="240.0" spacing="16.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" VBox.vgrow="ALWAYS">
                <children>
-                  <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#homeClicked" onMouseEntered="#homeEntered" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
+                  <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#homeClicked" onMouseEntered="#homeEntered" onMouseExited="#homeExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fx:id="homeIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Home.png" />
+                              <Image url="@../Home.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -48,7 +48,7 @@
                      <graphic>
                         <ImageView fx:id="peopleIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../People.png" />
+                              <Image url="@../People.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -57,7 +57,7 @@
                      <graphic>
                         <ImageView fx:id="navigationIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Map.png" />
+                              <Image url="@../Map.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -66,7 +66,7 @@
                      <graphic>
                         <ImageView fx:id="srIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../ServiceRequests.png" />
+                              <Image url="@../ServiceRequests.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -75,7 +75,7 @@
                      <graphic>
                         <ImageView fx:id="statisticsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Statistics.png" />
+                              <Image url="@../Statistics.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -84,7 +84,7 @@
                      <graphic>
                         <ImageView fx:id="settingsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Settings.png" />
+                              <Image url="@../Settings.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -95,7 +95,7 @@
                <graphic>
                   <ImageView fx:id="exitIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../Exit.png" />
+                        <Image url="@../Exit.png" />
                      </image>
                   </ImageView>
                </graphic>
