@@ -31,7 +31,8 @@ public enum Screen {
   Node_Table("views/Node.fxml", "MoveTable"),
   LocationName_Table("views/Location.fxml", "LocationNameTable"),
   Edge_Table("views/Edge.fxml", "EdgeTable"),
-  MENU_PANE("views/MenuRoot.fxml", "Menu Pane");
+  MENU_PANE("views/MenuRoot.fxml", "Menu Pane"),
+  STATISTICS("views/Statistics.fxml", "Statistics");
 
   private final String filename;
   private final String title;
