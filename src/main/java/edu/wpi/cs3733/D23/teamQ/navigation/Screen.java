@@ -23,8 +23,13 @@ public enum Screen {
       "views/ConferenceRoomRequestDisplay.fxml", "Conference Room Request Display"),
   FLOWER_REQUEST_DISPLAY("views/FlowerRequestDisplay.fxml", "Flower Request Display"),
   MEAL_REQUEST("views/MealDeliveryRequest.fxml", "Meal Request"),
+  MEAL_REQUEST_DISPLAY("views/MealDeliveryRequestDisplay.fxml", "Meal Request Display"),
   OFFICE_SUPPLIES_REQUEST("views/OfficeSuppliesRequest.fxml", "Office Supplies Request"),
+  OFFICE_SUPPLIES_REQUEST_DISPLAY(
+      "views/OfficeSuppliesRequestDisplay.fxml", "Office Supplies Request Display"),
   FURNITURE_REQUEST("views/FurnitureDeliveryRequest.fxml", "Furniture Request"),
+  FURNITURE_REQUEST_DISPLAY(
+      "views/FurnitureDeliveryRequestDisplay.fxml", "Furniture Request Display"),
   LIST_REQUESTS("views/ListServiceRequests.fxml", "List of Service Requests"),
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),

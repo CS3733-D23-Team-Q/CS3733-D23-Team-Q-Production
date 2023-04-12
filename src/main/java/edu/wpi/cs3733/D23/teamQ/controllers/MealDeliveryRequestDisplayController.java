@@ -85,4 +85,3 @@ public class MealDeliveryRequestDisplayController {
     qdb.updateMealRequest(ListServiceRequestController.getMealRequest().getRequestID(), newMR);
   }
 }
-

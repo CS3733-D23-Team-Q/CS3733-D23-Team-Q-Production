@@ -56,6 +56,27 @@ public class ListServiceRequestController {
           qdb.retrieveConferenceRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
       Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
+    } else if (qdb.retrieveMealRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      mealRequest =
+          qdb.retrieveMealRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigate(Screen.MEAL_REQUEST_DISPLAY);
+    } else if (qdb.retrieveOfficeSuppliesRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      officeSuppliesRequest =
+          qdb.retrieveOfficeSuppliesRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigate(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
+    } else if (qdb.retrieveFurnitureRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      furnitureRequest =
+          qdb.retrieveFurnitureRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigate(Screen.FURNITURE_REQUEST_DISPLAY);
     }
   }
 
@@ -67,17 +88,15 @@ public class ListServiceRequestController {
     return flowerRequest;
   }
 
-
   public static MealRequest getMealRequest() {
     return mealRequest;
   }
-
 
   public static FurnitureRequest getFurnitureRequest() {
     return furnitureRequest;
   }
 
-  public static OfficeSuppliesRequest getOfficeRequest(){
+  public static OfficeSuppliesRequest getOfficeRequest() {
     return officeSuppliesRequest;
   }
 }
