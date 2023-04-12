@@ -58,7 +58,7 @@ public class ConferenceRoomRequestDisplayController implements IController {
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   // Update with proper date and time

@@ -58,7 +58,7 @@ public class FlowerRequestDisplayController {
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
