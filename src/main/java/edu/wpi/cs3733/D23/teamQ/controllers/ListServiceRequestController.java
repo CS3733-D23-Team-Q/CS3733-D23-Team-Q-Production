@@ -19,6 +19,7 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, Integer> requestID;
   @FXML TableColumn<ServiceRequest, Integer> progress;
   @FXML TableColumn<ServiceRequest, String> roomNumber;
+  @FXML TableColumn<ServiceRequest, String> specialInstructions;
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -37,6 +38,8 @@ public class ListServiceRequestController {
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
+    specialInstructions.setCellValueFactory(
+        new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
   }
 

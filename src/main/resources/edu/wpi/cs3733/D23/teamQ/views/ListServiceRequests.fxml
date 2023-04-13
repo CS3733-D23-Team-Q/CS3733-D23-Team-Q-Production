@@ -13,12 +13,13 @@
    <children>
       <HBox alignment="CENTER" layoutY="100.0" prefWidth="512.0">
          <children>
-            <TableView fx:id="tableView" onMouseClicked="#rowSelected" prefHeight="732.0" prefWidth="380.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;" translateY="10.0">
-              <columns>
-                <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
-                <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
+            <TableView fx:id="tableView" onMouseClicked="#rowSelected" prefHeight="732.0" prefWidth="509.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;" translateY="10.0">
+               <columns>
+                  <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
+                  <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
                   <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
-              </columns>
+                  <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
+               </columns>
             </TableView>
          </children>
       </HBox>
