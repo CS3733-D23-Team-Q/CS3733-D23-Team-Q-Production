@@ -72,7 +72,7 @@ public class ConferenceRoomRequestController {
             (String) foodField.getValue());
 
     qdb.addConferenceRequest(cr);
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigateRight(Screen.SUBMISSION);
   }
 
   @FXML
