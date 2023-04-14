@@ -12,9 +12,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -24,22 +25,45 @@ public class PathfindingController {
   Qdb qdb = Qdb.getInstance();
   // Stage stage = App.getPrimaryStage();
   Alert alert = new Alert();
+  GesturePane pane;
   boolean ready4Second;
   Node start;
   Node target;
   List<Line> previousPath;
   Text text;
-  @FXML AnchorPane root;
+  List<Image> floors;
+  int floor;
+  List<Button> previousNodes;
+
+  @FXML HBox root;
   @FXML Group parent;
   @FXML ImageView map;
+  @FXML Button previousFloor;
+  @FXML Button nextFloor;
 
   @FXML
   public void initialize() throws IOException {
+    previousNodes = new ArrayList<>();
+    floors = new ArrayList<>();
+    // Image gf = new Image("/00_thegroundfloor.png");
+    Image l1 = new Image("/00_thelowerlevel1.png");
+    Image l2 = new Image("/00_thelowerlevel2.png");
+    Image ff = new Image("/01_thefirstfloor.png");
+    Image sf = new Image("/02_thesecondfloor.png");
+    Image tf = new Image("/03_thethirdfloor.png");
+    // floors.add(gf); // 0
+    floors.add(l1); // 0
+    floors.add(l2); // 1
+    floors.add(ff); // 2
+    floors.add(sf); // 3
+    floors.add(tf); // 4
+    floor = 2;
     ready4Second = false;
     previousPath = new ArrayList<>();
-    addButtons();
-    javafx.scene.Node node = parent;
-    GesturePane pane = new GesturePane(node);
+    addButtons("1");
+    pane = new GesturePane();
+    pane.setContent(parent);
+    pane.setFitMode(GesturePane.FitMode.COVER);
     root.getChildren().add(pane);
 
     pane.setOnMouseClicked(
@@ -55,15 +79,15 @@ public class PathfindingController {
         });
   }
 
-  public void addButtons() {
+  public void addButtons(String f) {
     List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> L1nodes = new ArrayList<>();
+    List<Node> fNodes = new ArrayList<>();
     for (Node n : nodes) {
-      if (n.getFloor().equals("L1")) {
-        L1nodes.add(n);
+      if (n.getFloor().equals(f)) {
+        fNodes.add(n);
       }
     }
-    for (Node n : L1nodes) {
+    for (Node n : fNodes) {
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
       Button node = new Button();
@@ -97,15 +121,21 @@ public class PathfindingController {
               ready4Second = false;
               try {
                 removeLines(previousPath);
-                // previousPath = new ArrayList<>();
                 // progress bar of generating a new path
-                previousPath = drawLines(start, target);
+                previousPath = drawLinesf(start, target, f);
               } catch (Exception ex) {
                 throw new RuntimeException(ex);
               }
             }
           });
+      previousNodes.add(node);
       parent.getChildren().add(node);
+    }
+  }
+
+  public void removeButtons() {
+    for (Button b : previousNodes) {
+      parent.getChildren().remove(b);
     }
   }
 
@@ -137,14 +167,85 @@ public class PathfindingController {
     }
   }
 
-  public List<Line> drawLines(Node start, Node target) throws IOException {
+  public List<Line> drawLinesf(Node start, Node target, String floor) throws IOException {
     List<Node> path = Star2.aStar(start, target);
+    List<Node> fpath = new ArrayList<>();
+    for (Node n : path) {
+      if (n.getFloor().equals(floor)) {
+        fpath.add(n);
+      }
+    }
     List<Line> lines = new ArrayList<>();
-    if (path.size() > 0) {
-      lines = addLines(path);
-    } else {
+    if (fpath.size() > 0) {
+      lines = addLines(fpath);
+    }
+    if (path.size() <= 0) {
       alert.alertBox("No solution", "Failed to find a path");
     }
     return lines;
+  }
+
+  public String whichFloor() {
+    String f = "";
+    switch (floor) {
+      case 0:
+        f = "L1";
+        break;
+      case 1:
+        f = "L2";
+        break;
+      case 2:
+        f = "1";
+        break;
+      case 3:
+        f = "2";
+        break;
+      case 4:
+        f = "3";
+        break;
+    }
+    return f;
+  }
+
+  public void previousFloorClicked() throws IOException {
+    String f = "";
+    if (floor == 1) {
+      previousFloor.setDisable(true);
+    }
+    if (nextFloor.isDisable()) {
+      nextFloor.setDisable(false);
+    }
+    if (floor > 0) {
+      floor--;
+      f = whichFloor();
+    }
+    Image previous = floors.get(floor);
+    map.setImage(previous);
+    removeButtons();
+    removeLines(previousPath); // remove previous floor's path
+    addButtons(f); // add current floor's path
+    if (!ready4Second) {
+      previousPath = drawLinesf(start, target, f);
+    }
+  }
+
+  public void nextFloorClicked() throws IOException {
+    String f = "";
+    if (floor == 3) {
+      nextFloor.setDisable(true);
+    }
+    if (previousFloor.isDisable()) {
+      previousFloor.setDisable(false);
+    }
+    if (floor < 4) {
+      floor++;
+      f = whichFloor();
+    }
+    Image next = floors.get(floor);
+    map.setImage(next);
+    removeButtons();
+    removeLines(previousPath);
+    addButtons(f);
+    previousPath = drawLinesf(start, target, f);
   }
 }
