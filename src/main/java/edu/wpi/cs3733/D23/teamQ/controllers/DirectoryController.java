@@ -25,7 +25,7 @@ public class DirectoryController {
 
   @FXML private TableColumn<Account, String> Title;
 
-  @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> Account;
+  @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
@@ -74,9 +74,7 @@ public class DirectoryController {
         new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty email =
-                new SimpleStringProperty(
-                    Qdb.getInstance().getEmailWithAUsername(param.getValue().getUsername()));
+            SimpleStringProperty email = new SimpleStringProperty(param.getValue().getEmail());
             return email;
           }
         });
@@ -93,7 +91,7 @@ public class DirectoryController {
         });
 
     /** set the information tableview */
-    Account.setItems(Accounts());
+    account.setItems(Accounts());
   }
 
   public void mapClicked(ActionEvent actionEvent) {}
