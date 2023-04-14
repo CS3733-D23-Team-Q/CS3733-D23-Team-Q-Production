@@ -19,7 +19,7 @@
                   <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
                   <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
                   <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
-                  <TableColumn fx:id="assigne" prefWidth="138.33328247070312" text="Assigne" />
+                  <TableColumn fx:id="assigne" prefWidth="138.33328247070312" text="Assignee" />
                   <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Time" />
                   <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Date" />
                </columns>
