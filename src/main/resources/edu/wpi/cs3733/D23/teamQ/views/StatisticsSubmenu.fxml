@@ -4,9 +4,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="statisticsSM" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#stsmExited" prefHeight="71.0" prefWidth="192.0" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.StatisticsSubmenuController">
+<VBox fx:id="statisticsSM" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#stsmExited" prefHeight="136.0" prefWidth="192.0" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.StatisticsSubmenuController">
    <children>
-      <MFXButton fx:id="statistics" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#statisticsClicked" prefHeight="53.0" prefWidth="160.0" text="Statistics" />
+      <MFXButton fx:id="statistics" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#statisticsClicked" prefHeight="53.0" prefWidth="160.0" text="User Statistics" />
+      <MFXButton fx:id="statistics1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#statisticsClicked" prefHeight="53.0" prefWidth="160.0" text="App Statistics" />
    </children>
    <padding>
       <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
