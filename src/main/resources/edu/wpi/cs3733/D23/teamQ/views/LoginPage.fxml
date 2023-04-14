@@ -21,11 +21,15 @@
          </HBox.margin>
          <children>
             <AnchorPane opacity="0.5" prefHeight="493.0" prefWidth="588.0" style="-fx-background-color: #002d59;" />
-            <ImageView fitHeight="806.0" fitWidth="1031.0" opacity="0.27" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-               <image>
-                  <Image url="@../../../../../../Login-background.jpeg" />
-               </image>
-            </ImageView>
+            <AnchorPane StackPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="900.0" fitWidth="1280.0" opacity="0.27" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../../../../../../Login-background.jpeg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
       </StackPane>
       <VBox alignment="CENTER" minWidth="-Infinity" prefHeight="843.0" prefWidth="250.0" spacing="2.0" style="-fx-background-color: #ffffffff;" HBox.hgrow="NEVER">

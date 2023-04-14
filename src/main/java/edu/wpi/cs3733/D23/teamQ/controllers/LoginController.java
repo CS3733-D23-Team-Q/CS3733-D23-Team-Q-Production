@@ -40,7 +40,8 @@ public class LoginController extends SecondaryStage implements IController {
   @Getter private static String loginUsername;
   @Getter private static String loginEmail;
 
-  public void initialize() {}
+  public void initialize() {
+  }
 
   @FXML
   public void quitButtonClicked() {
