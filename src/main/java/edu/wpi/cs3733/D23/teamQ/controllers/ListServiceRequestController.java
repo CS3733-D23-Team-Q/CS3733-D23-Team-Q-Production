@@ -21,6 +21,8 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> roomNumber;
   @FXML TableColumn<ServiceRequest, String> specialInstructions;
   @FXML TableColumn<ServiceRequest, String> assigne;
+  @FXML TableColumn<ServiceRequest, String> date;
+  @FXML TableColumn<ServiceRequest, String> time;
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -42,6 +44,8 @@ public class ListServiceRequestController {
     specialInstructions.setCellValueFactory(
         new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
     assigne.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assigne"));
+    date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
+    time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
   }
 
