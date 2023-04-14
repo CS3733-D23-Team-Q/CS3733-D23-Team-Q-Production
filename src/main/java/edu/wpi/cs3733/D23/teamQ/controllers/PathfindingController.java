@@ -3,11 +3,15 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.Star2;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -34,6 +38,9 @@ public class PathfindingController {
   List<Image> floors;
   int floor;
   List<Button> previousNodes;
+  List<Integer> restNodes;
+  List<Integer> cafeNodes;
+  // boolean elev;
 
   @FXML HBox root;
   @FXML Group parent;
@@ -43,6 +50,9 @@ public class PathfindingController {
 
   @FXML
   public void initialize() throws IOException {
+    //elev = false;
+    restNodes = new ArrayList<>();
+    cafeNodes = new ArrayList<>();
     previousNodes = new ArrayList<>();
     floors = new ArrayList<>();
     // Image gf = new Image("/00_thegroundfloor.png");
@@ -90,6 +100,10 @@ public class PathfindingController {
     for (Node n : fNodes) {
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
+      int nodeid = n.getNodeID();
+      Location location = qdb.retrieveLocation(nodeid);
+      String sname = location.getShortName();
+      String lname = location.getLongName();
       Button node = new Button();
       node.setLayoutX(x);
       node.setLayoutY(y);
@@ -102,8 +116,8 @@ public class PathfindingController {
               + "-fx-background-insets: 0px;");
       node.setOnMouseEntered(
           e -> {
-            String nodeid = "";
-            text = new Text(x + 3, y + 3, nodeid + n.getNodeID());
+            // String nodeid = "";
+            text = new Text(x + 3, y + 3, sname);
             text.setStyle("-fx-font-size: 8px;");
             parent.getChildren().add(text);
           });
@@ -130,6 +144,17 @@ public class PathfindingController {
           });
       previousNodes.add(node);
       parent.getChildren().add(node);
+      int index = parent.getChildren().indexOf(node);
+      Pattern pattern1 = Pattern.compile("(?i)(restroom|bathroom)");
+      Matcher matcher1 = pattern1.matcher(lname);
+      if (matcher1.find()) {
+        restNodes.add(index);
+      }
+      Pattern pattern2 = Pattern.compile("(?i)cafe");
+      Matcher matcher2 = pattern2.matcher(lname);
+      if (matcher2.find()) {
+        cafeNodes.add(index);
+      }
     }
   }
 
@@ -168,7 +193,12 @@ public class PathfindingController {
   }
 
   public List<Line> drawLinesf(Node start, Node target, String floor) throws IOException {
-    List<Node> path = Star2.aStar(start, target);
+    List<Node> path = new ArrayList<>();
+//    if (elev) {
+//      path = Star2.aStarElev(start, target);
+//    } else {
+      path = Star2.aStar(start, target);
+//    }
     List<Node> fpath = new ArrayList<>();
     for (Node n : path) {
       if (n.getFloor().equals(floor)) {
@@ -247,5 +277,39 @@ public class PathfindingController {
     removeLines(previousPath);
     addButtons(f);
     previousPath = drawLinesf(start, target, f);
+  }
+
+  public void restButtonClicked() {
+    ObservableList<javafx.scene.Node> children = parent.getChildren();
+    for (int i : restNodes) {
+      javafx.scene.Node child = children.get(i);
+      child.setStyle(
+          "-fx-background-radius: 5em;"
+              + "-fx-min-width: 3px;"
+              + "-fx-min-height: 3px;"
+              + "-fx-max-width: 3px;"
+              + "-fx-max-height: 3px;"
+              + "-fx-background-insets: 0px;"
+              + "-fx-border-color: red;");
+    }
+  }
+
+  public void cafeButtonClicked() {
+    ObservableList<javafx.scene.Node> children = parent.getChildren();
+    for (int i : cafeNodes) {
+      javafx.scene.Node child = children.get(i);
+      child.setStyle(
+          "-fx-background-radius: 5em;"
+              + "-fx-min-width: 3px;"
+              + "-fx-min-height: 3px;"
+              + "-fx-max-width: 3px;"
+              + "-fx-max-height: 3px;"
+              + "-fx-background-insets: 0px;"
+              + "-fx-border-color: red;");
+    }
+  }
+
+  public void elevButtonClicked() {
+    // elev = true;
   }
 }

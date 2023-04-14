@@ -33,6 +33,9 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="restButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#restButtonClicked" text="Restroom" />
+            <Button fx:id="cafeButton" layoutX="100.0" layoutY="10.0" mnemonicParsing="false" onAction="#cafeButtonClicked" text="Cafeteria" />
+            <Button fx:id="elevButton" layoutX="190.0" layoutY="10.0" mnemonicParsing="false" onAction="#elevButtonClicked" text="Elevator" />
          </children>
       </Group>
    </children>
