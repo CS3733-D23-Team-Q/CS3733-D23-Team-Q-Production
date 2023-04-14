@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
@@ -25,21 +26,21 @@ public class MealDeliveryRequestDisplayController {
   @FXML MFXButton backButton;
 
   @FXML MFXButton updateButton;
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
 
-  @FXML ChoiceBox drinkField;
-  @FXML ChoiceBox entreeField;
-  @FXML ChoiceBox sideField;
+  @FXML MFXComboBox drinkField;
+  @FXML MFXComboBox entreeField;
+  @FXML MFXComboBox sideField;
 
   @FXML
   public void initialize() {
 
-    assigneeField.setValue(ListServiceRequestController.getMealRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getMealRequest().getNode());
+    assigneeField.setText(ListServiceRequestController.getMealRequest().getAssignee());
+    roomNumberField.setText(ListServiceRequestController.getMealRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getMealRequest().getDate().getYear(),
@@ -48,9 +49,9 @@ public class MealDeliveryRequestDisplayController {
     timeField.setText(ListServiceRequestController.getMealRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getMealRequest().getSpecialInstructions());
-    drinkField.setValue(ListServiceRequestController.getMealRequest().getDrink());
-    entreeField.setValue(ListServiceRequestController.getMealRequest().getEntree());
-    sideField.setValue(ListServiceRequestController.getMealRequest().getSide());
+    drinkField.setText(ListServiceRequestController.getMealRequest().getDrink());
+    entreeField.setText(ListServiceRequestController.getMealRequest().getEntree());
+    sideField.setText(ListServiceRequestController.getMealRequest().getSide());
   }
 
   @FXML

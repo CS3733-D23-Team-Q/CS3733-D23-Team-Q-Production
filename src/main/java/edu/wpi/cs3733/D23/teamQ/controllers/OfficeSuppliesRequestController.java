@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
@@ -17,12 +18,12 @@ import javafx.scene.control.ChoiceBox;
 
 public class OfficeSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
-  @FXML ChoiceBox itemRequestedField;
+  @FXML MFXComboBox itemRequestedField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList(
           "Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");

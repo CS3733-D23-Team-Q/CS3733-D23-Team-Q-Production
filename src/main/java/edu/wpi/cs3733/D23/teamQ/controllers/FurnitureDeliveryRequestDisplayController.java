@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
@@ -23,19 +24,18 @@ public class FurnitureDeliveryRequestDisplayController {
   @FXML MFXButton backButton;
   @FXML MFXButton updateButton;
 
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
-  @FXML ChoiceBox furnitureChoiceField;
-  @FXML MFXTextField itemRequestedField;
+  @FXML MFXComboBox furnitureChoiceField;
   @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
     furnitureChoiceField.setItems(TypeOfFurniture);
-    assigneeField.setValue(ListServiceRequestController.getFurnitureRequest().getAssignee());
-    roomNumberField.setValue(ListServiceRequestController.getFurnitureRequest().getNode());
+    assigneeField.setText(ListServiceRequestController.getFurnitureRequest().getAssignee());
+    roomNumberField.setText(ListServiceRequestController.getFurnitureRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear(),
@@ -44,7 +44,7 @@ public class FurnitureDeliveryRequestDisplayController {
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
-    furnitureChoiceField.setValue(ListServiceRequestController.getFurnitureRequest().getItem());
+    furnitureChoiceField.setText(ListServiceRequestController.getFurnitureRequest().getItem());
   }
 
   @FXML

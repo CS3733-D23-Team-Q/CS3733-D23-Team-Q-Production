@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
@@ -11,18 +12,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+
 
 public class FurnitureDeliveryRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML ChoiceBox assigneeField;
-  @FXML ChoiceBox roomNumberField;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList("Desk", "Desk Chair", "Couch", "Examination Table");
-  @FXML ChoiceBox itemRequestedField;
+  @FXML
+  MFXComboBox itemRequestedField;
 
   @FXML Button resetButton;
   @FXML Button cancelButton;
