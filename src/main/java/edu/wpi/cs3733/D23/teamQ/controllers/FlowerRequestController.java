@@ -84,21 +84,6 @@ public class FlowerRequestController {
 
     qdb.addFlowerRequest(newFR);
 
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
-  }
-
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
+    Navigation.navigateRight(Screen.SUBMISSION);
   }
 }

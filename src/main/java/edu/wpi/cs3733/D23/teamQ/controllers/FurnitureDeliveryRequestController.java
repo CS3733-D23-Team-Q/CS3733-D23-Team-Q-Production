@@ -60,6 +60,6 @@ public class FurnitureDeliveryRequestController {
             itemRequestedField.getValue().toString());
 
     qdb.addFurnitureRequest(newFR);
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 }

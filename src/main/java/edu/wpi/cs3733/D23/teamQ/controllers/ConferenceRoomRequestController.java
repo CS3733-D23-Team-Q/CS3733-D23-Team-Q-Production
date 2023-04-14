@@ -74,19 +74,4 @@ public class ConferenceRoomRequestController {
     qdb.addConferenceRequest(cr);
     Navigation.navigateRight(Screen.SUBMISSION);
   }
-
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
-  }
 }

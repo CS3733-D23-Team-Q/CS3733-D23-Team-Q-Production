@@ -83,6 +83,6 @@ public class OfficeSuppliesRequestController {
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.addOfficeSuppliesRequest(newOSR);
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 }
