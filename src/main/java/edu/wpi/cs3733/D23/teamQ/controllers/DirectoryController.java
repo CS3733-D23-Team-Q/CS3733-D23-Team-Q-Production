@@ -13,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
+import java.beans.PersistenceDelegate;
+
 public class DirectoryController {
 
   @FXML private TableColumn<edu.wpi.cs3733.D23.teamQ.db.obj.Person, String> Email;
@@ -26,6 +28,8 @@ public class DirectoryController {
   @FXML private TableColumn<Person, String> Title;
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Person> Person;
+
+  Person person;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Person> People() {
@@ -96,17 +100,13 @@ public class DirectoryController {
     Person.setItems(People());
   }
 
-  public void mapClicked(ActionEvent actionEvent) {}
+  public void tableClicked() {
+    person=  Person.getSelectionModel().getSelectedItems().get(0);
+  }
 
-  public void edgeClicked(ActionEvent actionEvent) {}
+  public Person getPerson(){
+      return person;
+  }
 
-  public void locationClicked(ActionEvent actionEvent) {}
 
-  public void moveClicked(ActionEvent actionEvent) {}
-
-  public void BackClicked(ActionEvent actionEvent) {}
-
-  public void homeClicked(ActionEvent actionEvent) {}
-
-  public void exitClicked(ActionEvent actionEvent) {}
 }
