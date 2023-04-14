@@ -5,7 +5,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -18,15 +18,15 @@ import java.sql.Date;
 
 public class MealDeliveryRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML MFXComboBox assigneeField;
-  @FXML MFXComboBox roomNumberField;
+  @FXML MFXFilterComboBox assigneeField;
+  @FXML MFXFilterComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
   @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
 
-  @FXML MFXComboBox drinkField;
-  @FXML MFXComboBox entreeField;
-  @FXML MFXComboBox sideField;
+  @FXML MFXFilterComboBox drinkField;
+  @FXML MFXFilterComboBox entreeField;
+  @FXML MFXFilterComboBox sideField;
 
   @FXML Button resetButton;
   @FXML Button cancelButton;
