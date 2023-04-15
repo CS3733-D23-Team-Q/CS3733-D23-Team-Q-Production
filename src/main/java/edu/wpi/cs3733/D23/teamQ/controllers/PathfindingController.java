@@ -319,6 +319,27 @@ public class PathfindingController {
     return f;
   }
 
+  public List<Pair<Integer, Integer>> setCF(List<Pair<Integer, Integer>> cfnodes) {
+    switch (floor) {
+      case 0:
+        cfnodes = l1nodes;
+        break;
+      case 1:
+        cfnodes = l2nodes;
+        break;
+      case 2:
+        cfnodes = ffnodes;
+        break;
+      case 3:
+        cfnodes = sfnodes;
+        break;
+      case 4:
+        cfnodes = tfnodes;
+        break;
+    }
+    return cfnodes;
+  }
+
   public void previousFloorClicked() throws IOException {
     String f = "";
     if (floor == 1) {
@@ -361,7 +382,7 @@ public class PathfindingController {
         }
       }
     }
-    if (!ready4Second) {
+    if (!ready4Second && previousPath.size() > 0) {
       previousPath = drawLinesf(start, target, f);
     }
   }
@@ -408,7 +429,7 @@ public class PathfindingController {
         }
       }
     }
-    if (!ready4Second) {
+    if (!ready4Second && previousPath.size() > 0) {
       previousPath = drawLinesf(start, target, f);
     }
   }
@@ -508,23 +529,6 @@ public class PathfindingController {
       String nodeFloor = n.getFloor();
       int f = whichFloorI(nodeFloor);
       int crossFloors = Math.abs(f - floor);
-      switch (f) {
-        case 0:
-          cfnodes = l1nodes;
-          break;
-        case 1:
-          cfnodes = l2nodes;
-          break;
-        case 2:
-          cfnodes = ffnodes;
-          break;
-        case 3:
-          cfnodes = sfnodes;
-          break;
-        case 4:
-          cfnodes = tfnodes;
-          break;
-      }
       if (!ready4Second) {
         ready4Second = true;
         start = n;
@@ -548,6 +552,7 @@ public class PathfindingController {
           nextFloorClicked();
         }
       }
+      cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
           highlight(cfnodes.get(i).getValue()); // button
@@ -571,23 +576,6 @@ public class PathfindingController {
       String nodeFloor = n.getFloor();
       int nodef = whichFloorI(nodeFloor);
       int crossFloors = Math.abs(nodef - floor);
-      switch (nodef) {
-        case 0:
-          cfnodes = l1nodes;
-          break;
-        case 1:
-          cfnodes = l2nodes;
-          break;
-        case 2:
-          cfnodes = ffnodes;
-          break;
-        case 3:
-          cfnodes = sfnodes;
-          break;
-        case 4:
-          cfnodes = tfnodes;
-          break;
-      }
       if (ready4Second) {
         target = n;
         ready4Second = false;
@@ -608,6 +596,7 @@ public class PathfindingController {
           nextFloorClicked();
         }
       }
+      cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
           highlight(cfnodes.get(i).getValue()); // button
@@ -621,10 +610,19 @@ public class PathfindingController {
   }
 
   public void clearButtonClicked() {
+    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
     removeLines(previousPath);
+    previousPath.removeAll(previousPath);
     restCheck.setSelected(false);
     cafeCheck.setSelected(false);
-    unhighlight(restNodes);
-    unhighlight(cafeNodes);
+    // unhighlight(restNodes);
+    // unhighlight(cafeNodes);
+    cfnodes = setCF(cfnodes);
+    for (int i = 0; i < cfnodes.size(); i++) {
+      unhighlight(cfnodes.get(i).getValue());
+    }
+    highlightedNodes.removeAll(highlightedNodes);
+    startSelect.setValue(null);
+    endSelect.setValue(null);
   }
 }
