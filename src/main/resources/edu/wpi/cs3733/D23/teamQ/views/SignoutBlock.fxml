@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="exitHB" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="240.0" style="-fx-background-color: #f1f1f1;" stylesheets="@styles/Menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SignoutBlockController">
+<HBox fx:id="signoutHB" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="240.0" style="-fx-background-color: #f1f1f1;" stylesheets="@styles/Menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SignoutBlockController">
    <children>
-      <MFXButton fx:id="exit" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#exitEntered" onMouseExited="#exitExited" prefHeight="54.0" prefWidth="240.0" text="Sign Out">
+      <MFXButton fx:id="signout" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#signoutEntered" onMouseExited="#signoutExited" prefHeight="54.0" prefWidth="240.0" text="Sign Out">
          <graphic>
-            <ImageView fx:id="exitIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="signoutIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Exit.png" />
                </image>

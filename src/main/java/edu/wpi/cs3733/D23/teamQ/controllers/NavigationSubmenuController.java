@@ -11,7 +11,6 @@ public class NavigationSubmenuController {
   @FXML MFXButton pathfinder;
 
   @FXML MFXButton editor;
-  @FXML MenuRootController mrc;
 
   @FXML
   public void pathfinderClicked() {
@@ -21,19 +20,5 @@ public class NavigationSubmenuController {
   @FXML
   public void editorClicked() {
     Navigation.navigate(Screen.MAP_EDITOR_TABLE);
-  }
-
-  @FXML
-  public void nsmExited() {
-    mrc.showNavSM(false);
-  }
-
-  public void setVisible(boolean v) {
-    navigationSM.toFront();
-    navigationSM.setVisible(v);
-  }
-
-  public void setRootController(MenuRootController mrc) {
-    this.mrc = mrc;
   }
 }
