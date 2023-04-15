@@ -28,7 +28,7 @@ import javafx.util.Duration;
 import javafx.util.Pair;
 import net.kurobako.gesturefx.*;
 
-public class PathfindingController {
+public class PathfindingController2 {
   Qdb qdb = Qdb.getInstance();
   // Stage stage = App.getPrimaryStage();
   Alert alert = new Alert();

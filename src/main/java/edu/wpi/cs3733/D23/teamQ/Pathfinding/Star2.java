@@ -43,7 +43,7 @@ public class Star2 {
         }
       }
       Node current = openSet.get(winner);
-      if (current != null && current.equals(target)) {
+      if (current.equals(target)) {
         path.add(current);
         while (current.getParent() != null) {
           path.add(current.getParent());
