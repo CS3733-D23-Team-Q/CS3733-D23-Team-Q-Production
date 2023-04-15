@@ -397,12 +397,14 @@ public class PathfindingController2 {
     } else {
       unhighlight(cafeNodes);
     }
+    /*
     if (highlightedNodes.size() == 2) {
       Button node1 = highlightedNodes.get(0);
       Button node2 = highlightedNodes.get(1);
       highlight(node1);
       highlight(node2);
     }
+     */
     if (!ready4Second) {
       previousPath = drawLinesf(start, target, f);
     }

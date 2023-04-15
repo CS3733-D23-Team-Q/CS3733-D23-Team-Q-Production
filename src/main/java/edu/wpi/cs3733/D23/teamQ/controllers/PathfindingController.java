@@ -44,7 +44,8 @@ public class PathfindingController {
   List<Integer> restNodes;
   List<Integer> cafeNodes;
   List<Integer> nodeIds;
-  List<Button> highlightedNodes;
+  // List<Pair<Integer, Integer>> highlightedNodes;
+  List<Integer> highlightedNodes;
   List<Pair<Integer, Integer>> l1nodes;
   List<Pair<Integer, Integer>> l2nodes;
   List<Pair<Integer, Integer>> ffnodes;
@@ -110,19 +111,6 @@ public class PathfindingController {
         });
   }
 
-  /*
-  public void addSelections(String f){
-    List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> fNodes = new ArrayList<>();
-    for (Node n : nodes) {
-      if (n.getFloor().equals(f)) {
-        fNodes.add(n);
-      }
-    }
-    //startSelect.getItems().add();
-  }
-   */
-
   public void addButtons(String f) {
     List<Node> nodes = qdb.retrieveAllNodes();
     List<Node> fNodes = new ArrayList<>();
@@ -156,6 +144,8 @@ public class PathfindingController {
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
               + "-fx-background-insets: 0px;");
+      parent.getChildren().add(node);
+      int index = parent.getChildren().indexOf(node);
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
@@ -173,20 +163,19 @@ public class PathfindingController {
               ready4Second = true;
               start = n;
               removeLines(previousPath);
+              //problem here?
               if (highlightedNodes.size() > 0) {
                 unhighlight(highlightedNodes.get(0));
                 unhighlight(highlightedNodes.get(1));
                 highlightedNodes.removeAll(highlightedNodes);
               }
               highlight(node);
-              highlightedNodes.add(node);
-              // highlightedNodes.set(0, node);
+              highlightedNodes.add(index);
             } else {
               target = n;
               ready4Second = false;
               highlight(node);
-              highlightedNodes.add(node);
-              // highlightedNodes.set(1, node);
+              highlightedNodes.add(index);
               try {
                 // removeLines(previousPath);
                 // progress bar of generating a new path
@@ -197,8 +186,8 @@ public class PathfindingController {
             }
           });
       previousNodes.add(node);
-      parent.getChildren().add(node);
-      int index = parent.getChildren().indexOf(node);
+      //      parent.getChildren().add(node);
+      //      int index = parent.getChildren().indexOf(node);
       Pattern pattern1 = Pattern.compile("(?i)(restroom|bathroom)");
       Matcher matcher1 = pattern1.matcher(lname);
       if (matcher1.find()) {
@@ -344,6 +333,11 @@ public class PathfindingController {
     }
     Image previous = floors.get(floor);
     map.setImage(previous);
+    if (highlightedNodes.size() > 0) {
+      for (int i : highlightedNodes) {
+        unhighlight(i);
+      }
+    }
     removeButtons();
     removeLines(previousPath); // remove previous floor's path
     addButtons(f); // add current floor's path
@@ -357,14 +351,12 @@ public class PathfindingController {
     } else {
       unhighlight(cafeNodes);
     }
-    /*
-    if (highlightedNodes.size() == 2) {
-      Button node1 = highlightedNodes.get(0);
-      Button node2 = highlightedNodes.get(1);
-      highlight(node1);
-      highlight(node2);
+    //if on the same floor
+    if (highlightedNodes.size() > 0) {
+      for (int i : highlightedNodes) {
+        highlight(i);
+      }
     }
-     */
     if (!ready4Second) {
       previousPath = drawLinesf(start, target, f);
     }
@@ -384,6 +376,12 @@ public class PathfindingController {
     }
     Image next = floors.get(floor);
     map.setImage(next);
+    if (highlightedNodes.size() > 0) {
+      for (int i : highlightedNodes) {
+        unhighlight(i);
+        // unhighlight(highlightedNodes.get(1));
+      }
+    }
     removeButtons();
     removeLines(previousPath);
     addButtons(f);
@@ -397,11 +395,11 @@ public class PathfindingController {
     } else {
       unhighlight(cafeNodes);
     }
-    if (highlightedNodes.size() == 2) {
-      Button node1 = highlightedNodes.get(0);
-      Button node2 = highlightedNodes.get(1);
-      highlight(node1);
-      highlight(node2);
+    //if on the same floor
+    if (highlightedNodes.size() > 0) {
+      for (int i : highlightedNodes) {
+        highlight(i);
+      }
     }
     if (!ready4Second) {
       previousPath = drawLinesf(start, target, f);
@@ -465,6 +463,18 @@ public class PathfindingController {
     }
   }
 
+  public void unhighlight(int node) {
+    ObservableList<javafx.scene.Node> children = parent.getChildren();
+    javafx.scene.Node child = children.get(node);
+    child.setStyle(
+        "-fx-background-radius: 5em;"
+            + "-fx-min-width: 3px;"
+            + "-fx-min-height: 3px;"
+            + "-fx-max-width: 3px;"
+            + "-fx-max-height: 3px;"
+            + "-fx-background-insets: 0px;");
+  }
+
   public void unhighlight(Button node) {
     node.setStyle(
         "-fx-background-radius: 5em;"
@@ -524,20 +534,6 @@ public class PathfindingController {
         ready4Second = true;
         start = n;
         removeLines(previousPath);
-        /*
-        if (highlightedNodes.size() > 0) {
-          unhighlight(highlightedNodes.get(0));
-          unhighlight(highlightedNodes.get(1));
-          highlightedNodes.removeAll(highlightedNodes);
-        }
-        for (Pair<Integer, Integer> node : cfnodes) {
-          if (node.getKey() == nodeid) {
-            int i = node.getValue();
-            Button child = highlight(i);
-            highlightedNodes.add(child);
-          }
-        }
-         */
       }
       if (f < floor) {
         for (int i = 0; i < crossFloors; i++) {
@@ -586,15 +582,6 @@ public class PathfindingController {
         try {
           // removeLines(previousPath);
           previousPath = drawLinesf(start, target, f);
-          /*
-          for (Pair<Integer, Integer> node : cfnodes) {
-            if (node.getKey() == nodeid) {
-              int i = node.getValue();
-              Button child = highlight(i);
-              highlightedNodes.add(child);
-            }
-          }
-           */
         } catch (Exception ex) {
           throw new RuntimeException(ex);
         }
