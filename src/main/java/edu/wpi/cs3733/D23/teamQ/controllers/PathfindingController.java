@@ -171,12 +171,12 @@ public class PathfindingController {
                 }
                 highlightedNodes.removeAll(highlightedNodes);
               }
-              highlight(node);
+              highlight(node, "red");
               highlightedNodes.add(new Pair<>(index, floor));
             } else {
               target = n;
               ready4Second = false;
-              highlight(node);
+              highlight(node, "red");
               highlightedNodes.add(new Pair<>(index, floor));
               try {
                 // removeLines(previousPath);
@@ -365,12 +365,12 @@ public class PathfindingController {
     removeLines(previousPath); // remove previous floor's path
     addButtons(f); // add current floor's path
     if (restCheck.isSelected()) { // true
-      highlight(restNodes); // size 12
+      highlight(restNodes, "lightgreen"); // size 12
     } else {
       unhighlight(restNodes);
     }
     if (cafeCheck.isSelected()) {
-      highlight(cafeNodes);
+      highlight(cafeNodes, "yellow");
     } else {
       unhighlight(cafeNodes);
     }
@@ -378,7 +378,7 @@ public class PathfindingController {
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
         if (highlightedNodes.get(i).getValue() == floor) {
-          highlight(highlightedNodes.get(i).getKey());
+          highlight(highlightedNodes.get(i).getKey(), "red");
         }
       }
     }
@@ -412,12 +412,12 @@ public class PathfindingController {
     removeLines(previousPath);
     addButtons(f);
     if (restCheck.isSelected()) { // true
-      highlight(restNodes); // size 12
+      highlight(restNodes, "lightgreen"); // size 12
     } else {
       unhighlight(restNodes);
     }
     if (cafeCheck.isSelected()) {
-      highlight(cafeNodes);
+      highlight(cafeNodes, "yellow");
     } else {
       unhighlight(cafeNodes);
     }
@@ -425,7 +425,7 @@ public class PathfindingController {
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
         if (highlightedNodes.get(i).getValue() == floor) {
-          highlight(highlightedNodes.get(i).getKey());
+          highlight(highlightedNodes.get(i).getKey(), "red");
         }
       }
     }
@@ -434,7 +434,9 @@ public class PathfindingController {
     }
   }
 
-  public void highlight(List<Integer> nodes) {
+  public void highlight(List<Integer> nodes, String color) {
+    String border = "-fx-border-color: ";
+    border = border + color + ";";
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (int i : nodes) {
       javafx.scene.Node child = children.get(i);
@@ -445,11 +447,13 @@ public class PathfindingController {
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
               + "-fx-background-insets: 0px;"
-              + "-fx-border-color: red;");
+              + border);
     }
   }
 
-  public Button highlight(Button node) {
+  public void highlight(Button node, String color) {
+    String border = "-fx-border-color: ";
+    border = border + color + ";";
     node.setStyle(
         "-fx-background-radius: 5em;"
             + "-fx-min-width: 3px;"
@@ -457,11 +461,12 @@ public class PathfindingController {
             + "-fx-max-width: 3px;"
             + "-fx-max-height: 3px;"
             + "-fx-background-insets: 0px;"
-            + "-fx-border-color: red;");
-    return node;
+            + border);
   }
 
-  public Button highlight(int node) {
+  public void highlight(int node, String color) {
+    String border = "-fx-border-color: ";
+    border = border + color + ";";
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     Button child = (Button) children.get(node);
     child.setStyle(
@@ -471,8 +476,7 @@ public class PathfindingController {
             + "-fx-max-width: 3px;"
             + "-fx-max-height: 3px;"
             + "-fx-background-insets: 0px;"
-            + "-fx-border-color: red;");
-    return child;
+            + border);
   }
 
   public void unhighlight(List<Integer> nodes) {
@@ -503,7 +507,7 @@ public class PathfindingController {
 
   public void cafeChecked() {
     if (cafeCheck.isSelected()) {
-      highlight(cafeNodes);
+      highlight(cafeNodes, "yellow");
     } else {
       unhighlight(cafeNodes);
     }
@@ -511,7 +515,7 @@ public class PathfindingController {
 
   public void restChecked() {
     if (restCheck.isSelected()) {
-      highlight(restNodes);
+      highlight(restNodes, "lightgreen");
     } else {
       unhighlight(restNodes);
     }
@@ -555,7 +559,7 @@ public class PathfindingController {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
-          highlight(cfnodes.get(i).getValue()); // button
+          highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
               new Pair<>(
                   cfnodes.get(i).getValue(),
@@ -599,7 +603,7 @@ public class PathfindingController {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
-          highlight(cfnodes.get(i).getValue()); // button
+          highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
               new Pair<>(
                   cfnodes.get(i).getValue(),
