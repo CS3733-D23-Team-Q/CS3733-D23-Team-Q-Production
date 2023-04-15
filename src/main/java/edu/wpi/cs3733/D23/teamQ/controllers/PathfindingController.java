@@ -44,8 +44,8 @@ public class PathfindingController {
   List<Integer> restNodes;
   List<Integer> cafeNodes;
   List<Integer> nodeIds;
-  // List<Pair<Integer, Integer>> highlightedNodes;
-  List<Integer> highlightedNodes;
+  List<Pair<Integer, Integer>> highlightedNodes;
+  // List<Integer> highlightedNodes;
   List<Pair<Integer, Integer>> l1nodes;
   List<Pair<Integer, Integer>> l2nodes;
   List<Pair<Integer, Integer>> ffnodes;
@@ -163,19 +163,21 @@ public class PathfindingController {
               ready4Second = true;
               start = n;
               removeLines(previousPath);
-              //problem here?
               if (highlightedNodes.size() > 0) {
-                unhighlight(highlightedNodes.get(0));
-                unhighlight(highlightedNodes.get(1));
+                for (int i = 0; i < highlightedNodes.size(); i++) {
+                  if (highlightedNodes.get(i).getValue() == floor) {
+                    unhighlight(highlightedNodes.get(i).getKey());
+                  }
+                }
                 highlightedNodes.removeAll(highlightedNodes);
               }
               highlight(node);
-              highlightedNodes.add(index);
+              highlightedNodes.add(new Pair<>(index, floor));
             } else {
               target = n;
               ready4Second = false;
               highlight(node);
-              highlightedNodes.add(index);
+              highlightedNodes.add(new Pair<>(index, floor));
               try {
                 // removeLines(previousPath);
                 // progress bar of generating a new path
@@ -186,8 +188,6 @@ public class PathfindingController {
             }
           });
       previousNodes.add(node);
-      //      parent.getChildren().add(node);
-      //      int index = parent.getChildren().indexOf(node);
       Pattern pattern1 = Pattern.compile("(?i)(restroom|bathroom)");
       Matcher matcher1 = pattern1.matcher(lname);
       if (matcher1.find()) {
@@ -333,11 +333,13 @@ public class PathfindingController {
     }
     Image previous = floors.get(floor);
     map.setImage(previous);
+    /*
     if (highlightedNodes.size() > 0) {
-      for (int i : highlightedNodes) {
-        unhighlight(i);
+      for (int i = 0; i < highlightedNodes.size(); i++) {
+        unhighlight(highlightedNodes.get(i).getKey());
       }
     }
+     */
     removeButtons();
     removeLines(previousPath); // remove previous floor's path
     addButtons(f); // add current floor's path
@@ -351,10 +353,12 @@ public class PathfindingController {
     } else {
       unhighlight(cafeNodes);
     }
-    //if on the same floor
+    // if on the same floor
     if (highlightedNodes.size() > 0) {
-      for (int i : highlightedNodes) {
-        highlight(i);
+      for (int i = 0; i < highlightedNodes.size(); i++) {
+        if (highlightedNodes.get(i).getValue() == floor) {
+          highlight(highlightedNodes.get(i).getKey());
+        }
       }
     }
     if (!ready4Second) {
@@ -376,12 +380,13 @@ public class PathfindingController {
     }
     Image next = floors.get(floor);
     map.setImage(next);
+    /*
     if (highlightedNodes.size() > 0) {
-      for (int i : highlightedNodes) {
-        unhighlight(i);
-        // unhighlight(highlightedNodes.get(1));
+      for (int i = 0; i < highlightedNodes.size(); i++) {
+        unhighlight(highlightedNodes.get(i).getKey());
       }
     }
+     */
     removeButtons();
     removeLines(previousPath);
     addButtons(f);
@@ -395,10 +400,12 @@ public class PathfindingController {
     } else {
       unhighlight(cafeNodes);
     }
-    //if on the same floor
+    // if on the same floor
     if (highlightedNodes.size() > 0) {
-      for (int i : highlightedNodes) {
-        highlight(i);
+      for (int i = 0; i < highlightedNodes.size(); i++) {
+        if (highlightedNodes.get(i).getValue() == floor) {
+          highlight(highlightedNodes.get(i).getKey());
+        }
       }
     }
     if (!ready4Second) {
@@ -435,7 +442,6 @@ public class PathfindingController {
 
   public Button highlight(int node) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    // javafx.scene.Node child = children.get(node);
     Button child = (Button) children.get(node);
     child.setStyle(
         "-fx-background-radius: 5em;"
@@ -445,7 +451,6 @@ public class PathfindingController {
             + "-fx-max-height: 3px;"
             + "-fx-background-insets: 0px;"
             + "-fx-border-color: red;");
-    // highlightedNodes.add(child);
     return child;
   }
 
@@ -467,16 +472,6 @@ public class PathfindingController {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     javafx.scene.Node child = children.get(node);
     child.setStyle(
-        "-fx-background-radius: 5em;"
-            + "-fx-min-width: 3px;"
-            + "-fx-min-height: 3px;"
-            + "-fx-max-width: 3px;"
-            + "-fx-max-height: 3px;"
-            + "-fx-background-insets: 0px;");
-  }
-
-  public void unhighlight(Button node) {
-    node.setStyle(
         "-fx-background-radius: 5em;"
             + "-fx-min-width: 3px;"
             + "-fx-min-height: 3px;"
