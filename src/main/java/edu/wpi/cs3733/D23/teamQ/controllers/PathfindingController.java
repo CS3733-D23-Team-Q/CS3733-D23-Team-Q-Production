@@ -529,6 +529,14 @@ public class PathfindingController {
         ready4Second = true;
         start = n;
         removeLines(previousPath);
+        if (highlightedNodes.size() > 0) {
+          for (int i = 0; i < highlightedNodes.size(); i++) {
+            if (highlightedNodes.get(i).getValue() == floor) {
+              unhighlight(highlightedNodes.get(i).getKey());
+            }
+          }
+          highlightedNodes.removeAll(highlightedNodes);
+        }
       }
       if (f < floor) {
         for (int i = 0; i < crossFloors; i++) {
@@ -538,6 +546,15 @@ public class PathfindingController {
       if (f > floor) {
         for (int i = 0; i < crossFloors; i++) {
           nextFloorClicked();
+        }
+      }
+      for (int i = 0; i < cfnodes.size(); i++) {
+        if (cfnodes.get(i).getKey() == nodeid) {
+          highlight(cfnodes.get(i).getValue()); // button
+          highlightedNodes.add(
+              new Pair<>(
+                  cfnodes.get(i).getValue(),
+                  floor)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
@@ -589,6 +606,15 @@ public class PathfindingController {
       if (nodef > floor) {
         for (int i = 0; i < crossFloors; i++) {
           nextFloorClicked();
+        }
+      }
+      for (int i = 0; i < cfnodes.size(); i++) {
+        if (cfnodes.get(i).getKey() == nodeid) {
+          highlight(cfnodes.get(i).getValue()); // button
+          highlightedNodes.add(
+              new Pair<>(
+                  cfnodes.get(i).getValue(),
+                  floor)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
