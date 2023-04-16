@@ -26,4 +26,8 @@ public class NavigationSubmenuController {
   boolean navSMHovered() {
     return navigationSM.isHover();
   }
+
+  public void moveClicked() {
+    Navigation.navigate(Screen.OFFICE_MOVE);
+  }
 }
