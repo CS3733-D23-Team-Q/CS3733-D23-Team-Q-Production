@@ -78,5 +78,10 @@
             <Font name="Roboto" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="submitMessage" layoutX="321.0" layoutY="522.0" textFill="#012d5a">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

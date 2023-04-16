@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -18,6 +19,7 @@ public class OfficeMoveController {
   @FXML MFXComboBox currentLocationField;
   @FXML MFXComboBox newLocationField;
   @FXML MFXDatePicker dateField;
+  @FXML Label submitMessage;
   @FXML private TableView<Move> futureMoves;
   @FXML private TableColumn<Move, String> currentLocation;
   @FXML private TableColumn<Move, String> newLocation;
@@ -69,6 +71,10 @@ public class OfficeMoveController {
   }
 
   public void submitButtonClicked() {
+    if (currentLocationField.getValue().toString().equals(newLocationField.getValue().toString())) {
+      submitMessage.setText("Invalid Move: Please choose two different locations");
+      return;
+    }
 
     if (currentLocationField.getValue() != null
         && newLocationField.getValue() != null
@@ -81,7 +87,13 @@ public class OfficeMoveController {
               Date.valueOf(dateField.getValue()));
 
       qdb.addMove(newMove);
+      this.currentLocationField.setValue("Select Current Location");
+      this.newLocationField.setValue("Select New Location");
+      dateField.clear();
       updateTable();
+      submitMessage.setText("Move Submitted!");
+    } else {
+      submitMessage.setText("Please fill in all the required fields.");
     }
   }
 }
