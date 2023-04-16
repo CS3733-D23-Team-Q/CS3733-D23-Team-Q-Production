@@ -147,8 +147,8 @@ public class Star2 {
       Node chosen = null;
       for (Edge thisOne : current.getEdges()) {
         if (!closedList.contains(thisOne.getStartNode())
-                && !thisOne.getStartNode().equals(current)
-                && !path.contains(thisOne.getStartNode())) {
+            && !thisOne.getStartNode().equals(current)
+            && !path.contains(thisOne.getStartNode())) {
           double xDist = Math.abs(thisOne.getStartNode().getXCoord() - current.getXCoord());
           double yDist = Math.abs(thisOne.getStartNode().getYCoord() - current.getYCoord());
           double weight = Math.sqrt(xDist * xDist + yDist * yDist);
@@ -157,8 +157,8 @@ public class Star2 {
             chosen = thisOne.getStartNode();
           }
         } else if (!closedList.contains(thisOne.getEndNode())
-                && !thisOne.getEndNode().equals(current)
-                && !path.contains(thisOne.getEndNode())) {
+            && !thisOne.getEndNode().equals(current)
+            && !path.contains(thisOne.getEndNode())) {
           double xDist = Math.abs(thisOne.getEndNode().getXCoord() - current.getXCoord());
           double yDist = Math.abs(thisOne.getEndNode().getYCoord() - current.getYCoord());
           double weight = Math.sqrt(xDist * xDist + yDist * yDist);
@@ -176,4 +176,3 @@ public class Star2 {
     return path;
   }
 }
-
