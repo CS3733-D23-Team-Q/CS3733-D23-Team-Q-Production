@@ -72,7 +72,6 @@ public class ServiceRequestDaoImpl {
     serviceRequests.addAll(furnitureRequests);
     serviceRequests.addAll(officeSuppliesRequests);
     serviceRequests.addAll(patientTransportRequests);
-
     return true;
   }
 

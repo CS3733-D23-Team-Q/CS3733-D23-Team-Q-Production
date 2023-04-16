@@ -1,19 +1,16 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
+import edu.wpi.cs3733.D23.teamQ.Confirm;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import java.sql.SQLException;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -134,6 +131,7 @@ public class NodeController {
     /** set the node tableview */
     node.setItems(nodes());
   }
+  /*
 
   @FXML
   void edgeClicked(ActionEvent event) {
@@ -162,17 +160,20 @@ public class NodeController {
     Platform.exit();
   }
 
+   */
+
   @FXML
   void AddClicked(MouseEvent event) throws SQLException {
+    if (isNumber(NodeIDInput.getText())) {
+      nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
+      if (!nodeIDExist(nodeIDEdit)) {
+        if (isNumber(XInput.getText())) {
+          if (isNumber(YInput.getText())) {
 
-    if (BuildingInput.getText() != "") {
-      if (FloorInput.getText() != "") {
-        if (isNumber(NodeIDInput.getText())) {
-          if (isNumber(XInput.getText())) {
-            if (isNumber(YInput.getText())) {
+            if (FloorInput.getText() != "") {
 
-              nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
-              if (!nodeIDExist(nodeIDEdit)) {
+              if (BuildingInput.getText() != "") {
+
                 if (locationExist(nodeIDEdit)) {
                   alert.clearLabelAlert(InformationAlert, image2);
                   alert.clearLabelAlert(nodeIDAlert, image);
@@ -201,40 +202,38 @@ public class NodeController {
                 }
 
               } else {
-                alert.setLabelAlert(
-                    "This nodeID exists, please use another one.", nodeIDAlert, image);
-                alert.clearLabelAlert(InformationAlert, image2);
+                alert.setLabelAlert("Please input the correct building", InformationAlert, image2);
+                alert.clearLabelAlert(nodeIDAlert, image);
+                // Call Alert "Please input the correct Building"
 
-                // Here to call alert "This nodeID exists, please use another one
               }
-
             } else {
-              alert.setLabelAlert("Please input the correct Y-coord.", InformationAlert, image2);
+              alert.setLabelAlert("Please input the correct floor", InformationAlert, image2);
               alert.clearLabelAlert(nodeIDAlert, image);
-              // Call Alert "Please input the correct Y-coord"
+              // Call Alert "Please input the correct Floor"
             }
-
           } else {
-
-            alert.setLabelAlert("Please input the correct X-coord.", InformationAlert, image2);
+            alert.setLabelAlert("Please input the correct Y-coord.", InformationAlert, image2);
             alert.clearLabelAlert(nodeIDAlert, image);
-            // Call Alert "Please input the  correct X-coord"
+            // Call Alert "Please input the correct Y-coord"
           }
+
         } else {
-          alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
-          alert.clearLabelAlert(InformationAlert, image2);
-          // Call Alert "Please input the correct nodeID"
+
+          alert.setLabelAlert("Please input the correct X-coord.", InformationAlert, image2);
+          alert.clearLabelAlert(nodeIDAlert, image);
+          // Call Alert "Please input the  correct X-coord"
         }
       } else {
-        alert.setLabelAlert("Please input the correct floor", InformationAlert, image2);
-        alert.clearLabelAlert(nodeIDAlert, image);
-        // Call Alert "Please input the correct Floor"
+        alert.setLabelAlert("This nodeID exists, please use another one.", nodeIDAlert, image);
+        alert.clearLabelAlert(InformationAlert, image2);
+
+        // Here to call alert "This nodeID exists, please use another one
       }
     } else {
-      alert.setLabelAlert("Please input the correct building", InformationAlert, image2);
-      alert.clearLabelAlert(nodeIDAlert, image);
-      // Call Alert "Please input the correct Building"
-
+      alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+      alert.clearLabelAlert(InformationAlert, image2);
+      // Call Alert "Please input the correct nodeID"
     }
   }
 
@@ -268,15 +267,17 @@ public class NodeController {
 
   @FXML
   void SetClicked(MouseEvent event) throws SQLException {
+    if (isNumber(NodeIDInput.getText())) {
 
-    if (BuildingInput != null) {
-      if (FloorInput != null) {
-        if (isNumber(NodeIDInput.getText())) {
+      if (nodeIDExist(nodeIDEdit)) {
+        if (locationExist(nodeIDEdit)) {
           if (isNumber(XInput.getText())) {
             if (isNumber(YInput.getText())) {
-              nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
-              if (nodeIDExist(nodeIDEdit)) {
-                if (locationExist(nodeIDEdit)) {
+              if (FloorInput != null) {
+                if (BuildingInput != null) {
+
+                  nodeIDEdit = Integer.parseInt(NodeIDInput.getText());
+
                   alert.clearLabelAlert(InformationAlert, image2);
                   alert.clearLabelAlert(nodeIDAlert, image);
                   newBuilding = BuildingInput.getText();
@@ -300,41 +301,39 @@ public class NodeController {
 
                 } else {
                   alert.setLabelAlert(
-                      "The location of this nodeID does not exist.", nodeIDAlert, image);
-                  alert.clearLabelAlert(InformationAlert, image2);
+                      "Please input the correct building", InformationAlert, image2);
+                  alert.clearLabelAlert(nodeIDAlert, image);
+                  // Call Alert "Please input the correct Building"
+
                 }
               } else {
-                alert.setLabelAlert("This nodeID does not exist.", nodeIDAlert, image);
-                alert.clearLabelAlert(InformationAlert, image2);
-                // Here to call alert "This nodeID does not exist"
+                alert.setLabelAlert("Please input the correct floor", InformationAlert, image2);
+                alert.clearLabelAlert(nodeIDAlert, image);
+                // Call Alert "Please input the correct Floor"
               }
-
             } else {
               alert.setLabelAlert("Please input the correct Y-coord.", InformationAlert, image2);
               alert.clearLabelAlert(nodeIDAlert, image);
               // Call Alert "Please input the correct Y-coord"
             }
-
           } else {
             alert.setLabelAlert("Please input the correct X-coord.", InformationAlert, image2);
             alert.clearLabelAlert(nodeIDAlert, image);
             // Call Alert "Please input the  correct X-coord"
           }
         } else {
-          alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+          alert.setLabelAlert("The location of this nodeID does not exist.", nodeIDAlert, image);
           alert.clearLabelAlert(InformationAlert, image2);
-          // Call Alert "Please input the correct nodeID"
         }
       } else {
-        alert.setLabelAlert("Please input the correct floor", InformationAlert, image2);
-        alert.clearLabelAlert(nodeIDAlert, image);
-        // Call Alert "Please input the correct Floor"
+        alert.setLabelAlert("This nodeID does not exist.", nodeIDAlert, image);
+        alert.clearLabelAlert(InformationAlert, image2);
+        // Here to call alert "This nodeID does not exist"
       }
     } else {
-      alert.setLabelAlert("Please input the correct building", InformationAlert, image2);
-      alert.clearLabelAlert(nodeIDAlert, image);
-      // Call Alert "Please input the correct Building"
-
+      alert.setLabelAlert("Please input the correct nodeID.", nodeIDAlert, image);
+      alert.clearLabelAlert(InformationAlert, image2);
+      // Call Alert "Please input the correct nodeID"
     }
   }
 
@@ -367,10 +366,11 @@ public class NodeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().nodeTable.toCSV(path);
     if (success) {
-      Alert.alertBox("Export Successfully", "Export Successfully");
+      Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
       Alert.alertBox("Failed to Export", "Failed to Export");
     }
+    node.setItems(nodes());
   }
 
   @FXML
@@ -378,14 +378,17 @@ public class NodeController {
     path = ImportPath.getText();
     boolean success = Qdb.getInstance().nodeTable.importCSV(path);
     if (success) {
-      Alert.alertBox("Import Successfully", "Import Successfully");
+      Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {
       Alert.alertBox("Failed to Import", "Failed to Import");
     }
+    node.setItems(nodes());
   }
+  /*
+   @FXML
+   void BackClicked(ActionEvent event) {
+     Navigation.navigate(Screen.MAP_EDITOR);
+   }
 
-  @FXML
-  void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR);
-  }
+  */
 }

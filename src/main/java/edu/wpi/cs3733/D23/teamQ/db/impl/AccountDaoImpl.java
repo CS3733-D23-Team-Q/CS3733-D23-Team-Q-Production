@@ -5,6 +5,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AccountDaoImpl implements GenDao<Account, String> {
   private static AccountDaoImpl single_instance = null;
@@ -44,10 +46,15 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     int newq2 = accountWithNewChanges.getSecurityQuestion2();
     String newa1 = accountWithNewChanges.getSecurityAnswer1();
     String newa2 = accountWithNewChanges.getSecurityAnswer2();
+    int newID = accountWithNewChanges.getIDNum();
+    String newFN = accountWithNewChanges.getFirstName();
+    String newLN = accountWithNewChanges.getLastName();
+    String newTitle = accountWithNewChanges.getTitle();
+    int newPN = accountWithNewChanges.getPhoneNumber();
     boolean newActive = accountWithNewChanges.isActive();
     try {
       String query =
-          "UPDATE account SET password = ?, email = ?, security_question_1 = ?, security_question_2 = ?, security_answer_1 = ?, security_answer_2 = ?, active = ? WHERE username = ?";
+          "UPDATE account SET password = ?, email = ?, security_question_1 = ?, security_question_2 = ?, security_answer_1 = ?, security_answer_2 = ?, active = ?, \"IDNum\" = ?, \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\" = ? WHERE username = ?";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setString(1, newPass);
       pst.setString(2, newEmail);
@@ -56,7 +63,12 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(5, newa1);
       pst.setString(6, newa2);
       pst.setBoolean(7, newActive);
-      pst.setString(8, uname);
+      pst.setInt(8, newID);
+      pst.setString(9, newFN);
+      pst.setString(10, newLN);
+      pst.setString(11, newTitle);
+      pst.setInt(12, newPN);
+      pst.setString(13, uname);
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
@@ -68,6 +80,11 @@ public class AccountDaoImpl implements GenDao<Account, String> {
         accounts.get(index).setSecurityAnswer1(newa1);
         accounts.get(index).setSecurityAnswer1(newa2);
         accounts.get(index).setActive(newActive);
+        accounts.get(index).setIDNum(newID);
+        accounts.get(index).setFirstName(newFN);
+        accounts.get(index).setLastName(newLN);
+        accounts.get(index).setTitle(newTitle);
+        accounts.get(index).setPhoneNumber(newPN);
         System.out.println("Updated successful!");
       } else {
         System.out.println("Failed to update.");
@@ -112,11 +129,17 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     int q2 = a.getSecurityQuestion2();
     String a1 = a.getSecurityAnswer1();
     String a2 = a.getSecurityAnswer2();
+    boolean active = a.isActive();
+    int ID = a.getIDNum();
+    String FN = a.getFirstName();
+    String LN = a.getLastName();
+    String t = a.getTitle();
+    int PN = a.getPhoneNumber();
     boolean result = false;
     Connection con = GenDao.connect();
     try {
       String query =
-          "INSERT INTO account (username, password, email, security_question_1, security_question_2, security_answer_1, security_answer_2) VALUES(?,?,?,?,?,?,?)";
+          "INSERT INTO account (username, password, email, security_question_1, security_question_2, security_answer_1, security_answer_2, active, \"IDNum\", \"firstName\", \"lastName\", title, \"phoneNumber\") VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setString(1, uname);
       pst.setString(2, pass);
@@ -125,6 +148,12 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setInt(5, q2);
       pst.setString(6, a1);
       pst.setString(7, a2);
+      pst.setBoolean(8, active);
+      pst.setInt(9, ID);
+      pst.setString(10, FN);
+      pst.setString(11, LN);
+      pst.setString(12, t);
+      pst.setInt(13, PN);
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
@@ -163,7 +192,12 @@ public class AccountDaoImpl implements GenDao<Account, String> {
                 rs.getInt("security_question_2"),
                 rs.getString("security_answer_1"),
                 rs.getString("security_answer_2"),
-                rs.getBoolean("active"));
+                rs.getBoolean("active"),
+                rs.getInt("IDNum"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("title"),
+                rs.getInt("phoneNumber"));
         accounts.add(a);
       }
       con.close();
@@ -194,5 +228,41 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       }
     }
     return is;
+  }
+
+  public String getEmailWithUsername(String AUsername) {
+    String TheEmail = "";
+    for (int i = 0; i < accounts.size(); i++) {
+      if (accounts.get(i).getUsername().equals(AUsername)) {
+        TheEmail = accounts.get(i).getEmail();
+      }
+    }
+    return TheEmail;
+  }
+
+  public int getQuestionId(String question) {
+    int q = 0;
+    Connection con = GenDao.connect();
+    try {
+      String query = "SELECT id FROM security_question WHERE question = ?";
+      PreparedStatement pst = con.prepareStatement(query);
+      pst.setString(1, question);
+      ResultSet rs = pst.executeQuery();
+      rs.next();
+      q = rs.getInt(1);
+      con.close();
+      pst.close();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return q;
+  }
+
+  public ObservableList<String> getAllNames() {
+    ObservableList<String> names = FXCollections.observableArrayList();
+    for (Account p : accounts) {
+      names.add(p.getFirstName() + " " + p.getLastName() + ", " + p.getTitle());
+    }
+    return names;
   }
 }

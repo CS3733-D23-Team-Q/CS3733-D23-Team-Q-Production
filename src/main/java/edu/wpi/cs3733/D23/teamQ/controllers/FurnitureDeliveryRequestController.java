@@ -1,7 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
 public class FurnitureDeliveryRequestController {
+  Qdb qdb = Qdb.getInstance();
   @FXML ChoiceBox assigneeField;
   @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
@@ -24,6 +30,10 @@ public class FurnitureDeliveryRequestController {
 
   @FXML
   public void initialize() {
+    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setItems(qdb.getAllNames());
+    this.roomNumberField.setValue("Select a Location");
+    this.roomNumberField.setItems(qdb.getAllLongNames());
     this.itemRequestedField.setValue("Select Furniture Item");
     this.itemRequestedField.setItems(itemList);
   }
@@ -36,20 +46,20 @@ public class FurnitureDeliveryRequestController {
 
   @FXML
   public void submitButtonClicked() {
-    /*
     Qdb qdb = Qdb.getInstance();
-    FurnitureRequest newFR =
-            new FurnitureRequest(
-                    0,
-                    "temp user",
-                    0,
-                    assigneeField.getText(),
-                    roomNumberField.getText(),
-                    specialInstructionsField.getText(),
-                    (String) itemRequestedField.getValue());
-    // qdb.addConferenceRequest(newFR);
-    Navigation.navigate(Screen.HOME);
 
-     */
+    FurnitureRequest newFR =
+        new FurnitureRequest(
+            LoginController.getLoginUsername(),
+            0,
+            assigneeField.getValue().toString(),
+            qdb.retrieveNode(Integer.parseInt(roomNumberField.getValue().toString())),
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            itemRequestedField.getValue().toString());
+
+    qdb.addFurnitureRequest(newFR);
+    Navigation.navigate(Screen.HOME);
   }
 }

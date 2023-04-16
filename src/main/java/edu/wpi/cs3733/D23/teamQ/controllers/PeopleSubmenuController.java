@@ -18,16 +18,6 @@ public class PeopleSubmenuController {
 
   @FXML
   public void directoryClicked() {
-    // Navigation.navigate(Screen.Directory);
-  }
-
-  @FXML
-  public void psmExited() {
-    setVisible(false);
-  }
-
-  public void setVisible(boolean v) {
-    peopleSM.toFront();
-    peopleSM.setVisible(v);
+    Navigation.navigate(Screen.DIRECTORY);
   }
 }

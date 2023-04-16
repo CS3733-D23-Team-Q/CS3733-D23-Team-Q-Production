@@ -14,21 +14,20 @@ public class NavigationSubmenuController {
 
   @FXML
   public void pathfinderClicked() {
-    Navigation.navigate(Screen.PATH_TEXT);
+    Navigation.navigate(Screen.PATH_FINDING);
   }
 
   @FXML
   public void editorClicked() {
-    Navigation.navigate(Screen.MAP_EDITOR);
+    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
   }
 
   @FXML
-  public void nsmExited() {
-    setVisible(false);
+  boolean navSMHovered() {
+    return navigationSM.isHover();
   }
 
-  public void setVisible(boolean v) {
-    navigationSM.toFront();
-    navigationSM.setVisible(v);
+  public void moveClicked() {
+    Navigation.navigate(Screen.OFFICE_MOVE);
   }
 }

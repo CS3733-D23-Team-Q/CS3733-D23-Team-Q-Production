@@ -20,8 +20,8 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   }
 
   private OfficeSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
-    populate();
     this.nodeTable = nodeTable;
+    populate();
     if (officeSuppliesRequests.size() != 0) {
       nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;
     }
@@ -116,14 +116,16 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"specialInstructions\", \"item\", \"quantity\", \"nodeID\") VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
-      stmt.setString(4, request.getSpecialInstructions());
-      stmt.setString(5, request.getItem());
-      stmt.setInt(6, request.getQuantity());
-      stmt.setInt(7, request.getNode().getNodeID());
+      stmt.setInt(4, request.getNode().getNodeID());
+      stmt.setString(5, request.getSpecialInstructions());
+      stmt.setDate(6, request.getDate());
+      stmt.setString(7, request.getTime());
+      stmt.setString(8, request.getItem());
+      stmt.setInt(9, request.getQuantity());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -148,6 +150,8 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
                 rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
+                rst.getDate("date"),
+                rst.getString("time"),
                 rst.getString("item"),
                 rst.getInt("quantity")));
       }

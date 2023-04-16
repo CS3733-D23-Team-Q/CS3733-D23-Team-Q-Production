@@ -1,8 +1,10 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -21,6 +23,11 @@ public class ListServiceRequestController {
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
 
+  private static MealRequest mealRequest;
+  private static OfficeSuppliesRequest officeSuppliesRequest;
+
+  private static FurnitureRequest furnitureRequest;
+
   Qdb qdb = Qdb.getInstance();
 
   public ListServiceRequestController() {}
@@ -29,7 +36,7 @@ public class ListServiceRequestController {
   public void initialize() {
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
-    roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("roomNumber"));
+    roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
   }
 
@@ -41,14 +48,35 @@ public class ListServiceRequestController {
       flowerRequest =
           qdb.retrieveFlowerRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.FLOWER_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
             tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
         != null) {
       conferenceRequest =
           qdb.retrieveConferenceRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
+      Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
+    } else if (qdb.retrieveMealRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      mealRequest =
+          qdb.retrieveMealRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigateRight(Screen.MEAL_REQUEST_DISPLAY);
+    } else if (qdb.retrieveOfficeSuppliesRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      officeSuppliesRequest =
+          qdb.retrieveOfficeSuppliesRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
+    } else if (qdb.retrieveFurnitureRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      furnitureRequest =
+          qdb.retrieveFurnitureRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
     }
   }
 
@@ -58,5 +86,17 @@ public class ListServiceRequestController {
 
   public static FlowerRequest getFlowerRequest() {
     return flowerRequest;
+  }
+
+  public static MealRequest getMealRequest() {
+    return mealRequest;
+  }
+
+  public static FurnitureRequest getFurnitureRequest() {
+    return furnitureRequest;
+  }
+
+  public static OfficeSuppliesRequest getOfficeRequest() {
+    return officeSuppliesRequest;
   }
 }

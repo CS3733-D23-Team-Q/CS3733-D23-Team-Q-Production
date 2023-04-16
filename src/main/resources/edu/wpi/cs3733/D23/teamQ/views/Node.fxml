@@ -2,14 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -52,28 +48,6 @@
                </children>
             </HBox>
          </children></HBox>
-        <MenuBar prefHeight="25.0" prefWidth="122.0" styleClass="button-menu" stylesheets="@styles/Home.css">
-            <menus>
-                <Menu mnemonicParsing="false" text="Menu">
-                    <graphic>
-                        <ImageView fx:id="menuImage" fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../../../../../Menu.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#mapClicked" text="Map" />
-                  <MenuItem mnemonicParsing="false" onAction="#edgeClicked" text="Edge Table" />
-                  <MenuItem mnemonicParsing="false" onAction="#locationClicked" text="Location Name Table" />
-                  <MenuItem mnemonicParsing="false" onAction="#moveClicked" text="Move Table" />
-                  <MenuItem mnemonicParsing="false" onAction="#BackClicked" text="Back" />
-                  <MenuItem mnemonicParsing="false" onAction="#homeClicked" text="Home" />
-                  <MenuItem mnemonicParsing="false" onAction="#exitClicked" text="Exit" />
-               </items>
-                </Menu>
-            </menus>
-        </MenuBar>
         <TableView fx:id="node" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="NodeID" prefWidth="75.0" text="NodeID" />
@@ -130,9 +104,9 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onMouseClicked="#AddClicked" prefHeight="23.0" prefWidth="55.0" stylesheets="@styles/Home.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" prefHeight="23.0" prefWidth="58.0" stylesheets="@styles/Home.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onMouseClicked="#SetClicked" prefHeight="23.0" prefWidth="56.0" stylesheets="@styles/Home.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#AddClicked" prefHeight="23.0" prefWidth="55.0" stylesheets="@styles/MapEditor.css" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onMouseClicked="#DeleteClicked" prefHeight="23.0" prefWidth="58.0" stylesheets="@styles/MapEditor.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onMouseClicked="#SetClicked" prefHeight="23.0" prefWidth="56.0" stylesheets="@styles/MapEditor.css" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label prefHeight="23.0" prefWidth="150.0" text="Please input the nodeID" />
@@ -147,10 +121,11 @@
                         <Label fx:id="InformationAlert" prefHeight="25.0" prefWidth="443.0" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" prefHeight="23.0" prefWidth="86.0" text="Import CSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="88.0" text="Export CSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label prefHeight="14.0" prefWidth="172.0" text="Please input the path " GridPane.columnIndex="2" />
-                  <TextField fx:id="ImportPath" prefHeight="23.0" prefWidth="117.0" promptText="Path" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onMouseClicked="#ImportClicked" prefHeight="23.0" prefWidth="86.0" stylesheets="@styles/MapEditor.css" text="Import CSV" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#ExportClicked" prefHeight="23.0" prefWidth="88.0" stylesheets="@styles/MapEditor.css" text="Export CSV" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label prefHeight="14.0" prefWidth="172.0" text="Please input the filename " GridPane.columnIndex="2" />
+                  <TextField fx:id="ImportPath" prefHeight="23.0" prefWidth="117.0" promptText="Filename" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

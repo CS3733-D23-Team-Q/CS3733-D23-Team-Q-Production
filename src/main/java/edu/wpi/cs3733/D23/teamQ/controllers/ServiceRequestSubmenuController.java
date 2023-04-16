@@ -14,20 +14,12 @@ public class ServiceRequestSubmenuController {
   @FXML
   public void createClicked() {
     Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
   public void editClicked() {
     Navigation.navigate(Screen.LIST_REQUESTS);
-  }
-
-  @FXML
-  public void srsmExited() {
-    setVisible(false);
-  }
-
-  public void setVisible(boolean v) {
-    servicerequestSM.toFront();
-    servicerequestSM.setVisible(v);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 }

@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 public class Qdb {
 
@@ -15,7 +16,7 @@ public class Qdb {
 
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private PersonDaoImpl personTable = PersonDaoImpl.getInstance();
+  /* public PersonDaoImpl personTable = PersonDaoImpl.getInstance();*/
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(nodeTable);
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
@@ -64,6 +65,10 @@ public class Qdb {
 
   public int getAccountIndex(String username) {
     return accountTable.getIndex(username);
+  }
+
+  public ObservableList<String> getAllNames() {
+    return accountTable.getAllNames();
   }
 
   public List<Integer> getAccountIndexes(String email) {
@@ -186,6 +191,14 @@ public class Qdb {
     return (ArrayList<Location>) locationTable.getAllRows();
   }
 
+  public ObservableList<String> getAllLongNames(String[] nodeTypes) {
+    return locationTable.getAllLongNames(nodeTypes);
+  }
+
+  public ObservableList<String> getAllLongNames() {
+    return locationTable.getAllLongNames();
+  }
+
   public Move retrieveMove(int moveID) {
     return moveTable.retrieveRow(moveID);
   }
@@ -206,7 +219,7 @@ public class Qdb {
     return (ArrayList<Move>) moveTable.getAllRows();
   }
 
-  public Person retrievePerson(int ID) {
+  /*public Person retrievePerson(int ID) {
     return personTable.retrieveRow(ID);
   }
 
@@ -228,6 +241,10 @@ public class Qdb {
 
   public ArrayList<Person> retrieveAllPeople() {
     return (ArrayList<Person>) personTable.getAllRows();
+  }*/
+
+  public ArrayList<Account> retrieveAllPeople() {
+    return (ArrayList<Account>) accountTable.getAllRows();
   }
 
   public Question retrieveQuestion(int ID) {
@@ -340,5 +357,17 @@ public class Qdb {
 
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
+  }
+
+  public int getNodeFromLocation(String lName) {
+    return locationTable.getNodeFromLocation(lName);
+  }
+
+  public String getEmailWithAUsername(String username) {
+    return accountTable.getEmailWithUsername(username);
+  }
+
+  public List<Account> getRows() {
+    return accountTable.getAllRows();
   }
 }

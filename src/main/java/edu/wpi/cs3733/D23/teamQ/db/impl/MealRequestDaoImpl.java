@@ -19,8 +19,8 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   }
 
   private MealRequestDaoImpl(NodeDaoImpl nodeTable) {
-    populate();
     this.nodeTable = nodeTable;
+    populate();
     if (mealRequests.size() != 0) {
       nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;
     }
@@ -116,16 +116,17 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
-      stmt.setString(6, request.getDrink());
-      stmt.setString(7, request.getEntree());
-      stmt.setString(8, request.getSide());
-      stmt.setInt(9, request.getNode().getNodeID());
+      stmt.setDate(6, request.getDate());
+      stmt.setString(7, request.getTime());
+      stmt.setString(8, request.getDrink());
+      stmt.setString(9, request.getEntree());
+      stmt.setString(10, request.getSide());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -150,6 +151,8 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
                 rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
+                rst.getDate("date"),
+                rst.getString("time"),
                 rst.getString("drink"),
                 rst.getString("entree"),
                 rst.getString("side")));

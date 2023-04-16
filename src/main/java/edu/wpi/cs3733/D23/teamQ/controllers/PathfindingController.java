@@ -14,7 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -29,7 +29,7 @@ public class PathfindingController {
   Node target;
   List<Line> previousPath;
   Text text;
-  @FXML Pane root;
+  @FXML AnchorPane root;
   @FXML Group parent;
   @FXML ImageView map;
 
@@ -37,19 +37,10 @@ public class PathfindingController {
   public void initialize() throws IOException {
     ready4Second = false;
     previousPath = new ArrayList<>();
-    // ImageView view = new ImageView(getClass().getResource("/L1.png").toExternalForm());
-    // view.setFitWidth(1000);
-    // view.setFitHeight(680);
     addButtons();
     javafx.scene.Node node = parent;
     GesturePane pane = new GesturePane(node);
     root.getChildren().add(pane);
-
-    /*
-    Node start = qdb.retrieveNode(100);
-    Node target = qdb.retrieveNode(130);
-    drawLines(start, target);
-     */
 
     pane.setOnMouseClicked(
         e -> {
@@ -66,30 +57,33 @@ public class PathfindingController {
 
   public void addButtons() {
     List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> L1nodes = new ArrayList<>();
+    List<Node> ffNodes = new ArrayList<>();
     for (Node n : nodes) {
-      if (n.getFloor().equals("L1")) {
-        L1nodes.add(n);
+      /*
+      int nodeID = n.getNodeID();
+      Location location = qdb.retrieveLocation(nodeID);
+      String name = location.getShortName();
+      Pattern pattern = Pattern.compile("(?i).*hall.*");
+       */
+      if (n.getFloor().equals("1")) { // && !pattern.matcher(name).matches()) {
+        ffNodes.add(n);
       }
     }
-    for (Node n : L1nodes) {
+    for (Node n : ffNodes) {
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
       Button node = new Button();
       node.setLayoutX(x);
       node.setLayoutY(y);
       node.setStyle(
-          "-fx-background-radius: 5em;" // 5
-              + "-fx-min-width: 3px;" // 3
+          "-fx-background-radius: 5em;"
+              + "-fx-min-width: 3px;"
               + "-fx-min-height: 3px;"
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
               + "-fx-background-insets: 0px;");
       node.setOnMouseEntered(
           e -> {
-            // double cursorx = e.getX() + 3;
-            // double cursory = e.getY() + 3;
-            // parent.getChildren().remove(text);
             String nodeid = "";
             text = new Text(x + 3, y + 3, nodeid + n.getNodeID());
             text.setStyle("-fx-font-size: 8px;");
@@ -97,7 +91,7 @@ public class PathfindingController {
           });
       node.setOnMouseExited(
           e -> {
-            text.setText("");
+            parent.getChildren().remove(text);
           });
       node.setOnMouseClicked(
           e -> {
@@ -107,10 +101,12 @@ public class PathfindingController {
             } else {
               target = n;
               ready4Second = false;
-              removeLines(previousPath);
               try {
+                removeLines(previousPath);
+                // previousPath = new ArrayList<>();
+                // progress bar of generating a new path
                 previousPath = drawLines(start, target);
-              } catch (IOException ex) {
+              } catch (Exception ex) {
                 throw new RuntimeException(ex);
               }
             }
@@ -147,34 +143,11 @@ public class PathfindingController {
     }
   }
 
-  /*
-  public void addLine(Node n, Node next) {
-    int x1 = n.getXCoord() / 5;
-    int y1 = n.getYCoord() / 5;
-    int x2 = next.getXCoord() / 5;
-    int y2 = next.getYCoord() / 5;
-    Line line = new Line(x1, y1, x2, y2);
-    line.setStyle("-fx-stroke: blue;");
-    line.setStrokeWidth(3);
-    // line.toFront();
-    parent.getChildren().add(line);
-    // root.getChildren().add(parent);
-  }
-   */
-
   public List<Line> drawLines(Node start, Node target) throws IOException {
     List<Node> path = Star2.aStar(start, target);
     List<Line> lines = new ArrayList<>();
     if (path.size() > 0) {
       lines = addLines(path);
-      /*
-      for (int i = path.size() - 1; i >= 1; i--) { // change to i++ when calling the exist one
-        Node n = path.get(i);
-        Node next = path.get(i - 1);
-        addLine(n, next);
-        // map.toBack();
-      }
-       */
     } else {
       alert.alertBox("No solution", "Failed to find a path");
     }
