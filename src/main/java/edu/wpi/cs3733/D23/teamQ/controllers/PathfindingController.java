@@ -624,6 +624,14 @@ public class PathfindingController {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
+          if (highlightedNodes.size() > 0) {
+            for (int j = 0; j < highlightedNodes.size(); j++) {
+              if (highlightedNodes.get(j).getValue() == floor) {
+                unhighlight(highlightedNodes.get(j).getKey());
+              }
+              highlightedNodes.removeAll(highlightedNodes);
+            }
+          }
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
               new Pair<>(
