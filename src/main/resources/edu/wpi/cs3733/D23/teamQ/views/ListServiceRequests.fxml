@@ -11,17 +11,17 @@
 
 <AnchorPane prefHeight="902.0" prefWidth="1071.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController">
    <children>
-      <HBox alignment="CENTER" layoutY="72.0" prefHeight="760.0" prefWidth="1008.0">
+      <HBox alignment="CENTER" layoutY="72.0" prefHeight="760.0" prefWidth="1071.0">
          <children>
-            <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#rowSelected" prefHeight="732.0" prefWidth="912.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;">
+            <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#rowSelected" prefHeight="760.0" prefWidth="938.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;">
                <columns>
                   <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
                   <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
                   <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
                   <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
-                  <TableColumn fx:id="assigne" prefWidth="138.33328247070312" text="Assignee" />
                   <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Time" />
                   <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Date" />
+                  <TableColumn fx:id="assigne" prefWidth="138.33328247070312" text="Assignee" />
                </columns>
             </TableView>
          </children>
