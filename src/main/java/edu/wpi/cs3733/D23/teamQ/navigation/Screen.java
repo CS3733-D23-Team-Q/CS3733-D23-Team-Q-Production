@@ -44,7 +44,8 @@ public enum Screen {
 
   DIRECTORY("views/Directory.fxml", "Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
-  SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted");
+  SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
+  OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
 
   private final String filename;
   private final String title;
