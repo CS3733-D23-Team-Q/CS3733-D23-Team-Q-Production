@@ -96,8 +96,6 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    m.setMoveID(nextID);
-    nextID++;
     return moves.add(m);
   }
 
