@@ -50,6 +50,7 @@ public class PathfindingController2 {
   List<Pair<Integer, Integer>> ffnodes;
   List<Pair<Integer, Integer>> sfnodes;
   List<Pair<Integer, Integer>> tfnodes;
+  List<String> allSelections;
   // boolean elev;
 
   @FXML HBox root;
@@ -59,12 +60,13 @@ public class PathfindingController2 {
   @FXML Button nextFloor;
   @FXML CheckBox restCheck;
   @FXML CheckBox cafeCheck;
-  @FXML ComboBox startSelect;
-  @FXML ComboBox endSelect;
+  @FXML ComboBox<String> startSelect;
+  @FXML ComboBox<String> endSelect;
 
   @FXML
   public void initialize() throws IOException {
     // elev = false;
+    allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
     ffnodes = new ArrayList<>();
@@ -132,12 +134,16 @@ public class PathfindingController2 {
       int nodeid = n.getNodeID();
       nodeIds.add(nodeid);
       Location location = qdb.retrieveLocation(nodeid);
-      String lname = location.getShortName();
+      String lname = location.getLongName();
+      String nodetype = location.getNodeType();
       if (n.getFloor().equals(f)) {
         fNodes.add(n);
       }
-      startSelect.getItems().add(lname);
-      endSelect.getItems().add(lname);
+      if (!nodetype.equals("HALL")) {
+        startSelect.getItems().add(lname);
+        endSelect.getItems().add(lname);
+        allSelections.add(lname);
+      }
     }
     for (Node n : fNodes) {
       int x = n.getXCoord() / 5;
@@ -146,16 +152,30 @@ public class PathfindingController2 {
       Location location = qdb.retrieveLocation(nodeid);
       String sname = location.getShortName();
       String lname = location.getLongName();
+      String nodetype = location.getNodeType();
       Button node = new Button();
       node.setLayoutX(x);
       node.setLayoutY(y);
-      node.setStyle(
-          "-fx-background-radius: 5em;"
-              + "-fx-min-width: 3px;"
-              + "-fx-min-height: 3px;"
-              + "-fx-max-width: 3px;"
-              + "-fx-max-height: 3px;"
-              + "-fx-background-insets: 0px;");
+      // problem
+      if (!nodetype.equals("HALL")) {
+        node.setStyle(
+            "-fx-background-radius: 5em;"
+                + "-fx-min-width: 3px;"
+                + "-fx-min-height: 3px;"
+                + "-fx-max-width: 3px;"
+                + "-fx-max-height: 3px;"
+                + "-fx-background-insets: 0px;");
+      } else {
+        node.setStyle(
+            "-fx-background-radius: 5em;"
+                + "-fx-min-width: 3px;"
+                + "-fx-min-height: 3px;"
+                + "-fx-max-width: 3px;"
+                + "-fx-max-height: 3px;"
+                + "-fx-background-insets: 0px;"
+                + "-fx-background-color: transparent;");
+        node.setDisable(true);
+      }
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
@@ -497,7 +517,7 @@ public class PathfindingController2 {
 
   public void startSelected() throws IOException {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
-    String lname = (String) startSelect.getValue();
+    String lname = startSelect.getValue();
     if (!lname.equals("")) {
       int index = startSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
@@ -557,7 +577,7 @@ public class PathfindingController2 {
   public void endSelected() throws IOException {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
     String f = whichFloorS();
-    String lname = (String) endSelect.getValue();
+    String lname = endSelect.getValue();
     if (!lname.equals("")) {
       int index = endSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
