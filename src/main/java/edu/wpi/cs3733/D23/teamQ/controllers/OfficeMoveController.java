@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import java.sql.Date;
 import javafx.fxml.FXML;
 
 public class OfficeMoveController {
@@ -26,15 +27,18 @@ public class OfficeMoveController {
   }
 
   public void submitButtonClicked() {
-    if(currentLocationField.getValue() != null && newLocationField.getValue() != null && dateField.getValue() != null) {
+
+    if (currentLocationField.getValue() != null
+        && newLocationField.getValue() != null
+        && dateField.getValue() != null) {
       Move newMove =
-              new Move(
-                      qdb.retrieveNode(qdb.getNodeFromLocation(currentLocationField.getSelectedItem().toString())),
-                      newLocationField.getSelectedItem().toString(),
-                      dateField.getValue().toString());
+          new Move(
+              qdb.retrieveNode(
+                  qdb.getNodeFromLocation(currentLocationField.getSelectedItem().toString())),
+              newLocationField.getSelectedItem().toString(),
+              Date.valueOf(dateField.getValue()));
 
       qdb.addMove(newMove);
     }
-
   }
 }

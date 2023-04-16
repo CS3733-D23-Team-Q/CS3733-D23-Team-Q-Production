@@ -90,7 +90,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
                 "INSERT INTO move(\"nodeID\", \"longName\", \"date\") VALUES (?, ?, ?)")) {
       stmt.setInt(1, m.getNode().getNodeID());
       stmt.setString(2, m.getLongName());
-      stmt.setString(3, m.getDate());
+      stmt.setDate(3, m.getDate());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -119,7 +119,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
                 rst.getInt("moveID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("longName"),
-                rst.getString("date")));
+                rst.getDate("date")));
       }
       conn.close();
       stm.close();
@@ -204,7 +204,9 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       while (myReader.hasNextLine()) {
         String row = myReader.nextLine();
         String[] vars = row.split(",");
-        Move m = new Move(nodeTable.retrieveRow(Integer.parseInt(vars[0])), vars[1], vars[2]);
+        Move m =
+            new Move(
+                nodeTable.retrieveRow(Integer.parseInt(vars[0])), vars[1], Date.valueOf(vars[2]));
         addRow(m);
       }
       myReader.close();
