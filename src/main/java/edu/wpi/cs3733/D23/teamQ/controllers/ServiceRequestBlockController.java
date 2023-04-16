@@ -9,20 +9,40 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 public class ServiceRequestBlockController {
+  @FXML AnchorPane anchor;
   @FXML HBox sRequestsHB;
   @FXML MFXButton sRequests;
   @FXML ImageView sRequestsIcon;
   @FXML AnchorPane sRequestsSMPane;
+  @FXML MenuController mc;
 
   @FXML
-  public void sRequestsEntered() {
-    sRequestsSMPane.setVisible(true);
+  public void anchorEntered() {
+    mc.closeAll();
+    sRequests.setStyle("-fx-background-color: #f1f1f1; -fx-text-fill: #012d5a");
     sRequestsIcon.setImage(new Image(App.class.getResourceAsStream("ServiceRequestsBlue.png")));
+    sRequestsSMPane.setVisible(true);
   }
 
   @FXML
-  public void sRequestsExited() {
-    sRequestsSMPane.setVisible(false);
+  public void anchorExited() {
+    sRequests.setStyle("-fx-background-color: #012d5a; -fx-text-fill: #f1f1f1");
     sRequestsIcon.setImage(new Image(App.class.getResourceAsStream("ServiceRequests.png")));
+    sRequestsSMPane.setVisible(false);
+  }
+
+  @FXML
+  public void sRequestsEntered() {}
+
+  @FXML
+  public void sRequestsExited() {}
+
+  @FXML
+  public void hideSM() {
+    sRequestsSMPane.setVisible(false);
+  }
+
+  public void setMCController(MenuController MC) {
+    mc = MC;
   }
 }

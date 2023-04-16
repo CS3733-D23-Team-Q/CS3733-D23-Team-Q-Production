@@ -21,4 +21,9 @@ public class NavigationSubmenuController {
   public void editorClicked() {
     Navigation.navigate(Screen.MAP_EDITOR_TABLE);
   }
+
+  @FXML
+  boolean navSMHovered() {
+    return navigationSM.isHover();
+  }
 }

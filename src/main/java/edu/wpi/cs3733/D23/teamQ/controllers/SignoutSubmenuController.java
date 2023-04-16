@@ -20,4 +20,9 @@ public class SignoutSubmenuController {
   public void exitClicked() {
     Platform.exit();
   }
+
+  @FXML
+  boolean soHovered() {
+    return signoutSM.isHover();
+  }
 }

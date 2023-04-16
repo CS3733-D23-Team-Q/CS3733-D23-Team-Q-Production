@@ -14,4 +14,6 @@ public class StatisticsSubmenuController {
   public void statisticsClicked() {
     Navigation.navigate(Screen.STATISTICS);
   }
+
+  public void setMCController(MenuController menuController) {}
 }

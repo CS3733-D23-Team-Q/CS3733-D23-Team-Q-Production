@@ -8,24 +8,29 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class MenuController {
   @FXML AnchorPane menuPane;
   @FXML MFXButton home;
   @FXML ImageView homeIcon;
+  @FXML VBox spacer;
+  @FXML PeopleBlockController peopleBlockController;
+  @FXML NavigationBlockController navigationBlockController;
+  @FXML ServiceRequestBlockController srBlockController;
+  @FXML StatisticsBlockController statBlockController;
+  @FXML SettingsBlockController settingsBlockController;
+  @FXML SignoutBlockController signoutBlockController;
 
-  //    @FXML
-  //    PeopleBlockController peopleBlockController;
-  //    @FXML
-  //    NavigationBlockController navigationBlockController;
-  //    @FXML
-  //    ServiceRequestBlockController srBlockController;
-  //    @FXML
-  //    StatisticsBlockController statBlockController;
-  //    @FXML
-  //    SettingsBlockController settingsBlockController;
-  //    @FXML
-  //    SignoutBlockController signoutBlockController;
+  @FXML
+  public void initialize() {
+    peopleBlockController.setMCController(this);
+    navigationBlockController.setMCController(this);
+    srBlockController.setMCController(this);
+    statBlockController.setMCController(this);
+    settingsBlockController.setMCController(this);
+    signoutBlockController.setMCController(this);
+  }
 
   @FXML
   public void homeClicked() {
@@ -40,6 +45,21 @@ public class MenuController {
   @FXML
   public void homeExited() {
     homeIcon.setImage(new Image(App.class.getResourceAsStream("Home.png")));
+  }
+
+  @FXML
+  public void spacerEntered() {
+    closeAll();
+  }
+
+  @FXML
+  public void closeAll() {
+    peopleBlockController.hideSM();
+    navigationBlockController.hideSM();
+    srBlockController.hideSM();
+    statBlockController.hideSM();
+    settingsBlockController.hideSM();
+    signoutBlockController.hideSM();
   }
 
   @FXML

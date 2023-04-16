@@ -49,7 +49,7 @@
                   <fx:include fx:id="srBlock" source="ServiceRequestBlock.fxml" visible="true" />
                   <fx:include fx:id="statBlock" source="StatisticsBlock.fxml" visible="true" />
                   <fx:include fx:id="settingsBlock" source="SettingsBlock.fxml" visible="true" />
-                  <VBox maxHeight="1.7976931348623157E308" prefHeight="122.0" prefWidth="240.0" VBox.vgrow="ALWAYS" />
+                  <VBox fx:id="spacer" maxHeight="1.7976931348623157E308" onMouseEntered="#spacerEntered" prefHeight="122.0" prefWidth="240.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <fx:include fx:id="signoutBlock" source="SignoutBlock.fxml" visible="true" />
