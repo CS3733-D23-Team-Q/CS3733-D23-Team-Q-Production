@@ -1,68 +1,89 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import javafx.application.Platform;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
+import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 
 public class ConferenceRoomRequestDisplayController implements IController {
 
-  @FXML Button resetButton;
-  @FXML Button backButton;
-  @FXML Button submitButton;
+  ObservableList<String> foodOptionsList =
+      FXCollections.observableArrayList(
+          "Brunch spread", "Dinner spread", "Snack spread", "No food");
 
-  @FXML Label roomNumberField;
+  @FXML MFXButton deleteButton;
 
-  @FXML Label dateTimeField;
+  @FXML MFXButton backButton;
 
-  @FXML Label foodField;
-
-  @FXML Label specialInstructionsField;
-
-  @FXML Label assigneeField;
-
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
-  @FXML MenuItem profileItem;
+  @FXML MFXButton updateButton;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
+  @FXML MFXComboBox foodField;
+  @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
-    roomNumberField.setText(ListServiceRequestController.getConferenceRequest().getRoomNumber());
-    dateTimeField.setText(ListServiceRequestController.getConferenceRequest().getDateTime());
-    foodField.setText(ListServiceRequestController.getConferenceRequest().getFoodChoice());
+    Qdb qdb = Qdb.getInstance();
+    this.assigneeField.setItems(qdb.getAllNames());
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
+    this.foodField.setItems(foodOptionsList);
+
     assigneeField.setText(ListServiceRequestController.getConferenceRequest().getAssignee());
+    roomNumberField.setText(
+        ListServiceRequestController.getConferenceRequest().getNode().toString());
+    dateField.setValue(
+        LocalDate.of(
+            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
+            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
+            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+    foodField.setText(ListServiceRequestController.getConferenceRequest().getFoodChoice());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
   }
 
   @FXML
-  public void resetButtonClicked() {
-    Navigation.navigate(Screen.LIST_REQUESTS);
+  public void deleteButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
+    qdb.deleteConferenceRequest(ListServiceRequestController.getConferenceRequest().getRequestID());
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
+  // Update with proper date and time
   @FXML
-  public void submitButtonClicked() {}
+  public void updateButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
 
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
-
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
+    ConferenceRequest newCCR =
+        new ConferenceRequest(
+            ListServiceRequestController.getConferenceRequest().getRequestID(),
+            ListServiceRequestController.getConferenceRequest().getNode(),
+            "temp user",
+            (String) assigneeField.getValue(),
+            0,
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            (String) foodField.getValue());
+    qdb.updateConferenceRequest(
+        ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
+    Navigation.navigateRight(Screen.HOME);
   }
 }

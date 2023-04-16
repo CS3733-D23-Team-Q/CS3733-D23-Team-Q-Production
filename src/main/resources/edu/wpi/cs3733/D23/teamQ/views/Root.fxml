@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-
-<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" />
+<BorderPane fx:id="rootBorder" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.RootController">
+    <left>
+        <fx:include fx:id="menu" source="MenuRoot.fxml" />
+    </left>
+   <center>
+      <AnchorPane fx:id="rootCenter" />
+   </center>
+   <right>
+      <AnchorPane fx:id="rootRight" />
+   </right>
+</BorderPane>

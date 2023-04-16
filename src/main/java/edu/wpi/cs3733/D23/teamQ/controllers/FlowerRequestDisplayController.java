@@ -1,71 +1,90 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import javafx.application.Platform;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
+import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 
-public class FlowerRequestDisplayController implements IController {
-  @FXML Button resetButton;
-  @FXML Button backButton;
-  @FXML Button submitButton;
+public class FlowerRequestDisplayController {
 
-  @FXML Label roomNumberField;
+  ObservableList<String> TypeOfFlowers =
+      FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
 
-  @FXML Label flowerChoiceField;
+  @FXML MFXButton deleteButton;
+  @FXML MFXButton backButton;
+  @FXML MFXButton updateButton;
 
-  @FXML Label numberBouquetField;
-
-  @FXML Label flowerNoteField;
-
-  @FXML Label specialInstructionsField;
-
-  @FXML Label assigneeField;
-
-  @FXML MenuItem homeItem;
-  @FXML MenuItem exitItem;
-  @FXML MenuItem profileItem;
+  @FXML MFXComboBox assigneeField;
+  @FXML MFXComboBox roomNumberField;
+  @FXML MFXDatePicker dateField;
+  @FXML MFXTextField timeField;
+  @FXML MFXComboBox flowerTypeField;
+  @FXML MFXTextField bouquetChoiceField;
+  @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
-    roomNumberField.setText(ListServiceRequestController.getFlowerRequest().getRoomNumber());
-    flowerNoteField.setText(ListServiceRequestController.getFlowerRequest().getNote());
-    flowerChoiceField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
-    numberBouquetField.setText(
-        String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
-    assigneeField.setText(ListServiceRequestController.getFlowerRequest().getAssignee());
+    Qdb qdb = Qdb.getInstance();
+    this.assigneeField.setItems(qdb.getAllNames());
+    String[] conf = {"CONF"};
+    this.roomNumberField.setItems(qdb.getAllLongNames(conf));
+    this.flowerTypeField.setItems(TypeOfFlowers);
+
+    assigneeField.setText(ListServiceRequestController.getConferenceRequest().getAssignee());
+    roomNumberField.setText(
+        ListServiceRequestController.getConferenceRequest().getNode().toString());
+    dateField.setValue(
+        LocalDate.of(
+            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
+            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
+            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getFlowerRequest().getSpecialInstructions());
+        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+    flowerTypeField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
+    bouquetChoiceField.setText(
+        String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
   }
 
   @FXML
-  public void resetButtonClicked() {
-    Navigation.navigate(Screen.LIST_REQUESTS);
+  public void deleteButtonClicked() {
+    Qdb qdb = Qdb.getInstance();
+    qdb.deleteFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID());
   }
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
-  public void submitButtonClicked() {}
+  public void updateButtonClicked() {
 
-  @FXML
-  public void homeItemClicked() {
-    Navigation.navigate(Screen.HOME);
-  }
+    Qdb qdb = Qdb.getInstance();
 
-  @FXML
-  public void exitItemClicked() {
-    Platform.exit();
-  }
+    FlowerRequest newFR =
+        new FlowerRequest(
+            ListServiceRequestController.getFlowerRequest().getRequestID(),
+            "temp requester",
+            0,
+            "temp assignee",
+            ListServiceRequestController.getFlowerRequest().getNode(),
+            (String) specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            timeField.getText(),
+            "",
+            (String) flowerTypeField.getValue(),
+            Integer.parseInt((String) bouquetChoiceField.getText()));
 
-  @FXML
-  public void profileItemClicked() {
-    Navigation.navigate(Screen.PROFILE_PAGE);
+    qdb.updateFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID(), newFR);
   }
 }

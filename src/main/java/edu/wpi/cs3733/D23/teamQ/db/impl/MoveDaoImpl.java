@@ -34,23 +34,23 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
   /**
    * returns a move given a nodeID
    *
-   * @param nodeID of move being retrieved
+   * @param moveID of move being retrieved
    * @return a move with the given nodeID
    */
-  public Move retrieveRow(Integer nodeID) {
-    int index = this.getIndex(nodeID);
+  public Move retrieveRow(Integer moveID) {
+    int index = this.getIndex(moveID);
     return moves.get(index);
   }
 
   /**
    * updates move in list with a new move
    *
-   * @param nodeID nodeID of Move being replaced
+   * @param moveID moveID of Move being replaced
    * @param newMove new location being inserted
    * @return true if successful
    */
-  public boolean updateRow(Integer nodeID, Move newMove) {
-    int index = this.getIndex(nodeID);
+  public boolean updateRow(Integer moveID, Move newMove) {
+    int index = this.getIndex(moveID);
     moves.set(index, newMove);
     return true;
   }
@@ -87,16 +87,15 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO move(\"nodeID\", \"longName\", \"date\") VALUES (?, ?, ?)")) {
+                "INSERT INTO move(\"nodeID\", \"longName\", \"date\", \"moveID\") VALUES (?, ?, ?, ?)")) {
       stmt.setInt(1, m.getNode().getNodeID());
       stmt.setString(2, m.getLongName());
-      stmt.setString(3, m.getDate());
+      stmt.setDate(3, m.getDate());
+      stmt.setInt(4, moves.size() + 1);
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    m.setMoveID(nextID);
-    nextID++;
     return moves.add(m);
   }
 
@@ -119,7 +118,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
                 rst.getInt("moveID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("longName"),
-                rst.getString("date")));
+                rst.getDate("date")));
       }
       conn.close();
       stm.close();
@@ -170,9 +169,9 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       for (int i = 0; i < moves.size(); i++) {
         Move m = moves.get(i);
         myWriter.write(
-            m.getMoveID()
+            String.valueOf(m.getMoveID())
                 + ','
-                + m.getNode().getNodeID()
+                + String.valueOf(m.getNode().getNodeID())
                 + ','
                 + m.getLongName()
                 + ','
@@ -186,6 +185,8 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       System.out.println("An error occurred.");
       e.printStackTrace();
       return false;
+    } catch (Exception e) {
+      return false;
     }
   }
 
@@ -196,20 +197,23 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
    * @return true if successfully imported, false otherwise
    */
   public boolean importCSV(String filename) {
-    NodeDaoImpl nodeDao = NodeDaoImpl.getInstance();
     try {
       File f = new File(filename);
       Scanner myReader = new Scanner(f);
       while (myReader.hasNextLine()) {
         String row = myReader.nextLine();
         String[] vars = row.split(",");
-        Move m = new Move(nodeDao.retrieveRow(Integer.parseInt(vars[0])), vars[1], vars[2]);
+        Move m =
+            new Move(
+                nodeTable.retrieveRow(Integer.parseInt(vars[0])), vars[1], Date.valueOf(vars[2]));
         addRow(m);
       }
       myReader.close();
+      return true;
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-    return true;
   }
 }

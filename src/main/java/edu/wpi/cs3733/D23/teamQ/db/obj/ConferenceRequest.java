@@ -1,25 +1,28 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ConferenceRequest extends ServiceRequest {
+public class ConferenceRequest extends ServiceRequest implements IServiceRequest {
   private String dateTime;
   private String foodChoice;
+  // private String assigne;
 
   public ConferenceRequest(
       int requestID,
+      Node node,
       String requester,
-      int progress,
       String assignee,
-      String roomNumber,
+      int progress,
       String specialInstructions,
-      String dateTime,
+      Date date,
+      String time,
       String foodChoice) {
-    super(requestID, requester, progress, assignee, roomNumber, specialInstructions);
-    this.dateTime = dateTime;
+    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
     this.foodChoice = foodChoice;
   }
 
@@ -27,12 +30,12 @@ public class ConferenceRequest extends ServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
+      Node node,
       String specialInstructions,
-      String dateTime,
+      Date date,
+      String time,
       String foodChoice) {
-    super(0, requester, progress, assignee, roomNumber, specialInstructions);
-    this.dateTime = dateTime;
+    super(0, requester, progress, assignee, node, specialInstructions, date, time);
     this.foodChoice = foodChoice;
   }
 

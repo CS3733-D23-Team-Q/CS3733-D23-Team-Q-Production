@@ -15,7 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
@@ -25,9 +25,12 @@ public class GraphicalMapEditorController {
   // Stage stage = App.getPrimaryStage();
   Alert alert = new Alert();
   Text text;
-  @FXML Pane root;
+  @FXML AnchorPane root;
   @FXML Group parent;
   @FXML ImageView map;
+  @FXML Button addButton;
+  @FXML Button editButton;
+  @FXML Button deleteButton;
 
   @FXML
   public void initialize() throws IOException {
@@ -90,6 +93,29 @@ public class GraphicalMapEditorController {
           e -> {
             parent.getChildren().remove(text);
           });
+      final Delta dragDelta = new Delta();
+      /*
+      node.setOnMousePressed(
+          e -> {
+            //dragDelta.x = node.getLayoutX() - e.getSceneX();
+            //dragDelta.y = node.getLayoutY() - e.getSceneY();
+              dragDelta.x = node.getLayoutX() - e.getSceneX();
+            node.setCursor(Cursor.MOVE);
+          });
+      node.setOnMouseReleased(
+          e -> {
+            node.setCursor(Cursor.HAND);
+          });
+      node.setOnMouseDragged(
+          e -> {
+            node.setLayoutX(e.getSceneX());
+            node.setLayoutY(e.getSceneY());
+          });
+      node.setOnMouseEntered(
+          e -> {
+            node.setCursor(Cursor.HAND);
+          });
+       */
       /*
       node.setOnMouseClicked(
               e -> {
@@ -98,5 +124,9 @@ public class GraphicalMapEditorController {
        */
       parent.getChildren().add(node);
     }
+  }
+
+  class Delta {
+    double x, y;
   }
 }

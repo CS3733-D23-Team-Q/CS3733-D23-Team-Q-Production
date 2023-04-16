@@ -14,7 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -29,7 +29,7 @@ public class PathfindingController {
   Node target;
   List<Line> previousPath;
   Text text;
-  @FXML Pane root;
+  @FXML AnchorPane root;
   @FXML Group parent;
   @FXML ImageView map;
 
@@ -57,13 +57,19 @@ public class PathfindingController {
 
   public void addButtons() {
     List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> L1nodes = new ArrayList<>();
+    List<Node> ffNodes = new ArrayList<>();
     for (Node n : nodes) {
-      if (n.getFloor().equals("L1")) {
-        L1nodes.add(n);
+      /*
+      int nodeID = n.getNodeID();
+      Location location = qdb.retrieveLocation(nodeID);
+      String name = location.getShortName();
+      Pattern pattern = Pattern.compile("(?i).*hall.*");
+       */
+      if (n.getFloor().equals("1")) { // && !pattern.matcher(name).matches()) {
+        ffNodes.add(n);
       }
     }
-    for (Node n : L1nodes) {
+    for (Node n : ffNodes) {
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
       Button node = new Button();

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +12,13 @@ public class ServiceRequest {
   private Progress progress;
   private String requester;
   private String assignee;
-  private String roomNumber;
+  private Node node;
+  private int nodeID;
   private String specialInstructions;
+  private Date date;
+  private String time;
 
-  enum Progress {
+  public enum Progress {
     BLANK,
     PROCESSING,
     DONE
@@ -25,8 +29,10 @@ public class ServiceRequest {
       String requester,
       int progress,
       String assignee,
-      String roomNumber,
-      String specialInstructions) {
+      Node node,
+      String specialInstructions,
+      Date date,
+      String time) {
     this.requestID = requestID;
     if (progress == 0) {
       this.progress = Progress.BLANK;
@@ -39,7 +45,10 @@ public class ServiceRequest {
     }
     this.requester = requester;
     this.assignee = assignee;
-    this.roomNumber = roomNumber;
+    this.node = node;
     this.specialInstructions = specialInstructions;
+    this.date = date;
+    this.time = time;
+    this.nodeID = node.getNodeID();
   }
 }

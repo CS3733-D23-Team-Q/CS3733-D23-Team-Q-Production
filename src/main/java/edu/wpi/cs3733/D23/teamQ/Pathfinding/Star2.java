@@ -44,7 +44,8 @@ public class Star2 {
         path.add(current);
         while (current.getParent() != null) {
           path.add(current.getParent());
-          current = current.getParent();
+          if (!current.equals(current.getParent().getParent())) current = current.getParent();
+          else break;
         }
         return path;
       }
