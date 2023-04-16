@@ -60,8 +60,8 @@ public class PathfindingController {
   @FXML Button nextFloor;
   @FXML CheckBox restCheck;
   @FXML CheckBox cafeCheck;
-  @FXML ComboBox startSelect;
-  @FXML ComboBox endSelect;
+  @FXML ComboBox<String> startSelect;
+  @FXML ComboBox<String> endSelect;
 
   @FXML
   public void initialize() throws IOException {
@@ -120,7 +120,7 @@ public class PathfindingController {
       int nodeid = n.getNodeID();
       nodeIds.add(nodeid);
       Location location = qdb.retrieveLocation(nodeid);
-      String lname = location.getShortName();
+      String lname = location.getLongName();
       if (n.getFloor().equals(f)) {
         fNodes.add(n);
       }
@@ -269,7 +269,7 @@ public class PathfindingController {
     if (fpath.size() > 0) {
       lines = addLines(fpath);
     }
-    if (path.size() <= 0) {
+    if (path.size() == 0) {
       alert.alertBox("No solution", "Failed to find a path");
     }
     return lines;
@@ -382,7 +382,7 @@ public class PathfindingController {
         }
       }
     }
-    if (!ready4Second && previousPath.size() > 0) {
+    if (!ready4Second && start != null && target != null) {
       previousPath = drawLinesf(start, target, f);
     }
   }
@@ -429,7 +429,7 @@ public class PathfindingController {
         }
       }
     }
-    if (!ready4Second && previousPath.size() > 0) {
+    if (!ready4Second && start != null && target != null) { // && previousPath.size() > 0
       previousPath = drawLinesf(start, target, f);
     }
   }
@@ -525,7 +525,7 @@ public class PathfindingController {
 
   public void startSelected() throws IOException {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
-    String lname = (String) startSelect.getValue();
+    String lname = startSelect.getValue();
     if (!lname.equals("")) {
       int index = startSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
@@ -572,7 +572,7 @@ public class PathfindingController {
   public void endSelected() throws IOException {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
     String f = whichFloorS();
-    String lname = (String) endSelect.getValue();
+    String lname = endSelect.getValue();
     if (!lname.equals("")) {
       int index = endSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
@@ -616,7 +616,9 @@ public class PathfindingController {
   public void clearButtonClicked() {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
     removeLines(previousPath);
-    previousPath.removeAll(previousPath);
+    start = null;
+    target = null;
+    // previousPath.removeAll(previousPath);
     restCheck.setSelected(false);
     cafeCheck.setSelected(false);
     // unhighlight(restNodes);
