@@ -87,4 +87,93 @@ public class Star2 {
     path.removeAll(path);
     return path;
   }
+
+  public static ArrayList<Node> DFS(Node start, Node end) {
+    ArrayList<Node> visitedList = new ArrayList<Node>(); // list of visited nodes
+    ArrayList<Node> openList = new ArrayList<Node>();
+    ArrayList<Node> path = new ArrayList<Node>(); // path list if I need it
+    openList.add(start);
+    path.add(start);
+    while (!openList.isEmpty()) {
+      Node current = openList.get(0);
+      // in case the end node is on a diff floor
+
+      if (current.equals(end)) {
+        return path;
+      }
+      if (current.getEdges().size() == 0) {
+        System.out.println("This node is a dead end " + current);
+      }
+      if (!visitedList.contains(current.getEdges().get(0).getEndNode())) {
+        openList.add(current.getEdges().get(0).getEndNode());
+        path.add(current);
+        visitedList.add(current);
+      } else if (!visitedList.contains(current.getEdges().get(0).getStartNode())) {
+        openList.add(current.getEdges().get(0).getStartNode());
+        path.add(current);
+        visitedList.add(current);
+      } else {
+        // look through other edges until an unvisited node is found
+        for (Edge index : current.getEdges()) {
+          if (!visitedList.contains(index.getStartNode())) {
+            openList.add(index.getStartNode());
+            path.add(current);
+            visitedList.add(current);
+          } else if (!visitedList.contains(index.getEndNode())) {
+            openList.add(index.getEndNode());
+            path.add(current);
+            visitedList.add(current);
+          }
+        }
+      }
+    }
+    return path;
+  }
+
+  public static ArrayList<Node> Djikstra(Node start, Node end) {
+    ArrayList<Node> closedList = new ArrayList<Node>();
+    ArrayList<Node> openList = new ArrayList<Node>();
+    ArrayList<Node> path = new ArrayList<Node>();
+
+    openList.add(start);
+    while (!openList.isEmpty()) {
+      Node current = openList.get(0);
+      if (current.equals(end)) {
+        return path;
+      }
+      // write in elevator specifications
+
+      double lowestLocalCost = 10000000.0;
+      Node chosen = null;
+      for (Edge thisOne : current.getEdges()) {
+        if (!closedList.contains(thisOne.getStartNode())
+                && !thisOne.getStartNode().equals(current)
+                && !path.contains(thisOne.getStartNode())) {
+          double xDist = Math.abs(thisOne.getStartNode().getXCoord() - current.getXCoord());
+          double yDist = Math.abs(thisOne.getStartNode().getYCoord() - current.getYCoord());
+          double weight = Math.sqrt(xDist * xDist + yDist * yDist);
+          if (weight < lowestLocalCost) {
+            lowestLocalCost = weight;
+            chosen = thisOne.getStartNode();
+          }
+        } else if (!closedList.contains(thisOne.getEndNode())
+                && !thisOne.getEndNode().equals(current)
+                && !path.contains(thisOne.getEndNode())) {
+          double xDist = Math.abs(thisOne.getEndNode().getXCoord() - current.getXCoord());
+          double yDist = Math.abs(thisOne.getEndNode().getYCoord() - current.getYCoord());
+          double weight = Math.sqrt(xDist * xDist + yDist * yDist);
+          if (weight < lowestLocalCost) {
+            lowestLocalCost = weight;
+            chosen = thisOne.getStartNode();
+          }
+        }
+      }
+      path.add(current);
+      openList.add(chosen);
+      openList.remove(current);
+      closedList.add(current);
+    }
+    return path;
+  }
 }
+
