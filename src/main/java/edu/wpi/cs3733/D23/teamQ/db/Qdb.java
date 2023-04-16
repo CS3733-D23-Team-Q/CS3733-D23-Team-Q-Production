@@ -16,7 +16,7 @@ public class Qdb {
 
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  public PersonDaoImpl personTable = PersonDaoImpl.getInstance();
+  /* public PersonDaoImpl personTable = PersonDaoImpl.getInstance();*/
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(nodeTable);
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
@@ -68,7 +68,7 @@ public class Qdb {
   }
 
   public ObservableList<String> getAllNames() {
-    return personTable.getAllNames();
+    return accountTable.getAllNames();
   }
 
   public List<Integer> getAccountIndexes(String email) {
@@ -219,7 +219,7 @@ public class Qdb {
     return (ArrayList<Move>) moveTable.getAllRows();
   }
 
-  public Person retrievePerson(int ID) {
+  /*public Person retrievePerson(int ID) {
     return personTable.retrieveRow(ID);
   }
 
@@ -241,6 +241,10 @@ public class Qdb {
 
   public ArrayList<Person> retrieveAllPeople() {
     return (ArrayList<Person>) personTable.getAllRows();
+  }*/
+
+  public ArrayList<Account> retrieveAllPeople() {
+    return (ArrayList<Account>) accountTable.getAllRows();
   }
 
   public Question retrieveQuestion(int ID) {
@@ -361,5 +365,9 @@ public class Qdb {
 
   public String getEmailWithAUsername(String username) {
     return accountTable.getEmailWithUsername(username);
+  }
+
+  public List<Account> getRows() {
+    return accountTable.getAllRows();
   }
 }
