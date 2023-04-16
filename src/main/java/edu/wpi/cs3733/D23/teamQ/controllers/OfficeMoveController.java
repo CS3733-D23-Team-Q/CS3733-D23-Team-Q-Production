@@ -26,12 +26,15 @@ public class OfficeMoveController {
   }
 
   public void submitButtonClicked() {
-    Move newMove = new Move(
-            qdb.retrieveNode(qdb.getNodeFromLocation(currentLocationField.getSelectedItem().toString())),
-            newLocationField.getSelectedItem().toString(),
-            dateField.getValue().toString()
-    );
+    if(currentLocationField.getValue() != null && newLocationField.getValue() != null && dateField.getValue() != null) {
+      Move newMove =
+              new Move(
+                      qdb.retrieveNode(qdb.getNodeFromLocation(currentLocationField.getSelectedItem().toString())),
+                      newLocationField.getSelectedItem().toString(),
+                      dateField.getValue().toString());
 
-    qdb.addMove(newMove);
+      qdb.addMove(newMove);
+    }
+
   }
 }
