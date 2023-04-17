@@ -86,9 +86,9 @@ public class MealDeliveryRequestController {
     MealRequest newMR =
         new MealRequest(
             0,
-            ListServiceRequestController.getMealRequest().getRequester(),
+            "temp user",
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            (String) assigneeField.getValue(),
             (Node) roomNumberField.getValue(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

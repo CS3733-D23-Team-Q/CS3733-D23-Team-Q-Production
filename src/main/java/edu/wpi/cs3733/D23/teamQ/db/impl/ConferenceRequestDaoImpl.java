@@ -10,20 +10,16 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
   private List<ConferenceRequest> conferenceRequests = new ArrayList<ConferenceRequest>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static ConferenceRequestDaoImpl single_instance = null;
 
-  public static synchronized ConferenceRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new ConferenceRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized ConferenceRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new ConferenceRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private ConferenceRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+  private ConferenceRequestDaoImpl(NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
     populate();
     if (conferenceRequests.size() != 0) {
       nextID = conferenceRequests.get(conferenceRequests.size() - 1).getRequestID() + 1;
@@ -61,9 +57,9 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester().getUsername());
+      st.setString(2, newRequest.getRequester());
       st.setInt(3, newRequest.getProgress().ordinal());
-      st.setString(4, newRequest.getAssignee().getUsername());
+      st.setString(4, newRequest.getAssignee());
       st.setInt(5, newRequest.getNode().getNodeID());
       st.setString(6, newRequest.getSpecialInstructions());
       st.setDate(7, newRequest.getDate());
@@ -121,9 +117,9 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
         PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", date, time, \"foodChoice\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester().getUsername());
+      stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
-      stmt.setString(3, request.getAssignee().getUsername());
+      stmt.setString(3, request.getAssignee());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
       stmt.setDate(6, request.getDate());
@@ -149,8 +145,8 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
             new ConferenceRequest(
                 rst.getInt("requestID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                rst.getString("requester"),
+                rst.getString("assignee"),
                 rst.getInt("progress"),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),

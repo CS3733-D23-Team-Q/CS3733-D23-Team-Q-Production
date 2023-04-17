@@ -71,10 +71,10 @@ public class ConferenceRoomRequestController {
 
     ConferenceRequest cr =
         new ConferenceRequest(
-            ListServiceRequestController.getConferenceRequest().getRequester(),
+            LoginController.getUsername(),
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
-            qdb.retrieveNode(qdb.getNodeFromLocation(roomNumberField.getValue().toString())),
+            (String) assigneeField.getValue(),
+            qdb.retrieveNode(qdb.getNodeFromLocation((String) roomNumberField.getValue())),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             (String) timeField.getValue(),

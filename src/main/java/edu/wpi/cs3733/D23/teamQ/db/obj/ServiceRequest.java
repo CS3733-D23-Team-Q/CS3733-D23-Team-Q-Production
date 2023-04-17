@@ -10,8 +10,8 @@ public class ServiceRequest {
 
   private int requestID;
   private Progress progress;
-  private Account requester;
-  private Account assignee;
+  private String requester;
+  private String assignee;
   private Node node;
   private int nodeID;
   private String specialInstructions;
@@ -26,9 +26,9 @@ public class ServiceRequest {
 
   public ServiceRequest(
       int requestID,
-      Account requester,
+      String requester,
       int progress,
-      Account assignee,
+      String assignee,
       Node node,
       String specialInstructions,
       Date date,

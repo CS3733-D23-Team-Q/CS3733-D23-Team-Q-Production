@@ -76,9 +76,9 @@ public class OfficeSuppliesRequestDisplayController {
     OfficeSuppliesRequest newOR =
         new OfficeSuppliesRequest(
             ListServiceRequestController.getOfficeRequest().getRequestID(),
-            ListServiceRequestController.getOfficeRequest().getRequester(),
+            "temp requester",
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            "temp assignee",
             ListServiceRequestController.getOfficeRequest().getNode(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

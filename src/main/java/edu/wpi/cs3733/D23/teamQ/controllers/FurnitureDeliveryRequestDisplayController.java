@@ -41,8 +41,7 @@ public class FurnitureDeliveryRequestDisplayController {
   public void initialize() {
     timeField.setItems(timeList);
     furnitureChoiceField.setItems(TypeOfFurniture);
-    assigneeField.setText(
-        ListServiceRequestController.getFurnitureRequest().getAssignee().getUsername());
+    assigneeField.setText(ListServiceRequestController.getFurnitureRequest().getAssignee());
     roomNumberField.setText(
         ListServiceRequestController.getFurnitureRequest().getNode().toString());
     dateField.setValue(
@@ -75,9 +74,9 @@ public class FurnitureDeliveryRequestDisplayController {
     FurnitureRequest newFurR =
         new FurnitureRequest(
             ListServiceRequestController.getFurnitureRequest().getRequestID(),
-            ListServiceRequestController.getFurnitureRequest().getRequester(),
+            "temp requester",
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            "temp assignee",
             ListServiceRequestController.getFurnitureRequest().getNode(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

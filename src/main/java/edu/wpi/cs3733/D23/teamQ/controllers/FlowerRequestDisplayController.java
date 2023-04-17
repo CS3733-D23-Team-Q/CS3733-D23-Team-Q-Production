@@ -47,8 +47,7 @@ public class FlowerRequestDisplayController {
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.flowerTypeField.setItems(TypeOfFlowers);
 
-    assigneeField.setText(
-        ListServiceRequestController.getConferenceRequest().getAssignee().getUsername());
+    assigneeField.setText(ListServiceRequestController.getConferenceRequest().getAssignee());
     roomNumberField.setText(
         ListServiceRequestController.getConferenceRequest().getNode().toString());
     dateField.setValue(
@@ -83,11 +82,11 @@ public class FlowerRequestDisplayController {
     FlowerRequest newFR =
         new FlowerRequest(
             ListServiceRequestController.getFlowerRequest().getRequestID(),
-            ListServiceRequestController.getFlowerRequest().getRequester(),
+            "temp requester",
             0,
-            qdb.retrieveAccount(assigneeField.getSelectedItem().toString()),
+            "temp assignee",
             ListServiceRequestController.getFlowerRequest().getNode(),
-            specialInstructionsField.getText(),
+            (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
             "",
