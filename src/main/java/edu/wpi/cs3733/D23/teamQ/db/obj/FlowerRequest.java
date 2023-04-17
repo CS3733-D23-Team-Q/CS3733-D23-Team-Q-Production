@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+import java.lang.reflect.Type;
 import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
   private String note;
   private String flowerType;
   private int numberOfBouquets;
+  private Type requestType = this.getClass();
 
   public FlowerRequest(
       int requestID,
