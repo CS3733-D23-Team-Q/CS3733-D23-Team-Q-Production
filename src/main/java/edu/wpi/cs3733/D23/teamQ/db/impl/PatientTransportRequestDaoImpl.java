@@ -10,21 +10,17 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
   private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
-  public static synchronized PatientTransportRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new PatientTransportRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized PatientTransportRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private PatientTransportRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+  private PatientTransportRequestDaoImpl(NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
     populate();
     if (patientTransportRequests.size() != 0) {
       nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
@@ -62,9 +58,9 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester().getUsername());
+      st.setString(2, newRequest.getRequester());
       st.setInt(3, newRequest.getProgress().ordinal());
-      st.setString(4, newRequest.getAssignee().getUsername());
+      st.setString(4, newRequest.getAssignee());
       st.setInt(5, newRequest.getNode().getNodeID());
       st.setString(6, newRequest.getSpecialInstructions());
       st.setString(7, newRequest.getItem());
@@ -120,9 +116,9 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
         PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"transport\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester().getUsername());
+      stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
-      stmt.setString(3, request.getAssignee().getUsername());
+      stmt.setString(3, request.getAssignee());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
       stmt.setDate(6, request.getDate());
@@ -147,9 +143,9 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
         patientTransportRequests.add(
             new PatientTransportRequest(
                 rst.getInt("requestID"),
-                accountTable.retrieveRow(rst.getString("requester")),
+                rst.getString("requester"),
                 rst.getInt("progress"),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),

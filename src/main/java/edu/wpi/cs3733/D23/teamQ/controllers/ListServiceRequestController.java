@@ -20,7 +20,7 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, Integer> progress;
   @FXML TableColumn<ServiceRequest, String> roomNumber;
   @FXML TableColumn<ServiceRequest, String> specialInstructions;
-  @FXML TableColumn<ServiceRequest, String> assignee;
+  @FXML TableColumn<ServiceRequest, String> assigne;
   @FXML TableColumn<ServiceRequest, String> date;
   @FXML TableColumn<ServiceRequest, String> time;
 
@@ -44,7 +44,7 @@ public class ListServiceRequestController {
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
     specialInstructions.setCellValueFactory(
         new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
-    assignee.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assignee"));
+    assigne.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assigne"));
     date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
     time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());

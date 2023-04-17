@@ -13,7 +13,7 @@
           <children>
               <MFXButton fx:id="navigation" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#navigationEntered" onMouseExited="#navigationExited" prefHeight="54.0" prefWidth="240.0" text="Navigation">
                   <graphic>
-                      <ImageView fx:id="navigationIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fx:id="navigationIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../Map.png" />
                           </image>

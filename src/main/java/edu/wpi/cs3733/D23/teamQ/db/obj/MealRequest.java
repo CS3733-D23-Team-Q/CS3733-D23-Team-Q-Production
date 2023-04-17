@@ -14,9 +14,9 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
 
   public MealRequest(
       int requestID,
-      Account requester,
+      String requester,
       int progress,
-      Account assignee,
+      String assignee,
       Node node,
       String specialInstructions,
       Date date,
@@ -31,9 +31,9 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
   }
 
   public MealRequest(
-      Account requester,
+      String requester,
       int progress,
-      Account assignee,
+      String assignee,
       Node node,
       String specialInstructions,
       Date date,
