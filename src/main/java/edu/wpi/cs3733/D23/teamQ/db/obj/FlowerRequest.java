@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+
 import java.lang.reflect.Type;
 import java.sql.Date;
 import lombok.Getter;
