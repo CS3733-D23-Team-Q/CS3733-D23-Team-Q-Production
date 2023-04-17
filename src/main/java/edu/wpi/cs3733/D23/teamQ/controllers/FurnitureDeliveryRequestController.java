@@ -58,7 +58,9 @@ public class FurnitureDeliveryRequestController {
   }
 
   @FXML
-  public void cancelButtonClicked() {Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);}
+  public void cancelButtonClicked() {
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+  }
 
   @FXML
   public void submitButtonClicked() {
