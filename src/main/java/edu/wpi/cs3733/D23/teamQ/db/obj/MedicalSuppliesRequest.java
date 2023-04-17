@@ -1,9 +1,13 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 
+@Getter
+@Setter
 public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRequest{
     private String item;
     private int quantity;
