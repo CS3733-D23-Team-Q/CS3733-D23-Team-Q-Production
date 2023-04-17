@@ -5,6 +5,62 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.util.*;
 
+
+public class Bfs {
+  static Qdb qdb = Qdb.getInstance();
+  //  private Graph graph;
+  static List<Node> graph = new ArrayList<Node>();
+
+  public static LinkedList<Node> please(Node startNode, Node endNode) {
+    Graph graph = startNode.getGraph();
+    Set<Node> visited = new HashSet<Node>();
+    LinkedList<Node> queue = new LinkedList<Node>();
+    visited.add(startNode);
+    queue.add(startNode);
+    LinkedList<Node> path = new LinkedList<Node>();
+
+    while (queue.size() != 0) {
+
+      startNode = queue.poll();
+      System.out.print(startNode.getNodeID() + " ");
+      path.add(startNode);
+
+      if (startNode.getNodeID() == endNode.getNodeID()) {
+        break;
+      }
+
+      // Enqueue all adjacent nodes of the dequeued node that have not been visited yet
+      for (Edge edge : startNode.getEdges()) {
+        Node adjNode = edge.getEndNode();
+        if (!visited.contains(adjNode)) {
+          visited.add(adjNode);
+          queue.add(adjNode);
+        }
+      }
+    }
+    return path;
+  }
+
+  public static void addEdges(Node n) {
+    int nodeID = n.getNodeID();
+    List<Edge> edges = qdb.getEdges(nodeID);
+    n.setEdges(edges);
+  }
+
+  //  public static void addEdges(Node node, List<Edge> edges) {
+//    int nodeID = node.getNodeID();
+//    List<Edge> nodeEdges = new ArrayList<>();
+//
+//    for (Edge edge : edges) {
+//      if (edge.getStartNode().getNodeID() == nodeID) {
+//        nodeEdges.add(edge);
+//      }
+//    }
+//
+//    node.setEdges(nodeEdges);
+//  }
+
+
 // public class Bfs {
 //
 //  private int vertex;
@@ -86,64 +142,8 @@ import java.util.*;
 //  }
 // }
 
-public class Bfs {
-  static Qdb qdb = Qdb.getInstance();
-  //  private Graph graph;
-  static List<Node> graph = new ArrayList<Node>();
 
-  // Populate the graph with nodes and edges
-  //    Node node1 = new Node(1, 0, 0);
-  //    Node node2 = new Node(2, 0, 1);
-  //    Node node3 = new Node(3, 1, 0);
-  //    Node node4 = new Node(4, 1, 1);
-  //    Edge edge1 = new Edge(node1, node2);
-  //    Edge edge2 = new Edge(node1, node3);
-  //    Edge edge3 = new Edge(node2, node4);
-  //    Edge edge4 = new Edge(node3, node4);
-  //    node1.addBranch(edge1);
-  //    node1.addBranch(edge2);
-  //    node2.addBranch(edge3);
-  //    node3.addBranch(edge4);
-  //    graph.add(node1);
-  //    graph.add(node2);
-  //    graph.add(node3);
-  //    graph.add(node4);
-  //
-  //    startNode = node1;
-  //    endNode = node4;
 
-  //    public static void main(String[] args) {
-  // Create some nodes
-
-  public static LinkedList<Node> please(Node startNode, Node endNode) {
-    Graph graph = startNode.getGraph();
-    Set<Node> visited = new HashSet<Node>();
-    LinkedList<Node> queue = new LinkedList<Node>();
-    visited.add(startNode);
-    queue.add(startNode);
-    LinkedList<Node> path = new LinkedList<Node>();
-
-    while (queue.size() != 0) {
-
-      startNode = queue.poll();
-      System.out.print(startNode.getNodeID() + " ");
-      path.add(startNode);
-
-      if (startNode.getNodeID() == endNode.getNodeID()) {
-        break;
-      }
-
-      // Enqueue all adjacent nodes of the dequeued node that have not been visited yet
-      for (Edge edge : startNode.getEdges()) {
-        Node adjNode = edge.getEndNode();
-        if (!visited.contains(adjNode)) {
-          visited.add(adjNode);
-          queue.add(adjNode);
-        }
-      }
-    }
-    return path;
-  }
   //
   //    boolean[] visited = new boolean[graph.size()]; // Array to keep track of visited nodes
   //    LinkedList<Node> queue = new LinkedList<Node>(); // Queue for BFS traversal
@@ -173,11 +173,7 @@ public class Bfs {
   //  }
 
 
-  public static void addEdges(Node n) {
-    int nodeID = n.getNodeID();
-    List<Edge> edges = qdb.getEdges(nodeID);
-    n.setEdges(edges);
-  }
+
 
 //  public static void addEdges(Node node, List<Edge> edges) {
 //    int nodeID = node.getNodeID();
