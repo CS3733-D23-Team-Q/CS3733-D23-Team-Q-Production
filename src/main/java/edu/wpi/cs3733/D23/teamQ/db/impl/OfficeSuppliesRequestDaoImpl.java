@@ -11,18 +11,15 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       new ArrayList<OfficeSuppliesRequest>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
 
-  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new OfficeSuppliesRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new OfficeSuppliesRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private OfficeSuppliesRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+  private OfficeSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
     populate();
     if (officeSuppliesRequests.size() != 0) {
@@ -61,9 +58,9 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester().getUsername());
+      st.setString(2, newRequest.getRequester());
       st.setInt(3, newRequest.getProgress().ordinal());
-      st.setString(4, newRequest.getAssignee().getUsername());
+      st.setString(4, newRequest.getAssignee());
       st.setInt(5, newRequest.getNode().getNodeID());
       st.setString(6, newRequest.getItem());
       st.setInt(7, newRequest.getQuantity());
@@ -120,9 +117,9 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
         PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester().getUsername());
+      stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
-      stmt.setString(3, request.getAssignee().getUsername());
+      stmt.setString(3, request.getAssignee());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
       stmt.setDate(6, request.getDate());
@@ -148,9 +145,9 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
         officeSuppliesRequests.add(
             new OfficeSuppliesRequest(
                 rst.getInt("requestID"),
-                accountTable.retrieveRow(rst.getString("requester")),
+                rst.getString("requester"),
                 rst.getInt("progress"),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),

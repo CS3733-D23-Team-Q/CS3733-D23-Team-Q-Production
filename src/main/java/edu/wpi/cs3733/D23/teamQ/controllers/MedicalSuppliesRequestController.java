@@ -73,9 +73,9 @@ public class MedicalSuppliesRequestController {
     MedicalSuppliesRequest newMSR =
         new MedicalSuppliesRequest(
             ListServiceRequestController.getMedicalRequest().getRequestID(),
-            ListServiceRequestController.getMedicalRequest().getRequester(),
+            "temp user",
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            (String) assigneeField.getValue(),
             (Node) roomNumberField.getValue(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

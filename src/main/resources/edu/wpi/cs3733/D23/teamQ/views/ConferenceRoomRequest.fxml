@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
@@ -23,7 +22,6 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-
                   <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Assignee">
                      <font>
                         <Font name="Roboto" size="12.0" />
