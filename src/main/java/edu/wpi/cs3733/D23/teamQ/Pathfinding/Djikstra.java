@@ -9,7 +9,7 @@ public class Djikstra implements IPathfinding {
     ArrayList<Node> closedList = new ArrayList<Node>();
     ArrayList<Node> openList = new ArrayList<Node>();
     ArrayList<Node> path = new ArrayList<Node>();
-
+    String floor = start.getFloor();
     openList.add(start);
     while (!openList.isEmpty()) {
       Node current = openList.get(0);
