@@ -31,6 +31,7 @@ public class ListServiceRequestController {
   private static OfficeSuppliesRequest officeSuppliesRequest;
 
   private static FurnitureRequest furnitureRequest;
+  private static MedicalSuppliesRequest medicalSuppliesRequest;
 
   Qdb qdb = Qdb.getInstance();
 
@@ -86,6 +87,13 @@ public class ListServiceRequestController {
           qdb.retrieveFurnitureRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
       Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
+    } else if (qdb.retrieveMedicalSuppliesRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      medicalSuppliesRequest =
+          qdb.retrieveMedicalSuppliesRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST_DISPLAY);
     }
   }
 
@@ -107,5 +115,9 @@ public class ListServiceRequestController {
 
   public static OfficeSuppliesRequest getOfficeRequest() {
     return officeSuppliesRequest;
+  }
+
+  public static MedicalSuppliesRequest getMedicalRequest() {
+    return medicalSuppliesRequest;
   }
 }

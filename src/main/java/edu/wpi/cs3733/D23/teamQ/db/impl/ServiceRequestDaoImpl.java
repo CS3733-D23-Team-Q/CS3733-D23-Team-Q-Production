@@ -18,6 +18,7 @@ public class ServiceRequestDaoImpl {
   private GenDao furnitureRequestTable;
   private GenDao patientTransportRequestTable;
   private GenDao officeSuppliesRequestTable;
+  private GenDao medicalSuppliesRequestTable;
 
   private static ServiceRequestDaoImpl single_instance = null;
 
@@ -27,7 +28,8 @@ public class ServiceRequestDaoImpl {
       MealRequestDaoImpl mealRequests,
       FurnitureRequestDaoImpl furnitureRequests,
       OfficeSuppliesRequestDaoImpl officeSuppliesRequests,
-      PatientTransportRequestDaoImpl patientTransportRequests) {
+      PatientTransportRequestDaoImpl patientTransportRequests,
+      MedicalSuppliesRequestDaoImpl medicalSuppliesRequests) {
     if (single_instance == null)
       single_instance =
           new ServiceRequestDaoImpl(
@@ -36,7 +38,8 @@ public class ServiceRequestDaoImpl {
               mealRequests,
               furnitureRequests,
               officeSuppliesRequests,
-              patientTransportRequests);
+              patientTransportRequests,
+              medicalSuppliesRequests);
 
     return single_instance;
   }
@@ -47,13 +50,15 @@ public class ServiceRequestDaoImpl {
       GenDao mealRequests,
       GenDao furnitureRequests,
       GenDao officeSuppliesRequests,
-      GenDao patientTransportRequests) {
+      GenDao patientTransportRequests,
+      GenDao medicalSuppliesRequests) {
     this.conferenceRequestTable = conferenceRequests;
     this.flowerRequestTable = flowerRequests;
     this.mealRequestTable = mealRequests;
     this.furnitureRequestTable = furnitureRequests;
     this.officeSuppliesRequestTable = officeSuppliesRequests;
     this.patientTransportRequestTable = patientTransportRequests;
+    this.medicalSuppliesRequestTable = medicalSuppliesRequests;
     populate();
   }
 
