@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+
+import java.lang.reflect.Type;
 import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class PatientTransportRequest extends ServiceRequest implements IServiceRequest {
   private String item;
+  private Type requestType = this.getClass();
 
   public PatientTransportRequest(
       int requestID,
