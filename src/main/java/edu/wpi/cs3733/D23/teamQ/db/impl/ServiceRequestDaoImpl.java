@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -87,17 +86,9 @@ public class ServiceRequestDaoImpl {
   }
 
   public List<ServiceRequest> getUserRows(String user) {
-    List<ServiceRequest> list = new ArrayList<>();
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
-      if (serviceRequests
-              .get(i)
-              .getRequester()
-              .equals(
-                  Qdb.getInstance().retrieveAccount(user).getFirstName()
-                      + " "
-                      + Qdb.getInstance().retrieveAccount(user).getLastName()
-                      + ", "
-                      + Qdb.getInstance().retrieveAccount(user).getTitle())
+      if (serviceRequests.get(i).getRequester().equals(user)
           || serviceRequests
               .get(i)
               .getAssignee()
