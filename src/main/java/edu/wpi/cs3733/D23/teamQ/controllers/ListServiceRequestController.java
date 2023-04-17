@@ -48,7 +48,7 @@ public class ListServiceRequestController {
     assignee.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assignee"));
     date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
     time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
-    if (username == "admin") {
+    if (username.equals("admin")) {
       tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
     } else {
       tableView.setItems(

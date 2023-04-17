@@ -89,8 +89,24 @@ public class ServiceRequestDaoImpl {
   public List<ServiceRequest> getUserRows(String user) {
     List<ServiceRequest> list = new ArrayList<>();
     for (int i = 0; i < serviceRequests.size(); i++) {
-      if (serviceRequests.get(i).getRequester().equals(Qdb.getInstance().retrieveAccount(user).getFirstName() + " " + Qdb.getInstance().retrieveAccount(user).getLastName() + ", " + Qdb.getInstance().retrieveAccount(user).getTitle())
-          || serviceRequests.get(i).getAssignee().equals(Qdb.getInstance().retrieveAccount(user).getFirstName() + " " + Qdb.getInstance().retrieveAccount(user).getLastName() + ", " + Qdb.getInstance().retrieveAccount(user).getTitle())) {
+      if (serviceRequests
+              .get(i)
+              .getRequester()
+              .equals(
+                  Qdb.getInstance().retrieveAccount(user).getFirstName()
+                      + " "
+                      + Qdb.getInstance().retrieveAccount(user).getLastName()
+                      + ", "
+                      + Qdb.getInstance().retrieveAccount(user).getTitle())
+          || serviceRequests
+              .get(i)
+              .getAssignee()
+              .equals(
+                  Qdb.getInstance().retrieveAccount(user).getFirstName()
+                      + " "
+                      + Qdb.getInstance().retrieveAccount(user).getLastName()
+                      + ", "
+                      + Qdb.getInstance().retrieveAccount(user).getTitle())) {
         list.add(serviceRequests.get(i));
       }
     }
