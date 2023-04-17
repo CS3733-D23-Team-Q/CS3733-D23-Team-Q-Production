@@ -41,7 +41,8 @@ public class FurnitureDeliveryRequestDisplayController {
   public void initialize() {
     timeField.setItems(timeList);
     furnitureChoiceField.setItems(TypeOfFurniture);
-    assigneeField.setText(ListServiceRequestController.getFurnitureRequest().getAssignee());
+    assigneeField.setText(
+        ListServiceRequestController.getFurnitureRequest().getAssignee().getUsername());
     roomNumberField.setText(
         ListServiceRequestController.getFurnitureRequest().getNode().toString());
     dateField.setValue(

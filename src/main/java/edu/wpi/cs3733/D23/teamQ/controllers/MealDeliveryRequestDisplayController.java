@@ -45,7 +45,8 @@ public class MealDeliveryRequestDisplayController {
   @FXML
   public void initialize() {
     timeField.setItems(timeList);
-    assigneeField.setText(ListServiceRequestController.getMealRequest().getAssignee());
+    assigneeField.setText(
+        ListServiceRequestController.getMealRequest().getAssignee().getUsername());
     roomNumberField.setText(ListServiceRequestController.getMealRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
