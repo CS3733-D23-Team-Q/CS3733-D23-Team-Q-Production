@@ -47,9 +47,9 @@ public class FurnitureDeliveryRequestDisplayController {
         ListServiceRequestController.getFurnitureRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
-            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
+            ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
+            ListServiceRequestController.getConferenceRequest().getDate().getMonth() + 1,
+            ListServiceRequestController.getConferenceRequest().getDate().getDate()));
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
