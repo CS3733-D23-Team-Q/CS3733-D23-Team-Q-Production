@@ -2,12 +2,13 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +27,8 @@ public class DirectoryController {
   @FXML private TableColumn<Account, String> Title;
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
+
+  Account accountSelected;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
@@ -94,17 +97,12 @@ public class DirectoryController {
     account.setItems(Accounts());
   }
 
-  public void mapClicked(ActionEvent actionEvent) {}
+  public void tableClicked() {
+    accountSelected = account.getSelectionModel().getSelectedItems().get(0);
+    Navigation.navigateRight(Screen.DISPLAY_PROFILE);
+  }
 
-  public void edgeClicked(ActionEvent actionEvent) {}
-
-  public void locationClicked(ActionEvent actionEvent) {}
-
-  public void moveClicked(ActionEvent actionEvent) {}
-
-  public void BackClicked(ActionEvent actionEvent) {}
-
-  public void homeClicked(ActionEvent actionEvent) {}
-
-  public void exitClicked(ActionEvent actionEvent) {}
+  public Account getAccount() {
+    return accountSelected;
+  }
 }

@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="902.0" prefWidth="1071.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController">
+<VBox maxWidth="-Infinity" prefWidth="475.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController">
    <children>
-      <HBox alignment="CENTER" layoutY="72.0" prefHeight="760.0" prefWidth="1071.0">
+      <HBox maxWidth="-Infinity" prefHeight="50.0" prefWidth="475.0">
          <children>
-            <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#rowSelected" prefHeight="760.0" prefWidth="938.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;">
-               <columns>
-                  <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
-                  <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
-                  <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
-                  <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
-                  <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Time" />
-                  <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Date" />
-                  <TableColumn fx:id="assigne" prefWidth="138.33328247070312" text="Assignee" />
-               </columns>
-            </TableView>
+            <StackPane HBox.hgrow="NEVER">
+               <children>
+                  <Rectangle arcHeight="16.0" arcWidth="16.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #012D5A;" width="300.0" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFFFF;" text="Your Service Requests">
+                     <font>
+                        <Font name="Roboto Bold" size="28.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutY="20.0" maxWidth="1.7976931348623157E308" prefWidth="512.0">
+      <HBox prefHeight="760.0" prefWidth="324.0">
          <children>
-            <StackPane />
+            <ScrollPane>
+               <content>
+                  <TableView fx:id="tableView" onMouseClicked="#rowSelected" prefHeight="760.0" prefWidth="400.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;">
+                     <columns>
+                        <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
+                        <TableColumn fx:id="assignee" prefWidth="138.33328247070312" text="Assignee" />
+                        <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Date" />
+                        <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Time" />
+                        <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
+                        <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
+                        <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
+                     </columns>
+                  </TableView>
+               </content>
+            </ScrollPane>
          </children>
       </HBox>
-      <Rectangle arcHeight="16.0" arcWidth="16.0" fill="DODGERBLUE" height="50.0" layoutX="305.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #012D5A;" width="475.0" />
-      <Text fill="WHITE" layoutX="400.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFFFF;" text="Your Service Requests">
-         <font>
-            <Font name="Roboto Bold" size="28.0" />
-         </font>
-      </Text>
    </children>
-</AnchorPane>
+</VBox>
