@@ -28,7 +28,7 @@ public class DirectoryController {
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
 
-  static Account accountSelected;
+  Account accountSelected;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
@@ -102,7 +102,7 @@ public class DirectoryController {
     Navigation.navigateRight(Screen.DISPLAY_PROFILE);
   }
 
-  public static Account getAccount() {
+  public Account getAccount() {
     return accountSelected;
   }
 }
