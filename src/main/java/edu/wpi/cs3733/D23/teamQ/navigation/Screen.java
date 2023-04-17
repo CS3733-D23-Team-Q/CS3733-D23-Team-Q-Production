@@ -44,7 +44,10 @@ public enum Screen {
   MENU_PANE("views/MenuRoot.fxml", "Menu Pane"),
 
   DIRECTORY("views/Directory.fxml", "Directory"),
-  STATISTICS("views/Statistics.fxml", "Statistics");
+  STATISTICS("views/Statistics.fxml", "Statistics"),
+  SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
+
+  MAPEDITORHELP("views/MapEditorHelp.fxml", "Help");
 
   private final String filename;
   private final String title;
