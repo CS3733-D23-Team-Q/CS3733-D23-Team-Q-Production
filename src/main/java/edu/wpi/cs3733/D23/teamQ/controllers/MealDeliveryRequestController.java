@@ -72,7 +72,8 @@ public class MealDeliveryRequestController {
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);}
+    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+  }
 
   @FXML
   public void submitButtonClicked() {
