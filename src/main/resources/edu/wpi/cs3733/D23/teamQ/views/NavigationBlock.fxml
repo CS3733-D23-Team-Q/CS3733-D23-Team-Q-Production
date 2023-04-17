@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane fx:id="anchor" onMouseEntered="#anchorEntered" onMouseExited="#anchorExited" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.NavigationBlockController">
+   <children>
+      <HBox fx:id="navigationHB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="240.0" style="-fx-background-color: #f1f1f1;" stylesheets="@styles/Menu.css">
+          <children>
+              <MFXButton fx:id="navigation" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#navigationEntered" onMouseExited="#navigationExited" prefHeight="54.0" prefWidth="240.0" text="Navigation">
+                  <graphic>
+                      <ImageView fx:id="navigationIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../Map.png" />
+                          </image>
+                      </ImageView>
+                  </graphic>
+              </MFXButton>
+              <AnchorPane fx:id="navigationSMPane" visible="false">
+                  <fx:include fx:id="navigationSM" source="NavigationSubmenu.fxml" visible="true" />
+              </AnchorPane>
+          </children>
+      </HBox>
+   </children>
+</AnchorPane>

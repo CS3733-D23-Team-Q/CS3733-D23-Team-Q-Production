@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D23.teamQ.navigation;
 public enum Screen {
   ROOT("views/Root.fxml", "Root"),
   HOME("views/Home.fxml", "Home"),
-  HOME2("views/Home2.fxml", "Home"),
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),
@@ -30,6 +29,9 @@ public enum Screen {
   FURNITURE_REQUEST("views/FurnitureDeliveryRequest.fxml", "Furniture Request"),
   FURNITURE_REQUEST_DISPLAY(
       "views/FurnitureDeliveryRequestDisplay.fxml", "Furniture Request Display"),
+  MEDICAL_SUPPLIES_REQUEST("views/MedicalSuppliesRequest.fxml", "Medical Supplies Request"),
+  MEDICAL_SUPPLIES_REQUEST_DISPLAY(
+      "views/MedicalSuppliesRequestDisplay.fxml", "Medical Supplies Request Display"),
   LIST_REQUESTS("views/ListServiceRequests.fxml", "List of Service Requests"),
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
@@ -45,7 +47,8 @@ public enum Screen {
 
   DIRECTORY("views/Directory.fxml", "Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
-  SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted");
+  SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
+  OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
 
   private final String filename;
   private final String title;

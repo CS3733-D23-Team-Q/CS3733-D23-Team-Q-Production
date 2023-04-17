@@ -10,6 +10,7 @@ import lombok.Setter;
 public class ConferenceRequest extends ServiceRequest implements IServiceRequest {
   private String dateTime;
   private String foodChoice;
+  // private String assigne;
 
   public ConferenceRequest(
       int requestID,
