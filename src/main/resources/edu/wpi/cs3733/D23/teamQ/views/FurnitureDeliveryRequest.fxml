@@ -23,7 +23,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Assignee">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox>
@@ -33,7 +37,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Room Number">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox minHeight="-Infinity">
@@ -43,7 +51,10 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Select a Date">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font></MFXDatePicker>
                </children>
             </VBox>
             <VBox>
@@ -53,7 +64,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXTextField fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
+                  <MFXFilterComboBox fx:id="timeField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Time">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox>
@@ -63,7 +78,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="itemRequestedField" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="itemRequestedField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Furniture Item">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox>

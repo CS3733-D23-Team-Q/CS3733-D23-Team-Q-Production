@@ -10,6 +10,12 @@ public class Account {
   private String securityAnswer2;
   private boolean active;
 
+  private int IDNum;
+  private String firstName;
+  private String lastName;
+  private String title;
+  private int phoneNumber;
+
   public Account(
       String username,
       String password,
@@ -18,7 +24,12 @@ public class Account {
       int securityQuestion2,
       String securityAnswer1,
       String securityAnswer2,
-      boolean active) {
+      boolean active,
+      int IDNum,
+      String firstName,
+      String lastName,
+      String title,
+      int phoneNumber) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -27,6 +38,38 @@ public class Account {
     this.securityAnswer1 = securityAnswer1;
     this.securityAnswer2 = securityAnswer2;
     this.active = active;
+    this.IDNum = IDNum;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.title = title;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public Account(
+      String username,
+      String password,
+      String email,
+      int securityQuestion1,
+      int securityQuestion2,
+      String securityAnswer1,
+      String securityAnswer2,
+      boolean active,
+      String firstName,
+      String lastName,
+      String title,
+      int phoneNumber) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.securityQuestion1 = securityQuestion1;
+    this.securityQuestion2 = securityQuestion2;
+    this.securityAnswer1 = securityAnswer1;
+    this.securityAnswer2 = securityAnswer2;
+    this.active = active;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.title = title;
+    this.phoneNumber = phoneNumber;
   }
 
   public String getUsername() {
@@ -91,5 +134,45 @@ public class Account {
 
   public void setActive(boolean active) {
     this.active = active;
+  }
+
+  public int getIDNum() {
+    return IDNum;
+  }
+
+  public void setIDNum(int ID) {
+    this.IDNum = ID;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String FN) {
+    this.firstName = FN;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String LN) {
+    this.lastName = LN;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String t) {
+    this.title = t;
+  }
+
+  public int getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(int PN) {
+    this.phoneNumber = PN;
   }
 }

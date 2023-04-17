@@ -18,7 +18,16 @@ public class ConferenceRoomRequestController {
   @FXML MFXFilterComboBox assigneeField;
   @FXML MFXFilterComboBox roomNumberField;
   @FXML MFXDatePicker dateField;
-  @FXML MFXTextField timeField;
+
+  ObservableList<String> timeList =
+      FXCollections.observableArrayList(
+          "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00",
+          "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00",
+          "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
+          "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
+          "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
+  @FXML MFXFilterComboBox timeField;
+
   @FXML MFXFilterComboBox foodField;
   @FXML MFXTextField specialInstructionsField;
   ObservableList<String> foodOptionsList =
@@ -30,22 +39,24 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void initialize() {
-    this.assigneeField.setValue("Select an Assignee");
+    this.assigneeField.setValue("");
     this.assigneeField.setItems(qdb.getAllNames());
-    this.roomNumberField.setValue("Select a Conference Room");
+    this.roomNumberField.setValue("");
+    this.timeField.setValue("");
+    this.timeField.setItems(timeList);
     String[] conf = {"CONF"};
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
-    this.foodField.setValue("Select Food Option");
+    this.foodField.setValue("");
     this.foodField.setItems(foodOptionsList);
   }
 
   @FXML
   public void resetButtonClicked() {
-    assigneeField.setValue("Select an Assignee");
-    roomNumberField.setValue("Select a Location");
+    assigneeField.setValue("");
+    roomNumberField.setValue("");
     dateField.clear();
-    timeField.clear();
-    foodField.setValue("Select Food Option");
+    timeField.setValue("");
+    foodField.setValue("");
     specialInstructionsField.clear();
   }
 
@@ -65,9 +76,8 @@ public class ConferenceRoomRequestController {
             (String) assigneeField.getValue(),
             qdb.retrieveNode(qdb.getNodeFromLocation((String) roomNumberField.getValue())),
             specialInstructionsField.getText(),
-            // FIX THIS
             Date.valueOf(dateField.getValue()),
-            timeField.getText(),
+            (String) timeField.getValue(),
             (String) foodField.getValue());
 
     qdb.addConferenceRequest(cr);

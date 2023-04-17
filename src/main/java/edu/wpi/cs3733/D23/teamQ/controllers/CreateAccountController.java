@@ -292,7 +292,11 @@ public class CreateAccountController extends SecondaryStage implements IControll
               qdb.retrieveQuestion(question2).getId(),
               answer1,
               answer2,
-              false);
+              false,
+              null,
+              null,
+              null,
+              0);
       qdb.addAccount(a);
       confirm.setScene(stage, "Confirmation", "Account created successful!");
     }
