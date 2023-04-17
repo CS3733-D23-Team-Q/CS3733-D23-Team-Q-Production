@@ -51,14 +51,28 @@
                         <Insets left="54.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea fx:id="toDo" prefHeight="531.0" prefWidth="329.0" text="Things To Do:&#10;">
-                     <padding>
-                        <Insets left="97.0" />
-                     </padding>
-                  </TextArea>
+                  <StackPane prefHeight="150.0" prefWidth="289.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4b4b4" height="529.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="289.0" />
+                        <TextArea fx:id="toDo" prefHeight="575.0" prefWidth="289.0" style="-fx-background-color: #E2E2E2;" text="&#10;">
+                           <StackPane.margin>
+                              <Insets top="20.0" />
+                           </StackPane.margin>
+                        </TextArea>
+                        <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
+                           <padding>
+                              <Insets bottom="500.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="289.0" style="-fx-background-color: #fff8a8; -fx-border-color: #fff8a8;">
                      <children>
-                        <TextArea fx:id="note" prefHeight="474.0" prefWidth="287.0" style="-fx-background-color: #fff8a8; -fx-border-color: #fff8a8;" text="&#10;">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff8a8" height="523.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="271.0" />
+                        <TextArea fx:id="note" opacity="0.0" prefHeight="588.0" prefWidth="289.0" text="&#10;">
                            <StackPane.margin>
                               <Insets top="20.0" />
                            </StackPane.margin>
@@ -71,7 +85,6 @@
                               <Insets bottom="500.0" />
                            </padding>
                         </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="523.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="271.0" />
                      </children>
                      <HBox.margin>
                         <Insets left="100.0" />
