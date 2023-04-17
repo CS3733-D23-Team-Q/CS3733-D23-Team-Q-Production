@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -60,6 +61,9 @@ public class GraphicalMapEditorController {
   // Stage stage = App.getPrimaryStage();
   Alert alert = new Alert();
   Text text;
+  double mouseX;
+  double mouseY;
+  @FXML AnchorPane root;
 
   @FXML Group parent;
   @FXML ImageView map;
@@ -68,8 +72,6 @@ public class GraphicalMapEditorController {
   @FXML Button deleteButton;
 
   private GesturePane pane;
-
-  @FXML private AnchorPane root;
 
   private int xcoord;
 
@@ -219,12 +221,14 @@ public class GraphicalMapEditorController {
 
   @FXML
   void clearclicked(MouseEvent event) {
+    alert.clearLabelAlert(alerts, image1);
     nodeidinput.setText("");
     InitialNode();
   }
 
   @FXML
   public void initialize() throws IOException {
+
     /*  Text texts = new Text();
      root.getChildren().add(texts);
 
@@ -233,7 +237,13 @@ public class GraphicalMapEditorController {
 
     javafx.scene.Node node = parent;
     pane = new GesturePane(node);
+
+    mouseX = 0;
+    mouseY = 0;
+
     root.getChildren().add(pane);
+    pane.setContent(node);
+    pane.setFitMode(GesturePane.FitMode.COVER);
 
     pane.setOnMouseClicked(
         e -> {
@@ -299,13 +309,15 @@ public class GraphicalMapEditorController {
   public List<Button> addButtons(String floor) {
     List<Button> buttons = new ArrayList<>();
     List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> L1nodes = new ArrayList<>();
+    List<Node> ffNodes = new ArrayList<>();
     for (Node n : nodes) {
+
       if (n.getFloor().equals(floor)) {
-        L1nodes.add(n);
+        ffNodes.add(n);
       }
     }
-    for (Node n : L1nodes) {
+    for (Node n : ffNodes) {
+      int nodeID = n.getNodeID();
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
       Button node = new Button();
@@ -321,22 +333,22 @@ public class GraphicalMapEditorController {
 
       node.setOnMouseClicked(
           e -> {
-            int nodeID = n.getNodeID();
             nodeidinput.setText(Integer.toString(nodeID));
             NodeInformation(nodeID);
           });
       node.setOnMouseEntered(
           e -> {
-            int nodeID = n.getNodeID();
+            int x2 = n.getXCoord() / 5;
+            int y2 = n.getYCoord() / 5;
             Location location = qdb.retrieveLocation(nodeID);
             String name = location.getShortName();
             Pattern pattern = Pattern.compile("(?i).*hall.*");
             if (!pattern.matcher(name).matches()) {
-              text = new Text(x + 3, y + 3, name);
+              text = new Text(x2 + 3, y2 + 3, name);
               text.setStyle("-fx-font-size: 8px;");
               parent.getChildren().add(text);
             } else {
-              text = new Text(x + 3, y + 3, "");
+              text = new Text(x2 + 3, y2 + 3, "");
               text.setStyle("-fx-font-size: 8px;");
               parent.getChildren().add(text);
             }
@@ -345,29 +357,33 @@ public class GraphicalMapEditorController {
           e -> {
             parent.getChildren().remove(text);
           });
-      final Delta dragDelta = new Delta();
-      /*
       node.setOnMousePressed(
           e -> {
-            //dragDelta.x = node.getLayoutX() - e.getSceneX();
-            //dragDelta.y = node.getLayoutY() - e.getSceneY();
-              dragDelta.x = node.getLayoutX() - e.getSceneX();
+            // mouseX = e.getX();
+            mouseX = e.getSceneX() - node.getLayoutX();
+            // mouseY = e.getY();
+            mouseY = e.getSceneY() - node.getLayoutY();
+          });
+      node.setOnMouseDragged(
+          e -> {
+            node.setLayoutX(e.getSceneX() - mouseX);
+            node.setLayoutY(e.getSceneY() - mouseY);
+            // text.setLayoutX(e.getSceneX() - mouseX + 3);
+            // text.setLayoutY(e.getSceneY() - mouseY + 3);
             node.setCursor(Cursor.MOVE);
           });
       node.setOnMouseReleased(
           e -> {
             node.setCursor(Cursor.HAND);
+            int currentX = (int) node.getLayoutX() * 5;
+            int currentY = (int) node.getLayoutY() * 5;
+            Node newNode = qdb.retrieveNode(nodeID);
+            newNode.setXCoord(currentX);
+            newNode.setYCoord(currentY);
+            // after clicking confirm button
+            qdb.updateNode(nodeID, newNode);
+            NodeInformation(nodeID);
           });
-      node.setOnMouseDragged(
-          e -> {
-            node.setLayoutX(e.getSceneX());
-            node.setLayoutY(e.getSceneY());
-          });
-      node.setOnMouseEntered(
-          e -> {
-            node.setCursor(Cursor.HAND);
-          });
-       */
       /*
       node.setOnMouseClicked(
               e -> {
@@ -591,6 +607,14 @@ public class GraphicalMapEditorController {
   @FXML
   void NextClicked(MouseEvent event) {
     shownext();
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(30000);
+              } catch (Exception e) {
+              }
+            })
+        .start();
   }
 
   String Floor(int x) {
@@ -610,6 +634,14 @@ public class GraphicalMapEditorController {
   @FXML
   void LastClicked(MouseEvent event) {
     showlast();
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(30000);
+              } catch (Exception e) {
+              }
+            })
+        .start();
   }
 
   void showlast() {

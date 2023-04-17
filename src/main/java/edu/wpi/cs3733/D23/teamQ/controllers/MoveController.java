@@ -101,7 +101,8 @@ public class MoveController {
         new Callback<TableColumn.CellDataFeatures<Move, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(TableColumn.CellDataFeatures<Move, String> param) {
-            SimpleStringProperty dates = new SimpleStringProperty(param.getValue().getDate());
+            SimpleStringProperty dates =
+                new SimpleStringProperty(param.getValue().getDate().toString());
             return dates;
           }
         });

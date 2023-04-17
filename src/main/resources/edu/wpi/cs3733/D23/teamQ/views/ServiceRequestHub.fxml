@@ -46,6 +46,11 @@
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font></MFXButton>
+                  <MFXButton fx:id="mspButton" onAction="#mspButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Medical Supply Request">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </MFXButton>
                </children>
             </VBox>
          </children>

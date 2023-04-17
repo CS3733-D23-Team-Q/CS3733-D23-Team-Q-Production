@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.Star;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.old.Star;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -57,7 +57,7 @@ public class PathTextController implements IController {
         for (Node n : path) {
           sPath = sPath + n.getNodeID() + " ";
         }
-        //       String textPath = Star.returnPath(Astar.aStar(start, end));
+        //       String textPath = AStar.returnPath(Astar.aStar(start, end));
         textualPath.setText(sPath);
       }
     }
