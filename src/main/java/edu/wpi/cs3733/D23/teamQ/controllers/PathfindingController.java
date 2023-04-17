@@ -20,10 +20,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -67,7 +64,7 @@ public class PathfindingController {
   List<Pair<Integer, Integer>> sfnodes;
   List<Pair<Integer, Integer>> tfnodes;
   List<String> allSelections;
-  // String algorithm;
+  String algorithm;
   // boolean elev;
 
   @FXML HBox root;
@@ -84,11 +81,15 @@ public class PathfindingController {
   @FXML CheckBox servCheck;
   @FXML ComboBox<String> startSelect;
   @FXML ComboBox<String> endSelect;
+  @FXML RadioMenuItem aStarSelect;
+  @FXML RadioMenuItem bfsSelect;
+  @FXML RadioMenuItem dfsSelect;
+  @FXML RadioMenuItem djikstraSelect;
 
   @FXML
   public void initialize() throws IOException {
     // elev = false;
-    // algorithm = "AStar";
+    algorithm = "aStar";
     allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
@@ -357,12 +358,20 @@ public class PathfindingController {
   public List<Line> drawLinesf(Node start, Node target, String floor)
       throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
-    // if(algorithm.equals("AStar")) {
-    pathfindingAlgorithmSelection.setPathfindingAlgorithm(
-        aStar); // if a*, call this function (instead, create a String algorithm global variable
-    // that changes whenever the button is clicked)
-    path = pathfindingAlgorithmSelection.run(start, target);
-    // }
+    if (algorithm.equals("aStar")) {
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(
+          aStar); // if a*, call this function (instead, create a String algorithm global variable
+      // that changes whenever the button is clicked)
+      path = pathfindingAlgorithmSelection.run(start, target);
+    } else if (algorithm.equals("bfs")) {
+
+    } else if (algorithm.equals("dfs")) {
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
+      path = pathfindingAlgorithmSelection.run(start, target);
+    } else {
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
+      path = pathfindingAlgorithmSelection.run(start, target);
+    }
     /*
     path =
         AStar.aStar(
@@ -742,6 +751,34 @@ public class PathfindingController {
                   floor)); // int index = parent.getChildren().indexOf(node);
         }
       }
+    }
+  }
+
+  public void aStarSelected() {
+    if (aStarSelect.isSelected()) {
+      clearButtonClicked();
+      algorithm = "aStar";
+    }
+  }
+
+  public void bfsSelected() {
+    if (bfsSelect.isSelected()) {
+      clearButtonClicked();
+      algorithm = "bfs";
+    }
+  }
+
+  public void dfsSelected() {
+    if (dfsSelect.isSelected()) {
+      clearButtonClicked();
+      algorithm = "dfs";
+    }
+  }
+
+  public void djikstraSelected() {
+    if (djikstraSelect.isSelected()) {
+      clearButtonClicked();
+      algorithm = "djikstra";
     }
   }
 
