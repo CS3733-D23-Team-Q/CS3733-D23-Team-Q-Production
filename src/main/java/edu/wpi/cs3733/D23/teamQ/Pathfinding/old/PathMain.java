@@ -1,6 +1,6 @@
-package edu.wpi.cs3733.D23.teamQ.Pathfinding;
+package edu.wpi.cs3733.D23.teamQ.Pathfinding.old;
 
-import static edu.wpi.cs3733.D23.teamQ.Pathfinding.Star.aStar;
+import static edu.wpi.cs3733.D23.teamQ.Pathfinding.old.Star.aStar;
 
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.util.ArrayList;

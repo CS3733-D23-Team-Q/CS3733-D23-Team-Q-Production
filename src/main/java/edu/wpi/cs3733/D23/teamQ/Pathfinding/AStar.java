@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Star2 {
+public class AStar implements IPathfinding {
   static Qdb qdb = Qdb.getInstance();
 
   public static void addEdges(Node n) {
@@ -25,7 +25,7 @@ public class Star2 {
     return D;
   }
 
-  public static ArrayList<Node> aStar(Node start, Node target) {
+  public ArrayList<Node> run(Node start, Node target) {
     ArrayList<Node> openSet = new ArrayList<>();
     ArrayList<Node> closedSet = new ArrayList<>();
     ArrayList<Node> path = new ArrayList<>();
