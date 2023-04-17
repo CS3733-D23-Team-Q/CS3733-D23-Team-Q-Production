@@ -8,26 +8,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import net.kurobako.gesturefx.GesturePane?>
 
 <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #f1f1f1;" stylesheets="@styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.LoginController">
    <children>
-      <Pane fx:id="imagePane" opacity="0.75" prefHeight="900.0" prefWidth="1280.0" style="-fx-background-color: #012d5a;">
-         <children>
-            <ImageView fx:id="hospitalImage" fitHeight="900.0" fitWidth="1280.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Hospital1.jpeg" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
+      <GesturePane fx:id="imagePane" fitMode="COVER" hbarPolicy="NEVER" prefHeight="900.0" prefWidth="1280.0" vbarPolicy="NEVER" />
       <VBox alignment="CENTER" prefHeight="900.0" prefWidth="320.0" style="-fx-background-color: #f1f1f1;">
          <children>
             <ImageView fitHeight="92.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../download-removebg-preview.png" />
+                  <Image url="@../../../../../../BlueLogo.png" />
                </image>
             </ImageView>
             <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />

@@ -20,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import lombok.Getter;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -29,7 +28,7 @@ public class LoginController {
   static String user;
   Alert alert = new Alert();
   Qdb qdb = Qdb.getInstance();
-  GesturePane gpane;
+  //  GesturePane gpane;
   @FXML Label loginAlert;
   @FXML ImageView alertImage;
   @FXML MFXTextField usernameField;
@@ -37,17 +36,15 @@ public class LoginController {
   @FXML MFXButton forgotPassword;
   @FXML MFXButton login;
   @FXML MFXButton exit;
-  @FXML ImageView hospitalImage;
-  @FXML Pane imagePane;
+  @FXML GesturePane imagePane;
 
   @Getter private static String loginUsername;
   @Getter private static String loginEmail;
 
   @FXML
   public void initialize() {
-    gpane = new GesturePane();
-    gpane.setContent(hospitalImage);
-    gpane.setFitMode(GesturePane.FitMode.COVER);
+    Node hImage = new ImageView(getClass().getResource("Hospital1.jpeg").toExternalForm());
+    imagePane = new GesturePane(hImage);
   }
 
   @FXML
