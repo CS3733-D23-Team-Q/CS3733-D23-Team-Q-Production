@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.AStar;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.Context;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.DFS;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.Djikstra;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.*;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
@@ -37,6 +34,8 @@ public class PathfindingController {
   Context pathfindingAlgorithmSelection = new Context();
   AStar aStar = new AStar();
   DFS dfs = new DFS();
+
+  BFS bfs = new BFS();
   Djikstra djikstra = new Djikstra();
   Alert alert = new Alert();
   GesturePane pane;
@@ -364,6 +363,10 @@ public class PathfindingController {
       // that changes whenever the button is clicked)
       path = pathfindingAlgorithmSelection.run(start, target);
     } else if (algorithm.equals("bfs")) {
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(
+          bfs); // if a*, call this function (instead, create a String algorithm global variable
+      // that changes whenever the button is clicked)
+      path = pathfindingAlgorithmSelection.run(start, target);
 
     } else if (algorithm.equals("dfs")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
