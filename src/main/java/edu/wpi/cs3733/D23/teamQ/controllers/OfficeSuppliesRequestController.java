@@ -6,29 +6,23 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
+import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
 public class OfficeSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
-  @FXML MFXFilterComboBox assigneeField;
-  @FXML MFXFilterComboBox roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
-  ObservableList<String> timeList =
-      FXCollections.observableArrayList(
-          "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00",
-          "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00",
-          "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
-          "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
-          "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
-  @FXML MFXFilterComboBox timeField;
+  @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
-  @FXML MFXFilterComboBox itemRequestedField;
+  @FXML ChoiceBox itemRequestedField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList(
           "Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");
@@ -40,36 +34,40 @@ public class OfficeSuppliesRequestController {
 
   @FXML
   public void initialize() {
-    this.assigneeField.setValue("");
+    this.assigneeField.setValue("Select an Assignee");
     this.assigneeField.setItems(qdb.getAllNames());
-    this.roomNumberField.setValue("");
+    this.roomNumberField.setValue("Select a Location");
     this.roomNumberField.setItems(qdb.getAllLongNames());
-    this.itemRequestedField.setValue("");
+    this.itemRequestedField.setValue("Select Item");
     this.itemRequestedField.setItems(itemList);
-    this.timeField.setValue("");
-    this.timeField.setItems(timeList);
+
+    assigneeField.setValue(ListServiceRequestController.getOfficeRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getOfficeRequest().getNode());
+    dateField.setValue(
+        LocalDate.of(
+            ListServiceRequestController.getOfficeRequest().getDate().getYear(),
+            ListServiceRequestController.getOfficeRequest().getDate().getMonth(),
+            ListServiceRequestController.getOfficeRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getOfficeRequest().getTime());
+    specialInstructionsField.setText(
+        ListServiceRequestController.getOfficeRequest().getSpecialInstructions());
+    itemRequestedField.setValue(ListServiceRequestController.getOfficeRequest().getItem());
+    quantityField.setText("" + ListServiceRequestController.getOfficeRequest().getQuantity());
   }
 
   @FXML
-  public void resetButtonClicked() {
-    this.assigneeField.setValue("");
-    this.roomNumberField.setValue("");
-    this.itemRequestedField.setValue("");
-    this.timeField.setValue("");
-    dateField.clear();
-    specialInstructionsField.clear();
-    quantityField.clear();
-  }
+  public void resetButtonClicked() {}
 
   @FXML
-  public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
-  }
+  public void cancelButtonClicked() {}
 
   @FXML
   public void submitButtonClicked() {
 
     Qdb qdb = Qdb.getInstance();
+    if (((String) quantityField.getText()).equals("Select Quantity")) {
+      quantityField.setText("0");
+    }
 
     OfficeSuppliesRequest newOSR =
         new OfficeSuppliesRequest(
@@ -85,6 +83,6 @@ public class OfficeSuppliesRequestController {
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.addOfficeSuppliesRequest(newOSR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.HOME);
   }
 }

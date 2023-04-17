@@ -54,7 +54,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"officeSuppliesRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, item = ?, quantity = ?, \"specialInstructions\" = ? "
+                "UPDATE \"officeSupplies\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, item = ?, quantity = ?, \"specialInstructions\" = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);

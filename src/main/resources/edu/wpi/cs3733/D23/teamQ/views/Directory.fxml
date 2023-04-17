@@ -68,7 +68,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <TableView fx:id="account" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TableView fx:id="Person" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
                 <TableColumn fx:id="FirstName" prefWidth="75.0" text="First Name" />

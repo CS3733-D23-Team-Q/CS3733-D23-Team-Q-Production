@@ -11,7 +11,6 @@ public class ServiceRequestHubController implements IController {
   @FXML Button frdButton;
   @FXML Button fedButton;
   @FXML Button ospButton;
-  @FXML Button mspButton;
 
   @FXML
   public void initialize() {};
@@ -39,10 +38,5 @@ public class ServiceRequestHubController implements IController {
   @FXML
   public void ospButtonClicked() {
     Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST);
-  }
-
-  @FXML
-  public void mspButtonClicked() {
-    Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST);
   }
 }

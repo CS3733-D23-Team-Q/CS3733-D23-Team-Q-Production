@@ -1,6 +1,5 @@
-package edu.wpi.cs3733.D23.teamQ.Pathfinding.old;
+package edu.wpi.cs3733.D23.teamQ.Pathfinding;
 
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.AStar;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class Star extends Edge {
       }
 
       Edge m = null;
-      AStar.addEdges(n);
+      Star2.addEdges(n);
       for (int i = 0; i < n.getEdges().size(); i++) {
         m = n.getEdges().get(i);
         Edge next = null;

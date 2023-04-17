@@ -4,7 +4,9 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 
 public class Main {
 
-  public static void main(String[] args) {
+  static int counter = 0;
+
+  public static void main(String[] args) throws InterruptedException {
     Qdb.getInstance();
     App.launch(App.class, args);
   }
