@@ -6,10 +6,10 @@ import java.util.*;
 
 public class BFS implements IPathfinding {
 
-  private int vertex;
-  private LinkedList[] adj;
-  private Queue<Integer> queue;
-  List<Edge> edges = new ArrayList<Edge>();
+  //  private int vertex;
+  //  private LinkedList[] adj;
+  //  private Queue<Integer> queue;
+  //  List<Edge> edges = new ArrayList<Edge>();
 
   @Override
   public ArrayList<Node> run(Node start, Node target) {
@@ -35,11 +35,13 @@ public class BFS implements IPathfinding {
       for (Edge edge : currNode.getEdges()) {
         Node neighbor = edge.getEndNode();
         System.out.println("move to " + neighbor.getNodeID() + " " + neighbor.getLocation());
-
+        //        if (!visited.contains(neighbor){
         if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor())) {
           visited.add(neighbor);
           parentMap.put(neighbor, currNode);
-          queue.offer(neighbor);
+          //used to be
+          //queue.offer(neighbor)
+          queue.add(neighbor);
         }
       }
     }
