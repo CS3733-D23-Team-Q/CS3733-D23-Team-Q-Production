@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.AStar;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.Context;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.DFS;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.Djikstra;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
@@ -37,6 +39,8 @@ public class PathfindingController {
   // Stage stage = App.getPrimaryStage();
   Context pathfindingAlgorithmSelection = new Context();
   AStar aStar = new AStar();
+  DFS dfs = new DFS();
+  Djikstra djikstra = new Djikstra();
   Alert alert = new Alert();
   GesturePane pane;
   boolean ready4Second;
@@ -63,7 +67,7 @@ public class PathfindingController {
   List<Pair<Integer, Integer>> sfnodes;
   List<Pair<Integer, Integer>> tfnodes;
   List<String> allSelections;
-  //String algorithm;
+  // String algorithm;
   // boolean elev;
 
   @FXML HBox root;
@@ -84,7 +88,7 @@ public class PathfindingController {
   @FXML
   public void initialize() throws IOException {
     // elev = false;
-    //algorithm = "AStar";
+    // algorithm = "AStar";
     allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
@@ -353,10 +357,11 @@ public class PathfindingController {
   public List<Line> drawLinesf(Node start, Node target, String floor)
       throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
-    //if(algorithm.equals("AStar")) {
-      pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar); // if a*, call this function (instead, create a String algorithm global variable that changes whenever the button is clicked)
-      path = pathfindingAlgorithmSelection.run(start, target);
-    //}
+    // if(algorithm.equals("AStar")) {
+    pathfindingAlgorithmSelection.setPathfindingAlgorithm(
+        aStar); // if a*, call this function (instead, create a String algorithm global variable that changes whenever the button is clicked)
+    path = pathfindingAlgorithmSelection.run(start, target);
+    // }
     /*
     path =
         AStar.aStar(
