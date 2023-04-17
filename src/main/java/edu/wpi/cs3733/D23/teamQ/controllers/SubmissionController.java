@@ -13,7 +13,7 @@ public class SubmissionController {
     requestID.setText(
         "Request ID : "
             + qdb.retrieveAllServiceRequests()
-                .get(qdb.retrieveAllServiceRequests().size())
+                .get(qdb.retrieveAllServiceRequests().size() - 1)
                 .getRequestID());
   }
 }
