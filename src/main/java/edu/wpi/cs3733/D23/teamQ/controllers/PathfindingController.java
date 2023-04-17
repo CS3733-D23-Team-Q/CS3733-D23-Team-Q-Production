@@ -359,7 +359,8 @@ public class PathfindingController {
     List<Node> path = new ArrayList<>();
     // if(algorithm.equals("AStar")) {
     pathfindingAlgorithmSelection.setPathfindingAlgorithm(
-        aStar); // if a*, call this function (instead, create a String algorithm global variable that changes whenever the button is clicked)
+        aStar); // if a*, call this function (instead, create a String algorithm global variable
+    // that changes whenever the button is clicked)
     path = pathfindingAlgorithmSelection.run(start, target);
     // }
     /*
