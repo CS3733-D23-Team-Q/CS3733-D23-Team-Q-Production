@@ -66,12 +66,13 @@ public class ConferenceRoomRequestController {
             (String) assigneeField.getValue(),
             qdb.retrieveNode(qdb.getNodeFromLocation((String) roomNumberField.getValue())),
             specialInstructionsField.getText(),
-            Date.valueOf(dateField.getCurrentDate()),
+            // FIX THIS
+            Date.valueOf(dateField.getValue()),
             timeField.getText(),
             (String) foodField.getValue());
 
     qdb.addConferenceRequest(cr);
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigateRight(Screen.SUBMISSION);
   }
 
   @FXML

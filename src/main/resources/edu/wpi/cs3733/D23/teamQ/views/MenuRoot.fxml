@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuRootController">
+<AnchorPane fx:id="menuPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MenuController">
    <children>
-      <VBox fx:id="menuPane" onMouseEntered="#menuPaneExited" prefHeight="800.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="800.0" prefWidth="240.0" spacing="12.0" style="-fx-background-color: #012d5a;" stylesheets="@styles/Menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="66.0" prefWidth="240.0" spacing="18.0" VBox.vgrow="ALWAYS">
                <children>
@@ -44,77 +44,19 @@
                         </ImageView>
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="people" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#peopleEntered" onMouseExited="#peopleExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="People" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fx:id="peopleIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../People.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MFXButton>
-                  <MFXButton fx:id="navigation" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#navEntered" onMouseExited="#navExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleAnimationSpeed="0.0" rippleColor="#f1f1f1" text="Navigation" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fx:id="navigationIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Map.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MFXButton>
-                  <MFXButton fx:id="servicerequest" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#srEntered" onMouseExited="#srExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Service Requests" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fx:id="srIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../ServiceRequests.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MFXButton>
-                  <MFXButton fx:id="statistics" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#statEntered" onMouseExited="#statExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Statistics" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fx:id="statisticsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Statistics.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MFXButton>
-                  <MFXButton fx:id="settings" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#setEntered" onMouseExited="#setExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Settings" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fx:id="settingsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Settings.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MFXButton>
+                  <fx:include fx:id="peopleBlock" source="PeopleBlock.fxml" visible="true" />
+                  <fx:include fx:id="navigationBlock" source="NavigationBlock.fxml" visible="true" />
+                  <fx:include fx:id="srBlock" source="ServiceRequestBlock.fxml" visible="true" />
+                  <fx:include fx:id="statBlock" source="StatisticsBlock.fxml" visible="true" />
+                  <fx:include fx:id="settingsBlock" source="SettingsBlock.fxml" visible="true" />
                   <VBox fx:id="spacer" maxHeight="1.7976931348623157E308" onMouseEntered="#spacerEntered" prefHeight="122.0" prefWidth="240.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <MFXButton fx:id="signout" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#soEntered" onMouseExited="#soExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" text="Sign Out" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
-               <graphic>
-                  <ImageView fx:id="exitIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Exit.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </MFXButton>
+            <fx:include fx:id="signoutBlock" source="SignoutBlock.fxml" visible="true" />
          </children>
          <padding>
             <Insets bottom="12.0" top="12.0" />
          </padding>
       </VBox>
-      <AnchorPane fx:id="subPane" layoutX="240.0" onMouseExited="#subPaneExited" prefHeight="800.0" prefWidth="0.0" style="-fx-background-color: #f1f1f1;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-192.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <fx:include fx:id="peopleSM" layoutY="174.0" source="PeopleSubmenu.fxml" visible="false" />
-            <fx:include fx:id="navigationSM" layoutY="243.0" source="NavigationSubmenu.fxml" visible="false" />
-            <fx:include fx:id="servicerequestSM" layoutY="312.0" source="ServiceRequestSubmenu.fxml" visible="false" />
-            <fx:include fx:id="statisticsSM" layoutY="381.0" source="StatisticsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="settingsSM" layoutY="450.0" source="SettingsSubmenu.fxml" visible="false" />
-            <fx:include fx:id="signoutSM" layoutY="933.0" source="SignoutSubmenu.fxml" visible="false" />
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

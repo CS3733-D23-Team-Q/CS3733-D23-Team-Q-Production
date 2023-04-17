@@ -10,7 +10,6 @@ public class SettingsSubmenuController {
   @FXML VBox settingsSM;
   @FXML MFXButton settings;
   @FXML MFXButton help;
-  @FXML MenuRootController mrc;
 
   @FXML
   public void settingsClicked() {
@@ -20,19 +19,5 @@ public class SettingsSubmenuController {
   @FXML
   public void helpClicked() {
     Navigation.navigate(Screen.HELP);
-  }
-
-  @FXML
-  public void sesmExited() {
-    mrc.showSetSM(false);
-  }
-
-  public void setVisible(boolean v) {
-    settingsSM.toFront();
-    settingsSM.setVisible(v);
-  }
-
-  public void setRootController(MenuRootController mrc) {
-    this.mrc = mrc;
   }
 }

@@ -20,8 +20,8 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   }
 
   private OfficeSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
-    populate();
     this.nodeTable = nodeTable;
+    populate();
     if (officeSuppliesRequests.size() != 0) {
       nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;
     }

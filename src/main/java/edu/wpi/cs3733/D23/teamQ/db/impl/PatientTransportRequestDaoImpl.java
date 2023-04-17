@@ -20,8 +20,8 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   }
 
   private PatientTransportRequestDaoImpl(NodeDaoImpl nodeTable) {
-    populate();
     this.nodeTable = nodeTable;
+    populate();
     if (patientTransportRequests.size() != 0) {
       nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
     }

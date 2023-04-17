@@ -345,12 +345,16 @@ public class PathfindingController {
     }
   }
 
-  public List<Line> drawLinesf(Node start, Node target, String floor) throws IOException { //add a string to specify the algorithm (no)
+  public List<Line> drawLinesf(Node start, Node target, String floor)
+      throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
     //    if (elev) {
     //      path = Star2.aStarElev(start, target);
     //    } else {
-    path = Star2.aStar(start, target); //if a*, call this function (instead, create a String algorithm global variable that changes whenever the button is clicked)
+    path =
+        Star2.aStar(
+            start, target); // if a*, call this function (instead, create a String algorithm global
+    // variable that changes whenever the button is clicked)
     //    }
     List<Node> fpath = new ArrayList<>();
     for (Node n : path) {

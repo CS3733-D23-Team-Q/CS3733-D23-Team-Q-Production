@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane fx:id="anchor" onMouseEntered="#anchorEntered" onMouseExited="#anchorExited" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.PeopleBlockController">
+   <children>
+      <HBox fx:id="peopleHB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="240.0" style="-fx-background-color: #f1f1f1;" stylesheets="@styles/Menu.css">
+          <children>
+              <MFXButton fx:id="people" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#peopleEntered" onMouseExited="#peopleExited" prefHeight="54.0" prefWidth="240.0" text="People">
+                  <graphic>
+                      <ImageView fx:id="peopleIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../People.png" />
+                          </image>
+                      </ImageView>
+                  </graphic>
+              </MFXButton>
+              <AnchorPane fx:id="peopleSMPane" visible="false">
+                  <fx:include fx:id="peopleSM" source="PeopleSubmenu.fxml" visible="true" />
+              </AnchorPane>
+          </children>
+      </HBox>
+   </children>
+</AnchorPane>
