@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
-import java.lang.reflect.Type;
 import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +10,7 @@ import lombok.Setter;
 public class ConferenceRequest extends ServiceRequest implements IServiceRequest {
   private String dateTime;
   private String foodChoice;
-  private Type requestType = this.getClass();
+  // private String assigne;
 
   public ConferenceRequest(
       int requestID,

@@ -13,7 +13,7 @@
           <children>
               <MFXButton fx:id="people" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#peopleEntered" onMouseExited="#peopleExited" prefHeight="54.0" prefWidth="240.0" text="People">
                   <graphic>
-                      <ImageView fx:id="peopleIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fx:id="peopleIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../People.png" />
                           </image>
