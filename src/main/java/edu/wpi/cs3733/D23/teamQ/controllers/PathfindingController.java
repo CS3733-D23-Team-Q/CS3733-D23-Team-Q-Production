@@ -7,6 +7,7 @@ import edu.wpi.cs3733.D23.teamQ.Pathfinding.DFS;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.Djikstra;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class PathfindingController {
   List<Pair<Integer, Integer>> tfnodes;
   List<String> allSelections;
   String algorithm;
+  // Date date;
   // boolean elev;
 
   @FXML HBox root;
@@ -85,10 +87,12 @@ public class PathfindingController {
   @FXML RadioMenuItem bfsSelect;
   @FXML RadioMenuItem dfsSelect;
   @FXML RadioMenuItem djikstraSelect;
+  // @FXML Menu dateMenu;
 
   @FXML
   public void initialize() throws IOException {
     // elev = false;
+    // date = Date.valueOf("2023-01-01");
     algorithm = "aStar";
     allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
@@ -198,8 +202,10 @@ public class PathfindingController {
   }
 
   public void addButtons(String f) {
-    List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> fNodes = new ArrayList<>();
+    List<Node> nodes = qdb.retrieveAllNodes(); // allNodes
+    List<Move> allMoves = qdb.retrieveAllMoves();
+    List<Node> moveNodes = new ArrayList<>();
+    List<Node> fNodes = new ArrayList<>(); // floorNodes
     restNodes.removeAll(restNodes);
     deptNodes.removeAll(deptNodes);
     labsNodes.removeAll(labsNodes);
@@ -207,7 +213,26 @@ public class PathfindingController {
     confNodes.removeAll(confNodes);
     retlNodes.removeAll(retlNodes);
     servNodes.removeAll(servNodes);
-    for (Node n : nodes) {
+    /*
+    for(Move m : allMoves){
+    Date d = m.getDate();
+      if(d.compareTo(date) == 0) {
+        for (Node n : allNodes) {
+          if (m.getNodeID() == n.getNodeID()) {
+            moveNodes.add(n);
+          }
+          //add a variable to ignore the duplicates
+          RadioMenuItem item = new RadioMenuItem();
+          item.setToggleGroup(dateToggle);
+          item.setOnAction(e -> {
+          dateSelected();
+          });
+          dateMenu.getItems().add(item);
+        }
+      }
+    }
+     */
+    for (Node n : nodes) { // Node n : moveNodes
       int nodeid = n.getNodeID();
       nodeIds.add(nodeid);
       Location location = qdb.retrieveLocation(nodeid);
@@ -780,6 +805,11 @@ public class PathfindingController {
       clearButtonClicked();
       algorithm = "djikstra";
     }
+  }
+
+  public void dateSelected() {
+    // clearButtonClicked();
+    // date = Date.valueOf(dateSelect.getText());
   }
 
   public void clearButtonClicked() {
