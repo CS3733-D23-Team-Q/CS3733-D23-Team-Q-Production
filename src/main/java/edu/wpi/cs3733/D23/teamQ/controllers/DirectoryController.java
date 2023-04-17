@@ -7,13 +7,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
-
-import java.beans.PersistenceDelegate;
 
 public class DirectoryController {
 
@@ -101,12 +98,10 @@ public class DirectoryController {
   }
 
   public void tableClicked() {
-    person=  Person.getSelectionModel().getSelectedItems().get(0);
+    person = Person.getSelectionModel().getSelectedItems().get(0);
   }
 
-  public Person getPerson(){
-      return person;
+  public Person getPerson() {
+    return person;
   }
-
-
 }

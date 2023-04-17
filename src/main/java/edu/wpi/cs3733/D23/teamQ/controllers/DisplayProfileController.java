@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Person;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -9,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class DisplayProfileController {
+
+  DirectoryController directoryController = new DirectoryController();
 
   @FXML private MFXTextField ProfileEditPage_Email_TextField;
 
@@ -26,22 +29,25 @@ public class DisplayProfileController {
 
   @FXML
   private void initialize() {
-    String username = LoginController.getLoginUsername();
-
-    String email = LoginController.getLoginEmail();
+    String username = directoryController.getPerson().getUsername();
 
     Qdb qdb = Qdb.getInstance();
-//    this.ProfileEditPage_Title_TextField.setText(qdb.getDirectory().getTitle());
-//    this.ProfileEditPage_IDNumber_TextField.setText(
-//        String.valueOf(qdb.retrievePerson(username).getIDNum()));
-//    this.ProfileEditPage_FirstName_TextField.setText(qdb.retrievePerson(username).getFirstName());
-//    this.ProfileEditPage_LastName_TextField.setText(qdb.retrievePerson(username).getLastName());
-//    this.ProfileEditPage_Email_TextField.setText(email);
-//
-//    this.ProfileEditPage_PhoneNumber_TextField.setText(
-//        String.valueOf(qdb.retrievePerson(username).getPhoneNumber()));
-//
-//    this.ProfileEditPage_Username_TextField.setText(username);
+
+    Person user = qdb.retrievePerson(username);
+
+    this.ProfileEditPage_Title_TextField.setText(user.getTitle());
+        this.ProfileEditPage_IDNumber_TextField.setText(
+            String.valueOf(user.getIDNum()));
+
+     this.ProfileEditPage_FirstName_TextField.setText(user.getFirstName());
+
+     this.ProfileEditPage_LastName_TextField.setText(user.getLastName());
+        //this.ProfileEditPage_Email_TextField.setText(user.getEmail());
+
+        this.ProfileEditPage_PhoneNumber_TextField.setText(
+            String.valueOf(user.getPhoneNumber()));
+
+        this.ProfileEditPage_Username_TextField.setText(username);
   }
 
   @FXML
