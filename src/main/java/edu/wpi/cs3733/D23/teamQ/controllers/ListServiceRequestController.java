@@ -20,7 +20,7 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, Integer> progress;
   @FXML TableColumn<ServiceRequest, String> roomNumber;
   @FXML TableColumn<ServiceRequest, String> specialInstructions;
-  @FXML TableColumn<ServiceRequest, String> assigne;
+  @FXML TableColumn<ServiceRequest, String> assignee;
   @FXML TableColumn<ServiceRequest, String> date;
   @FXML TableColumn<ServiceRequest, String> time;
 
@@ -31,6 +31,7 @@ public class ListServiceRequestController {
   private static OfficeSuppliesRequest officeSuppliesRequest;
 
   private static FurnitureRequest furnitureRequest;
+  private static MedicalSuppliesRequest medicalSuppliesRequest;
 
   Qdb qdb = Qdb.getInstance();
 
@@ -44,7 +45,7 @@ public class ListServiceRequestController {
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
     specialInstructions.setCellValueFactory(
         new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
-    assigne.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assigne"));
+    assignee.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assignee"));
     date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
     time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
     if (username == "admin") {
@@ -92,6 +93,13 @@ public class ListServiceRequestController {
           qdb.retrieveFurnitureRequest(
               tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
       Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
+    } else if (qdb.retrieveMedicalSuppliesRequest(
+            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+        != null) {
+      medicalSuppliesRequest =
+          qdb.retrieveMedicalSuppliesRequest(
+              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+      Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST_DISPLAY);
     }
   }
 
@@ -113,5 +121,9 @@ public class ListServiceRequestController {
 
   public static OfficeSuppliesRequest getOfficeRequest() {
     return officeSuppliesRequest;
+  }
+
+  public static MedicalSuppliesRequest getMedicalRequest() {
+    return medicalSuppliesRequest;
   }
 }

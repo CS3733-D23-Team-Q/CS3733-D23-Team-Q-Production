@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class MealDeliveryRequestController {
+public class MedicalSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
   @FXML MFXFilterComboBox assigneeField;
   @FXML MFXFilterComboBox roomNumberField;
@@ -28,22 +28,14 @@ public class MealDeliveryRequestController {
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
   @FXML MFXTextField specialInstructionsField;
-
-  @FXML MFXFilterComboBox drinkField;
-  @FXML MFXFilterComboBox entreeField;
-  @FXML MFXFilterComboBox sideField;
+  @FXML MFXFilterComboBox itemRequestedField;
+  ObservableList<String> itemList =
+      FXCollections.observableArrayList("tbd1", "tbd2", "tbd3", "tbd4", "tbd5");
+  @FXML MFXTextField quantityField;
 
   @FXML Button resetButton;
   @FXML Button cancelButton;
   @FXML Button submitButton;
-
-  ObservableList<String> drinkList =
-      FXCollections.observableArrayList("Water", "Coke", "Coffee", "Tea");
-  ObservableList<String> entreeList =
-      FXCollections.observableArrayList("Chicken", "Steak", "Pork", "Fish", "Vegetarian");
-
-  ObservableList<String> sideList =
-      FXCollections.observableArrayList("Fries", "Onion Rings", "Soup", "Salad");
 
   @FXML
   public void initialize() {
@@ -51,26 +43,21 @@ public class MealDeliveryRequestController {
     this.assigneeField.setItems(qdb.getAllNames());
     this.roomNumberField.setValue("");
     this.roomNumberField.setItems(qdb.getAllLongNames());
+    this.itemRequestedField.setValue("");
+    this.itemRequestedField.setItems(itemList);
     this.timeField.setValue("");
     this.timeField.setItems(timeList);
-    this.drinkField.setValue("");
-    this.drinkField.setItems(drinkList);
-    this.entreeField.setValue("");
-    this.entreeField.setItems(entreeList);
-    this.sideField.setValue("");
-    this.sideField.setItems(sideList);
   }
 
   @FXML
   public void resetButtonClicked() {
-    assigneeField.setValue("");
-    roomNumberField.setValue("");
+    this.assigneeField.setValue("");
+    this.roomNumberField.setValue("");
+    this.itemRequestedField.setValue("");
+    this.timeField.setValue("");
     dateField.clear();
-    timeField.setValue("");
-    drinkField.setValue("");
-    entreeField.setValue("");
-    sideField.setValue("");
     specialInstructionsField.clear();
+    quantityField.clear();
   }
 
   @FXML
@@ -83,9 +70,9 @@ public class MealDeliveryRequestController {
 
     Qdb qdb = Qdb.getInstance();
 
-    MealRequest newMR =
-        new MealRequest(
-            0,
+    MedicalSuppliesRequest newMSR =
+        new MedicalSuppliesRequest(
+            ListServiceRequestController.getMedicalRequest().getRequestID(),
             "temp user",
             0,
             (String) assigneeField.getValue(),
@@ -93,11 +80,10 @@ public class MealDeliveryRequestController {
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            (String) drinkField.getValue(),
-            (String) entreeField.getValue(),
-            (String) sideField.getValue());
+            (String) itemRequestedField.getValue(),
+            Integer.parseInt((String) quantityField.getText()));
 
-    qdb.addMealRequest(newMR);
-    Navigation.navigate(Screen.SUBMISSION);
+    qdb.addMedicalSuppliesRequest(newMSR);
+    Navigation.navigateRight(Screen.SUBMISSION);
   }
 }
