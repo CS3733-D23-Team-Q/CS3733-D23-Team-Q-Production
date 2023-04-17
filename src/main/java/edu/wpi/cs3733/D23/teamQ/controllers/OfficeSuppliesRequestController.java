@@ -74,9 +74,9 @@ public class OfficeSuppliesRequestController {
     OfficeSuppliesRequest newOSR =
         new OfficeSuppliesRequest(
             ListServiceRequestController.getOfficeRequest().getRequestID(),
-            "temp user",
+            ListServiceRequestController.getOfficeRequest().getRequester(),
             0,
-            (String) assigneeField.getValue(),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             (Node) roomNumberField.getValue(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
