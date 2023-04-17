@@ -40,7 +40,8 @@ public class ConferenceRoomRequestDisplayController implements IController {
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.foodField.setItems(foodOptionsList);
 
-    assigneeField.setText(ListServiceRequestController.getConferenceRequest().getAssignee());
+    assigneeField.setText(
+        ListServiceRequestController.getConferenceRequest().getAssignee().getUsername());
     roomNumberField.setText(
         ListServiceRequestController.getConferenceRequest().getNode().toString());
     dateField.setValue(
@@ -75,8 +76,8 @@ public class ConferenceRoomRequestDisplayController implements IController {
         new ConferenceRequest(
             ListServiceRequestController.getConferenceRequest().getRequestID(),
             ListServiceRequestController.getConferenceRequest().getNode(),
-            "temp user",
-            (String) assigneeField.getValue(),
+            ListServiceRequestController.getConferenceRequest().getRequester(),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             0,
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

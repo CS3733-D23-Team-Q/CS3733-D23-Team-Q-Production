@@ -13,9 +13,9 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
 
   public MedicalSuppliesRequest(
       int requestID,
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,
@@ -28,9 +28,9 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
   }
 
   public MedicalSuppliesRequest(
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,

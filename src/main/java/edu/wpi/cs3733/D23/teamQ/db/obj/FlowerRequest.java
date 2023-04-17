@@ -14,9 +14,9 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
 
   public FlowerRequest(
       int requestID,
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,
@@ -31,9 +31,9 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
   }
 
   public FlowerRequest(
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,

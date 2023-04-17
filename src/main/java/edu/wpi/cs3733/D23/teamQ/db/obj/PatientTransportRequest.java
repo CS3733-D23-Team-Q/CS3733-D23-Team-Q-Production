@@ -12,9 +12,9 @@ public class PatientTransportRequest extends ServiceRequest implements IServiceR
 
   public PatientTransportRequest(
       int requestID,
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,
@@ -25,9 +25,9 @@ public class PatientTransportRequest extends ServiceRequest implements IServiceR
   }
 
   public PatientTransportRequest(
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,

@@ -10,13 +10,12 @@ import lombok.Setter;
 public class ConferenceRequest extends ServiceRequest implements IServiceRequest {
   private String dateTime;
   private String foodChoice;
-  // private String assigne;
 
   public ConferenceRequest(
       int requestID,
       Node node,
-      String requester,
-      String assignee,
+      Account requester,
+      Account assignee,
       int progress,
       String specialInstructions,
       Date date,
@@ -27,9 +26,9 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
   }
 
   public ConferenceRequest(
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,

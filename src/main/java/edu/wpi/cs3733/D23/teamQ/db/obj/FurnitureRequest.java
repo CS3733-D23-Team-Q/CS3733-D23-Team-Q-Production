@@ -12,9 +12,9 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
 
   public FurnitureRequest(
       int requestID,
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,
@@ -25,9 +25,9 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
   }
 
   public FurnitureRequest(
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,

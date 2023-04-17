@@ -13,9 +13,9 @@ public class OfficeSuppliesRequest extends ServiceRequest implements IServiceReq
 
   public OfficeSuppliesRequest(
       int requestID,
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,
@@ -28,9 +28,9 @@ public class OfficeSuppliesRequest extends ServiceRequest implements IServiceReq
   }
 
   public OfficeSuppliesRequest(
-      String requester,
+      Account requester,
       int progress,
-      String assignee,
+      Account assignee,
       Node node,
       String specialInstructions,
       Date date,
