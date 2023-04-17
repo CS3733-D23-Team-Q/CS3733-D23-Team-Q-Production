@@ -43,6 +43,7 @@ public enum Screen {
   MENU_PANE("views/MenuRoot.fxml", "Menu Pane"),
 
   DIRECTORY("views/Directory.fxml", "Directory"),
+  DISPLAY_PROFILE("views/DisplayProfile.fxml", "Display Profile"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
   OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");

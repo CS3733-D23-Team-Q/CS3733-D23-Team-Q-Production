@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -26,7 +28,7 @@ public class DirectoryController {
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
 
-  Person person;
+  static Account accountSelected;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
@@ -96,10 +98,11 @@ public class DirectoryController {
   }
 
   public void tableClicked() {
-    person = Person.getSelectionModel().getSelectedItems().get(0);
+    accountSelected = account.getSelectionModel().getSelectedItems().get(0);
+    Navigation.navigateRight(Screen.DISPLAY_PROFILE);
   }
 
-  public Person getPerson() {
-    return person;
+  public static Account getAccount() {
+    return accountSelected;
   }
 }

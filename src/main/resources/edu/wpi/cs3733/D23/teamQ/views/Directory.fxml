@@ -26,7 +26,7 @@
         <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TableView fx:id="Person" onMouseClicked="#tableClicked" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TableView fx:id="account" onMouseClicked="#tableClicked" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
                 <TableColumn fx:id="FirstName" prefWidth="75.0" text="First Name" />
