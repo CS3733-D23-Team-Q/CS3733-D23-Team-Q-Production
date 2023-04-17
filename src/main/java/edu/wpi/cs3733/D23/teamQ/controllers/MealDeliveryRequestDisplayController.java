@@ -49,9 +49,9 @@ public class MealDeliveryRequestDisplayController {
     roomNumberField.setText(ListServiceRequestController.getMealRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getMealRequest().getDate().getYear(),
-            ListServiceRequestController.getMealRequest().getDate().getMonth(),
-            ListServiceRequestController.getMealRequest().getDate().getDay()));
+            ListServiceRequestController.getMealRequest().getDate().getYear() + 1900,
+            ListServiceRequestController.getMealRequest().getDate().getMonth() + 1,
+            ListServiceRequestController.getMealRequest().getDate().getDate()));
     timeField.setText(ListServiceRequestController.getMealRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getMealRequest().getSpecialInstructions());

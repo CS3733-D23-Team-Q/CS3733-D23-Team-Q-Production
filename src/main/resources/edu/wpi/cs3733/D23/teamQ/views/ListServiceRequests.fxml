@@ -34,8 +34,8 @@
                      <columns>
                         <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
                         <TableColumn fx:id="assignee" prefWidth="138.33328247070312" text="Assignee" />
-                        <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Date" />
-                        <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Time" />
+                        <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Time" />
+                        <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Date" />
                         <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
                         <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
                         <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
