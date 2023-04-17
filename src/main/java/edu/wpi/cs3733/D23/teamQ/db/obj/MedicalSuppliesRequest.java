@@ -8,13 +8,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MealRequest extends ServiceRequest implements IServiceRequest {
-  private String drink;
-  private String entree;
-  private String side;
+public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRequest {
+  private String item;
+  private int quantity;
   private Type requestType = this.getClass();
 
-  public MealRequest(
+  public MedicalSuppliesRequest(
       int requestID,
       String requester,
       int progress,
@@ -23,16 +22,14 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
       String specialInstructions,
       Date date,
       String time,
-      String drink,
-      String entree,
-      String side) {
+      String item,
+      int quantity) {
     super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
-    this.drink = drink;
-    this.entree = entree;
-    this.side = side;
+    this.item = item;
+    this.quantity = quantity;
   }
 
-  public MealRequest(
+  public MedicalSuppliesRequest(
       String requester,
       int progress,
       String assignee,
@@ -40,19 +37,17 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
       String specialInstructions,
       Date date,
       String time,
-      String drink,
-      String entree,
-      String side) {
+      String item,
+      int quantity) {
     super(0, requester, progress, assignee, node, specialInstructions, date, time);
-    this.drink = drink;
-    this.entree = entree;
-    this.side = side;
+    this.item = item;
+    this.quantity = quantity;
   }
 
-  public int progressToInt(Progress progress) {
-    if (progress == Progress.BLANK) {
+  public int progressToInt(ServiceRequest.Progress progress) {
+    if (progress == ServiceRequest.Progress.BLANK) {
       return 0;
-    } else if (progress == Progress.PROCESSING) {
+    } else if (progress == ServiceRequest.Progress.PROCESSING) {
       return 1;
     } else {
       return 2;

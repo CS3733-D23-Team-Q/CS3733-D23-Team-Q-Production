@@ -1,3 +1,4 @@
+/*
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import lombok.Getter;
@@ -37,3 +38,4 @@ public class Person {
     this.username = username;
   }
 }
+*/

@@ -38,28 +38,28 @@ public class ProfilePageController implements IController {
 
     Qdb qdb = Qdb.getInstance();
 
-    this.ID_Number_Display.setText(String.valueOf(qdb.retrievePerson(username).getIDNum()));
-    if (qdb.retrievePerson(username).getFirstName() == null) {
+    this.ID_Number_Display.setText(String.valueOf(qdb.retrieveAccount(username).getIDNum()));
+    if (qdb.retrieveAccount(username).getFirstName() == null) {
       this.First_Name_Display.setText("empty");
     } else {
-      this.First_Name_Display.setText(qdb.retrievePerson(username).getFirstName());
+      this.First_Name_Display.setText(qdb.retrieveAccount(username).getFirstName());
     }
-    if (qdb.retrievePerson(username).getLastName() == null) {
+    if (qdb.retrieveAccount(username).getLastName() == null) {
       this.Last_Name_Display.setText("empty");
     } else {
-      this.Last_Name_Display.setText(qdb.retrievePerson(username).getLastName());
+      this.Last_Name_Display.setText(qdb.retrieveAccount(username).getLastName());
     }
     this.Email_Display.setText(email);
-    if (qdb.retrievePerson(username).getTitle() == null) {
+    if (qdb.retrieveAccount(username).getTitle() == null) {
       this.Title_Display.setText("empty");
     } else {
-      this.Title_Display.setText(qdb.retrievePerson(username).getTitle());
+      this.Title_Display.setText(qdb.retrieveAccount(username).getTitle());
     }
-    if (qdb.retrievePerson(username).getPhoneNumber() == 0) {
+    if (qdb.retrieveAccount(username).getPhoneNumber() == 0) {
       this.Phone_Number_Display.setText("empty");
     } else {
       this.Phone_Number_Display.setText(
-          String.valueOf(qdb.retrievePerson(username).getPhoneNumber()));
+          String.valueOf(qdb.retrieveAccount(username).getPhoneNumber()));
     }
 
     this.Username_Display.setText(username);

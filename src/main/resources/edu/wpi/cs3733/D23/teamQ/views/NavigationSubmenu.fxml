@@ -8,7 +8,7 @@
    <children>
       <MFXButton fx:id="pathfinder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#pathfinderClicked" prefHeight="53.0" prefWidth="160.0" text="Pathfinder" />
       <MFXButton fx:id="editor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#editorClicked" prefHeight="53.0" prefWidth="160.0" text="Map Editor" />
-      <MFXButton fx:id="oMover" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#editorClicked" prefHeight="53.0" prefWidth="160.0" text="Move Offices" />
+      <MFXButton fx:id="oMover" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#moveClicked" prefHeight="53.0" prefWidth="160.0" text="Move Offices" />
    </children>
    <padding>
       <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />

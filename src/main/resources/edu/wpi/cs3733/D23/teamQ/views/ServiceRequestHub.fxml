@@ -20,31 +20,48 @@
       </StackPane>
       <VBox alignment="TOP_CENTER" spacing="24.0">
          <children>
-            <MFXButton fx:id="ccrButton" onAction="#ccrButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Conference Room Request">
-               <font>
-                  <Font name="Roboto Bold" size="16.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="frdButton" onAction="#frdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Flower Delivery Request">
-               <font>
-                  <Font name="Roboto Bold" size="16.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="ospButton" onAction="#ospButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Office Supply Request">
-               <font>
-                  <Font name="Roboto Bold" size="16.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="fedButton" onAction="#fedButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Furniture Request">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="mdButton" onAction="#mdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Meal Delivery Request">
-               <font>
-                  <Font name="Roboto Bold" size="16.0" />
-               </font>
-            </MFXButton>
+            <StackPane prefHeight="50.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+               <children>
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request">
+                     <font>
+                        <Font name="Roboto Bold" size="28.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <VBox spacing="24.0">
+               <children>
+                  <MFXButton fx:id="ccrButton" onAction="#ccrButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Conference Room Request">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="frdButton" onAction="#frdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Flower Delivery Request">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="ospButton" onAction="#ospButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Office Supply Request">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="fedButton" onAction="#fedButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Furniture Request">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="mdButton" onAction="#mdButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Meal Delivery Request">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font></MFXButton>
+                  <MFXButton fx:id="mspButton" onAction="#mspButtonClicked" prefHeight="50.0" prefWidth="475.0" rippleColor="#e5e5e5" style="-fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" styleClass="mfx-button" text="New Medical Supply Request">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </MFXButton>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
