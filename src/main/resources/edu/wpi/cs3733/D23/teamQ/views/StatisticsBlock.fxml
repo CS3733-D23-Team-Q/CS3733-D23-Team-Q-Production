@@ -13,7 +13,7 @@
           <children>
               <MFXButton fx:id="statistics" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#statisticsEntered" onMouseExited="#statisticsExited" prefHeight="54.0" prefWidth="240.0" text="Statistics">
                   <graphic>
-                      <ImageView fx:id="statisticsIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fx:id="statisticsIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../Statistics.png" />
                           </image>

@@ -6,13 +6,13 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
 public class MealDeliveryRequestDisplayController {
 
@@ -25,28 +25,21 @@ public class MealDeliveryRequestDisplayController {
   @FXML MFXButton backButton;
 
   @FXML MFXButton updateButton;
-  @FXML MFXFilterComboBox assigneeField;
-  @FXML MFXFilterComboBox roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
-  ObservableList<String> timeList =
-      FXCollections.observableArrayList(
-          "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00",
-          "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00",
-          "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
-          "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
-          "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
-  @FXML MFXFilterComboBox timeField;
+  @FXML MFXTextField timeField;
   @FXML MFXTextField specialInstructionsField;
 
-  @FXML MFXFilterComboBox drinkField;
-  @FXML MFXFilterComboBox entreeField;
-  @FXML MFXFilterComboBox sideField;
+  @FXML ChoiceBox drinkField;
+  @FXML ChoiceBox entreeField;
+  @FXML ChoiceBox sideField;
 
   @FXML
   public void initialize() {
-    timeField.setItems(timeList);
-    assigneeField.setText(ListServiceRequestController.getMealRequest().getAssignee());
-    roomNumberField.setText(ListServiceRequestController.getMealRequest().getNode().toString());
+
+    assigneeField.setValue(ListServiceRequestController.getMealRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getMealRequest().getNode());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getMealRequest().getDate().getYear(),
@@ -55,9 +48,9 @@ public class MealDeliveryRequestDisplayController {
     timeField.setText(ListServiceRequestController.getMealRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getMealRequest().getSpecialInstructions());
-    drinkField.setText(ListServiceRequestController.getMealRequest().getDrink());
-    entreeField.setText(ListServiceRequestController.getMealRequest().getEntree());
-    sideField.setText(ListServiceRequestController.getMealRequest().getSide());
+    drinkField.setValue(ListServiceRequestController.getMealRequest().getDrink());
+    entreeField.setValue(ListServiceRequestController.getMealRequest().getEntree());
+    sideField.setValue(ListServiceRequestController.getMealRequest().getSide());
   }
 
   @FXML
