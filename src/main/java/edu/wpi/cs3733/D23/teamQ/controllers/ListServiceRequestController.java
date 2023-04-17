@@ -38,6 +38,7 @@ public class ListServiceRequestController {
 
   @FXML
   public void initialize() {
+    String username = LoginController.getLoginUsername();
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
@@ -46,7 +47,12 @@ public class ListServiceRequestController {
     assigne.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assigne"));
     date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
     time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
-    tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
+    if (username == "admin") {
+      tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
+    } else {
+      tableView.setItems(
+          (ObservableList<ServiceRequest>) qdb.retrieveUserServiceRequests(username));
+    }
   }
 
   @FXML

@@ -123,6 +123,10 @@ public class Qdb {
     return serviceRequestTable.getAllRows();
   }
 
+  public List<ServiceRequest> retrieveUserServiceRequests(String user) {
+    return serviceRequestTable.getUserRows(user);
+  }
+
   public ServiceRequest retrieveServiceRequest(int requestID) {
     return serviceRequestTable.retrieveRow(requestID);
   }
