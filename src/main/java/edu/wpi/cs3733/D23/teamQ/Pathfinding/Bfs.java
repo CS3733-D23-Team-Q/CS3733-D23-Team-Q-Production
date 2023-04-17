@@ -115,19 +115,20 @@ public class Bfs {
   //    public static void main(String[] args) {
   // Create some nodes
 
-  public static List<Node> please(Node startNode, Node endNode) {
-    Graph graph = startNode.getGraph(); // Get the graph from the starting node
-    Set<Node> visited = new HashSet<Node>(); // Set to keep track of visited nodes
-    LinkedList<Node> queue = new LinkedList<Node>(); // Queue for BFS traversal
-    visited.add(startNode); // Mark the starting node as visited
-    queue.add(startNode); // Add the starting node to the queue
+  public static LinkedList<Node> please(Node startNode, Node endNode) {
+    Graph graph = startNode.getGraph();
+    Set<Node> visited = new HashSet<Node>();
+    LinkedList<Node> queue = new LinkedList<Node>();
+    visited.add(startNode);
+    queue.add(startNode);
+    LinkedList<Node> path = new LinkedList<Node>();
 
     while (queue.size() != 0) {
-      // Dequeue a node from the queue and print it
+
       startNode = queue.poll();
       System.out.print(startNode.getNodeID() + " ");
+      path.add(startNode);
 
-      // If the dequeued node is the destination node, stop the search
       if (startNode.getNodeID() == endNode.getNodeID()) {
         break;
       }
@@ -141,7 +142,7 @@ public class Bfs {
         }
       }
     }
-    return null;
+    return path;
   }
   //
   //    boolean[] visited = new boolean[graph.size()]; // Array to keep track of visited nodes
