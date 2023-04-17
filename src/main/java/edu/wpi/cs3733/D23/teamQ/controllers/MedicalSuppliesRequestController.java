@@ -30,8 +30,7 @@ public class MedicalSuppliesRequestController {
   @FXML MFXTextField specialInstructionsField;
   @FXML MFXFilterComboBox itemRequestedField;
   ObservableList<String> itemList =
-      FXCollections.observableArrayList(
-          "Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");
+      FXCollections.observableArrayList("tbd1", "tbd2", "tbd3", "tbd4", "tbd5");
   @FXML MFXTextField quantityField;
 
   @FXML Button resetButton;
