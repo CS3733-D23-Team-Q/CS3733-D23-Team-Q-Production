@@ -14,7 +14,6 @@ public class SubmissionController {
         "Request ID : "
             + qdb.retrieveAllServiceRequests()
                 .get(qdb.retrieveAllServiceRequests().size() - 1)
-                .getRequestID()
-            + 1);
+                .getRequestID());
   }
 }

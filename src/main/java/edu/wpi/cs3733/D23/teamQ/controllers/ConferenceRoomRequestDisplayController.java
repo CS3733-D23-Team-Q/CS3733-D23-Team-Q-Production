@@ -51,9 +51,9 @@ public class ConferenceRoomRequestDisplayController implements IController {
         ListServiceRequestController.getConferenceRequest().getNode().toString());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth() + 1,
-            ListServiceRequestController.getConferenceRequest().getDate().getDate()));
+            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
+            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
+            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     foodField.setText(ListServiceRequestController.getConferenceRequest().getFoodChoice());
     specialInstructionsField.setText(
