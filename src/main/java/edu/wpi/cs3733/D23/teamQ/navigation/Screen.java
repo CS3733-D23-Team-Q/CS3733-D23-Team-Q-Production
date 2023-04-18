@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.navigation;
 
 public enum Screen {
   ROOT("views/Root.fxml", "Root"),
-  HOME("views/Home.fxml", "Home"),
+  HOME("views/newHome.fxml", "Home"),
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),
@@ -48,6 +48,9 @@ public enum Screen {
   DIRECTORY("views/Directory.fxml", "Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
+
+  MAPEDITORHELP("views/MapEditorHelp.fxml", "Help"),
+
   OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
 
   private final String filename;

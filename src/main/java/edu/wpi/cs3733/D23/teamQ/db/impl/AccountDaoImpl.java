@@ -78,7 +78,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
         accounts.get(index).setSecurityQuestion1(newq1);
         accounts.get(index).setSecurityQuestion2(newq2);
         accounts.get(index).setSecurityAnswer1(newa1);
-        accounts.get(index).setSecurityAnswer1(newa2);
+        accounts.get(index).setSecurityAnswer2(newa2);
         accounts.get(index).setActive(newActive);
         accounts.get(index).setIDNum(newID);
         accounts.get(index).setFirstName(newFN);
