@@ -7,37 +7,49 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 public class Qdb {
+  private AccountDaoImpl accountTable;
 
-  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  public LocationDaoImpl locationTable;
 
-  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+  public NodeDaoImpl nodeTable;
+  public EdgeDaoImpl edgeTable;
+  public MoveDaoImpl moveTable;
 
-  private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
-  private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private ConferenceRequestDaoImpl conferenceRequestTable =
-      ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private FlowerRequestDaoImpl flowerRequestTable =
-      FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private MealRequestDaoImpl mealRequestTable =
-      MealRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private FurnitureRequestDaoImpl furnitureRequestTable =
-      FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private PatientTransportRequestDaoImpl patientTransportRequestTable =
-      PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable =
-      OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable =
-      MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
+  private QuestionDaoImpl questionTable;
+
+  private ConferenceRequestDaoImpl conferenceRequestTable;
+  private FlowerRequestDaoImpl flowerRequestTable;
+  private MealRequestDaoImpl mealRequestTable;
+  private FurnitureRequestDaoImpl furnitureRequestTable;
+  private PatientTransportRequestDaoImpl patientTransportRequestTable;
+  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
+  private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
+  private ServiceRequestDaoImpl serviceRequestTable;
 
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
     if (single_instance == null) single_instance = new Qdb();
     return single_instance;
+  }
+
+  private Qdb() {
+    accountTable = AccountDaoImpl.getInstance();
+    locationTable = LocationDaoImpl.getInstance();
+    nodeTable = NodeDaoImpl.getInstance(locationTable);
+    edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+    moveTable = MoveDaoImpl.getInstance(nodeTable);
+    questionTable = QuestionDaoImpl.getInstance();
+    conferenceRequestTable = ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
+    flowerRequestTable = FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
+    mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
+    furnitureRequestTable = FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
+    patientTransportRequestTable =
+        PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
+    officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+    medicalSuppliesRequestTable =
+        MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+    serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
   }
 
   public Account retrieveAccount(String username) {

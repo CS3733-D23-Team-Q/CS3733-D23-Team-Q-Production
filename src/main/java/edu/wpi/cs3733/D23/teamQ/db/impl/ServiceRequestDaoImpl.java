@@ -1,10 +1,8 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
-import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ServiceRequestDaoImpl {
-  private ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
+  private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
 
@@ -66,16 +64,8 @@ public class ServiceRequestDaoImpl {
   public List<ServiceRequest> getUserRows(String user) {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
-      if (serviceRequests.get(i).getRequester().equals(user)
-          || serviceRequests
-              .get(i)
-              .getAssignee()
-              .equals(
-                  Qdb.getInstance().retrieveAccount(user).getFirstName()
-                      + " "
-                      + Qdb.getInstance().retrieveAccount(user).getLastName()
-                      + ", "
-                      + Qdb.getInstance().retrieveAccount(user).getTitle())) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          || serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
         list.add(serviceRequests.get(i));
       }
     }
