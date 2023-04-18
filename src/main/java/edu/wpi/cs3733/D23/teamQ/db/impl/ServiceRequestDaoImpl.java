@@ -93,7 +93,6 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
-
   /**
    * deletes medicalSuppliesRequest from list of medicalSuppliesRequests
    *
