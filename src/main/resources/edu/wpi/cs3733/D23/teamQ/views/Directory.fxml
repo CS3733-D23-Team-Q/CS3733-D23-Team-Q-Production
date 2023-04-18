@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -40,6 +41,9 @@
                      </font>
                   </Text>
                </children>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
             </StackPane>
          </children>
       </HBox>

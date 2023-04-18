@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -37,10 +38,16 @@
                     <children>
                         <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Directory">
                             <font>
-                                <Font name="Roboto Bold" size="28.0" />
+                                <Font name="Roboto Bold" size="24.0" />
                             </font>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
                         </Text>
                     </children>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
                 </StackPane>
             </children>
         </HBox>
@@ -65,4 +72,3 @@
         </HBox>
     </children>
 </GridPane>
-
