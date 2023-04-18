@@ -29,7 +29,6 @@ public class LoginController {
   static String user;
   Alert alert = new Alert();
   Qdb qdb = Qdb.getInstance();
-  //  GesturePane gpane;
   @FXML Label loginAlert;
   @FXML ImageView alertImage;
   @FXML MFXTextField usernameField;
