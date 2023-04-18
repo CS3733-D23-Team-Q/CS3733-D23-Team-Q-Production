@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.Graph;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Node {
   private static int idCounter = 0;
   private int weight;
   Node parent = null;
+  private Graph graph;
 
   public Node(int nodeID, int xCoord, int yCoord, String floor, String building, Location l) {
     this.nodeID = nodeID;
@@ -30,6 +32,7 @@ public class Node {
     this.floor = floor;
     this.building = building;
     this.location = l;
+    this.graph = graph;
 
     String x = Integer.toString(xCoord);
     String y = Integer.toString(yCoord);
@@ -42,6 +45,7 @@ public class Node {
     this.setYCoord(yCoord);
     this.setNodeID(nodeID);
     this.edges = new ArrayList<Edge>();
+    this.graph = graph;
   }
 
   public String toString() {

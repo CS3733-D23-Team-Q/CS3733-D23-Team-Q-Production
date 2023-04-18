@@ -16,7 +16,18 @@ public class AStar implements IPathfinding {
     int nodeID = n.getNodeID();
     List<Edge> edges = qdb.getEdges(nodeID);
     n.setEdges(edges);
+
+    //    for (Edge e : edges) {
+    //      Edge temp = null;
+    //      temp.setStartNode(e.getEndNode());
+    //      temp.setEndNode(e.getStartNode());
+    //      edges.add(temp);
+    //    }
+    //    //    n.setEdges(addEdges(););
+    //    n.setEdges(edges);
   }
+
+  //  public static void addEdges(Node n, Node n1) {}
 
   public static double heuristic(Node n, Node target) {
     int dx = Math.abs(n.getXCoord() - target.getXCoord());
