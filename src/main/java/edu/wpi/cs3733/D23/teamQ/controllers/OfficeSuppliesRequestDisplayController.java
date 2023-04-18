@@ -69,13 +69,13 @@ public class OfficeSuppliesRequestDisplayController {
     OfficeSuppliesRequest newOR =
         new OfficeSuppliesRequest(
             ListServiceRequestController.getOfficeRequest().getRequestID(),
-            qdb.retrieveAccount(LoginController.getUsername()),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
             ListServiceRequestController.getOfficeRequest().getNode(),
+            qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) itemRequestedField.getValue(),
             Integer.parseInt((String) quantityField.getText()));
 

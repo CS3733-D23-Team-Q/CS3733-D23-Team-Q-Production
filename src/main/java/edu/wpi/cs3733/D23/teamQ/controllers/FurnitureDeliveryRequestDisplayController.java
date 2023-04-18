@@ -66,14 +66,14 @@ public class FurnitureDeliveryRequestDisplayController {
     FurnitureRequest newFurR =
         new FurnitureRequest(
             ListServiceRequestController.getFurnitureRequest().getRequestID(),
-            qdb.retrieveAccount(LoginController.getUsername()),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
             ListServiceRequestController.getFurnitureRequest().getNode(),
-            (String) specialInstructionsField.getText(),
+            qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            (String) furnitureChoiceField.getValue());
+            0,
+            furnitureChoiceField.getValue().toString());
 
     qdb.updateFurnitureRequest(
         ListServiceRequestController.getFurnitureRequest().getRequestID(), newFurR);

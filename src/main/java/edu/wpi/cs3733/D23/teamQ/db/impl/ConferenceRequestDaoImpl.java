@@ -133,9 +133,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return conferenceRequests.add(request);
+    return populate();
   }
 
   @Override
@@ -151,10 +149,10 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
                 accountTable.retrieveRow(rst.getString("requester")),
                 accountTable.retrieveRow(rst.getString("assignee")),
-                rst.getInt("progress"),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("foodChoice")));
       }
       conn.close();

@@ -10,7 +10,6 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
   private List<FurnitureRequest> furnitureRequests = new ArrayList<FurnitureRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
-  private int nextID = 0;
   private static FurnitureRequestDaoImpl single_instance = null;
 
   public static synchronized FurnitureRequestDaoImpl getInstance(
@@ -25,9 +24,6 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (furnitureRequests.size() != 0) {
-      nextID = furnitureRequests.get(furnitureRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -132,9 +128,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return furnitureRequests.add(request);
+    return populate();
   }
 
   @Override
@@ -147,13 +141,13 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
         furnitureRequests.add(
             new FurnitureRequest(
                 rst.getInt("requestID"),
-                accountTable.retrieveRow(rst.getString("requester")),
-                rst.getInt("progress"),
-                accountTable.retrieveRow(rst.getString("assignee")),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("item")));
       }
       conn.close();

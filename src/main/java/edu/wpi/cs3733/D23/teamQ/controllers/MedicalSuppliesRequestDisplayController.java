@@ -69,13 +69,13 @@ public class MedicalSuppliesRequestDisplayController {
     MedicalSuppliesRequest newMSP =
         new MedicalSuppliesRequest(
             ListServiceRequestController.getMedicalRequest().getRequestID(),
-            ListServiceRequestController.getMedicalRequest().getRequester(),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
             ListServiceRequestController.getMedicalRequest().getNode(),
+            ListServiceRequestController.getMedicalRequest().getRequester(),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) itemRequestedField.getValue(),
             Integer.parseInt((String) quantityField.getText()));
 

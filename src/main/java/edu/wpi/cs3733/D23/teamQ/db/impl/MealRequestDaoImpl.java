@@ -8,7 +8,6 @@ import java.util.List;
 
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
@@ -24,9 +23,6 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (mealRequests.size() != 0) {
-      nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -134,9 +130,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return mealRequests.add(request);
+    return populate();
   }
 
   @Override
@@ -149,13 +143,13 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
         mealRequests.add(
             new MealRequest(
                 rst.getInt("requestID"),
-                accountTable.retrieveRow(rst.getString("requester")),
-                rst.getInt("progress"),
-                accountTable.retrieveRow(rst.getString("assignee")),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("drink"),
                 rst.getString("entree"),
                 rst.getString("side")));
