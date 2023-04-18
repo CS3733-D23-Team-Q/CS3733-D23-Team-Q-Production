@@ -66,9 +66,9 @@ public class FurnitureDeliveryRequestDisplayController {
     FurnitureRequest newFurR =
         new FurnitureRequest(
             ListServiceRequestController.getFurnitureRequest().getRequestID(),
-            "temp requester",
+            qdb.retrieveAccount(LoginController.getUsername()),
             0,
-            "temp assignee",
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             ListServiceRequestController.getFurnitureRequest().getNode(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
