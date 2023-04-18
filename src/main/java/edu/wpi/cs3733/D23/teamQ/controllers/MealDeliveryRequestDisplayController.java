@@ -72,13 +72,13 @@ public class MealDeliveryRequestDisplayController {
     MealRequest newMR =
         new MealRequest(
             ListServiceRequestController.getMealRequest().getRequestID(),
+            ListServiceRequestController.getMealRequest().getNode(),
             ListServiceRequestController.getMealRequest().getRequester(),
-            0,
             qdb.retrieveAccount(assigneeField.getValue().toString()),
-            ListServiceRequestController.getConferenceRequest().getNode(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) drinkField.getValue(),
             (String) entreeField.getValue(),
             (String) sideField.getValue());

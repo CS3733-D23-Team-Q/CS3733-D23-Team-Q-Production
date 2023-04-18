@@ -75,14 +75,13 @@ public class FlowerRequestDisplayController {
     FlowerRequest newFR =
         new FlowerRequest(
             ListServiceRequestController.getFlowerRequest().getRequestID(),
-            ListServiceRequestController.getFlowerRequest().getRequester(),
-            0,
-            qdb.retrieveAccount(assigneeField.getText()),
             ListServiceRequestController.getFlowerRequest().getNode(),
-            (String) specialInstructionsField.getText(),
+            ListServiceRequestController.getFlowerRequest().getRequester(),
+            qdb.retrieveAccount(assigneeField.getText()),
+            specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            "",
+            0,
             (String) flowerTypeField.getValue(),
             Integer.parseInt((String) bouquetChoiceField.getText()));
 

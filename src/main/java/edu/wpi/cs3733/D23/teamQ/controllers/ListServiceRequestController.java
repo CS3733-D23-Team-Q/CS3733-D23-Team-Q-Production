@@ -44,7 +44,8 @@ public class ListServiceRequestController {
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
     specialInstructions.setCellValueFactory(
         new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
-    assigne.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assignee"));
+    assigne.setCellValueFactory(
+        new PropertyValueFactory<ServiceRequest, String>("assigneeUsername"));
     date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
     time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());

@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -77,26 +79,22 @@ public class MealDeliveryRequestController {
 
   @FXML
   public void submitButtonClicked() {
-    /*
-        Qdb qdb = Qdb.getInstance();
+    Qdb qdb = Qdb.getInstance();
 
-    //    MealRequest newMR =
-    //        new MealRequest(
-    //            0,
-    //            "temp user",
-    //            0,
-    //            assigneeField.getText(),
-    //            qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
-    //            specialInstructionsField.getText(),
-    //                // for date
-    //                // for time
-    //            drinkField.getText(),
-    //            entreeField.getText(),
-    //            sideField.getText());
+    MealRequest newMR =
+        new MealRequest(
+            qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
+            qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
+            specialInstructionsField.getText(),
+            Date.valueOf(dateField.getValue()),
+            (String) timeField.getValue(),
+            0,
+            drinkField.getText(),
+            entreeField.getText(),
+            sideField.getText());
 
-        // qdb.addMealRequest(newMR);
-        Navigation.navigate(Screen.HOME);
-
-         */
+    qdb.addMealRequest(newMR);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 }

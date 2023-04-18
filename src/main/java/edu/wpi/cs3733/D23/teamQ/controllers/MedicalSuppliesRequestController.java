@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
@@ -67,22 +66,18 @@ public class MedicalSuppliesRequestController {
 
   @FXML
   public void submitButtonClicked() {
-
     Qdb qdb = Qdb.getInstance();
-
     MedicalSuppliesRequest newMSR =
         new MedicalSuppliesRequest(
-            ListServiceRequestController.getMedicalRequest().getRequestID(),
+            qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
             qdb.retrieveAccount(LoginController.getUsername()),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
-            (Node) roomNumberField.getValue(),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            (String) itemRequestedField.getValue(),
-            Integer.parseInt((String) quantityField.getText()));
-
+            0,
+            itemRequestedField.getValue().toString(),
+            Integer.parseInt(quantityField.getText()));
     qdb.addMedicalSuppliesRequest(newMSR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }

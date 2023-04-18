@@ -10,18 +10,18 @@ import javafx.collections.ObservableList;
 
 public class AccountDaoImpl implements GenDao<Account, String> {
   private static AccountDaoImpl single_instance = null;
+  private List<Account> accounts = new ArrayList<Account>();
 
   public static synchronized AccountDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new AccountDaoImpl();
-
+    if (single_instance == null) {
+      single_instance = new AccountDaoImpl();
+    }
     return single_instance;
   }
 
   private AccountDaoImpl() {
     populate();
   }
-
-  private List<Account> accounts = new ArrayList<Account>();
 
   public Account retrieveRow(String uname) {
     int index = this.getIndex(uname);
@@ -78,7 +78,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
         accounts.get(index).setSecurityQuestion1(newq1);
         accounts.get(index).setSecurityQuestion2(newq2);
         accounts.get(index).setSecurityAnswer1(newa1);
-        accounts.get(index).setSecurityAnswer1(newa2);
+        accounts.get(index).setSecurityAnswer2(newa2);
         accounts.get(index).setActive(newActive);
         accounts.get(index).setIDNum(newID);
         accounts.get(index).setFirstName(newFN);
@@ -261,7 +261,15 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   public ObservableList<String> getAllNames() {
     ObservableList<String> names = FXCollections.observableArrayList();
     for (Account p : accounts) {
-      names.add(p.getFirstName() + " " + p.getLastName() + ", " + p.getTitle());
+      names.add(
+          p.getUsername()
+              + ", ("
+              + p.getFirstName()
+              + " "
+              + p.getLastName()
+              + ", "
+              + p.getTitle()
+              + ")");
     }
     return names;
   }

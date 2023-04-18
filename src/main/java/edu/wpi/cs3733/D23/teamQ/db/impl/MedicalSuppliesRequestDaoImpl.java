@@ -9,7 +9,6 @@ import java.util.List;
 public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequest, Integer> {
   private List<MedicalSuppliesRequest> medicalSuppliesRequests =
       new ArrayList<MedicalSuppliesRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MedicalSuppliesRequestDaoImpl single_instance = null;
@@ -26,9 +25,6 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (medicalSuppliesRequests.size() != 0) {
-      nextID = medicalSuppliesRequests.get(medicalSuppliesRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -133,9 +129,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return medicalSuppliesRequests.add(request);
+    return populate();
   }
 
   @Override
@@ -148,13 +142,13 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
         medicalSuppliesRequests.add(
             new MedicalSuppliesRequest(
                 rst.getInt("requestID"),
-                accountTable.retrieveRow(rst.getString("requester")),
-                rst.getInt("progress"),
-                accountTable.retrieveRow(rst.getString("assignee")),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("item"),
                 rst.getInt("quantity")));
       }

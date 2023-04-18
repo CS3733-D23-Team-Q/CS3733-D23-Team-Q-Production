@@ -16,34 +16,34 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
 
   public MealRequest(
       int requestID,
-      Account requester,
-      int progress,
-      Account assignee,
       Node node,
+      Account requester,
+      Account assignee,
       String specialInstructions,
       Date date,
       String time,
+      int progress,
       String drink,
       String entree,
       String side) {
-    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
+    super(0, node, assignee, requester, specialInstructions, date, time, progress);
     this.drink = drink;
     this.entree = entree;
     this.side = side;
   }
 
   public MealRequest(
-      Account requester,
-      int progress,
-      Account assignee,
       Node node,
+      Account requester,
+      Account assignee,
       String specialInstructions,
       Date date,
       String time,
+      int progress,
       String drink,
       String entree,
       String side) {
-    super(0, requester, progress, assignee, node, specialInstructions, date, time);
+    super(0, node, assignee, requester, specialInstructions, date, time, progress);
     this.drink = drink;
     this.entree = entree;
     this.side = side;

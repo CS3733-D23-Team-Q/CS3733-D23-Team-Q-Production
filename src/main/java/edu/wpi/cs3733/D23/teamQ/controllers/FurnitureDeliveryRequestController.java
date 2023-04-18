@@ -65,18 +65,16 @@ public class FurnitureDeliveryRequestController {
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-
     FurnitureRequest newFR =
         new FurnitureRequest(
+            qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
             qdb.retrieveAccount(LoginController.getLoginUsername()),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
-            qdb.retrieveNode(Integer.parseInt(roomNumberField.getValue().toString())),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             itemRequestedField.getValue().toString());
-
     qdb.addFurnitureRequest(newFR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }

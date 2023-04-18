@@ -77,11 +77,11 @@ public class ConferenceRoomRequestDisplayController implements IController {
             ListServiceRequestController.getConferenceRequest().getRequestID(),
             ListServiceRequestController.getConferenceRequest().getNode(),
             ListServiceRequestController.getConferenceRequest().getRequester(),
-            qdb.retrieveAccount((String) assigneeField.getValue()),
-            0,
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) foodField.getValue());
     qdb.updateConferenceRequest(
         ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);

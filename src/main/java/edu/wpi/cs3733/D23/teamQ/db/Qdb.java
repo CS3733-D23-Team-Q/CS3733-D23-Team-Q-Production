@@ -31,14 +31,7 @@ public class Qdb {
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable =
       MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
   private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(
-          conferenceRequestTable,
-          flowerRequestTable,
-          mealRequestTable,
-          furnitureRequestTable,
-          officeSuppliesRequestTable,
-          patientTransportRequestTable,
-          medicalSuppliesRequestTable);
+      ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
 
   private static Qdb single_instance = null;
 
@@ -92,6 +85,7 @@ public class Qdb {
   }
 
   public boolean deleteConferenceRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return conferenceRequestTable.deleteRow(requestID);
   }
 
@@ -112,6 +106,7 @@ public class Qdb {
   }
 
   public boolean deleteFlowerRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return flowerRequestTable.deleteRow(requestID);
   }
 
@@ -264,6 +259,7 @@ public class Qdb {
   }
 
   public boolean deleteMealRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return mealRequestTable.deleteRow(requestID);
   }
 
@@ -284,6 +280,7 @@ public class Qdb {
   }
 
   public boolean deleteFurnitureRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return furnitureRequestTable.deleteRow(requestID);
   }
 
@@ -304,6 +301,7 @@ public class Qdb {
   }
 
   public boolean deletePatientTransportRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return patientTransportRequestTable.deleteRow(requestID);
   }
 
@@ -324,6 +322,7 @@ public class Qdb {
   }
 
   public boolean deleteOfficeSuppliesRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return officeSuppliesRequestTable.deleteRow(requestID);
   }
 
@@ -335,8 +334,8 @@ public class Qdb {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
 
-  public int getNodeFromLocation(String lName) {
-    return locationTable.getNodeFromLocation(lName);
+  public Node getNodeFromLocation(String lName) {
+    return nodeTable.retrieveRow(locationTable.getNodeFromLocation(lName));
   }
 
   public String getEmailWithAUsername(String username) {
@@ -352,6 +351,7 @@ public class Qdb {
   }
 
   public boolean deleteMedicalSuppliesRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return medicalSuppliesRequestTable.deleteRow(requestID);
   }
 
@@ -361,5 +361,10 @@ public class Qdb {
 
   public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
     return (ArrayList<MedicalSuppliesRequest>) medicalSuppliesRequestTable.getAllRows();
+  }
+
+  public ServiceRequest retrieveLastRequest() {
+    serviceRequestTable.populate();
+    return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
   }
 }
