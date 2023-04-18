@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ProfilePageController">
+    <children>
+        <StackPane alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="50.0" prefWidth="475" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+            <children>
+                <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" StackPane.alignment="CENTER">
+                    <font>
+                        <Font name="Roboto Bold" size="28.0" />
+                    </font>
+                </Text>
+            </children>
+         <VBox.margin>
+            <Insets left="10.0" top="10.0" />
+         </VBox.margin>
+        </StackPane>
+      <VBox>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin>
+         <children>
+            <Label text="First Name">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="First_Name_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="first name here" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Last Name">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="Last_Name_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="last name here" />
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Title">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="Title_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="title here" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Email">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="Email_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="email here" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Phone Number">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="Phone_Number_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="phone here" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Security Question 1">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="question1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 1" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Security Answer 1">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="answer1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 1" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Security Question 2">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="question2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 2" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Security Answer 2">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="answer2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 2" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <MFXButton fx:id="ProfilePage_Edit_Button" onAction="#EditPressed" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #012d5a;" text="Edit" textFill="WHITE">
+         <VBox.margin>
+            <Insets left="10.0" top="20.0" />
+         </VBox.margin>
+      </MFXButton>
+    </children>
+</VBox>

@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.fxml.FXML;
@@ -26,6 +27,13 @@ public class ProfilePageController implements IController {
   @FXML private Label Title_Display;
 
   @FXML private Label Username_Display;
+
+  @FXML private Label question1Display;
+  @FXML private Label answer1Display;
+  @FXML private Label question2Display;
+  @FXML private Label answer2Display;
+
+
   private Button ProfilePage_Home_Button;
 
   @FXML
@@ -36,33 +44,40 @@ public class ProfilePageController implements IController {
 
     String email = LoginController.getLoginEmail();
 
+    Account account = qdb.retrieveAccount(username);
+
     Qdb qdb = Qdb.getInstance();
 
-    this.ID_Number_Display.setText(String.valueOf(qdb.retrieveAccount(username).getIDNum()));
-    if (qdb.retrieveAccount(username).getFirstName() == null) {
+    if (account.getFirstName() == null) {
       this.First_Name_Display.setText("empty");
     } else {
-      this.First_Name_Display.setText(qdb.retrieveAccount(username).getFirstName());
+      this.First_Name_Display.setText(account.getFirstName());
     }
-    if (qdb.retrieveAccount(username).getLastName() == null) {
+
+    if (account.getLastName() == null) {
       this.Last_Name_Display.setText("empty");
     } else {
-      this.Last_Name_Display.setText(qdb.retrieveAccount(username).getLastName());
+      this.Last_Name_Display.setText(account.getLastName());
     }
+
     this.Email_Display.setText(email);
-    if (qdb.retrieveAccount(username).getTitle() == null) {
+    if (account.getTitle() == null) {
       this.Title_Display.setText("empty");
     } else {
-      this.Title_Display.setText(qdb.retrieveAccount(username).getTitle());
+      this.Title_Display.setText(account.getTitle());
     }
-    if (qdb.retrieveAccount(username).getPhoneNumber() == 0) {
+    if (account.getPhoneNumber() == 0) {
       this.Phone_Number_Display.setText("empty");
     } else {
       this.Phone_Number_Display.setText(
-          String.valueOf(qdb.retrieveAccount(username).getPhoneNumber()));
+          String.valueOf(account.getPhoneNumber()));
     }
 
     this.Username_Display.setText(username);
+
+
+
+
 
     //    this.ProfilePage_Edit_Button.setOnMouseClicked(
     //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
