@@ -24,10 +24,6 @@ public class DFS implements IPathfinding {
       if (current.getEdges().size() == 0) {
         System.out.println("This node is a dead end " + current);
       }
-      System.out.println();
-      System.out.println("The path so far is " + path);
-      System.out.println();
-      System.out.println("The node we are at is " + current.getNodeID());
       ArrayList<Node> nodesAvailable = new ArrayList<Node>();
       for (Edge edgePath : current.getEdges()) {
         nodesAvailable.add(edgePath.getStartNode());
@@ -41,13 +37,6 @@ public class DFS implements IPathfinding {
         openList.remove(current);
         path.add(current);
         visitedList.add(current);
-        System.out.println();
-        System.out.println("current node is " + current);
-        System.out.println();
-        // System.out.println("Edges contain " + current.getEdges());
-        System.out.println();
-        System.out.println(
-            "Added a end node with ID" + current.getEdges().get(0).getEndNode().getNodeID());
         nextChosen = true;
       } else if (!visitedList.contains(current.getEdges().get(0).getStartNode())
           && !current.getEdges().isEmpty()
@@ -57,13 +46,6 @@ public class DFS implements IPathfinding {
         openList.remove(current);
         path.add(current);
         visitedList.add(current);
-        System.out.println();
-        System.out.println("current node is " + current);
-        System.out.println();
-        //  System.out.println("Edges contain " + current.getEdges());
-        System.out.println();
-        System.out.println(
-            "Added a start node with ID" + current.getEdges().get(0).getStartNode().getNodeID());
         nextChosen = true;
       } else {
         for (Node backup : nodesAvailable) {
@@ -74,8 +56,6 @@ public class DFS implements IPathfinding {
             openList.remove(current);
             path.add(current);
             visitedList.add(current);
-            System.out.println();
-            System.out.println("Backup was triggered ");
             nextChosen = true;
           }
         }
@@ -97,8 +77,6 @@ public class DFS implements IPathfinding {
             openList.remove(current);
             path.add(current);
             visitedList.add(current);
-            System.out.println();
-            System.out.println("Backup-backup was triggered ");
             nextChosen = true;
           }
         }
