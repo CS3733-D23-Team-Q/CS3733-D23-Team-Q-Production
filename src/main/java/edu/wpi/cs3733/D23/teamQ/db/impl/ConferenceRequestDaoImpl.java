@@ -133,9 +133,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return conferenceRequests.add(request);
+    return populate();
   }
 
   @Override

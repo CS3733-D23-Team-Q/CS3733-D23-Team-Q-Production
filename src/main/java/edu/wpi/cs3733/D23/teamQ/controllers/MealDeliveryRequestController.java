@@ -85,7 +85,7 @@ public class MealDeliveryRequestController {
         new MealRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
             qdb.retrieveAccount(LoginController.getUsername()),
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             (String) timeField.getValue(),
@@ -95,6 +95,6 @@ public class MealDeliveryRequestController {
             sideField.getText());
 
     qdb.addMealRequest(newMR);
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 }

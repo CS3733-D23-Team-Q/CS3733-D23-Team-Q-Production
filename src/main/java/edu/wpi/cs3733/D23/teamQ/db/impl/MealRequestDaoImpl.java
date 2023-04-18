@@ -8,7 +8,6 @@ import java.util.List;
 
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
@@ -24,9 +23,6 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (mealRequests.size() != 0) {
-      nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -134,9 +130,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return mealRequests.add(request);
+    return populate();
   }
 
   @Override

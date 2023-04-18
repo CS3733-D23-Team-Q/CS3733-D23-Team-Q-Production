@@ -9,7 +9,6 @@ import java.util.List;
 public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
   private List<OfficeSuppliesRequest> officeSuppliesRequests =
       new ArrayList<OfficeSuppliesRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
@@ -26,9 +25,6 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (officeSuppliesRequests.size() != 0) {
-      nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -134,9 +130,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return officeSuppliesRequests.add(request);
+    return populate();
   }
 
   @Override

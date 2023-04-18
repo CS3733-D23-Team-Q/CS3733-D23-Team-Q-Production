@@ -10,18 +10,18 @@ import javafx.collections.ObservableList;
 
 public class AccountDaoImpl implements GenDao<Account, String> {
   private static AccountDaoImpl single_instance = null;
+  private List<Account> accounts = new ArrayList<Account>();
 
   public static synchronized AccountDaoImpl getInstance() {
-    if (single_instance == null) single_instance = new AccountDaoImpl();
-
+    if (single_instance == null) {
+      single_instance = new AccountDaoImpl();
+    }
     return single_instance;
   }
 
   private AccountDaoImpl() {
     populate();
   }
-
-  private List<Account> accounts = new ArrayList<Account>();
 
   public Account retrieveRow(String uname) {
     int index = this.getIndex(uname);

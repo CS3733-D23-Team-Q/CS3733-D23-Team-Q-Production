@@ -31,24 +31,13 @@ public class Qdb {
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable =
       MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
   private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(
-          conferenceRequestTable,
-          flowerRequestTable,
-          mealRequestTable,
-          furnitureRequestTable,
-          officeSuppliesRequestTable,
-          patientTransportRequestTable,
-          medicalSuppliesRequestTable);
+      ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
 
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
     if (single_instance == null) single_instance = new Qdb();
     return single_instance;
-  }
-
-  public boolean addServiceRequest(ServiceRequest sr) {
-    return serviceRequestTable.addRow(sr);
   }
 
   public Account retrieveAccount(String username) {
@@ -96,11 +85,11 @@ public class Qdb {
   }
 
   public boolean deleteConferenceRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return conferenceRequestTable.deleteRow(requestID);
   }
 
   public boolean addConferenceRequest(ConferenceRequest cr) {
-    serviceRequestTable.addRow(cr);
     return conferenceRequestTable.addRow(cr);
   }
 
@@ -117,11 +106,11 @@ public class Qdb {
   }
 
   public boolean deleteFlowerRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return flowerRequestTable.deleteRow(requestID);
   }
 
   public boolean addFlowerRequest(FlowerRequest fr) {
-    serviceRequestTable.addRow(fr);
     return flowerRequestTable.addRow(fr);
   }
 
@@ -270,11 +259,11 @@ public class Qdb {
   }
 
   public boolean deleteMealRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return mealRequestTable.deleteRow(requestID);
   }
 
   public boolean addMealRequest(MealRequest mr) {
-    serviceRequestTable.addRow(mr);
     return mealRequestTable.addRow(mr);
   }
 
@@ -291,11 +280,11 @@ public class Qdb {
   }
 
   public boolean deleteFurnitureRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return furnitureRequestTable.deleteRow(requestID);
   }
 
   public boolean addFurnitureRequest(FurnitureRequest fr) {
-    serviceRequestTable.addRow(fr);
     return furnitureRequestTable.addRow(fr);
   }
 
@@ -312,11 +301,11 @@ public class Qdb {
   }
 
   public boolean deletePatientTransportRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return patientTransportRequestTable.deleteRow(requestID);
   }
 
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
-    serviceRequestTable.addRow(ptr);
     return patientTransportRequestTable.addRow(ptr);
   }
 
@@ -333,11 +322,11 @@ public class Qdb {
   }
 
   public boolean deleteOfficeSuppliesRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return officeSuppliesRequestTable.deleteRow(requestID);
   }
 
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
-    serviceRequestTable.addRow(osr);
     return officeSuppliesRequestTable.addRow(osr);
   }
 
@@ -362,15 +351,20 @@ public class Qdb {
   }
 
   public boolean deleteMedicalSuppliesRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return medicalSuppliesRequestTable.deleteRow(requestID);
   }
 
   public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
-    serviceRequestTable.addRow(msr);
     return medicalSuppliesRequestTable.addRow(msr);
   }
 
   public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
     return (ArrayList<MedicalSuppliesRequest>) medicalSuppliesRequestTable.getAllRows();
+  }
+
+  public ServiceRequest retrieveLastRequest() {
+    serviceRequestTable.populate();
+    return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
   }
 }

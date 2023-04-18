@@ -76,8 +76,8 @@ public class MedicalSuppliesRequestController {
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
             0,
-            (String) itemRequestedField.getValue(),
-            Integer.parseInt((String) quantityField.getText()));
+            itemRequestedField.getValue().toString(),
+            Integer.parseInt(quantityField.getText()));
     qdb.addMedicalSuppliesRequest(newMSR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }

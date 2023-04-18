@@ -11,7 +11,6 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
       new ArrayList<PatientTransportRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
-  private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
   public static synchronized PatientTransportRequestDaoImpl getInstance(
@@ -26,9 +25,6 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (patientTransportRequests.size() != 0) {
-      nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -132,9 +128,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return patientTransportRequests.add(request);
+    return populate();
   }
 
   @Override

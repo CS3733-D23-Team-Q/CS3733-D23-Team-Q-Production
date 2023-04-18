@@ -23,7 +23,7 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String time,
       int progress,
       String foodChoice) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
     this.foodChoice = foodChoice;
   }
 
