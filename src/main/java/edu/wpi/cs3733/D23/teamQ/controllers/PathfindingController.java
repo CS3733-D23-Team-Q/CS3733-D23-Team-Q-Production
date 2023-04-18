@@ -211,6 +211,7 @@ public class PathfindingController {
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Node> moveNodes = new ArrayList<>();
     List<Node> floorNodes = new ArrayList<>(); // fNodes
+
     restNodes.removeAll(restNodes);
     deptNodes.removeAll(deptNodes);
     labsNodes.removeAll(labsNodes);
@@ -218,6 +219,12 @@ public class PathfindingController {
     confNodes.removeAll(confNodes);
     retlNodes.removeAll(retlNodes);
     servNodes.removeAll(servNodes);
+
+    l1nodes.removeAll(l1nodes);
+    l2nodes.removeAll(l2nodes);
+    ffnodes.removeAll(ffnodes);
+    sfnodes.removeAll(sfnodes);
+    tfnodes.removeAll(tfnodes);
 
     for (Move m : allMoves) {
       Date d = m.getDate();
@@ -279,6 +286,7 @@ public class PathfindingController {
               + "-fx-background-insets: 0px;");
       parent.getChildren().add(node);
       int index = parent.getChildren().indexOf(node);
+      // System.out.println(index);
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
@@ -320,6 +328,7 @@ public class PathfindingController {
               }
             }
           });
+      // System.out.println(parent.getChildren().size());
       previousNodes.add(node);
       restNodes = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restNodes, index);
       deptNodes = addSpecificNode("\\bDEPT\\b", nodetype, deptNodes, index);
@@ -825,8 +834,8 @@ public class PathfindingController {
   }
 
   public void dateSelected(RadioMenuItem itemSelect) {
-    clearButtonClicked();
     if (itemSelect.isSelected()) {
+      clearButtonClicked();
       date = Date.valueOf(itemSelect.getText());
       refresh();
     }
@@ -855,8 +864,9 @@ public class PathfindingController {
     // unhighlight(restNodes);
     // unhighlight(cafeNodes);
     cfnodes = setCF(cfnodes);
+    // System.out.println(cfnodes.size());
     for (int i = 0; i < cfnodes.size(); i++) {
-      unhighlight(cfnodes.get(i).getValue());
+      unhighlight(cfnodes.get(i).getValue()); // + 1
     }
     highlightedNodes.removeAll(highlightedNodes);
     startSelect.setValue(null);
