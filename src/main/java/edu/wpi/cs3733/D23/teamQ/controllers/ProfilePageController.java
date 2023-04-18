@@ -33,7 +33,6 @@ public class ProfilePageController implements IController {
   @FXML private Label question2Display;
   @FXML private Label answer2Display;
 
-
   private Button ProfilePage_Home_Button;
 
   @FXML
@@ -69,15 +68,17 @@ public class ProfilePageController implements IController {
     if (account.getPhoneNumber() == 0) {
       this.Phone_Number_Display.setText("empty");
     } else {
-      this.Phone_Number_Display.setText(
-          String.valueOf(account.getPhoneNumber()));
+      this.Phone_Number_Display.setText(String.valueOf(account.getPhoneNumber()));
     }
 
     this.Username_Display.setText(username);
 
-
-
-
+    this.question1Display.setText(
+        qdb.retrieveQuestion(account.getSecurityQuestion1()).getQuestion());
+    this.question2Display.setText(
+        qdb.retrieveQuestion(account.getSecurityQuestion2()).getQuestion());
+    this.answer1Display.setText(account.getSecurityAnswer1());
+    this.answer2Display.setText(account.getSecurityAnswer2());
 
     //    this.ProfilePage_Edit_Button.setOnMouseClicked(
     //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
