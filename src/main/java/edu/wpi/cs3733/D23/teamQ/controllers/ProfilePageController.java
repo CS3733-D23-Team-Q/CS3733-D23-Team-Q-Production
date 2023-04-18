@@ -41,11 +41,12 @@ public class ProfilePageController implements IController {
     // DO ONE FOR PROFILE IMAGE AS WELL NEXT TIME
     String username = LoginController.getLoginUsername();
 
-    String email = LoginController.getLoginEmail();
-
     Account account = qdb.retrieveAccount(username);
 
     Qdb qdb = Qdb.getInstance();
+
+    System.out.println(account.getSecurityAnswer1());
+    System.out.println(account.getSecurityAnswer2());
 
     if (account.getFirstName() == null) {
       this.First_Name_Display.setText("empty");
@@ -59,7 +60,7 @@ public class ProfilePageController implements IController {
       this.Last_Name_Display.setText(account.getLastName());
     }
 
-    this.Email_Display.setText(email);
+    this.Email_Display.setText(account.getEmail());
     if (account.getTitle() == null) {
       this.Title_Display.setText("empty");
     } else {
