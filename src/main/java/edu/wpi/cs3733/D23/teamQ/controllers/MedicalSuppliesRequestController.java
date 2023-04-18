@@ -29,7 +29,8 @@ public class MedicalSuppliesRequestController {
   @FXML MFXTextField specialInstructionsField;
   @FXML MFXFilterComboBox itemRequestedField;
   ObservableList<String> itemList =
-      FXCollections.observableArrayList("bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
+      FXCollections.observableArrayList(
+          "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
   @FXML MFXTextField quantityField;
 
   @FXML Button resetButton;
