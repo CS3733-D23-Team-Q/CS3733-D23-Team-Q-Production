@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -55,7 +56,7 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e2e2e2" height="116.0" stroke="BLACK" strokeType="INSIDE" width="606.0">
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#e2e2e2" height="116.0" stroke="BLACK" strokeType="INSIDE" width="606.0">
                                  <StackPane.margin>
                                     <Insets top="25.0" />
                                  </StackPane.margin>
@@ -67,6 +68,7 @@
                               </Label>
                            </children>
                         </StackPane>
+                        <DatePicker prefHeight="218.0" prefWidth="584.0" />
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -74,7 +76,7 @@
                   </VBox>
                   <StackPane prefHeight="150.0" prefWidth="289.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4b4b4" height="529.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="289.0" />
+                        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="529.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="289.0" />
                         <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
                            <padding>
                               <Insets bottom="500.0" />
@@ -102,7 +104,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="289.0" style="-fx-background-color: #fff8a8; -fx-border-color: #fff8a8;">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff8a8" height="523.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="271.0" />
+                        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#fff8a8" height="523.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="271.0" />
                         <Label prefHeight="537.0" prefWidth="35.0" text="Notes" textAlignment="CENTER">
                            <StackPane.margin>
                               <Insets />
