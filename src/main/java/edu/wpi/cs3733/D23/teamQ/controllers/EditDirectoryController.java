@@ -2,18 +2,20 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
-import javafx.beans.property.SimpleLongProperty;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-public class DirectoryController {
+public class EditDirectoryController {
 
   @FXML private TableColumn<edu.wpi.cs3733.D23.teamQ.db.obj.Account, String> Email;
 
@@ -26,8 +28,6 @@ public class DirectoryController {
   @FXML private TableColumn<Account, String> Title;
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
-
-  Account accountSelected;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
@@ -86,8 +86,8 @@ public class DirectoryController {
         new Callback<TableColumn.CellDataFeatures<Account, Number>, ObservableValue<Number>>() {
           @Override
           public ObservableValue<Number> call(TableColumn.CellDataFeatures<Account, Number> param) {
-            SimpleLongProperty phoneNumbers =
-                new SimpleLongProperty(param.getValue().getPhoneNumber());
+            SimpleIntegerProperty phoneNumbers =
+                new SimpleIntegerProperty(param.getValue().getPhoneNumber());
             return phoneNumbers;
           }
         });
@@ -96,5 +96,30 @@ public class DirectoryController {
     account.setItems(Accounts());
   }
 
-  public void tableClicked(MouseEvent mouseEvent) {}
+  public void mapClicked(ActionEvent actionEvent) {}
+
+  public void edgeClicked(ActionEvent actionEvent) {}
+
+  public void locationClicked(ActionEvent actionEvent) {}
+
+  public void moveClicked(ActionEvent actionEvent) {}
+
+  public void BackClicked(ActionEvent actionEvent) {}
+
+  public void homeClicked(ActionEvent actionEvent) {}
+
+  public void exitClicked(ActionEvent actionEvent) {}
+
+  @FXML
+  void DoneClicked(ActionEvent event) {
+    Navigation.navigate(Screen.ADMIN_DIRECTORY);
+  }
+
+  @FXML
+  void DeleteClicked(ActionEvent event) {
+
+    Account tempAccount = account.getSelectionModel().getSelectedItem();
+    Qdb.getInstance().deleteAccount(tempAccount.getUsername());
+    Navigation.navigate(Screen.EDIT_DIRECTORY);
+  }
 }
