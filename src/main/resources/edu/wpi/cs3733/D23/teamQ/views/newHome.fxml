@@ -40,107 +40,114 @@
                   </HBox>
                </children>
             </StackPane>
-            <HBox prefHeight="126.0" prefWidth="1543.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Commitments:" wrappingWidth="413.4875946044922">
+               <font>
+                  <Font name="Roboto Medium" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="0.0" prefWidth="1360.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Commitments:" translateX="50.0" translateY="50.0" wrappingWidth="413.4875946044922">
-                     <font>
-                        <Font name="Roboto Medium" size="36.0" />
-                     </font>
-                  </Text>
+                  <VBox prefHeight="482.0" prefWidth="1360.0">
+                     <children>
+                        <HBox prefHeight="608.0" prefWidth="451.0">
+                           <children>
+                              <VBox prefHeight="529.0" prefWidth="746.0">
+                                 <children>
+                                    <StackPane prefHeight="175.0" prefWidth="741.0">
+                                       <children>
+                                          <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#e2e2e2" height="163.0" stroke="BLACK" strokeType="INSIDE" width="553.0">
+                                             <StackPane.margin>
+                                                <Insets />
+                                             </StackPane.margin>
+                                          </Rectangle>
+                                          <Label alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="239.0" text="No commitments!" textAlignment="CENTER">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <CalendarHeaderView minWidth="-Infinity" prefWidth="500.0" />
+                                    <CalendarView minWidth="-Infinity" prefHeight="384.0" prefWidth="650.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <StackPane minWidth="-Infinity" prefHeight="529.0" prefWidth="250.0">
+                                 <children>
+                                    <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
+                                    <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="500.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Write Here:" text="&#10;">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.14">
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </ColorAdjust>
+                                       </effect>
+                                       <StackPane.margin>
+                                          <Insets top="20.0" />
+                                       </StackPane.margin>
+                                    </TextArea>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets left="300.0" />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="40.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                              <StackPane minWidth="-Infinity" prefHeight="468.0" prefWidth="279.0">
+                                 <children>
+                                    <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
+                                    <Label prefHeight="46.0" prefWidth="39.0" text="Notes" textAlignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="500.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea maxHeight="-Infinity" prefHeight="487.0" prefWidth="252.0" promptText="Write Here:" text="&#10;">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.14">
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </ColorAdjust>
+                                       </effect>
+                                       <StackPane.margin>
+                                          <Insets top="20.0" />
+                                       </StackPane.margin>
+                                    </TextArea>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets left="300.0" />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </StackPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="61.0" left="50.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
-            <VBox prefHeight="605.0" prefWidth="1545.0">
-               <children>
-                  <HBox prefHeight="608.0" prefWidth="451.0">
-                     <children>
-                        <VBox prefHeight="529.0" prefWidth="746.0">
-                           <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#e2e2e2" height="36.0" stroke="BLACK" strokeType="INSIDE" width="282.0">
-                                       <StackPane.margin>
-                                          <Insets top="25.0" />
-                                       </StackPane.margin>
-                                    </Rectangle>
-                                    <Label alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="99.0" text="No commitments!" textAlignment="CENTER" />
-                                 </children>
-                              </StackPane>
-                              <CalendarHeaderView minWidth="-Infinity" prefWidth="500.0" />
-                              <CalendarView minWidth="-Infinity" prefHeight="384.0" prefWidth="650.0" />
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
-                        <StackPane minWidth="-Infinity" prefHeight="529.0" prefWidth="250.0">
-                           <children>
-                              <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
-                              <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="500.0" />
-                                 </padding>
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <TextArea maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Write Here:" text="&#10;">
-                                 <effect>
-                                    <ColorAdjust brightness="-0.14">
-                                       <input>
-                                          <Glow />
-                                       </input>
-                                    </ColorAdjust>
-                                 </effect>
-                                 <StackPane.margin>
-                                    <Insets top="20.0" />
-                                 </StackPane.margin>
-                              </TextArea>
-                           </children>
-                           <opaqueInsets>
-                              <Insets left="300.0" />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets left="40.0" />
-                           </HBox.margin>
-                        </StackPane>
-                        <StackPane minWidth="-Infinity" prefHeight="468.0" prefWidth="279.0">
-                           <children>
-                              <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
-                              <Label prefHeight="46.0" prefWidth="39.0" text="Notes" textAlignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="500.0" />
-                                 </padding>
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <TextArea maxHeight="-Infinity" prefHeight="487.0" prefWidth="252.0" promptText="Write Here:" text="&#10;">
-                                 <effect>
-                                    <ColorAdjust brightness="-0.14">
-                                       <input>
-                                          <ColorAdjust />
-                                       </input>
-                                    </ColorAdjust>
-                                 </effect>
-                                 <StackPane.margin>
-                                    <Insets top="20.0" />
-                                 </StackPane.margin>
-                              </TextArea>
-                           </children>
-                           <opaqueInsets>
-                              <Insets left="300.0" />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                        </StackPane>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="61.0" left="50.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
          </children>
       </VBox>
    </children>
