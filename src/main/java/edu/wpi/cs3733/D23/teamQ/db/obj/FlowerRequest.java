@@ -32,15 +32,15 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
   }
 
   public FlowerRequest(
-          Node node,
-          Account requester,
-          Account assignee,
-          String specialInstructions,
-          Date date,
-          String time,
-          int progress,
-          String flowerType,
-          int numberOfBouquets) {
+      Node node,
+      Account requester,
+      Account assignee,
+      String specialInstructions,
+      Date date,
+      String time,
+      int progress,
+      String flowerType,
+      int numberOfBouquets) {
     super(0, node, assignee, requester, specialInstructions, date, time, progress);
     this.note = note;
     this.flowerType = flowerType;

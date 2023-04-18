@@ -47,6 +47,10 @@ public class Qdb {
     return single_instance;
   }
 
+  public boolean addServiceRequest(ServiceRequest sr) {
+    return serviceRequestTable.addRow(sr);
+  }
+
   public Account retrieveAccount(String username) {
     return accountTable.retrieveRow(username);
   }

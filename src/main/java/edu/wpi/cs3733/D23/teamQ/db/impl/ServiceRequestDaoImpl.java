@@ -2,6 +2,9 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,7 +103,23 @@ public class ServiceRequestDaoImpl {
     return -1;
   }
 
-  public boolean addRow(ServiceRequest serviceRequest) {
-    return serviceRequests.add(serviceRequest);
+  public boolean addRow(ServiceRequest sr) {
+    try (Connection conn = GenDao.connect();
+        PreparedStatement stmt =
+            conn.prepareStatement(
+                "INSERT INTO \"serviceRequest\"(\"nodeID\", requester, assignee, \"specialInstructions\", \"date\", \"time\", progress) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+      stmt.setInt(1, sr.getNode().getNodeID());
+      stmt.setString(2, sr.getRequester().getUsername());
+      stmt.setString(3, sr.getAssignee().getUsername());
+      stmt.setString(4, sr.getSpecialInstructions());
+      stmt.setDate(5, sr.getDate());
+      stmt.setString(6, sr.getTime());
+      stmt.setInt(7, sr.progressToInt(sr.getProgress()));
+      stmt.executeUpdate();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+
+    return serviceRequests.add(sr);
   }
 }
