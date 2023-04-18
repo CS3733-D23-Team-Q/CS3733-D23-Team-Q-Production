@@ -39,8 +39,8 @@ public class BFS implements IPathfinding {
         if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor())) {
           visited.add(neighbor);
           parentMap.put(neighbor, currNode);
-          //used to be
-          //queue.offer(neighbor)
+          // used to be
+          // queue.offer(neighbor)
           queue.add(neighbor);
         }
       }
