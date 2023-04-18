@@ -826,10 +826,10 @@ public class PathfindingController {
 
   public void dateSelected(RadioMenuItem itemSelect) {
     clearButtonClicked();
-    refresh();
     if (itemSelect.isSelected()) {
       date = Date.valueOf(itemSelect.getText());
     }
+    refresh();
   }
 
   public void refresh() {
@@ -840,7 +840,7 @@ public class PathfindingController {
 
   public void clearButtonClicked() {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
-    moveDates.removeAll(moveDates);
+    // moveDates.removeAll(moveDates);
     removeLines(previousPath);
     start = null;
     target = null;
