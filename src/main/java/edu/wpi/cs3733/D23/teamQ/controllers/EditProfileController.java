@@ -7,10 +7,13 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class EditProfileController {
 
-  public MFXButton ProfilePage_Done_Button;
+  @FXML public MFXButton ProfilePage_Done_Button;
+  @FXML public Label question1Display;
+  @FXML public Label question2Display;
   @FXML private MFXTextField ProfileEditPage_Email_TextField;
 
   @FXML private MFXTextField ProfileEditPage_FirstName_TextField;
