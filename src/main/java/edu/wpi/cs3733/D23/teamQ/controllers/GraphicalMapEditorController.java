@@ -25,7 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -66,7 +66,7 @@ public class GraphicalMapEditorController {
   Text text;
   double mouseX;
   double mouseY;
-  @FXML AnchorPane root;
+  @FXML GridPane root;
 
   @FXML Group parent;
   @FXML ImageView map;
@@ -120,34 +120,38 @@ public class GraphicalMapEditorController {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       if (coordAlert(xinitial, yinitial, alerts, image1)) {
         if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
+          if (floorAlert(floorinitial, alerts, image1)) {
 
-          nodeid = Integer.parseInt(nodeidinput.getText());
-          //  parent.getChildren().remove(findButton(nodeid));
-          newLongName = longnameinitial.getText();
-          newNodeType = nodetypeinitial.getText();
-          newShortName = shortnameinitial.getText();
-          qdb.locationTable.updateRow(
-              nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
-          newBuilding = buildinginitial.getText();
-          newFloor = floorinitial.getText();
-          newXcoord = Integer.parseInt(xinitial.getText());
-          newYcoord = Integer.parseInt(yinitial.getText());
+            nodeid = Integer.parseInt(nodeidinput.getText());
+            //  parent.getChildren().remove(findButton(nodeid));
+            newLongName = longnameinitial.getText();
+            newNodeType = nodetypeinitial.getText();
+            newShortName = shortnameinitial.getText();
+            qdb.locationTable.updateRow(
+                nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
+            newBuilding = buildinginitial.getText();
+            newFloor = floorinitial.getText();
+            newXcoord = Integer.parseInt(xinitial.getText());
+            newYcoord = Integer.parseInt(yinitial.getText());
 
-          qdb.nodeTable.updateRow(
-              nodeid,
-              new Node(
-                  nodeid,
-                  newXcoord,
-                  newYcoord,
-                  newFloor,
-                  newBuilding,
-                  Qdb.getInstance().locationTable.retrieveRow(nodeid)));
+            qdb.nodeTable.updateRow(
+                nodeid,
+                new Node(
+                    nodeid,
+                    newXcoord,
+                    newYcoord,
+                    newFloor,
+                    newBuilding,
+                    Qdb.getInstance().locationTable.retrieveRow(nodeid)));
 
-          // refresh();
-          Node n = qdb.nodeTable.retrieveRow(nodeid);
-          Button but = createButton(n);
-          parent.getChildren().remove(button.get(findButton(nodeid)));
-          parent.getChildren().set(findButton(nodeid), but);
+            // refresh();
+            Node n = qdb.nodeTable.retrieveRow(nodeid);
+            Button but = createButton(n);
+            parent.getChildren().remove(button.get(findButton(nodeid)));
+            parent.getChildren().set(findButton(nodeid), but);
+
+            findOnMap();
+          }
         }
       }
     }
@@ -183,28 +187,7 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void findclicked(MouseEvent event) {
-    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
-      nodeid = Integer.parseInt(nodeidinput.getText());
-      NodeInformation(nodeid);
-      String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
-      if (!floor.equals(Floor(currentIndex))) {
-        currentIndex = findFloor(floor);
-        if (!button.isEmpty()) parent.getChildren().removeAll(button);
-        button = addButtons(Floor(currentIndex));
-        imageView.setImage(image[currentIndex]);
-        setFloor(currentIndex);
-      }
-      Point2D pivotOnTarget =
-          new Point2D(
-              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
-              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
-      pane.animate(Duration.millis(200))
-          .interpolateWith(Interpolator.EASE_BOTH)
-          .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-
-    } else {
-      InitialNode();
-    }
+    findOnMap();
   }
 
   @FXML
@@ -212,36 +195,33 @@ public class GraphicalMapEditorController {
     if (nodeIDAlerttwo(nodeidinput, alerts, image1)) {
       if (coordAlert(xinitial, yinitial, alerts, image1)) {
         if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
-          nodeid = Integer.parseInt(nodeidinput.getText());
-          newLongName = longnameinitial.getText();
-          newNodeType = nodetypeinitial.getText();
-          newShortName = shortnameinitial.getText();
-          qdb.locationTable.addRow(new Location(nodeid, newLongName, newShortName, newNodeType));
-          newBuilding = buildinginitial.getText();
-          newFloor = floorinitial.getText();
-          newXcoord = Integer.parseInt(xinitial.getText());
-          newYcoord = Integer.parseInt(yinitial.getText());
-          Node newnode =
-              new Node(
-                  nodeid,
-                  newXcoord,
-                  newYcoord,
-                  newFloor,
-                  newBuilding,
-                  Qdb.getInstance().locationTable.retrieveRow(nodeid));
-          qdb.nodeTable.addRow(newnode);
+          if (floorAlert(floorinitial, alerts, image1)) {
+            nodeid = Integer.parseInt(nodeidinput.getText());
+            newLongName = longnameinitial.getText();
+            newNodeType = nodetypeinitial.getText();
+            newShortName = shortnameinitial.getText();
+            qdb.locationTable.addRow(new Location(nodeid, newLongName, newShortName, newNodeType));
+            newBuilding = buildinginitial.getText();
+            newFloor = floorinitial.getText();
+            newXcoord = Integer.parseInt(xinitial.getText());
+            newYcoord = Integer.parseInt(yinitial.getText());
+            Node newnode =
+                new Node(
+                    nodeid,
+                    newXcoord,
+                    newYcoord,
+                    newFloor,
+                    newBuilding,
+                    Qdb.getInstance().locationTable.retrieveRow(nodeid));
+            qdb.nodeTable.addRow(newnode);
 
-          parent.getChildren().removeAll(button);
-          Button but = createButton(newnode);
-          button.add(but);
-          parent.getChildren().addAll(button);
+            parent.getChildren().removeAll(button);
+            Button but = createButton(newnode);
+            button.add(but);
+            parent.getChildren().addAll(button);
 
-          // refresh();
-          /*
-                   Button but = createButton(newnode);
-                   parent.getChildren().add(but);
-
-          */
+            findOnMap();
+          }
         }
       }
     }
@@ -499,6 +479,21 @@ public class GraphicalMapEditorController {
     return false;
   }
 
+  public boolean floorAlert(TextField floor, Label floorAlert, ImageView image) {
+    Alert alert = new Alert();
+    String floors = floor.getText();
+    if (floors.equals("1")
+        || floors.equals("2")
+        || floors.equals("3")
+        || floors.equals("L1")
+        || floors.equals("L2")) {
+      return true;
+    } else {
+      alert.setLabelAlert("This floor does not exist.", floorAlert, image);
+    }
+    return false;
+  }
+
   public boolean nodeIDAlertone(TextField nodeID, Label nodeIDAlert, ImageView image) {
     Alert alert = new Alert();
     if (isNumber(nodeID.getText())) {
@@ -740,7 +735,10 @@ public class GraphicalMapEditorController {
 
   @FXML
   void EdgesDispalyClicked(MouseEvent event) {
-    line = addLines(chooseLines(currentIndex));
+    if (!displayEdges) {
+      line = addLines(chooseLines(currentIndex));
+      displayEdges = true;
+    }
   }
 
   @FXML
@@ -840,5 +838,30 @@ public class GraphicalMapEditorController {
           NodeInformation(nodeID);
         });
     return node;
+  }
+
+  void findOnMap() {
+    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
+      nodeid = Integer.parseInt(nodeidinput.getText());
+      NodeInformation(nodeid);
+      String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
+      if (!floor.equals(Floor(currentIndex))) {
+        currentIndex = findFloor(floor);
+        if (!button.isEmpty()) parent.getChildren().removeAll(button);
+        button = addButtons(Floor(currentIndex));
+        imageView.setImage(image[currentIndex]);
+        setFloor(currentIndex);
+      }
+      Point2D pivotOnTarget =
+          new Point2D(
+              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
+              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
+      pane.animate(Duration.millis(200))
+          .interpolateWith(Interpolator.EASE_BOTH)
+          .zoomBy(pane.getCurrentScale(), pivotOnTarget);
+
+    } else {
+      InitialNode();
+    }
   }
 }
