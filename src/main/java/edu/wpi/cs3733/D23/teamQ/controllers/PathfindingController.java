@@ -828,8 +828,8 @@ public class PathfindingController {
     clearButtonClicked();
     if (itemSelect.isSelected()) {
       date = Date.valueOf(itemSelect.getText());
+      refresh();
     }
-    refresh();
   }
 
   public void refresh() {
