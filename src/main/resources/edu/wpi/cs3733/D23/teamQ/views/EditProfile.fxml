@@ -1,112 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.EditProfileController">
-   <children>
-      <Label layoutX="270.0" layoutY="318.0" text="Title">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="270.0" layoutY="469.0" text="ID Number">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="270.0" layoutY="620.0" text="Username">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="795.0" layoutY="170.0" text="First Name">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="795.0" layoutY="318.0" text="Last Name">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="795.0" layoutY="469.0" text="Email">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="795.0" layoutY="620.0" text="Phone Number">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="ProfileEditPage_Done_Button" layoutX="1072.0" layoutY="790.0" mnemonicParsing="false" onAction="#DonePressed" style="-fx-background-color: #012D5A;" text="Done" textFill="WHITE">
-         <padding>
-            <Insets bottom="15.0" left="40.0" right="40.0" top="15.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <MFXTextField fx:id="ProfileEditPage_PhoneNumber_TextField" layoutX="795.0" layoutY="661.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField fx:id="ProfileEditPage_Email_TextField" layoutX="795.0" layoutY="510.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField fx:id="ProfileEditPage_LastName_TextField" layoutX="795.0" layoutY="359.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField fx:id="ProfileEditPage_FirstName_TextField" layoutX="795.0" layoutY="211.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField fx:id="ProfileEditPage_Username_TextField" layoutX="270.0" layoutY="661.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField fx:id="ProfileEditPage_IDNumber_TextField" layoutX="270.0" layoutY="510.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField fx:id="ProfileEditPage_Title_TextField" layoutX="270.0" layoutY="359.0" style="-fx-border-color: #004D97; -fx-border-radius: 15; -fx-min-width: 400; -fx-border-width: 2; -fx-min-height: 70;">
-         <padding>
-            <Insets bottom="11.0" left="20.0" top="11.0" />
-         </padding>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXTextField>
-   </children>
-</AnchorPane>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.EditProfileController">
+    <children>
+        <StackPane alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="50.0" prefWidth="475" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+            <children>
+                <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" StackPane.alignment="CENTER">
+                    <font>
+                        <Font name="Roboto Bold" size="28.0" />
+                    </font>
+                </Text>
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" top="10.0" />
+            </VBox.margin>
+        </StackPane>
+        <VBox>
+            <VBox.margin>
+                <Insets left="10.0" />
+            </VBox.margin>
+            <children>
+                <Label text="First Name">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_FirstName_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="first name here">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Last Name">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_LastName_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="last name here">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" />
+            </VBox.margin>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Username">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_Username_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="username here">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </MFXTextField>
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" />
+            </VBox.margin>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Title">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_Title_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="title here">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Email">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_Email_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="email here">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Phone Number">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_PhoneNumber_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="phone here">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Security Question 1">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXFilterComboBox fx:id="editQuestion1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 1">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXFilterComboBox>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Security Answer 1">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_Answer1_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 1">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Security Question 2">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXFilterComboBox fx:id="editQuestion2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 2">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXFilterComboBox>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Security Answer 2">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <MFXTextField fx:id="ProfileEditPage_Answer2_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 2">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding></MFXTextField>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <MFXButton fx:id="ProfilePage_Done_Button" onAction="#DonePressed" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #012d5a;" text="Done" textFill="WHITE">
+            <VBox.margin>
+                <Insets left="10.0" top="20.0" />
+            </VBox.margin>
+        </MFXButton>
+    </children>
+</VBox>
