@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -73,17 +72,15 @@ public class OfficeSuppliesRequestController {
 
     OfficeSuppliesRequest newOSR =
         new OfficeSuppliesRequest(
-            ListServiceRequestController.getOfficeRequest().getRequestID(),
-            "temp user",
-            0,
-            (String) assigneeField.getValue(),
-            (Node) roomNumberField.getValue(),
+            qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
+            qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) itemRequestedField.getValue(),
-            Integer.parseInt((String) quantityField.getText()));
-
+            Integer.parseInt(quantityField.getText()));
     qdb.addOfficeSuppliesRequest(newOSR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }

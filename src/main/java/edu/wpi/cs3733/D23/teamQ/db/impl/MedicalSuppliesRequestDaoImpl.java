@@ -9,22 +9,22 @@ import java.util.List;
 public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequest, Integer> {
   private List<MedicalSuppliesRequest> medicalSuppliesRequests =
       new ArrayList<MedicalSuppliesRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
+  private AccountDaoImpl accountTable;
   private static MedicalSuppliesRequestDaoImpl single_instance = null;
 
-  public static synchronized MedicalSuppliesRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new MedicalSuppliesRequestDaoImpl(nodeTable);
+  public static synchronized MedicalSuppliesRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+    if (single_instance == null)
+      single_instance = new MedicalSuppliesRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
   }
 
-  private MedicalSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
+  private MedicalSuppliesRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
+    this.accountTable = accountTable;
     populate();
-    if (medicalSuppliesRequests.size() != 0) {
-      nextID = medicalSuppliesRequests.get(medicalSuppliesRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -38,7 +38,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
       int index = this.getIndex(requestID);
       return medicalSuppliesRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -58,9 +58,9 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester());
+      st.setString(2, newRequest.getRequester().getUsername());
       st.setInt(3, newRequest.getProgress().ordinal());
-      st.setString(4, newRequest.getAssignee());
+      st.setString(4, newRequest.getAssignee().getUsername());
       st.setInt(5, newRequest.getNode().getNodeID());
       st.setString(6, newRequest.getItem());
       st.setInt(7, newRequest.getQuantity());
@@ -116,9 +116,9 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
         PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"medicalSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
-      stmt.setString(3, request.getAssignee());
+      stmt.setString(1, request.getRequester().getUsername());
+      stmt.setInt(2, request.getProgress().ordinal());
+      stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
       stmt.setDate(6, request.getDate());
@@ -129,14 +129,13 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return medicalSuppliesRequests.add(request);
+    return populate();
   }
 
   @Override
   public boolean populate() {
     try {
+      medicalSuppliesRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"medicalSuppliesRequest\"");
@@ -144,13 +143,13 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
         medicalSuppliesRequests.add(
             new MedicalSuppliesRequest(
                 rst.getInt("requestID"),
-                rst.getString("requester"),
-                rst.getInt("progress"),
-                rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("item"),
                 rst.getInt("quantity")));
       }
@@ -171,11 +170,11 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
   private int getIndex(Integer requestID) {
     for (int i = 0; i < medicalSuppliesRequests.size(); i++) {
       MedicalSuppliesRequest x = medicalSuppliesRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No medical supplies request found with ID: " + requestID);
   }
 
   /**

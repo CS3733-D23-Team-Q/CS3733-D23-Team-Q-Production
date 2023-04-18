@@ -66,16 +66,15 @@ public class ConferenceRoomRequestController {
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-
     ConferenceRequest cr =
         new ConferenceRequest(
-            LoginController.getUsername(),
-            0,
-            (String) assigneeField.getValue(),
-            qdb.retrieveNode(qdb.getNodeFromLocation((String) roomNumberField.getValue())),
+            qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
+            qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             (String) timeField.getValue(),
+            0,
             (String) foodField.getValue());
 
     qdb.addConferenceRequest(cr);

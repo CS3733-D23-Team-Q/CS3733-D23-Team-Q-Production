@@ -10,21 +10,21 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
   private NodeDaoImpl nodeTable;
-  private int nextID = 0;
+  private AccountDaoImpl accountTable;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
-  public static synchronized PatientTransportRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl(nodeTable);
+  public static synchronized PatientTransportRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+    if (single_instance == null)
+      single_instance = new PatientTransportRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
   }
 
-  private PatientTransportRequestDaoImpl(NodeDaoImpl nodeTable) {
+  private PatientTransportRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
+    this.accountTable = accountTable;
     populate();
-    if (patientTransportRequests.size() != 0) {
-      nextID = patientTransportRequests.get(patientTransportRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -38,7 +38,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
       int index = this.getIndex(requestID);
       return patientTransportRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -58,9 +58,9 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester());
+      st.setString(2, newRequest.getRequester().getUsername());
       st.setInt(3, newRequest.getProgress().ordinal());
-      st.setString(4, newRequest.getAssignee());
+      st.setString(4, newRequest.getAssignee().getUsername());
       st.setInt(5, newRequest.getNode().getNodeID());
       st.setString(6, newRequest.getSpecialInstructions());
       st.setString(7, newRequest.getItem());
@@ -116,9 +116,9 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
         PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"transport\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
-      stmt.setString(3, request.getAssignee());
+      stmt.setString(1, request.getRequester().getUsername());
+      stmt.setInt(2, request.getProgress().ordinal());
+      stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
       stmt.setDate(6, request.getDate());
@@ -128,14 +128,13 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return patientTransportRequests.add(request);
+    return populate();
   }
 
   @Override
   public boolean populate() {
     try {
+      patientTransportRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"patientTransportRequest\"");
@@ -143,13 +142,13 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
         patientTransportRequests.add(
             new PatientTransportRequest(
                 rst.getInt("requestID"),
-                rst.getString("requester"),
-                rst.getInt("progress"),
-                rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("item")));
       }
       conn.close();
@@ -169,11 +168,11 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   private int getIndex(Integer requestID) {
     for (int i = 0; i < patientTransportRequests.size(); i++) {
       PatientTransportRequest x = patientTransportRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No patient transport request found with ID: " + requestID);
   }
 
   /**

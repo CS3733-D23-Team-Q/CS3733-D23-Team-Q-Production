@@ -8,22 +8,21 @@ import java.util.List;
 
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
+  private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
 
-  public static synchronized MealRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new MealRequestDaoImpl(nodeTable);
+  public static synchronized MealRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new MealRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
   }
 
-  private MealRequestDaoImpl(NodeDaoImpl nodeTable) {
+  private MealRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
+    this.accountTable = accountTable;
     populate();
-    if (mealRequests.size() != 0) {
-      nextID = mealRequests.get(mealRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -37,7 +36,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
       int index = this.getIndex(requestID);
       return mealRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -57,9 +56,9 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
-      st.setString(2, newRequest.getRequester());
+      st.setString(2, newRequest.getRequester().getUsername());
       st.setInt(3, newRequest.getProgress().ordinal());
-      st.setString(4, newRequest.getAssignee());
+      st.setString(4, newRequest.getAssignee().getUsername());
       st.setInt(5, newRequest.getNode().getNodeID());
       st.setString(6, newRequest.getSpecialInstructions());
       st.setString(7, newRequest.getDrink());
@@ -117,9 +116,9 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
         PreparedStatement stmt =
             conn.prepareStatement(
                 "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-      stmt.setString(1, request.getRequester());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
-      stmt.setString(3, request.getAssignee());
+      stmt.setString(1, request.getRequester().getUsername());
+      stmt.setInt(2, request.getProgress().ordinal());
+      stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
       stmt.setDate(6, request.getDate());
@@ -131,14 +130,13 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return mealRequests.add(request);
+    return populate();
   }
 
   @Override
   public boolean populate() {
     try {
+      mealRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"mealRequest\"");
@@ -146,13 +144,13 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
         mealRequests.add(
             new MealRequest(
                 rst.getInt("requestID"),
-                rst.getString("requester"),
-                rst.getInt("progress"),
-                rst.getString("assignee"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("drink"),
                 rst.getString("entree"),
                 rst.getString("side")));
@@ -174,11 +172,11 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private int getIndex(Integer requestID) {
     for (int i = 0; i < mealRequests.size(); i++) {
       MealRequest x = mealRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No meal delivery request found with ID: " + requestID);
   }
 
   /**

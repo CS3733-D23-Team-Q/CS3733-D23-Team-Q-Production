@@ -17,7 +17,8 @@ import javafx.scene.control.ChoiceBox;
 public class MedicalSuppliesRequestDisplayController {
 
   ObservableList<String> medicalItemList =
-      FXCollections.observableArrayList("tbd1", "tbd2", "tbd3", "tbd4", "tbd5");
+      FXCollections.observableArrayList(
+          "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
 
   @FXML MFXButton deleteButton;
   @FXML MFXButton backButton;
@@ -34,7 +35,6 @@ public class MedicalSuppliesRequestDisplayController {
   @FXML
   public void initialize() {
     itemRequestedField.setItems(medicalItemList);
-
     assigneeField.setValue(ListServiceRequestController.getMedicalRequest().getAssignee());
     roomNumberField.setValue(ListServiceRequestController.getMedicalRequest().getNode());
     dateField.setValue(
@@ -69,13 +69,13 @@ public class MedicalSuppliesRequestDisplayController {
     MedicalSuppliesRequest newMSP =
         new MedicalSuppliesRequest(
             ListServiceRequestController.getMedicalRequest().getRequestID(),
-            "temp requester",
-            0,
-            "temp assignee",
             ListServiceRequestController.getMedicalRequest().getNode(),
+            ListServiceRequestController.getMedicalRequest().getRequester(),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) itemRequestedField.getValue(),
             Integer.parseInt((String) quantityField.getText()));
 

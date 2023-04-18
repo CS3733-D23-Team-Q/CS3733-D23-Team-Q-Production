@@ -73,15 +73,14 @@ public class FlowerRequestController {
 
     FlowerRequest newFR =
         new FlowerRequest(
-            LoginController.getUsername(),
-            0,
-            assigneeField.getSelectedItem().toString(),
-            qdb.retrieveNode(qdb.getNodeFromLocation(roomNumberField.getSelectedItem().toString())),
+            qdb.getNodeFromLocation(roomNumberField.getSelectedItem().toString()),
+            qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            "",
-            flowerTypeField.getSelectedItem().toString(),
+            0,
+            (String) flowerTypeField.getSelectedItem(),
             Integer.parseInt(bouquetChoiceField.getText()));
 
     qdb.addFlowerRequest(newFR);
