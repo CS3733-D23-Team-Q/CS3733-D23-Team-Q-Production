@@ -129,12 +129,10 @@ public class ServiceRequestDaoImpl {
       st.setDate(6, newRequest.getDate());
       st.setString(7, newRequest.getTime());
       st.setInt(8, newRequest.getProgress().ordinal());
-
       st.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
     int index = this.getIndex(requestID);
     serviceRequests.get(index).setNode(newRequest.getNode());
     serviceRequests.get(index).setRequester(newRequest.getRequester());

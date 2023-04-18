@@ -43,14 +43,4 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
     this.item = item;
     this.quantity = quantity;
   }
-
-  public int progressToInt(ServiceRequest.Progress progress) {
-    if (progress == ServiceRequest.Progress.BLANK) {
-      return 0;
-    } else if (progress == ServiceRequest.Progress.PROCESSING) {
-      return 1;
-    } else {
-      return 2;
-    }
-  }
 }

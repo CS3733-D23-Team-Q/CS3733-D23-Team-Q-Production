@@ -95,6 +95,6 @@ public class MealDeliveryRequestController {
             sideField.getText());
 
     qdb.addMealRequest(newMR);
-    Navigation.navigate(Screen.SUBMISSION);
+    Navigation.navigateRight(Screen.SUBMISSION);
   }
 }

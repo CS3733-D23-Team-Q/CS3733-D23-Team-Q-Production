@@ -117,7 +117,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
             conn.prepareStatement(
                 "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
+      stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
