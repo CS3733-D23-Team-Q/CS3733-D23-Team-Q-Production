@@ -34,6 +34,7 @@ public class ServiceRequestDaoImpl {
 
   public boolean populate() {
     try {
+      serviceRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"serviceRequest\"");
@@ -73,19 +74,23 @@ public class ServiceRequestDaoImpl {
   }
 
   public ServiceRequest retrieveRow(Integer ID) {
-    int index = getIndex(ID);
-    return serviceRequests.get(index);
+    try {
+      int index = this.getIndex(ID);
+      return serviceRequests.get(index);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
   }
 
-  public int getIndex(int requestID) {
-    populate();
+  private int getIndex(Integer requestID) {
     for (int i = 0; i < serviceRequests.size(); i++) {
-      ServiceRequest sr = serviceRequests.get(i);
-      if (sr.getRequestID() == requestID) {
+      ServiceRequest x = serviceRequests.get(i);
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    return -1;
+    throw new RuntimeException("No service request found with ID: " + requestID);
   }
 
   /**
@@ -106,6 +111,38 @@ public class ServiceRequestDaoImpl {
     }
     int index = this.getIndex(requestID);
     serviceRequests.remove(index);
+    return true;
+  }
+
+  public boolean updateRow(Integer requestID, ServiceRequest newRequest) {
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?"
+                    + "WHERE \"requestID\" = ?")) {
+
+      st.setInt(1, requestID);
+      st.setInt(2, newRequest.getNode().getNodeID());
+      st.setString(3, newRequest.getRequester().getUsername());
+      st.setString(4, newRequest.getAssignee().getUsername());
+      st.setString(5, newRequest.getSpecialInstructions());
+      st.setDate(6, newRequest.getDate());
+      st.setString(7, newRequest.getTime());
+      st.setInt(8, newRequest.getProgress().ordinal());
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    int index = this.getIndex(requestID);
+    serviceRequests.get(index).setNode(newRequest.getNode());
+    serviceRequests.get(index).setRequester(newRequest.getRequester());
+    serviceRequests.get(index).setAssignee(newRequest.getAssignee());
+    serviceRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    serviceRequests.get(index).setDate(newRequest.getDate());
+    serviceRequests.get(index).setTime(newRequest.getTime());
+    serviceRequests.get(index).setProgress(newRequest.getProgress());
     return true;
   }
 }
