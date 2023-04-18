@@ -23,6 +23,11 @@ public class DFS implements IPathfinding {
       if (current.getEdges().size() == 0) {
         System.out.println("This node is a dead end " + current);
       }
+      ArrayList<Node> nodesAvailable = new ArrayList<Node>();
+      for (Edge edgePath : current.getEdges()) {
+        nodesAvailable.add(edgePath.getStartNode());
+        nodesAvailable.add(edgePath.getEndNode());
+      }
       if (!visitedList.contains(current.getEdges().get(0).getEndNode())
           && !current.getEdges().isEmpty()
           && !current.equals(current.getEdges().get(0).getEndNode())
@@ -54,34 +59,14 @@ public class DFS implements IPathfinding {
         System.out.println(
             "Added a start node with ID" + current.getEdges().get(0).getStartNode().getNodeID());
       } else {
-        // look through other edges until an unvisited node is found
-        for (Edge index : current.getEdges()) {
-          if (!visitedList.contains(index.getStartNode())
-              && !index.getStartNode().equals(current)
-              && index.getStartNode().getFloor().equalsIgnoreCase(floor)) {
-            openList.add(index.getStartNode());
+        for (Node backup : nodesAvailable) {
+          if (!visitedList.contains(backup)
+              && !current.equals(backup)
+              && floor.equalsIgnoreCase(backup.getFloor())) {
+            openList.add(backup);
             openList.remove(current);
             path.add(current);
             visitedList.add(current);
-            System.out.println();
-            System.out.println("current node is " + current);
-            System.out.println();
-            System.out.println("Edges contain " + current.getEdges());
-            System.out.println();
-            System.out.println("added from pre-final if");
-          } else if (!visitedList.contains(index.getEndNode())
-              && !index.getEndNode().equals(current)
-              && index.getEndNode().getFloor().equalsIgnoreCase(floor)) {
-            openList.add(index.getEndNode());
-            openList.remove(current);
-            path.add(current);
-            visitedList.add(current);
-            System.out.println();
-            System.out.println("current node is " + current);
-            System.out.println();
-            System.out.println("Edges contain " + current.getEdges());
-            System.out.println();
-            System.out.println("added from final if");
           }
         }
       }

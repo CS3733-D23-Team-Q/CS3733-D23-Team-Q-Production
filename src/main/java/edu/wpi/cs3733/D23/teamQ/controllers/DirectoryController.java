@@ -7,10 +7,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class DirectoryController {
@@ -27,11 +27,13 @@ public class DirectoryController {
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
 
+  Account accountSelected;
+
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
     ObservableList<Account> account = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().getRows().size(); i++) {
-      account.add(Qdb.getInstance().getRows().get(i));
+    for (int i = 0; i < Qdb.getInstance().retrieveAllAccounts().size(); i++) {
+      account.add(Qdb.getInstance().retrieveAllAccounts().get(i));
     }
     return account;
   }
@@ -94,17 +96,5 @@ public class DirectoryController {
     account.setItems(Accounts());
   }
 
-  public void mapClicked(ActionEvent actionEvent) {}
-
-  public void edgeClicked(ActionEvent actionEvent) {}
-
-  public void locationClicked(ActionEvent actionEvent) {}
-
-  public void moveClicked(ActionEvent actionEvent) {}
-
-  public void BackClicked(ActionEvent actionEvent) {}
-
-  public void homeClicked(ActionEvent actionEvent) {}
-
-  public void exitClicked(ActionEvent actionEvent) {}
+  public void tableClicked(MouseEvent mouseEvent) {}
 }

@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import java.sql.Date;
 import java.util.List;
@@ -13,11 +12,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.controlsfx.control.SearchableComboBox;
 
 public class OfficeMoveController {
   Qdb qdb = Qdb.getInstance();
-  @FXML MFXComboBox currentLocationField;
-  @FXML MFXComboBox newLocationField;
+  @FXML SearchableComboBox currentLocationField;
+  @FXML SearchableComboBox newLocationField;
   @FXML MFXDatePicker dateField;
   @FXML Label submitMessage;
   @FXML private TableView<Move> futureMoves;
@@ -60,13 +60,13 @@ public class OfficeMoveController {
 
     this.currentLocationField.setValue("Select Current Location");
     this.currentLocationField.setItems(qdb.getAllLongNames());
-    this.newLocationField.setValue("Select Current Location");
+    this.newLocationField.setValue("Select New Location");
     this.newLocationField.setItems(qdb.getAllLongNames());
   }
 
   public void resetButtonClicked() {
     this.currentLocationField.setValue("Select Current Location");
-    this.newLocationField.setValue("Select Current Location");
+    this.newLocationField.setValue("Select New Location");
     dateField.clear();
   }
 
@@ -81,9 +81,8 @@ public class OfficeMoveController {
         && dateField.getValue() != null) {
       Move newMove =
           new Move(
-              qdb.retrieveNode(
-                  qdb.getNodeFromLocation(currentLocationField.getSelectedItem().toString())),
-              newLocationField.getSelectedItem().toString(),
+              qdb.getNodeFromLocation(currentLocationField.getValue().toString()),
+              newLocationField.getValue().toString(),
               Date.valueOf(dateField.getValue()));
 
       qdb.addMove(newMove);
