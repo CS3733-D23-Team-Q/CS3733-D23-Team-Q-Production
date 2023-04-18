@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Navigation {
@@ -113,6 +114,23 @@ public class Navigation {
     } catch (IOException | NullPointerException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void login() throws IOException {
+    final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/Root.fxml"));
+    BorderPane root = loader.load();
+    App.setRootBorder(root);
+    App.setRController(loader.getController());
+    App.setRootCenter(App.getRController().rootCenter);
+    App.setRootRight(App.getRController().rootRight);
+    final Scene scene = new Scene(App.getRootBorder());
+    App.getPrimaryStage().setScene(scene);
+    App.getPrimaryStage().show();
+    App.getPrimaryStage().setFullScreen(true);
+    App.getRController().showMenu(true);
+    App.getRootBorder().setLeft(null);
+    App.getRootBorder().setRight(null);
+    Navigation.navigate(Screen.HOME);
   }
 
   public static IController getController(final Screen screen) throws IOException {

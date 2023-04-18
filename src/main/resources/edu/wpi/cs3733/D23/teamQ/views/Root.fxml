@@ -5,7 +5,7 @@
 
 <BorderPane fx:id="rootBorder" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.RootController">
     <left>
-        <fx:include fx:id="menu" source="MenuRoot.fxml" />
+        <fx:include fx:id="menu" source="MenuRoot.fxml" visible="true"/>
     </left>
    <center>
       <AnchorPane fx:id="rootCenter" />

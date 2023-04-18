@@ -6,17 +6,13 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.util.List;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -101,14 +97,7 @@ public class LoginController {
       a.setActive(true);
       qdb.updateAccount(username, a);
       alert.clearLabelAlert(loginAlert, alertImage);
-      Screen menuScreen = Screen.MENU_PANE;
-      final String filename = menuScreen.getFilename();
-      final var resource = App.class.getResource(filename);
-      final FXMLLoader loader = new FXMLLoader(resource);
-      Node n = loader.load();
-      App.getRootBorder().setLeft(n);
-      App.getRController().showMenu(true);
-      Navigation.navigate(Screen.HOME);
+      Navigation.login();
       loginUsername = usernameField.getText();
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
     } else {

@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ;
 
 import edu.wpi.cs3733.D23.teamQ.controllers.RootController;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,13 +33,9 @@ public class App extends Application {
     App.primaryStage = primaryStage;
     primaryStage.setTitle("Login Page");
 
-    final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/Root.fxml"));
-    rootBorder = loader.load();
-    rController = loader.getController();
-    App.rootCenter = rController.rootCenter;
-    App.rootRight = rController.rootRight;
+    final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/LoginPage.fxml"));
     primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));
-    final Scene scene = new Scene(rootBorder);
+    final Scene scene = new Scene(loader.load());
     primaryStage.setScene(scene);
     scene
         .getStylesheets()
@@ -57,11 +51,6 @@ public class App extends Application {
     primaryStage.setWidth(screenBounds.getWidth());
     primaryStage.setHeight(screenBounds.getHeight());
                */
-    primaryStage.setFullScreen(true);
-    rController.showMenu(false);
-    rootBorder.setLeft(null);
-    rootBorder.setRight(null);
-    Navigation.navigate(Screen.LOGIN);
   }
 
   @Override
