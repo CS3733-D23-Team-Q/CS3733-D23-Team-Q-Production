@@ -48,6 +48,9 @@ public enum Screen {
   DIRECTORY("views/Directory.fxml", "Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
+
+  MAPEDITORHELP("views/MapEditorHelp.fxml", "Help"),
+
   OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
 
   private final String filename;
