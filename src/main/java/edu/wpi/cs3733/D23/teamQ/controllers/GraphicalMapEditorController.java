@@ -123,7 +123,7 @@ public class GraphicalMapEditorController {
           if (floorAlert(floorinitial, alerts, image1)) {
 
             nodeid = Integer.parseInt(nodeidinput.getText());
-            //  parent.getChildren().remove(findButton(nodeid));
+
             newLongName = longnameinitial.getText();
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
@@ -145,12 +145,18 @@ public class GraphicalMapEditorController {
                     Qdb.getInstance().locationTable.retrieveRow(nodeid)));
 
             // refresh();
+            /*
             Node n = qdb.nodeTable.retrieveRow(nodeid);
             Button but = createButton(n);
             parent.getChildren().remove(button.get(findButton(nodeid)));
             parent.getChildren().set(findButton(nodeid), but);
 
+             */
+
+            refreshNodes();
+
             findOnMap();
+            // imageView.setImage(image[currentIndex]);
           }
         }
       }
@@ -170,10 +176,7 @@ public class GraphicalMapEditorController {
       qdb.locationTable.deleteRow(nodeid);
       // refresh();
 
-      parent.getChildren().removeAll(button);
-      button.clear();
-      button = addButtons(Floor(currentIndex));
-      parent.getChildren().addAll(button);
+      refreshNodes();
 
     } else {
       InitialNode();
@@ -200,6 +203,7 @@ public class GraphicalMapEditorController {
             newLongName = longnameinitial.getText();
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
+
             qdb.locationTable.addRow(new Location(nodeid, newLongName, newShortName, newNodeType));
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
@@ -215,10 +219,7 @@ public class GraphicalMapEditorController {
                     Qdb.getInstance().locationTable.retrieveRow(nodeid));
             qdb.nodeTable.addRow(newnode);
 
-            parent.getChildren().removeAll(button);
-            Button but = createButton(newnode);
-            button.add(but);
-            parent.getChildren().addAll(button);
+            refreshNodes();
 
             findOnMap();
           }
@@ -604,8 +605,11 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
-  void refresh() {
-    Navigation.navigate(Screen.GRAPHICAL_MAP_EDITOR);
+  void refreshNodes() {
+    parent.getChildren().removeAll(button);
+    button.clear();
+    button = addButtons(Floor(currentIndex));
+    // parent.getChildren().addAll(button);
   }
 
   List<javafx.scene.shape.Line> addLines(List<Node> path) {
@@ -765,80 +769,82 @@ public class GraphicalMapEditorController {
     }
     return x;
   }
+  /*
+   Button createButton(Node n) {
+     int nodeID = n.getNodeID();
+     int x = n.getXCoord() / 5;
+     int y = n.getYCoord() / 5;
+     Button node = new Button();
+     node.setLayoutX(x);
+     node.setLayoutY(y);
+     node.setStyle(
+         "-fx-background-radius: 5em;"
+             + "-fx-min-width: 3px;"
+             + "-fx-min-height: 3px;"
+             + "-fx-max-width: 3px;"
+             + "-fx-max-height: 3px;"
+             + "-fx-background-insets: 0px;");
 
-  Button createButton(Node n) {
-    int nodeID = n.getNodeID();
-    int x = n.getXCoord() / 5;
-    int y = n.getYCoord() / 5;
-    Button node = new Button();
-    node.setLayoutX(x);
-    node.setLayoutY(y);
-    node.setStyle(
-        "-fx-background-radius: 5em;"
-            + "-fx-min-width: 3px;"
-            + "-fx-min-height: 3px;"
-            + "-fx-max-width: 3px;"
-            + "-fx-max-height: 3px;"
-            + "-fx-background-insets: 0px;");
+     node.setOnMouseClicked(
+         e -> {
+           nodeidinput.setText(Integer.toString(nodeID));
+           NodeInformation(nodeID);
+         });
+     node.setOnMouseEntered(
+         e -> {
+           int x2 = n.getXCoord() / 5;
+           int y2 = n.getYCoord() / 5;
+           Location location = qdb.retrieveLocation(nodeID);
+           String name = location.getShortName();
+           Pattern pattern = Pattern.compile("(?i).*hall.*");
+           if (!pattern.matcher(name).matches()) {
+             text = new Text(x2 + 3, y2 + 3, name);
+             text.setStyle("-fx-font-size: 8px;");
+             parent.getChildren().add(text);
+           } else {
+             text = new Text(x2 + 3, y2 + 3, "");
+             text.setStyle("-fx-font-size: 8px;");
+             parent.getChildren().add(text);
+           }
+         });
+     node.setOnMouseExited(
+         e -> {
+           parent.getChildren().remove(text);
+         });
+     node.setOnMousePressed(
+         e -> {
+           mouseX = e.getX();
+           mouseY = e.getY();
+         });
+     node.setOnMouseDragged(
+         e -> {
+           double distanceX = e.getX() - mouseX;
+           double distanceY = e.getY() - mouseY;
 
-    node.setOnMouseClicked(
-        e -> {
-          nodeidinput.setText(Integer.toString(nodeID));
-          NodeInformation(nodeID);
-        });
-    node.setOnMouseEntered(
-        e -> {
-          int x2 = n.getXCoord() / 5;
-          int y2 = n.getYCoord() / 5;
-          Location location = qdb.retrieveLocation(nodeID);
-          String name = location.getShortName();
-          Pattern pattern = Pattern.compile("(?i).*hall.*");
-          if (!pattern.matcher(name).matches()) {
-            text = new Text(x2 + 3, y2 + 3, name);
-            text.setStyle("-fx-font-size: 8px;");
-            parent.getChildren().add(text);
-          } else {
-            text = new Text(x2 + 3, y2 + 3, "");
-            text.setStyle("-fx-font-size: 8px;");
-            parent.getChildren().add(text);
-          }
-        });
-    node.setOnMouseExited(
-        e -> {
-          parent.getChildren().remove(text);
-        });
-    node.setOnMousePressed(
-        e -> {
-          mouseX = e.getX();
-          mouseY = e.getY();
-        });
-    node.setOnMouseDragged(
-        e -> {
-          double distanceX = e.getX() - mouseX;
-          double distanceY = e.getY() - mouseY;
+           posx = node.getLayoutX() + distanceX;
+           posy = node.getLayoutY() + distanceY;
 
-          posx = node.getLayoutX() + distanceX;
-          posy = node.getLayoutY() + distanceY;
+           node.setLayoutX(posx);
+           node.setLayoutY(posy);
 
-          node.setLayoutX(posx);
-          node.setLayoutY(posy);
+           node.setCursor(Cursor.MOVE);
+         });
+     node.setOnMouseReleased(
+         e -> {
+           node.setCursor(Cursor.HAND);
+           int currentX = (int) (node.getLayoutX() * 5);
+           int currentY = (int) (node.getLayoutY() * 5);
+           Node newNode = qdb.retrieveNode(nodeID);
+           newNode.setXCoord(currentX);
+           newNode.setYCoord(currentY);
+           // after clicking confirm button
+           qdb.updateNode(nodeID, newNode);
+           NodeInformation(nodeID);
+         });
+     return node;
+   }
 
-          node.setCursor(Cursor.MOVE);
-        });
-    node.setOnMouseReleased(
-        e -> {
-          node.setCursor(Cursor.HAND);
-          int currentX = (int) (node.getLayoutX() * 5);
-          int currentY = (int) (node.getLayoutY() * 5);
-          Node newNode = qdb.retrieveNode(nodeID);
-          newNode.setXCoord(currentX);
-          newNode.setYCoord(currentY);
-          // after clicking confirm button
-          qdb.updateNode(nodeID, newNode);
-          NodeInformation(nodeID);
-        });
-    return node;
-  }
+  */
 
   void findOnMap() {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
@@ -860,8 +866,29 @@ public class GraphicalMapEditorController {
           .interpolateWith(Interpolator.EASE_BOTH)
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
 
+      button.get(findButton(nodeid)).setStyle("-fx-background-color: #3966af;");
     } else {
       InitialNode();
     }
   }
+
+  /*
+  void findOnMap2() {
+    nodeid = Integer.parseInt(nodeidinput.getText());
+    String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
+    if (!floor.equals(Floor(currentIndex))) {
+      currentIndex = findFloor(floor);
+    }
+    imageView.setImage(image[currentIndex]);
+    setFloor(currentIndex);
+    Point2D pivotOnTarget =
+        new Point2D(
+            qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
+            qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
+    pane.animate(Duration.millis(200))
+        .interpolateWith(Interpolator.EASE_BOTH)
+        .zoomBy(pane.getCurrentScale(), pivotOnTarget);
+  }
+
+   */
 }
