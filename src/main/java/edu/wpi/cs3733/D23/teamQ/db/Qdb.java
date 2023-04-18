@@ -7,37 +7,49 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 public class Qdb {
+  private AccountDaoImpl accountTable;
 
-  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  public LocationDaoImpl locationTable;
 
-  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+  public NodeDaoImpl nodeTable;
+  public EdgeDaoImpl edgeTable;
+  public MoveDaoImpl moveTable;
 
-  private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
-  private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  private ConferenceRequestDaoImpl conferenceRequestTable =
-      ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private FlowerRequestDaoImpl flowerRequestTable =
-      FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private MealRequestDaoImpl mealRequestTable =
-      MealRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private FurnitureRequestDaoImpl furnitureRequestTable =
-      FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private PatientTransportRequestDaoImpl patientTransportRequestTable =
-      PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable =
-      OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable =
-      MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
+  private QuestionDaoImpl questionTable;
+
+  private ConferenceRequestDaoImpl conferenceRequestTable;
+  private FlowerRequestDaoImpl flowerRequestTable;
+  private MealRequestDaoImpl mealRequestTable;
+  private FurnitureRequestDaoImpl furnitureRequestTable;
+  private PatientTransportRequestDaoImpl patientTransportRequestTable;
+  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
+  private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
+  private ServiceRequestDaoImpl serviceRequestTable;
 
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
     if (single_instance == null) single_instance = new Qdb();
     return single_instance;
+  }
+
+  private Qdb() {
+    accountTable = AccountDaoImpl.getInstance();
+    locationTable = LocationDaoImpl.getInstance();
+    nodeTable = NodeDaoImpl.getInstance(locationTable);
+    edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+    moveTable = MoveDaoImpl.getInstance(nodeTable);
+    questionTable = QuestionDaoImpl.getInstance();
+    conferenceRequestTable = ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
+    flowerRequestTable = FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
+    mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
+    furnitureRequestTable = FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
+    patientTransportRequestTable =
+        PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
+    officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+    medicalSuppliesRequestTable =
+        MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+    serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
   }
 
   public Account retrieveAccount(String username) {
@@ -90,7 +102,8 @@ public class Qdb {
   }
 
   public boolean addConferenceRequest(ConferenceRequest cr) {
-    return conferenceRequestTable.addRow(cr);
+    conferenceRequestTable.addRow(cr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<ConferenceRequest> retrieveAllConferenceRequests() {
@@ -111,7 +124,8 @@ public class Qdb {
   }
 
   public boolean addFlowerRequest(FlowerRequest fr) {
-    return flowerRequestTable.addRow(fr);
+    flowerRequestTable.addRow(fr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<FlowerRequest> retrieveAllFlowerRequests() {
@@ -120,6 +134,10 @@ public class Qdb {
 
   public List<ServiceRequest> retrieveAllServiceRequests() {
     return serviceRequestTable.getAllRows();
+  }
+
+  public List<ServiceRequest> retrieveUserServiceRequests(String user) {
+    return serviceRequestTable.getUserRows(user);
   }
 
   public ServiceRequest retrieveServiceRequest(int requestID) {
@@ -264,7 +282,8 @@ public class Qdb {
   }
 
   public boolean addMealRequest(MealRequest mr) {
-    return mealRequestTable.addRow(mr);
+    mealRequestTable.addRow(mr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<MealRequest> retrieveAllMealRequests() {
@@ -285,7 +304,8 @@ public class Qdb {
   }
 
   public boolean addFurnitureRequest(FurnitureRequest fr) {
-    return furnitureRequestTable.addRow(fr);
+    furnitureRequestTable.addRow(fr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<FurnitureRequest> retrieveAllFurnitureRequests() {
@@ -306,7 +326,8 @@ public class Qdb {
   }
 
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
-    return patientTransportRequestTable.addRow(ptr);
+    patientTransportRequestTable.addRow(ptr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<PatientTransportRequest> retrieveAllPatientTransportRequests() {
@@ -327,7 +348,8 @@ public class Qdb {
   }
 
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
-    return officeSuppliesRequestTable.addRow(osr);
+    officeSuppliesRequestTable.addRow(osr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
@@ -356,7 +378,8 @@ public class Qdb {
   }
 
   public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
-    return medicalSuppliesRequestTable.addRow(msr);
+    medicalSuppliesRequestTable.addRow(msr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
@@ -366,5 +389,13 @@ public class Qdb {
   public ServiceRequest retrieveLastRequest() {
     serviceRequestTable.populate();
     return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
+  }
+
+  public boolean deleteServiceRequest(int requestID) {
+    return serviceRequestTable.deleteRow(requestID);
+  }
+
+  public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
+    return serviceRequestTable.updateRow(requestID, sr);
   }
 }

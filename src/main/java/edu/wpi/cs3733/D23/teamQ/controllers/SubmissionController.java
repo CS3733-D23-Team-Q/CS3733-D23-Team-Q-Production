@@ -10,7 +10,5 @@ public class SubmissionController {
 
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
-    // NEED TO CHECK CORRECT NUMBER IS RETURNED
-    requestID.setText("Request ID: " + qdb.retrieveLastRequest().getRequestID());
   }
 }
