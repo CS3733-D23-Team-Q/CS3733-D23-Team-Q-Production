@@ -655,6 +655,7 @@ public class GraphicalMapEditorController {
   @FXML
   void NextClicked(MouseEvent event) {
     shownext();
+    /*
     new Thread(
             () -> {
               try {
@@ -663,6 +664,8 @@ public class GraphicalMapEditorController {
               }
             })
         .start();
+
+     */
   }
 
   String Floor(int x) {
@@ -682,6 +685,7 @@ public class GraphicalMapEditorController {
   @FXML
   void LastClicked(MouseEvent event) {
     showlast();
+    /*
     new Thread(
             () -> {
               try {
@@ -690,6 +694,8 @@ public class GraphicalMapEditorController {
               }
             })
         .start();
+
+     */
   }
 
   void showlast() {
