@@ -62,17 +62,6 @@ public class ServiceRequestDaoImpl {
     return serviceRequests;
   }
 
-  public List<ServiceRequest> getUserRows(String user) {
-    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
-    for (int i = 0; i < serviceRequests.size(); i++) {
-      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
-          || serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
-        list.add(serviceRequests.get(i));
-      }
-    }
-    return list;
-  }
-
   public ServiceRequest retrieveRow(Integer ID) {
     try {
       int index = this.getIndex(ID);
@@ -92,6 +81,18 @@ public class ServiceRequestDaoImpl {
     }
     throw new RuntimeException("No service request found with ID: " + requestID);
   }
+
+  public List<ServiceRequest> getUserRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          || serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
 
   /**
    * deletes medicalSuppliesRequest from list of medicalSuppliesRequests

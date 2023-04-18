@@ -6,12 +6,24 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class NavigationSubmenuController {
+public class NavigationSubmenuAdminController {
   @FXML VBox navigationSM;
   @FXML MFXButton pathfinder;
+
+  @FXML MFXButton editor;
+  @FXML MFXButton oMover;
 
   @FXML
   public void pathfinderClicked() {
     Navigation.navigate(Screen.PATH_FINDING);
+  }
+
+  @FXML
+  public void editorClicked() {
+    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
+  }
+
+  public void moveClicked() {
+    Navigation.navigate(Screen.OFFICE_MOVE);
   }
 }
