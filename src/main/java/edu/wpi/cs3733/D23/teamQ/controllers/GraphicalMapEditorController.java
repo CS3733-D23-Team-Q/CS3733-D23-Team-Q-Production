@@ -24,7 +24,6 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -34,6 +33,10 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 public class GraphicalMapEditorController {
+
+  List<Integer> NodeID = new ArrayList<>();
+  private double posx = 0;
+  private double posy = 0;
 
   private List<Line> line = new ArrayList<>();
 
@@ -117,7 +120,9 @@ public class GraphicalMapEditorController {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       if (coordAlert(xinitial, yinitial, alerts, image1)) {
         if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
+
           nodeid = Integer.parseInt(nodeidinput.getText());
+          //  parent.getChildren().remove(findButton(nodeid));
           newLongName = longnameinitial.getText();
           newNodeType = nodetypeinitial.getText();
           newShortName = shortnameinitial.getText();
@@ -137,7 +142,12 @@ public class GraphicalMapEditorController {
                   newFloor,
                   newBuilding,
                   Qdb.getInstance().locationTable.retrieveRow(nodeid)));
-          refresh();
+
+          // refresh();
+          Node n = qdb.nodeTable.retrieveRow(nodeid);
+          Button but = createButton(n);
+          parent.getChildren().remove(button.get(findButton(nodeid)));
+          parent.getChildren().set(findButton(nodeid), but);
         }
       }
     }
@@ -151,9 +161,16 @@ public class GraphicalMapEditorController {
   @FXML
   void deleteclicked(MouseEvent event) {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
+      nodeid = Integer.parseInt(nodeidinput.getText());
       qdb.nodeTable.deleteRow(nodeid);
       qdb.locationTable.deleteRow(nodeid);
-      refresh();
+      // refresh();
+
+      parent.getChildren().removeAll(button);
+      button.clear();
+      button = addButtons(Floor(currentIndex));
+      parent.getChildren().addAll(button);
+
     } else {
       InitialNode();
     }
@@ -204,16 +221,27 @@ public class GraphicalMapEditorController {
           newFloor = floorinitial.getText();
           newXcoord = Integer.parseInt(xinitial.getText());
           newYcoord = Integer.parseInt(yinitial.getText());
-
-          qdb.nodeTable.addRow(
+          Node newnode =
               new Node(
                   nodeid,
                   newXcoord,
                   newYcoord,
                   newFloor,
                   newBuilding,
-                  Qdb.getInstance().locationTable.retrieveRow(nodeid)));
-          refresh();
+                  Qdb.getInstance().locationTable.retrieveRow(nodeid));
+          qdb.nodeTable.addRow(newnode);
+
+          parent.getChildren().removeAll(button);
+          Button but = createButton(newnode);
+          button.add(but);
+          parent.getChildren().addAll(button);
+
+          // refresh();
+          /*
+                   Button but = createButton(newnode);
+                   parent.getChildren().add(but);
+
+          */
         }
       }
     }
@@ -255,14 +283,17 @@ public class GraphicalMapEditorController {
                 .interpolateWith(Interpolator.EASE_BOTH)
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
+          /*
           if (e.getButton() == MouseButton.SECONDARY) {
-            xcoord = (int) e.getX() * 5;
-            ycoord = (int) e.getY() * 5;
+            xcoord = (int) e.getSceneX() * 5;
+            ycoord = (int) e.getSceneY() * 5;
             nodeidinput.setText("");
             InitialNode();
             xinitial.setText(Integer.toString(xcoord));
             yinitial.setText(Integer.toString(ycoord));
           }
+
+           */
         });
     /*
     Text texts = new Text();
@@ -307,6 +338,7 @@ public class GraphicalMapEditorController {
   }
 
   public List<Button> addButtons(String floor) {
+    NodeID.clear();
     List<Button> buttons = new ArrayList<>();
     List<Node> nodes = qdb.retrieveAllNodes();
     List<Node> ffNodes = new ArrayList<>();
@@ -359,15 +391,31 @@ public class GraphicalMapEditorController {
           });
       node.setOnMousePressed(
           e -> {
-            // mouseX = e.getX();
+            mouseX = e.getX();
+            mouseY = e.getY();
+            /*
             mouseX = e.getSceneX() - node.getLayoutX();
-            // mouseY = e.getY();
+
             mouseY = e.getSceneY() - node.getLayoutY();
+
+               */
           });
       node.setOnMouseDragged(
           e -> {
-            node.setLayoutX(e.getSceneX() - mouseX);
-            node.setLayoutY(e.getSceneY() - mouseY);
+            double distanceX = e.getX() - mouseX;
+            double distanceY = e.getY() - mouseY;
+
+            posx = node.getLayoutX() + distanceX;
+            posy = node.getLayoutY() + distanceY;
+
+            node.setLayoutX(posx);
+            node.setLayoutY(posy);
+
+            /*
+              node.setLayoutX(e.getSceneX() - mouseX);
+              node.setLayoutY(e.getSceneY() - mouseY);
+
+            */
             // text.setLayoutX(e.getSceneX() - mouseX + 3);
             // text.setLayoutY(e.getSceneY() - mouseY + 3);
             node.setCursor(Cursor.MOVE);
@@ -375,8 +423,8 @@ public class GraphicalMapEditorController {
       node.setOnMouseReleased(
           e -> {
             node.setCursor(Cursor.HAND);
-            int currentX = (int) node.getLayoutX() * 5;
-            int currentY = (int) node.getLayoutY() * 5;
+            int currentX = (int) (node.getLayoutX() * 5);
+            int currentY = (int) (node.getLayoutY() * 5);
             Node newNode = qdb.retrieveNode(nodeID);
             newNode.setXCoord(currentX);
             newNode.setYCoord(currentY);
@@ -391,6 +439,7 @@ public class GraphicalMapEditorController {
        */
       parent.getChildren().add(node);
       buttons.add(node);
+      NodeID.add(nodeID);
     }
     return buttons;
   }
@@ -707,5 +756,89 @@ public class GraphicalMapEditorController {
   void HideEdges() {
     if (displayEdges == true) removeLines(line);
     displayEdges = false;
+  }
+
+  int findButton(int id) {
+    int x = 0;
+    for (int i = 0; i < NodeID.size(); i++) {
+      if (NodeID.get(i) == id) {
+        x = i;
+      }
+    }
+    return x;
+  }
+
+  Button createButton(Node n) {
+    int nodeID = n.getNodeID();
+    int x = n.getXCoord() / 5;
+    int y = n.getYCoord() / 5;
+    Button node = new Button();
+    node.setLayoutX(x);
+    node.setLayoutY(y);
+    node.setStyle(
+        "-fx-background-radius: 5em;"
+            + "-fx-min-width: 3px;"
+            + "-fx-min-height: 3px;"
+            + "-fx-max-width: 3px;"
+            + "-fx-max-height: 3px;"
+            + "-fx-background-insets: 0px;");
+
+    node.setOnMouseClicked(
+        e -> {
+          nodeidinput.setText(Integer.toString(nodeID));
+          NodeInformation(nodeID);
+        });
+    node.setOnMouseEntered(
+        e -> {
+          int x2 = n.getXCoord() / 5;
+          int y2 = n.getYCoord() / 5;
+          Location location = qdb.retrieveLocation(nodeID);
+          String name = location.getShortName();
+          Pattern pattern = Pattern.compile("(?i).*hall.*");
+          if (!pattern.matcher(name).matches()) {
+            text = new Text(x2 + 3, y2 + 3, name);
+            text.setStyle("-fx-font-size: 8px;");
+            parent.getChildren().add(text);
+          } else {
+            text = new Text(x2 + 3, y2 + 3, "");
+            text.setStyle("-fx-font-size: 8px;");
+            parent.getChildren().add(text);
+          }
+        });
+    node.setOnMouseExited(
+        e -> {
+          parent.getChildren().remove(text);
+        });
+    node.setOnMousePressed(
+        e -> {
+          mouseX = e.getX();
+          mouseY = e.getY();
+        });
+    node.setOnMouseDragged(
+        e -> {
+          double distanceX = e.getX() - mouseX;
+          double distanceY = e.getY() - mouseY;
+
+          posx = node.getLayoutX() + distanceX;
+          posy = node.getLayoutY() + distanceY;
+
+          node.setLayoutX(posx);
+          node.setLayoutY(posy);
+
+          node.setCursor(Cursor.MOVE);
+        });
+    node.setOnMouseReleased(
+        e -> {
+          node.setCursor(Cursor.HAND);
+          int currentX = (int) (node.getLayoutX() * 5);
+          int currentY = (int) (node.getLayoutY() * 5);
+          Node newNode = qdb.retrieveNode(nodeID);
+          newNode.setXCoord(currentX);
+          newNode.setYCoord(currentY);
+          // after clicking confirm button
+          qdb.updateNode(nodeID, newNode);
+          NodeInformation(nodeID);
+        });
+    return node;
   }
 }
