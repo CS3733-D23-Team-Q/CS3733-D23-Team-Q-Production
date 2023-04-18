@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.AStar;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.Context;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.DFS;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.Djikstra;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.*;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
@@ -37,6 +34,7 @@ public class PathfindingController {
   Qdb qdb = Qdb.getInstance();
   // Stage stage = App.getPrimaryStage();
   Context pathfindingAlgorithmSelection = new Context();
+  BFS bfs = new BFS();
   AStar aStar = new AStar();
   DFS dfs = new DFS();
   Djikstra djikstra = new Djikstra();
@@ -211,6 +209,7 @@ public class PathfindingController {
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Node> moveNodes = new ArrayList<>();
     List<Node> floorNodes = new ArrayList<>(); // fNodes
+
     restNodes.removeAll(restNodes);
     deptNodes.removeAll(deptNodes);
     labsNodes.removeAll(labsNodes);
@@ -218,6 +217,12 @@ public class PathfindingController {
     confNodes.removeAll(confNodes);
     retlNodes.removeAll(retlNodes);
     servNodes.removeAll(servNodes);
+
+    l1nodes.removeAll(l1nodes);
+    l2nodes.removeAll(l2nodes);
+    ffnodes.removeAll(ffnodes);
+    sfnodes.removeAll(sfnodes);
+    tfnodes.removeAll(tfnodes);
 
     for (Move m : allMoves) {
       Date d = m.getDate();
@@ -279,6 +284,7 @@ public class PathfindingController {
               + "-fx-background-insets: 0px;");
       parent.getChildren().add(node);
       int index = parent.getChildren().indexOf(node);
+      // System.out.println(index);
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
@@ -320,6 +326,7 @@ public class PathfindingController {
               }
             }
           });
+      // System.out.println(parent.getChildren().size());
       previousNodes.add(node);
       restNodes = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restNodes, index);
       deptNodes = addSpecificNode("\\bDEPT\\b", nodetype, deptNodes, index);
@@ -401,8 +408,8 @@ public class PathfindingController {
       // that changes whenever the button is clicked)
       path = pathfindingAlgorithmSelection.run(start, target);
     } else if (algorithm.equals("bfs")) {
-      // pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
-      // path = pathfindingAlgorithmSelection.run(start, target);
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
+      path = pathfindingAlgorithmSelection.run(start, target);
     } else if (algorithm.equals("dfs")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
       path = pathfindingAlgorithmSelection.run(start, target);
@@ -825,8 +832,8 @@ public class PathfindingController {
   }
 
   public void dateSelected(RadioMenuItem itemSelect) {
-    clearButtonClicked();
     if (itemSelect.isSelected()) {
+      clearButtonClicked();
       date = Date.valueOf(itemSelect.getText());
       refresh();
     }
@@ -855,8 +862,9 @@ public class PathfindingController {
     // unhighlight(restNodes);
     // unhighlight(cafeNodes);
     cfnodes = setCF(cfnodes);
+    // System.out.println(cfnodes.size());
     for (int i = 0; i < cfnodes.size(); i++) {
-      unhighlight(cfnodes.get(i).getValue());
+      unhighlight(cfnodes.get(i).getValue()); // + 1
     }
     highlightedNodes.removeAll(highlightedNodes);
     startSelect.setValue(null);
