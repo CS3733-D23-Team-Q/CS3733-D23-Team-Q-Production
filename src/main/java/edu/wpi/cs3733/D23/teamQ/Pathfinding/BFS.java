@@ -6,7 +6,6 @@ import java.util.*;
 
 public class BFS implements IPathfinding {
 
-
   @Override
   public ArrayList<Node> run(Node start, Node target) {
     Queue<Node> queue = new LinkedList<>();
