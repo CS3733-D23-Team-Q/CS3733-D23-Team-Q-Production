@@ -42,8 +42,10 @@ public class ListServiceRequestController {
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
-    specialInstructions.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
-    assignee.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("assignee"));
+    specialInstructions.setCellValueFactory(
+        new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
+    assignee.setCellValueFactory(
+        new PropertyValueFactory<ServiceRequest, String>("assigneeUsername"));
     date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
     time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
     tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
@@ -51,47 +53,44 @@ public class ListServiceRequestController {
 
   @FXML
   public void rowSelected() {
-    if (qdb.retrieveFlowerRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+    if (qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       flowerRequest =
-          qdb.retrieveFlowerRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+          qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
       Navigation.navigateRight(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       conferenceRequest =
           qdb.retrieveConferenceRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
       Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
     } else if (qdb.retrieveMealRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       mealRequest =
-          qdb.retrieveMealRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+          qdb.retrieveMealRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
       Navigation.navigateRight(Screen.MEAL_REQUEST_DISPLAY);
     } else if (qdb.retrieveOfficeSuppliesRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       officeSuppliesRequest =
           qdb.retrieveOfficeSuppliesRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
       Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
     } else if (qdb.retrieveFurnitureRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       furnitureRequest =
           qdb.retrieveFurnitureRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
       Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
     } else if (qdb.retrieveMedicalSuppliesRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       medicalSuppliesRequest =
           qdb.retrieveMedicalSuppliesRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
       Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST_DISPLAY);
     }
   }

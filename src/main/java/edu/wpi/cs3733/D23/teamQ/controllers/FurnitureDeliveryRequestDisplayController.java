@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import static edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController.getFurnitureRequest;
+
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
@@ -40,12 +42,14 @@ public class FurnitureDeliveryRequestDisplayController {
 
   @FXML
   public void initialize() {
+    Qdb qdb = Qdb.getInstance();
     timeField.setItems(timeList);
     furnitureChoiceField.setItems(TypeOfFurniture);
-    assigneeField.setText(
-        ListServiceRequestController.getFurnitureRequest().getAssignee().getUsername());
+    assigneeField.setText(getFurnitureRequest().getAssignee().getUsername());
     roomNumberField.setText(
-        ListServiceRequestController.getFurnitureRequest().getNode().toString());
+        qdb.retrieveNode(ListServiceRequestController.getFurnitureRequest().getNodeID())
+            .getLocation()
+            .getLongName());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
@@ -54,13 +58,13 @@ public class FurnitureDeliveryRequestDisplayController {
     timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
-    furnitureChoiceField.setText(ListServiceRequestController.getFurnitureRequest().getItem());
+    furnitureChoiceField.setText(getFurnitureRequest().getItem());
   }
 
   @FXML
   public void deleteButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-    qdb.deleteFurnitureRequest(ListServiceRequestController.getFurnitureRequest().getRequestID());
+    qdb.deleteFurnitureRequest(getFurnitureRequest().getRequestID());
   }
 
   @FXML
@@ -75,9 +79,9 @@ public class FurnitureDeliveryRequestDisplayController {
 
     FurnitureRequest newFurR =
         new FurnitureRequest(
-            ListServiceRequestController.getFurnitureRequest().getRequestID(),
-            ListServiceRequestController.getFurnitureRequest().getNode(),
-            ListServiceRequestController.getFurnitureRequest().getRequester(),
+            getFurnitureRequest().getRequestID(),
+            getFurnitureRequest().getNode(),
+            getFurnitureRequest().getRequester(),
             (Account) assigneeField.getValue(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
@@ -85,7 +89,6 @@ public class FurnitureDeliveryRequestDisplayController {
             0,
             (String) furnitureChoiceField.getValue());
 
-    qdb.updateFurnitureRequest(
-        ListServiceRequestController.getFurnitureRequest().getRequestID(), newFurR);
+    qdb.updateFurnitureRequest(getFurnitureRequest().getRequestID(), newFurR);
   }
 }
