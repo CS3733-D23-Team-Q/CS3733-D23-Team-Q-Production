@@ -96,6 +96,7 @@ public class Qdb {
   }
 
   public boolean addConferenceRequest(ConferenceRequest cr) {
+    serviceRequestTable.addRow(cr);
     return conferenceRequestTable.addRow(cr);
   }
 
@@ -116,6 +117,7 @@ public class Qdb {
   }
 
   public boolean addFlowerRequest(FlowerRequest fr) {
+    serviceRequestTable.addRow(fr);
     return flowerRequestTable.addRow(fr);
   }
 
@@ -268,6 +270,7 @@ public class Qdb {
   }
 
   public boolean addMealRequest(MealRequest mr) {
+    serviceRequestTable.addRow(mr);
     return mealRequestTable.addRow(mr);
   }
 
@@ -288,6 +291,7 @@ public class Qdb {
   }
 
   public boolean addFurnitureRequest(FurnitureRequest fr) {
+    serviceRequestTable.addRow(fr);
     return furnitureRequestTable.addRow(fr);
   }
 
@@ -308,6 +312,7 @@ public class Qdb {
   }
 
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
+    serviceRequestTable.addRow(ptr);
     return patientTransportRequestTable.addRow(ptr);
   }
 
@@ -328,6 +333,7 @@ public class Qdb {
   }
 
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
+    serviceRequestTable.addRow(osr);
     return officeSuppliesRequestTable.addRow(osr);
   }
 
@@ -356,6 +362,7 @@ public class Qdb {
   }
 
   public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
+    serviceRequestTable.addRow(msr);
     return medicalSuppliesRequestTable.addRow(msr);
   }
 

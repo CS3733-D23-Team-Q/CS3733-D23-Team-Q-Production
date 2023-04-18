@@ -75,7 +75,7 @@ public class MedicalSuppliesRequestController {
             ListServiceRequestController.getMedicalRequest().getRequestID(),
             qdb.retrieveAccount(LoginController.getUsername()),
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             (Node) roomNumberField.getValue(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

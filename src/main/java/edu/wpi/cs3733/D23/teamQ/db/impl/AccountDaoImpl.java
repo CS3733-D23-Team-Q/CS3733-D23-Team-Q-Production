@@ -261,7 +261,15 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   public ObservableList<String> getAllNames() {
     ObservableList<String> names = FXCollections.observableArrayList();
     for (Account p : accounts) {
-      names.add(p.getFirstName() + " " + p.getLastName() + ", " + p.getTitle());
+      names.add(
+          p.getUsername()
+              + ", ("
+              + p.getFirstName()
+              + " "
+              + p.getLastName()
+              + ", "
+              + p.getTitle()
+              + ")");
     }
     return names;
   }

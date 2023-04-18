@@ -26,6 +26,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
 
   private FlowerRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
+    this.accountTable = accountTable;
     populate();
     if (flowerRequests.size() != 0) {
       nextID = flowerRequests.get(flowerRequests.size() - 1).getRequestID() + 1;

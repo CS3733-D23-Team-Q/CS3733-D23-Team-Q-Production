@@ -1,61 +1,63 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.IServiceRequest;
+
 import java.lang.reflect.Type;
 import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class MealRequest extends ServiceRequest implements IServiceRequest {
-  private String drink;
-  private String entree;
-  private String side;
-  private Type requestType = this.getClass();
+    private String drink;
+    private String entree;
+    private String side;
+    private Type requestType = this.getClass();
 
-  public MealRequest(
-      int requestID,
-      Account requester,
-      int progress,
-      Account assignee,
-      Node node,
-      String specialInstructions,
-      Date date,
-      String time,
-      String drink,
-      String entree,
-      String side) {
-    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
-    this.drink = drink;
-    this.entree = entree;
-    this.side = side;
-  }
-
-  public MealRequest(
-      Account requester,
-      int progress,
-      Account assignee,
-      Node node,
-      String specialInstructions,
-      Date date,
-      String time,
-      String drink,
-      String entree,
-      String side) {
-    super(0, requester, progress, assignee, node, specialInstructions, date, time);
-    this.drink = drink;
-    this.entree = entree;
-    this.side = side;
-  }
-
-  public int progressToInt(Progress progress) {
-    if (progress == Progress.BLANK) {
-      return 0;
-    } else if (progress == Progress.PROCESSING) {
-      return 1;
-    } else {
-      return 2;
+    public MealRequest(
+            int requestID,
+            Node node,
+            Account requester,
+            Account assignee,
+            String specialInstructions,
+            Date date,
+            String time,
+            int progress,
+            String drink,
+            String entree,
+            String side) {
+        super(0, node, assignee, requester, specialInstructions, date, time, progress);
+        this.drink = drink;
+        this.entree = entree;
+        this.side = side;
     }
-  }
+
+    public MealRequest(
+            Node node,
+            Account requester,
+            Account assignee,
+            String specialInstructions,
+            Date date,
+            String time,
+            int progress,
+            String drink,
+            String entree,
+            String side) {
+        super(0, node, assignee, requester, specialInstructions, date, time, progress);
+        this.drink = drink;
+        this.entree = entree;
+        this.side = side;
+    }
+
+    public int progressToInt(Progress progress) {
+        if (progress == Progress.BLANK) {
+            return 0;
+        } else if (progress == Progress.PROCESSING) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 }

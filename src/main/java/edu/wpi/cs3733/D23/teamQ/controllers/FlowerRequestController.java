@@ -75,7 +75,7 @@ public class FlowerRequestController {
         new FlowerRequest(
             qdb.retrieveAccount(LoginController.getUsername()),
             0,
-            qdb.retrieveAccount(assigneeField.getSelectedItem().toString()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveNode(qdb.getNodeFromLocation(roomNumberField.getSelectedItem().toString())),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

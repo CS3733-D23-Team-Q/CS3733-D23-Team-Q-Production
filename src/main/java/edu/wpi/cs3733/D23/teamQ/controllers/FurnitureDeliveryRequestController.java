@@ -70,7 +70,7 @@ public class FurnitureDeliveryRequestController {
         new FurnitureRequest(
             qdb.retrieveAccount(LoginController.getLoginUsername()),
             0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveNode(Integer.parseInt(roomNumberField.getValue().toString())),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

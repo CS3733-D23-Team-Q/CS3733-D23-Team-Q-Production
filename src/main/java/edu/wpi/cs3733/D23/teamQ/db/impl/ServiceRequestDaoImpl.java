@@ -99,4 +99,8 @@ public class ServiceRequestDaoImpl {
     }
     return -1;
   }
+
+  public boolean addRow(ServiceRequest serviceRequest) {
+    return serviceRequests.add(serviceRequest);
+  }
 }
