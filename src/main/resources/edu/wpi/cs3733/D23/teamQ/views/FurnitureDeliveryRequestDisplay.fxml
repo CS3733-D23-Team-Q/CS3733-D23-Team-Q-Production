@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -22,17 +22,17 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="assigneeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
-            <VBox>
+            <VBox fx:id="roomNumberField">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="roomNumberField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox minHeight="-Infinity">
@@ -52,7 +52,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXTextField fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
+                  <MFXFilterComboBox fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
                </children>
             </VBox>
             <VBox>
@@ -62,7 +62,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="itemRequestedField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="furnitureChoiceField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox>
