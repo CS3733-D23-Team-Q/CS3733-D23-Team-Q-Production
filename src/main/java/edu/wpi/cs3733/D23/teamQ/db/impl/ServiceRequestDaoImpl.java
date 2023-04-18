@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 
@@ -7,6 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,6 +63,25 @@ public class ServiceRequestDaoImpl {
 
     public List<ServiceRequest> getAllRows() {
         return serviceRequests;
+    }
+
+    public List<ServiceRequest> getUserRows(String user) {
+        ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+        for (int i = 0; i < serviceRequests.size(); i++) {
+            if (serviceRequests.get(i).getRequester().equals(user)
+                    || serviceRequests
+                    .get(i)
+                    .getAssignee()
+                    .equals(
+                            Qdb.getInstance().retrieveAccount(user).getFirstName()
+                                    + " "
+                                    + Qdb.getInstance().retrieveAccount(user).getLastName()
+                                    + ", "
+                                    + Qdb.getInstance().retrieveAccount(user).getTitle())) {
+                list.add(serviceRequests.get(i));
+            }
+        }
+        return list;
     }
 
     public ServiceRequest retrieveRow(Integer ID) {
