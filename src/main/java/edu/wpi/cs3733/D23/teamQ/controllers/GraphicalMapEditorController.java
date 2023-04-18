@@ -230,9 +230,20 @@ public class GraphicalMapEditorController {
 
   @FXML
   void clearclicked(MouseEvent event) {
+
     alert.clearLabelAlert(alerts, image1);
     nodeidinput.setText("");
     InitialNode();
+    button
+        .get(findButton(nodeid))
+        .setStyle(
+            "-fx-background-radius: 5em;"
+                + "-fx-min-width: 3px;"
+                + "-fx-min-height: 3px;"
+                + "-fx-max-width: 3px;"
+                + "-fx-max-height: 3px;"
+                + "-fx-background-insets: 0px;"
+                + "-fx-background-color: #F1F1F1");
   }
 
   @FXML
@@ -304,15 +315,21 @@ public class GraphicalMapEditorController {
   void shownext() {
     HideEdges();
     currentIndex++;
-    if (!button.isEmpty()) parent.getChildren().removeAll(button);
     if (currentIndex < file.length) {
-      button = addButtons(Floor(currentIndex));
+      if (!button.isEmpty()) {
+        refreshNodes();
+      } else {
+        button = addButtons(Floor(currentIndex));
+      }
       imageView.setImage(image[currentIndex]);
-      // refresh();
 
     } else {
       currentIndex = 0;
-      button = addButtons(Floor(currentIndex));
+      if (!button.isEmpty()) {
+        refreshNodes();
+      } else {
+        button = addButtons(Floor(currentIndex));
+      }
       imageView.setImage(image[currentIndex]);
     }
     setFloor(currentIndex);
@@ -342,15 +359,33 @@ public class GraphicalMapEditorController {
               + "-fx-min-height: 3px;"
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
-              + "-fx-background-insets: 0px;");
+              + "-fx-background-insets: 0px;"
+              + "-fx-background-color: #F1F1F1");
 
       node.setOnMouseClicked(
           e -> {
+            node.setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #3492D5");
             nodeidinput.setText(Integer.toString(nodeID));
             NodeInformation(nodeID);
           });
       node.setOnMouseEntered(
           e -> {
+            node.setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #3492D5");
+            node.setCursor(Cursor.HAND);
             int x2 = n.getXCoord() / 5;
             int y2 = n.getYCoord() / 5;
             Location location = qdb.retrieveLocation(nodeID);
@@ -368,10 +403,26 @@ public class GraphicalMapEditorController {
           });
       node.setOnMouseExited(
           e -> {
+            node.setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #F1F1F1");
             parent.getChildren().remove(text);
           });
       node.setOnMousePressed(
           e -> {
+            node.setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #3492D5");
             mouseX = e.getX();
             mouseY = e.getY();
             /*
@@ -383,6 +434,14 @@ public class GraphicalMapEditorController {
           });
       node.setOnMouseDragged(
           e -> {
+            node.setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #3492D5");
             double distanceX = e.getX() - mouseX;
             double distanceY = e.getY() - mouseY;
 
@@ -403,7 +462,14 @@ public class GraphicalMapEditorController {
           });
       node.setOnMouseReleased(
           e -> {
-            node.setCursor(Cursor.HAND);
+            node.setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #F1F1F1");
             int currentX = (int) (node.getLayoutX() * 5);
             int currentY = (int) (node.getLayoutY() * 5);
             Node newNode = qdb.retrieveNode(nodeID);
@@ -701,15 +767,23 @@ public class GraphicalMapEditorController {
   void showlast() {
     HideEdges();
     currentIndex--;
-    if (!button.isEmpty()) parent.getChildren().removeAll(button);
+
     if (currentIndex > 0) {
-      button = addButtons(Floor(currentIndex));
+      if (!button.isEmpty()) {
+        refreshNodes();
+      } else {
+        button = addButtons(Floor(currentIndex));
+      }
       imageView.setImage(image[currentIndex]);
       // refresh();
 
     } else {
       currentIndex = 4;
-      button = addButtons(Floor(currentIndex));
+      if (!button.isEmpty()) {
+        refreshNodes();
+      } else {
+        button = addButtons(Floor(currentIndex));
+      }
       imageView.setImage(image[currentIndex]);
     }
     setFloor(currentIndex);
@@ -873,6 +947,16 @@ public class GraphicalMapEditorController {
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
 
       // button.get(findButton(nodeid)).setStyle("-fx-background-color: #3966af;");
+      button
+          .get(findButton(nodeid))
+          .setStyle(
+              "-fx-background-radius: 5em;"
+                  + "-fx-min-width: 3px;"
+                  + "-fx-min-height: 3px;"
+                  + "-fx-max-width: 3px;"
+                  + "-fx-max-height: 3px;"
+                  + "-fx-background-insets: 0px;"
+                  + "-fx-background-color: #3492D5");
     } else {
       InitialNode();
     }

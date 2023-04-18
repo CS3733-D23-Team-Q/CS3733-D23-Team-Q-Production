@@ -9,17 +9,17 @@
    <children>
       <AnchorPane prefHeight="605.0" prefWidth="600.0">
          <children>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="36.0" prefHeight="29.0" prefWidth="479.0" text="Double-click the mouse: Enlarge the map.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="36.0" prefHeight="29.0" prefWidth="479.0" text="Double-click the mouse: Zoom in the map.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="152.0" prefHeight="29.0" prefWidth="479.0" text="Drag the node: Edit the location of nodes by draging them.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="152.0" prefHeight="29.0" prefWidth="471.0" text="Drag the node: Edit the X-coord and Y-coord of nodes.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="181.0" prefHeight="29.0" prefWidth="479.0" text="Find: Display the node information and find the node on the map.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="181.0" prefHeight="29.0" prefWidth="479.0" text="Find: Find the node on the map (Blue), and display the information.">
                <font>
                   <Font size="14.0" />
                </font>
@@ -29,17 +29,17 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="239.0" prefHeight="29.0" prefWidth="495.0" text="Set: Update the information of the node and find the node on the map.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="239.0" prefHeight="29.0" prefWidth="495.0" text="Set: Update the node and find the node on the map (Blue).">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="268.0" prefHeight="29.0" prefWidth="479.0" text="Add: Add a new node and find the node on the map.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="268.0" prefHeight="29.0" prefWidth="479.0" text="Add: Add a new node and find the node on the map (Blue).">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="297.0" prefHeight="29.0" prefWidth="479.0" text="Clear: Clear the node information table.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="297.0" prefHeight="29.0" prefWidth="479.0" text="Clear: Clear the node information table, and deselete the node.">
                <font>
                   <Font size="14.0" />
                </font>
@@ -69,12 +69,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="65.0" prefHeight="29.0" prefWidth="479.0" text="Alt+Mouse Wheel Up / Alt+&quot;+&quot;: Enlarge the map.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="65.0" prefHeight="29.0" prefWidth="479.0" text="Ctrl+Mouse Wheel Up: Zoom in the map.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="94.0" prefHeight="29.0" prefWidth="479.0" text="Alt+Mouse Wheel Down / Alt + &quot;-&quot;: Shrink the map.">
+            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="94.0" prefHeight="29.0" prefWidth="479.0" text="Ctrl+Mouse Wheel Down: Zoom out the map.">
                <font>
                   <Font size="14.0" />
                </font>
