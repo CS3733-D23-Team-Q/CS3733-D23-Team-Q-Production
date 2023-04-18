@@ -3,15 +3,16 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class ServiceRequestDaoImpl {
-  private ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
+  private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
 
@@ -75,6 +76,18 @@ public class ServiceRequestDaoImpl {
     }
     return -1;
   }
+
+  public List<ServiceRequest> getUserRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          || serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
 
   /**
    * deletes medicalSuppliesRequest from list of medicalSuppliesRequests
