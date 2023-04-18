@@ -69,9 +69,9 @@ public class MedicalSuppliesRequestDisplayController {
     MedicalSuppliesRequest newMSP =
         new MedicalSuppliesRequest(
             ListServiceRequestController.getMedicalRequest().getRequestID(),
-            "temp requester",
+            ListServiceRequestController.getMedicalRequest().getRequester(),
             0,
-            "temp assignee",
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             ListServiceRequestController.getMedicalRequest().getNode(),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),

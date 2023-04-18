@@ -17,17 +17,19 @@ public class Qdb {
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
   private ConferenceRequestDaoImpl conferenceRequestTable =
-      ConferenceRequestDaoImpl.getInstance(nodeTable);
-  private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
-  private MealRequestDaoImpl mealRequestTable = MealRequestDaoImpl.getInstance(nodeTable);
+      ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
+  private FlowerRequestDaoImpl flowerRequestTable =
+      FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
+  private MealRequestDaoImpl mealRequestTable =
+      MealRequestDaoImpl.getInstance(accountTable, nodeTable);
   private FurnitureRequestDaoImpl furnitureRequestTable =
-      FurnitureRequestDaoImpl.getInstance(nodeTable);
+      FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
   private PatientTransportRequestDaoImpl patientTransportRequestTable =
-      PatientTransportRequestDaoImpl.getInstance(nodeTable);
+      PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable =
-      OfficeSuppliesRequestDaoImpl.getInstance(nodeTable);
+      OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable =
-      MedicalSuppliesRequestDaoImpl.getInstance(nodeTable);
+      MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
   private ServiceRequestDaoImpl serviceRequestTable =
       ServiceRequestDaoImpl.getInstance(
           conferenceRequestTable,
