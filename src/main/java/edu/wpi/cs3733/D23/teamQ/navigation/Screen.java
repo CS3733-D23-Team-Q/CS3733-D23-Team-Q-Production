@@ -29,6 +29,9 @@ public enum Screen {
   FURNITURE_REQUEST("views/FurnitureDeliveryRequest.fxml", "Furniture Request"),
   FURNITURE_REQUEST_DISPLAY(
       "views/FurnitureDeliveryRequestDisplay.fxml", "Furniture Request Display"),
+  MEDICAL_SUPPLIES_REQUEST("views/MedicalSuppliesRequest.fxml", "Medical Supplies Request"),
+  MEDICAL_SUPPLIES_REQUEST_DISPLAY(
+      "views/MedicalSuppliesRequestDisplay.fxml", "Medical Supplies Request Display"),
   LIST_REQUESTS("views/ListServiceRequests.fxml", "List of Service Requests"),
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),

@@ -91,7 +91,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
       stmt.setInt(1, m.getNode().getNodeID());
       stmt.setString(2, m.getLongName());
       stmt.setDate(3, m.getDate());
-      stmt.setInt(4, moves.size() + 1);
+      stmt.setInt(4, getAllRows().get(getAllRows().size() - 1).getMoveID() + 1);
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

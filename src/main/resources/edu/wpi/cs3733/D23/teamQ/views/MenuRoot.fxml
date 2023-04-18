@@ -37,7 +37,7 @@
                <children>
                   <MFXButton fx:id="home" alignment="TOP_LEFT" graphicTextGap="24.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#homeClicked" onMouseEntered="#homeEntered" onMouseExited="#homeExited" prefHeight="48.0" prefWidth="240.0" rippleAnimateBackground="false" rippleColor="#f1f1f1" stylesheets="@styles/Menu.css" text="Home" textFill="#f1f1f1" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fx:id="homeIcon" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="homeIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Home.png" />
                            </image>

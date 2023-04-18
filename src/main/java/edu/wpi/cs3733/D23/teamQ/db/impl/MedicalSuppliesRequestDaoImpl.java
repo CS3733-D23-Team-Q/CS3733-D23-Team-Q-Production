@@ -1,42 +1,42 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
-import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
-  private List<OfficeSuppliesRequest> officeSuppliesRequests =
-      new ArrayList<OfficeSuppliesRequest>();
+public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequest, Integer> {
+  private List<MedicalSuppliesRequest> medicalSuppliesRequests =
+      new ArrayList<MedicalSuppliesRequest>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
-  private static OfficeSuppliesRequestDaoImpl single_instance = null;
+  private static MedicalSuppliesRequestDaoImpl single_instance = null;
 
-  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new OfficeSuppliesRequestDaoImpl(nodeTable);
+  public static synchronized MedicalSuppliesRequestDaoImpl getInstance(NodeDaoImpl nodeTable) {
+    if (single_instance == null) single_instance = new MedicalSuppliesRequestDaoImpl(nodeTable);
 
     return single_instance;
   }
 
-  private OfficeSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
+  private MedicalSuppliesRequestDaoImpl(NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
     populate();
-    if (officeSuppliesRequests.size() != 0) {
-      nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;
+    if (medicalSuppliesRequests.size() != 0) {
+      nextID = medicalSuppliesRequests.get(medicalSuppliesRequests.size() - 1).getRequestID() + 1;
     }
   }
 
   /**
-   * returns a officeSuppliesRequest given a requestID
+   * returns a medicalSuppliesRequest given a requestID
    *
-   * @param requestID of officeSuppliesRequest being retrieved
-   * @return a officeSuppliesRequest with the given nodeID
+   * @param requestID of medicalSuppliesRequest being retrieved
+   * @return a medicalSuppliesRequest with the given nodeID
    */
-  public OfficeSuppliesRequest retrieveRow(Integer requestID) {
+  public MedicalSuppliesRequest retrieveRow(Integer requestID) {
     try {
       int index = this.getIndex(requestID);
-      return officeSuppliesRequests.get(index);
+      return medicalSuppliesRequests.get(index);
     } catch (Exception e) {
       System.out.println("No request found with ID: " + requestID);
     }
@@ -44,17 +44,17 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   }
 
   /**
-   * updates officeSuppliesRequest in list with a new officeSuppliesRequest
+   * updates medicalSuppliesRequest in list with a new medicalSuppliesRequest
    *
-   * @param requestID requestID of officeSuppliesRequest being replaced
-   * @param newRequest new officeSuppliesRequest being inserted
+   * @param requestID requestID of medicalSuppliesRequest being replaced
+   * @param newRequest new medicalSuppliesRequest being inserted
    * @return true if successful
    */
-  public boolean updateRow(Integer requestID, OfficeSuppliesRequest newRequest) {
+  public boolean updateRow(Integer requestID, MedicalSuppliesRequest newRequest) {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"officeSuppliesRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, item = ?, quantity = ?, \"specialInstructions\" = ? "
+                "UPDATE \"medicalSuppliesRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, item = ?, quantity = ?, \"specialInstructions\" = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -72,28 +72,27 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     }
 
     int index = this.getIndex(requestID);
-    officeSuppliesRequests.get(index).setRequester(newRequest.getRequester());
-    officeSuppliesRequests.get(index).setProgress(newRequest.getProgress());
-    officeSuppliesRequests.get(index).setAssignee(newRequest.getAssignee());
-    officeSuppliesRequests.get(index).setNode(newRequest.getNode());
-    officeSuppliesRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
-    officeSuppliesRequests.get(index).setItem(newRequest.getItem());
-    officeSuppliesRequests.get(index).setQuantity(newRequest.getQuantity());
-
+    medicalSuppliesRequests.get(index).setRequester(newRequest.getRequester());
+    medicalSuppliesRequests.get(index).setProgress(newRequest.getProgress());
+    medicalSuppliesRequests.get(index).setAssignee(newRequest.getAssignee());
+    medicalSuppliesRequests.get(index).setNode(newRequest.getNode());
+    medicalSuppliesRequests.get(index).setSpecialInstructions(newRequest.getSpecialInstructions());
+    medicalSuppliesRequests.get(index).setItem(newRequest.getItem());
+    medicalSuppliesRequests.get(index).setQuantity(newRequest.getQuantity());
     return true;
   }
 
   /**
-   * deletes officeSuppliesRequest from list of officeSuppliesRequests
+   * deletes medicalSuppliesRequest from list of medicalSuppliesRequests
    *
-   * @param requestID of officeSuppliesRequest being deleted
+   * @param requestID of medicalSuppliesRequest being deleted
    * @return true if successfully deleted
    */
   public boolean deleteRow(Integer requestID) {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "DELETE FROM \"officeSuppliesRequest\" WHERE \"requestID\" = ?")) {;
+                "DELETE FROM \"medicalSuppliesRequest\" WHERE \"requestID\" = ?")) {;
       st.setInt(1, requestID);
       st.executeUpdate();
     } catch (SQLException e) {
@@ -101,22 +100,22 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     }
 
     int index = this.getIndex(requestID);
-    officeSuppliesRequests.remove(index);
+    medicalSuppliesRequests.remove(index);
 
     return true;
   }
 
   /**
-   * adds a officeSuppliesRequest to the list
+   * adds a medicalSuppliesRequest to the list
    *
-   * @param request officeSuppliesRequest being added
+   * @param request medicalSuppliesRequest being added
    * @return true if successful
    */
-  public boolean addRow(OfficeSuppliesRequest request) {
+  public boolean addRow(MedicalSuppliesRequest request) {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"medicalSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester());
       stmt.setInt(2, request.progressToInt(request.getProgress()));
       stmt.setString(3, request.getAssignee());
@@ -132,7 +131,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     }
     request.setRequestID(nextID);
     nextID++;
-    return officeSuppliesRequests.add(request);
+    return medicalSuppliesRequests.add(request);
   }
 
   @Override
@@ -140,10 +139,10 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try {
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
-      ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");
+      ResultSet rst = stm.executeQuery("Select * From \"medicalSuppliesRequest\"");
       while (rst.next()) {
-        officeSuppliesRequests.add(
-            new OfficeSuppliesRequest(
+        medicalSuppliesRequests.add(
+            new MedicalSuppliesRequest(
                 rst.getInt("requestID"),
                 rst.getString("requester"),
                 rst.getInt("progress"),
@@ -170,8 +169,8 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
    * @return value of index
    */
   private int getIndex(Integer requestID) {
-    for (int i = 0; i < officeSuppliesRequests.size(); i++) {
-      OfficeSuppliesRequest x = officeSuppliesRequests.get(i);
+    for (int i = 0; i < medicalSuppliesRequests.size(); i++) {
+      MedicalSuppliesRequest x = medicalSuppliesRequests.get(i);
       if (x.getRequestID() == (Integer) requestID) {
         return i;
       }
@@ -180,17 +179,17 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   }
 
   /**
-   * function that gets all office supplies requests in the list
+   * function that gets all medical supplies requests in the list
    *
-   * @return all office supplies requests in list
+   * @return all medical supplies requests in list
    */
-  public List<OfficeSuppliesRequest> getAllRows() {
-    return officeSuppliesRequests;
+  public List<MedicalSuppliesRequest> getAllRows() {
+    return medicalSuppliesRequests;
   }
 
-  public List<OfficeSuppliesRequest> listConferenceRequests(String username) {
-    List<OfficeSuppliesRequest> list = new ArrayList<OfficeSuppliesRequest>();
-    for (OfficeSuppliesRequest request : officeSuppliesRequests) {
+  public List<MedicalSuppliesRequest> listConferenceRequests(String username) {
+    List<MedicalSuppliesRequest> list = new ArrayList<MedicalSuppliesRequest>();
+    for (MedicalSuppliesRequest request : medicalSuppliesRequests) {
       if (request.getRequester().equals(username)) {}
     }
     return list;
