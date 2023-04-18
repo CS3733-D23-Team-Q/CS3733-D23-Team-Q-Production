@@ -614,7 +614,7 @@ public class GraphicalMapEditorController {
 
   List<javafx.scene.shape.Line> addLines(List<Node> path) {
     List<javafx.scene.shape.Line> lines = new ArrayList<>();
-    for (int i = path.size() - 1; i >= 1; i--) {
+    for (int i = path.size() - 1; i >= 1; i = i - 2) {
       Node n = path.get(i);
       Node next = path.get(i - 1);
       int x1 = n.getXCoord() / 5;
@@ -866,7 +866,7 @@ public class GraphicalMapEditorController {
           .interpolateWith(Interpolator.EASE_BOTH)
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
 
-      button.get(findButton(nodeid)).setStyle("-fx-background-color: #3966af;");
+      // button.get(findButton(nodeid)).setStyle("-fx-background-color: #3966af;");
     } else {
       InitialNode();
     }
