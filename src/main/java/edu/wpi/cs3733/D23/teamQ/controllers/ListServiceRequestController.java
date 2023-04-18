@@ -53,7 +53,7 @@ public class ListServiceRequestController {
       tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
     } else {
       tableView.setItems(
-              (ObservableList<ServiceRequest>) qdb.retrieveUserServiceRequests(username));
+          (ObservableList<ServiceRequest>) qdb.retrieveUserServiceRequests(username));
     }
   }
 
