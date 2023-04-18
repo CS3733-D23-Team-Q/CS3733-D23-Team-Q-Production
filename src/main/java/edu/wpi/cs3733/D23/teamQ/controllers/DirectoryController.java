@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -84,8 +84,8 @@ public class DirectoryController {
         new Callback<TableColumn.CellDataFeatures<Account, Number>, ObservableValue<Number>>() {
           @Override
           public ObservableValue<Number> call(TableColumn.CellDataFeatures<Account, Number> param) {
-            SimpleIntegerProperty phoneNumbers =
-                new SimpleIntegerProperty(param.getValue().getPhoneNumber());
+            SimpleLongProperty phoneNumbers =
+                new SimpleLongProperty(param.getValue().getPhoneNumber());
             return phoneNumbers;
           }
         });

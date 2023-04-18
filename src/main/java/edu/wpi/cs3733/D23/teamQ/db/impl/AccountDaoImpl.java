@@ -50,7 +50,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     String newFN = accountWithNewChanges.getFirstName();
     String newLN = accountWithNewChanges.getLastName();
     String newTitle = accountWithNewChanges.getTitle();
-    int newPN = accountWithNewChanges.getPhoneNumber();
+    long newPN = accountWithNewChanges.getPhoneNumber();
     boolean newActive = accountWithNewChanges.isActive();
     try {
       String query =
@@ -67,7 +67,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(9, newFN);
       pst.setString(10, newLN);
       pst.setString(11, newTitle);
-      pst.setInt(12, newPN);
+      pst.setLong(12, newPN);
       pst.setString(13, uname);
       int rs = pst.executeUpdate();
       if (rs == 1) {
@@ -134,7 +134,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     String FN = a.getFirstName();
     String LN = a.getLastName();
     String t = a.getTitle();
-    int PN = a.getPhoneNumber();
+    long PN = a.getPhoneNumber();
     boolean result = false;
     Connection con = GenDao.connect();
     try {
@@ -153,7 +153,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(10, FN);
       pst.setString(11, LN);
       pst.setString(12, t);
-      pst.setInt(13, PN);
+      pst.setLong(13, PN);
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
@@ -197,7 +197,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
                 rs.getString("firstName"),
                 rs.getString("lastName"),
                 rs.getString("title"),
-                rs.getInt("phoneNumber"));
+                rs.getLong("phoneNumber"));
         accounts.add(a);
       }
       con.close();

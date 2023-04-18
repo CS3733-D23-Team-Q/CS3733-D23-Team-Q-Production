@@ -95,7 +95,7 @@ public class EditProfileController {
             ProfileEditPage_FirstName_TextField.getText(),
             ProfileEditPage_LastName_TextField.getText(),
             ProfileEditPage_Title_TextField.getText(),
-            Integer.parseInt(ProfileEditPage_PhoneNumber_TextField.getText()));
+            Long.parseLong(ProfileEditPage_PhoneNumber_TextField.getText()));
 
     qdb.updateAccount(username, newAccount);
     Navigation.navigate(Screen.PROFILE_PAGE);
