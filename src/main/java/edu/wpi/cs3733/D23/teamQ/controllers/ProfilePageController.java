@@ -79,10 +79,6 @@ public class ProfilePageController implements IController {
         qdb.retrieveQuestion(account.getSecurityQuestion2()).getQuestion());
     this.answer1Display.setText(account.getSecurityAnswer1());
     this.answer2Display.setText(account.getSecurityAnswer2());
-
-    //    this.ProfilePage_Edit_Button.setOnMouseClicked(
-    //        event -> Navigation.navigate(Screen.EDIT_PROFILE));
-    //    this.ProfilePage_Home_Button.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
   }
 
   public void EditPressed() {

@@ -32,7 +32,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="First_Name_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="first name here" />
+            <Label fx:id="First_Name_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="first name here">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
       </VBox>
       <VBox>
@@ -42,7 +45,27 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="Last_Name_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="last name here" />
+            <Label fx:id="Last_Name_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="last name here">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Username">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="Username_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="username here">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
          </children>
          <VBox.margin>
             <Insets left="10.0" />
@@ -55,7 +78,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="Title_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="title here" />
+            <Label fx:id="Title_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="title here">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -68,7 +94,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="Email_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="email here" />
+            <Label fx:id="Email_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="email here">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -81,7 +110,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="Phone_Number_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="phone here" />
+            <Label fx:id="Phone_Number_Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="phone here">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -94,7 +126,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="question1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 1" />
+            <Label fx:id="question1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 1">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -107,7 +142,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="answer1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 1" />
+            <Label fx:id="answer1Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 1">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -120,7 +158,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="question2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 2" />
+            <Label fx:id="question2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="question 2">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -133,7 +174,10 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="answer2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 2" />
+            <Label fx:id="answer2Display" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="answer 2">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
          </children>
          <padding>
             <Insets left="10.0" />
