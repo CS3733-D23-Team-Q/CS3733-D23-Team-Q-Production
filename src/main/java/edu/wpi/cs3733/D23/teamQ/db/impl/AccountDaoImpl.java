@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +100,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   }
 
   public boolean deleteRow(String uname) {
+    Qdb qdb = Qdb.getInstance();
     boolean result = false;
     Connection con = GenDao.connect();
     try {
@@ -109,7 +112,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
         result = true;
         int index = this.getIndex(uname);
         accounts.remove(index);
-        System.out.println("Account deleted successful!");
+        System.out.println("Account deleted successfully!");
       } else {
         System.out.println("Failed to delete your account.");
       }
@@ -118,6 +121,17 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+    for (ServiceRequest sr : qdb.retrieveAllServiceRequests()) {
+      if (sr.getRequester().getUsername().equals(uname)) {
+        qdb.deleteServiceRequest(sr.getRequestID());
+      }
+      if (sr.getRequester().getUsername().equals(uname)) {
+        ServiceRequest sr2 = sr;
+        sr2.setAssignee(accounts.get(getIndex("admin")));
+        qdb.updateServiceRequest(sr.getRequestID(), sr2);
+      }
+    }
+
     return result;
   }
 
@@ -158,7 +172,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       if (rs == 1) {
         result = true;
         accounts.add(a);
-        System.out.println("Account created successful!");
+        System.out.println("Account created successfully!");
       } else {
         System.out.println("Failed to create your account.");
       }

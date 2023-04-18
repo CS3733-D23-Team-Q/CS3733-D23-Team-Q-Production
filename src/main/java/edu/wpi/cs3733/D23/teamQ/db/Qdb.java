@@ -383,4 +383,12 @@ public class Qdb {
     serviceRequestTable.populate();
     return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
   }
+
+  public boolean deleteServiceRequest(int requestID) {
+    return serviceRequestTable.deleteRow(requestID);
+  }
+
+  public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
+    return serviceRequestTable.updateRow(requestID, sr);
+  }
 }
