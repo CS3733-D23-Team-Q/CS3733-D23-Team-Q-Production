@@ -1,145 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.calendarfx.view.CalendarHeaderView?>
+<?import com.calendarfx.view.CalendarView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="919.0" prefWidth="1382.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0">
+      <VBox prefHeight="919.0" prefWidth="1382.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="285.0" fitWidth="1545.0" opacity="0.6" pickOnBounds="true" preserveRatio="true" smooth="false">
-               <image>
-                  <Image url="@../../../../../../Shapiro-Center-at-dusk-copy.jpg" />
-
-               </image>
-            </ImageView>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back User!" translateX="50.0" translateY="50.0" wrappingWidth="352.1573028564453">
+                  <ImageView fitHeight="285.0" fitWidth="1600.0" opacity="0.6" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../../../../../../Shapiro-Center-at-dusk-copy.jpg" />
+      
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="0.0" prefWidth="1360.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back User!" translateX="50.0" translateY="50.0" wrappingWidth="352.1573028564453">
+                           <font>
+                              <Font name="Roboto Medium" size="36.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <HBox prefHeight="126.0" prefWidth="1543.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Commitments:" translateX="50.0" translateY="50.0" wrappingWidth="413.4875946044922">
                      <font>
                         <Font name="Roboto Medium" size="36.0" />
                      </font>
                   </Text>
                </children>
             </HBox>
-         </children>
-      </StackPane>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Commitments:" translateX="50.0" translateY="50.0" wrappingWidth="413.4875946044922">
-               <font>
-                  <Font name="Roboto Medium" size="36.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
-      <VBox prefHeight="605.0" prefWidth="1545.0">
-         <children>
-            <HBox prefHeight="608.0" prefWidth="1545.0">
+            <VBox prefHeight="605.0" prefWidth="1545.0">
                <children>
-                  <VBox prefHeight="529.0" prefWidth="746.0">
+                  <HBox prefHeight="608.0" prefWidth="451.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <VBox prefHeight="529.0" prefWidth="746.0">
                            <children>
-                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#e2e2e2" height="116.0" stroke="BLACK" strokeType="INSIDE" width="606.0">
-                                 <StackPane.margin>
-                                    <Insets top="25.0" />
-                                 </StackPane.margin>
-                              </Rectangle>
-                              <Label prefHeight="175.0" prefWidth="301.0" text="No commitments!">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#e2e2e2" height="36.0" stroke="BLACK" strokeType="INSIDE" width="282.0">
+                                       <StackPane.margin>
+                                          <Insets top="25.0" />
+                                       </StackPane.margin>
+                                    </Rectangle>
+                                    <Label alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="99.0" text="No commitments!" textAlignment="CENTER" />
+                                 </children>
+                              </StackPane>
+                              <CalendarHeaderView minWidth="-Infinity" prefWidth="500.0" />
+                              <CalendarView minWidth="-Infinity" prefHeight="384.0" prefWidth="650.0" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <StackPane minWidth="-Infinity" prefHeight="529.0" prefWidth="250.0">
+                           <children>
+                              <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
+                              <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="500.0" />
+                                 </padding>
                                  <font>
-                                    <Font name="Roboto Light" size="36.0" />
+                                    <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
+                              <TextArea prefHeight="366.0" prefWidth="122.0" promptText="Write Here:" text="&#10;">
+                                 <effect>
+                                    <ColorAdjust brightness="-0.14">
+                                       <input>
+                                          <Glow />
+                                       </input>
+                                    </ColorAdjust>
+                                 </effect>
+                                 <StackPane.margin>
+                                    <Insets top="20.0" />
+                                 </StackPane.margin>
+                              </TextArea>
                            </children>
+                           <opaqueInsets>
+                              <Insets left="300.0" />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
                         </StackPane>
-                        <DatePicker prefHeight="218.0" prefWidth="584.0" />
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </VBox>
-                  <StackPane prefHeight="150.0" prefWidth="289.0">
-                     <children>
-                        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="529.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="289.0" />
-                        <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
+                        <StackPane minWidth="-Infinity" prefHeight="468.0" prefWidth="279.0">
+                           <children>
+                              <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
+                              <Label prefHeight="46.0" prefWidth="39.0" text="Notes" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="500.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextArea prefHeight="530.0" prefWidth="252.0" promptText="Write Here:" text="&#10;">
+                                 <effect>
+                                    <ColorAdjust brightness="-0.14">
+                                       <input>
+                                          <Glow />
+                                       </input>
+                                    </ColorAdjust>
+                                 </effect>
+                                 <StackPane.margin>
+                                    <Insets top="20.0" />
+                                 </StackPane.margin>
+                              </TextArea>
+                           </children>
+                           <opaqueInsets>
+                              <Insets left="300.0" />
+                           </opaqueInsets>
                            <padding>
-                              <Insets bottom="500.0" />
+                              <Insets left="30.0" />
                            </padding>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <TextArea prefHeight="366.0" prefWidth="122.0" promptText="Write Here:" text="&#10;">
-                           <effect>
-                              <ColorAdjust brightness="-0.14">
-                                 <input>
-                                    <Glow />
-                                 </input>
-                              </ColorAdjust>
-                           </effect>
-                           <StackPane.margin>
-                              <Insets top="20.0" />
-                           </StackPane.margin>
-                        </TextArea>
+                        </StackPane>
                      </children>
-                     <opaqueInsets>
-                        <Insets left="300.0" />
-                     </opaqueInsets>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="289.0" style="-fx-background-color: #fff8a8; -fx-border-color: #fff8a8;">
-                     <children>
-                        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#fff8a8" height="523.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="271.0" />
-                        <Label prefHeight="537.0" prefWidth="35.0" text="Notes" textAlignment="CENTER">
-                           <StackPane.margin>
-                              <Insets />
-                           </StackPane.margin>
-                           <padding>
-                              <Insets bottom="500.0" />
-                           </padding>
-                        </Label>
-                        <TextArea fx:id="note" prefHeight="588.0" prefWidth="289.0" text="&#10;">
-                           <StackPane.margin>
-                              <Insets top="20.0" />
-                           </StackPane.margin>
-                           <effect>
-                              <Lighting bumpInput="$null" specularConstant="0.28" specularExponent="0.0" surfaceScale="0.0">
-                                 <light>
-                                    <Light.Distant azimuth="36.68" elevation="94.94">
-                                       <color>
-                                          <Color red="1.0" green="0.9725490212440491" blue="0.658823549747467" />
-                                       </color>
-                                    </Light.Distant>
-                                 </light>
-                              </Lighting>
-                           </effect>
-                        </TextArea>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                  </StackPane>
+                     <VBox.margin>
+                        <Insets bottom="61.0" left="50.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="61.0" left="50.0" />
-               </VBox.margin>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </children>
-</VBox>
+</AnchorPane>
