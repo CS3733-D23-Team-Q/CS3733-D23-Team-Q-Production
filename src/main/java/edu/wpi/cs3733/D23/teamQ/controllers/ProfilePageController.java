@@ -45,9 +45,6 @@ public class ProfilePageController implements IController {
 
     Qdb qdb = Qdb.getInstance();
 
-    System.out.println(account.getSecurityAnswer1());
-    System.out.println(account.getSecurityAnswer2());
-
     if (account.getFirstName() == null) {
       this.First_Name_Display.setText("empty");
     } else {
