@@ -10,8 +10,6 @@ public interface IServiceRequest {
 
   public Account getRequester();
 
-  public int progressToInt(ServiceRequest.Progress progress);
-
   public ServiceRequest.Progress getProgress();
 
   public Account getAssignee();
