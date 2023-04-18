@@ -115,6 +115,10 @@ public class EditDirectoryController {
     Navigation.navigate(Screen.ADMIN_DIRECTORY);
   }
 
-  @FXML
-  void DeleteClicked(ActionEvent event) {}
+    @FXML
+    void DeleteClicked(ActionEvent event) {
+
+      Account tempAccount = account.getSelectionModel().getSelectedItem();
+      Qdb.getInstance().deleteAccount(tempAccount.getUsername());
+    }
 }
