@@ -40,7 +40,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       int index = this.getIndex(requestID);
       return flowerRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -181,7 +181,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
         return i;
       }
     }
-    throw new RuntimeException("No move found with ID " + requestID);
+    throw new RuntimeException("No flower request found with ID: " + requestID);
   }
 
   /**

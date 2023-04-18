@@ -38,7 +38,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
       int index = this.getIndex(requestID);
       return medicalSuppliesRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -170,11 +170,11 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
   private int getIndex(Integer requestID) {
     for (int i = 0; i < medicalSuppliesRequests.size(); i++) {
       MedicalSuppliesRequest x = medicalSuppliesRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No medical supplies request found with ID: " + requestID);
   }
 
   /**

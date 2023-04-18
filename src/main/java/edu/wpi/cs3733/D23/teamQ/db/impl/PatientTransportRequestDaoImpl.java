@@ -38,7 +38,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
       int index = this.getIndex(requestID);
       return patientTransportRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -168,11 +168,11 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   private int getIndex(Integer requestID) {
     for (int i = 0; i < patientTransportRequests.size(); i++) {
       PatientTransportRequest x = patientTransportRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No patient transport request found with ID: " + requestID);
   }
 
   /**

@@ -37,7 +37,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
       int index = this.getIndex(requestID);
       return furnitureRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -168,11 +168,11 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
   private int getIndex(Integer requestID) {
     for (int i = 0; i < furnitureRequests.size(); i++) {
       FurnitureRequest x = furnitureRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No furniture request found with ID: " + requestID);
   }
 
   /**

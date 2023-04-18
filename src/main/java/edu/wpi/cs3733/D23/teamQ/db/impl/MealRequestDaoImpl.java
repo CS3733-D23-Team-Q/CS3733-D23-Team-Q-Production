@@ -36,7 +36,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
       int index = this.getIndex(requestID);
       return mealRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -172,11 +172,11 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private int getIndex(Integer requestID) {
     for (int i = 0; i < mealRequests.size(); i++) {
       MealRequest x = mealRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No meal delivery request found with ID: " + requestID);
   }
 
   /**

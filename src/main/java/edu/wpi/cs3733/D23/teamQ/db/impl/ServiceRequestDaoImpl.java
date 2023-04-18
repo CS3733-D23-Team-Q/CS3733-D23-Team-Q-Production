@@ -74,19 +74,23 @@ public class ServiceRequestDaoImpl {
   }
 
   public ServiceRequest retrieveRow(Integer ID) {
-    int index = getIndex(ID);
-    return serviceRequests.get(index);
+    try {
+      int index = this.getIndex(ID);
+      return serviceRequests.get(index);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
   }
 
-  public int getIndex(int requestID) {
-    populate();
+  private int getIndex(Integer requestID) {
     for (int i = 0; i < serviceRequests.size(); i++) {
-      ServiceRequest sr = serviceRequests.get(i);
-      if (sr.getRequestID() == requestID) {
+      ServiceRequest x = serviceRequests.get(i);
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    return -1;
+    throw new RuntimeException("No service request found with ID: " + requestID);
   }
 
   /**

@@ -38,7 +38,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       int index = this.getIndex(requestID);
       return officeSuppliesRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -171,11 +171,11 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   private int getIndex(Integer requestID) {
     for (int i = 0; i < officeSuppliesRequests.size(); i++) {
       OfficeSuppliesRequest x = officeSuppliesRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No office supplies request found with ID: " + requestID);
   }
 
   /**
