@@ -48,14 +48,4 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
     this.entree = entree;
     this.side = side;
   }
-
-  public int progressToInt(Progress progress) {
-    if (progress == Progress.BLANK) {
-      return 0;
-    } else if (progress == Progress.PROCESSING) {
-      return 1;
-    } else {
-      return 2;
-    }
-  }
 }

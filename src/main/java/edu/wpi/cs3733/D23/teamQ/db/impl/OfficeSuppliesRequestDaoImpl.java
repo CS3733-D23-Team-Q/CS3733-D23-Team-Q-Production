@@ -38,7 +38,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       int index = this.getIndex(requestID);
       return officeSuppliesRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -118,7 +118,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
             conn.prepareStatement(
                 "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
+      stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
@@ -136,6 +136,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   @Override
   public boolean populate() {
     try {
+      officeSuppliesRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");
@@ -170,11 +171,11 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   private int getIndex(Integer requestID) {
     for (int i = 0; i < officeSuppliesRequests.size(); i++) {
       OfficeSuppliesRequest x = officeSuppliesRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No office supplies request found with ID: " + requestID);
   }
 
   /**

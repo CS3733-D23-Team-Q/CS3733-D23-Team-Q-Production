@@ -174,8 +174,8 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="304.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#LastClicked" prefHeight="39.0" prefWidth="157.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="&lt;-    Last Floor" textFill="WHITE" />
-                        <Button mnemonicParsing="false" onMouseClicked="#NextClicked" prefHeight="39.0" prefWidth="168.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="Next Floor   -&gt;" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onMouseClicked="#LastClicked" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="&lt;-    Last Floor" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onMouseClicked="#NextClicked" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="Next Floor   -&gt;" textFill="WHITE" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="304.0">

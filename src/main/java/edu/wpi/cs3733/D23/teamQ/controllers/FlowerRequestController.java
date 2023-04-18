@@ -80,7 +80,7 @@ public class FlowerRequestController {
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
             0,
-            flowerTypeField.getSelectedItem().toString(),
+            (String) flowerTypeField.getSelectedItem(),
             Integer.parseInt(bouquetChoiceField.getText()));
 
     qdb.addFlowerRequest(newFR);

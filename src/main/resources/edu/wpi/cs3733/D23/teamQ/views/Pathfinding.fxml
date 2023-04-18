@@ -44,6 +44,7 @@
             </Button>
             <MenuBar>
               <menus>
+                  <Menu fx:id="dateMenu" mnemonicParsing="false" text="Date" />
                 <Menu mnemonicParsing="false" text="Algorithm">
                   <items>
                         <RadioMenuItem fx:id="aStarSelect" mnemonicParsing="false" onAction="#aStarSelected" selected="true" text="A*">

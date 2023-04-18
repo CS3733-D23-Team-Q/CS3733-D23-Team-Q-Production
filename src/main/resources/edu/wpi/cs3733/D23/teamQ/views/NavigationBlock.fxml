@@ -21,7 +21,6 @@
                   </graphic>
               </MFXButton>
               <AnchorPane fx:id="navigationSMPane" visible="false">
-                  <fx:include fx:id="navigationSM" source="NavigationSubmenu.fxml" visible="true" />
               </AnchorPane>
           </children>
       </HBox>

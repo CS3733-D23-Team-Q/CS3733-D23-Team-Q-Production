@@ -41,7 +41,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
       int index = this.getIndex(requestID);
       return conferenceRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -122,7 +122,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
             conn.prepareStatement(
                 "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", date, time, \"foodChoice\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
+      stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
@@ -139,6 +139,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
   @Override
   public boolean populate() {
     try {
+      conferenceRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"conferenceRequest\"");
@@ -172,11 +173,11 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
   private int getIndex(Integer requestID) {
     for (int i = 0; i < conferenceRequests.size(); i++) {
       ConferenceRequest x = conferenceRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No conference request found with ID: " + requestID);
   }
 
   /**

@@ -43,14 +43,4 @@ public class OfficeSuppliesRequest extends ServiceRequest implements IServiceReq
     this.item = item;
     this.quantity = quantity;
   }
-
-  public int progressToInt(Progress progress) {
-    if (progress == Progress.BLANK) {
-      return 0;
-    } else if (progress == Progress.PROCESSING) {
-      return 1;
-    } else {
-      return 2;
-    }
-  }
 }

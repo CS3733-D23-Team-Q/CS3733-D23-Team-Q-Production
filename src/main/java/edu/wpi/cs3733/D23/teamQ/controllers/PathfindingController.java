@@ -1,11 +1,16 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
-import edu.wpi.cs3733.D23.teamQ.Pathfinding.*;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.AStar;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.Context;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.DFS;
+import edu.wpi.cs3733.D23.teamQ.Pathfinding.Djikstra;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -34,8 +39,6 @@ public class PathfindingController {
   Context pathfindingAlgorithmSelection = new Context();
   AStar aStar = new AStar();
   DFS dfs = new DFS();
-
-  BFS bfs = new BFS();
   Djikstra djikstra = new Djikstra();
   Alert alert = new Alert();
   GesturePane pane;
@@ -64,6 +67,9 @@ public class PathfindingController {
   List<Pair<Integer, Integer>> tfnodes;
   List<String> allSelections;
   String algorithm;
+  Date date;
+  List<Date> moveDates;
+  ToggleGroup dateToggle;
   // boolean elev;
 
   @FXML HBox root;
@@ -84,10 +90,14 @@ public class PathfindingController {
   @FXML RadioMenuItem bfsSelect;
   @FXML RadioMenuItem dfsSelect;
   @FXML RadioMenuItem djikstraSelect;
+  @FXML Menu dateMenu;
 
   @FXML
   public void initialize() throws IOException {
     // elev = false;
+    dateToggle = new ToggleGroup();
+    date = Date.valueOf("2023-01-01");
+    moveDates = new ArrayList<>();
     algorithm = "aStar";
     allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
@@ -197,8 +207,10 @@ public class PathfindingController {
   }
 
   public void addButtons(String f) {
-    List<Node> nodes = qdb.retrieveAllNodes();
-    List<Node> fNodes = new ArrayList<>();
+    List<Node> allNodes = qdb.retrieveAllNodes(); // nodes
+    List<Move> allMoves = qdb.retrieveAllMoves();
+    List<Node> moveNodes = new ArrayList<>();
+    List<Node> floorNodes = new ArrayList<>(); // fNodes
     restNodes.removeAll(restNodes);
     deptNodes.removeAll(deptNodes);
     labsNodes.removeAll(labsNodes);
@@ -206,14 +218,40 @@ public class PathfindingController {
     confNodes.removeAll(confNodes);
     retlNodes.removeAll(retlNodes);
     servNodes.removeAll(servNodes);
-    for (Node n : nodes) {
+
+    for (Move m : allMoves) {
+      Date d = m.getDate();
+      if (d.compareTo(date) == 0) {
+        for (Node n : allNodes) {
+          if (m.getNode().getNodeID() == n.getNodeID()) {
+            moveNodes.add(n);
+          }
+          // add a variable to ignore the duplicates
+        }
+      }
+      if (!moveDates.contains(d)) {
+        moveDates.add(d);
+        RadioMenuItem item = new RadioMenuItem(d.toString());
+        if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
+          item.setSelected(true);
+        }
+        item.setToggleGroup(dateToggle);
+        dateMenu.getItems().add(item);
+        item.setOnAction(
+            e -> {
+              dateSelected(item);
+            });
+      }
+    }
+
+    for (Node n : moveNodes) { // Node n : nodes
       int nodeid = n.getNodeID();
       nodeIds.add(nodeid);
       Location location = qdb.retrieveLocation(nodeid);
       String nodetype = location.getNodeType();
       String lname = location.getLongName();
       if (n.getFloor().equals(f)) {
-        fNodes.add(n);
+        floorNodes.add(n);
       }
       if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
         startSelect.getItems().add(lname);
@@ -221,7 +259,7 @@ public class PathfindingController {
         allSelections.add(lname);
       }
     }
-    for (Node n : fNodes) {
+    for (Node n : floorNodes) {
       int x = n.getXCoord() / 5;
       int y = n.getYCoord() / 5;
       int nodeid = n.getNodeID();
@@ -244,7 +282,7 @@ public class PathfindingController {
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
-            text = new Text(x + 3, y + 3, "" + sname); // change back to sname
+            text = new Text(x + 3, y + 3, sname);
             text.setStyle("-fx-font-size: 8px;");
             parent.getChildren().add(text);
           });
@@ -339,11 +377,9 @@ public class PathfindingController {
       int y2 = next.getYCoord() / 5;
       Line line = new Line(x1, y1, x2, y2);
       line.setStyle("-fx-stroke: blue;");
-      line.setStrokeWidth(2);
-
+      line.setStrokeWidth(3);
       parent.getChildren().add(line);
       lines.add(line);
-      
     }
     return lines;
   }
@@ -365,11 +401,8 @@ public class PathfindingController {
       // that changes whenever the button is clicked)
       path = pathfindingAlgorithmSelection.run(start, target);
     } else if (algorithm.equals("bfs")) {
-      pathfindingAlgorithmSelection.setPathfindingAlgorithm(
-          bfs); // if a*, call this function (instead, create a String algorithm global variable
-      // that changes whenever the button is clicked)
-      path = pathfindingAlgorithmSelection.run(start, target);
-
+      // pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
+      // path = pathfindingAlgorithmSelection.run(start, target);
     } else if (algorithm.equals("dfs")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
       path = pathfindingAlgorithmSelection.run(start, target);
@@ -504,6 +537,10 @@ public class PathfindingController {
     }
     if (!ready4Second && start != null && target != null) {
       previousPath = drawLinesf(start, target, f);
+      /*
+      List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+      cfnodes = setCF(cfnodes);
+       */
     }
   }
 
@@ -787,8 +824,23 @@ public class PathfindingController {
     }
   }
 
+  public void dateSelected(RadioMenuItem itemSelect) {
+    clearButtonClicked();
+    if (itemSelect.isSelected()) {
+      date = Date.valueOf(itemSelect.getText());
+      refresh();
+    }
+  }
+
+  public void refresh() {
+    String f = whichFloorS();
+    removeButtons();
+    addButtons(f);
+  }
+
   public void clearButtonClicked() {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    // moveDates.removeAll(moveDates);
     removeLines(previousPath);
     start = null;
     target = null;

@@ -7,10 +7,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class DirectoryController {
@@ -26,8 +26,6 @@ public class DirectoryController {
   @FXML private TableColumn<Account, String> Title;
 
   @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
-
-  Account accountSelected;
 
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
@@ -96,5 +94,17 @@ public class DirectoryController {
     account.setItems(Accounts());
   }
 
-  public void tableClicked(MouseEvent mouseEvent) {}
+  public void mapClicked(ActionEvent actionEvent) {}
+
+  public void edgeClicked(ActionEvent actionEvent) {}
+
+  public void locationClicked(ActionEvent actionEvent) {}
+
+  public void moveClicked(ActionEvent actionEvent) {}
+
+  public void BackClicked(ActionEvent actionEvent) {}
+
+  public void homeClicked(ActionEvent actionEvent) {}
+
+  public void exitClicked(ActionEvent actionEvent) {}
 }
