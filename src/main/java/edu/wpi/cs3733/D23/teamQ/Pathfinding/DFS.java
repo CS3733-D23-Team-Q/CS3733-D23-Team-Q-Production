@@ -14,6 +14,7 @@ public class DFS implements IPathfinding {
     visitedList.add(start);
     // path.add(start);
     while (!openList.isEmpty()) {
+      boolean nextChosen = false;
       Node current = openList.get(0);
       // in case the end node is on a diff floor
       if (current.equals(end)) {
@@ -36,13 +37,7 @@ public class DFS implements IPathfinding {
         openList.remove(current);
         path.add(current);
         visitedList.add(current);
-        System.out.println();
-        System.out.println("current node is " + current);
-        System.out.println();
-        System.out.println("Edges contain " + current.getEdges());
-        System.out.println();
-        System.out.println(
-            "Added a end node with ID" + current.getEdges().get(0).getEndNode().getNodeID());
+        nextChosen = true;
       } else if (!visitedList.contains(current.getEdges().get(0).getStartNode())
           && !current.getEdges().isEmpty()
           && !current.equals(current.getEdges().get(0).getStartNode())
@@ -51,13 +46,7 @@ public class DFS implements IPathfinding {
         openList.remove(current);
         path.add(current);
         visitedList.add(current);
-        System.out.println();
-        System.out.println("current node is " + current);
-        System.out.println();
-        System.out.println("Edges contain " + current.getEdges());
-        System.out.println();
-        System.out.println(
-            "Added a start node with ID" + current.getEdges().get(0).getStartNode().getNodeID());
+        nextChosen = true;
       } else {
         for (Node backup : nodesAvailable) {
           if (!visitedList.contains(backup)
@@ -67,6 +56,28 @@ public class DFS implements IPathfinding {
             openList.remove(current);
             path.add(current);
             visitedList.add(current);
+            nextChosen = true;
+          }
+        }
+      }
+      int i = 1;
+      while (!nextChosen) {
+        Node previous = path.get(path.size() - i);
+        ArrayList<Node> previousNodes = new ArrayList<Node>();
+        i++;
+        for (Edge previousEdge : previous.getEdges()) {
+          previousNodes.add(previousEdge.getStartNode());
+          previousNodes.add(previousEdge.getEndNode());
+        }
+        for (Node previousNode : previousNodes) {
+          if (!path.contains(previousNode)
+              && !visitedList.contains(previousNode)
+              && floor.equalsIgnoreCase(previousNode.getFloor())) {
+            openList.add(previousNode);
+            openList.remove(current);
+            path.add(current);
+            visitedList.add(current);
+            nextChosen = true;
           }
         }
       }
