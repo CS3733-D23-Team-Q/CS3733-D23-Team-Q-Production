@@ -5,13 +5,16 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class ServiceRequestDaoImpl {
-  private ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
+  private ObservableList<ServiceRequest> serviceRequests =
+      FXCollections.observableList(new ArrayList<>());
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
 
