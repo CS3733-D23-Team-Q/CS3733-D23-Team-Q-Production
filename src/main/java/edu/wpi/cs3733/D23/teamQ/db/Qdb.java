@@ -341,8 +341,8 @@ public class Qdb {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
 
-  public int getNodeFromLocation(String lName) {
-    return locationTable.getNodeFromLocation(lName);
+  public Node getNodeFromLocation(String lName) {
+    return nodeTable.retrieveRow(locationTable.getNodeFromLocation(lName));
   }
 
   public String getEmailWithAUsername(String username) {
