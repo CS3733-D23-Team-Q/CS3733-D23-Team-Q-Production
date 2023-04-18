@@ -343,22 +343,7 @@ public class PathfindingController {
 
       parent.getChildren().add(line);
       lines.add(line);
-
-      List<Line> temp = new ArrayList<Line>();
-      temp.add(line);
-      if (n.getFloor().equals(next.getFloor())) {
-        System.out.println(
-            "node 1: "
-                + n.getNodeID()
-                + " on floor "
-                + n.getFloor()
-                + " - to node: "
-                + next.getNodeID()
-                + " on floor "
-                + next.getFloor()
-                + "\n");
-        //        removeLines(temp);
-      }
+      
     }
     return lines;
   }
