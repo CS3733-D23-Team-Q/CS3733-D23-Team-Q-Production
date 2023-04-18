@@ -21,7 +21,6 @@ public class Djikstra implements IPathfinding {
         return path;
       }
       // write in elevator specifications
-
       double lowestLocalCost = 10000000.0;
       Node chosen = null;
       for (Edge thisOne : current.getEdges()) {
