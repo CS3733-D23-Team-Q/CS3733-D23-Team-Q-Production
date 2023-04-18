@@ -244,7 +244,7 @@ public class PathfindingController {
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
-            text = new Text(x + 3, y + 3, sname);
+            text = new Text(x + 3, y + 3, "" + sname); // change back to sname
             text.setStyle("-fx-font-size: 8px;");
             parent.getChildren().add(text);
           });

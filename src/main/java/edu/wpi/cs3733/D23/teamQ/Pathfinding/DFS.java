@@ -82,7 +82,6 @@ public class DFS implements IPathfinding {
             System.out.println("Edges contain " + current.getEdges());
             System.out.println();
             System.out.println("added from final if");
-            // if (openList.isEmpty()){System.out.println("Node not added to open list");}
           }
         }
       }
