@@ -14,8 +14,10 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
 
-  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new OfficeSuppliesRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+    if (single_instance == null)
+      single_instance = new OfficeSuppliesRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
   }

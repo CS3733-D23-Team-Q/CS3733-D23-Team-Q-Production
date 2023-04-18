@@ -14,8 +14,10 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
   private AccountDaoImpl accountTable;
   private static MedicalSuppliesRequestDaoImpl single_instance = null;
 
-  public static synchronized MedicalSuppliesRequestDaoImpl getInstance(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new MedicalSuppliesRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized MedicalSuppliesRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+    if (single_instance == null)
+      single_instance = new MedicalSuppliesRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
   }

@@ -14,8 +14,10 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   private int nextID = 0;
   private static PatientTransportRequestDaoImpl single_instance = null;
 
-  public static synchronized PatientTransportRequestDaoImpl getInstance(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized PatientTransportRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+    if (single_instance == null)
+      single_instance = new PatientTransportRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
   }

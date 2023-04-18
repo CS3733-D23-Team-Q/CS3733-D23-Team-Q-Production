@@ -18,8 +18,10 @@ public class Qdb {
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
-  private MealRequestDaoImpl mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
+  private FlowerRequestDaoImpl flowerRequestTable =
+      FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
+  private MealRequestDaoImpl mealRequestTable =
+      MealRequestDaoImpl.getInstance(accountTable, nodeTable);
   private FurnitureRequestDaoImpl furnitureRequestTable =
       FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
   private PatientTransportRequestDaoImpl patientTransportRequestTable =

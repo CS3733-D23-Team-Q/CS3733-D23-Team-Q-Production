@@ -13,7 +13,8 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
 
-  public static synchronized MealRequestDaoImpl getInstance(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
+  public static synchronized MealRequestDaoImpl getInstance(
+      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
     if (single_instance == null) single_instance = new MealRequestDaoImpl(accountTable, nodeTable);
 
     return single_instance;
