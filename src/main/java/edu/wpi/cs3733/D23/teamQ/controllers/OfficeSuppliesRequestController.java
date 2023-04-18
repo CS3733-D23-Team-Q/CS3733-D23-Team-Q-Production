@@ -85,7 +85,6 @@ public class OfficeSuppliesRequestController {
 
         OfficeSuppliesRequest newOSR =
                 new OfficeSuppliesRequest(
-                        ListServiceRequestController.getOfficeRequest().getRequestID(),
                         qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
                         qdb.retrieveAccount(LoginController.getUsername()),
                         qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
@@ -95,7 +94,6 @@ public class OfficeSuppliesRequestController {
                         0,
                         (String) itemRequestedField.getValue(),
                         Integer.parseInt(quantityField.getText()));
-
         qdb.addOfficeSuppliesRequest(newOSR);
         Navigation.navigateRight(Screen.SUBMISSION);
     }

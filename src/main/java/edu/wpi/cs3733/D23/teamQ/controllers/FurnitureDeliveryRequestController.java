@@ -78,7 +78,7 @@ public class FurnitureDeliveryRequestController {
         Qdb qdb = Qdb.getInstance();
         FurnitureRequest newFR =
                 new FurnitureRequest(
-                        qdb.retrieveNode(Integer.parseInt(roomNumberField.getValue().toString())),
+                        qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
                         qdb.retrieveAccount(LoginController.getLoginUsername()),
                         qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
                         specialInstructionsField.getText(),

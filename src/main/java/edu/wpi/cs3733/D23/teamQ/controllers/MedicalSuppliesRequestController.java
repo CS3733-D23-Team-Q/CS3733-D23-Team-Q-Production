@@ -79,12 +79,9 @@ public class MedicalSuppliesRequestController {
 
     @FXML
     public void submitButtonClicked() {
-
         Qdb qdb = Qdb.getInstance();
-
         MedicalSuppliesRequest newMSR =
                 new MedicalSuppliesRequest(
-                        ListServiceRequestController.getMedicalRequest().getRequestID(),
                         qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
                         qdb.retrieveAccount(LoginController.getUsername()),
                         qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
@@ -94,7 +91,6 @@ public class MedicalSuppliesRequestController {
                         0,
                         (String) itemRequestedField.getValue(),
                         Integer.parseInt((String) quantityField.getText()));
-
         qdb.addMedicalSuppliesRequest(newMSR);
         Navigation.navigateRight(Screen.SUBMISSION);
     }

@@ -96,7 +96,7 @@ public class MealDeliveryRequestController {
 
         MealRequest newMR =
                 new MealRequest(
-                        qdb.retrieveNode(Integer.parseInt(roomNumberField.getText())),
+                        qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
                         qdb.retrieveAccount(LoginController.getUsername()),
                         qdb.retrieveAccount(assigneeField.getValue().toString()),
                         specialInstructionsField.getText(),
