@@ -17,7 +17,7 @@ import javafx.scene.control.ChoiceBox;
 public class MedicalSuppliesRequestDisplayController {
 
   ObservableList<String> medicalItemList =
-      FXCollections.observableArrayList("tbd1", "tbd2", "tbd3", "tbd4", "tbd5");
+      FXCollections.observableArrayList("bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
 
   @FXML MFXButton deleteButton;
   @FXML MFXButton backButton;
