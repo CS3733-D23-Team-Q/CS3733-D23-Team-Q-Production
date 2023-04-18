@@ -6,8 +6,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -59,46 +57,52 @@ public class ListServiceRequestController {
 
   @FXML
   public void rowSelected() {
-    if (qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID())
-        != null) {
-      flowerRequest =
-          qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
-      Navigation.navigateRight(Screen.FLOWER_REQUEST_DISPLAY);
-    } else if (qdb.retrieveConferenceRequest(
-            tableView.getSelectionModel().getSelectedItem().getRequestID())
-        != null) {
-      conferenceRequest =
-          qdb.retrieveConferenceRequest(
-              tableView.getSelectionModel().getSelectedItem().getRequestID());
-      Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
-    } else if (qdb.retrieveMealRequest(
-            tableView.getSelectionModel().getSelectedItem().getRequestID())
-        != null) {
-      mealRequest =
-          qdb.retrieveMealRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
-      Navigation.navigateRight(Screen.MEAL_REQUEST_DISPLAY);
-    } else if (qdb.retrieveOfficeSuppliesRequest(
-            tableView.getSelectionModel().getSelectedItem().getRequestID())
-        != null) {
-      officeSuppliesRequest =
-          qdb.retrieveOfficeSuppliesRequest(
-              tableView.getSelectionModel().getSelectedItem().getRequestID());
-      Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
-    } else if (qdb.retrieveFurnitureRequest(
-            tableView.getSelectionModel().getSelectedItem().getRequestID())
-        != null) {
-      furnitureRequest =
-          qdb.retrieveFurnitureRequest(
-              tableView.getSelectionModel().getSelectedItem().getRequestID());
-      Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
-    } else if (qdb.retrieveMedicalSuppliesRequest(
-            tableView.getSelectionModel().getSelectedItem().getRequestID())
-        != null) {
-      medicalSuppliesRequest =
-          qdb.retrieveMedicalSuppliesRequest(
-              tableView.getSelectionModel().getSelectedItem().getRequestID());
-      Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST_DISPLAY);
-    }
+
+    System.out.println(qdb.retrieveFlowerRequest(16));
+
+    //    if
+    // (qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID())
+    //        != null) {
+    //      flowerRequest =
+    //
+    // qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
+    //      Navigation.navigateRight(Screen.FLOWER_REQUEST_DISPLAY);
+    //    } else if (qdb.retrieveConferenceRequest(
+    //            tableView.getSelectionModel().getSelectedItem().getRequestID())
+    //        != null) {
+    //      conferenceRequest =
+    //          qdb.retrieveConferenceRequest(
+    //              tableView.getSelectionModel().getSelectedItem().getRequestID());
+    //      Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
+    //    } else if (qdb.retrieveMealRequest(
+    //            tableView.getSelectionModel().getSelectedItem().getRequestID())
+    //        != null) {
+    //      mealRequest =
+    //
+    // qdb.retrieveMealRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
+    //      Navigation.navigateRight(Screen.MEAL_REQUEST_DISPLAY);
+    //    } else if (qdb.retrieveOfficeSuppliesRequest(
+    //            tableView.getSelectionModel().getSelectedItem().getRequestID())
+    //        != null) {
+    //      officeSuppliesRequest =
+    //          qdb.retrieveOfficeSuppliesRequest(
+    //              tableView.getSelectionModel().getSelectedItem().getRequestID());
+    //      Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
+    //    } else if (qdb.retrieveFurnitureRequest(
+    //            tableView.getSelectionModel().getSelectedItem().getRequestID())
+    //        != null) {
+    //      furnitureRequest =
+    //          qdb.retrieveFurnitureRequest(
+    //              tableView.getSelectionModel().getSelectedItem().getRequestID());
+    //      Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
+    //    } else if (qdb.retrieveMedicalSuppliesRequest(
+    //            tableView.getSelectionModel().getSelectedItem().getRequestID())
+    //        != null) {
+    //      medicalSuppliesRequest =
+    //          qdb.retrieveMedicalSuppliesRequest(
+    //              tableView.getSelectionModel().getSelectedItem().getRequestID());
+    //      Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST_DISPLAY);
+    //    }
   }
 
   public static ConferenceRequest getConferenceRequest() {
