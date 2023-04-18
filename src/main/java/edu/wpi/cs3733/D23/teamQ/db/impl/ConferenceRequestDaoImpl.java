@@ -139,6 +139,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
   @Override
   public boolean populate() {
     try {
+      conferenceRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"conferenceRequest\"");

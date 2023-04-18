@@ -136,6 +136,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   @Override
   public boolean populate() {
     try {
+      officeSuppliesRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");

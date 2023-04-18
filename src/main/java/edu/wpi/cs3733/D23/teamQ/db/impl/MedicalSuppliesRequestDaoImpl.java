@@ -135,6 +135,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
   @Override
   public boolean populate() {
     try {
+      medicalSuppliesRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"medicalSuppliesRequest\"");

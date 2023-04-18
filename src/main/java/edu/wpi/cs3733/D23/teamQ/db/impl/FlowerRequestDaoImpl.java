@@ -134,12 +134,14 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    flowerRequests.add(request);
     return populate();
   }
 
   @Override
   public boolean populate() {
     try {
+      flowerRequests.clear();
       Connection conn = GenDao.connect();
       PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"flowerRequest\"");
       ResultSet rs = pst.executeQuery();

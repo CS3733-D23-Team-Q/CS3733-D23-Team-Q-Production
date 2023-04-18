@@ -134,6 +134,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
   @Override
   public boolean populate() {
     try {
+      patientTransportRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"patientTransportRequest\"");

@@ -136,6 +136,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   @Override
   public boolean populate() {
     try {
+      mealRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"mealRequest\"");

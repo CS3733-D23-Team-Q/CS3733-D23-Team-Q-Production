@@ -134,6 +134,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
   @Override
   public boolean populate() {
     try {
+      furnitureRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"furnitureRequest\"");

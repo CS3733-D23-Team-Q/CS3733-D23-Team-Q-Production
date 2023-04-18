@@ -34,6 +34,7 @@ public class ServiceRequestDaoImpl {
 
   public boolean populate() {
     try {
+      serviceRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"serviceRequest\"");

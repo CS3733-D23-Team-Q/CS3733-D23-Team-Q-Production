@@ -102,7 +102,8 @@ public class Qdb {
   }
 
   public boolean addConferenceRequest(ConferenceRequest cr) {
-    return conferenceRequestTable.addRow(cr);
+    conferenceRequestTable.addRow(cr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<ConferenceRequest> retrieveAllConferenceRequests() {
@@ -123,7 +124,8 @@ public class Qdb {
   }
 
   public boolean addFlowerRequest(FlowerRequest fr) {
-    return flowerRequestTable.addRow(fr);
+    flowerRequestTable.addRow(fr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<FlowerRequest> retrieveAllFlowerRequests() {
@@ -280,7 +282,8 @@ public class Qdb {
   }
 
   public boolean addMealRequest(MealRequest mr) {
-    return mealRequestTable.addRow(mr);
+    mealRequestTable.addRow(mr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<MealRequest> retrieveAllMealRequests() {
@@ -301,7 +304,8 @@ public class Qdb {
   }
 
   public boolean addFurnitureRequest(FurnitureRequest fr) {
-    return furnitureRequestTable.addRow(fr);
+    furnitureRequestTable.addRow(fr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<FurnitureRequest> retrieveAllFurnitureRequests() {
@@ -322,7 +326,8 @@ public class Qdb {
   }
 
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
-    return patientTransportRequestTable.addRow(ptr);
+    patientTransportRequestTable.addRow(ptr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<PatientTransportRequest> retrieveAllPatientTransportRequests() {
@@ -343,7 +348,8 @@ public class Qdb {
   }
 
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
-    return officeSuppliesRequestTable.addRow(osr);
+    officeSuppliesRequestTable.addRow(osr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
@@ -372,7 +378,8 @@ public class Qdb {
   }
 
   public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
-    return medicalSuppliesRequestTable.addRow(msr);
+    medicalSuppliesRequestTable.addRow(msr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
