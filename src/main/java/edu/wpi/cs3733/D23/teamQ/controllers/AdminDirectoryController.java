@@ -32,8 +32,8 @@ public class AdminDirectoryController {
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Account> Accounts() {
     ObservableList<Account> account = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().getRows().size(); i++) {
-      account.add(Qdb.getInstance().getRows().get(i));
+    for (int i = 0; i < Qdb.getInstance().retrieveAllAccounts().size(); i++) {
+      account.add(Qdb.getInstance().retrieveAllAccounts().get(i));
     }
     return account;
   }

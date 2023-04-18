@@ -2,8 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -97,12 +95,12 @@ public class DirectoryController {
     account.setItems(Accounts());
   }
 
-  public void tableClicked() {
-    accountSelected = account.getSelectionModel().getSelectedItems().get(0);
-    Navigation.navigateRight(Screen.DISPLAY_PROFILE);
-  }
+  //  public void tableClicked() {
+  //    accountSelected = account.getSelectionModel().getSelectedItems().get(0);
+  //    Navigation.navigateRight(Screen.DISPLAY_PROFILE);
+  //  }
 
-  public Account getAccount() {
-    return accountSelected;
-  }
+  //  public Account getAccount() {
+  //    return accountSelected;
+  //  }
 }

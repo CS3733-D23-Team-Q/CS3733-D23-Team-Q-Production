@@ -31,7 +31,7 @@ public class DisplayProfileController {
 
   @FXML
   private void initialize() {
-    String username = directoryController.getAccount().getUsername();
+    String username = LoginController.getLoginUsername();
 
     Qdb qdb = Qdb.getInstance();
 

@@ -47,6 +47,9 @@ public enum Screen {
   EDIT_DIRECTORY("views/EditDirectory.fxml", "EditDirectory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
+  MEDICAL_SUPPLIES_REQUEST_DISPLAY(
+      "views/MedicalSuppliesRequestDisplay.fxml", "Medical Supplies Request Display"),
+  MEDICAL_SUPPLIES_REQUEST("views/MedicalSuppliesRequest.fxml", "Medical Supplies Request"),
   OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
 
   private final String filename;
