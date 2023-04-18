@@ -16,7 +16,6 @@ public class Qdb {
 
   private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
   private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  /* public PersonDaoImpl personTable = PersonDaoImpl.getInstance();*/
   private ConferenceRequestDaoImpl conferenceRequestTable =
       ConferenceRequestDaoImpl.getInstance(nodeTable);
   private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
@@ -27,6 +26,8 @@ public class Qdb {
       PatientTransportRequestDaoImpl.getInstance(nodeTable);
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable =
       OfficeSuppliesRequestDaoImpl.getInstance(nodeTable);
+  private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable =
+      MedicalSuppliesRequestDaoImpl.getInstance(nodeTable);
   private ServiceRequestDaoImpl serviceRequestTable =
       ServiceRequestDaoImpl.getInstance(
           conferenceRequestTable,
@@ -34,7 +35,8 @@ public class Qdb {
           mealRequestTable,
           furnitureRequestTable,
           officeSuppliesRequestTable,
-          patientTransportRequestTable);
+          patientTransportRequestTable,
+          medicalSuppliesRequestTable);
 
   private static Qdb single_instance = null;
 
@@ -219,34 +221,6 @@ public class Qdb {
     return (ArrayList<Move>) moveTable.getAllRows();
   }
 
-  /*public Person retrievePerson(int ID) {
-    return personTable.retrieveRow(ID);
-  }
-
-  public Person retrievePerson(String username) {
-    return personTable.getPersonWithUsername(username);
-  }
-
-  public boolean updatePerson(int ID, Person p) {
-    return personTable.updateRow(ID, p);
-  }
-
-  public boolean deletePerson(int ID) {
-    return personTable.deleteRow(ID);
-  }
-
-  public boolean addPerson(Person p) {
-    return personTable.addRow(p);
-  }
-
-  public ArrayList<Person> retrieveAllPeople() {
-    return (ArrayList<Person>) personTable.getAllRows();
-  }*/
-
-  public ArrayList<Account> retrieveAllPeople() {
-    return (ArrayList<Account>) accountTable.getAllRows();
-  }
-
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }
@@ -367,7 +341,23 @@ public class Qdb {
     return accountTable.getEmailWithUsername(username);
   }
 
-  public List<Account> getRows() {
-    return accountTable.getAllRows();
+  public MedicalSuppliesRequest retrieveMedicalSuppliesRequest(int requestID) {
+    return medicalSuppliesRequestTable.retrieveRow(requestID);
+  }
+
+  public boolean updateMedicalSuppliesRequest(int requestID, MedicalSuppliesRequest msr) {
+    return medicalSuppliesRequestTable.updateRow(requestID, msr);
+  }
+
+  public boolean deleteMedicalSuppliesRequest(int requestID) {
+    return medicalSuppliesRequestTable.deleteRow(requestID);
+  }
+
+  public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
+    return medicalSuppliesRequestTable.addRow(msr);
+  }
+
+  public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
+    return (ArrayList<MedicalSuppliesRequest>) medicalSuppliesRequestTable.getAllRows();
   }
 }
