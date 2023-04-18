@@ -83,7 +83,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextArea prefHeight="366.0" prefWidth="122.0" promptText="Write Here:" text="&#10;">
+                              <TextArea maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Write Here:" text="&#10;">
                                  <effect>
                                     <ColorAdjust brightness="-0.14">
                                        <input>
@@ -114,11 +114,11 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextArea prefHeight="530.0" prefWidth="252.0" promptText="Write Here:" text="&#10;">
+                              <TextArea maxHeight="-Infinity" prefHeight="487.0" prefWidth="252.0" promptText="Write Here:" text="&#10;">
                                  <effect>
                                     <ColorAdjust brightness="-0.14">
                                        <input>
-                                          <Glow />
+                                          <ColorAdjust />
                                        </input>
                                     </ColorAdjust>
                                  </effect>
