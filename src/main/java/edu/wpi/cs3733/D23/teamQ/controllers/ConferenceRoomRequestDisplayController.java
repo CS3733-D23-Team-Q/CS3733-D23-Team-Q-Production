@@ -49,7 +49,9 @@ public class ConferenceRoomRequestDisplayController implements IController {
     assigneeField.setText(
         ListServiceRequestController.getConferenceRequest().getAssignee().getUsername());
     roomNumberField.setText(
-        ListServiceRequestController.getConferenceRequest().getNode().toString());
+        qdb.retrieveNode(ListServiceRequestController.getConferenceRequest().getNodeID())
+            .getLocation()
+            .getLongName());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,

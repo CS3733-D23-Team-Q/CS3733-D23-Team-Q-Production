@@ -45,10 +45,14 @@ public class MealDeliveryRequestDisplayController {
 
   @FXML
   public void initialize() {
+    Qdb qdb = Qdb.getInstance();
     timeField.setItems(timeList);
     assigneeField.setText(
         ListServiceRequestController.getMealRequest().getAssignee().getUsername());
-    roomNumberField.setText(ListServiceRequestController.getMealRequest().getNode().toString());
+    roomNumberField.setText(
+        qdb.retrieveNode(ListServiceRequestController.getMealRequest().getNodeID())
+            .getLocation()
+            .getLongName());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getMealRequest().getDate().getYear() + 1900,

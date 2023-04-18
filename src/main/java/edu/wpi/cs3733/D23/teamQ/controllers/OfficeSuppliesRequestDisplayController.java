@@ -42,11 +42,15 @@ public class OfficeSuppliesRequestDisplayController {
 
   @FXML
   public void initialize() {
+    Qdb qdb = Qdb.getInstance();
     timeField.setItems(timeList);
     itemRequestedField.setItems(officeItemList);
     assigneeField.setText(
         ListServiceRequestController.getOfficeRequest().getAssignee().getUsername());
-    roomNumberField.setText(ListServiceRequestController.getOfficeRequest().getNode().toString());
+    roomNumberField.setText(
+        qdb.retrieveNode(ListServiceRequestController.getOfficeRequest().getNodeID())
+            .getLocation()
+            .getLongName());
     dateField.setValue(
         LocalDate.of(
             ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
