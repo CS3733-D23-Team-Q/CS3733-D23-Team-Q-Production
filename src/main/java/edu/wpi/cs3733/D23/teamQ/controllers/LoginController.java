@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -33,7 +34,7 @@ public class LoginController {
   @FXML ImageView alertImage;
   @FXML MFXTextField usernameField;
   @FXML MFXPasswordField passwordField;
-  @FXML MFXButton forgotPassword;
+  @FXML MFXButton fpButton;
   @FXML MFXButton login;
   @FXML MFXButton exit;
   @FXML GesturePane imagePane;
@@ -43,8 +44,10 @@ public class LoginController {
 
   @FXML
   public void initialize() {
-    Node hImage = new ImageView(getClass().getResource("Hospital1.jpeg").toExternalForm());
-    imagePane = new GesturePane(hImage);
+    Image hImage = new Image(App.class.getResourceAsStream("Hospital1.jpeg"));
+    ImageView imageView = new ImageView(hImage);
+    imageView.setOpacity(0.75);
+    imagePane.setContent(imageView);
   }
 
   @FXML
@@ -53,7 +56,7 @@ public class LoginController {
   }
 
   @FXML
-  public void usernameFieldEntered(KeyEvent e) {
+  public void usernameEntered(KeyEvent e) {
     if (e.getCode().equals(KeyCode.ENTER)) {
       passwordField.requestFocus();
     }
@@ -62,12 +65,12 @@ public class LoginController {
   @FXML
   public void passwordFieldEntered(KeyEvent e) throws IOException {
     if (e.getCode().equals(KeyCode.ENTER)) {
-      loginButtonClicked();
+      loginClicked();
     }
   }
 
   @FXML
-  public void loginButtonClicked() throws IOException {
+  public void loginClicked() throws IOException {
     String username = usernameField.getText();
     String enteredPassword = passwordField.getText();
     String actualPassword = "";
@@ -112,12 +115,12 @@ public class LoginController {
     }
   }
 
-  public static String getUsername() {
-    return user;
+  @FXML
+  public void fpbuttonClicked() throws IOException {
+    ForgotPasswordController.display();
   }
 
-  @FXML
-  public void forgotPasswordClicked() throws IOException {
-    ForgotPasswordController.display();
+  public static String getUsername() {
+    return user;
   }
 }
