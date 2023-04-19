@@ -22,12 +22,37 @@ public class Djikstra implements IPathfinding {
       }
       // write in elevator specifications
       double lowestLocalCost = 10000000.0;
+      boolean nextChosen = false;
       Node chosen = null;
+      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+              && !current.getFloor().equalsIgnoreCase(end.getFloor())
+          || current.getLocation().getNodeType().equalsIgnoreCase("STAI")
+              && !current.getFloor().equalsIgnoreCase(end.getFloor())) {
+        System.out.println(
+            "Found an elevator to a diff floor at " + current + " with end " + end.getFloor());
+        ArrayList<Node> elevatorTargets = new ArrayList<Node>();
+        for (Edge these : current.getEdges()) {
+          elevatorTargets.add(these.getStartNode());
+          elevatorTargets.add(these.getEndNode());
+        }
+        for (Node node : elevatorTargets) {
+          if (node.getFloor().equalsIgnoreCase(end.getFloor())) {
+            Node chosenElev = node;
+            openList.add(chosenElev);
+            openList.remove(current);
+            path.add(current);
+            closedList.add(current);
+            nextChosen = true;
+            break;
+          }
+        }
+      }
       for (Edge thisOne : current.getEdges()) {
         if (!closedList.contains(thisOne.getStartNode())
             && !thisOne.getStartNode().equals(current)
             && !path.contains(thisOne.getStartNode())
-            && thisOne.getStartNode().getFloor().equalsIgnoreCase(start.getFloor())) {
+            && thisOne.getStartNode().getFloor().equalsIgnoreCase(start.getFloor())
+            && !nextChosen) {
           double xDist = Math.abs(end.getXCoord() - thisOne.getStartNode().getXCoord());
           double yDist = Math.abs(end.getYCoord() - thisOne.getStartNode().getYCoord());
           double weight = Math.sqrt(xDist * xDist + yDist * yDist);
@@ -39,7 +64,8 @@ public class Djikstra implements IPathfinding {
         } else if (!closedList.contains(thisOne.getEndNode())
             && !thisOne.getEndNode().equals(current)
             && !path.contains(thisOne.getEndNode())
-            && thisOne.getEndNode().getFloor().equalsIgnoreCase(start.getFloor())) {
+            && thisOne.getEndNode().getFloor().equalsIgnoreCase(start.getFloor())
+            && !nextChosen) {
           double xDist = Math.abs(end.getXCoord() - thisOne.getEndNode().getXCoord());
           double yDist = Math.abs(end.getYCoord() - thisOne.getEndNode().getYCoord());
           double weight = Math.sqrt(xDist * xDist + yDist * yDist);
