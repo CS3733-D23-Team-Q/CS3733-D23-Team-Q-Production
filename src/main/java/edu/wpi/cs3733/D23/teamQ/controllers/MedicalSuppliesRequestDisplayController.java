@@ -17,7 +17,8 @@ import javafx.scene.control.ChoiceBox;
 public class MedicalSuppliesRequestDisplayController {
 
   ObservableList<String> medicalItemList =
-      FXCollections.observableArrayList("tbd1", "tbd2", "tbd3", "tbd4", "tbd5");
+      FXCollections.observableArrayList(
+          "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
 
   @FXML MFXButton deleteButton;
   @FXML MFXButton backButton;
@@ -34,17 +35,16 @@ public class MedicalSuppliesRequestDisplayController {
   @FXML
   public void initialize() {
     itemRequestedField.setItems(medicalItemList);
-
     assigneeField.setValue(ListServiceRequestController.getMedicalRequest().getAssignee());
     roomNumberField.setValue(ListServiceRequestController.getMedicalRequest().getNode());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
-            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+            ListServiceRequestController.getMedicalRequest().getDate().getYear(),
+            ListServiceRequestController.getMedicalRequest().getDate().getMonth(),
+            ListServiceRequestController.getMedicalRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getMedicalRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getMedicalRequest().getSpecialInstructions());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getMedicalRequest().getQuantity()));
   }
@@ -69,17 +69,17 @@ public class MedicalSuppliesRequestDisplayController {
     MedicalSuppliesRequest newMSP =
         new MedicalSuppliesRequest(
             ListServiceRequestController.getMedicalRequest().getRequestID(),
-            ListServiceRequestController.getMedicalRequest().getRequester(),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
             ListServiceRequestController.getMedicalRequest().getNode(),
+            ListServiceRequestController.getMedicalRequest().getRequester(),
+            qdb.retrieveAccount(assigneeField.getValue().toString()),
             (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
+            0,
             (String) itemRequestedField.getValue(),
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.updateMedicalSuppliesRequest(
-        ListServiceRequestController.getFlowerRequest().getRequestID(), newMSP);
+        ListServiceRequestController.getMedicalRequest().getRequestID(), newMSP);
   }
 }

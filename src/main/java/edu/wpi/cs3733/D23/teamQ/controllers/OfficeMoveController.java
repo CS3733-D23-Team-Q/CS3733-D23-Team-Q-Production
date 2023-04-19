@@ -81,7 +81,7 @@ public class OfficeMoveController {
         && dateField.getValue() != null) {
       Move newMove =
           new Move(
-              qdb.retrieveNode(qdb.getNodeFromLocation(currentLocationField.getValue().toString())),
+              qdb.getNodeFromLocation(currentLocationField.getValue().toString()),
               newLocationField.getValue().toString(),
               Date.valueOf(dateField.getValue()));
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.DirectoryController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.EditDirectoryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="629.6666870117188" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="867.0" minWidth="10.0" prefWidth="858.0" />
@@ -33,12 +34,15 @@
     <children>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
             <children>
-                <StackPane prefHeight="150.0" prefWidth="275.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+                <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
                     <children>
-                        <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Hospital Directory">
+                        <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Directory">
                             <font>
                                 <Font name="Roboto Bold" size="24.0" />
                             </font>
+                            <StackPane.margin>
+                                <Insets />
+                            </StackPane.margin>
                         </Text>
                     </children>
                     <HBox.margin>
@@ -47,7 +51,7 @@
                 </StackPane>
             </children>
         </HBox>
-        <TableView fx:id="account" onMouseClicked="#tableClicked" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TableView fx:id="account" prefHeight="433.0" prefWidth="798.0" style="-fx-background-color: #F1F1F1;" translateY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
                 <TableColumn fx:id="FirstName" prefWidth="75.0" text="First Name" />
@@ -59,5 +63,12 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <children>
+                <MFXButton onAction="#DeleteClicked" style="-fx-background-color: #f1f1f1; -fx-background-radius: 10; -fx-border-radius: #142A53;" text="Delete" textFill="#142a53" />
+                <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                <MFXButton onAction="#DoneClicked" style="-fx-background-color: #142A53; -fx-background-radius: 10;" text="Done" textFill="WHITE" />
+            </children>
+        </HBox>
     </children>
 </GridPane>

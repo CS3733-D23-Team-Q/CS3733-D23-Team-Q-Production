@@ -15,42 +15,32 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
 
   public MedicalSuppliesRequest(
       int requestID,
-      Account requester,
-      int progress,
-      Account assignee,
       Node node,
+      Account requester,
+      Account assignee,
       String specialInstructions,
       Date date,
       String time,
+      int progress,
       String item,
       int quantity) {
-    super(requestID, requester, progress, assignee, node, specialInstructions, date, time);
+    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
     this.item = item;
     this.quantity = quantity;
   }
 
   public MedicalSuppliesRequest(
-      Account requester,
-      int progress,
-      Account assignee,
       Node node,
+      Account requester,
+      Account assignee,
       String specialInstructions,
       Date date,
       String time,
+      int progress,
       String item,
       int quantity) {
-    super(0, requester, progress, assignee, node, specialInstructions, date, time);
+    super(0, node, assignee, requester, specialInstructions, date, time, progress);
     this.item = item;
     this.quantity = quantity;
-  }
-
-  public int progressToInt(ServiceRequest.Progress progress) {
-    if (progress == ServiceRequest.Progress.BLANK) {
-      return 0;
-    } else if (progress == ServiceRequest.Progress.PROCESSING) {
-      return 1;
-    } else {
-      return 2;
-    }
   }
 }

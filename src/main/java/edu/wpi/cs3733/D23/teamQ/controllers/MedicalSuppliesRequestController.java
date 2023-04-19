@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
@@ -11,8 +12,12 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+
+import static edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController.getFurnitureRequest;
+import static edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController.getMedicalRequest;
 
 public class MedicalSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -30,7 +35,8 @@ public class MedicalSuppliesRequestController {
   @FXML MFXTextField specialInstructionsField;
   @FXML MFXFilterComboBox itemRequestedField;
   ObservableList<String> itemList =
-      FXCollections.observableArrayList("tbd1", "tbd2", "tbd3", "tbd4", "tbd5");
+      FXCollections.observableArrayList(
+          "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
   @FXML MFXTextField quantityField;
 
   @FXML Button resetButton;
@@ -67,23 +73,48 @@ public class MedicalSuppliesRequestController {
 
   @FXML
   public void submitButtonClicked() {
-
     Qdb qdb = Qdb.getInstance();
-
     MedicalSuppliesRequest newMSR =
         new MedicalSuppliesRequest(
-            ListServiceRequestController.getMedicalRequest().getRequestID(),
+            qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
             qdb.retrieveAccount(LoginController.getUsername()),
-            0,
-            qdb.retrieveAccount(assigneeField.getValue().toString()),
-            (Node) roomNumberField.getValue(),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            (String) itemRequestedField.getValue(),
-            Integer.parseInt((String) quantityField.getText()));
-
+            0,
+            itemRequestedField.getValue().toString(),
+            Integer.parseInt(quantityField.getText()));
     qdb.addMedicalSuppliesRequest(newMSR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }
+
+  public void deleteButtonClicked(ActionEvent actionEvent) {
+    Qdb qdb = Qdb.getInstance();
+    qdb.deleteFurnitureRequest(getMedicalRequest().getRequestID());
+  }
+
+  public void backButtonClicked(ActionEvent actionEvent) {
+    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
+  }
+
+  public void updateButtonClicked(ActionEvent actionEvent) {
+    Qdb qdb = Qdb.getInstance();
+
+    MedicalSuppliesRequest newMedR =
+            new MedicalSuppliesRequest(
+                    getMedicalRequest().getRequestID(),
+                    getMedicalRequest().getNode(),
+                    getMedicalRequest().getRequester(),
+                    (Account) assigneeField.getValue(),
+                    specialInstructionsField.getText(),
+                    Date.valueOf(dateField.getValue()),
+                    timeField.getText(),
+                    getMedicalRequest().getProgress().ordinal(),
+                    itemRequestedField.getValue().toString(),
+                    Integer.parseInt(quantityField.getText()));
+
+    qdb.updateMedicalSuppliesRequest(getMedicalRequest().getRequestID(), newMedR);
+  }
+
 }

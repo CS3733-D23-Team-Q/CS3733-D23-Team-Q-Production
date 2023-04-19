@@ -51,6 +51,7 @@ public class LoginController {
 
   @FXML
   public void exitClicked() {
+
     Platform.exit();
   }
 

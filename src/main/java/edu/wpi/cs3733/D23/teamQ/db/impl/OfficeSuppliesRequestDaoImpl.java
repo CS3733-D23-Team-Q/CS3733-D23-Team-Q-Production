@@ -9,7 +9,6 @@ import java.util.List;
 public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
   private List<OfficeSuppliesRequest> officeSuppliesRequests =
       new ArrayList<OfficeSuppliesRequest>();
-  private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
@@ -26,9 +25,6 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     this.nodeTable = nodeTable;
     this.accountTable = accountTable;
     populate();
-    if (officeSuppliesRequests.size() != 0) {
-      nextID = officeSuppliesRequests.get(officeSuppliesRequests.size() - 1).getRequestID() + 1;
-    }
   }
 
   /**
@@ -42,7 +38,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       int index = this.getIndex(requestID);
       return officeSuppliesRequests.get(index);
     } catch (Exception e) {
-      System.out.println("No request found with ID: " + requestID);
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -122,7 +118,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
             conn.prepareStatement(
                 "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
-      stmt.setInt(2, request.progressToInt(request.getProgress()));
+      stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
       stmt.setInt(4, request.getNode().getNodeID());
       stmt.setString(5, request.getSpecialInstructions());
@@ -134,14 +130,13 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
-    request.setRequestID(nextID);
-    nextID++;
-    return officeSuppliesRequests.add(request);
+    return populate();
   }
 
   @Override
   public boolean populate() {
     try {
+      officeSuppliesRequests.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"officeSuppliesRequest\"");
@@ -149,13 +144,13 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
         officeSuppliesRequests.add(
             new OfficeSuppliesRequest(
                 rst.getInt("requestID"),
-                accountTable.retrieveRow(rst.getString("requester")),
-                rst.getInt("progress"),
-                accountTable.retrieveRow(rst.getString("assignee")),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
+                accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
+                rst.getInt("progress"),
                 rst.getString("item"),
                 rst.getInt("quantity")));
       }
@@ -176,11 +171,11 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
   private int getIndex(Integer requestID) {
     for (int i = 0; i < officeSuppliesRequests.size(); i++) {
       OfficeSuppliesRequest x = officeSuppliesRequests.get(i);
-      if (x.getRequestID() == (Integer) requestID) {
+      if (x.getRequestID() == requestID) {
         return i;
       }
     }
-    throw new RuntimeException("No request found with ID " + requestID);
+    throw new RuntimeException("No office supplies request found with ID: " + requestID);
   }
 
   /**
