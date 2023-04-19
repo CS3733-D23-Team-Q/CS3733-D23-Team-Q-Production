@@ -63,11 +63,11 @@
                         <Insets bottom="5.0" top="5.0" />
                     </VBox.margin>
                 </Label>
-                <MFXTextField fx:id="ProfileEditPage_Username_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="username here">
+                <Label fx:id="ProfileEditPage_Username_TextField" prefHeight="40.0" prefWidth="475.0" style="-fx-border-color: #012d5a; -fx-border-radius: 15; -fx-border-width: 2;" text="username here">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
-                </MFXTextField>
+                </Label>
             </children>
             <VBox.margin>
                 <Insets left="10.0" />

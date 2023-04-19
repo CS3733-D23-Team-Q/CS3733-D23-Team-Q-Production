@@ -46,6 +46,8 @@ public enum Screen {
   MENU_PANE("views/MenuRoot.fxml", "Menu Pane"),
 
   DIRECTORY("views/Directory.fxml", "Directory"),
+  ADMIN_DIRECTORY("views/AdminDirectory.fxml", "Admin Directory"),
+  EDIT_DIRECTORY("views/EditDirectory.fxml", "Edit Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
 
