@@ -19,6 +19,10 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, Integer> requestID;
   @FXML TableColumn<ServiceRequest, Integer> progress;
   @FXML TableColumn<ServiceRequest, String> roomNumber;
+  @FXML TableColumn<ServiceRequest, String> specialInstructions;
+  @FXML TableColumn<ServiceRequest, String> assignee;
+  @FXML TableColumn<ServiceRequest, String> date;
+  @FXML TableColumn<ServiceRequest, String> time;
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -27,6 +31,7 @@ public class ListServiceRequestController {
   private static OfficeSuppliesRequest officeSuppliesRequest;
 
   private static FurnitureRequest furnitureRequest;
+  private static MedicalSuppliesRequest medicalSuppliesRequest;
 
   Qdb qdb = Qdb.getInstance();
 
@@ -34,49 +39,65 @@ public class ListServiceRequestController {
 
   @FXML
   public void initialize() {
+    String username = LoginController.getLoginUsername();
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
-    tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
+    specialInstructions.setCellValueFactory(
+        new PropertyValueFactory<ServiceRequest, String>("specialInstructions"));
+    assignee.setCellValueFactory(
+        new PropertyValueFactory<ServiceRequest, String>("assigneeUsername"));
+    date.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Date"));
+    time.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Time"));
+    if (username.equals("admin")) {
+      tableView.setItems((ObservableList<ServiceRequest>) qdb.retrieveAllServiceRequests());
+    } else {
+      tableView.setItems(
+          (ObservableList<ServiceRequest>) qdb.retrieveUserServiceRequests(username));
+    }
   }
 
   @FXML
   public void rowSelected() {
-    if (qdb.retrieveFlowerRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+    if (qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       flowerRequest =
-          qdb.retrieveFlowerRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.FLOWER_REQUEST_DISPLAY);
+          qdb.retrieveFlowerRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
+      Navigation.navigateRight(Screen.FLOWER_REQUEST_DISPLAY);
     } else if (qdb.retrieveConferenceRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       conferenceRequest =
           qdb.retrieveConferenceRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
+      Navigation.navigateRight(Screen.CONFERENCE_ROOM_REQUEST_DISPLAY);
     } else if (qdb.retrieveMealRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       mealRequest =
-          qdb.retrieveMealRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.MEAL_REQUEST_DISPLAY);
+          qdb.retrieveMealRequest(tableView.getSelectionModel().getSelectedItem().getRequestID());
+      Navigation.navigateRight(Screen.MEAL_REQUEST_DISPLAY);
     } else if (qdb.retrieveOfficeSuppliesRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       officeSuppliesRequest =
           qdb.retrieveOfficeSuppliesRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
+      Navigation.navigateRight(Screen.OFFICE_SUPPLIES_REQUEST_DISPLAY);
     } else if (qdb.retrieveFurnitureRequest(
-            tableView.getSelectionModel().getSelectedItems().get(0).getRequestID())
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
         != null) {
       furnitureRequest =
           qdb.retrieveFurnitureRequest(
-              tableView.getSelectionModel().getSelectedItems().get(0).getRequestID());
-      Navigation.navigate(Screen.FURNITURE_REQUEST_DISPLAY);
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
+      Navigation.navigateRight(Screen.FURNITURE_REQUEST_DISPLAY);
+    } else if (qdb.retrieveMedicalSuppliesRequest(
+            tableView.getSelectionModel().getSelectedItem().getRequestID())
+        != null) {
+      medicalSuppliesRequest =
+          qdb.retrieveMedicalSuppliesRequest(
+              tableView.getSelectionModel().getSelectedItem().getRequestID());
+      Navigation.navigateRight(Screen.MEDICAL_SUPPLIES_REQUEST_DISPLAY);
     }
   }
 
@@ -98,5 +119,9 @@ public class ListServiceRequestController {
 
   public static OfficeSuppliesRequest getOfficeRequest() {
     return officeSuppliesRequest;
+  }
+
+  public static MedicalSuppliesRequest getMedicalRequest() {
+    return medicalSuppliesRequest;
   }
 }

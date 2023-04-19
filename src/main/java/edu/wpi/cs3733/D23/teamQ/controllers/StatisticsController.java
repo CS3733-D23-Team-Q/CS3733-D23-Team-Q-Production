@@ -14,6 +14,6 @@ public class StatisticsController {
   public void initialize() {
     users.setText("Total users: " + qdb.retrieveAllAccounts().size());
     nodes.setText("Total nodes: " + qdb.retrieveAllNodes().size());
-    requests.setText("Total request: " + qdb.retrieveAllServiceRequests().size());
+    requests.setText("Total requests: " + qdb.retrieveAllServiceRequests().size());
   }
 }

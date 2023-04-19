@@ -10,30 +10,8 @@ public class NavigationSubmenuController {
   @FXML VBox navigationSM;
   @FXML MFXButton pathfinder;
 
-  @FXML MFXButton editor;
-  @FXML MenuRootController mrc;
-
   @FXML
   public void pathfinderClicked() {
     Navigation.navigate(Screen.PATH_FINDING);
-  }
-
-  @FXML
-  public void editorClicked() {
-    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
-  }
-
-  @FXML
-  public void nsmExited() {
-    mrc.showNavSM(false);
-  }
-
-  public void setVisible(boolean v) {
-    navigationSM.toFront();
-    navigationSM.setVisible(v);
-  }
-
-  public void setRootController(MenuRootController mrc) {
-    this.mrc = mrc;
   }
 }

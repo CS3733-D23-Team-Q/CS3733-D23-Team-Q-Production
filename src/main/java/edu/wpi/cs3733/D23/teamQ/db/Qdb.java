@@ -7,40 +7,49 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 public class Qdb {
+  private AccountDaoImpl accountTable;
 
-  public LocationDaoImpl locationTable = LocationDaoImpl.getInstance();
+  public LocationDaoImpl locationTable;
 
-  public NodeDaoImpl nodeTable = NodeDaoImpl.getInstance(locationTable);
-  public EdgeDaoImpl edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-  public MoveDaoImpl moveTable = MoveDaoImpl.getInstance(nodeTable);
+  public NodeDaoImpl nodeTable;
+  public EdgeDaoImpl edgeTable;
+  public MoveDaoImpl moveTable;
 
-  private QuestionDaoImpl questionTable = QuestionDaoImpl.getInstance();
-  private AccountDaoImpl accountTable = AccountDaoImpl.getInstance();
-  public PersonDaoImpl personTable = PersonDaoImpl.getInstance();
-  private ConferenceRequestDaoImpl conferenceRequestTable =
-      ConferenceRequestDaoImpl.getInstance(nodeTable);
-  private FlowerRequestDaoImpl flowerRequestTable = FlowerRequestDaoImpl.getInstance(nodeTable);
-  private MealRequestDaoImpl mealRequestTable = MealRequestDaoImpl.getInstance(nodeTable);
-  private FurnitureRequestDaoImpl furnitureRequestTable =
-      FurnitureRequestDaoImpl.getInstance(nodeTable);
-  private PatientTransportRequestDaoImpl patientTransportRequestTable =
-      PatientTransportRequestDaoImpl.getInstance(nodeTable);
-  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable =
-      OfficeSuppliesRequestDaoImpl.getInstance(nodeTable);
-  private ServiceRequestDaoImpl serviceRequestTable =
-      ServiceRequestDaoImpl.getInstance(
-          conferenceRequestTable,
-          flowerRequestTable,
-          mealRequestTable,
-          furnitureRequestTable,
-          officeSuppliesRequestTable,
-          patientTransportRequestTable);
+  private QuestionDaoImpl questionTable;
+
+  private ConferenceRequestDaoImpl conferenceRequestTable;
+  private FlowerRequestDaoImpl flowerRequestTable;
+  private MealRequestDaoImpl mealRequestTable;
+  private FurnitureRequestDaoImpl furnitureRequestTable;
+  private PatientTransportRequestDaoImpl patientTransportRequestTable;
+  private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
+  private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
+  private ServiceRequestDaoImpl serviceRequestTable;
 
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
     if (single_instance == null) single_instance = new Qdb();
     return single_instance;
+  }
+
+  private Qdb() {
+    accountTable = AccountDaoImpl.getInstance();
+    locationTable = LocationDaoImpl.getInstance();
+    nodeTable = NodeDaoImpl.getInstance(locationTable);
+    edgeTable = EdgeDaoImpl.getInstance(nodeTable);
+    moveTable = MoveDaoImpl.getInstance(nodeTable);
+    questionTable = QuestionDaoImpl.getInstance();
+    conferenceRequestTable = ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
+    flowerRequestTable = FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
+    mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
+    furnitureRequestTable = FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
+    patientTransportRequestTable =
+        PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
+    officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+    medicalSuppliesRequestTable =
+        MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+    serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
   }
 
   public Account retrieveAccount(String username) {
@@ -68,7 +77,7 @@ public class Qdb {
   }
 
   public ObservableList<String> getAllNames() {
-    return personTable.getAllNames();
+    return accountTable.getAllNames();
   }
 
   public List<Integer> getAccountIndexes(String email) {
@@ -88,11 +97,13 @@ public class Qdb {
   }
 
   public boolean deleteConferenceRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return conferenceRequestTable.deleteRow(requestID);
   }
 
   public boolean addConferenceRequest(ConferenceRequest cr) {
-    return conferenceRequestTable.addRow(cr);
+    conferenceRequestTable.addRow(cr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<ConferenceRequest> retrieveAllConferenceRequests() {
@@ -108,11 +119,13 @@ public class Qdb {
   }
 
   public boolean deleteFlowerRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return flowerRequestTable.deleteRow(requestID);
   }
 
   public boolean addFlowerRequest(FlowerRequest fr) {
-    return flowerRequestTable.addRow(fr);
+    flowerRequestTable.addRow(fr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<FlowerRequest> retrieveAllFlowerRequests() {
@@ -121,6 +134,10 @@ public class Qdb {
 
   public List<ServiceRequest> retrieveAllServiceRequests() {
     return serviceRequestTable.getAllRows();
+  }
+
+  public List<ServiceRequest> retrieveUserServiceRequests(String user) {
+    return serviceRequestTable.getUserRows(user);
   }
 
   public ServiceRequest retrieveServiceRequest(int requestID) {
@@ -219,30 +236,6 @@ public class Qdb {
     return (ArrayList<Move>) moveTable.getAllRows();
   }
 
-  public Person retrievePerson(int ID) {
-    return personTable.retrieveRow(ID);
-  }
-
-  public Person retrievePerson(String username) {
-    return personTable.getPersonWithUsername(username);
-  }
-
-  public boolean updatePerson(int ID, Person p) {
-    return personTable.updateRow(ID, p);
-  }
-
-  public boolean deletePerson(int ID) {
-    return personTable.deleteRow(ID);
-  }
-
-  public boolean addPerson(Person p) {
-    return personTable.addRow(p);
-  }
-
-  public ArrayList<Person> retrieveAllPeople() {
-    return (ArrayList<Person>) personTable.getAllRows();
-  }
-
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }
@@ -284,11 +277,13 @@ public class Qdb {
   }
 
   public boolean deleteMealRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return mealRequestTable.deleteRow(requestID);
   }
 
   public boolean addMealRequest(MealRequest mr) {
-    return mealRequestTable.addRow(mr);
+    mealRequestTable.addRow(mr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<MealRequest> retrieveAllMealRequests() {
@@ -304,11 +299,13 @@ public class Qdb {
   }
 
   public boolean deleteFurnitureRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return furnitureRequestTable.deleteRow(requestID);
   }
 
   public boolean addFurnitureRequest(FurnitureRequest fr) {
-    return furnitureRequestTable.addRow(fr);
+    furnitureRequestTable.addRow(fr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<FurnitureRequest> retrieveAllFurnitureRequests() {
@@ -324,11 +321,13 @@ public class Qdb {
   }
 
   public boolean deletePatientTransportRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return patientTransportRequestTable.deleteRow(requestID);
   }
 
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
-    return patientTransportRequestTable.addRow(ptr);
+    patientTransportRequestTable.addRow(ptr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<PatientTransportRequest> retrieveAllPatientTransportRequests() {
@@ -344,22 +343,59 @@ public class Qdb {
   }
 
   public boolean deleteOfficeSuppliesRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
     return officeSuppliesRequestTable.deleteRow(requestID);
   }
 
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
-    return officeSuppliesRequestTable.addRow(osr);
+    officeSuppliesRequestTable.addRow(osr);
+    return serviceRequestTable.populate();
   }
 
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
     return (ArrayList<OfficeSuppliesRequest>) officeSuppliesRequestTable.getAllRows();
   }
 
-  public int getNodeFromLocation(String lName) {
-    return locationTable.getNodeFromLocation(lName);
+  public Node getNodeFromLocation(String lName) {
+    return nodeTable.retrieveRow(locationTable.getNodeFromLocation(lName));
   }
 
   public String getEmailWithAUsername(String username) {
     return accountTable.getEmailWithUsername(username);
+  }
+
+  public MedicalSuppliesRequest retrieveMedicalSuppliesRequest(int requestID) {
+    return medicalSuppliesRequestTable.retrieveRow(requestID);
+  }
+
+  public boolean updateMedicalSuppliesRequest(int requestID, MedicalSuppliesRequest msr) {
+    return medicalSuppliesRequestTable.updateRow(requestID, msr);
+  }
+
+  public boolean deleteMedicalSuppliesRequest(int requestID) {
+    serviceRequestTable.deleteRow(requestID);
+    return medicalSuppliesRequestTable.deleteRow(requestID);
+  }
+
+  public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
+    medicalSuppliesRequestTable.addRow(msr);
+    return serviceRequestTable.populate();
+  }
+
+  public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
+    return (ArrayList<MedicalSuppliesRequest>) medicalSuppliesRequestTable.getAllRows();
+  }
+
+  public ServiceRequest retrieveLastRequest() {
+    serviceRequestTable.populate();
+    return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
+  }
+
+  public boolean deleteServiceRequest(int requestID) {
+    return serviceRequestTable.deleteRow(requestID);
+  }
+
+  public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
+    return serviceRequestTable.updateRow(requestID, sr);
   }
 }

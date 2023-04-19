@@ -2,16 +2,16 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.OfficeSuppliesRequestController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.OfficeSuppliesRequestController">
    <children>
       <VBox prefHeight="558.0" prefWidth="848.0" spacing="30.0">
          <children>
@@ -22,7 +22,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="assigneeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Assignee">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox>
@@ -32,7 +36,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="roomNumberField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Location">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox minHeight="-Infinity">
@@ -42,7 +50,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Select a Date" />
                </children>
             </VBox>
             <VBox>
@@ -52,7 +60,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXTextField fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
+                  <MFXFilterComboBox fx:id="timeField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Time">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox>
@@ -62,7 +74,11 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="itemRequestedField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXFilterComboBox fx:id="itemRequestedField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Item">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </MFXFilterComboBox>
                </children>
             </VBox>
             <VBox>

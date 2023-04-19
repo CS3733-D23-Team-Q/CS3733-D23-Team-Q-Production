@@ -7,15 +7,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ServiceRequest {
-
   private int requestID;
-  private Progress progress;
-  private String requester;
-  private String assignee;
   private Node node;
+  private Account requester;
+  private Account assignee;
   private String specialInstructions;
   private Date date;
   private String time;
+  private Progress progress;
+  private String assigneeUsername;
+  private int nodeID;
 
   public enum Progress {
     BLANK,
@@ -25,13 +26,13 @@ public class ServiceRequest {
 
   public ServiceRequest(
       int requestID,
-      String requester,
-      int progress,
-      String assignee,
       Node node,
+      Account requester,
+      Account assignee,
       String specialInstructions,
       Date date,
-      String time) {
+      String time,
+      int progress) {
     this.requestID = requestID;
     if (progress == 0) {
       this.progress = Progress.BLANK;
@@ -48,5 +49,7 @@ public class ServiceRequest {
     this.specialInstructions = specialInstructions;
     this.date = date;
     this.time = time;
+    this.nodeID = node.getNodeID();
+    this.assigneeUsername = assignee.getUsername();
   }
 }
