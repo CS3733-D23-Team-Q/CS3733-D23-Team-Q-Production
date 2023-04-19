@@ -371,12 +371,16 @@ public class PathfindingController {
     }
   }
 
-  public List<Line> addLines(List<Node> path) {
+  public List<Line> addLines(List<Pair<Node, Boolean>> path) { //List<Node path>
     List<Line> lines = new ArrayList<>();
     for (int i = path.size() - 1; i >= 1; i--) {
       // for (int i = 0; i < path.size() - 1; i++) {
+      Node n = path.get(i).getKey();
+      Node next = path.get(i - 1).getKey();
+      /*
       Node n = path.get(i);
       Node next = path.get(i - 1);
+       */
 
       // Node next = path.get(i + 1);
       int x1 = n.getXCoord() / 5;
@@ -388,6 +392,7 @@ public class PathfindingController {
       line.setStrokeWidth(2);
       //      parent.getChildren().add(line);
       //      lines.add(line);
+      /*
       if (!next.getLocation().getNodeType().equals("ELEV")
               && !next.getLocation().getNodeType().equals("STAI")
           && !n.getLocation().getNodeType().equals("ELEV")
@@ -395,6 +400,7 @@ public class PathfindingController {
         parent.getChildren().add(line);
         lines.add(line);
       }
+       */
     }
     return lines;
   }
@@ -430,13 +436,27 @@ public class PathfindingController {
         AStar.aStar(
             start, target);
      */
+    List<Pair<Node, Boolean>> fpath = new ArrayList<>();
+    for(int i = 0; i < path.size() - 1; i++){
+      Node n = path.get(i);
+      Node next = path.get(i + 1);
+      if(path.get(i).getFloor().equals(floor)){
+        if((n.getLocation().getNodeType().equals("ELEV") || n.getLocation().getNodeType().equals("STAI")) && next.getFloor() != n.getFloor()){
+          fpath.add(new Pair<>(n, true));
+        }else{
+          fpath.add(new Pair<>(n, false));
+        }
+      }
+      fpath.add(new Pair<>(path.get(path.size() - 1), false));
+    }
+    /*
     List<Node> fpath = new ArrayList<>();
     for (Node n : path) {
       if (n.getFloor().equals(floor)) {
         fpath.add(n);
       }
     }
-    List<Line> lines = new ArrayList<>();
+     */
     if (fpath.size() > 0) {
       lines = addLines(fpath);
     }
