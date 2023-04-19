@@ -396,13 +396,6 @@ public class PathfindingController {
         parent.getChildren().add(line);
         lines.add(line);
       }
-
-      //      if(!n.getFloor().equals(next.getFloor())){
-      //        List<Line> temp = new ArrayList<>();
-      //        temp.add(line);
-      //        removeLines(temp);
-      //      }
-
     }
     return lines;
   }
