@@ -33,7 +33,7 @@ public class EditProfileController {
 
   @FXML private MFXTextField ProfileEditPage_Title_TextField;
 
-  @FXML private MFXTextField ProfileEditPage_Username_TextField;
+  @FXML private Label ProfileEditPage_Username_TextField;
   @FXML private MFXTextField ProfileEditPage_Answer1_TextField;
   @FXML private MFXTextField ProfileEditPage_Answer2_TextField;
 
