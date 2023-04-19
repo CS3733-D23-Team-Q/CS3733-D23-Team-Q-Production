@@ -8,24 +8,25 @@ public class BFS implements IPathfinding {
 
   @Override
   public ArrayList<Node> run(Node start, Node target) {
-    Queue<Node> queue = new LinkedList<>();
     ArrayList<Node> visited = new ArrayList<>();
+    Queue<Node> queue = new LinkedList<>();
     Map<Node, Node> parentMap = new HashMap<>();
 
     String floor = start.getFloor();
-    queue.offer(start);
+    queue.add(start);
     visited.add(start);
 
     while (!queue.isEmpty()) {
-      Node currNode = queue.poll();
-      if (currNode == target) {
+      Node n = queue.poll();
+      if (n == target) {
         return visited;
       }
-      for (Edge edge : currNode.getEdges()) {
+      for (Edge edge : n.getEdges()) {
         Node neighbor = edge.getEndNode();
-        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor())) {
+        if (!visited.contains(neighbor)) {
+          //        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor()))
           visited.add(neighbor);
-          parentMap.put(neighbor, currNode);
+          parentMap.put(neighbor, n);
           queue.add(neighbor);
         }
       }

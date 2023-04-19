@@ -377,6 +377,7 @@ public class PathfindingController {
       // for (int i = 0; i < path.size() - 1; i++) {
       Node n = path.get(i);
       Node next = path.get(i - 1);
+
       // Node next = path.get(i + 1);
       int x1 = n.getXCoord() / 5;
       int y1 = n.getYCoord() / 5;
@@ -384,9 +385,17 @@ public class PathfindingController {
       int y2 = next.getYCoord() / 5;
       Line line = new Line(x1, y1, x2, y2);
       line.setStyle("-fx-stroke: blue;");
-      line.setStrokeWidth(3);
-      parent.getChildren().add(line);
-      lines.add(line);
+      line.setStrokeWidth(2);
+      //      parent.getChildren().add(line);
+      //      lines.add(line);
+
+      if (!next.getLocation().getNodeType().equals("ELEV")
+          && !next.getLocation().getNodeType().equals("STAI")
+          && !n.getLocation().getNodeType().equals("ELEV")
+          && !n.getLocation().getNodeType().equals("STAI")) {
+        parent.getChildren().add(line);
+        lines.add(line);
+      }
     }
     return lines;
   }
