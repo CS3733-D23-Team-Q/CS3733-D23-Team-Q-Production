@@ -19,7 +19,7 @@ public class PeopleSubmenuController {
   @FXML
   public void directoryClicked() {
     if (LoginController.getLoginUsername()
-            .equals("admin")) // checks if admin and if so can edit directory
+        .equals("admin")) // checks if admin and if so can edit directory
     {
       Navigation.navigate(Screen.ADMIN_DIRECTORY);
     } else {
