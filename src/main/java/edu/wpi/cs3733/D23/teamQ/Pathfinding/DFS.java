@@ -24,34 +24,25 @@ public class DFS implements IPathfinding {
       if (current.getEdges().size() == 0) {
         System.out.println("This node is a dead end " + current);
       }
-      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV")
-              && !current.getFloor().equalsIgnoreCase(end.getFloor())
-          || current.getLocation().getNodeType().equalsIgnoreCase("STAI")
-              && !current.getFloor().equalsIgnoreCase(end.getFloor())) {
-        System.out.println(
-            "Found an elevator to a diff floor at " + current + " with end " + end.getFloor());
-        ArrayList<Node> elevatorTargets = new ArrayList<Node>();
-        for (Edge these : current.getEdges()) {
-          elevatorTargets.add(these.getStartNode());
-          elevatorTargets.add(these.getEndNode());
-        }
-        for (Node node : elevatorTargets) {
-          if (node.getFloor().equalsIgnoreCase(end.getFloor())) {
-            Node chosenElev = node;
-            openList.add(chosenElev);
+      ArrayList<Node> nodesAvailable = new ArrayList<Node>();
+      for (Edge edgePath : current.getEdges()) {
+        nodesAvailable.add(edgePath.getStartNode());
+        nodesAvailable.add(edgePath.getEndNode());
+      }
+      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV") // block used to guide
+          || current.getLocation().getNodeType().equalsIgnoreCase("STAI")) { // thru stair/elev
+        for (Node node : nodesAvailable) {
+          if (!node.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+                  && !visitedList.contains(node) // find a nonelevator
+              || !node.getLocation().getNodeType().equalsIgnoreCase("STAI")
+                  && !visitedList.contains(node)) {
+            openList.add(node);
             openList.remove(current);
             path.add(current);
             visitedList.add(current);
             nextChosen = true;
-            break;
           }
         }
-      }
-      ArrayList<Node> nodesAvailable = new ArrayList<Node>();
-
-      for (Edge edgePath : current.getEdges()) {
-        nodesAvailable.add(edgePath.getStartNode());
-        nodesAvailable.add(edgePath.getEndNode());
       }
       if (!visitedList.contains(current.getEdges().get(0).getEndNode())
           && !current.getEdges().isEmpty()
