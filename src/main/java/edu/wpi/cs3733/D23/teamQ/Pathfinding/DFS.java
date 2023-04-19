@@ -24,7 +24,31 @@ public class DFS implements IPathfinding {
       if (current.getEdges().size() == 0) {
         System.out.println("This node is a dead end " + current);
       }
+      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+              && !current.getFloor().equalsIgnoreCase(end.getFloor())
+          || current.getLocation().getNodeType().equalsIgnoreCase("STAI")
+              && !current.getFloor().equalsIgnoreCase(end.getFloor())) {
+        System.out.println(
+            "Found an elevator to a diff floor at " + current + " with end " + end.getFloor());
+        ArrayList<Node> elevatorTargets = new ArrayList<Node>();
+        for (Edge these : current.getEdges()) {
+          elevatorTargets.add(these.getStartNode());
+          elevatorTargets.add(these.getEndNode());
+        }
+        for (Node node : elevatorTargets) {
+          if (node.getFloor().equalsIgnoreCase(end.getFloor())) {
+            Node chosenElev = node;
+            openList.add(chosenElev);
+            openList.remove(current);
+            path.add(current);
+            visitedList.add(current);
+            nextChosen = true;
+            break;
+          }
+        }
+      }
       ArrayList<Node> nodesAvailable = new ArrayList<Node>();
+
       for (Edge edgePath : current.getEdges()) {
         nodesAvailable.add(edgePath.getStartNode());
         nodesAvailable.add(edgePath.getEndNode());
@@ -32,7 +56,8 @@ public class DFS implements IPathfinding {
       if (!visitedList.contains(current.getEdges().get(0).getEndNode())
           && !current.getEdges().isEmpty()
           && !current.equals(current.getEdges().get(0).getEndNode())
-          && floor.equalsIgnoreCase(current.getEdges().get(0).getEndNode().getFloor())) {
+          && floor.equalsIgnoreCase(current.getEdges().get(0).getEndNode().getFloor())
+          && !nextChosen) {
         openList.add(current.getEdges().get(0).getEndNode());
         openList.remove(current);
         path.add(current);
@@ -41,7 +66,8 @@ public class DFS implements IPathfinding {
       } else if (!visitedList.contains(current.getEdges().get(0).getStartNode())
           && !current.getEdges().isEmpty()
           && !current.equals(current.getEdges().get(0).getStartNode())
-          && floor.equalsIgnoreCase(current.getEdges().get(0).getStartNode().getFloor())) {
+          && floor.equalsIgnoreCase(current.getEdges().get(0).getStartNode().getFloor())
+          && !nextChosen) {
         openList.add(current.getEdges().get(0).getStartNode());
         openList.remove(current);
         path.add(current);
@@ -51,7 +77,8 @@ public class DFS implements IPathfinding {
         for (Node backup : nodesAvailable) {
           if (!visitedList.contains(backup)
               && !current.equals(backup)
-              && floor.equalsIgnoreCase(backup.getFloor())) {
+              && floor.equalsIgnoreCase(backup.getFloor())
+              && !nextChosen) {
             openList.add(backup);
             openList.remove(current);
             path.add(current);

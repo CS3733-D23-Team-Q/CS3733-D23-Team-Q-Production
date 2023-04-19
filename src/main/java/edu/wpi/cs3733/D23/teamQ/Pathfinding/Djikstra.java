@@ -69,6 +69,9 @@ public class Djikstra implements IPathfinding {
       if (chosen == null) {
         System.out.println("COUNTERMEAUSRES LULW");
       }
+      if (!path.contains(current)) {
+        path.add(current);
+      }
       openList.add(chosen);
       openList.remove(current);
       closedList.add(current);
