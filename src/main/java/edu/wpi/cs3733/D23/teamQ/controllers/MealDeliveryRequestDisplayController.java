@@ -86,15 +86,15 @@ public class MealDeliveryRequestDisplayController {
         new MealRequest(
             ListServiceRequestController.getMealRequest().getRequestID(),
             ListServiceRequestController.getMealRequest().getNode(),
-            (Account) ListServiceRequestController.getMealRequest().getRequester(),
+            ListServiceRequestController.getMealRequest().getRequester(),
             (Account) assigneeField.getValue(),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            0,
-            (String) drinkField.getValue(),
-            (String) entreeField.getValue(),
-            (String) sideField.getValue());
+            ListServiceRequestController.getMealRequest().getProgress().ordinal(),
+            drinkField.getValue().toString(),
+            entreeField.getValue().toString(),
+            sideField.getValue().toString());
     qdb.updateMealRequest(ListServiceRequestController.getMealRequest().getRequestID(), newMR);
   }
 }

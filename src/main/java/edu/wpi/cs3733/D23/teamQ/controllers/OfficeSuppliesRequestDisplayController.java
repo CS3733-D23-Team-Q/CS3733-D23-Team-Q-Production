@@ -53,12 +53,12 @@ public class OfficeSuppliesRequestDisplayController {
             .getLongName());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth() + 1,
-            ListServiceRequestController.getConferenceRequest().getDate().getDate()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+            ListServiceRequestController.getOfficeRequest().getDate().getYear() + 1900,
+            ListServiceRequestController.getOfficeRequest().getDate().getMonth() + 1,
+            ListServiceRequestController.getOfficeRequest().getDate().getDate()));
+    timeField.setText(ListServiceRequestController.getOfficeRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getOfficeRequest().getSpecialInstructions());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
   }
@@ -93,6 +93,6 @@ public class OfficeSuppliesRequestDisplayController {
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.updateOfficeSuppliesRequest(
-        ListServiceRequestController.getFlowerRequest().getRequestID(), newOR);
+        ListServiceRequestController.getOfficeRequest().getRequestID(), newOR);
   }
 }

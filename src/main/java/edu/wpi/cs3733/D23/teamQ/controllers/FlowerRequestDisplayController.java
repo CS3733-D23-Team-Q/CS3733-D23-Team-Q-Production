@@ -49,19 +49,19 @@ public class FlowerRequestDisplayController {
     this.flowerTypeField.setItems(TypeOfFlowers);
 
     assigneeField.setText(
-        ListServiceRequestController.getConferenceRequest().getAssignee().getUsername());
+        ListServiceRequestController.getFlowerRequest().getAssignee().getUsername());
     roomNumberField.setText(
         qdb.retrieveNode(ListServiceRequestController.getFlowerRequest().getNodeID())
             .getLocation()
             .getLongName());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth() + 1,
-            ListServiceRequestController.getConferenceRequest().getDate().getDate()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+            ListServiceRequestController.getFlowerRequest().getDate().getYear() + 1900,
+            ListServiceRequestController.getFlowerRequest().getDate().getMonth() + 1,
+            ListServiceRequestController.getFlowerRequest().getDate().getDate()));
+    timeField.setText(ListServiceRequestController.getFlowerRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getFlowerRequest().getSpecialInstructions());
     flowerTypeField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
     bouquetChoiceField.setText(
         String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));

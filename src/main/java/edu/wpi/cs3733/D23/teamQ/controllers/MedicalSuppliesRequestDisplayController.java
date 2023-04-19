@@ -39,12 +39,12 @@ public class MedicalSuppliesRequestDisplayController {
     roomNumberField.setValue(ListServiceRequestController.getMedicalRequest().getNode());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
-            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+            ListServiceRequestController.getMedicalRequest().getDate().getYear(),
+            ListServiceRequestController.getMedicalRequest().getDate().getMonth(),
+            ListServiceRequestController.getMedicalRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getMedicalRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getMedicalRequest().getSpecialInstructions());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getMedicalRequest().getQuantity()));
   }
@@ -80,6 +80,6 @@ public class MedicalSuppliesRequestDisplayController {
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.updateMedicalSuppliesRequest(
-        ListServiceRequestController.getFlowerRequest().getRequestID(), newMSP);
+        ListServiceRequestController.getMedicalRequest().getRequestID(), newMSP);
   }
 }

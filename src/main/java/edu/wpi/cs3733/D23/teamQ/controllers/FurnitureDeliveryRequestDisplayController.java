@@ -52,12 +52,12 @@ public class FurnitureDeliveryRequestDisplayController {
             .getLongName());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth() + 1,
-            ListServiceRequestController.getConferenceRequest().getDate().getDate()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+            ListServiceRequestController.getFurnitureRequest().getDate().getYear() + 1900,
+            ListServiceRequestController.getFurnitureRequest().getDate().getMonth() + 1,
+            ListServiceRequestController.getFurnitureRequest().getDate().getDate()));
+    timeField.setText(ListServiceRequestController.getFurnitureRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getFurnitureRequest().getSpecialInstructions());
     furnitureChoiceField.setText(getFurnitureRequest().getItem());
   }
 
@@ -69,7 +69,7 @@ public class FurnitureDeliveryRequestDisplayController {
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
@@ -83,11 +83,11 @@ public class FurnitureDeliveryRequestDisplayController {
             getFurnitureRequest().getNode(),
             getFurnitureRequest().getRequester(),
             (Account) assigneeField.getValue(),
-            (String) specialInstructionsField.getText(),
+            specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            0,
-            (String) furnitureChoiceField.getValue());
+            getFurnitureRequest().getProgress().ordinal(),
+            furnitureChoiceField.getValue().toString());
 
     qdb.updateFurnitureRequest(getFurnitureRequest().getRequestID(), newFurR);
   }

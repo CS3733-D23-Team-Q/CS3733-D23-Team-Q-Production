@@ -25,7 +25,7 @@
                   <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
-            <VBox fx:id="roomNumberField">
+            <VBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
                      <font>
