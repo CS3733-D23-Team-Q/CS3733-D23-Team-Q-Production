@@ -388,11 +388,10 @@ public class PathfindingController {
       line.setStrokeWidth(2);
       //      parent.getChildren().add(line);
       //      lines.add(line);
-
       if (!next.getLocation().getNodeType().equals("ELEV")
-          && !next.getLocation().getNodeType().equals("STAI")
+              && !next.getLocation().getNodeType().equals("STAI")
           && !n.getLocation().getNodeType().equals("ELEV")
-          && !n.getLocation().getNodeType().equals("STAI")) {
+              && !n.getLocation().getNodeType().equals("STAI")) {
         parent.getChildren().add(line);
         lines.add(line);
       }
