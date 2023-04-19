@@ -385,7 +385,7 @@ public class PathfindingController {
       int y2 = next.getYCoord() / 5;
       Line line = new Line(x1, y1, x2, y2);
       line.setStyle("-fx-stroke: blue;");
-      line.setStrokeWidth(3);
+      line.setStrokeWidth(2);
       //      parent.getChildren().add(line);
       //      lines.add(line);
 

@@ -13,19 +13,21 @@ public class BFS implements IPathfinding {
     Map<Node, Node> parentMap = new HashMap<>();
 
     String floor = start.getFloor();
-    queue.offer(start);
+    queue.add(start);
     visited.add(start);
 
     while (!queue.isEmpty()) {
-      Node currNode = queue.poll();
-      if (currNode == target) {
+      Node n = queue.poll();
+      if (n == target) {
         return visited;
       }
-      for (Edge edge : currNode.getEdges()) {
+      for (Edge edge : n.getEdges()) {
         Node neighbor = edge.getEndNode();
-        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor())) {
+        if (!visited.contains(neighbor)) {
+
+          //        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor())){
           visited.add(neighbor);
-          parentMap.put(neighbor, currNode);
+          parentMap.put(neighbor, n);
           queue.add(neighbor);
         }
       }
