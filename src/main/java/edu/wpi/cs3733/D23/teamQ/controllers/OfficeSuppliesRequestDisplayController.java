@@ -59,6 +59,7 @@ public class OfficeSuppliesRequestDisplayController {
     timeField.setText(ListServiceRequestController.getOfficeRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getOfficeRequest().getSpecialInstructions());
+    itemRequestedField.setText(ListServiceRequestController.getOfficeRequest().getItem());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
   }
@@ -83,13 +84,13 @@ public class OfficeSuppliesRequestDisplayController {
         new OfficeSuppliesRequest(
             ListServiceRequestController.getOfficeRequest().getRequestID(),
             ListServiceRequestController.getOfficeRequest().getNode(),
-            (Account) ListServiceRequestController.getOfficeRequest().getRequester(),
+            ListServiceRequestController.getOfficeRequest().getRequester(),
             (Account) assigneeField.getValue(),
-            (String) specialInstructionsField.getText(),
+            specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            0,
-            (String) itemRequestedField.getValue(),
+            ListServiceRequestController.getOfficeRequest().getProgress().ordinal(),
+            itemRequestedField.getValue().toString(),
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.updateOfficeSuppliesRequest(
