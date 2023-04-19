@@ -23,9 +23,10 @@ public class BFS implements IPathfinding {
       }
       for (Edge edge : n.getEdges()) {
         Node neighbor = edge.getEndNode();
-        if (!visited.contains(neighbor)) {
+        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor())) {
           //        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor()))
           visited.add(neighbor);
+          System.out.println("on floor " + n.getFloor());
           parentMap.put(neighbor, n);
           queue.add(neighbor);
         }
