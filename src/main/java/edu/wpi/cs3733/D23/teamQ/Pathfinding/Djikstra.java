@@ -24,8 +24,8 @@ public class Djikstra implements IPathfinding {
       double lowestLocalCost = 10000000.0;
       boolean nextChosen = false;
       Node chosen = null;
-      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV")
-              && !current.getFloor().equalsIgnoreCase(end.getFloor())
+      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV") // choice block for swithcing
+              && !current.getFloor().equalsIgnoreCase(end.getFloor()) // floors
           || current.getLocation().getNodeType().equalsIgnoreCase("STAI")
               && !current.getFloor().equalsIgnoreCase(end.getFloor())) {
         System.out.println(
@@ -47,11 +47,12 @@ public class Djikstra implements IPathfinding {
           }
         }
       }
-      for (Edge thisOne : current.getEdges()) {
+      for (Edge thisOne :
+          current.getEdges()) { // main choice block for start nodes, used to calc distance
         if (!closedList.contains(thisOne.getStartNode())
             && !thisOne.getStartNode().equals(current)
             && !path.contains(thisOne.getStartNode())
-            && thisOne.getStartNode().getFloor().equalsIgnoreCase(start.getFloor())
+            //   && thisOne.getStartNode()
             && !nextChosen) {
           double xDist = Math.abs(end.getXCoord() - thisOne.getStartNode().getXCoord());
           double yDist = Math.abs(end.getYCoord() - thisOne.getStartNode().getYCoord());
@@ -61,8 +62,9 @@ public class Djikstra implements IPathfinding {
             chosen = thisOne.getStartNode();
             System.out.println();
           }
-        } else if (!closedList.contains(thisOne.getEndNode())
-            && !thisOne.getEndNode().equals(current)
+        } else if (!closedList.contains(
+                thisOne.getEndNode()) // main choice block for end nodes, used to cacl
+            && !thisOne.getEndNode().equals(current) // distance
             && !path.contains(thisOne.getEndNode())
             && thisOne.getEndNode().getFloor().equalsIgnoreCase(start.getFloor())
             && !nextChosen) {
@@ -76,9 +78,11 @@ public class Djikstra implements IPathfinding {
           }
         }
       }
-      path.add(current);
+      if (!path.contains(current)) {
+        path.add(current);
+      }
       if (chosen == null) {
-        ArrayList<Node> altNodes = new ArrayList<Node>();
+        ArrayList<Node> altNodes = new ArrayList<Node>(); // backup block
         for (Node node : closedList) {
           for (Edge edge : node.getEdges()) {
             altNodes.add(edge.getStartNode());
@@ -87,10 +91,22 @@ public class Djikstra implements IPathfinding {
         }
         for (Node node2 : altNodes) {
           if (!closedList.contains(node2)
-              && node2.getFloor().equalsIgnoreCase(start.getFloor())) { // "ELEV", STAI
+                  && node2.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+              || !closedList.contains(node2)
+                  && node2.getLocation().getNodeType().equalsIgnoreCase("STAI")) { // "ELEV", STAI
             chosen = node2;
           }
         }
+      }
+      if (chosen != null
+              && chosen.getLocation().getNodeType().equalsIgnoreCase("STAI") // test statement
+          || chosen != null
+              && chosen.getLocation().getNodeType().equalsIgnoreCase("ELEV")) { // block
+        System.out.println(
+            "The chosen node was an elevator/stair at node "
+                + chosen.getNodeID()
+                + " and it was a "
+                + chosen.getLocation().getNodeType());
       }
       if (chosen == null) {
         System.out.println("COUNTERMEAUSRES LULW");
@@ -98,9 +114,53 @@ public class Djikstra implements IPathfinding {
       if (!path.contains(current)) {
         path.add(current);
       }
-      openList.add(chosen);
-      openList.remove(current);
-      closedList.add(current);
+      if (chosen
+                  .getLocation()
+                  .getNodeType()
+                  .equalsIgnoreCase("ELEV") // this block is used to send the path
+              && chosen
+                  .getFloor()
+                  .equalsIgnoreCase(end.getFloor()) // "through" an elevator when on the same
+              && current.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+          || chosen.getLocation().getNodeType().equalsIgnoreCase("STAI") // floor as a target node
+              && chosen.getFloor().equalsIgnoreCase(end.getFloor())
+              && current.getLocation().getNodeType().equalsIgnoreCase("STAI")) {
+        System.out.println();
+        System.out.println("Was at node " + current + "and went to " + chosen);
+        ArrayList<Node> availableList =
+            new ArrayList<Node>(); // list of nodes available from an elevator/stair
+        ArrayList<Node> availableClone = new ArrayList<Node>();
+        for (Edge edge : current.getEdges()) { // get all available edges
+          availableList.add(edge.getStartNode());
+          availableList.add(edge.getEndNode());
+          availableClone.add(edge.getStartNode());
+          availableClone.add(edge.getEndNode());
+        }
+        for (Node node : availableClone) { // removes visited nodes from available list
+          if (availableList.contains(node) && path.contains(node)
+              || availableList.contains(node) && closedList.contains(node)
+              || node.equals(current)) {
+            availableList.remove(node);
+          }
+        }
+        for (Node node : availableList) { // this loop is used to find a non-elevetor or stair node
+          if (!node.getLocation()
+                  .getNodeType()
+                  .equalsIgnoreCase("ELEV") // if its not a stair or elevator
+              || !node.getLocation().getNodeType().equalsIgnoreCase("STAI")) {
+            chosen = node;
+            nextChosen = true;
+            System.out.println();
+            System.out.println("Picked node " + node);
+            break;
+          }
+        }
+      }
+      if (!openList.contains(chosen)) {
+        openList.add(chosen);
+      }
+      if (openList.contains(current)) openList.remove(current);
+      if (!closedList.contains(current)) closedList.add(current);
       System.out.println();
       System.out.println("Added node " + current.getNodeID() + " to closedList");
     }
