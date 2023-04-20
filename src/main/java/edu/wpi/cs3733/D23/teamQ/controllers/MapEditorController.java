@@ -37,7 +37,7 @@ public class MapEditorController {
 
   @FXML
   void MapClicked(MouseEvent event) {
-    Navigation.navigate(Screen.GRAPHICAL_MAP_EDITOR);
+    // Navigation.navigate(Screen.GRAPHICAL_MAP_EDITOR);
   }
 
   @FXML
