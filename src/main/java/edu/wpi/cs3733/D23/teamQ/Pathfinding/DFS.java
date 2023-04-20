@@ -29,10 +29,26 @@ public class DFS implements IPathfinding {
         nodesAvailable.add(edgePath.getStartNode());
         nodesAvailable.add(edgePath.getEndNode());
       }
+      if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV") // block used to guide
+          || current.getLocation().getNodeType().equalsIgnoreCase("STAI")) { // thru stair/elev
+        for (Node node : nodesAvailable) {
+          if (!node.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+                  && !visitedList.contains(node) // find a nonelevator
+              || !node.getLocation().getNodeType().equalsIgnoreCase("STAI")
+                  && !visitedList.contains(node)) {
+            openList.add(node);
+            openList.remove(current);
+            path.add(current);
+            visitedList.add(current);
+            nextChosen = true;
+          }
+        }
+      }
       if (!visitedList.contains(current.getEdges().get(0).getEndNode())
           && !current.getEdges().isEmpty()
           && !current.equals(current.getEdges().get(0).getEndNode())
-          && floor.equalsIgnoreCase(current.getEdges().get(0).getEndNode().getFloor())) {
+          && floor.equalsIgnoreCase(current.getEdges().get(0).getEndNode().getFloor())
+          && !nextChosen) {
         openList.add(current.getEdges().get(0).getEndNode());
         openList.remove(current);
         path.add(current);
@@ -41,7 +57,8 @@ public class DFS implements IPathfinding {
       } else if (!visitedList.contains(current.getEdges().get(0).getStartNode())
           && !current.getEdges().isEmpty()
           && !current.equals(current.getEdges().get(0).getStartNode())
-          && floor.equalsIgnoreCase(current.getEdges().get(0).getStartNode().getFloor())) {
+          && floor.equalsIgnoreCase(current.getEdges().get(0).getStartNode().getFloor())
+          && !nextChosen) {
         openList.add(current.getEdges().get(0).getStartNode());
         openList.remove(current);
         path.add(current);
@@ -51,7 +68,8 @@ public class DFS implements IPathfinding {
         for (Node backup : nodesAvailable) {
           if (!visitedList.contains(backup)
               && !current.equals(backup)
-              && floor.equalsIgnoreCase(backup.getFloor())) {
+              && floor.equalsIgnoreCase(backup.getFloor())
+              && !nextChosen) {
             openList.add(backup);
             openList.remove(current);
             path.add(current);

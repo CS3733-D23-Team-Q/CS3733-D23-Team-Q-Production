@@ -89,8 +89,8 @@ public class ConferenceRoomRequestDisplayController implements IController {
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            0,
-            (String) foodField.getValue());
+            ListServiceRequestController.getConferenceRequest().getProgress().ordinal(),
+            foodField.getValue().toString());
     qdb.updateConferenceRequest(
         ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
     Navigation.navigateRight(Screen.HOME);

@@ -24,7 +24,7 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
       int progress,
       String item,
       int quantity) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
     this.item = item;
     this.quantity = quantity;
   }

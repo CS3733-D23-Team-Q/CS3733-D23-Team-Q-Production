@@ -53,12 +53,13 @@ public class OfficeSuppliesRequestDisplayController {
             .getLongName());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getConferenceRequest().getDate().getYear() + 1900,
-            ListServiceRequestController.getConferenceRequest().getDate().getMonth() + 1,
-            ListServiceRequestController.getConferenceRequest().getDate().getDate()));
-    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
+            ListServiceRequestController.getOfficeRequest().getDate().getYear() + 1900,
+            ListServiceRequestController.getOfficeRequest().getDate().getMonth() + 1,
+            ListServiceRequestController.getOfficeRequest().getDate().getDate()));
+    timeField.setText(ListServiceRequestController.getOfficeRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+        ListServiceRequestController.getOfficeRequest().getSpecialInstructions());
+    itemRequestedField.setText(ListServiceRequestController.getOfficeRequest().getItem());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
   }
@@ -83,16 +84,16 @@ public class OfficeSuppliesRequestDisplayController {
         new OfficeSuppliesRequest(
             ListServiceRequestController.getOfficeRequest().getRequestID(),
             ListServiceRequestController.getOfficeRequest().getNode(),
-            (Account) ListServiceRequestController.getOfficeRequest().getRequester(),
+            ListServiceRequestController.getOfficeRequest().getRequester(),
             (Account) assigneeField.getValue(),
-            (String) specialInstructionsField.getText(),
+            specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            0,
-            (String) itemRequestedField.getValue(),
+            ListServiceRequestController.getOfficeRequest().getProgress().ordinal(),
+            itemRequestedField.getValue().toString(),
             Integer.parseInt((String) quantityField.getText()));
 
     qdb.updateOfficeSuppliesRequest(
-        ListServiceRequestController.getFlowerRequest().getRequestID(), newOR);
+        ListServiceRequestController.getOfficeRequest().getRequestID(), newOR);
   }
 }
