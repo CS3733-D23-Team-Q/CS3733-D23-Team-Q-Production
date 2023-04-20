@@ -106,7 +106,7 @@
                      <children>
                         <Button fx:id="previousFloor" mnemonicParsing="false" onAction="#previousFloorClicked" prefHeight="39.0" prefWidth="43.0" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>
                                     <Image url="@../../../../../../Chevron%20Left.png" />
                                  </image>
@@ -120,7 +120,7 @@
                      <children>
                         <Button fx:id="nextFloor" mnemonicParsing="false" onAction="#nextFloorClicked" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fitHeight="38.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="38.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>
                                     <Image url="@../../../../../../Chevron%20Right.png" />
                                  </image>
