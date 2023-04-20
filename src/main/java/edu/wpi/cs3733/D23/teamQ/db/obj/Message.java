@@ -5,10 +5,13 @@ public class Message {
     private Account receiver;
     private String message;
 
-    public Message(Account sender, Account receiver, String message) {
+    private long timeStamp;
+
+    public Message(Account sender, Account receiver, String message, long timeStamp) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
+        this.timeStamp = timeStamp;
     }
 
     public Account getSender() {
@@ -33,5 +36,13 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
