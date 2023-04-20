@@ -57,7 +57,9 @@ public class PathfindingController {
   List<Integer> confNodes;
   List<Integer> retlNodes;
   List<Integer> servNodes;
-  List<Integer> nodeIds;
+  // List<Integer> nodeIds;
+  List<Pair<Integer, Integer>> startSelections;
+  List<Pair<Integer, Integer>> endSelections;
   List<Pair<Integer, Integer>> highlightedNodes;
   // List<Integer> highlightedNodes;
   List<Pair<Integer, Integer>> l1nodes;
@@ -106,7 +108,9 @@ public class PathfindingController {
     sfnodes = new ArrayList<>();
     tfnodes = new ArrayList<>();
     highlightedNodes = new ArrayList<>();
-    nodeIds = new ArrayList<>();
+    // nodeIds = new ArrayList<>();
+    startSelections = new ArrayList<>();
+    endSelections = new ArrayList<>();
     restNodes = new ArrayList<>();
     deptNodes = new ArrayList<>();
     labsNodes = new ArrayList<>();
@@ -253,7 +257,7 @@ public class PathfindingController {
 
     for (Node n : moveNodes) { // Node n : nodes
       int nodeid = n.getNodeID();
-      nodeIds.add(nodeid);
+      // nodeIds.add(nodeid);
       Location location = qdb.retrieveLocation(nodeid);
       String nodetype = location.getNodeType();
       String lname = location.getLongName();
@@ -262,7 +266,11 @@ public class PathfindingController {
       }
       if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
         startSelect.getItems().add(lname);
+        int index1 = startSelect.getSelectionModel().getSelectedIndex();
+        startSelections.add(new Pair<>(index1, nodeid));
         endSelect.getItems().add(lname);
+        int index2 = endSelect.getSelectionModel().getSelectedIndex();
+        startSelections.add(new Pair<>(index2, nodeid));
         allSelections.add(lname);
       }
     }
@@ -291,10 +299,15 @@ public class PathfindingController {
       node.setShape(new Circle(3));
       node.setMinSize(6, 6);
       node.setMaxSize(6, 6);
-      node.setStyle(
-          "-fx-background-color: lightblue;"
-              + "-fx-border-color: black;"
-              + "-fx-background-insets: 0px;");
+      if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
+        node.setStyle(
+            "-fx-background-color: lightblue;"
+                + "-fx-border-color: black;"
+                + "-fx-background-insets: 0px;");
+      } else {
+        node.setStyle("-fx-background-color: transparent;");
+        node.setDisable(true);
+      }
       parent.getChildren().add(node);
       int index = parent.getChildren().indexOf(node);
       // System.out.println(index);
@@ -380,6 +393,8 @@ public class PathfindingController {
   }
 
   public void removeButtons() {
+    startSelections.removeAll(startSelections);
+    endSelections.removeAll(endSelections);
     for (Button b : previousNodes) {
       parent.getChildren().remove(b);
     }
@@ -772,7 +787,12 @@ public class PathfindingController {
     String lname = startSelect.getValue();
     if (!lname.equals("")) {
       int index = startSelect.getSelectionModel().getSelectedIndex();
-      int nodeid = nodeIds.get(index);
+      int nodeid = 0;
+      for (int i = 0; i < startSelections.size(); i++) {
+        if (index == startSelections.get(i).getKey()) {
+          nodeid = startSelections.get(i).getValue();
+        }
+      }
       Node n = qdb.retrieveNode(nodeid);
       String nodeFloor = n.getFloor();
       int f = whichFloorI(nodeFloor);
@@ -827,7 +847,12 @@ public class PathfindingController {
     String lname = endSelect.getValue();
     if (!lname.equals("")) {
       int index = endSelect.getSelectionModel().getSelectedIndex();
-      int nodeid = nodeIds.get(index);
+      int nodeid = 0;
+      for (int i = 0; i < endSelections.size(); i++) {
+        if (index == endSelections.get(i).getKey()) {
+          nodeid = endSelections.get(i).getValue();
+        }
+      }
       Node n = qdb.retrieveNode(nodeid);
       String nodeFloor = n.getFloor();
       int nodef = whichFloorI(nodeFloor);
