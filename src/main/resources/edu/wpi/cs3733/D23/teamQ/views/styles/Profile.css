@@ -1,3 +1,9 @@
-#pane {
-    -fx-background-image: url("https://www.massgeneralbrigham.org/content/mgb-global/global/en/patient-care/international/about/brigham-and-womens-hospital/_jcr_content/root/container_924996778/hero_banner.coreimg.jpeg/1667229588893/international-bwh-1428x1110.jpeg");
+.my-hbox {
+    -fx-background-color: #012d5a;
+}
+
+.profile-image {
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-background-color: #CCC;
 }
