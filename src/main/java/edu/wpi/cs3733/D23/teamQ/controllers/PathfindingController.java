@@ -442,11 +442,13 @@ public class PathfindingController {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
       path = pathfindingAlgorithmSelection.run(start, target);
     }
+
     /*
     path =
         AStar.aStar(
             start, target);
      */
+
     List<Pair<Node, Boolean>> fpath = new ArrayList<>();
     for (int i = path.size() - 1; i > 0; i--) {
       Node n = path.get(i);
@@ -467,6 +469,9 @@ public class PathfindingController {
       fpath.add(new Pair<>(path.get(0), false));
       // System.out.println(path.get(0).getNodeID());
     }
+
+    // List<Triple<Integer, Integer, String>> cfnodes = new ArrayList<>();
+
     /*
     List<Node> fpath = new ArrayList<>();
     for (Node n : path) {
@@ -639,6 +644,7 @@ public class PathfindingController {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (int i : nodes) {
       javafx.scene.Node child = children.get(i);
+      child.setDisable(false);
       child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
     }
   }
@@ -646,6 +652,7 @@ public class PathfindingController {
   public void highlight(Button node, String color) {
     String border = "-fx-border-color: ";
     border = border + color + ";";
+    node.setDisable(false);
     node.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
@@ -654,6 +661,7 @@ public class PathfindingController {
     border = border + color + ";";
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     Button child = (Button) children.get(node);
+    child.setDisable(false);
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
@@ -778,11 +786,11 @@ public class PathfindingController {
 
           int ind = cfnodes.get(i).getValue();
           javafx.scene.Node node = parent.getChildren().get(ind);
+          node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
                   + "-fx-border-color: black;"
                   + "-fx-background-insets: 0px;");
-          node.setDisable(false);
 
           if (highlightedNodes.size() > 0) {
             for (int j = 0; j < highlightedNodes.size(); j++) {
@@ -839,11 +847,11 @@ public class PathfindingController {
 
           int ind = cfnodes.get(i).getValue();
           javafx.scene.Node node = parent.getChildren().get(ind);
+          node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
                   + "-fx-border-color: black;"
                   + "-fx-background-insets: 0px;");
-          node.setDisable(false);
 
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
