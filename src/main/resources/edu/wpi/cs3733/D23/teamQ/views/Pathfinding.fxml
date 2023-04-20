@@ -74,16 +74,10 @@
                   <Insets left="20.0" />
                </padding>
             </CheckBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <ComboBox fx:id="dateMenu" editable="true" prefHeight="25.0" prefWidth="307.0" />
-                  <ComboBox fx:id="endSelect1" editable="true" prefHeight="25.0" prefWidth="307.0" />
-               </children>
-            </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />
-            <MenuBar fx:id="dateMenu">
+            <MenuBar>
               <menus>
-                  <Menu fx:id="olddateMenu" mnemonicParsing="false" text="Date" />
+                  <Menu fx:id="dateMenu" mnemonicParsing="false" text="Date" />
                 <Menu mnemonicParsing="false" text="Algorithm">
                   <items>
                         <RadioMenuItem fx:id="aStarSelect" mnemonicParsing="false" onAction="#aStarSelected" selected="true" text="A*">
