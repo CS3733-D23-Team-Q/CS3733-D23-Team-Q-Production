@@ -31,6 +31,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import net.kurobako.gesturefx.*;
+import org.apache.commons.lang3.tuple.Triple;
 
 public class PathfindingController {
   Qdb qdb = Qdb.getInstance();
@@ -69,6 +70,7 @@ public class PathfindingController {
   Date date;
   List<Date> moveDates;
   ToggleGroup dateToggle;
+  List<Triple<Integer, Integer, String>> cfpath;
   // boolean elev;
 
   @FXML HBox root;
@@ -427,6 +429,8 @@ public class PathfindingController {
   public List<Line> drawLinesf(Node start, Node target, String floor)
       throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
+    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    cfnodes = setCF(cfnodes);
     if (algorithm.equals("aStar")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(
           aStar); // if a*, call this function (instead, create a String algorithm global variable
@@ -449,6 +453,7 @@ public class PathfindingController {
             start, target);
      */
 
+    cfpath.removeAll(cfpath);
     List<Pair<Node, Boolean>> fpath = new ArrayList<>();
     for (int i = path.size() - 1; i > 0; i--) {
       Node n = path.get(i);
@@ -459,9 +464,36 @@ public class PathfindingController {
           // n.getLocation().getNodeType().equals("STAI")) &&
           fpath.add(new Pair<>(n, true));
           // System.out.println(n.getNodeID());
+          if(whichFloorI(next.getFloor()) < whichFloorI(n.getFloor())){
+            for(int j = 0; j < cfnodes.size(); i++){
+              Integer nodeid = cfnodes.get(j).getKey();
+              if(nodeid == n.getNodeID()){
+                int index = cfnodes.get(j).getValue();
+                Triple<Integer, Integer, String> triple = Triple.of(nodeid, index, "Down");
+                cfpath.add(triple);
+              }
+            }
+          }else{
+            for(int j = 0; j < cfnodes.size(); i++){
+              Integer nodeid = cfnodes.get(j).getKey();
+              if(nodeid == n.getNodeID()){
+                int index = cfnodes.get(j).getValue();
+                Triple<Integer, Integer, String> triple = Triple.of(nodeid, index, "Up");
+                cfpath.add(triple);
+              }
+            }
+          }
         } else {
           fpath.add(new Pair<>(n, false));
           // System.out.println(n.getNodeID());
+          for(int j = 0; j < cfnodes.size(); i++){
+            Integer nodeid = cfnodes.get(j).getKey();
+            if(nodeid == n.getNodeID()){
+              int index = cfnodes.get(j).getValue();
+              Triple<Integer, Integer, String> triple = Triple.of(nodeid, index, "Same");
+              cfpath.add(triple);
+            }
+          }
         }
       }
     }
@@ -469,8 +501,6 @@ public class PathfindingController {
       fpath.add(new Pair<>(path.get(0), false));
       // System.out.println(path.get(0).getNodeID());
     }
-
-    // List<Triple<Integer, Integer, String>> cfnodes = new ArrayList<>();
 
     /*
     List<Node> fpath = new ArrayList<>();
@@ -831,6 +861,9 @@ public class PathfindingController {
           throw new RuntimeException(ex);
         }
       }
+
+
+
       if (nodef < floor) {
         for (int i = 0; i < crossFloors; i++) {
           previousFloorClicked();
