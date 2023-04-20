@@ -57,9 +57,11 @@ public class PathfindingController {
   List<Integer> confNodes;
   List<Integer> retlNodes;
   List<Integer> servNodes;
-  // List<Integer> nodeIds;
+  List<Integer> nodeIds;
+  /*
   List<Pair<Integer, Integer>> startSelections;
   List<Pair<Integer, Integer>> endSelections;
+   */
   List<Pair<Integer, Integer>> highlightedNodes;
   // List<Integer> highlightedNodes;
   List<Pair<Integer, Integer>> l1nodes;
@@ -108,9 +110,11 @@ public class PathfindingController {
     sfnodes = new ArrayList<>();
     tfnodes = new ArrayList<>();
     highlightedNodes = new ArrayList<>();
-    // nodeIds = new ArrayList<>();
+    nodeIds = new ArrayList<>();
+    /*
     startSelections = new ArrayList<>();
     endSelections = new ArrayList<>();
+     */
     restNodes = new ArrayList<>();
     deptNodes = new ArrayList<>();
     labsNodes = new ArrayList<>();
@@ -257,7 +261,6 @@ public class PathfindingController {
 
     for (Node n : moveNodes) { // Node n : nodes
       int nodeid = n.getNodeID();
-      // nodeIds.add(nodeid);
       Location location = qdb.retrieveLocation(nodeid);
       String nodetype = location.getNodeType();
       String lname = location.getLongName();
@@ -265,12 +268,17 @@ public class PathfindingController {
         floorNodes.add(n);
       }
       if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
+        nodeIds.add(nodeid);
         startSelect.getItems().add(lname);
+        /*
         int index1 = startSelect.getSelectionModel().getSelectedIndex();
         startSelections.add(new Pair<>(index1, nodeid));
+         */
         endSelect.getItems().add(lname);
+        /*
         int index2 = endSelect.getSelectionModel().getSelectedIndex();
-        startSelections.add(new Pair<>(index2, nodeid));
+        endSelections.add(new Pair<>(index2, nodeid));
+         */
         allSelections.add(lname);
       }
     }
@@ -393,8 +401,10 @@ public class PathfindingController {
   }
 
   public void removeButtons() {
+    /*
     startSelections.removeAll(startSelections);
     endSelections.removeAll(endSelections);
+     */
     for (Button b : previousNodes) {
       parent.getChildren().remove(b);
     }
@@ -785,7 +795,10 @@ public class PathfindingController {
   public void startSelected() throws IOException {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
     String lname = startSelect.getValue();
-    if (!lname.equals("")) {
+    if (lname != null && !lname.equals("")) {
+      int index = startSelect.getSelectionModel().getSelectedIndex();
+      int nodeid = nodeIds.get(index);
+      /*
       int index = startSelect.getSelectionModel().getSelectedIndex();
       int nodeid = 0;
       for (int i = 0; i < startSelections.size(); i++) {
@@ -793,6 +806,7 @@ public class PathfindingController {
           nodeid = startSelections.get(i).getValue();
         }
       }
+       */
       Node n = qdb.retrieveNode(nodeid);
       String nodeFloor = n.getFloor();
       int f = whichFloorI(nodeFloor);
@@ -845,14 +859,18 @@ public class PathfindingController {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
     String f = whichFloorS();
     String lname = endSelect.getValue();
-    if (!lname.equals("")) {
+    if (lname != null && !lname.equals("")) {
       int index = endSelect.getSelectionModel().getSelectedIndex();
+      int nodeid = nodeIds.get(index);
+      /*
       int nodeid = 0;
       for (int i = 0; i < endSelections.size(); i++) {
+        System.out.println(index);
         if (index == endSelections.get(i).getKey()) {
           nodeid = endSelections.get(i).getValue();
         }
       }
+       */
       Node n = qdb.retrieveNode(nodeid);
       String nodeFloor = n.getFloor();
       int nodef = whichFloorI(nodeFloor);
