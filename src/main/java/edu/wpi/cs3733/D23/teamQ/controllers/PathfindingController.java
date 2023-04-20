@@ -88,7 +88,8 @@ public class PathfindingController {
   @FXML RadioMenuItem bfsSelect;
   @FXML RadioMenuItem dfsSelect;
   @FXML RadioMenuItem djikstraSelect;
-  @FXML Menu dateMenu;
+    @FXML Menu dateMenu;
+//  @FXML CheckBox dateMenu;
 
   @FXML
   public void initialize() throws IOException {
