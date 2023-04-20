@@ -74,7 +74,6 @@
                   <Insets left="20.0" />
                </padding>
             </CheckBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
             <MenuBar>
               <menus>
                   <Menu fx:id="dateMenu" mnemonicParsing="false" text="Date" />
@@ -94,9 +93,9 @@
             </MenuBar>
             <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="300.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#clearButtonClicked" text="Clear">
+                  <Button mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="298.0" text="Clear">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
