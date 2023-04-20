@@ -27,12 +27,12 @@
                            </image>
                         </ImageView>
                         <Circle fx:id="activeIndicator" fill="#ce3c49" radius="14.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                        <MFXFilterComboBox onMouseReleased="#personSelected" prefHeight="55.0" prefWidth="1149.0" HBox.hgrow="ALWAYS" />
+                        <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="1149.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <MFXScrollPane fx:id="messageSP" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox fx:id="messageVbox" prefHeight="729.0" prefWidth="1594.0" />
+                        <VBox fx:id="messageVbox" prefHeight="729.0" prefWidth="1456.0" />
                      </content>
                   </MFXScrollPane>
                   <HBox spacing="20.0">
