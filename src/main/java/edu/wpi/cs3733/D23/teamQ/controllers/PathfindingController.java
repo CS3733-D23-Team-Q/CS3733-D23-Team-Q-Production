@@ -958,16 +958,16 @@ public class PathfindingController {
       }
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
-
-        int ind = cfnodes.get(i).getValue();
-        javafx.scene.Node node = parent.getChildren().get(ind);
-        node.setStyle(
-            "-fx-background-color: lightblue;"
-                + "-fx-border-color: black;"
-                + "-fx-background-insets: 0px;");
-        node.setDisable(false);
-
         if (cfnodes.get(i).getKey() == nodeid) {
+
+          int ind = cfnodes.get(i).getValue();
+          javafx.scene.Node node = parent.getChildren().get(ind);
+          node.setStyle(
+              "-fx-background-color: lightblue;"
+                  + "-fx-border-color: black;"
+                  + "-fx-background-insets: 0px;");
+          node.setDisable(false);
+
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
               new Pair<>(
