@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import java.sql.Date;
 import java.util.List;
@@ -40,15 +41,22 @@ public class OfficeMoveController {
     return futureMoves;
   }
 
+  public ObservableList<Integer> getNodeIDs() {
+    List<Node> allNodes = qdb.nodeTable.getAllRows();
+    ObservableList<Integer> ids = FXCollections.observableArrayList();
+
+    for (Node node : allNodes) {
+      ids.add(node.getNodeID());
+    }
+    return ids;
+  }
+
   public void updateTable() {
     currentLocation.setCellValueFactory(
         cellData -> new SimpleStringProperty(cellData.getValue().getLongName()));
     newLocation.setCellValueFactory(
         cellData ->
-            new SimpleStringProperty(
-                qdb.locationTable
-                    .retrieveRow(cellData.getValue().getNode().getNodeID())
-                    .getLongName()));
+            new SimpleStringProperty(Integer.toString(cellData.getValue().getNode().getNodeID())));
     date.setCellValueFactory(
         cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
 
@@ -58,36 +66,32 @@ public class OfficeMoveController {
   public void initialize() {
     updateTable();
 
-    this.currentLocationField.setValue("Select Current Location");
+    this.currentLocationField.setValue("Select Location");
     this.currentLocationField.setItems(qdb.getAllLongNames());
-    this.newLocationField.setValue("Select New Location");
-    this.newLocationField.setItems(qdb.getAllLongNames());
+    this.newLocationField.setValue("Select New Node ID");
+    this.newLocationField.setItems(getNodeIDs());
   }
 
   public void resetButtonClicked() {
     this.currentLocationField.setValue("Select Current Location");
-    this.newLocationField.setValue("Select New Location");
+    this.newLocationField.setValue("Select New Node ID");
     dateField.clear();
   }
 
   public void submitButtonClicked() {
-    if (currentLocationField.getValue().toString().equals(newLocationField.getValue().toString())) {
-      submitMessage.setText("Invalid Move: Please choose two different locations");
-      return;
-    }
 
     if (currentLocationField.getValue() != null
         && newLocationField.getValue() != null
         && dateField.getValue() != null) {
       Move newMove =
           new Move(
-              qdb.retrieveNode(qdb.getNodeFromLocation(currentLocationField.getValue().toString())),
+              qdb.retrieveNode(Integer.parseInt(newLocationField.getValue().toString())),
               newLocationField.getValue().toString(),
               Date.valueOf(dateField.getValue()));
 
       qdb.addMove(newMove);
       this.currentLocationField.setValue("Select Current Location");
-      this.newLocationField.setValue("Select New Location");
+      this.newLocationField.setValue("Select New Node ID");
       dateField.clear();
       updateTable();
       submitMessage.setText("Move Submitted!");
