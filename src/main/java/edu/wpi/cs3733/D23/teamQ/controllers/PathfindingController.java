@@ -320,15 +320,21 @@ public class PathfindingController {
       node.setShape(new Circle(3));
       node.setMinSize(6, 6);
       node.setMaxSize(6, 6);
+      /*
       if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
         node.setStyle(
             "-fx-background-color: lightblue;"
                 + "-fx-border-color: black;"
                 + "-fx-background-insets: 0px;");
       } else {
-        node.setStyle("-fx-background-color: transparent;");
-        node.setDisable(true);
-      }
+       */
+      node.setStyle(
+          "-fx-background-color: lightblue;"
+              + "-fx-border-color: black;"
+              + "-fx-background-insets: 0px;");
+      node.setStyle("-fx-background-color: transparent;");
+      node.setDisable(true);
+      // }
       parent.getChildren().add(node);
       int index = parent.getChildren().indexOf(node);
       // System.out.println(index);
@@ -747,14 +753,23 @@ public class PathfindingController {
                       + "-fx-max-height: 3px;"
                       + "-fx-background-insets: 0px;");
        */
+
+      /*
       if (child.isDisable()) {
-        child.setStyle("-fx-background-color: transparent;");
+          child.setStyle("-fx-background-color: transparent;");
       } else {
-        child.setStyle(
-            "-fx-background-color: lightblue;"
-                + "-fx-background-insets: 0px;"
-                + "-fx-border-color: black;");
+          child.setStyle(
+                  "-fx-background-color: lightblue;"
+                          + "-fx-background-insets: 0px;"
+                          + "-fx-border-color: black;");
       }
+       */
+      child.setStyle(
+          "-fx-background-color: lightblue;"
+              + "-fx-background-insets: 0px;"
+              + "-fx-border-color: black;");
+      child.setStyle("-fx-background-color: transparent;");
+      child.setDisable(true);
     }
   }
 
@@ -770,6 +785,8 @@ public class PathfindingController {
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;");
      */
+
+    /*
     if (child.isDisable()) {
       child.setStyle("-fx-background-color: transparent;");
     } else {
@@ -778,6 +795,13 @@ public class PathfindingController {
               + "-fx-background-insets: 0px;"
               + "-fx-border-color: black;");
     }
+       */
+    child.setStyle(
+        "-fx-background-color: lightblue;"
+            + "-fx-background-insets: 0px;"
+            + "-fx-border-color: black;");
+    child.setStyle("-fx-background-color: transparent;");
+    child.setDisable(true);
   }
 
   public void restChecked() {
@@ -865,6 +889,15 @@ public class PathfindingController {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
+
+          int ind = cfnodes.get(i).getValue();
+          javafx.scene.Node node = parent.getChildren().get(ind);
+          node.setStyle(
+              "-fx-background-color: lightblue;"
+                  + "-fx-border-color: black;"
+                  + "-fx-background-insets: 0px;");
+          node.setDisable(false);
+
           if (highlightedNodes.size() > 0) {
             for (int j = 0; j < highlightedNodes.size(); j++) {
               if (highlightedNodes.get(j).getValue() == floor) {
@@ -925,6 +958,15 @@ public class PathfindingController {
       }
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
+
+        int ind = cfnodes.get(i).getValue();
+        javafx.scene.Node node = parent.getChildren().get(ind);
+        node.setStyle(
+            "-fx-background-color: lightblue;"
+                + "-fx-border-color: black;"
+                + "-fx-background-insets: 0px;");
+        node.setDisable(false);
+
         if (cfnodes.get(i).getKey() == nodeid) {
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
