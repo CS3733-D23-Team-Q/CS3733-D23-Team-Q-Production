@@ -91,15 +91,11 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="300.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="298.0" text="Clear">
-                     <HBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
+            <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="321.0" text="Clear" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Button>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
