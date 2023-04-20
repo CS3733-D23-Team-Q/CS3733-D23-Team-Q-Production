@@ -58,12 +58,7 @@ public class PathfindingController {
   List<Integer> retlNodes;
   List<Integer> servNodes;
   List<Integer> nodeIds;
-  /*
-  List<Pair<Integer, Integer>> startSelections;
-  List<Pair<Integer, Integer>> endSelections;
-   */
   List<Pair<Integer, Integer>> highlightedNodes;
-  // List<Integer> highlightedNodes;
   List<Pair<Integer, Integer>> l1nodes;
   List<Pair<Integer, Integer>> l2nodes;
   List<Pair<Integer, Integer>> ffnodes;
@@ -111,10 +106,6 @@ public class PathfindingController {
     tfnodes = new ArrayList<>();
     highlightedNodes = new ArrayList<>();
     nodeIds = new ArrayList<>();
-    /*
-    startSelections = new ArrayList<>();
-    endSelections = new ArrayList<>();
-     */
     restNodes = new ArrayList<>();
     deptNodes = new ArrayList<>();
     labsNodes = new ArrayList<>();
@@ -124,13 +115,11 @@ public class PathfindingController {
     servNodes = new ArrayList<>();
     previousNodes = new ArrayList<>();
     floors = new ArrayList<>();
-    // Image gf = new Image("/00_thegroundfloor.png");
     Image l1 = new Image("/00_thelowerlevel1.png");
     Image l2 = new Image("/00_thelowerlevel2.png");
     Image ff = new Image("/01_thefirstfloor.png");
     Image sf = new Image("/02_thesecondfloor.png");
     Image tf = new Image("/03_thethirdfloor.png");
-    // floors.add(gf); // 0
     floors.add(l1); // 0
     floors.add(l2); // 1
     floors.add(ff); // 2
@@ -282,15 +271,7 @@ public class PathfindingController {
         if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
           nodeIds.add(nodeid);
           startSelect.getItems().add(lname);
-          /*
-          int index1 = startSelect.getSelectionModel().getSelectedIndex();
-          startSelections.add(new Pair<>(index1, nodeid));
-           */
           endSelect.getItems().add(lname);
-          /*
-          int index2 = endSelect.getSelectionModel().getSelectedIndex();
-          endSelections.add(new Pair<>(index2, nodeid));
-           */
           allSelections.add(lname);
         }
       }
@@ -306,17 +287,6 @@ public class PathfindingController {
       Button node = new Button();
       node.setLayoutX(x);
       node.setLayoutY(y);
-      /*
-      node.setStyle(
-          "-fx-background-radius: 5em;"
-              + "-fx-min-width: 3px;"
-              + "-fx-min-height: 3px;"
-              + "-fx-max-width: 3px;"
-              + "-fx-max-height: 3px;"
-              + "-fx-background-insets: 0px;"
-              + "-fx-border-color: black;"
-              + "-fx-background-color: blue;");
-       */
       node.setShape(new Circle(3));
       node.setMinSize(6, 6);
       node.setMaxSize(6, 6);
@@ -337,7 +307,6 @@ public class PathfindingController {
       // }
       parent.getChildren().add(node);
       int index = parent.getChildren().indexOf(node);
-      // System.out.println(index);
       node.setOnMouseEntered(
           e -> {
             // String nodeid = "";
@@ -380,7 +349,6 @@ public class PathfindingController {
               }
             }
           });
-      // System.out.println(parent.getChildren().size());
       previousNodes.add(node);
       restNodes = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restNodes, index);
       deptNodes = addSpecificNode("\\bDEPT\\b", nodetype, deptNodes, index);
@@ -420,15 +388,6 @@ public class PathfindingController {
   }
 
   public void removeButtons() {
-    /*
-    startSelections.removeAll(startSelections);
-    endSelections.removeAll(endSelections);
-     */
-    /*
-    startSelect.getItems().removeAll(allSelections);
-    endSelect.getItems().removeAll(allSelections);
-    allSelections.removeAll(allSelections);
-     */
     for (Button b : previousNodes) {
       parent.getChildren().remove(b);
     }
@@ -438,9 +397,7 @@ public class PathfindingController {
     List<Line> lines = new ArrayList<>();
     // for (int i = path.size() - 1; i >= 1; i--) {
     for (int i = 0; i < path.size() - 1; i++) {
-      // Node n = path.get(i);
       Node n = path.get(i).getKey();
-      // Node next = path.get(i - 1);
       Node next = path.get(i + 1).getKey();
       int x1 = n.getXCoord() / 5;
       int y1 = n.getYCoord() / 5;
@@ -634,10 +591,6 @@ public class PathfindingController {
     }
     if (!ready4Second && start != null && target != null) {
       previousPath = drawLinesf(start, target, f);
-      /*
-      List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
-      cfnodes = setCF(cfnodes);
-       */
     }
   }
 
@@ -655,13 +608,7 @@ public class PathfindingController {
     }
     Image next = floors.get(floor);
     map.setImage(next);
-    /*
-    if (highlightedNodes.size() > 0) {
-      for (int i = 0; i < highlightedNodes.size(); i++) {
-        unhighlight(highlightedNodes.get(i).getKey());
-      }
-    }
-     */
+
     removeButtons();
     removeLines(previousPath);
     addButtons(f);
@@ -692,16 +639,6 @@ public class PathfindingController {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (int i : nodes) {
       javafx.scene.Node child = children.get(i);
-      /*
-      child.setStyle(
-          "-fx-background-radius: 5em;"
-              + "-fx-min-width: 3px;"
-              + "-fx-min-height: 3px;"
-              + "-fx-max-width: 3px;"
-              + "-fx-max-height: 3px;"
-              + "-fx-background-insets: 0px;"
-              + border);
-       */
       child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
     }
   }
@@ -709,16 +646,6 @@ public class PathfindingController {
   public void highlight(Button node, String color) {
     String border = "-fx-border-color: ";
     border = border + color + ";";
-    /*
-    node.setStyle(
-        "-fx-background-radius: 5em;"
-            + "-fx-min-width: 3px;"
-            + "-fx-min-height: 3px;"
-            + "-fx-max-width: 3px;"
-            + "-fx-max-height: 3px;"
-            + "-fx-background-insets: 0px;"
-            + border);
-     */
     node.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
@@ -727,16 +654,6 @@ public class PathfindingController {
     border = border + color + ";";
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     Button child = (Button) children.get(node);
-    /*
-    child.setStyle(
-            "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + border);
-     */
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
@@ -744,16 +661,6 @@ public class PathfindingController {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (int i : nodes) {
       javafx.scene.Node child = children.get(i);
-      /*
-      child.setStyle(
-              "-fx-background-radius: 5em;"
-                      + "-fx-min-width: 3px;"
-                      + "-fx-min-height: 3px;"
-                      + "-fx-max-width: 3px;"
-                      + "-fx-max-height: 3px;"
-                      + "-fx-background-insets: 0px;");
-       */
-
       /*
       if (child.isDisable()) {
           child.setStyle("-fx-background-color: transparent;");
@@ -776,16 +683,6 @@ public class PathfindingController {
   public void unhighlight(int node) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     javafx.scene.Node child = children.get(node);
-    /*
-    child.setStyle(
-            "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;");
-     */
-
     /*
     if (child.isDisable()) {
       child.setStyle("-fx-background-color: transparent;");
@@ -847,18 +744,7 @@ public class PathfindingController {
     String lname = startSelect.getValue();
     if (lname != null && !lname.equals("")) {
       int index = startSelect.getSelectionModel().getSelectedIndex();
-      // System.out.println(index);
       int nodeid = nodeIds.get(index);
-      // System.out.println(nodeid);
-      /*
-      int index = startSelect.getSelectionModel().getSelectedIndex();
-      int nodeid = 0;
-      for (int i = 0; i < startSelections.size(); i++) {
-        if (index == startSelections.get(i).getKey()) {
-          nodeid = startSelections.get(i).getValue();
-        }
-      }
-       */
       Node n = qdb.retrieveNode(nodeid);
       String nodeFloor = n.getFloor();
       int f = whichFloorI(nodeFloor);
@@ -923,15 +809,6 @@ public class PathfindingController {
     if (lname != null && !lname.equals("")) {
       int index = endSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
-      /*
-      int nodeid = 0;
-      for (int i = 0; i < endSelections.size(); i++) {
-        System.out.println(index);
-        if (index == endSelections.get(i).getKey()) {
-          nodeid = endSelections.get(i).getValue();
-        }
-      }
-       */
       Node n = qdb.retrieveNode(nodeid);
       String nodeFloor = n.getFloor();
       int nodef = whichFloorI(nodeFloor);
@@ -1037,7 +914,6 @@ public class PathfindingController {
     // unhighlight(restNodes);
     // unhighlight(cafeNodes);
     cfnodes = setCF(cfnodes);
-    // System.out.println(cfnodes.size());
     for (int i = 0; i < cfnodes.size(); i++) {
       unhighlight(cfnodes.get(i).getValue()); // + 1
     }
