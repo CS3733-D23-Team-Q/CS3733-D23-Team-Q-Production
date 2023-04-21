@@ -35,6 +35,8 @@ public class MessagingController {
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
 
+  String hello = "The dog said moo";
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
@@ -43,7 +45,7 @@ public class MessagingController {
 
 
     //NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
-    //Take a list of messages in order of send date, and if sender = me call sentHistory()
+    //Take a list of messages in order of send date, and if sender = me call sentHistorically()
     //Sender != me, call messageReceived
 
 
@@ -100,6 +102,7 @@ public class MessagingController {
               message,
               currentTimeMillis());
 
+
       HBox hbox = new HBox();
       hbox.setAlignment(Pos.CENTER_RIGHT);
       hbox.setPadding(new Insets(5, 5, 5, 10));
@@ -120,7 +123,7 @@ public class MessagingController {
     }
   }
 
-  public void sentHistory(Message messageSent){
+  public void sentHistorically(Message messageSent){
     String message = messageSent.getMessage();
 
     HBox hbox = new HBox();
