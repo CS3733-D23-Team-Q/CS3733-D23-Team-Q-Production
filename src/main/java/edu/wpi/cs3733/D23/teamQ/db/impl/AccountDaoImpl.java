@@ -232,6 +232,15 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     }
     return -1;
   }
+ public Account getAccountFromUN(String UN){
+    Account a = new Account("null");
+    for(int i=0; i<accounts.size(); i++){
+      if(accounts.get(i).getUsername().equals(UN)){
+        return accounts.get(i);
+      }
+    }
+    return a;
+ }
 
   public List<Integer> getIndexes(String email) {
     List<Integer> is = new ArrayList<Integer>();

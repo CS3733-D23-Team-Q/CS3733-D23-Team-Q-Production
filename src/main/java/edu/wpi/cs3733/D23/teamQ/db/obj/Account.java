@@ -71,6 +71,22 @@ public class Account {
     this.title = title;
     this.phoneNumber = phoneNumber;
   }
+  public Account(
+          String username
+          ) {
+    this.username = username;
+    this.password = null;
+    this.email = null;
+    this.securityQuestion1 = 2;
+    this.securityQuestion2 = 1;
+    this.securityAnswer1 = null;
+    this.securityAnswer2 = null;
+    this.active = true;
+    this.firstName = null;
+    this.lastName = null;
+    this.title = null;
+    this.phoneNumber = 0;
+  }
 
   public String getUsername() {
     return username;

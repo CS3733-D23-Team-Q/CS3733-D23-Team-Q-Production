@@ -109,6 +109,7 @@ public class LoginController {
       App.getRController().showMenu(true);
       Navigation.navigate(Screen.HOME);
       loginUsername = usernameField.getText();
+      qdb.getAccountFromUsername(loginUsername).setActive(true);
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
     } else {
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);

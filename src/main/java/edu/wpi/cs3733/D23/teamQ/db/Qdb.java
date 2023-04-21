@@ -83,6 +83,7 @@ public class Qdb {
   public List<Integer> getAccountIndexes(String email) {
     return accountTable.getIndexes(email);
   }
+  public Account getAccountFromUsername(String UN){ return accountTable.getAccountFromUN(UN);}
 
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
