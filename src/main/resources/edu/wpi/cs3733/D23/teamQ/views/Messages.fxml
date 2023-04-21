@@ -19,15 +19,15 @@
             <Line endY="900.0" stroke="#b4b4b4" HBox.hgrow="ALWAYS" />
             <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <ImageView fx:id="profilePicture" fitHeight="83.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../../../../../../../Downloads/IMG_3424.jpg" />
                            </image>
                         </ImageView>
-                        <Circle fx:id="activeIndicator" fill="#ce3c49" radius="14.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                        <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="1149.0" HBox.hgrow="ALWAYS" />
+                        <Circle fx:id="activeIndicator" fill="#f1f1f1" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="1149.0" style="-fx-border-color: #0167B1;" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <MFXScrollPane fx:id="messageSP" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">

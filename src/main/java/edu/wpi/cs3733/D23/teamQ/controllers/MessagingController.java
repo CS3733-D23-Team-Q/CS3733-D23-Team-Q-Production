@@ -8,6 +8,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -52,12 +55,24 @@ public class MessagingController {
 
     // Add new message listener for messages coming in
 
-    // add listener for changing who the message is being sent to
-    // peopleSelector.addEventHandler();
-    // Set image
-    // receiver = qdb.retrieveAccount(peopleSelector.getText());
-    // if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
-    // else activeIndicator.setStyle("-fx-fill: #CE3C49");
+    peopleSelector
+        .valueProperty()
+        .addListener(
+            new ChangeListener<>() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                String regex = "\\A[^,]*";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(newValue.toString());
+                String result;
+                if (matcher.find()) {
+                  result = matcher.group(0);
+                  receiver = qdb.retrieveAccount(result);
+                  if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
+                  else  activeIndicator.setStyle("-fx-fill: #CE3C49");
+                }
+              }
+            });
   }
 
   @FXML
@@ -80,10 +95,11 @@ public class MessagingController {
       TextFlow textFlow = new TextFlow(text);
       textFlow.setStyle("-fx-background-color: #0167B1");
       textFlow.setStyle("-fx-background-radius: 20px");
-      textFlow.setPadding(new Insets(5, 10, 5, 10));
+      textFlow.setPadding(new Insets(5, 10, 5, 100));
       text.setStyle("-fx-font-family: Roboto");
       text.setFill(Color.BLACK);
-      hbox.getChildren().add(text);
+      text.setFont(Font.font(18));
+      hbox.getChildren().add(textFlow);
       messageVbox.getChildren().add(hbox);
 
       // qdb.addMessage(newMessage);
@@ -102,11 +118,12 @@ public class MessagingController {
 
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
-    textFlow.setStyle("-fx-color: #B4B4B4");
+    textFlow.setStyle("-fx-background-color: #B4B4B4");
     textFlow.setStyle("-fx-background-radius: 20px");
-    textFlow.setPadding(new Insets(5, 10, 5, 10));
+    textFlow.setPadding(new Insets(5, 100, 5, 10));
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.BLACK);
+    text.setFont(Font.font(18));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
   }
