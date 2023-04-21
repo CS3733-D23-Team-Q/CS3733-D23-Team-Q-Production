@@ -143,7 +143,7 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <MFXButton contentDisplay="TOP" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Edit Profile" textFill="WHITE">
+                              <MFXButton contentDisplay="TOP" onAction="#editPressed" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Edit Profile" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets bottom="30.0" top="40.0" />
                                  </VBox.margin>
