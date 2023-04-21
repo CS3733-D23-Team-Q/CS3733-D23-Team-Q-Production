@@ -8,6 +8,9 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.beans.value.ChangeListener;
@@ -16,8 +19,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -37,18 +39,11 @@ public class MessagingController {
 
   String hello = "The dog said moo";
 
+  long oldTime = 0;
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
-
-    //qdb.getMessages(Account a, Account b)
-
-
-    //NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
-    //Take a list of messages in order of send date, and if sender = me call sentHistorically()
-    //Sender != me, call messageReceived
-
-
 
     peopleSelector.setValue("");
     peopleSelector.setItems(qdb.getAllNames());
@@ -85,6 +80,17 @@ public class MessagingController {
                   // Image image = qdb.getProfilePicture;
 
                   // profilePicture = new ImageView(image);
+
+                  List<Message> messageList;
+                  // messageList =
+                  // qdb.getMessages(qdb.retrieveAccount(LoginController.getUsername()), receiver);
+
+                  displayTime(System.currentTimeMillis());
+
+                  // NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
+                  // Take a list of messages in order of send date, and if sender = me call
+                  // sentHistorically()
+                  // Sender != me, call messageReceived
                 }
               }
             });
@@ -94,14 +100,13 @@ public class MessagingController {
   public void sendButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     String message = messageField.getText();
-    if (!message.isEmpty()) {
+    if (!message.isEmpty() && (receiver != null)) {
       Message newMessage =
           new Message(
               qdb.retrieveAccount(LoginController.getUsername()),
               receiver,
               message,
               currentTimeMillis());
-
 
       HBox hbox = new HBox();
       hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -114,7 +119,7 @@ public class MessagingController {
       textFlow.setPadding(new Insets(5, 10, 5, 100));
       text.setStyle("-fx-font-family: Roboto");
       text.setFill(Color.BLACK);
-      text.setFont(Font.font(18));
+      text.setFont(Font.font(14));
       hbox.getChildren().add(textFlow);
       messageVbox.getChildren().add(hbox);
 
@@ -123,7 +128,7 @@ public class MessagingController {
     }
   }
 
-  public void sentHistorically(Message messageSent){
+  public void sentHistorically(Message messageSent) {
     String message = messageSent.getMessage();
 
     HBox hbox = new HBox();
@@ -132,12 +137,12 @@ public class MessagingController {
 
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
-    textFlow.setStyle("-fx-background-color: #0167B1");
-    textFlow.setStyle("-fx-background-radius: 20px");
+    text.setStyle("-fx-background-color: #0167B1");
+    text.setStyle("-fx-background-radius: 20px");
     textFlow.setPadding(new Insets(5, 10, 5, 100));
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.BLACK);
-    text.setFont(Font.font(18));
+    text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
   }
@@ -156,7 +161,29 @@ public class MessagingController {
     textFlow.setPadding(new Insets(5, 100, 5, 10));
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.BLACK);
-    text.setFont(Font.font(18));
+    text.setFont(Font.font(14));
+    hbox.getChildren().add(textFlow);
+    messageVbox.getChildren().add(hbox);
+  }
+
+  public void displayTime(long time) {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+    Date resultDate = new Date(time);
+    String timeString = sdf.format(resultDate);
+
+    HBox hbox = new HBox();
+    hbox.setAlignment(Pos.CENTER);
+    hbox.setPadding(new Insets(5, 10, 5, 5));
+
+    Text text = new Text(timeString);
+    TextFlow textFlow = new TextFlow(text);
+    textFlow.setStyle("-fx-background-color: #B4B4B4");
+    textFlow.setStyle("-fx-background-radius: 20px");
+    textFlow.setPadding(new Insets(5, 100, 5, 10));
+    text.setStyle("-fx-font-family: Roboto");
+    text.setFill(Color.BLACK);
+    text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
   }
