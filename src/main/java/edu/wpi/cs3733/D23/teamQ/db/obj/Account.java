@@ -71,9 +71,8 @@ public class Account {
     this.title = title;
     this.phoneNumber = phoneNumber;
   }
-  public Account(
-          String username
-          ) {
+
+  public Account(String username) {
     this.username = username;
     this.password = null;
     this.email = null;

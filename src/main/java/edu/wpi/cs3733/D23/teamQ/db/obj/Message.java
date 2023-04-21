@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
-public class Message extends Object {
+public class Message {
   private Account sender;
   private Account receiver;
   private String message;

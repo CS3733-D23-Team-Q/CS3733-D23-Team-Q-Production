@@ -39,6 +39,15 @@ public class MessagingController {
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
 
+    //qdb.getMessages(Account a, Account b)
+
+
+    //NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
+    //Take a list of messages in order of send date, and if sender = me call sentHistory()
+    //Sender != me, call messageReceived
+
+
+
     peopleSelector.setValue("");
     peopleSelector.setItems(qdb.getAllNames());
 
@@ -69,7 +78,11 @@ public class MessagingController {
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
                   if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
-                  else  activeIndicator.setStyle("-fx-fill: #CE3C49");
+                  else activeIndicator.setStyle("-fx-fill: #CE3C49");
+
+                  // Image image = qdb.getProfilePicture;
+
+                  // profilePicture = new ImageView(image);
                 }
               }
             });
@@ -104,9 +117,26 @@ public class MessagingController {
 
       // qdb.addMessage(newMessage);
       messageField.clear();
-
-      System.out.println(message);
     }
+  }
+
+  public void sentHistory(Message messageSent){
+    String message = messageSent.getMessage();
+
+    HBox hbox = new HBox();
+    hbox.setAlignment(Pos.CENTER_RIGHT);
+    hbox.setPadding(new Insets(5, 5, 5, 10));
+
+    Text text = new Text(message);
+    TextFlow textFlow = new TextFlow(text);
+    textFlow.setStyle("-fx-background-color: #0167B1");
+    textFlow.setStyle("-fx-background-radius: 20px");
+    textFlow.setPadding(new Insets(5, 10, 5, 100));
+    text.setStyle("-fx-font-family: Roboto");
+    text.setFill(Color.BLACK);
+    text.setFont(Font.font(18));
+    hbox.getChildren().add(textFlow);
+    messageVbox.getChildren().add(hbox);
   }
 
   public void messageReceived(Message messageReceived) {

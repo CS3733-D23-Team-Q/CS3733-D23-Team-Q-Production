@@ -12,6 +12,7 @@ public class SignoutSubmenuController {
   @FXML MFXButton signout;
   @FXML MFXButton exit;
   Qdb qdb = Qdb.getInstance();
+
   @FXML
   public void signoutClicked() {
     Navigation.logout();
