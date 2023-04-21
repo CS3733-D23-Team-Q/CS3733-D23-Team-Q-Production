@@ -510,25 +510,63 @@ public class PathfindingController {
         }
       }
     }
-    Node n = path.get(0);
-    if (n.getFloor().equals(floor)) {
-      fpath.add(new Pair<>(n, false));
-      // System.out.println(path.get(0).getNodeID());
-      for (int j = 0; j < cfnodes.size(); j++) {
-        Integer nodeid = cfnodes.get(j).getKey();
-        if (nodeid == n.getNodeID()) {
-          int index = cfnodes.get(j).getValue();
-          Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
-          cfpath.add(triple);
+
+    for (int i = 0; i < path.size() - 1; i++) {
+      Node n = path.get(i);
+      Node next = path.get(i + 1);
+      if (n.getFloor().equals(floor)) {
+        if (!next.getFloor().equals(n.getFloor())) {
+          if (whichFloorI(next.getFloor()) < whichFloorI(n.getFloor())) {
+            int crossFloors = whichFloorI(n.getFloor()) - whichFloorI(next.getFloor());
+            for (int j = 0; j < cfnodes.size(); j++) {
+              Integer nodeid = cfnodes.get(j).getKey();
+              if (nodeid == n.getNodeID()) {
+                int index = cfnodes.get(j).getValue();
+                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, -crossFloors);
+                // System.out.println(triple.getRight());
+                cfpath.add(triple);
+              }
+            }
+          } else {
+            int crossFloors = whichFloorI(next.getFloor()) - whichFloorI(n.getFloor());
+            for (int j = 0; j < cfnodes.size(); j++) {
+              Integer nodeid = cfnodes.get(j).getKey();
+              if (nodeid == n.getNodeID()) {
+                int index = cfnodes.get(j).getValue();
+                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, crossFloors);
+                // System.out.println(triple.getRight());
+                cfpath.add(triple);
+              }
+            }
+          }
+        } else {
+          fpath.add(new Pair<>(n, false));
+          // System.out.println(n.getNodeID());
+          for (int j = 0; j < cfnodes.size(); j++) {
+            Integer nodeid = cfnodes.get(j).getKey();
+            if (nodeid == n.getNodeID()) {
+              int index = cfnodes.get(j).getValue();
+              Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
+              cfpath.add(triple);
+            }
+          }
         }
       }
     }
     /*
-    List<Node> fpath = new ArrayList<>();
-    for (Node n : path) {
-      if (n.getFloor().equals(floor)) {
-        fpath.add(n);
-      }
+    Node n = path.get(0);
+    if (n.getFloor().
+            equals(floor)) {
+        fpath.add(new Pair<>(n, false));
+        // System.out.println(path.get(0).getNodeID());
+        for (int j = 0; j < cfnodes.size(); j++) {
+            Integer nodeid = cfnodes.get(j).getKey();
+            if (nodeid == n.getNodeID()) {
+                int index = cfnodes.get(j).getValue();
+                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
+                cfpath.add(triple);
+            }
+        }
     }
      */
     List<Line> lines = new ArrayList<>();
@@ -1006,7 +1044,6 @@ public class PathfindingController {
                   floor,
                   0)); // int index = parent.getChildren().indexOf(node);
         }
-
         /*
         for (Triple<Integer, Integer, Integer> tp : cfpath) {
           ImageView image = new ImageView();
