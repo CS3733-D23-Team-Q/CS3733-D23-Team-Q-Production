@@ -5,7 +5,5 @@ import javafx.fxml.FXML;
 public class AboutController {
 
   @FXML
-  public void initialize() {
-    ;
-  }
+  public void initialize() {}
 }
