@@ -10,6 +10,7 @@ public class SettingsSubmenuController {
   @FXML VBox settingsSM;
   @FXML MFXButton settings;
   @FXML MFXButton help;
+  @FXML MFXButton about;
 
   @FXML
   public void settingsClicked() {
@@ -19,5 +20,10 @@ public class SettingsSubmenuController {
   @FXML
   public void helpClicked() {
     Navigation.navigate(Screen.HELP);
+  }
+
+  @FXML
+  public void aboutClicked() {
+    Navigation.navigate(Screen.ABOUT);
   }
 }
