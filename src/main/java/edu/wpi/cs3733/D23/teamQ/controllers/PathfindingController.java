@@ -645,7 +645,7 @@ public class PathfindingController {
           if (highlightedNodes.get(i).getRight() == 0) {
             highlight(highlightedNodes.get(i).getLeft(), "red");
           } else {
-            highlighte(highlightedNodes.get(i).getLeft());
+            highlighte(highlightedNodes.get(i).getLeft(), highlightedNodes.get(i).getRight());
           }
         }
       }
@@ -688,7 +688,7 @@ public class PathfindingController {
           if (highlightedNodes.get(i).getRight() == 0) {
             highlight(highlightedNodes.get(i).getLeft(), "red");
           } else {
-            highlighte(highlightedNodes.get(i).getLeft());
+            highlighte(highlightedNodes.get(i).getLeft(), highlightedNodes.get(i).getRight());
           }
         }
       }
@@ -725,7 +725,7 @@ public class PathfindingController {
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
-  public void highlighte(int node) {
+  public void highlighte(int node, int move) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     Button child = (Button) children.get(node);
     ImageView image = new ImageView();
@@ -734,46 +734,62 @@ public class PathfindingController {
         "-fx-background-color: yellow;"
             // + "-fx-border-color: yellow;"
             + "-fx-background-insets: 0px;");
-    image.setImage(new Image("/Down.png"));
+    if (move < 0) {
+      image.setImage(new Image("/Down.png"));
+      child.setOnAction(
+          e -> {
+            try {
+              for (int j = 0; j < Math.abs(move); j++) {
+                previousFloorClicked();
+              }
+            } catch (IOException ex) {
+              throw new RuntimeException(ex);
+            }
+          });
+    } else {
+      image.setImage(new Image("/Up.png"));
+      child.setOnAction(
+          e -> {
+            try {
+              for (int j = 0; j < Math.abs(move); j++) {
+                nextFloorClicked();
+              }
+            } catch (IOException ex) {
+              throw new RuntimeException(ex);
+            }
+          });
+    }
     image.fitWidthProperty().bind(child.widthProperty());
     image.fitHeightProperty().bind(child.heightProperty());
     child.setGraphic(image);
     child.toFront();
-    /*
-    child.setOnAction(
-            e -> {
-              try {
-                for (int j = 0; j < Math.abs(move); j++) {
-                  previousFloorClicked();
-                }
-              } catch (IOException ex) {
-                throw new RuntimeException(ex);
-              }
-            });
-     */
   }
 
   public void unhighlight(List<Integer> nodes) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (int i : nodes) {
-      javafx.scene.Node child = children.get(i);
+      // javafx.scene.Node child = children.get(i);
+      Button child = (Button) children.get(i);
       child.setStyle(
           "-fx-background-color: lightblue;"
               + "-fx-background-insets: 0px;"
               + "-fx-border-color: black;");
       child.setStyle("-fx-background-color: transparent;");
+      child.setGraphic(null);
       child.setDisable(true);
     }
   }
 
   public void unhighlight(int node) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    javafx.scene.Node child = children.get(node);
+    // javafx.scene.Node child = children.get(node);
+    Button child = (Button) children.get(node);
     child.setStyle(
         "-fx-background-color: lightblue;"
             + "-fx-background-insets: 0px;"
             + "-fx-border-color: black;");
     child.setStyle("-fx-background-color: transparent;");
+    child.setGraphic(null);
     child.setDisable(true);
   }
 
