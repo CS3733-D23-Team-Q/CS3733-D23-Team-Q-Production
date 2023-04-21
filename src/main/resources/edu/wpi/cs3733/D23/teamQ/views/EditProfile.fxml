@@ -127,8 +127,8 @@
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-                                                <MFXTextField fx:id="usernameField" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title" />
+                                                <MFXTextField fx:id="titleEdit" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
                                                    <VBox.margin>
                                                       <Insets bottom="20.0" top="5.0" />
                                                    </VBox.margin>

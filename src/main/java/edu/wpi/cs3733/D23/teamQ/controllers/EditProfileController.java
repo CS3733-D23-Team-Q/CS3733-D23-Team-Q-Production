@@ -22,7 +22,7 @@ public class EditProfileController {
   @FXML private MFXTextField lastName;
   @FXML private MFXTextField email;
   @FXML private MFXTextField phone;
-  @FXML private MFXTextField usernameField;
+  @FXML private MFXTextField titleEdit;
   @FXML private MFXTextField securityAnswer1;
   @FXML private MFXTextField securityAnswer2;
   @FXML private MFXFilterComboBox securityQuestion1;
@@ -49,7 +49,7 @@ public class EditProfileController {
     lastName.setText(account.getLastName());
     email.setText(account.getEmail());
     phone.setText(Integer.toString(account.getPhoneNumber()));
-    usernameField.setText(username);
+    titleEdit.setText(account.getTitle());
     securityAnswer1.setText(account.getSecurityAnswer1());
     securityAnswer2.setText(account.getSecurityAnswer2());
     securityQuestion1.setText(qdb.retrieveQuestion(account.getSecurityQuestion1()).getQuestion());
@@ -65,7 +65,7 @@ public class EditProfileController {
 
     Account newAccount =
         new Account(
-            usernameField.getText(),
+            username,
             account.getPassword(),
             email.getText(),
             qdb.getQuestionIndex(securityQuestion1.getText()) + 1,
@@ -76,7 +76,7 @@ public class EditProfileController {
             account.getIDNum(),
             firstName.getText(),
             lastName.getText(),
-            account.getTitle(),
+            titleEdit.getText(),
             Integer.parseInt(phone.getText()));
 
     qdb.updateAccount(username, newAccount);
