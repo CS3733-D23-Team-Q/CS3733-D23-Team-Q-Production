@@ -58,7 +58,7 @@ public class PathfindingController {
   List<Integer> retlNodes;
   List<Integer> servNodes;
   List<Integer> nodeIds;
-  List<Pair<Integer, Integer>> highlightedNodes;
+  List<Triple<Integer, Integer, Integer>> highlightedNodes;
   List<Pair<Integer, Integer>> l1nodes;
   List<Pair<Integer, Integer>> l2nodes;
   List<Pair<Integer, Integer>> ffnodes;
@@ -338,19 +338,19 @@ public class PathfindingController {
               removeLines(previousPath);
               if (highlightedNodes.size() > 0) {
                 for (int i = 0; i < highlightedNodes.size(); i++) {
-                  if (highlightedNodes.get(i).getValue() == floor) {
-                    unhighlight(highlightedNodes.get(i).getKey());
+                  if (highlightedNodes.get(i).getMiddle() == floor) {
+                    unhighlight(highlightedNodes.get(i).getLeft());
                   }
                 }
                 highlightedNodes.removeAll(highlightedNodes);
               }
               highlight(node, "red");
-              highlightedNodes.add(new Pair<>(index, floor));
+              highlightedNodes.add(Triple.of(index, floor, 0));
             } else {
               target = n;
               ready4Second = false;
               highlight(node, "red");
-              highlightedNodes.add(new Pair<>(index, floor));
+              highlightedNodes.add(Triple.of(index, floor, 0));
               try {
                 // removeLines(previousPath);
                 // progress bar of generating a new path
@@ -641,8 +641,12 @@ public class PathfindingController {
     // if on the same floor
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
-        if (highlightedNodes.get(i).getValue() == floor) {
-          highlight(highlightedNodes.get(i).getKey(), "red");
+        if (highlightedNodes.get(i).getMiddle() == floor) {
+          if (highlightedNodes.get(i).getRight() == 0) {
+            highlight(highlightedNodes.get(i).getLeft(), "red");
+          } else {
+            highlighte(highlightedNodes.get(i).getLeft());
+          }
         }
       }
     }
@@ -680,8 +684,12 @@ public class PathfindingController {
     // if on the same floor
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
-        if (highlightedNodes.get(i).getValue() == floor) {
-          highlight(highlightedNodes.get(i).getKey(), "red");
+        if (highlightedNodes.get(i).getMiddle() == floor) {
+          if (highlightedNodes.get(i).getRight() == 0) {
+            highlight(highlightedNodes.get(i).getLeft(), "red");
+          } else {
+            highlighte(highlightedNodes.get(i).getLeft());
+          }
         }
       }
     }
@@ -715,6 +723,34 @@ public class PathfindingController {
     Button child = (Button) children.get(node);
     child.setDisable(false);
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
+  }
+
+  public void highlighte(int node) {
+    ObservableList<javafx.scene.Node> children = parent.getChildren();
+    Button child = (Button) children.get(node);
+    ImageView image = new ImageView();
+    child.setDisable(false);
+    child.setStyle(
+        "-fx-background-color: yellow;"
+            // + "-fx-border-color: yellow;"
+            + "-fx-background-insets: 0px;");
+    image.setImage(new Image("/Down.png"));
+    image.fitWidthProperty().bind(child.widthProperty());
+    image.fitHeightProperty().bind(child.heightProperty());
+    child.setGraphic(image);
+    child.toFront();
+    /*
+    child.setOnAction(
+            e -> {
+              try {
+                for (int j = 0; j < Math.abs(move); j++) {
+                  previousFloorClicked();
+                }
+              } catch (IOException ex) {
+                throw new RuntimeException(ex);
+              }
+            });
+     */
   }
 
   public void unhighlight(List<Integer> nodes) {
@@ -795,8 +831,8 @@ public class PathfindingController {
         removeLines(previousPath);
         if (highlightedNodes.size() > 0) {
           for (int i = 0; i < highlightedNodes.size(); i++) {
-            if (highlightedNodes.get(i).getValue() == floor) {
-              unhighlight(highlightedNodes.get(i).getKey());
+            if (highlightedNodes.get(i).getMiddle() == floor) {
+              unhighlight(highlightedNodes.get(i).getLeft());
             }
           }
           highlightedNodes.removeAll(highlightedNodes);
@@ -828,17 +864,18 @@ public class PathfindingController {
 
           if (highlightedNodes.size() > 0) {
             for (int j = 0; j < highlightedNodes.size(); j++) {
-              if (highlightedNodes.get(j).getValue() == floor) {
-                unhighlight(highlightedNodes.get(j).getKey());
+              if (highlightedNodes.get(j).getMiddle() == floor) {
+                unhighlight(highlightedNodes.get(j).getLeft());
               }
               highlightedNodes.removeAll(highlightedNodes);
             }
           }
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
-              new Pair<>(
+              Triple.of(
                   cfnodes.get(i).getValue(),
-                  floor)); // int index = parent.getChildren().indexOf(node);
+                  floor,
+                  0)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
@@ -879,9 +916,10 @@ public class PathfindingController {
 
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
-              new Pair<>(
+              Triple.of(
                   cfnodes.get(i).getValue(),
-                  floor)); // int index = parent.getChildren().indexOf(node);
+                  floor,
+                  0)); // int index = parent.getChildren().indexOf(node);
         }
 
         for (Triple<Integer, Integer, Integer> tp : cfpath) {
@@ -903,6 +941,7 @@ public class PathfindingController {
               image.fitHeightProperty().bind(node.heightProperty());
               node.setGraphic(image);
               node.toFront();
+              highlightedNodes.add(Triple.of(cfnodes.get(i).getValue(), floor, move));
               node.setOnAction(
                   e -> {
                     try {
@@ -925,7 +964,7 @@ public class PathfindingController {
               image.fitHeightProperty().bind(node.heightProperty());
               node.setGraphic(image);
               node.toFront();
-              highlightedNodes.add(new Pair<>(cfnodes.get(i).getValue(), floor));
+              highlightedNodes.add(Triple.of(cfnodes.get(i).getValue(), floor, move));
               node.setOnAction(
                   e -> {
                     try {
