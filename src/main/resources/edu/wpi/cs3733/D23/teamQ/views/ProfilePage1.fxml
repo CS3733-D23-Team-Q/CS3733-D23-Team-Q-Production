@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -31,23 +32,133 @@
                         <Image url="@../../../../../../../../../../../../Downloads/wwong2.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="firstName" strokeType="OUTSIDE" strokeWidth="0.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" top="175.0" />
-                     </HBox.margin>
-                  </Text>
-                  <Text fx:id="lastName" strokeType="OUTSIDE" strokeWidth="0.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" top="175.0" />
-                     </HBox.margin>
-                  </Text>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fx:id="fullName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="name" text="Full Name">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="30.0" top="185.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
+                           <VBox.margin>
+                              <Insets left="30.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
                </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;">
+                     <HBox.margin>
+                        <Insets bottom="40.0" left="125.0" top="30.0" />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
+                           <children>
+                              <HBox prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="50.0" top="40.0" />
+                                       </HBox.margin>
+                                       <image>
+                                          <Image url="@../GreenCircle.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="status" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="40.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="50.0" top="30.0" />
+                                       </HBox.margin>
+                                       <image>
+                                          <Image url="@../Username.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="displayUsername" strokeType="OUTSIDE" strokeWidth="0.0" text="username">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="30.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="50.0" top="30.0" />
+                                       </HBox.margin>
+                                       <image>
+                                          <Image url="@../Phone.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="phone" strokeType="OUTSIDE" strokeWidth="0.0" text="phone number">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="30.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="50.0" top="30.0" />
+                                       </HBox.margin>
+                                       <image>
+                                          <Image url="@../Email.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" text="email">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="30.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <MFXButton contentDisplay="TOP" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Edit Profile" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" top="40.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </MFXButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </StackPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

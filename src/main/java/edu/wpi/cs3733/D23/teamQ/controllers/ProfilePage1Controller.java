@@ -8,17 +8,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class ProfilePage1Controller {
+
   Qdb qdb = Qdb.getInstance();
   @FXML private HBox myHBox;
   @FXML private ImageView profileImage;
-  @FXML private Text firstName;
-  @FXML private Text lastName;
+  @FXML private Text fullName;
+  @FXML private Text title;
+  @FXML private Text displayUsername;
+  @FXML private Text email;
+  @FXML private Text phone;
+  @FXML private Text status;
 
   public void initialize() {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
 
-    firstName.setText(account.getFirstName());
-    lastName.setText(account.getLastName());
+    fullName.setText(account.getFirstName() + " " + account.getLastName());
+    title.setText(account.getTitle());
+    displayUsername.setText(username);
+    email.setText(account.getEmail());
+    phone.setText(Integer.toString(account.getPhoneNumber()));
+    status.setText("Online");
   }
 }

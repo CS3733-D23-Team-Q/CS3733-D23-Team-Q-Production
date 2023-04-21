@@ -7,3 +7,7 @@
     -fx-background-radius: 50%;
     -fx-background-color: #CCC;
 }
+
+.name {
+    -fx-font-weight: bold;
+}
