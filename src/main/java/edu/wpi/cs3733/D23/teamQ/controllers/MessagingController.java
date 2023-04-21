@@ -10,6 +10,7 @@ import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,6 +41,8 @@ public class MessagingController {
   String hello = "The dog said moo";
 
   long oldTime = 0;
+
+  List<Message> messageList = new LinkedList<>();
 
   @FXML
   public void initialize() {
@@ -81,11 +84,8 @@ public class MessagingController {
 
                   // profilePicture = new ImageView(image);
 
-                  List<Message> messageList;
                   // messageList =
                   // qdb.getMessages(qdb.retrieveAccount(LoginController.getUsername()), receiver);
-
-                  displayTime(System.currentTimeMillis());
 
                   // NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
                   // Take a list of messages in order of send date, and if sender = me call
@@ -107,6 +107,10 @@ public class MessagingController {
               receiver,
               message,
               currentTimeMillis());
+
+      if (messageList.isEmpty()
+          || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+              >= 3600000)) displayTime(System.currentTimeMillis());
 
       HBox hbox = new HBox();
       hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -131,6 +135,10 @@ public class MessagingController {
   public void sentHistorically(Message messageSent) {
     String message = messageSent.getMessage();
 
+    if (messageList.isEmpty()
+            || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+            >= 3600000)) displayTime(System.currentTimeMillis());
+
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_RIGHT);
     hbox.setPadding(new Insets(5, 5, 5, 10));
@@ -149,6 +157,10 @@ public class MessagingController {
 
   public void messageReceived(Message messageReceived) {
     String message = messageReceived.getMessage();
+
+    if (messageList.isEmpty()
+            || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_LEFT);
