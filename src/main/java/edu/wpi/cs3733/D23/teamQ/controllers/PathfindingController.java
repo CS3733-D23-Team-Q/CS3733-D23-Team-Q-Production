@@ -496,7 +496,6 @@ public class PathfindingController {
               }
             }
           }
-
         } else {
           fpath.add(new Pair<>(n, false));
           // System.out.println(n.getNodeID());
@@ -539,6 +538,66 @@ public class PathfindingController {
     if (path.size() == 0) {
       alert.alertBox("No solution", "Failed to find a path");
     }
+
+    for (int i = 0; i < cfnodes.size(); i++) {
+      for (Triple<Integer, Integer, Integer> tp : cfpath) {
+        ImageView image = new ImageView();
+        Integer id = tp.getLeft();
+        Integer idx = tp.getMiddle();
+        Button node = (Button) parent.getChildren().get(idx);
+        Integer move = tp.getRight();
+        // System.out.println(move);
+        if (cfnodes.get(i).getKey() == id) {
+          if (move > 0) {
+            node.setDisable(false);
+            node.setStyle(
+                "-fx-background-color: yellow;"
+                    // + "-fx-border-color: yellow;"
+                    + "-fx-background-insets: 0px;");
+            image.setImage(new Image("/Up.png"));
+            image.fitWidthProperty().bind(node.widthProperty());
+            image.fitHeightProperty().bind(node.heightProperty());
+            node.setGraphic(image);
+            node.toFront();
+            // highlightedNodes.add(Triple.of(idx, whichFloorI(floor), move));
+            node.setOnAction(
+                e -> {
+                  try {
+                    for (int j = 0; j < Math.abs(move); j++) {
+                      nextFloorClicked();
+                    }
+                  } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                  }
+                });
+          }
+          if (move < 0) {
+            node.setDisable(false);
+            node.setStyle(
+                "-fx-background-color: yellow;"
+                    // + "-fx-border-color: yellow;"
+                    + "-fx-background-insets: 0px;");
+            image.setImage(new Image("/Down.png"));
+            image.fitWidthProperty().bind(node.widthProperty());
+            image.fitHeightProperty().bind(node.heightProperty());
+            node.setGraphic(image);
+            node.toFront();
+            // highlightedNodes.add(Triple.of(idx, whichFloorI(floor), move));
+            node.setOnAction(
+                e -> {
+                  try {
+                    for (int j = 0; j < Math.abs(move); j++) {
+                      previousFloorClicked();
+                    }
+                  } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                  }
+                });
+          }
+        }
+      }
+    }
+
     return lines;
   }
 
@@ -905,9 +964,9 @@ public class PathfindingController {
       int index = endSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
       Node n = qdb.retrieveNode(nodeid);
-      // String nodeFloor = n.getFloor();
-      // int nodef = whichFloorI(nodeFloor);
-      // int crossFloors = Math.abs(nodef - floor);
+      String nodeFloor = n.getFloor();
+      int nodef = whichFloorI(nodeFloor);
+      int crossFloors = Math.abs(nodef - floor);
       if (ready4Second) {
         target = n;
         ready4Second = false;
@@ -916,6 +975,17 @@ public class PathfindingController {
           previousPath = drawLinesf(start, target, f);
         } catch (Exception ex) {
           throw new RuntimeException(ex);
+        }
+      }
+
+      if (nodef < floor) {
+        for (int i = 0; i < crossFloors; i++) {
+          previousFloorClicked();
+        }
+      }
+      if (nodef > floor) {
+        for (int i = 0; i < crossFloors; i++) {
+          nextFloorClicked();
         }
       }
 
@@ -929,7 +999,6 @@ public class PathfindingController {
               "-fx-background-color: lightblue;"
                   + "-fx-border-color: black;"
                   + "-fx-background-insets: 0px;");
-
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodes.add(
               Triple.of(
@@ -938,6 +1007,7 @@ public class PathfindingController {
                   0)); // int index = parent.getChildren().indexOf(node);
         }
 
+        /*
         for (Triple<Integer, Integer, Integer> tp : cfpath) {
           ImageView image = new ImageView();
           Integer id = tp.getLeft();
@@ -994,6 +1064,7 @@ public class PathfindingController {
             }
           }
         }
+        */
       }
     }
   }
