@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="552.0" layoutY="61.0" text="Settings" textFill="#012d5a">
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="634.0" layoutY="46.0" text="Settings" textFill="#012d5a">
          <font>
             <Font name="Roboto Black" size="36.0" />
          </font>
