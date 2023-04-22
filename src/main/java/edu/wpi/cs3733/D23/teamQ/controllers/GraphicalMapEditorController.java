@@ -18,10 +18,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +30,13 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 public class GraphicalMapEditorController {
+  @FXML private MenuItem EdgeTableBtn;
+
+  @FXML private MenuItem LocationTableBtn;
+
+  @FXML private MenuItem MoveTableBtn;
+
+  @FXML private MenuItem NodeTableBtn;
 
   @FXML private Button AddBtn;
 
@@ -172,7 +176,7 @@ public class GraphicalMapEditorController {
             parent.getChildren().set(findButton(nodeid), but);
 
              */
-
+            HideEdges();
             refreshNodes();
 
             findOnMap();
@@ -217,6 +221,7 @@ public class GraphicalMapEditorController {
         });
 
      */
+    HideEdges();
     findOnMap();
   }
 
@@ -245,7 +250,7 @@ public class GraphicalMapEditorController {
                     newBuilding,
                     Qdb.getInstance().locationTable.retrieveRow(nodeid));
             qdb.nodeTable.addRow(newnode);
-
+            HideEdges();
             refreshNodes();
 
             findOnMap();
@@ -270,7 +275,7 @@ public class GraphicalMapEditorController {
                 + "-fx-max-width: 3px;"
                 + "-fx-max-height: 3px;"
                 + "-fx-background-insets: 0px;"
-                + "-fx-background-color: #F1F1F1");
+                + "-fx-background-color: #3492D5");
   }
 
   @FXML
@@ -280,6 +285,7 @@ public class GraphicalMapEditorController {
      root.getChildren().add(texts);
 
     */
+
     button = addButtons(Floor(currentIndex));
 
     javafx.scene.Node node = parent;
@@ -423,18 +429,10 @@ public class GraphicalMapEditorController {
               + "-fx-max-width: 3px;"
               + "-fx-max-height: 3px;"
               + "-fx-background-insets: 0px;"
-              + "-fx-background-color: #F1F1F1");
+              + "-fx-background-color: #3492D5");
 
       node.setOnMouseClicked(
           e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
             nodeidinput.setText(Integer.toString(nodeID));
             NodeInformation(nodeID);
           });
@@ -447,7 +445,7 @@ public class GraphicalMapEditorController {
                     + "-fx-max-width: 3px;"
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
+                    + "-fx-background-color: #37AC2B");
             node.setCursor(Cursor.HAND);
             int x2 = n.getXCoord() / 5;
             int y2 = n.getYCoord() / 5;
@@ -473,7 +471,7 @@ public class GraphicalMapEditorController {
                     + "-fx-max-width: 3px;"
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #F1F1F1");
+                    + "-fx-background-color: #3492D5");
             parent.getChildren().remove(text);
           });
       node.setOnMousePressed(
@@ -485,7 +483,7 @@ public class GraphicalMapEditorController {
                     + "-fx-max-width: 3px;"
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
+                    + "-fx-background-color: #37AC2B");
             mouseX = e.getX();
             mouseY = e.getY();
             /*
@@ -504,7 +502,7 @@ public class GraphicalMapEditorController {
                     + "-fx-max-width: 3px;"
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
+                    + "-fx-background-color: #37AC2B");
             double distanceX = e.getX() - mouseX;
             double distanceY = e.getY() - mouseY;
 
@@ -532,7 +530,7 @@ public class GraphicalMapEditorController {
                     + "-fx-max-width: 3px;"
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #F1F1F1");
+                    + "-fx-background-color: #3492D5");
             int currentX = (int) (node.getLayoutX() * 5);
             int currentY = (int) (node.getLayoutY() * 5);
             Node newNode = qdb.retrieveNode(nodeID);
@@ -833,7 +831,7 @@ public class GraphicalMapEditorController {
     HideEdges();
     currentIndex--;
 
-    if (currentIndex > 0) {
+    if (currentIndex >= 0) {
 
       refreshNodes();
 
@@ -1019,7 +1017,7 @@ public class GraphicalMapEditorController {
                   + "-fx-max-width: 3px;"
                   + "-fx-max-height: 3px;"
                   + "-fx-background-insets: 0px;"
-                  + "-fx-background-color: #3492D5");
+                  + "-fx-background-color: #37AC2B");
     } else {
       InitialNode();
     }
@@ -1044,4 +1042,45 @@ public class GraphicalMapEditorController {
   }
 
    */
+
+  @FXML
+  void NodeTableClicked(javafx.event.ActionEvent actionEvent) throws Exception {
+
+    NodeController controller = (NodeController) Navigation.getController(Screen.Node_Table);
+    Stage stage = newStage("Node Table", Screen.Node_Table);
+    controller.setStage(stage);
+    stage.show();
+    stage.centerOnScreen();
+  }
+
+  @FXML
+  void LocationTableClicked(javafx.event.ActionEvent actionEvent) throws IOException {
+
+    LocationController controller =
+        (LocationController) Navigation.getController(Screen.LocationName_Table);
+    Stage stage = newStage("Help", Screen.LocationName_Table);
+    controller.setStage(stage);
+    stage.show();
+    stage.centerOnScreen();
+  }
+
+  @FXML
+  void MoveTableClicked(javafx.event.ActionEvent actionEvent) throws IOException {
+
+    MoveController controller = (MoveController) Navigation.getController(Screen.Move_Table);
+    Stage stage = newStage("Help", Screen.Move_Table);
+    controller.setStage(stage);
+    stage.show();
+    stage.centerOnScreen();
+  }
+
+  @FXML
+  void EdgeTableClicked(javafx.event.ActionEvent actionEvent) throws IOException {
+
+    EdgeController controller = (EdgeController) Navigation.getController(Screen.Edge_Table);
+    Stage stage = newStage("Help", Screen.Edge_Table);
+    controller.setStage(stage);
+    stage.show();
+    stage.centerOnScreen();
+  }
 }
