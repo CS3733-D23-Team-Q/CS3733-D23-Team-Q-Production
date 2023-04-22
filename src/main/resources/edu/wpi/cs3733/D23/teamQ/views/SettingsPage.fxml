@@ -5,16 +5,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SettingsController">
+<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SettingsController">
    <children>
-      <StackPane layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="512.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+      <StackPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="427.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
          <children>
             <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
                <font>
@@ -22,8 +21,11 @@
                </font>
             </Text>
          </children>
+         <VBox.margin>
+            <Insets left="30.0" />
+         </VBox.margin>
       </StackPane>
-      <HBox layoutY="135.0" prefHeight="764.0" prefWidth="1359.0">
+      <HBox prefHeight="764.0" prefWidth="1359.0">
          <children>
             <VBox prefHeight="764.0" prefWidth="1418.0">
                <children>
@@ -37,7 +39,7 @@
                               <Insets left="94.0" />
                            </padding>
                         </Label>
-                        <VBox prefHeight="200.0" prefWidth="316.0">
+                        <VBox prefHeight="200.0" prefWidth="316.0" spacing="30.0">
                            <children>
                               <Label text="Update Password">
                                  <font>
@@ -67,7 +69,30 @@
                               <Insets left="78.0" />
                            </padding>
                         </VBox>
+                        <VBox prefHeight="188.0" prefWidth="185.0">
+                           <children>
+                              <Label fx:id="emailDisplay" prefHeight="28.0" prefWidth="201.0" text="email">
+                                 <font>
+                                    <Font name="Roboto Light" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="110.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="phoneDisplay" prefWidth="127.0" text="phoneNumber">
+                                 <font>
+                                    <Font name="Roboto Light" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
+                     <padding>
+                        <Insets top="60.0" />
+                     </padding>
                   </HBox>
                   <HBox prefHeight="107.0" prefWidth="1359.0">
                      <children>
@@ -79,22 +104,24 @@
                               <Insets left="94.0" />
                            </padding>
                         </Label>
-                        <VBox prefHeight="107.0" prefWidth="309.0">
+                        <VBox prefHeight="107.0" prefWidth="309.0" spacing="30.0">
                            <children>
                               <Label text="Select Font Size">
                                  <font>
                                     <Font name="Roboto Light" size="20.0" />
-                                 </font></Label>
+                                 </font>
+                              </Label>
                               <Label text="Dark Mode">
                                  <font>
                                     <Font name="Roboto Light" size="20.0" />
-                                 </font></Label>
+                                 </font>
+                              </Label>
                            </children>
                            <padding>
                               <Insets left="78.0" />
                            </padding>
                         </VBox>
-                        <VBox prefHeight="107.0" prefWidth="191.0">
+                        <VBox prefHeight="107.0" prefWidth="191.0" spacing="30.0">
                            <children>
                               <MFXFilterComboBox fx:id="fontField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="160.0" promptText="Default (Normal)">
                                  <VBox.margin>
@@ -109,6 +136,9 @@
                            </children>
                         </VBox>
                      </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -120,34 +150,34 @@
                               <Insets left="94.0" />
                            </padding>
                         </Label>
-                        <VBox alignment="TOP_CENTER" prefHeight="764.0" prefWidth="327.0">
+                        <VBox prefHeight="96.0" prefWidth="329.0" spacing="30.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label prefHeight="17.0" prefWidth="121.0" text="Sound">
-                                       <font>
-                                          <Font name="Roboto Light" size="20.0" />
-                                       </font></Label>
-                                    <Label text="Voice Selection">
-                                       <font>
-                                          <Font name="Roboto Light" size="20.0" />
-                                       </font></Label>
-                                    <Label text="Language">
-                                       <font>
-                                          <Font name="Roboto Light" size="20.0" />
-                                       </font></Label>
-                                    <Label text="Preferred Algorithm">
-                                       <font>
-                                          <Font name="Roboto Light" size="20.0" />
-                                       </font></Label>
-                                 </children>
-                                 <padding>
-                                    <Insets left="78.0" />
-                                 </padding>
-                              </VBox>
+                              <Label prefHeight="17.0" prefWidth="121.0" text="Sound">
+                                 <font>
+                                    <Font name="Roboto Light" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Voice Selection">
+                                 <font>
+                                    <Font name="Roboto Light" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Language">
+                                 <font>
+                                    <Font name="Roboto Light" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Preferred Algorithm">
+                                 <font>
+                                    <Font name="Roboto Light" size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
+                           <padding>
+                              <Insets left="78.0" />
+                           </padding>
                         </VBox>
-                        <VBox prefHeight="100.0" prefWidth="191.0">
+                        <VBox prefHeight="100.0" prefWidth="191.0" spacing="30.0">
                            <children>
                               <MFXToggleButton fx:id="soundToggle" minHeight="-Infinity" prefHeight="8.0" prefWidth="103.0">
                                  <VBox.margin>
@@ -157,15 +187,18 @@
                               <MFXFilterComboBox fx:id="voiceField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="160.0" promptText="Default (Wong)">
                                  <VBox.margin>
                                     <Insets bottom="2.0" left="10.0" />
-                                 </VBox.margin></MFXFilterComboBox>
+                                 </VBox.margin>
+                              </MFXFilterComboBox>
                               <MFXFilterComboBox fx:id="languageField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="160.0" promptText="Default (English)">
                                  <VBox.margin>
                                     <Insets bottom="2.0" left="10.0" />
-                                 </VBox.margin></MFXFilterComboBox>
+                                 </VBox.margin>
+                              </MFXFilterComboBox>
                               <MFXFilterComboBox fx:id="algorithmField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="160.0" promptText="Default (A*)">
                                  <VBox.margin>
                                     <Insets left="10.0" />
-                                 </VBox.margin></MFXFilterComboBox>
+                                 </VBox.margin>
+                              </MFXFilterComboBox>
                            </children>
                         </VBox>
                      </children>
@@ -173,6 +206,12 @@
                </children>
             </VBox>
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </HBox>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets top="15.0" />
+   </padding>
+</VBox>
