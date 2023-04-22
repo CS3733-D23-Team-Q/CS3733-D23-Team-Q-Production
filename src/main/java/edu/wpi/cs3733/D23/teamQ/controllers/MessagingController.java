@@ -19,6 +19,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -78,9 +79,12 @@ public class MessagingController {
                   if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
                   else activeIndicator.setStyle("-fx-fill: #CE3C49");
 
-                  // Image image = qdb.getProfilePicture;
-
-                  // profilePicture = new ImageView(image);
+                  if (qdb.getProfileImageIndex(receiver.getUsername()) != -1) {
+                    Image pfp =
+                        qdb.convertByteaToImage(
+                            qdb.retrieveProfileImage(receiver.getUsername()).getImageData());
+                    profilePicture.setImage(pfp);
+                  }
 
                   // messageList =
                   // qdb.getMessages(qdb.retrieveAccount(LoginController.getUsername()), receiver);
