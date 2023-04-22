@@ -118,16 +118,16 @@ public class MessagingController {
 
       Text text = new Text(message);
       TextFlow textFlow = new TextFlow(text);
-      textFlow.setStyle("-fx-background-color: #0167B1");
-      textFlow.setStyle("-fx-background-radius: 20px");
-      textFlow.setPadding(new Insets(5, 10, 5, 100));
+      textFlow.setStyle(
+          "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 10 20 10 20;");
       text.setStyle("-fx-font-family: Roboto");
-      text.setFill(Color.BLACK);
+      text.setFill(Color.WHITE);
       text.setFont(Font.font(14));
       hbox.getChildren().add(textFlow);
       messageVbox.getChildren().add(hbox);
 
       // qdb.addMessage(newMessage);
+      messageList.add(newMessage);
       messageField.clear();
     }
   }
@@ -136,7 +136,7 @@ public class MessagingController {
     String message = messageSent.getMessage();
 
     if (messageList.isEmpty()
-            || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+        || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
             >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
@@ -145,11 +145,10 @@ public class MessagingController {
 
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
-    text.setStyle("-fx-background-color: #0167B1");
-    text.setStyle("-fx-background-radius: 20px");
-    textFlow.setPadding(new Insets(5, 10, 5, 100));
+    textFlow.setStyle(
+        "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 10 20 10 20;");
     text.setStyle("-fx-font-family: Roboto");
-    text.setFill(Color.BLACK);
+    text.setFill(Color.WHITE);
     text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
@@ -159,7 +158,7 @@ public class MessagingController {
     String message = messageReceived.getMessage();
 
     if (messageList.isEmpty()
-            || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+        || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
             >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
@@ -168,19 +167,19 @@ public class MessagingController {
 
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
-    textFlow.setStyle("-fx-background-color: #B4B4B4");
-    textFlow.setStyle("-fx-background-radius: 20px");
-    textFlow.setPadding(new Insets(5, 100, 5, 10));
+    textFlow.setStyle(
+        "-fx-background-color: #B4B4B4; -fx-background-radius: 20px; -fx-padding: 10 20 10 20;");
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.BLACK);
     text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
+    messageList.add(messageReceived);
   }
 
   public void displayTime(long time) {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
     Date resultDate = new Date(time);
     String timeString = sdf.format(resultDate);
 
@@ -190,10 +189,7 @@ public class MessagingController {
 
     Text text = new Text(timeString);
     TextFlow textFlow = new TextFlow(text);
-    textFlow.setStyle("-fx-background-color: #B4B4B4");
-    textFlow.setStyle("-fx-background-radius: 20px");
-    textFlow.setPadding(new Insets(5, 100, 5, 10));
-    text.setStyle("-fx-font-family: Roboto");
+    text.setStyle("-fx-font-family: Roboto; -fx-font-weight: bold;");
     text.setFill(Color.BLACK);
     text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
