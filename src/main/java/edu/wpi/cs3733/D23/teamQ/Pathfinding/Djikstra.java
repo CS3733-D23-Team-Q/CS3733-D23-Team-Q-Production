@@ -114,7 +114,8 @@ public class Djikstra implements IPathfinding {
       if (!path.contains(current)) {
         path.add(current);
       }
-      if (chosen
+      if (chosen != null
+              && chosen
                   .getLocation()
                   .getNodeType()
                   .equalsIgnoreCase("ELEV") // this block is used to send the path
