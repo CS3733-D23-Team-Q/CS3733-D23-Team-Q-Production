@@ -38,6 +38,16 @@ public class SignoutBlockController {
   public void signoutExited() {}
 
   @FXML
+  public void hideBlock() {
+    signoutHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    signoutHB.setVisible(true);
+  }
+
+  @FXML
   public void hideSM() {
     signoutSMPane.setVisible(false);
   }
