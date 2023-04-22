@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" spacing="12.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.AboutController">
+   <children>
+      <StackPane prefHeight="48.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+         <children>
+            <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits">
+               <font>
+                  <Font name="Roboto Bold" size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </StackPane>
+      <MFXScrollPane hbarPolicy="NEVER" style="-fx-background-color: #f1f1f1;" vbarPolicy="ALWAYS" />
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</VBox>

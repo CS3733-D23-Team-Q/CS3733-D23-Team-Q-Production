@@ -53,7 +53,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../KenyonHeadshot.png" />
                                        </image>
@@ -79,7 +79,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../OlegHeadshot.png" />
                                        </image>
@@ -105,7 +105,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../AshleyHeadshot.png" />
                                        </image>
@@ -131,7 +131,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../SophiaHeadshot.png" />
                                        </image>
@@ -157,7 +157,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../JoshHeadshot.png" />
                                        </image>
@@ -190,7 +190,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../LydiaHeadshot.png" />
                                        </image>
@@ -216,7 +216,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../AmyHeadshot.png" />
                                        </image>
@@ -242,7 +242,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../WillHeadshot.png" />
                                        </image>
@@ -268,7 +268,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../DovHeadshot.png" />
                                        </image>
@@ -294,7 +294,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="96.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../CameronHeadshot.png" />
                                        </image>
