@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -641,16 +642,33 @@ public class PathfindingController {
     }
     // }
     // }
+    // textualPathfinding.setWrapText(true);
     textualPathfinding.setText(toString(path));
+    Text tempText = new Text(textualPathfinding.getText());
+    tempText.setFont(textualPathfinding.getFont());
+    double prefHeight = tempText.getLayoutBounds().getHeight();
+    /*
+           + textualPathfinding.getPadding().getTop()
+           + textualPathfinding.getPadding().getBottom();
+    */
+    textualPathfinding.setMaxHeight(313.3);
+    textualPathfinding.setPrefHeight(prefHeight);
     return lines;
   }
 
   public String toString(List<Node> path) {
     String direction = "";
-    direction += path.get(0).getLocation().getLongName();
+    direction +=
+        "Floor " + path.get(0).getFloor() + ": " + "\n" + path.get(0).getLocation().getLongName();
     for (int i = 1; i < path.size(); i++) {
       Node n = path.get(i);
-      direction += " -> \n" + n.getLocation().getLongName();
+      Node previous = path.get(i - 1);
+      if (!previous.getFloor().equals(n.getFloor())) {
+        direction +=
+            " -> " + "\n\nFloor " + n.getFloor() + ": " + "\n" + n.getLocation().getLongName();
+      } else {
+        direction += " -> \n" + n.getLocation().getLongName();
+      }
     }
     return direction;
   }
@@ -1150,6 +1168,8 @@ public class PathfindingController {
 
   public void clearButtonClicked() {
     List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    textualPathfinding.setText(null);
+    textualPathfinding.setPrefHeight(Region.USE_COMPUTED_SIZE);
     // moveDates.removeAll(moveDates);
     removeLines(previousPath);
     start = null;
