@@ -1,6 +1,24 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import java.awt.*;
+import javafx.fxml.FXML;
+
 public class HomeController implements IController {
+
+  Qdb qdb = Qdb.getInstance();
+
+  @FXML private Label User;
+
+  @FXML
+  public void initialize() {
+    String username = LoginController.getLoginUsername();
+    Account account = qdb.retrieveAccount(username);
+
+    User.setText("Welcome Back " + account.getFirstName() + "!");
+  }
+
   //  Qdb qdb = Qdb.getInstance();
   //
   //  @FXML Button ServiceHubButton;

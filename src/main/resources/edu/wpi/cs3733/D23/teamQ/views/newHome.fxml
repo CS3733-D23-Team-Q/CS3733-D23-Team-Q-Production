@@ -31,7 +31,7 @@
                   </ImageView>
                   <HBox prefHeight="0.0" prefWidth="1360.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back User!" translateX="50.0" translateY="50.0" wrappingWidth="352.1573028564453">
+                        <Text fx:id="User" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back User!" translateX="50.0" translateY="50.0" wrappingWidth="352.1573028564453">
                            <font>
                               <Font name="Roboto Medium" size="36.0" />
                            </font>
