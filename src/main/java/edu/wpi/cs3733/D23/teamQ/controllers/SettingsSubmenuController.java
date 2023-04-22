@@ -12,6 +12,7 @@ public class SettingsSubmenuController {
   @FXML MFXButton help;
   @FXML MFXButton about;
   @FXML MFXButton credits;
+  @FXML SettingsBlockController sbc;
 
   @FXML
   public void settingsClicked() {
@@ -25,11 +26,18 @@ public class SettingsSubmenuController {
 
   @FXML
   public void aboutClicked() {
+    sbc.hideAllButHome();
     Navigation.navigate(Screen.ABOUT);
   }
 
   @FXML
   public void creditsClicked() {
+    sbc.hideAllButHome();
     Navigation.navigate(Screen.CREDITS);
+  }
+
+  @FXML
+  public void setSBC(SettingsBlockController sbc) {
+    this.sbc = sbc;
   }
 }
