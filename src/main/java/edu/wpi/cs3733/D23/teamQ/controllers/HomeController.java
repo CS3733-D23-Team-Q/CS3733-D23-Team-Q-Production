@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import java.awt.*;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 
 public class HomeController implements IController {
 
