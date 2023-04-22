@@ -95,6 +95,7 @@ public class PathfindingController {
   @FXML RadioMenuItem dfsSelect;
   @FXML RadioMenuItem djikstraSelect;
   @FXML Menu dateMenu;
+  @FXML TextArea textualPathfinding;
 
   @FXML
   public void initialize() throws IOException {
@@ -318,6 +319,16 @@ public class PathfindingController {
       node.toFront();
       parent.getChildren().add(node);
       int index = parent.getChildren().indexOf(node);
+
+      /*
+      if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
+        text = new Text(x, y, sname);
+        text.setFill(Color.BLUE);
+        text.setStyle("-fx-font-size: 3px;");
+        parent.getChildren().add(text);
+      }
+       */
+
       /*
       node.setOnMouseEntered(
           e -> {
@@ -630,8 +641,18 @@ public class PathfindingController {
     }
     // }
     // }
-
+    textualPathfinding.setText(toString(path));
     return lines;
+  }
+
+  public String toString(List<Node> path) {
+    String direction = "";
+    direction += path.get(0).getLocation().getLongName();
+    for (int i = 1; i < path.size(); i++) {
+      Node n = path.get(i);
+      direction += " -> \n" + n.getLocation().getLongName();
+    }
+    return direction;
   }
 
   public String whichFloorS() {
