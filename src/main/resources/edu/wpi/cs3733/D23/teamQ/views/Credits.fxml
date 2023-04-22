@@ -73,43 +73,43 @@
                                     <Insets bottom="12.0" top="12.0" />
                                  </padding>
                                  <children>
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Alert" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="AlertBox" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="BlueLogo" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Chevron Left" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Chevron Right" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Close" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Confirm" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Down" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Edge" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Exit" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="ExitBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Flower" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Handshake" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Home" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="HomeBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Left Arrow" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Location" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="LoginExit" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Logo" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Map" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Map 2" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="MapBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Map Editor" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Menu" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Move" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Node" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="People" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="PeopleBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Profile" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Right Arrow" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="ServiceRequests" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="ServiceRequestsBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Settings" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="SettingsBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Statistics" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="StatisticsBlue" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Up" />
+                                    <MFXButton fx:id="alert" onAction="#alertClicked" prefHeight="36.0" prefWidth="320.0" text="Alert" />
+                                    <MFXButton fx:id="alertBox" onAction="#alertBoxClicked" prefHeight="36.0" prefWidth="320.0" text="AlertBox" />
+                                    <MFXButton fx:id="blueLogo" onAction="#blueLogoClicked" prefHeight="36.0" prefWidth="320.0" text="BlueLogo" />
+                                    <MFXButton fx:id="chevronLeft" onAction="#chevronLeftClicked" prefHeight="36.0" prefWidth="320.0" text="Chevron Left" />
+                                    <MFXButton fx:id="chevronRight" onAction="#chevronRightClicked" prefHeight="36.0" prefWidth="320.0" text="Chevron Right" />
+                                    <MFXButton fx:id="close" onAction="#closeClicked" prefHeight="36.0" prefWidth="320.0" text="Close" />
+                                    <MFXButton fx:id="confirm" onAction="#confirmClicked" prefHeight="36.0" prefWidth="320.0" text="Confirm" />
+                                    <MFXButton fx:id="down" onAction="#downClicked"  prefHeight="36.0" prefWidth="320.0" text="Down" />
+                                    <MFXButton fx:id="edge" onAction="#edgeClicked" prefHeight="36.0" prefWidth="320.0" text="Edge" />
+                                    <MFXButton fx:id="exit" onAction="#exitClicked" prefHeight="36.0" prefWidth="320.0" text="Exit" />
+                                    <MFXButton fx:id="exitBlue" onAction="#exitBlueClicked" prefHeight="36.0" prefWidth="320.0" text="ExitBlue" />
+                                    <MFXButton fx:id="flower" onAction="#flowerClicked" prefHeight="36.0" prefWidth="320.0" text="Flower" />
+                                    <MFXButton fx:id="handshake" onAction="#handshakeClicked" prefHeight="36.0" prefWidth="320.0" text="Handshake" />
+                                    <MFXButton fx:id="home" onAction="#homeClicked" prefHeight="36.0" prefWidth="320.0" text="Home" />
+                                    <MFXButton fx:id="homeBlue" onAction="#homeBlueClicked" prefHeight="36.0" prefWidth="320.0" text="HomeBlue" />
+                                    <MFXButton fx:id="leftArrow" onAction="#leftArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Left Arrow" />
+                                    <MFXButton fx:id="loc" onAction="#locClicked" prefHeight="36.0" prefWidth="320.0" text="Location" />
+                                    <MFXButton fx:id="loginExit" onAction="#loginExitClicked" prefHeight="36.0" prefWidth="320.0" text="LoginExit" />
+                                    <MFXButton fx:id="logo" onAction="#logoClicked" prefHeight="36.0" prefWidth="320.0" text="Logo" />
+                                    <MFXButton fx:id="map" onAction="#mapClicked" prefHeight="36.0" prefWidth="320.0" text="Map" />
+                                    <MFXButton fx:id="map2" onAction="#map2Clicked" prefHeight="36.0" prefWidth="320.0" text="Map 2" />
+                                    <MFXButton fx:id="mapBlue" onAction="#mapBlueClicked" prefHeight="36.0" prefWidth="320.0" text="MapBlue" />
+                                    <MFXButton fx:id="mapEditor" onAction="#mapEditorClicked" prefHeight="36.0" prefWidth="320.0" text="Map Editor" />
+                                    <MFXButton fx:id="menu" onAction="#menuClicked" prefHeight="36.0" prefWidth="320.0" text="Menu" />
+                                    <MFXButton fx:id="move" onAction="#moveClicked" prefHeight="36.0" prefWidth="320.0" text="Move" />
+                                    <MFXButton fx:id="node" onAction="#nodeClicked" prefHeight="36.0" prefWidth="320.0" text="Node" />
+                                    <MFXButton fx:id="people" onAction="#peopleClicked" prefHeight="36.0" prefWidth="320.0" text="People" />
+                                    <MFXButton fx:id="peopleBlue" onAction="#peopleBlueClicked" prefHeight="36.0" prefWidth="320.0" text="PeopleBlue" />
+                                    <MFXButton fx:id="profile" onAction="#profileClicked" prefHeight="36.0" prefWidth="320.0" text="Profile" />
+                                    <MFXButton fx:id="rightArrow" onAction="#rightArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Right Arrow" />
+                                    <MFXButton fx:id="sr" onAction="#srClicked" prefHeight="36.0" prefWidth="320.0" text="ServiceRequests" />
+                                    <MFXButton fx:id="srBlue" onAction="#srBlueClicked" prefHeight="36.0" prefWidth="320.0" text="ServiceRequestsBlue" />
+                                    <MFXButton fx:id="settings" onAction="#settingsClicked" prefHeight="36.0" prefWidth="320.0" text="Settings" />
+                                    <MFXButton fx:id="settingsBlue" onAction="#settingsBlueClicked" prefHeight="36.0" prefWidth="320.0" text="SettingsBlue" />
+                                    <MFXButton fx:id="stat" onAction="#statClicked" prefHeight="36.0" prefWidth="320.0" text="Statistics" />
+                                    <MFXButton fx:id="statBlue" onAction="#statBlueClicked" prefHeight="36.0" prefWidth="320.0" text="StatisticsBlue" />
+                                    <MFXButton fx:id="up" onAction="#upClicked"  prefHeight="36.0" prefWidth="320.0" text="Up" />
                                  </children>
                               </VBox>
                            </children>
@@ -130,16 +130,16 @@
                                     <Insets bottom="12.0" top="12.0" />
                                  </padding>
                                  <children>
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="First Floor" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Ground Floor" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Hospital Exterior" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Hospital Imagemark" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Lower Level 1" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Lower Level 2" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Second Floor" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Shapiro Center" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="TextLogo" />
-                                    <MFXButton prefHeight="36.0" prefWidth="320.0" text="Third Floor" />
+                                    <MFXButton fx:id="firstFloor" onAction="#firstFloorClicked" prefHeight="36.0" prefWidth="320.0" text="First Floor" />
+                                    <MFXButton fx:id="groundFloor" onAction="#groundFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Ground Floor" />
+                                    <MFXButton fx:id="exterior" onAction="#exteriorClicked" prefHeight="36.0" prefWidth="320.0" text="Hospital Exterior" />
+                                    <MFXButton fx:id="imagemark" onAction="#imagemarkClicked" prefHeight="36.0" prefWidth="320.0" text="Hospital Imagemark" />
+                                    <MFXButton fx:id="lowerLevel1" onAction="#lowerLevel1Clicked" prefHeight="36.0" prefWidth="320.0" text="Lower Level 1" />
+                                    <MFXButton fx:id="lowerLevel2" onAction="#lowerLevel2Clicked" prefHeight="36.0" prefWidth="320.0" text="Lower Level 2" />
+                                    <MFXButton fx:id="secondFloor" onAction="#secondFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Second Floor" />
+                                    <MFXButton fx:id="shapiro" onAction="#shapiroClicked" prefHeight="36.0" prefWidth="320.0" text="Shapiro Center" />
+                                    <MFXButton fx:id="textLogo" onAction="#textLogoClicked" prefHeight="36.0" prefWidth="320.0" text="TextLogo" />
+                                    <MFXButton fx:id="thirdFloor" onAction="#thirdFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Third Floor" />
                                  </children>
                               </VBox>
                            </children>
@@ -210,7 +210,7 @@
                <children>
                   <Label fx:id="linkDisplay" text="Click an item to display the associated link:" textFill="#012d5a">
                      <font>
-                        <Font name="Roboto" size="24.0" />
+                        <Font name="Roboto" size="36.0" />
                      </font>
                   </Label>
                   <MFXButton fx:id="copy" onAction="#copyClicked" prefHeight="36.0" prefWidth="128.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" text="Copy" textFill="#f1f1f1">
