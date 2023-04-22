@@ -38,6 +38,16 @@ public class ServiceRequestBlockController {
   public void sRequestsExited() {}
 
   @FXML
+  public void hideBlock() {
+    sRequestsHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    sRequestsHB.setVisible(true);
+  }
+
+  @FXML
   public void hideSM() {
     sRequestsSMPane.setVisible(false);
   }

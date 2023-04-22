@@ -56,6 +56,16 @@ public class NavigationBlockController {
   public void navigationExited() {}
 
   @FXML
+  public void hideBlock() {
+    navigationHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    navigationHB.setVisible(true);
+  }
+
+  @FXML
   public void hideSM() {
     navigationSMPane.setVisible(false);
   }

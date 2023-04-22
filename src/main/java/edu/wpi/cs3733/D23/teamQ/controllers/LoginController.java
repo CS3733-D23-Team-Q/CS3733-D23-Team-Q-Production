@@ -43,7 +43,7 @@ public class LoginController {
 
   @FXML
   public void initialize() {
-    Image hImage = new Image(App.class.getResourceAsStream("Hospital1.jpeg"));
+    Image hImage = new Image(App.class.getResourceAsStream("Hospital.jpeg"));
     ImageView imageView = new ImageView(hImage);
     imageView.setOpacity(0.75);
     imagePane.setContent(imageView);
