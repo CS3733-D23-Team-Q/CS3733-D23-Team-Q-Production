@@ -109,7 +109,7 @@ public class MessagingController {
               currentTimeMillis());
 
       if (messageList.isEmpty()
-          || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+          || (System.currentTimeMillis() - messageList.get(messageList.size() - 1).getTimeStamp()
               >= 3600000)) displayTime(System.currentTimeMillis());
 
       HBox hbox = new HBox();
@@ -136,7 +136,7 @@ public class MessagingController {
     String message = messageSent.getMessage();
 
     if (messageList.isEmpty()
-        || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+        || (System.currentTimeMillis() - messageList.get(messageList.size() - 1).getTimeStamp()
             >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
@@ -158,7 +158,7 @@ public class MessagingController {
     String message = messageReceived.getMessage();
 
     if (messageList.isEmpty()
-        || (messageList.get(messageList.size() - 1).getTimeStamp() - System.currentTimeMillis()
+        || (System.currentTimeMillis() - messageList.get(messageList.size() - 1).getTimeStamp()
             >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
