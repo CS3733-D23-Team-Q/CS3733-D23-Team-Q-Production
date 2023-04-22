@@ -43,8 +43,8 @@ public class ServiceRequestDaoImpl {
             new ServiceRequest(
                 rst.getInt("requestID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
                 accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
+                accountTable.retrieveRow(rst.getString("requester")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
