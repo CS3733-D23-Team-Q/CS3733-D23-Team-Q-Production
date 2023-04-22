@@ -20,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -37,10 +39,6 @@ public class MessagingController {
 
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
-
-  String hello = "The dog said moo";
-
-  long oldTime = 0;
 
   List<Message> messageList = new LinkedList<>();
 
@@ -97,6 +95,13 @@ public class MessagingController {
   }
 
   @FXML
+  public void keyPressed(KeyEvent e) {
+    if (e.getCode().equals(KeyCode.ENTER)) {
+      sendButtonClicked();
+    }
+  }
+
+  @FXML
   public void sendButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     String message = messageField.getText();
@@ -114,12 +119,12 @@ public class MessagingController {
 
       HBox hbox = new HBox();
       hbox.setAlignment(Pos.CENTER_RIGHT);
-      hbox.setPadding(new Insets(5, 5, 5, 10));
+      hbox.setPadding(new Insets(4, 16, 4, 640));
 
       Text text = new Text(message);
       TextFlow textFlow = new TextFlow(text);
       textFlow.setStyle(
-          "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 10 20 10 20;");
+          "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
       text.setStyle("-fx-font-family: Roboto");
       text.setFill(Color.WHITE);
       text.setFont(Font.font(14));
@@ -141,12 +146,12 @@ public class MessagingController {
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_RIGHT);
-    hbox.setPadding(new Insets(5, 5, 5, 10));
+    hbox.setPadding(new Insets(4, 16, 4, 640));
 
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
     textFlow.setStyle(
-        "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 10 20 10 20;");
+        "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.WHITE);
     text.setFont(Font.font(14));
@@ -163,12 +168,12 @@ public class MessagingController {
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_LEFT);
-    hbox.setPadding(new Insets(5, 10, 5, 5));
+    hbox.setPadding(new Insets(4, 640, 4, 16));
 
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
     textFlow.setStyle(
-        "-fx-background-color: #B4B4B4; -fx-background-radius: 20px; -fx-padding: 10 20 10 20;");
+        "-fx-background-color: #B4B4B4; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.BLACK);
     text.setFont(Font.font(14));
@@ -185,7 +190,6 @@ public class MessagingController {
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER);
-    hbox.setPadding(new Insets(5, 10, 5, 5));
 
     Text text = new Text(timeString);
     TextFlow textFlow = new TextFlow(text);

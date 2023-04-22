@@ -33,7 +33,7 @@
                   </MFXScrollPane>
                   <HBox spacing="20.0">
                      <children>
-                        <MFXTextField fx:id="messageField" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="825.0" promptText="Message" HBox.hgrow="ALWAYS">
+                        <MFXTextField fx:id="messageField" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="40.0" prefWidth="825.0" promptText="Message" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
