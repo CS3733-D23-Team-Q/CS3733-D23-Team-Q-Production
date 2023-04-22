@@ -88,6 +88,9 @@
                                  </VBox.margin>
                               </Label>
                            </children>
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
                         </VBox>
                      </children>
                      <padding>
