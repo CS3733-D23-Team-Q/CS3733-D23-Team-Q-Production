@@ -1,0 +1,13 @@
+.my-hbox {
+    -fx-background-color: #012d5a;
+}
+
+.profile-image {
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-background-color: #CCC;
+}
+
+.name {
+    -fx-font-weight: bold;
+}
