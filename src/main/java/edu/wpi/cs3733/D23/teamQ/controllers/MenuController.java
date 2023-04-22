@@ -34,6 +34,7 @@ public class MenuController {
 
   @FXML
   public void homeClicked() {
+    this.showAll();
     Navigation.navigate(Screen.HOME);
   }
 
@@ -60,6 +61,26 @@ public class MenuController {
     statBlockController.hideSM();
     settingsBlockController.hideSM();
     signoutBlockController.hideSM();
+  }
+
+  @FXML
+  public void showAll() {
+    navigationBlockController.showBlock();
+    peopleBlockController.showBlock();
+    srBlockController.showBlock();
+    settingsBlockController.showBlock();
+    signoutBlockController.showBlock();
+    statBlockController.showBlock();
+  }
+
+  @FXML
+  public void hideAll() {
+    navigationBlockController.hideBlock();
+    peopleBlockController.hideBlock();
+    srBlockController.hideBlock();
+    settingsBlockController.hideBlock();
+    signoutBlockController.hideBlock();
+    statBlockController.hideBlock();
   }
 
   @FXML
