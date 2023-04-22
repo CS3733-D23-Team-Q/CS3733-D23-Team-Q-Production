@@ -2,22 +2,22 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
-import java.awt.*;
 import javafx.fxml.FXML;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 
 public class HomeController implements IController {
 
   Qdb qdb = Qdb.getInstance();
 
-  @FXML private Text User;
+  @FXML private Label User;
+  @FXML Label name;
 
   @FXML
   public void initialize() {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
 
-    User.setText("Welcome Back " + account.getFirstName() + "!");
+    name.setText("Welcome Back " + account.getFirstName() + "!");
   }
 
   //  Qdb qdb = Qdb.getInstance();
