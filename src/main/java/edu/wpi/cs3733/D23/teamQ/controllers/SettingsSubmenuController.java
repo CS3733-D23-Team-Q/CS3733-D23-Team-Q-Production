@@ -11,6 +11,7 @@ public class SettingsSubmenuController {
   @FXML MFXButton settings;
   @FXML MFXButton help;
   @FXML MFXButton about;
+  @FXML MFXButton credits;
 
   @FXML
   public void settingsClicked() {
@@ -25,5 +26,10 @@ public class SettingsSubmenuController {
   @FXML
   public void aboutClicked() {
     Navigation.navigate(Screen.ABOUT);
+  }
+
+  @FXML
+  public void creditsClicked() {
+    Navigation.navigate(Screen.CREDITS);
   }
 }

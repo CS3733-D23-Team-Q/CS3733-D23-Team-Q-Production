@@ -12,7 +12,7 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" spacing="12.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.AboutController">
    <children>
-      <StackPane prefHeight="48.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+      <StackPane minHeight="-Infinity" prefHeight="48.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
          <children>
             <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="About">
                <font>
@@ -27,7 +27,7 @@
                <children>
                   <Label alignment="CENTER" prefHeight="48.0" prefWidth="192.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" text="Our Team" textFill="#f1f1f1">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

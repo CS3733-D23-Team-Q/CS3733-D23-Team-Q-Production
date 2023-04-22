@@ -54,7 +54,8 @@ public enum Screen {
   MAPEDITORHELP("views/MapEditorHelp.fxml", "Help"),
 
   OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves"),
-  ABOUT("views/About.fxml", "About");
+  ABOUT("views/About.fxml", "About"),
+  CREDITS("views/Credits.fxml", "Credits");
 
   private final String filename;
   private final String title;
