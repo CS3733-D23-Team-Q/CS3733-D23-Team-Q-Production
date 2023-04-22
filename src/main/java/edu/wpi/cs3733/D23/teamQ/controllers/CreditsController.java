@@ -27,8 +27,6 @@ public class CreditsController {
   @FXML MFXButton edge;
   @FXML MFXButton exit;
   @FXML MFXButton exitBlue;
-  @FXML MFXButton flower;
-  @FXML MFXButton handshake;
   @FXML MFXButton home;
   @FXML MFXButton homeBlue;
   @FXML MFXButton leftArrow;
@@ -106,187 +104,183 @@ public class CreditsController {
   // icons
   @FXML
   public void alertClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
   }
 
   @FXML
   public void alertBoxClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=regular");
   }
 
   @FXML
   public void blueLogoClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw2Viz7R1kroR73Q--3Ku8uM&ust=1682277692166000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIibuPSavv4CFQAAAAAdAAAAABAE");
   }
 
   @FXML
   public void chevronLeftClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/chevron-left?f=classic&s=solid");
   }
 
   @FXML
   public void chevronRightClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/chevron-right?f=classic&s=solid");
   }
 
   @FXML
   public void closeClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/xmark?f=classic&s=light");
   }
 
   @FXML
   public void confirmClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/circle-check?f=classic&s=regular");
   }
 
   @FXML
   public void downClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-down?f=classic&s=solid");
   }
 
   @FXML
   public void edgeClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/code-merge?f=classic&s=solid");
   }
 
   @FXML
   public void exitClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
   }
 
   @FXML
   public void exitBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
-  }
-
-  @FXML
-  public void flowerClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
-  }
-
-  @FXML
-  public void handshakeClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
   }
 
   @FXML
   public void homeClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
   }
 
   @FXML
   public void homeBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
   }
 
   @FXML
   public void leftArrowClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-left?f=classic&s=solid");
   }
 
   @FXML
   public void locClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/location-dot?f=sharp&s=solid");
   }
 
   @FXML
   public void loginExitClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/material-icons-action-2/exit-to-app-icon-16880");
   }
 
   @FXML
   public void logoClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw1-aU9VafVfv0WsXljuKITf&ust=1682278518253000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLiQp_6dvv4CFQAAAAAdAAAAABAE");
   }
 
   @FXML
   public void mapClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
   }
 
   @FXML
   public void map2Clicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/map-location-dot?f=sharp&s=regular");
   }
 
   @FXML
   public void mapBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
   }
 
   @FXML
   public void mapEditorClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
   }
 
   @FXML
   public void menuClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/bars?f=classic&s=solid");
   }
 
   @FXML
   public void moveClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/car?f=classic&s=solid");
   }
 
   @FXML
   public void nodeClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/location-crosshairs?f=classic&s=solid");
   }
 
   @FXML
   public void peopleClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
   }
 
   @FXML
   public void peopleBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
   }
 
   @FXML
   public void profileClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/user?f=classic&s=solid");
   }
 
   @FXML
   public void rightArrowClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-right?f=classic&s=solid");
   }
 
   @FXML
   public void srClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
   }
 
   @FXML
   public void srBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
   }
 
   @FXML
   public void settingsClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
   }
 
   @FXML
   public void settingsBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
   }
 
   @FXML
   public void statClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/outline-and-life-style/analytics-graph-bar-icon-1");
   }
 
   @FXML
   public void statBlueClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://freeicons.io/outline-and-life-style/analytics-graph-bar-icon-1");
   }
 
   @FXML
   public void upClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-up?f=classic&s=solid");
   }
 
   // images
@@ -297,47 +291,51 @@ public class CreditsController {
 
   @FXML
   public void groundFloorClicked() {
-    linkDisplay.setText("BWH Second Flor");
+    linkDisplay.setText("BWH Second Floor");
   }
 
   @FXML
   public void exteriorClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
   }
 
   @FXML
   public void imagemarkClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnndc.org%2Fnndc-members%2Fbrigham-and-womens-hospital%2F&psig=AOvVaw2acGby4gEVm2jrpGbZVryV&ust=1682277038806000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCICFmb2Yvv4CFQAAAAAdAAAAABAE");
   }
 
   @FXML
   public void lowerLevel1Clicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("BWH Lower Level 1");
   }
 
   @FXML
   public void lowerLevel2Clicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("BWH Lower Level 2");
   }
 
   @FXML
   public void secondFloorClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("BWH Second Floor");
   }
 
   @FXML
   public void shapiroClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
   }
 
   @FXML
   public void textLogoClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brighamandwomens.org%2F&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAE");
   }
 
   @FXML
   public void thirdFloorClicked() {
-    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+    linkDisplay.setText("BWH Third Floor");
   }
 
   // software

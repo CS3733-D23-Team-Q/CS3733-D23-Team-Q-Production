@@ -84,8 +84,6 @@
                                     <MFXButton fx:id="edge" onAction="#edgeClicked" prefHeight="36.0" prefWidth="320.0" text="Edge" />
                                     <MFXButton fx:id="exit" onAction="#exitClicked" prefHeight="36.0" prefWidth="320.0" text="Exit" />
                                     <MFXButton fx:id="exitBlue" onAction="#exitBlueClicked" prefHeight="36.0" prefWidth="320.0" text="ExitBlue" />
-                                    <MFXButton fx:id="flower" onAction="#flowerClicked" prefHeight="36.0" prefWidth="320.0" text="Flower" />
-                                    <MFXButton fx:id="handshake" onAction="#handshakeClicked" prefHeight="36.0" prefWidth="320.0" text="Handshake" />
                                     <MFXButton fx:id="home" onAction="#homeClicked" prefHeight="36.0" prefWidth="320.0" text="Home" />
                                     <MFXButton fx:id="homeBlue" onAction="#homeBlueClicked" prefHeight="36.0" prefWidth="320.0" text="HomeBlue" />
                                     <MFXButton fx:id="leftArrow" onAction="#leftArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Left Arrow" />
