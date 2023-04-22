@@ -5,13 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class ProfileImage {
-    private String username;
-    private byte[] imageData;
+  private String username;
+  private byte[] imageData;
 
-    public ProfileImage(String username, byte[] imageData) {
-        this.username = username;
-        this.imageData = imageData;
-    }
+  public ProfileImage(String username, byte[] imageData) {
+    this.username = username;
+    this.imageData = imageData;
+  }
 }
