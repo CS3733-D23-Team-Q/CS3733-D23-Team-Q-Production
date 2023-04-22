@@ -2,25 +2,30 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ProfileImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import io.github.palexdev.materialfx.utils.SwingFXUtils;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
 
 public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
   private static ProfileImageDaoImpl single_instance = null;
   private List<ProfileImage> profileImages = new ArrayList<ProfileImage>();
 
-  public ProfileImageDaoImpl() throws SQLException {
+  private ProfileImageDaoImpl() throws SQLException {
     populate();
   }
 
-  public static synchronized ProfileImageDaoImpl getInstance() throws SQLException {
+  public static synchronized ProfileImageDaoImpl getInstance() {
     if (single_instance == null) {
-      single_instance = new ProfileImageDaoImpl();
+      try {
+        single_instance = new ProfileImageDaoImpl();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
     }
     return single_instance;
   }
@@ -143,32 +148,31 @@ public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
     return -1;
   }
 
-  public byte[] convertImageToBytea(String imagePath) {
-    File imageFile = new File(imagePath);
-    byte[] imageData = new byte[(int) imageFile.length()];
+  public byte[] convertImageToBytea(Image image) {
+    try {
+      BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
 
-    try (FileInputStream fis = new FileInputStream(imageFile)) {
-      fis.read(imageData);
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      File tempFile = File.createTempFile("temp", ".png");
+      ImageIO.write(bufferedImage, "png", tempFile);
+
+      byte[] imageData;
+      try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+        BufferedImage img = ImageIO.read(tempFile);
+        ImageIO.write(img, "png", baos);
+        imageData = baos.toByteArray();
+      }
+
+      tempFile.delete();
+
+      return imageData;
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
-    return imageData;
   }
 
-  public static void main(String[] args) throws SQLException {
-    ProfileImageDaoImpl profileImageDAO = new ProfileImageDaoImpl();
-    //      // Convert local image to bytea
-    //      String imagePath = "../../../Downloads/wwong2.jpg";
-    //
-    //      // path
-    //      byte[] imageData = profileImageDAO.convertImageToBytea(imagePath);
-    //
-    //      // Create ProfileImage object and insert into database
-    //      String username = "admin"; // Replace with desired username
-    //      ProfileImage profileImage = new ProfileImage(username, imageData);
-    //      profileImageDAO.addRow(profileImage);
+  public Image convertByteaToImage(byte[] imageData) {
+    ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+    Image pfp = new Image(bis);
+    return pfp;
   }
 }

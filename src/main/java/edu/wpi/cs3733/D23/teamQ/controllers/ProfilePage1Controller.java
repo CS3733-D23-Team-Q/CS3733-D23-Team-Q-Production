@@ -1,12 +1,10 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.impl.ProfileImageDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.awt.*;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.fxml.FXML;
@@ -31,7 +29,7 @@ public class ProfilePage1Controller {
 
   public void initialize() throws IOException, SQLException {
     String username = LoginController.getLoginUsername();
-    ProfileImageDaoImpl dao = new ProfileImageDaoImpl();
+    Qdb qdb = Qdb.getInstance();
     Account account = qdb.retrieveAccount(username);
 
     fullName.setText(account.getFirstName() + " " + account.getLastName());
@@ -41,11 +39,10 @@ public class ProfilePage1Controller {
     phone.setText(Integer.toString(account.getPhoneNumber()));
     status.setText("Online");
 
-    byte[] imageData = dao.retrieveRow(username).getImageData();
-    ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-    Image pfp = new Image(bis);
-    profileImage.setImage(pfp);
-
+    if (qdb.getProfileImageIndex(username) != -1) {
+      Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
+      profileImage.setImage(pfp);
+    }
   }
 
   public void editPressed() {

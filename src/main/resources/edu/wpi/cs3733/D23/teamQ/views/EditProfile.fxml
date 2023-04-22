@@ -26,14 +26,23 @@
                   <Insets top="195.0" />
                </VBox.margin>
                <children>
-                  <ImageView fx:id="profileImage" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
+                  <StackPane prefHeight="300.0" prefWidth="300.0">
+                     <children>
+                        <ImageView fx:id="profileImage" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
+                           <image>
+                              <Image url="@../../../../../../../../../../../../Downloads/default-profile.png" />
+                           </image>
+                        </ImageView>
+                        <MFXButton fx:id="editPFP" onAction="#editPFPClicked" style="-fx-background-radius: 100;">
+                           <StackPane.margin>
+                              <Insets left="220.0" top="230.0" />
+                           </StackPane.margin>
+                        </MFXButton>
+                     </children>
                      <HBox.margin>
                         <Insets left="125.0" />
                      </HBox.margin>
-                     <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/default-profile.png" />
-                     </image>
-                  </ImageView>
+                  </StackPane>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Text fx:id="fullName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="name" text="Full Name">

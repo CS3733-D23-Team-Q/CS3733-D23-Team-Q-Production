@@ -2,16 +2,23 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ProfileImage;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Question;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.File;
+import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
 public class EditProfileController {
   Qdb qdb = Qdb.getInstance();
@@ -27,6 +34,8 @@ public class EditProfileController {
   @FXML private MFXTextField securityAnswer2;
   @FXML private MFXFilterComboBox securityQuestion1;
   @FXML private MFXFilterComboBox securityQuestion2;
+  @FXML private ImageView profileImage;
+  @FXML private MFXButton editPFP;
 
   private ObservableList<String> getQuestions() {
     ObservableList<String> questions = FXCollections.observableArrayList();
@@ -38,7 +47,7 @@ public class EditProfileController {
   }
 
   @FXML
-  private void initialize() {
+  private void initialize() throws SQLException {
     Qdb qdb = Qdb.getInstance();
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
@@ -56,6 +65,18 @@ public class EditProfileController {
     securityQuestion2.setText(qdb.retrieveQuestion(account.getSecurityQuestion2()).getQuestion());
     securityQuestion1.setItems(getQuestions());
     securityQuestion2.setItems(getQuestions());
+
+    Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
+    ImageView imageView = new ImageView(image);
+    imageView.setFitHeight(30.0);
+    imageView.setFitWidth(30.0);
+    editPFP.setText("");
+    editPFP.setGraphic(imageView);
+
+    if (qdb.getProfileImageIndex(username) != -1) {
+      Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
+      profileImage.setImage(pfp);
+    }
   }
 
   @FXML
@@ -77,9 +98,30 @@ public class EditProfileController {
             firstName.getText(),
             lastName.getText(),
             titleEdit.getText(),
-            Integer.parseInt(phone.getText()));
+            Integer.parseInt(phone.getText()),
+            account.getNotes(),
+            account.getTodo());
 
     qdb.updateAccount(username, newAccount);
     Navigation.navigate(Screen.PROFILE_PAGE);
+  }
+
+  public void editPFPClicked() throws SQLException {
+    String username = LoginController.getLoginUsername();
+    FileChooser fileChooser = new FileChooser();
+    File selectedFile = fileChooser.showOpenDialog(editPFP.getScene().getWindow());
+
+    if (selectedFile != null) {
+      Image image = new Image(selectedFile.toURI().toString());
+      profileImage.setImage(image);
+
+      ProfileImage newPFP = new ProfileImage(username, qdb.convertImageToBytea(image));
+
+      if (qdb.getProfileImageIndex(username) == -1) {
+        qdb.addProfileImage(newPFP);
+      } else {
+        qdb.updateProfileImage(username, newPFP);
+      }
+    }
   }
 }
