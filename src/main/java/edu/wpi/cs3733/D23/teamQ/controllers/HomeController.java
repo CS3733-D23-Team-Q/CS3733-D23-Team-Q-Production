@@ -9,7 +9,7 @@ public class HomeController implements IController {
 
   Qdb qdb = Qdb.getInstance();
 
-  @FXML private Label User;
+  @FXML private Text User;
 
   @FXML
   public void initialize() {
