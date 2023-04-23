@@ -100,6 +100,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
 
   public boolean populate() {
     try {
+      locations.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"locationName\"");
