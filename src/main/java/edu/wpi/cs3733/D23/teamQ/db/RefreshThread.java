@@ -27,7 +27,8 @@ public class RefreshThread implements Runnable {
       "node",
       "profileImage",
       "security_question",
-      "serviceRequest"
+      "serviceRequest",
+      "message"
     };
     ArrayList<String> toUpdate = new ArrayList<>();
     while (true) {

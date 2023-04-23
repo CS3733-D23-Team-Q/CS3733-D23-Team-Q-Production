@@ -1,23 +1,66 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
+import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MessageDaoImpl {
     private List<Message> messages = new ArrayList<>();
+    private AccountDaoImpl accountTable;
+    private static MessageDaoImpl single_instance = null;
 
-    public boolean addRow(Message m) {
+    public static synchronized MessageDaoImpl getInstance(
+            AccountDaoImpl accountTable) {
+        if (single_instance == null)
+            single_instance = new MessageDaoImpl(accountTable);
 
-
-        messages.add(m);
-        return true;
+        return single_instance;
     }
 
-    public boolean populate() throws SQLException {
-        return false;
+    private MessageDaoImpl(AccountDaoImpl accountTable) {
+        this.accountTable = accountTable;
+        populate();
+    }
+
+    public boolean addRow(Message m) {
+        try (Connection conn = GenDao.connect();
+             PreparedStatement stmt =
+                     conn.prepareStatement(
+                             "INSERT INTO \"message\"(sender, receiver, message, timestamp) VALUES (?, ?, ?, ?)")) {
+            stmt.setString(1, m.getSender().getUsername());
+            stmt.setString(2, m.getReceiver().getUsername());
+            stmt.setString(3, m.getMessage());
+            stmt.setLong(4, m.getTimeStamp());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return populate();
+    }
+
+    public boolean populate(){
+        try {
+            messages.clear();
+            Connection conn = GenDao.connect();
+            Statement stm = conn.createStatement();
+            ResultSet rst = stm.executeQuery("Select * From \"message\"");
+            while (rst.next()) {
+                messages.add(
+                        new Message(accountTable.retrieveRow(rst.getString("sender")),
+                                accountTable.retrieveRow(rst.getString("receiver")),
+                                rst.getString("message"),
+                                rst.getLong("timestamp")));
+            }
+            conn.close();
+            stm.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public List<Message> retrieveMessages(String p1, String p2){
