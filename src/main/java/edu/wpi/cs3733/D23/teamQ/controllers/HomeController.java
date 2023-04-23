@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 public class HomeController implements IController {
 
@@ -11,6 +12,8 @@ public class HomeController implements IController {
 
   @FXML private Label User;
   @FXML Label name;
+  @FXML TextArea toDoField;
+  @FXML TextArea notesField;
 
   @FXML
   public void initialize() {
@@ -18,6 +21,8 @@ public class HomeController implements IController {
     Account account = qdb.retrieveAccount(username);
 
     name.setText("Welcome Back " + account.getFirstName() + "!");
+    toDoField.setText(account.getTodo());
+    notesField.setText(account.getNotes());
   }
 
   //  Qdb qdb = Qdb.getInstance();
