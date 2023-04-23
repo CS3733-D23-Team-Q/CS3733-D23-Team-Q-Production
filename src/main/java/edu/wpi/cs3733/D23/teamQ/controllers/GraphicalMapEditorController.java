@@ -4,6 +4,7 @@ import static edu.wpi.cs3733.D23.teamQ.SecondaryStage.newStage;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -12,8 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
@@ -30,13 +32,42 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 public class GraphicalMapEditorController {
-  @FXML private MenuItem EdgeTableBtn;
 
-  @FXML private MenuItem LocationTableBtn;
+  Node empty = new Node(-1, 0, 0, "empty", "empty", null);
 
-  @FXML private MenuItem MoveTableBtn;
+  @FXML private Button AddEdgeBtn;
 
-  @FXML private MenuItem NodeTableBtn;
+  @FXML private Label alerts1;
+
+  @FXML private ImageView image11;
+
+  private boolean startnodeOr = false;
+
+  private boolean endnodeOr = false;
+
+  private Node startnode = empty;
+
+  private Node endnode = empty;
+
+  @FXML private TextField endnodeinitial;
+
+  @FXML private TextField startnodeinitial;
+
+  @FXML private ComboBox<String> TableChoose;
+
+  @FXML private Button TableChooseBtn;
+
+  private List<Text> Texts = new ArrayList<>();
+  @FXML private Button DisplayLocationBtn;
+
+  @FXML private ComboBox<String> NodeTypeChoose;
+
+  private String NodeType[] = {
+    "/", "All", "CONF", "DEPT", "ELEV", "EXIT", "INFO", "LABS", "REST", "RETL", "STAI", "BATH",
+    "SERV"
+  };
+
+  private String TableType[] = {"Node Table", "Location Name Table", "Move Table", "Edge Table"};
 
   @FXML private Button AddBtn;
 
@@ -93,6 +124,7 @@ public class GraphicalMapEditorController {
   @FXML GridPane root;
 
   @FXML Group parent;
+
   @FXML ImageView map;
   @FXML Button addButton;
   @FXML Button editButton;
@@ -176,8 +208,14 @@ public class GraphicalMapEditorController {
             parent.getChildren().set(findButton(nodeid), but);
 
              */
-            HideEdges();
+
             refreshNodes();
+            if (displayEdges = true) {
+              HideEdges();
+              DisplayEdges();
+            }
+
+            // refreshLines();
 
             findOnMap();
             // imageView.setImage(image[currentIndex]);
@@ -281,6 +319,9 @@ public class GraphicalMapEditorController {
   @FXML
   public void initialize() throws IOException {
 
+    NodeTypeChoose.getItems().addAll(NodeType);
+    TableChoose.getItems().addAll(TableType);
+
     /*  Text texts = new Text();
      root.getChildren().add(texts);
 
@@ -320,6 +361,19 @@ public class GraphicalMapEditorController {
 
            */
         });
+    AddEdgeBtn.setOnMouseEntered(
+        e -> {
+          AddEdgeBtn.setCursor(Cursor.HAND);
+        });
+    TableChooseBtn.setOnMouseEntered(
+        e -> {
+          TableChooseBtn.setCursor(Cursor.HAND);
+        });
+    DisplayLocationBtn.setOnMouseEntered(
+        e -> {
+          DisplayLocationBtn.setCursor(Cursor.HAND);
+        });
+
     FindBtn.setOnMouseEntered(
         e -> {
           FindBtn.setCursor(Cursor.HAND);
@@ -386,6 +440,14 @@ public class GraphicalMapEditorController {
   }
 
   void shownext() {
+    startnodeinitial.clear();
+    endnodeinitial.clear();
+    startnodeinitial.setPromptText("Click here to choose the start node");
+    endnodeinitial.setPromptText("Click here to choose the start node");
+    startnodeOr = false;
+    endnodeOr = false;
+    startnode = empty;
+    endnode = empty;
     HideEdges();
     currentIndex++;
     if (currentIndex < file.length) {
@@ -421,7 +483,10 @@ public class GraphicalMapEditorController {
       int y = n.getYCoord() / 5;
       Button node = new Button();
       node.setLayoutX(x);
+
       node.setLayoutY(y);
+      // node.setCenterShape(true);
+      // node.setAlignment(Pos.CENTER);
       node.setStyle(
           "-fx-background-radius: 5em;"
               + "-fx-min-width: 3px;"
@@ -435,6 +500,15 @@ public class GraphicalMapEditorController {
           e -> {
             nodeidinput.setText(Integer.toString(nodeID));
             NodeInformation(nodeID);
+            if (startnodeOr == true) {
+              startnodeinitial.setText(Integer.toString(nodeID));
+              startnode = qdb.nodeTable.retrieveRow(nodeID);
+              startnodeOr = false;
+            } else if (endnodeOr == true) {
+              endnodeinitial.setText(Integer.toString(nodeID));
+              endnode = qdb.nodeTable.retrieveRow(nodeID);
+              endnodeOr = false;
+            }
           });
       node.setOnMouseEntered(
           e -> {
@@ -447,9 +521,15 @@ public class GraphicalMapEditorController {
                     + "-fx-background-insets: 0px;"
                     + "-fx-background-color: #37AC2B");
             node.setCursor(Cursor.HAND);
+            /*
             int x2 = n.getXCoord() / 5;
             int y2 = n.getYCoord() / 5;
+
+             */
+            /*
             Location location = qdb.retrieveLocation(nodeID);
+
+
             String name = location.getShortName();
             Pattern pattern = Pattern.compile("(?i).*hall.*");
             if (!pattern.matcher(name).matches()) {
@@ -461,6 +541,8 @@ public class GraphicalMapEditorController {
               text.setStyle("-fx-font-size: 8px;");
               parent.getChildren().add(text);
             }
+
+             */
           });
       node.setOnMouseExited(
           e -> {
@@ -472,7 +554,7 @@ public class GraphicalMapEditorController {
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
                     + "-fx-background-color: #3492D5");
-            parent.getChildren().remove(text);
+            //   parent.getChildren().remove(text);
           });
       node.setOnMousePressed(
           e -> {
@@ -539,6 +621,8 @@ public class GraphicalMapEditorController {
             // after clicking confirm button
             qdb.updateNode(nodeID, newNode);
             NodeInformation(nodeID);
+            HideEdges();
+            DisplayEdges();
           });
       /*
       node.setOnMouseClicked(
@@ -740,8 +824,10 @@ public class GraphicalMapEditorController {
     // parent.getChildren().addAll(button);
   }
 
-  List<javafx.scene.shape.Line> addLines(List<Node> path) {
+  List<javafx.scene.shape.Line> addLines(List<Integer> path) {
     List<javafx.scene.shape.Line> lines = new ArrayList<>();
+
+    /*
     for (int i = path.size() - 1; i >= 1; i = i - 2) {
       Node n = path.get(i);
       Node next = path.get(i - 1);
@@ -750,11 +836,32 @@ public class GraphicalMapEditorController {
       int x2 = next.getXCoord() / 5;
       int y2 = next.getYCoord() / 5;
       javafx.scene.shape.Line line = new Line(x1, y1, x2, y2);
+
       line.setStyle("-fx-stroke: blue;");
       line.setStrokeWidth(0.5);
       parent.getChildren().add(line);
       lines.add(line);
     }
+
+     */
+
+    for (int i = path.size() - 1; i >= 1; i = i - 2) {
+      int n = path.get(i);
+      int next = path.get(i - 1);
+      DoubleProperty startX =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5);
+      DoubleProperty startY =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5);
+      DoubleProperty endX =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5);
+      DoubleProperty endY =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5);
+      Line line = new BoundLine(startX, startY, endX, endY);
+
+      parent.getChildren().add(line);
+      lines.add(line);
+    }
+
     displayEdges = true;
     return lines;
   }
@@ -765,13 +872,14 @@ public class GraphicalMapEditorController {
         parent.getChildren().remove(line);
       }
     }
+    displayEdges = false;
   }
 
-  List<Node> chooseLines(int floor) {
-    List<Node> path = new ArrayList<>();
+  List<Integer> chooseLines(int floor) {
+    List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.edgeTable.getAllRows().size(); i++) {
-      Node start = qdb.edgeTable.getAllRows().get(i).getStartNode();
-      Node target = qdb.edgeTable.getAllRows().get(i).getEndNode();
+      int start = qdb.edgeTable.getAllRows().get(i).getStartNode().getNodeID();
+      int target = qdb.edgeTable.getAllRows().get(i).getEndNode().getNodeID();
       if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
         path.add(start);
         path.add(target);
@@ -828,6 +936,12 @@ public class GraphicalMapEditorController {
   }
 
   void showlast() {
+    startnodeinitial.setPromptText("Click here to choose the start node");
+    endnodeinitial.setPromptText("Click here to choose the start node");
+    startnodeOr = false;
+    endnodeOr = false;
+    startnode = empty;
+    endnode = empty;
     HideEdges();
     currentIndex--;
 
@@ -880,6 +994,10 @@ public class GraphicalMapEditorController {
 
   @FXML
   void EdgesDispalyClicked(MouseEvent event) {
+    DisplayEdges();
+  }
+
+  void DisplayEdges() {
     if (!displayEdges) {
       line = addLines(chooseLines(currentIndex));
       displayEdges = true;
@@ -888,11 +1006,11 @@ public class GraphicalMapEditorController {
 
   @FXML
   void EdgesHidingClicked(MouseEvent event) {
-    HideEdges();
+    if (displayEdges == true) HideEdges();
   }
 
-  boolean nodeOnTheFloor(Node node, int floor) {
-    if (node.getFloor().equals(Floor(floor))) return true;
+  boolean nodeOnTheFloor(int node, int floor) {
+    if (qdb.nodeTable.retrieveRow(node).getFloor().equals(Floor(floor))) return true;
     return false;
   }
 
@@ -1043,8 +1161,7 @@ public class GraphicalMapEditorController {
 
    */
 
-  @FXML
-  void NodeTableClicked(javafx.event.ActionEvent actionEvent) throws Exception {
+  void NodeTable() throws Exception {
 
     NodeController controller = (NodeController) Navigation.getController(Screen.Node_Table);
     Stage stage = newStage("Node Table", Screen.Node_Table);
@@ -1053,8 +1170,7 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
-  @FXML
-  void LocationTableClicked(javafx.event.ActionEvent actionEvent) throws IOException {
+  void LocationTable() throws IOException {
 
     LocationController controller =
         (LocationController) Navigation.getController(Screen.LocationName_Table);
@@ -1064,8 +1180,7 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
-  @FXML
-  void MoveTableClicked(javafx.event.ActionEvent actionEvent) throws IOException {
+  void MoveTable() throws IOException {
 
     MoveController controller = (MoveController) Navigation.getController(Screen.Move_Table);
     Stage stage = newStage("Help", Screen.Move_Table);
@@ -1074,8 +1189,7 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
-  @FXML
-  void EdgeTableClicked(javafx.event.ActionEvent actionEvent) throws IOException {
+  void EdgeTable() throws IOException {
 
     EdgeController controller = (EdgeController) Navigation.getController(Screen.Edge_Table);
     Stage stage = newStage("Help", Screen.Edge_Table);
@@ -1083,4 +1197,127 @@ public class GraphicalMapEditorController {
     stage.show();
     stage.centerOnScreen();
   }
+
+  boolean ShowLocationName() {
+    parent.getChildren().removeAll(Texts);
+    Texts.clear();
+    List<Node> allNodes = qdb.nodeTable.getAllRows();
+    String check = NodeTypeChoose.getValue();
+    for (int i = 0; i < allNodes.size(); i++) {
+      Node node1 = allNodes.get(i);
+      String type = node1.getLocation().getNodeType();
+      String name = node1.getLocation().getShortName();
+      int x = node1.getXCoord() / 5;
+      int y = node1.getYCoord() / 5;
+      if (node1.getFloor().equals(Floor(currentIndex))) {
+        if (check.equals("All")) {
+          text = new Text(x + 3, y + 3, name);
+          text.setStyle("-fx-font-size: 6px;");
+          Texts.add(text);
+        } else if (type.equals(check)) {
+          text = new Text(x + 3, y + 3, name);
+          text.setStyle("-fx-font-size: 6px;");
+          Texts.add(text);
+        } else if (check.equals("/")) {
+          parent.getChildren().removeAll(Texts);
+          return false;
+        } else {
+
+        }
+      }
+    }
+    return true;
+  }
+
+  @FXML
+  void DisplayLocationClicked(MouseEvent event) {
+    boolean check = ShowLocationName();
+    if ((!Texts.isEmpty()) && check == true) {
+      parent.getChildren().addAll(Texts);
+    }
+  }
+
+  @FXML
+  void TableClicked(MouseEvent event) throws Exception {
+    String table = TableChoose.getValue();
+    if (table.equals("Node Table")) {
+      NodeTable();
+    } else if (table.equals("Location Name Table")) {
+      LocationTable();
+    } else if (table.equals("Move Table")) {
+      MoveTable();
+    } else {
+      EdgeTable();
+    }
+  }
+
+  @FXML
+  void AddEdgesClicked(MouseEvent event) {
+    Edge addedge = new Edge(startnode, endnode);
+    if (edgeAlert(addedge)) {
+      qdb.edgeTable.addRow(addedge);
+    }
+    HideEdges();
+    DisplayEdges();
+  }
+
+  boolean edgeAlert(Edge edge) {
+    List<Edge> alledges = qdb.edgeTable.getAllRows();
+    for (int i = 0; i < alledges.size(); i++) {
+      if (edge.getStartNode().equals(empty)) {
+        alert.setLabelAlert("The start node cannot be empty", alerts1, image11);
+        return false;
+      } else if (edge.getEndNode().equals(empty)) {
+        alert.setLabelAlert("The end node cannot be empty", alerts1, image11);
+        return false;
+      } else if (edge.getStartNode().getNodeID() == edge.getEndNode().getNodeID()) {
+        alert.setLabelAlert("The start node and the end node cannot be the same", alerts1, image11);
+        return false;
+      } else if (edge.getStartNode().getNodeID() == alledges.get(i).getStartNode().getNodeID()
+          && edge.getEndNode().getNodeID() == alledges.get(i).getEndNode().getNodeID()) {
+        alert.setLabelAlert("This edge exists", alerts1, image11);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @FXML
+  void ChooseEndNodeClicked(MouseEvent event) {
+    endnodeOr = true;
+    endnodeinitial.setPromptText("Please Click a node as the start node");
+  }
+
+  @FXML
+  void ChooseStartNodeClicked(MouseEvent event) {
+    startnodeOr = true;
+    startnodeinitial.setPromptText("Please Click a node as the start node");
+  }
+
+  void refreshLines() {
+    //   line = addLines(chooseLines(currentIndex));
+    parent.getChildren().removeAll(line);
+    // line = addLines(chooseLines(currentIndex));
+  }
 }
+
+class BoundLine extends Line {
+  BoundLine(
+          DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
+    startXProperty().bind(startX);
+    startYProperty().bind(startY);
+    endXProperty().bind(endX);
+    endYProperty().bind(endY);
+    /*setStrokeWidth(2);
+    setStroke(Color.GRAY.deriveColor(0, 1, 1, 0.5));
+    setStrokeLineCap(StrokeLineCap.BUTT);
+    getStrokeDashArray().setAll(10.0, 5.0);
+
+     */
+    setStrokeWidth(0.5);
+    setStyle("-fx-stroke: blue;");
+    setMouseTransparent(true);
+  }
+}
+
+
