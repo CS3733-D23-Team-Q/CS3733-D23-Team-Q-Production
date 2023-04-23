@@ -153,8 +153,9 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   }
 
   public boolean populate() {
-    Connection con = GenDao.connect();
     try {
+      Connection con = GenDao.connect();
+      accounts.clear();
       String query = "SELECT * FROM account";
       Statement st = con.createStatement();
       ResultSet rs = st.executeQuery(query);
