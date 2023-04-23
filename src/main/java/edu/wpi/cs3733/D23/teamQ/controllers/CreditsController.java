@@ -1,0 +1,376 @@
+package edu.wpi.cs3733.D23.teamQ.controllers;
+
+import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+
+public class CreditsController {
+  @FXML Label linkDisplay;
+  @FXML MFXButton copy;
+  @FXML MFXButton clear;
+
+  // libraries
+  @FXML MFXButton gesturefx;
+  @FXML MFXButton materialfx;
+
+  // icons
+  @FXML MFXButton alert;
+  @FXML MFXButton alertBox;
+  @FXML MFXButton blueLogo;
+  @FXML MFXButton chevronLeft;
+  @FXML MFXButton chevronRight;
+  @FXML MFXButton close;
+  @FXML MFXButton confirm;
+  @FXML MFXButton down;
+  @FXML MFXButton edge;
+  @FXML MFXButton exit;
+  @FXML MFXButton exitBlue;
+  @FXML MFXButton home;
+  @FXML MFXButton homeBlue;
+  @FXML MFXButton leftArrow;
+  @FXML MFXButton loc;
+  @FXML MFXButton loginExit;
+  @FXML MFXButton logo;
+  @FXML MFXButton map;
+  @FXML MFXButton map2;
+  @FXML MFXButton mapBlue;
+  @FXML MFXButton mapEditor;
+  @FXML MFXButton menu;
+  @FXML MFXButton move;
+  @FXML MFXButton node;
+  @FXML MFXButton people;
+  @FXML MFXButton peopleBlue;
+  @FXML MFXButton profile;
+  @FXML MFXButton rightArrow;
+  @FXML MFXButton sr;
+  @FXML MFXButton srBlue;
+  @FXML MFXButton settings;
+  @FXML MFXButton settingsBlue;
+  @FXML MFXButton stat;
+  @FXML MFXButton statBlue;
+  @FXML MFXButton up;
+
+  // images
+  @FXML MFXButton firstFloor;
+  @FXML MFXButton groundFloor;
+  @FXML MFXButton exterior;
+  @FXML MFXButton imagemark;
+  @FXML MFXButton lowerLevel1;
+  @FXML MFXButton lowerLevel2;
+  @FXML MFXButton secondFloor;
+  @FXML MFXButton shapiro;
+  @FXML MFXButton textLogo;
+  @FXML MFXButton thirdFloor;
+
+  // software
+  @FXML MFXButton figma;
+  @FXML MFXButton github;
+  @FXML MFXButton intellij;
+  @FXML MFXButton jira;
+  @FXML MFXButton postgresql;
+  @FXML MFXButton sbuilder;
+  @FXML MFXButton slack;
+  final Clipboard cb = Clipboard.getSystemClipboard();
+  final ClipboardContent content = new ClipboardContent();
+
+  @FXML
+  public void initialize() {}
+
+  @FXML
+  public void clearClicked() {
+    linkDisplay.setText("Click an item to display the associated link:");
+    cb.clear();
+  }
+
+  @FXML
+  public void copyClicked() {
+    content.putString(linkDisplay.getText());
+    cb.setContent(content);
+  }
+
+  // libraries
+  @FXML
+  public void gesturefxClicked() {
+    linkDisplay.setText("https://github.com/tom91136/GestureFX");
+  }
+
+  @FXML
+  public void materialfxClicked() {
+    linkDisplay.setText("https://github.com/palexdev/MaterialFX");
+  }
+
+  // icons
+  @FXML
+  public void alertClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
+  }
+
+  @FXML
+  public void alertBoxClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=regular");
+  }
+
+  @FXML
+  public void blueLogoClicked() {
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw2Viz7R1kroR73Q--3Ku8uM&ust=1682277692166000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIibuPSavv4CFQAAAAAdAAAAABAE");
+  }
+
+  @FXML
+  public void chevronLeftClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/chevron-left?f=classic&s=solid");
+  }
+
+  @FXML
+  public void chevronRightClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/chevron-right?f=classic&s=solid");
+  }
+
+  @FXML
+  public void closeClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/xmark?f=classic&s=light");
+  }
+
+  @FXML
+  public void confirmClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-check?f=classic&s=regular");
+  }
+
+  @FXML
+  public void downClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-down?f=classic&s=solid");
+  }
+
+  @FXML
+  public void edgeClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/code-merge?f=classic&s=solid");
+  }
+
+  @FXML
+  public void exitClicked() {
+    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+  }
+
+  @FXML
+  public void exitBlueClicked() {
+    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+  }
+
+  @FXML
+  public void homeClicked() {
+    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
+  }
+
+  @FXML
+  public void homeBlueClicked() {
+    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
+  }
+
+  @FXML
+  public void leftArrowClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-left?f=classic&s=solid");
+  }
+
+  @FXML
+  public void locClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/location-dot?f=sharp&s=solid");
+  }
+
+  @FXML
+  public void loginExitClicked() {
+    linkDisplay.setText("https://freeicons.io/material-icons-action-2/exit-to-app-icon-16880");
+  }
+
+  @FXML
+  public void logoClicked() {
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw1-aU9VafVfv0WsXljuKITf&ust=1682278518253000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLiQp_6dvv4CFQAAAAAdAAAAABAE");
+  }
+
+  @FXML
+  public void mapClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
+  }
+
+  @FXML
+  public void map2Clicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/map-location-dot?f=sharp&s=regular");
+  }
+
+  @FXML
+  public void mapBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
+  }
+
+  @FXML
+  public void mapEditorClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
+  }
+
+  @FXML
+  public void menuClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/bars?f=classic&s=solid");
+  }
+
+  @FXML
+  public void moveClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/car?f=classic&s=solid");
+  }
+
+  @FXML
+  public void nodeClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/location-crosshairs?f=classic&s=solid");
+  }
+
+  @FXML
+  public void peopleClicked() {
+    linkDisplay.setText(
+        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+  }
+
+  @FXML
+  public void peopleBlueClicked() {
+    linkDisplay.setText(
+        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+  }
+
+  @FXML
+  public void profileClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/user?f=classic&s=solid");
+  }
+
+  @FXML
+  public void rightArrowClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-right?f=classic&s=solid");
+  }
+
+  @FXML
+  public void srClicked() {
+    linkDisplay.setText(
+        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+  }
+
+  @FXML
+  public void srBlueClicked() {
+    linkDisplay.setText(
+        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+  }
+
+  @FXML
+  public void settingsClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+  }
+
+  @FXML
+  public void settingsBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+  }
+
+  @FXML
+  public void statClicked() {
+    linkDisplay.setText("https://freeicons.io/outline-and-life-style/analytics-graph-bar-icon-1");
+  }
+
+  @FXML
+  public void statBlueClicked() {
+    linkDisplay.setText("https://freeicons.io/outline-and-life-style/analytics-graph-bar-icon-1");
+  }
+
+  @FXML
+  public void upClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/arrow-up?f=classic&s=solid");
+  }
+
+  // images
+  @FXML
+  public void firstFloorClicked() {
+    linkDisplay.setText("BWH First Floor");
+  }
+
+  @FXML
+  public void groundFloorClicked() {
+    linkDisplay.setText("BWH Second Floor");
+  }
+
+  @FXML
+  public void exteriorClicked() {
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
+  }
+
+  @FXML
+  public void imagemarkClicked() {
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnndc.org%2Fnndc-members%2Fbrigham-and-womens-hospital%2F&psig=AOvVaw2acGby4gEVm2jrpGbZVryV&ust=1682277038806000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCICFmb2Yvv4CFQAAAAAdAAAAABAE");
+  }
+
+  @FXML
+  public void lowerLevel1Clicked() {
+    linkDisplay.setText("BWH Lower Level 1");
+  }
+
+  @FXML
+  public void lowerLevel2Clicked() {
+    linkDisplay.setText("BWH Lower Level 2");
+  }
+
+  @FXML
+  public void secondFloorClicked() {
+    linkDisplay.setText("BWH Second Floor");
+  }
+
+  @FXML
+  public void shapiroClicked() {
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
+  }
+
+  @FXML
+  public void textLogoClicked() {
+    linkDisplay.setText(
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brighamandwomens.org%2F&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAE");
+  }
+
+  @FXML
+  public void thirdFloorClicked() {
+    linkDisplay.setText("BWH Third Floor");
+  }
+
+  // software
+  @FXML
+  public void figmaClicked() {
+    linkDisplay.setText("https://www.figma.com/");
+  }
+
+  @FXML
+  public void githubClicked() {
+    linkDisplay.setText("https://github.com/");
+  }
+
+  @FXML
+  public void intellijClicked() {
+    linkDisplay.setText("https://www.jetbrains.com/idea/");
+  }
+
+  @FXML
+  public void jiraClicked() {
+    linkDisplay.setText("https://www.atlassian.com/software/jira");
+  }
+
+  @FXML
+  public void postgresqlClicked() {
+    linkDisplay.setText("https://www.postgresql.org/");
+  }
+
+  @FXML
+  public void sbuilderClicked() {
+    linkDisplay.setText("https://gluonhq.com/products/scene-builder/");
+  }
+
+  @FXML
+  public void slackClicked() {
+    linkDisplay.setText("https://slack.com/");
+  }
+}

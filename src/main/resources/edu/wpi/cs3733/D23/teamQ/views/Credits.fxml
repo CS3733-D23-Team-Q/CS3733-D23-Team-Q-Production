@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" spacing="12.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.CreditsController">
+   <children>
+      <StackPane minHeight="-Infinity" prefHeight="48.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" VBox.vgrow="ALWAYS">
+         <children>
+            <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits">
+               <font>
+                  <Font name="Roboto Bold" size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </StackPane>
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <MFXScrollPane hbarPolicy="NEVER" style="-fx-background-color: #f1f1f1;" stylesheets="@styles/Credits.css" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox prefWidth="320.0" spacing="18.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <StackPane prefHeight="48.0" prefWidth="192.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+                                 <children>
+                                    <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Libraries">
+                                       <font>
+                                          <Font name="Roboto Bold" size="28.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox prefHeight="48.0" prefWidth="100.0" spacing="12.0">
+                                 <children>
+                                    <MFXButton fx:id="gesturefx" onAction="#gesturefxClicked" prefHeight="36.0" prefWidth="320.0" text="GestureFX" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="materialfx" onAction="#materialfxClicked" prefHeight="36.0" prefWidth="320.0" text="MaterialFX" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="12.0" top="12.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane prefHeight="48.0" prefWidth="192.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+                                 <children>
+                                    <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Icons">
+                                       <font>
+                                          <Font name="Roboto Bold" size="28.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox prefHeight="48.0" prefWidth="100.0" spacing="12.0">
+                                 <padding>
+                                    <Insets bottom="12.0" top="12.0" />
+                                 </padding>
+                                 <children>
+                                    <MFXButton fx:id="alert" onAction="#alertClicked" prefHeight="36.0" prefWidth="320.0" text="Alert" />
+                                    <MFXButton fx:id="alertBox" onAction="#alertBoxClicked" prefHeight="36.0" prefWidth="320.0" text="AlertBox" />
+                                    <MFXButton fx:id="blueLogo" onAction="#blueLogoClicked" prefHeight="36.0" prefWidth="320.0" text="BlueLogo" />
+                                    <MFXButton fx:id="chevronLeft" onAction="#chevronLeftClicked" prefHeight="36.0" prefWidth="320.0" text="Chevron Left" />
+                                    <MFXButton fx:id="chevronRight" onAction="#chevronRightClicked" prefHeight="36.0" prefWidth="320.0" text="Chevron Right" />
+                                    <MFXButton fx:id="close" onAction="#closeClicked" prefHeight="36.0" prefWidth="320.0" text="Close" />
+                                    <MFXButton fx:id="confirm" onAction="#confirmClicked" prefHeight="36.0" prefWidth="320.0" text="Confirm" />
+                                    <MFXButton fx:id="down" onAction="#downClicked"  prefHeight="36.0" prefWidth="320.0" text="Down" />
+                                    <MFXButton fx:id="edge" onAction="#edgeClicked" prefHeight="36.0" prefWidth="320.0" text="Edge" />
+                                    <MFXButton fx:id="exit" onAction="#exitClicked" prefHeight="36.0" prefWidth="320.0" text="Exit" />
+                                    <MFXButton fx:id="exitBlue" onAction="#exitBlueClicked" prefHeight="36.0" prefWidth="320.0" text="ExitBlue" />
+                                    <MFXButton fx:id="home" onAction="#homeClicked" prefHeight="36.0" prefWidth="320.0" text="Home" />
+                                    <MFXButton fx:id="homeBlue" onAction="#homeBlueClicked" prefHeight="36.0" prefWidth="320.0" text="HomeBlue" />
+                                    <MFXButton fx:id="leftArrow" onAction="#leftArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Left Arrow" />
+                                    <MFXButton fx:id="loc" onAction="#locClicked" prefHeight="36.0" prefWidth="320.0" text="Location" />
+                                    <MFXButton fx:id="loginExit" onAction="#loginExitClicked" prefHeight="36.0" prefWidth="320.0" text="LoginExit" />
+                                    <MFXButton fx:id="logo" onAction="#logoClicked" prefHeight="36.0" prefWidth="320.0" text="Logo" />
+                                    <MFXButton fx:id="map" onAction="#mapClicked" prefHeight="36.0" prefWidth="320.0" text="Map" />
+                                    <MFXButton fx:id="map2" onAction="#map2Clicked" prefHeight="36.0" prefWidth="320.0" text="Map 2" />
+                                    <MFXButton fx:id="mapBlue" onAction="#mapBlueClicked" prefHeight="36.0" prefWidth="320.0" text="MapBlue" />
+                                    <MFXButton fx:id="mapEditor" onAction="#mapEditorClicked" prefHeight="36.0" prefWidth="320.0" text="Map Editor" />
+                                    <MFXButton fx:id="menu" onAction="#menuClicked" prefHeight="36.0" prefWidth="320.0" text="Menu" />
+                                    <MFXButton fx:id="move" onAction="#moveClicked" prefHeight="36.0" prefWidth="320.0" text="Move" />
+                                    <MFXButton fx:id="node" onAction="#nodeClicked" prefHeight="36.0" prefWidth="320.0" text="Node" />
+                                    <MFXButton fx:id="people" onAction="#peopleClicked" prefHeight="36.0" prefWidth="320.0" text="People" />
+                                    <MFXButton fx:id="peopleBlue" onAction="#peopleBlueClicked" prefHeight="36.0" prefWidth="320.0" text="PeopleBlue" />
+                                    <MFXButton fx:id="profile" onAction="#profileClicked" prefHeight="36.0" prefWidth="320.0" text="Profile" />
+                                    <MFXButton fx:id="rightArrow" onAction="#rightArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Right Arrow" />
+                                    <MFXButton fx:id="sr" onAction="#srClicked" prefHeight="36.0" prefWidth="320.0" text="ServiceRequests" />
+                                    <MFXButton fx:id="srBlue" onAction="#srBlueClicked" prefHeight="36.0" prefWidth="320.0" text="ServiceRequestsBlue" />
+                                    <MFXButton fx:id="settings" onAction="#settingsClicked" prefHeight="36.0" prefWidth="320.0" text="Settings" />
+                                    <MFXButton fx:id="settingsBlue" onAction="#settingsBlueClicked" prefHeight="36.0" prefWidth="320.0" text="SettingsBlue" />
+                                    <MFXButton fx:id="stat" onAction="#statClicked" prefHeight="36.0" prefWidth="320.0" text="Statistics" />
+                                    <MFXButton fx:id="statBlue" onAction="#statBlueClicked" prefHeight="36.0" prefWidth="320.0" text="StatisticsBlue" />
+                                    <MFXButton fx:id="up" onAction="#upClicked"  prefHeight="36.0" prefWidth="320.0" text="Up" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane prefHeight="48.0" prefWidth="192.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+                                 <children>
+                                    <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Images">
+                                       <font>
+                                          <Font name="Roboto Bold" size="28.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox prefHeight="48.0" prefWidth="100.0" spacing="12.0">
+                                 <padding>
+                                    <Insets bottom="12.0" top="12.0" />
+                                 </padding>
+                                 <children>
+                                    <MFXButton fx:id="firstFloor" onAction="#firstFloorClicked" prefHeight="36.0" prefWidth="320.0" text="First Floor" />
+                                    <MFXButton fx:id="groundFloor" onAction="#groundFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Ground Floor" />
+                                    <MFXButton fx:id="exterior" onAction="#exteriorClicked" prefHeight="36.0" prefWidth="320.0" text="Hospital Exterior" />
+                                    <MFXButton fx:id="imagemark" onAction="#imagemarkClicked" prefHeight="36.0" prefWidth="320.0" text="Hospital Imagemark" />
+                                    <MFXButton fx:id="lowerLevel1" onAction="#lowerLevel1Clicked" prefHeight="36.0" prefWidth="320.0" text="Lower Level 1" />
+                                    <MFXButton fx:id="lowerLevel2" onAction="#lowerLevel2Clicked" prefHeight="36.0" prefWidth="320.0" text="Lower Level 2" />
+                                    <MFXButton fx:id="secondFloor" onAction="#secondFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Second Floor" />
+                                    <MFXButton fx:id="shapiro" onAction="#shapiroClicked" prefHeight="36.0" prefWidth="320.0" text="Shapiro Center" />
+                                    <MFXButton fx:id="textLogo" onAction="#textLogoClicked" prefHeight="36.0" prefWidth="320.0" text="TextLogo" />
+                                    <MFXButton fx:id="thirdFloor" onAction="#thirdFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Third Floor" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane prefHeight="48.0" prefWidth="192.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+                                 <children>
+                                    <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Software">
+                                       <font>
+                                          <Font name="Roboto Bold" size="28.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox prefHeight="48.0" prefWidth="100.0" spacing="12.0">
+                                 <children>
+                                    <MFXButton fx:id="figma" onAction="#figmaClicked" prefHeight="36.0" prefWidth="320.0" text="Figma" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="github" onAction="#githubClicked" prefHeight="36.0" prefWidth="320.0" text="Github" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="intellij" onAction="#intellijClicked" prefHeight="36.0" prefWidth="320.0" text="IntelliJ" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="jira" onAction="#jiraClicked" prefHeight="36.0" prefWidth="320.0" text="Jira" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="postgresql" onAction="#postgresqlClicked" prefHeight="36.0" prefWidth="320.0" text="PostgreSQL" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="sbuilder" onAction="#sbuilderClicked" prefHeight="36.0" prefWidth="320.0" text="Scene Builder" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="slack" onAction="#slackClicked" prefHeight="36.0" prefWidth="320.0" text="Slack" textFill="#012d5a">
+                                       <font>
+                                          <Font name="Roboto" size="16.0" />
+                                       </font>
+                                    </MFXButton>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="12.0" top="12.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets right="8.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </MFXScrollPane>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="linkDisplay" text="Click an item to display the associated link:" textFill="#012d5a">
+                     <font>
+                        <Font name="Roboto" size="36.0" />
+                     </font>
+                  </Label>
+                  <MFXButton fx:id="copy" onAction="#copyClicked" prefHeight="36.0" prefWidth="128.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" text="Copy" textFill="#f1f1f1">
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <MFXButton fx:id="clear" onAction="#clearClicked" prefHeight="36.0" prefWidth="128.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" text="Clear" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </MFXButton>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="12.0" right="12.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</VBox>

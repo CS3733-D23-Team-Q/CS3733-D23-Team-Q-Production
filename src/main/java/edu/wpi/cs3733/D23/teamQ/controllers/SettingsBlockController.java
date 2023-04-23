@@ -14,7 +14,13 @@ public class SettingsBlockController {
   @FXML MFXButton settings;
   @FXML ImageView settingsIcon;
   @FXML AnchorPane settingsSMPane;
+  @FXML SettingsSubmenuController settingsSMController;
   @FXML MenuController mc;
+
+  @FXML
+  public void initialize() {
+    settingsSMController.setSBC(this);
+  }
 
   @FXML
   public void anchorEntered() {
@@ -36,6 +42,21 @@ public class SettingsBlockController {
 
   @FXML
   public void settingsExited() {}
+
+  @FXML
+  public void hideBlock() {
+    settingsHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    settingsHB.setVisible(true);
+  }
+
+  @FXML
+  public void hideAllButHome() {
+    mc.hideAll();
+  }
 
   @FXML
   public void hideSM() {
