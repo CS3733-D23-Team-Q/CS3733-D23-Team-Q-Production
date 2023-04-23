@@ -67,6 +67,8 @@ public class Qdb {
       st.setLong(1, System.currentTimeMillis());
       st.setString(2, tableName);
       st.executeUpdate();
+      connection.close();
+      st.close();
       return true;
     } catch (SQLException e) {
       e.printStackTrace();
