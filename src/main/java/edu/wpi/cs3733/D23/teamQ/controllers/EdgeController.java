@@ -14,9 +14,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class EdgeController {
+public class EdgeController implements IController {
+
+  static Stage stage;
+
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
 
   private String path;
   Alert alert = new Alert();
