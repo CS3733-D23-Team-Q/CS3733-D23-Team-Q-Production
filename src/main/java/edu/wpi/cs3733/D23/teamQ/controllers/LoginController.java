@@ -88,6 +88,8 @@ public class LoginController {
         passwordReact(username, enteredPassword, actualPassword);
       }
     } else {
+      loginAlert.setVisible(true);
+      alertImage.setVisible(true);
       alert.setLabelAlert("User doesn't exist", loginAlert, alertImage);
     }
   }
@@ -111,6 +113,8 @@ public class LoginController {
       loginUsername = usernameField.getText();
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
     } else {
+      loginAlert.setVisible(true);
+      alertImage.setVisible(true);
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }
   }
