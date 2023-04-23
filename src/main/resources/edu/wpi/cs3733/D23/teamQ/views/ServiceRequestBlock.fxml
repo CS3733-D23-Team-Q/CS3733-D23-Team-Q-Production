@@ -22,6 +22,9 @@
               <AnchorPane fx:id="sRequestsSMPane" visible="false">
                   <fx:include fx:id="sRequestsSM" source="ServiceRequestSubmenu.fxml" visible="true" />
               </AnchorPane>
+              <AnchorPane fx:id="srCreationSMPane" visible="false">
+                  <fx:include fx:id="srCreationSM" source="ServiceRequestCreationSubmenu.fxml" visible="true" />
+              </AnchorPane>
           </children>
       </HBox>
    </children>

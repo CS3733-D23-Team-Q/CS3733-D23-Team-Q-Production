@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="servicerequestSM" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="288.0" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ServiceRequestCreationSubmenuController">
+   <children>
+      <MFXButton fx:id="ccr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ccrClicked" prefHeight="53.0" prefWidth="256.0" text="Conference Room Request" />
+      <MFXButton fx:id="frr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#frrClicked" prefHeight="53.0" prefWidth="256.0" text="Flower Request" />
+      <MFXButton fx:id="osr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#osrClicked" prefHeight="53.0" prefWidth="256.0" text="Office Supply Request" />
+      <MFXButton fx:id="fer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ferClicked" prefHeight="53.0" prefWidth="256.0" text="Furniture Request" />
+      <MFXButton fx:id="mdr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#mdrClicked" prefHeight="53.0" prefWidth="256.0" text="Meal Delivery Request" />
+      <MFXButton fx:id="msr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#msrClicked" prefHeight="53.0" prefWidth="256.0" text="Medical Supply Request" />
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</VBox>
