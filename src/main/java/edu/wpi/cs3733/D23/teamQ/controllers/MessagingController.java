@@ -74,6 +74,9 @@ public class MessagingController {
                 Matcher matcher = pattern.matcher(newValue.toString());
                 String result;
                 if (matcher.find()) {
+                  if (!messageVbox.getChildren().isEmpty()) {
+                    messageVbox.getChildren().clear();
+                  }
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
                   if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
@@ -87,12 +90,14 @@ public class MessagingController {
                   }
 
                   // messageList =
-                  // qdb.getMessages(qdb.retrieveAccount(LoginController.getUsername()), receiver);
+                  // qdb.getMessages(qdb.retrieveAccount(LoginController.getUsername()),
+                  // receiver);
 
                   // NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
                   // Take a list of messages in order of send date, and if sender = me call
                   // sentHistorically()
                   // Sender != me, call messageReceived
+
                 }
               }
             });
