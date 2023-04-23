@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 public class Qdb {
   private AccountDaoImpl accountTable;
@@ -18,6 +19,7 @@ public class Qdb {
   public NodeDaoImpl nodeTable;
   public EdgeDaoImpl edgeTable;
   public MoveDaoImpl moveTable;
+  private ProfileImageDaoImpl profileImageTable;
 
   private QuestionDaoImpl questionTable;
 
@@ -54,6 +56,7 @@ public class Qdb {
     medicalSuppliesRequestTable =
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
+    profileImageTable = ProfileImageDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -168,6 +171,10 @@ public class Qdb {
 
   public List<ServiceRequest> retrieveUserServiceRequests(String user) {
     return serviceRequestTable.getUserRows(user);
+  }
+
+  public List<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
+    return serviceRequestTable.getUserAssignedRows(user);
   }
 
   public ServiceRequest retrieveServiceRequest(int requestID) {
@@ -464,6 +471,38 @@ public class Qdb {
   public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
     updateTimestamp("serviceRequest");
     return serviceRequestTable.updateRow(requestID, sr);
+  }
+
+  public List<ProfileImage> getAllProfileImages() {
+    return profileImageTable.getAllRows();
+  }
+
+  public ProfileImage retrieveProfileImage(String username) {
+    return profileImageTable.retrieveRow(username);
+  }
+
+  public boolean updateProfileImage(String username, ProfileImage x) throws SQLException {
+    return profileImageTable.updateRow(username, x);
+  }
+
+  public boolean deleteProfileImage(String username) throws SQLException {
+    return profileImageTable.deleteRow(username);
+  }
+
+  public boolean addProfileImage(ProfileImage x) {
+    return profileImageTable.addRow(x);
+  }
+
+  public byte[] convertImageToBytea(Image image) {
+    return profileImageTable.convertImageToBytea(image);
+  }
+
+  public Image convertByteaToImage(byte[] imageData) {
+    return profileImageTable.convertByteaToImage(imageData);
+  }
+
+  public int getProfileImageIndex(String username) {
+    return profileImageTable.getIndex(username);
   }
 
   public boolean populate(ArrayList<String> tableNames) {
