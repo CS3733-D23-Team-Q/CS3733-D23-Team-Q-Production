@@ -13,30 +13,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FurnitureDeliveryRequestController">
+<VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FurnitureDeliveryRequestController">
    <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="125.0" fitWidth="818.0">
+                     <image>
+                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/testingads.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Furniture Delivery Form ">
+                     <font>
+                        <Font name="Roboto Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
       <HBox>
          <children>
-            <VBox prefHeight="558.0" prefWidth="848.0" spacing="30.0" style="-fx-background-color: #f1f1f1;">
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox prefHeight="558.0" prefWidth="487.0" spacing="30.0" style="-fx-background-color: #f1f1f1;">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="125.0" fitWidth="818.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/testingads.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Furniture Delivery Form ">
-                                 <font>
-                                    <Font name="Roboto Bold" size="36.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </VBox>
                   <VBox>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
@@ -95,20 +96,6 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Requested">
-                           <font>
-                              <Font name="Roboto Bold" size="16.0" />
-                           </font>
-                        </Text>
-                        <MFXFilterComboBox fx:id="itemRequestedField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Furniture Item">
-                           <font>
-                              <Font name="Roboto" size="12.0" />
-                           </font>
-                        </MFXFilterComboBox>
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
                            <font>
                               <Font name="Roboto Bold" size="16.0" />
@@ -122,6 +109,29 @@
                   <Insets left="30.0" />
                </padding>
             </VBox>
+            <VBox prefHeight="200.0" prefWidth="200.0" />
+            <VBox prefHeight="200.0" prefWidth="400.0" spacing="30.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Requested">
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <MFXFilterComboBox fx:id="itemRequestedField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Furniture Item">
+                           <font>
+                              <Font name="Roboto" size="12.0" />
+                           </font>
+                        </MFXFilterComboBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="848.0" spacing="400.0">
@@ -131,17 +141,24 @@
                   <Font name="Roboto" size="16.0" />
                </font>
             </MFXButton>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox spacing="20.0">
                <children>
                   <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
                   </MFXButton>
                   <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
                   </MFXButton>
                </children>
             </HBox>

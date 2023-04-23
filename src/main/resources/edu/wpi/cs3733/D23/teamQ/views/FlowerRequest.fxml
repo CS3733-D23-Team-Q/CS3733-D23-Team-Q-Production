@@ -15,28 +15,29 @@
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FlowerRequestController">
    <children>
+      <VBox prefHeight="130.0" prefWidth="1360.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="125.0" fitWidth="818.0">
+                     <image>
+                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/NOW.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Delivery Form ">
+                     <font>
+                        <Font name="Roboto Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
       <HBox prefHeight="558.0" prefWidth="848.0">
          <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox prefHeight="648.0" prefWidth="448.0" spacing="30.0">
                <children>
-                  <VBox prefHeight="130.0" prefWidth="817.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="125.0" fitWidth="818.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/NOW.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Delivery Form ">
-                                 <font>
-                                    <Font name="Roboto Bold" size="36.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </VBox>
                   <VBox>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
@@ -95,6 +96,24 @@
                   </VBox>
                   <VBox>
                      <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox prefHeight="200.0" prefWidth="448.0" spacing="30.0">
+               <children>
+                  <VBox>
+                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Type">
                            <font>
                               <Font name="Roboto Bold" size="16.0" />
@@ -117,19 +136,9 @@
                         <MFXTextField fx:id="bouquetChoiceField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Number of Bouquets (In Dozens)" />
                      </children>
                   </VBox>
-                  <VBox>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
-                           <font>
-                              <Font name="Roboto Bold" size="16.0" />
-                           </font>
-                        </Text>
-                        <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
-                     </children>
-                  </VBox>
                </children>
                <padding>
-                  <Insets left="30.0" />
+                  <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
          </children>

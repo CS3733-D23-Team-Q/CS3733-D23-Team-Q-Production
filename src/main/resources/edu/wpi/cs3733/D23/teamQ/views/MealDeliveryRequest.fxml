@@ -13,30 +13,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
+<VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
    <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="125.0" fitWidth="818.0">
+                     <image>
+                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form ">
+                     <font>
+                        <Font name="Roboto Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
       <HBox>
          <children>
-            <VBox prefHeight="558.0" prefWidth="848.0" spacing="30.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox prefHeight="678.0" prefWidth="504.0" spacing="30.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="125.0" fitWidth="818.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form ">
-                                 <font>
-                                    <Font name="Roboto Bold" size="36.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </VBox>
                   <VBox>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
@@ -83,14 +84,22 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Drink">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
                            <font>
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="drinkField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Drink" />
+                        <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
                      </children>
                   </VBox>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="200.0" />
+            <VBox prefHeight="200.0" prefWidth="400.0" spacing="30.0">
+               <children>
                   <VBox>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entree">
@@ -99,6 +108,16 @@
                            </font>
                         </Text>
                         <MFXFilterComboBox fx:id="entreeField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Entree" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="58.0" prefWidth="748.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Drink">
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <MFXFilterComboBox fx:id="drinkField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Drink" />
                      </children>
                   </VBox>
                   <VBox>
@@ -115,21 +134,12 @@
                         </MFXFilterComboBox>
                      </children>
                   </VBox>
-                  <VBox>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
-                           <font>
-                              <Font name="Roboto Bold" size="16.0" />
-                           </font>
-                        </Text>
-                        <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
-                     </children>
-                  </VBox>
                </children>
                <padding>
-                  <Insets left="30.0" />
+                  <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="848.0" spacing="400.0">
