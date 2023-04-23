@@ -46,7 +46,10 @@ public class PathfindingController2 {
           "Third Floor");
   @FXML MFXFilterComboBox floorField;
   @FXML MFXFilterComboBox dateField;
+  ObservableList<String> algorithmList =
+      FXCollections.observableArrayList("A*", "Dijkstra's", "DFS", "BFS");
   @FXML MFXFilterComboBox algorithmField;
+  private String algorithm;
   Image i1 = new Image(App.class.getResourceAsStream("00_thegroundfloor.png"));
   ImageView I1 = new ImageView(i1);
   Image i2 = new Image(App.class.getResourceAsStream("00_thelowerlevel1.png"));
@@ -66,6 +69,9 @@ public class PathfindingController2 {
     mapPane.zoomBy(-500, -500, new Point2D(0, 0));
     floorField.setValue("First Floor");
     floorField.setItems(floors);
+    algorithmField.setValue("A*");
+    algorithmField.setItems(algorithmList);
+    pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
 
     floorField
         .valueProperty()
@@ -83,11 +89,27 @@ public class PathfindingController2 {
                 } else if (floor.equals("First Floor")) {
                   mapPane.setContent(I4);
                 } else if (floor.equals("Second Floor")) {
-                  Image hImage = new Image(App.class.getResourceAsStream("02_thesecondfloor.png"));
-                  ImageView imageView = new ImageView(hImage);
                   mapPane.setContent(I5);
                 } else if (floor.equals("Third Floor")) {
                   mapPane.setContent(I6);
+                }
+              }
+            });
+    algorithmField
+        .valueProperty()
+        .addListener(
+            new ChangeListener<>() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                String algorithm = (String) algorithmField.getValue();
+                if (algorithm.equals("A*")) {
+                  pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
+                } else if (algorithm.equals("Dijkstra's")) {
+                  pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
+                } else if (algorithm.equals("DFS")) {
+                  pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
+                } else if (algorithm.equals("BFS")) {
+                  pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
                 }
               }
             });
