@@ -60,7 +60,6 @@ public enum Screen {
   ABOUT("views/About.fxml", "About"),
   CREDITS("views/Credits.fxml", "Credits");
 
-
   private final String filename;
   private final String title;
 
