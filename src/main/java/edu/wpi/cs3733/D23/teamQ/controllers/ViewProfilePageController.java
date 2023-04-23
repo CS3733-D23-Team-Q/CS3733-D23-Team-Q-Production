@@ -31,7 +31,7 @@ public class ViewProfilePageController {
     } else {
       username = DirectoryController.getViewProfileUsername();
     }
-    System.out.println("viewprofile: " + username);
+
     Account account = qdb.retrieveAccount(username);
 
     fullName.setText(account.getFirstName() + " " + account.getLastName());

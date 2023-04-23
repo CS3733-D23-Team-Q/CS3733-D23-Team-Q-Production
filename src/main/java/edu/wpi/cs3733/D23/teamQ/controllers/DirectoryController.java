@@ -91,9 +91,8 @@ public class DirectoryController {
                 EmployeeData employeeData = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
-                      // Handle button click event
                       System.out.println(
-                          "Button clicked for: " + employeeData.getAccount().getUsername());
+                          "Chat button clicked for: " + employeeData.getAccount().getUsername());
                     });
                 button.setStyle(
                     "-fx-background-color: #012d5a; -fx-text-fill: #FFFFFF; -fx-pref-width: 100");
@@ -117,9 +116,6 @@ public class DirectoryController {
                 EmployeeData employeeData = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
-                      // Handle button click event
-                      System.out.println(
-                          "Button clicked for: " + employeeData.getAccount().getUsername());
                       viewProfileUsername = employeeData.getAccount().getUsername();
                       Navigation.navigate(Screen.VIEW_PROFILE);
                     });

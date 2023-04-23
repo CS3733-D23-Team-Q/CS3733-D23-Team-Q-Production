@@ -92,7 +92,7 @@ public class AdminDirectoryController {
                     event -> {
                       // Handle button click event
                       System.out.println(
-                          "Button clicked for: " + employeeData.getAccount().getUsername());
+                          "Chat button clicked for: " + employeeData.getAccount().getUsername());
                     });
                 button.setStyle(
                     "-fx-background-color: #012d5a; -fx-text-fill: #FFFFFF; -fx-pref-width: 100");
@@ -116,9 +116,6 @@ public class AdminDirectoryController {
                 EmployeeData employeeData = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
-                      // Handle button click event
-                      System.out.println(
-                          "Button clicked for: " + employeeData.getAccount().getUsername());
                       viewProfileUsername = employeeData.getAccount().getUsername();
                       Navigation.navigate(Screen.VIEW_PROFILE);
                     });
@@ -155,14 +152,9 @@ public class AdminDirectoryController {
                       alert.setContentText("Are you sure you want to delete this employee?");
                       alert.initOwner(button.getScene().getWindow());
 
-                      // Show and wait for user response
                       Optional<ButtonType> result = alert.showAndWait();
                       if (result.isPresent() && result.get() == ButtonType.OK) {
-                        // Handle button click event
-                        System.out.println(
-                            "Button clicked for: " + employeeData.getAccount().getUsername());
                         qdb.deleteAccount(employeeData.getAccount().getUsername());
-                        // Refresh the table view
                         directoryTable.getItems().remove(employeeData);
                         directoryTable.refresh();
                       }
