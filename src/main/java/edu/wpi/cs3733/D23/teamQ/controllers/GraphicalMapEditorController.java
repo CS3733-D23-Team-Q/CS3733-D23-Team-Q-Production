@@ -479,14 +479,15 @@ public class GraphicalMapEditorController {
     }
     for (Node n : ffNodes) {
       int nodeID = n.getNodeID();
-      int x = n.getXCoord() / 5;
-      int y = n.getYCoord() / 5;
+      double x = n.getXCoord() / 5 - 1.5;
+      double y = n.getYCoord() / 5 - 1.5;
       Button node = new Button();
-      node.setLayoutX(x);
 
+      node.setLayoutX(x);
       node.setLayoutY(y);
       // node.setCenterShape(true);
       // node.setAlignment(Pos.CENTER);
+
       node.setStyle(
           "-fx-background-radius: 5em;"
               + "-fx-min-width: 3px;"
@@ -613,8 +614,8 @@ public class GraphicalMapEditorController {
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
                     + "-fx-background-color: #3492D5");
-            int currentX = (int) (node.getLayoutX() * 5);
-            int currentY = (int) (node.getLayoutY() * 5);
+            int currentX = (int) ((node.getLayoutX() + 1.5) * 5);
+            int currentY = (int) ((node.getLayoutY() + 1.5) * 5);
             Node newNode = qdb.retrieveNode(nodeID);
             newNode.setXCoord(currentX);
             newNode.setYCoord(currentY);
@@ -857,7 +858,6 @@ public class GraphicalMapEditorController {
       DoubleProperty endY =
           new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5);
       Line line = new BoundLine(startX, startY, endX, endY);
-
       parent.getChildren().add(line);
       lines.add(line);
     }
@@ -1210,11 +1210,7 @@ public class GraphicalMapEditorController {
       int x = node1.getXCoord() / 5;
       int y = node1.getYCoord() / 5;
       if (node1.getFloor().equals(Floor(currentIndex))) {
-        if (check.equals("All")) {
-          text = new Text(x + 3, y + 3, name);
-          text.setStyle("-fx-font-size: 6px;");
-          Texts.add(text);
-        } else if (type.equals(check)) {
+        if (check.equals("All") || type.equals(check)) {
           text = new Text(x + 3, y + 3, name);
           text.setStyle("-fx-font-size: 6px;");
           Texts.add(text);
@@ -1303,7 +1299,7 @@ public class GraphicalMapEditorController {
 
 class BoundLine extends Line {
   BoundLine(
-          DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
+      DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
     startXProperty().bind(startX);
     startYProperty().bind(startY);
     endXProperty().bind(endX);
@@ -1319,5 +1315,3 @@ class BoundLine extends Line {
     setMouseTransparent(true);
   }
 }
-
-
