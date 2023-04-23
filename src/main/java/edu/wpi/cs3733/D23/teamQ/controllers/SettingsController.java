@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 public class SettingsController {
 
@@ -49,11 +50,15 @@ public class SettingsController {
     this.algorithmField.setValue("");
     this.algorithmField.setItems(algorithmList);
 
+    Color main = Color.web("012D5A", 1.0);
+    Color secondary = Color.web("7D7D7D", 1.0);
+    darkModeToggle.setColors(main, secondary);
+    soundToggle.setColors(main, secondary);
+
     this.darkModeToggle.setSelected(false);
     this.soundToggle.setSelected(true);
 
     this.emailDisplay.setText(account.getEmail());
-    //    this.phoneDisplay.setText("test");
     this.phoneDisplay.setText(String.valueOf(account.getPhoneNumber()));
   };
 
