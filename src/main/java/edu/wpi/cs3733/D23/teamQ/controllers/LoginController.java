@@ -98,7 +98,7 @@ public class LoginController {
       user = username;
       Account a = qdb.retrieveAccount(username);
       a.setActive(true);
-      qdb.updateAccount(username, a);
+      // qdb.updateAccount(username, a);
       alert.clearLabelAlert(loginAlert, alertImage);
       Screen menuScreen = Screen.MENU_PANE;
       final String filename = menuScreen.getFilename();
