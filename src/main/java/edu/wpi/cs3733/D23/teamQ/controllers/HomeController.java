@@ -19,8 +19,7 @@ public class HomeController implements IController {
     Calendar serviceRequests = new Calendar("Service Requests");
 
     CalendarSource SR = new CalendarSource("testing");
-    SR.getCalendars().add(serviceRequests);
-    Calender.getCalendarSources().add(SR);
+
     for (int i = 0; i < qdb.retrieveUserAssignServiceRequests(username).size(); i++) {
       int num = qdb.retrieveUserAssignServiceRequests(username).get(i).getRequestID();
       Entry<String> temp = new Entry<>("Service Request ID Num-" + num);
@@ -34,6 +33,8 @@ public class HomeController implements IController {
       temp.changeEndTime(
           LocalTime.parse(qdb.retrieveUserAssignServiceRequests(username).get(i).getTime()));
     }
+    SR.getCalendars().add(serviceRequests);
+    Calender.getCalendarSources().add(SR);
   }
   //  Qdb qdb = Qdb.getInstance();
   //

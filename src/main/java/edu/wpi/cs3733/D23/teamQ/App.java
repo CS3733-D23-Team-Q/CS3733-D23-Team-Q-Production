@@ -49,7 +49,7 @@ public class App extends Application {
             getClass()
                 .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
                 .toExternalForm());
-    primaryStage.show();
+
     /*
     Rectangle2D screenBounds = javafx.stage.Screen.getPrimary().getVisualBounds();
     primaryStage.setX(screenBounds.getMinX());
@@ -62,6 +62,8 @@ public class App extends Application {
     rootBorder.setLeft(null);
     rootBorder.setRight(null);
     Navigation.navigate(Screen.LOGIN);
+
+    primaryStage.show();
   }
 
   @Override
