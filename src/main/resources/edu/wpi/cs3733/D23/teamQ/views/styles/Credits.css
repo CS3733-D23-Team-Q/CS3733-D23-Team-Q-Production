@@ -1,4 +1,4 @@
-.button {
+.mfx-button {
     -fx-background-color: #f1f1f1;
     -fx-font-family: Roboto;
     -fx-font-size: 16;
@@ -7,12 +7,10 @@
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
-.button2 {
-    -fx-background-color: #f1f1f1;
-    -fx-font-family: Roboto;
-    -fx-font-size: 16;
-    -fx-text-fill: #012d5a;
-    -fx-border-color: #012d5a;
+
+.mfx-button:hover {
+    -fx-background-color: #012d5a;
+    -fx-text-fill: #f1f1f1;
 }
 
 

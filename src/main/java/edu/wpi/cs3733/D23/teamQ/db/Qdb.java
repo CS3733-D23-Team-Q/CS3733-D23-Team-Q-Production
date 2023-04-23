@@ -144,6 +144,10 @@ public class Qdb {
     return serviceRequestTable.getUserRows(user);
   }
 
+  public List<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
+    return serviceRequestTable.getUserAssignedRows(user);
+  }
+
   public ServiceRequest retrieveServiceRequest(int requestID) {
     return serviceRequestTable.retrieveRow(requestID);
   }

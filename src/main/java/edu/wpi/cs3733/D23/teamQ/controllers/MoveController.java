@@ -15,9 +15,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class MoveController {
+public class MoveController implements IController {
+
+  static Stage stage;
+
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
   /*
 
   private int newNodeID;
