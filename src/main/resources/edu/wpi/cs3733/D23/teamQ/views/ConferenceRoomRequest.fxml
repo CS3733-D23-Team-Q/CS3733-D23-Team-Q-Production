@@ -23,7 +23,7 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <ImageView fitHeight="125.0" fitWidth="849.0" StackPane.alignment="TOP_LEFT">
+                              <ImageView fitHeight="125.0" fitWidth="818.0" StackPane.alignment="TOP_LEFT">
                                  <image>
                                     <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/conferenceroom.jpg" />
                                  </image>

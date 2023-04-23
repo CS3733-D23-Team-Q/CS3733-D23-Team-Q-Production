@@ -13,7 +13,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
    <children>
       <HBox>
@@ -24,7 +23,7 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <ImageView fitHeight="131.0" fitWidth="820.0">
+                              <ImageView fitHeight="125.0" fitWidth="818.0">
                                  <image>
                                     <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
                                  </image>

@@ -23,13 +23,10 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <ImageView blendMode="MULTIPLY" fitHeight="129.0" fitWidth="848.0">
+                              <ImageView fitHeight="125.0" fitWidth="818.0">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/SunflowersSmaller.jpg" />
+                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/NOW.jpg" />
                                  </image>
-                                 <StackPane.margin>
-                                    <Insets />
-                                 </StackPane.margin>
                               </ImageView>
                               <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Delivery Form ">
                                  <font>
