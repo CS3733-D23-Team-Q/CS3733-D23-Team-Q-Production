@@ -8,6 +8,10 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import java.sql.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,7 +21,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Line;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -60,48 +66,54 @@ public class PathfindingController2 {
   @FXML MFXFilterComboBox destinationField;
   ObservableList<String> nodeTypes =
       FXCollections.observableArrayList(
-          "Ground Floor",
-          "Lower Level 1",
-          "Lower Level 2",
-          "First Floor",
-          "Second Floor",
-          "Third Floor");
+          "None",
+          "Conference Room",
+          "Department",
+          "Info Desk",
+          "Laboratory",
+          "Restroom",
+          "Retail",
+          "Service");
   @FXML MFXFilterComboBox highlightField;
   @FXML MFXButton clearButton;
   ObservableList<String> floors =
       FXCollections.observableArrayList(
-          "Ground Floor",
-          "Lower Level 1",
-          "Lower Level 2",
-          "First Floor",
-          "Second Floor",
-          "Third Floor");
+          "Lower Level 1", "Lower Level 2", "First Floor", "Second Floor", "Third Floor");
   @FXML MFXFilterComboBox floorField;
   @FXML MFXFilterComboBox dateField;
   ObservableList<String> algorithmList =
       FXCollections.observableArrayList("A*", "Dijkstra's", "DFS", "BFS");
   @FXML MFXFilterComboBox algorithmField;
-  Image i1 = new Image(App.class.getResourceAsStream("00_thegroundfloor.png"));
-  ImageView I1 = new ImageView(i1);
-  Image i2 = new Image(App.class.getResourceAsStream("00_thelowerlevel1.png"));
-  ImageView I2 = new ImageView(i2);
-  Image i3 = new Image(App.class.getResourceAsStream("00_thelowerlevel2.png"));
-  ImageView I3 = new ImageView(i3);
-  Image i4 = new Image(App.class.getResourceAsStream("01_thefirstfloor.png"));
-  ImageView I4 = new ImageView(i4);
-  Image i5 = new Image(App.class.getResourceAsStream("02_thesecondfloor.png"));
-  ImageView I5 = new ImageView(i5);
-  Image i6 = new Image(App.class.getResourceAsStream("03_thethirdfloor.png"));
-  ImageView I6 = new ImageView(i6);
+  ImageView I0 = new ImageView(new Image(App.class.getResourceAsStream("00_thegroundfloor.png")));
+  ImageView I1 = new ImageView(new Image(App.class.getResourceAsStream("00_thelowerlevel1.png")));
+  ImageView I2 = new ImageView(new Image(App.class.getResourceAsStream("00_thelowerlevel2.png")));
+  ImageView I3 = new ImageView(new Image(App.class.getResourceAsStream("01_thefirstfloor.png")));
+  ImageView I4 = new ImageView(new Image(App.class.getResourceAsStream("02_thesecondfloor.png")));
+  ImageView I5 = new ImageView(new Image(App.class.getResourceAsStream("03_thethirdfloor.png")));
 
   @FXML
   public void initialize() {
     mapPane.setContent(I1);
     mapPane.zoomBy(-500, -500, new Point2D(0, 0));
+    mapPane.setOnMouseClicked(
+        e -> {
+          if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
+            Point2D pivotOnTarget =
+                mapPane
+                    .targetPointAt(new Point2D(e.getX(), e.getY()))
+                    .orElse(mapPane.targetPointAtViewportCentre());
+            mapPane
+                .animate(Duration.millis(200))
+                .interpolateWith(Interpolator.EASE_BOTH)
+                .zoomBy(mapPane.getCurrentScale(), pivotOnTarget);
+          }
+        });
     floorField.setValue("First Floor");
     floorField.setItems(floors);
     algorithmField.setValue("A*");
     algorithmField.setItems(algorithmList);
+    highlightField.setValue("None");
+    highlightField.setItems(nodeTypes);
     pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
 
     floorField
@@ -111,21 +123,20 @@ public class PathfindingController2 {
               @Override
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 String floor = (String) floorField.getValue();
-                if (floor.equals("Ground Floor")) {
+                if (floor.equals("Lower Level 1")) {
                   mapPane.setContent(I1);
-                } else if (floor.equals("Lower Level 1")) {
-                  mapPane.setContent(I2);
                 } else if (floor.equals("Lower Level 2")) {
-                  mapPane.setContent(I3);
+                  mapPane.setContent(I2);
                 } else if (floor.equals("First Floor")) {
-                  mapPane.setContent(I4);
+                  mapPane.setContent(I3);
                 } else if (floor.equals("Second Floor")) {
-                  mapPane.setContent(I5);
+                  mapPane.setContent(I4);
                 } else if (floor.equals("Third Floor")) {
-                  mapPane.setContent(I6);
+                  mapPane.setContent(I5);
                 }
               }
             });
+
     algorithmField
         .valueProperty()
         .addListener(
@@ -144,5 +155,47 @@ public class PathfindingController2 {
                 }
               }
             });
+
+    highlightField
+        .valueProperty()
+        .addListener(
+            new ChangeListener() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                String nodeType = (String) highlightField.getValue();
+                if (nodeType.equals("None")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Restroom")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Department")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Laboratory")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Info Desk")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Conference Room")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Retail")) {
+                  System.out.println(nodeType);
+                } else if (nodeType.equals("Service")) {
+                  System.out.println(nodeType);
+                }
+              }
+            });
+  }
+
+  @FXML
+  public void clearClicked() {
+    highlightField.setValue("None");
+  }
+
+  public List<Integer> addSpecificNode(
+          String pattern, String input, List<Integer> nodes, int node) {
+    Pattern pattern1 = Pattern.compile(pattern);
+    Matcher matcher1 = pattern1.matcher(input);
+    if (matcher1.find()) {
+      nodes.add(node);
+    }
+    return nodes;
   }
 }

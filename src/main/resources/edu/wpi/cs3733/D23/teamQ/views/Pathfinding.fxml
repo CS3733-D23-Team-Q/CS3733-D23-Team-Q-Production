@@ -69,7 +69,7 @@
                         </MFXFilterComboBox>
                         <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <MFXButton fx:id="clearButton" style="-fx-background-radius: 12; -fx-border-radius: 12;" text="Clear" textFill="#012d5a" />
+                              <MFXButton fx:id="clearButton" onMouseClicked="#clearClicked" style="-fx-background-radius: 12; -fx-border-radius: 12;" text="Clear" textFill="#012d5a" />
                            </children>
                         </HBox>
                      </children>
