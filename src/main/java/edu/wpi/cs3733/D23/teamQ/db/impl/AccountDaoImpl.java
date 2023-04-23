@@ -73,7 +73,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(11, newTitle);
       pst.setInt(12, newPN);
       pst.setString(13, newNotes);
-      pst.setString(13, newTodo);
+      pst.setString(14, newTodo);
       pst.setString(15, uname);
       int rs = pst.executeUpdate();
       if (rs == 1) {

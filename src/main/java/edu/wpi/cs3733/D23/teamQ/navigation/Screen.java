@@ -53,7 +53,8 @@ public enum Screen {
 
   MAPEDITORHELP("views/MapEditorHelp.fxml", "Help"),
 
-  OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
+  OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves"),
+  VIEW_PROFILE("views/ViewProfile.fxml", "View Profile");
 
   private final String filename;
   private final String title;
