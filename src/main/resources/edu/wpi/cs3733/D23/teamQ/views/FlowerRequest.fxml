@@ -28,7 +28,7 @@
                                     <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/SunflowersSmaller.jpg" />
                                  </image>
                                  <StackPane.margin>
-                                    <Insets left="-30.0" />
+                                    <Insets />
                                  </StackPane.margin>
                               </ImageView>
                               <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Delivery Form ">
