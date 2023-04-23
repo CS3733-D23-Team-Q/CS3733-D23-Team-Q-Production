@@ -1,10 +1,15 @@
 package edu.wpi.cs3733.D23.teamQ.db;
 
+import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 public class Qdb {
   private AccountDaoImpl accountTable;
@@ -14,6 +19,7 @@ public class Qdb {
   public NodeDaoImpl nodeTable;
   public EdgeDaoImpl edgeTable;
   public MoveDaoImpl moveTable;
+  private ProfileImageDaoImpl profileImageTable;
 
   private QuestionDaoImpl questionTable;
 
@@ -50,6 +56,24 @@ public class Qdb {
     medicalSuppliesRequestTable =
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
+    profileImageTable = ProfileImageDaoImpl.getInstance();
+  }
+
+  private boolean updateTimestamp(String tableName) {
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"timestamp\" SET updated_timestamp = ? WHERE \"tableName\" = ?")) {
+      st.setLong(1, System.currentTimeMillis());
+      st.setString(2, tableName);
+      st.executeUpdate();
+      connection.close();
+      st.close();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return false;
+    }
   }
 
   public Account retrieveAccount(String username) {
@@ -61,14 +85,17 @@ public class Qdb {
   }
 
   public boolean updateAccount(String username, Account a) {
+    updateTimestamp("account");
     return accountTable.updateRow(username, a);
   }
 
   public boolean deleteAccount(String username) {
+    updateTimestamp("account");
     return accountTable.deleteRow(username);
   }
 
   public boolean addAccount(Account a) {
+    updateTimestamp("account");
     return accountTable.addRow(a);
   }
 
@@ -93,15 +120,19 @@ public class Qdb {
   }
 
   public boolean updateConferenceRequest(int requestID, ConferenceRequest cr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, cr);
     return conferenceRequestTable.updateRow(requestID, cr);
   }
 
   public boolean deleteConferenceRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return conferenceRequestTable.deleteRow(requestID);
   }
 
   public boolean addConferenceRequest(ConferenceRequest cr) {
+    updateTimestamp("serviceRequest");
     conferenceRequestTable.addRow(cr);
     return serviceRequestTable.populate();
   }
@@ -115,15 +146,19 @@ public class Qdb {
   }
 
   public boolean updateFlowerRequest(int requestID, FlowerRequest fr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, fr);
     return flowerRequestTable.updateRow(requestID, fr);
   }
 
   public boolean deleteFlowerRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return flowerRequestTable.deleteRow(requestID);
   }
 
   public boolean addFlowerRequest(FlowerRequest fr) {
+    updateTimestamp("serviceRequest");
     flowerRequestTable.addRow(fr);
     return serviceRequestTable.populate();
   }
@@ -140,6 +175,10 @@ public class Qdb {
     return serviceRequestTable.getUserRows(user);
   }
 
+  public List<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
+    return serviceRequestTable.getUserAssignedRows(user);
+  }
+
   public ServiceRequest retrieveServiceRequest(int requestID) {
     return serviceRequestTable.retrieveRow(requestID);
   }
@@ -149,14 +188,17 @@ public class Qdb {
   }
 
   public boolean updateEdge(int edgeID, Edge e) {
+    updateTimestamp("edge");
     return edgeTable.updateRow(edgeID, e);
   }
 
   public boolean deleteEdge(int edgeID) {
+    updateTimestamp("edge");
     return edgeTable.deleteRow(edgeID);
   }
 
   public boolean addEdge(Edge e) {
+    updateTimestamp("edge");
     return edgeTable.addRow(e);
   }
 
@@ -173,14 +215,17 @@ public class Qdb {
   }
 
   public boolean updateNode(int nodeID, Node n) {
+    updateTimestamp("node");
     return nodeTable.updateRow(nodeID, n);
   }
 
   public boolean deleteNode(int nodeID) {
+    updateTimestamp("node");
     return nodeTable.deleteRow(nodeID);
   }
 
   public boolean addNode(Node n) {
+    updateTimestamp("node");
     return nodeTable.addRow(n);
   }
 
@@ -193,14 +238,17 @@ public class Qdb {
   }
 
   public boolean updateLocation(int nodeID, Location l) {
+    updateTimestamp("locationName");
     return locationTable.updateRow(nodeID, l);
   }
 
   public boolean deleteLocation(int nodeID) {
+    updateTimestamp("locationName");
     return locationTable.deleteRow(nodeID);
   }
 
   public boolean addLocation(Location l) {
+    updateTimestamp("locationName");
     return locationTable.addRow(l);
   }
 
@@ -221,14 +269,17 @@ public class Qdb {
   }
 
   public boolean updateMove(int moveID, Move m) {
+    updateTimestamp("move");
     return moveTable.updateRow(moveID, m);
   }
 
   public boolean deleteMove(int moveID) {
+    updateTimestamp("move");
     return moveTable.deleteRow(moveID);
   }
 
   public boolean addMove(Move m) {
+    updateTimestamp("move");
     return moveTable.addRow(m);
   }
 
@@ -245,10 +296,12 @@ public class Qdb {
   }
 
   public boolean updateQuestion(int ID, Question q) {
+    updateTimestamp("question");
     return questionTable.updateRow(ID, q);
   }
 
   public boolean deleteQuestion(int ID) {
+    updateTimestamp("question");
     return questionTable.deleteRow(ID);
   }
 
@@ -257,6 +310,7 @@ public class Qdb {
   }
 
   public boolean addQuestion(Question q) {
+    updateTimestamp("question");
     return questionTable.addRow(q);
   }
 
@@ -273,15 +327,19 @@ public class Qdb {
   }
 
   public boolean updateMealRequest(int requestID, MealRequest mr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, mr);
     return mealRequestTable.updateRow(requestID, mr);
   }
 
   public boolean deleteMealRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return mealRequestTable.deleteRow(requestID);
   }
 
   public boolean addMealRequest(MealRequest mr) {
+    updateTimestamp("serviceRequest");
     mealRequestTable.addRow(mr);
     return serviceRequestTable.populate();
   }
@@ -295,15 +353,19 @@ public class Qdb {
   }
 
   public boolean updateFurnitureRequest(int requestID, FurnitureRequest fr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, fr);
     return furnitureRequestTable.updateRow(requestID, fr);
   }
 
   public boolean deleteFurnitureRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return furnitureRequestTable.deleteRow(requestID);
   }
 
   public boolean addFurnitureRequest(FurnitureRequest fr) {
+    updateTimestamp("serviceRequest");
     furnitureRequestTable.addRow(fr);
     return serviceRequestTable.populate();
   }
@@ -317,15 +379,19 @@ public class Qdb {
   }
 
   public boolean updatePatientTransportRequest(int requestID, PatientTransportRequest ptr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, ptr);
     return patientTransportRequestTable.updateRow(requestID, ptr);
   }
 
   public boolean deletePatientTransportRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return patientTransportRequestTable.deleteRow(requestID);
   }
 
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
+    updateTimestamp("serviceRequest");
     patientTransportRequestTable.addRow(ptr);
     return serviceRequestTable.populate();
   }
@@ -339,15 +405,19 @@ public class Qdb {
   }
 
   public boolean updateOfficeSuppliesRequest(int requestID, OfficeSuppliesRequest osr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, osr);
     return officeSuppliesRequestTable.updateRow(requestID, osr);
   }
 
   public boolean deleteOfficeSuppliesRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return officeSuppliesRequestTable.deleteRow(requestID);
   }
 
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
+    updateTimestamp("serviceRequest");
     officeSuppliesRequestTable.addRow(osr);
     return serviceRequestTable.populate();
   }
@@ -369,15 +439,19 @@ public class Qdb {
   }
 
   public boolean updateMedicalSuppliesRequest(int requestID, MedicalSuppliesRequest msr) {
+    updateTimestamp("serviceRequest");
+    serviceRequestTable.updateRow(requestID, msr);
     return medicalSuppliesRequestTable.updateRow(requestID, msr);
   }
 
   public boolean deleteMedicalSuppliesRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     serviceRequestTable.deleteRow(requestID);
     return medicalSuppliesRequestTable.deleteRow(requestID);
   }
 
   public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
+    updateTimestamp("serviceRequest");
     medicalSuppliesRequestTable.addRow(msr);
     return serviceRequestTable.populate();
   }
@@ -392,10 +466,73 @@ public class Qdb {
   }
 
   public boolean deleteServiceRequest(int requestID) {
+    updateTimestamp("serviceRequest");
     return serviceRequestTable.deleteRow(requestID);
   }
 
   public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
+    updateTimestamp("serviceRequest");
     return serviceRequestTable.updateRow(requestID, sr);
+  }
+
+  public List<ProfileImage> getAllProfileImages() {
+    return profileImageTable.getAllRows();
+  }
+
+  public ProfileImage retrieveProfileImage(String username) {
+    return profileImageTable.retrieveRow(username);
+  }
+
+  public boolean updateProfileImage(String username, ProfileImage x) throws SQLException {
+    return profileImageTable.updateRow(username, x);
+  }
+
+  public boolean deleteProfileImage(String username) throws SQLException {
+    return profileImageTable.deleteRow(username);
+  }
+
+  public boolean addProfileImage(ProfileImage x) {
+    return profileImageTable.addRow(x);
+  }
+
+  public byte[] convertImageToBytea(Image image) {
+    return profileImageTable.convertImageToBytea(image);
+  }
+
+  public Image convertByteaToImage(byte[] imageData) {
+    return profileImageTable.convertByteaToImage(imageData);
+  }
+
+  public int getProfileImageIndex(String username) {
+    return profileImageTable.getIndex(username);
+  }
+
+  public boolean populate(ArrayList<String> tableNames) {
+    for (String tableName : tableNames) {
+      switch (tableName) {
+        case "account":
+          accountTable.populate();
+        case "edge":
+          edgeTable.populate();
+        case "locationName":
+          locationTable.populate();
+        case "move":
+          moveTable.populate();
+        case "node":
+          nodeTable.populate();
+        case "profileImage":
+          // tbd
+        case "serviceRequest":
+          serviceRequestTable.populate();
+          conferenceRequestTable.populate();
+          flowerRequestTable.populate();
+          furnitureRequestTable.populate();
+          mealRequestTable.populate();
+          medicalSuppliesRequestTable.populate();
+          officeSuppliesRequestTable.populate();
+          patientTransportRequestTable.populate();
+      }
+    }
+    return true;
   }
 }

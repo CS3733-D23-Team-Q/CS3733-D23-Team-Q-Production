@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,7 +37,7 @@ public class ProfilePageController implements IController {
   private Button ProfilePage_Home_Button;
 
   @FXML
-  private void initialize() {
+  private void initialize() throws SQLException {
 
     // DO ONE FOR PROFILE IMAGE AS WELL NEXT TIME
     String username = LoginController.getLoginUsername();

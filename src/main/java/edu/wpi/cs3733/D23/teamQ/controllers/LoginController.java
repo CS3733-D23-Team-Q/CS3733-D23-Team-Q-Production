@@ -43,7 +43,7 @@ public class LoginController {
 
   @FXML
   public void initialize() {
-    Image hImage = new Image(App.class.getResourceAsStream("Hospital1.jpeg"));
+    Image hImage = new Image(App.class.getResourceAsStream("Hospital.jpeg"));
     ImageView imageView = new ImageView(hImage);
     imageView.setOpacity(0.75);
     imagePane.setContent(imageView);
@@ -98,7 +98,7 @@ public class LoginController {
       user = username;
       Account a = qdb.retrieveAccount(username);
       a.setActive(true);
-      qdb.updateAccount(username, a);
+      // qdb.updateAccount(username, a);
       alert.clearLabelAlert(loginAlert, alertImage);
       Screen menuScreen = Screen.MENU_PANE;
       final String filename = menuScreen.getFilename();
@@ -107,9 +107,10 @@ public class LoginController {
       Node n = loader.load();
       App.getRootBorder().setLeft(n);
       App.getRController().showMenu(true);
-      Navigation.navigate(Screen.HOME);
+
       loginUsername = usernameField.getText();
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
+      Navigation.navigate(Screen.HOME);
     } else {
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }

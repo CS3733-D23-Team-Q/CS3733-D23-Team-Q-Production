@@ -14,7 +14,14 @@ public class ServiceRequestBlockController {
   @FXML MFXButton sRequests;
   @FXML ImageView sRequestsIcon;
   @FXML AnchorPane sRequestsSMPane;
+  @FXML AnchorPane srCreationSMPane;
   @FXML MenuController mc;
+  @FXML ServiceRequestSubmenuController sRequestsSMController;
+
+  @FXML
+  public void initialize() {
+    sRequestsSMController.setSRBC(this);
+  }
 
   @FXML
   public void anchorEntered() {
@@ -29,6 +36,7 @@ public class ServiceRequestBlockController {
     sRequests.setStyle("-fx-background-color: #012d5a; -fx-text-fill: #f1f1f1");
     sRequestsIcon.setImage(new Image(App.class.getResourceAsStream("ServiceRequests.png")));
     sRequestsSMPane.setVisible(false);
+    srCreationSMPane.setVisible(false);
   }
 
   @FXML
@@ -36,6 +44,16 @@ public class ServiceRequestBlockController {
 
   @FXML
   public void sRequestsExited() {}
+
+  @FXML
+  public void hideBlock() {
+    sRequestsHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    sRequestsHB.setVisible(true);
+  }
 
   @FXML
   public void hideSM() {
