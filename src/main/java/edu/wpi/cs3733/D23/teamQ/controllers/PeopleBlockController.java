@@ -39,6 +39,16 @@ public class PeopleBlockController {
   public void peopleExited() {}
 
   @FXML
+  public void hideBlock() {
+    peopleHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    peopleHB.setVisible(true);
+  }
+
+  @FXML
   public void hideSM() {
     peopleSMPane.setVisible(false);
   }

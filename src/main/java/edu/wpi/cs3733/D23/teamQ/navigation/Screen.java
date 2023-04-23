@@ -35,7 +35,7 @@ public enum Screen {
   LIST_REQUESTS("views/ListServiceRequests.fxml", "List of Service Requests"),
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
-  PROFILE_PAGE("views/ProfilePage.fxml", "Profile Page"),
+  PROFILE_PAGE("views/ProfilePage1.fxml", "Profile Page"),
 
   CONFIRM("views/Confirm.fxml", "Confirm"),
   ALERT("views/Alert.fxml", "Alert"),
@@ -53,7 +53,9 @@ public enum Screen {
 
   MAPEDITORHELP("views/MapEditorHelp.fxml", "Help"),
 
-  OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves");
+  OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves"),
+  ABOUT("views/About.fxml", "About"),
+  CREDITS("views/Credits.fxml", "Credits");
 
   private final String filename;
   private final String title;
