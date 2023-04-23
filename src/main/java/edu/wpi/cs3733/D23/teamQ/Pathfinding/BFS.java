@@ -12,7 +12,7 @@ public class BFS implements IPathfinding {
     Queue<Node> queue = new LinkedList<>();
     Map<Node, Node> parentMap = new HashMap<>();
 
-    String floor = start.getFloor();
+    String endFloor = target.getFloor();
     queue.add(start);
     visited.add(start);
 
@@ -21,14 +21,77 @@ public class BFS implements IPathfinding {
       if (n == target) {
         return visited;
       }
+      if (n.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+          && !n.getFloor()
+              .equalsIgnoreCase(endFloor)) { // branch to send to correct floor, if needed
+        ArrayList<Node> elevatorNodes = new ArrayList<Node>();
+        for (Edge edge : n.getEdges()) {
+          elevatorNodes.add(edge.getStartNode());
+          elevatorNodes.add(edge.getEndNode());
+        }
+        for (Node node : elevatorNodes) {
+          if (node.getFloor().equalsIgnoreCase(endFloor) && !node.equals(n)) {
+            visited.add(node);
+            parentMap.put(node, n);
+            queue.add(node);
+          }
+        }
+      }
+      if (n.getLocation().getNodeType().equalsIgnoreCase("ELEV")
+          && n.getFloor()
+              .equalsIgnoreCase(endFloor)) { // branch to send to correct floor, if needed
+        ArrayList<Node> elevatorNodes = new ArrayList<Node>();
+        for (Edge edge : n.getEdges()) {
+          elevatorNodes.add(edge.getStartNode());
+          elevatorNodes.add(edge.getEndNode());
+        }
+        for (Node node : elevatorNodes) {
+          if (node.getFloor().equalsIgnoreCase(n.getFloor())
+              && !visited.contains(node)) { // might have to exclude ele
+            visited.add(node); // vators as well
+            parentMap.put(node, n);
+            queue.add(node);
+          }
+        }
+      }
+      if (n.getLocation().getNodeType().equalsIgnoreCase("STAI")
+          && !n.getFloor()
+              .equalsIgnoreCase(endFloor)) { // branch to send to correct floor, if needed
+        ArrayList<Node> stairNodes = new ArrayList<Node>();
+        for (Edge edge : n.getEdges()) {
+          stairNodes.add(edge.getStartNode());
+          stairNodes.add(edge.getEndNode());
+        }
+        for (Node node : stairNodes) {
+          if (node.getFloor().equalsIgnoreCase(endFloor) && !node.equals(n)) {
+            visited.add(node);
+            parentMap.put(node, n);
+            queue.add(node);
+          }
+        }
+      }
+      if (n.getLocation().getNodeType().equalsIgnoreCase("STAI")
+          && n.getFloor()
+              .equalsIgnoreCase(endFloor)) { // branch to send to correct floor, if needed
+        ArrayList<Node> stairNodes = new ArrayList<Node>();
+        for (Edge edge : n.getEdges()) {
+          stairNodes.add(edge.getStartNode());
+          stairNodes.add(edge.getEndNode());
+        }
+        for (Node node : stairNodes) {
+          if (node.getFloor().equalsIgnoreCase(n.getFloor()) && !node.equals(n)) {
+            visited.add(node);
+            parentMap.put(node, n);
+            queue.add(node);
+          }
+        }
+      }
       for (Edge edge : n.getEdges()) {
         Node neighbor = edge.getEndNode();
         if (!visited.contains(neighbor)
-            && floor.equalsIgnoreCase(neighbor.getFloor())
+            && n.getFloor().equalsIgnoreCase(neighbor.getFloor())
             && !neighbor.equals(n)) {
-          //        if (!visited.contains(neighbor) && floor.equalsIgnoreCase(neighbor.getFloor()))
           visited.add(neighbor);
-          // System.out.println("on floor " + n.getFloor());
           parentMap.put(neighbor, n);
           queue.add(neighbor);
           System.out.println();
@@ -39,7 +102,7 @@ public class BFS implements IPathfinding {
                   + neighbor.getFloor());
         }
         if (!visited.contains(edge.getStartNode())
-            && floor.equalsIgnoreCase(edge.getStartNode().getFloor())
+            && n.getFloor().equalsIgnoreCase(edge.getStartNode().getFloor())
             && !n.equals(edge.getStartNode())) {
           visited.add(edge.getStartNode());
           parentMap.put(edge.getStartNode(), n);
