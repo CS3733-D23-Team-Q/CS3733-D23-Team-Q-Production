@@ -1,48 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import io.github.palexdev.materialfx.controls.MFXTableColumn?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxWidth="-Infinity" prefWidth="475.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="50.0" prefWidth="475.0">
+            <StackPane maxWidth="275.0" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
                <children>
-                  <StackPane alignment="TOP_CENTER" HBox.hgrow="NEVER">
-                     <children>
-                        <Rectangle arcHeight="16.0" arcWidth="16.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #012D5A;" width="300.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFFFF;" text="Your Service Requests">
-                           <font>
-                              <Font name="Roboto Bold" size="28.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Service Requests">
+                     <font>
+                        <Font name="Roboto Bold" size="24.0" />
+                     </font>
+                  </Text>
                </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="760.0" prefWidth="324.0">
-               <children>
-                  <TableView fx:id="tableView" onMouseClicked="#rowSelected" prefHeight="760.0" prefWidth="400.0" style="-fx-background-color: #F1F1F1; -fx-border-color: #012D5A;">
-                     <columns>
-                        <TableColumn fx:id="requestID" prefWidth="126.33324432373047" text="Request ID" />
-                        <TableColumn fx:id="assignee" prefWidth="138.33328247070312" text="Assignee" />
-                        <TableColumn fx:id="time" prefWidth="138.33328247070312" text="Time" />
-                        <TableColumn fx:id="date" prefWidth="138.33328247070312" text="Date" />
-                        <TableColumn fx:id="progress" prefWidth="114.00013732910156" text="Progress" />
-                        <TableColumn fx:id="roomNumber" prefWidth="138.33328247070312" text="Room Number" />
-                        <TableColumn fx:id="specialInstructions" prefWidth="138.33328247070312" text="Special Instructions" />
-                     </columns>
-                  </TableView>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets top="30.0" />
+               </HBox.margin>
+            </StackPane>
+         </children></HBox>
+      <MFXTableView prefHeight="700.0" prefWidth="1150.0" VBox.vgrow="ALWAYS">
+         <tableColumns>
+            <MFXTableColumn text="Column 1" />
+            <MFXTableColumn text="Column 2" />
+            <MFXTableColumn text="Column 3" />
+            <MFXTableColumn text="Column 4" />
+            <MFXTableColumn text="Column 5" />
+         </tableColumns>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </MFXTableView>
    </children>
 </VBox>
