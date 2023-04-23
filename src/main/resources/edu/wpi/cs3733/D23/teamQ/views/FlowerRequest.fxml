@@ -23,7 +23,7 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <ImageView blendMode="MULTIPLY" fitHeight="129.0" fitWidth="848.0" opacity="0.8">
+                              <ImageView blendMode="MULTIPLY" fitHeight="129.0" fitWidth="848.0">
                                  <image>
                                     <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/SunflowersSmaller.jpg" />
                                  </image>
