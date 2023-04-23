@@ -110,8 +110,9 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
   }
 
   public boolean populate() {
-    Connection con = GenDao.connect();
     try {
+      Connection con = GenDao.connect();
+      questions.clear();
       String query = "SELECT * FROM security_question";
       Statement st = con.createStatement();
       ResultSet rs = st.executeQuery(query);
