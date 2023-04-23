@@ -3,11 +3,8 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.*;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import java.sql.Date;
-import java.util.List;
 import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,9 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.shape.Line;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import javafx.util.Pair;
 import net.kurobako.gesturefx.GesturePane;
 
 public class PathfindingController2 {
@@ -31,34 +27,9 @@ public class PathfindingController2 {
   AStar aStar = new AStar();
   DFS dfs = new DFS();
   Djikstra djikstra = new Djikstra();
-  boolean ready4Second;
-  Node start;
-  Node target;
-  List<Line> previousPath;
-  // List<Image> floors;
-  int curFloor;
-  List<Button> previousNodes;
-  List<Integer> restNodes;
-  List<Integer> deptNodes;
-  List<Integer> labsNodes;
-  List<Integer> infoNodes;
-  List<Integer> confNodes;
-  List<Integer> retlNodes;
-  List<Integer> servNodes;
-  List<Integer> nodeIds;
-  List<Pair<Integer, Integer>> highlightedNodes;
-  // List<Integer> highlightedNodes;
-  List<Pair<Integer, Integer>> l1nodes;
-  List<Pair<Integer, Integer>> l2nodes;
-  List<Pair<Integer, Integer>> ffnodes;
-  List<Pair<Integer, Integer>> sfnodes;
-  List<Pair<Integer, Integer>> tfnodes;
-  List<String> allSelections;
-  String algorithm;
-  Date date;
-  List<Date> moveDates;
-  ToggleGroup dateToggle;
   @FXML GesturePane mapPane;
+  @FXML ImageView mapImage;
+  @FXML Pane nodesPane;
   @FXML MFXFilterComboBox startingField;
   @FXML MFXFilterComboBox destinationField;
   ObservableList<String> nodeTypes =
@@ -81,17 +52,16 @@ public class PathfindingController2 {
   ObservableList<String> algorithmList =
       FXCollections.observableArrayList("A*", "Dijkstra's", "DFS", "BFS");
   @FXML MFXFilterComboBox algorithmField;
-  ImageView I0 = new ImageView(new Image(App.class.getResourceAsStream("00_thegroundfloor.png")));
-  ImageView I1 = new ImageView(new Image(App.class.getResourceAsStream("00_thelowerlevel1.png")));
-  ImageView I2 = new ImageView(new Image(App.class.getResourceAsStream("00_thelowerlevel2.png")));
-  ImageView I3 = new ImageView(new Image(App.class.getResourceAsStream("01_thefirstfloor.png")));
-  ImageView I4 = new ImageView(new Image(App.class.getResourceAsStream("02_thesecondfloor.png")));
-  ImageView I5 = new ImageView(new Image(App.class.getResourceAsStream("03_thethirdfloor.png")));
+  Image i1 = new Image(App.class.getResourceAsStream("00_thelowerlevel1.png"));
+  Image i2 = new Image(App.class.getResourceAsStream("00_thelowerlevel2.png"));
+  Image i3 = new Image(App.class.getResourceAsStream("01_thefirstfloor.png"));
+  Image i4 = new Image(App.class.getResourceAsStream("02_thesecondfloor.png"));
+  Image i5 = new Image(App.class.getResourceAsStream("03_thethirdfloor.png"));
 
   @FXML
   public void initialize() {
-    mapPane.setContent(I3);
-    mapPane.zoomBy(-500, -500, new Point2D(0, 0));
+    mapImage.setImage(i3);
+    mapPane.zoomTo(0, 0, Point2D.ZERO);
     mapPane.setOnMouseClicked(
         e -> {
           if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
@@ -105,7 +75,6 @@ public class PathfindingController2 {
                 .zoomBy(mapPane.getCurrentScale(), pivotOnTarget);
           }
         });
-    curFloor = 3;
     floorField.setValue("First Floor");
     floorField.setItems(floors);
     algorithmField.setValue("A*");
@@ -122,15 +91,15 @@ public class PathfindingController2 {
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 String floor = (String) floorField.getValue();
                 if (floor.equals("Lower Level 1")) {
-                  mapPane.setContent(I1);
+                  mapImage.setImage(i1);
                 } else if (floor.equals("Lower Level 2")) {
-                  mapPane.setContent(I2);
+                  mapImage.setImage(i2);
                 } else if (floor.equals("First Floor")) {
-                  mapPane.setContent(I3);
+                  mapImage.setImage(i3);
                 } else if (floor.equals("Second Floor")) {
-                  mapPane.setContent(I4);
+                  mapImage.setImage(i4);
                 } else if (floor.equals("Third Floor")) {
-                  mapPane.setContent(I5);
+                  mapImage.setImage(i5);
                 }
               }
             });

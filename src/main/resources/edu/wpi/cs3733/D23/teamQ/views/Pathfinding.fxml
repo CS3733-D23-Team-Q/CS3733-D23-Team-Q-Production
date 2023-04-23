@@ -3,16 +3,24 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import net.kurobako.gesturefx.GesturePane?>
 
 <HBox fx:id="root" prefHeight="100.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.PathfindingController2">
-   <children>
-      <GesturePane fx:id="mapPane" fitMode="COVER" style="-fx-background-color: #f1f1f1;" />
+   <children>  
+      <GesturePane fx:id="mapPane" fitMode="COVER" prefHeight="900.0" HBox.hgrow="ALWAYS">
+         <Group fx:id="mapGroup">
+            <Pane fx:id="nodesPane" />
+            <ImageView fx:id="mapImage" />
+         </Group>
+      </GesturePane>
       <VBox minWidth="-Infinity" prefHeight="900.0" prefWidth="240.0" spacing="48.0" style="-fx-background-color: #012d5a;">
          <children>
             <VBox spacing="12.0">
