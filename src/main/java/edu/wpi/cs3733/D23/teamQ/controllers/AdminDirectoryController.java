@@ -199,6 +199,9 @@ public class AdminDirectoryController {
     ObservableList<EmployeeData> allData = FXCollections.observableArrayList();
 
     for (Account account : allAccounts) {
+      if (account.getUsername().equals("admin")) {
+        continue;
+      }
       if (qdb.getProfileImageIndex(account.getUsername()) != -1) {
         ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
         EmployeeData employeeData = new EmployeeData(account, pfp);

@@ -153,8 +153,12 @@ public class DirectoryController {
 
   public ObservableList<EmployeeData> populateData() {
     ObservableList<EmployeeData> allData = FXCollections.observableArrayList();
+    String loggedInUser = LoginController.getLoginUsername();
 
     for (Account account : allAccounts) {
+      if (account.getUsername().equals(loggedInUser)) {
+        continue;
+      }
       if (qdb.getProfileImageIndex(account.getUsername()) != -1) {
         ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
         EmployeeData employeeData = new EmployeeData(account, pfp);
