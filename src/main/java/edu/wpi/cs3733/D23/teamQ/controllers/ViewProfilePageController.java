@@ -49,6 +49,11 @@ public class ViewProfilePageController {
   }
 
   public void backButtonPressed() {
-    Navigation.navigate(Screen.DIRECTORY);
+    String username = DirectoryController.getViewProfileUsername();
+    if (username.equals("admin")) {
+      Navigation.navigate(Screen.ADMIN_DIRECTORY);
+    } else {
+      Navigation.navigate(Screen.DIRECTORY);
+    }
   }
 }
