@@ -3,17 +3,11 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.*;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,7 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import net.kurobako.gesturefx.GesturePane;
@@ -43,7 +36,7 @@ public class PathfindingController2 {
   Node target;
   List<Line> previousPath;
   // List<Image> floors;
-  int floor;
+  int curFloor;
   List<Button> previousNodes;
   List<Integer> restNodes;
   List<Integer> deptNodes;
@@ -97,7 +90,7 @@ public class PathfindingController2 {
 
   @FXML
   public void initialize() {
-    mapPane.setContent(I1);
+    mapPane.setContent(I3);
     mapPane.zoomBy(-500, -500, new Point2D(0, 0));
     mapPane.setOnMouseClicked(
         e -> {
@@ -112,6 +105,7 @@ public class PathfindingController2 {
                 .zoomBy(mapPane.getCurrentScale(), pivotOnTarget);
           }
         });
+    curFloor = 3;
     floorField.setValue("First Floor");
     floorField.setItems(floors);
     algorithmField.setValue("A*");
@@ -192,27 +186,4 @@ public class PathfindingController2 {
   public void clearClicked() {
     highlightField.setValue("None");
   }
-
-  public List<Integer> addSpecificNode(String pattern, String input, List<Integer> nodes, int node) {
-    Pattern pattern1 = Pattern.compile(pattern);
-    Matcher matcher1 = pattern1.matcher(input);
-    if (matcher1.find()) {
-      nodes.add(node);
-    }
-    return nodes;
-  }
-
-//  public void removeButtons() {
-//    for (Button b : previousNodes) {
-//      parent.getChildren().remove(b);
-//    }
-//  }
-
-//  public void removeLines(List<Line> lines) {
-//    if (lines.size() > 0) {
-//      for (Line line : lines) {
-//        parent.getChildren().remove(line);
-//      }
-//    }
-//  }
 }
