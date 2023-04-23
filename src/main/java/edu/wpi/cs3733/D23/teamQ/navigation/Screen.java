@@ -17,7 +17,7 @@ public enum Screen {
   CONFERENCE_ROOM_REQUEST("views/ConferenceRoomRequest.fxml", "Conference Room Request"),
   FLOWER_REQUEST("views/FlowerRequest.fxml", "Flower Request"),
   FLOWER_REQUEST_SUBMISSION("views/FlowerRequestSubmission.fxml", "Flower Request Submission"),
-  SETTINGS("views/Settings.fxml", "Settings"),
+  SETTINGS("views/SettingsPage.fxml", "Settings"),
   CONFERENCE_ROOM_REQUEST_DISPLAY(
       "views/ConferenceRoomRequestDisplay.fxml", "Conference Room Request Display"),
   FLOWER_REQUEST_DISPLAY("views/FlowerRequestDisplay.fxml", "Flower Request Display"),
