@@ -80,9 +80,9 @@
                               <Insets left="78.0" />
                            </padding>
                         </VBox>
-                        <VBox prefHeight="188.0" prefWidth="185.0">
+                        <VBox prefHeight="246.0" prefWidth="478.0">
                            <children>
-                              <Label fx:id="emailDisplay" prefHeight="28.0" prefWidth="201.0" text="email">
+                              <Label fx:id="emailDisplay" prefHeight="28.0" prefWidth="514.0" text="email">
                                  <font>
                                     <Font name="Roboto Light" size="20.0" />
                                  </font>
