@@ -107,9 +107,10 @@ public class LoginController {
       Node n = loader.load();
       App.getRootBorder().setLeft(n);
       App.getRController().showMenu(true);
-      Navigation.navigate(Screen.HOME);
+
       loginUsername = usernameField.getText();
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
+      Navigation.navigate(Screen.HOME);
     } else {
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }
