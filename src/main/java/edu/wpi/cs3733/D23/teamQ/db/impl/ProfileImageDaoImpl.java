@@ -122,6 +122,7 @@ public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
   public boolean populate() throws SQLException {
     Connection connection = GenDao.connect();
     try {
+      profileImages.clear();
       String query = "SELECT * FROM \"profileImage\"";
       Statement statement = connection.createStatement();
       ResultSet rs = statement.executeQuery(query);

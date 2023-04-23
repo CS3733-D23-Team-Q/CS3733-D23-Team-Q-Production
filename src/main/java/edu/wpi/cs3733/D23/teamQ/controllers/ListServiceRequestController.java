@@ -40,6 +40,7 @@ public class ListServiceRequestController {
   @FXML
   public void initialize() {
     String username = LoginController.getLoginUsername();
+    System.out.println(username);
     requestID.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("requestID"));
     progress.setCellValueFactory(new PropertyValueFactory<ServiceRequest, Integer>("progress"));
     roomNumber.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("nodeID"));
