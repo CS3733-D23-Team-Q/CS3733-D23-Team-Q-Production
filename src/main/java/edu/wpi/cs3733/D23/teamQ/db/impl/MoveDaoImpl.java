@@ -108,6 +108,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
   @Override
   public boolean populate() {
     try {
+      moves.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From move");

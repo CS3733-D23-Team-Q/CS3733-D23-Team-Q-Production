@@ -74,7 +74,7 @@
                                        </children>
                                     </StackPane>
                                     <CalendarHeaderView minWidth="-Infinity" prefWidth="500.0" />
-                                    <CalendarView minWidth="-Infinity" prefHeight="384.0" prefWidth="650.0" />
+                                    <CalendarView fx:id="Calender" minWidth="-Infinity" prefHeight="384.0" prefWidth="650.0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets />
