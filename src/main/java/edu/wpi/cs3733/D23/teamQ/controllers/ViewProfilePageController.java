@@ -24,8 +24,14 @@ public class ViewProfilePageController {
   @FXML private MFXButton backButton;
 
   public void initialize() {
-    String username = DirectoryController.getViewProfileUsername();
-    System.out.println(username);
+    String loggedInUser = LoginController.getLoginUsername();
+    String username;
+    if (loggedInUser.equals("admin")) {
+      username = AdminDirectoryController.getViewProfileUsername();
+    } else {
+      username = DirectoryController.getViewProfileUsername();
+    }
+    System.out.println("viewprofile: " + username);
     Account account = qdb.retrieveAccount(username);
 
     fullName.setText(account.getFirstName() + " " + account.getLastName());
@@ -49,7 +55,8 @@ public class ViewProfilePageController {
   }
 
   public void backButtonPressed() {
-    String username = DirectoryController.getViewProfileUsername();
+    String username = LoginController.getLoginUsername();
+    System.out.println(username);
     if (username.equals("admin")) {
       Navigation.navigate(Screen.ADMIN_DIRECTORY);
     } else {
