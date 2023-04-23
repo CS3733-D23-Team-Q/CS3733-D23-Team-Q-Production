@@ -10,7 +10,6 @@ public class BFS implements IPathfinding {
   public ArrayList<Node> run(Node start, Node target) {
     ArrayList<Node> visited = new ArrayList<>();
     Queue<Node> queue = new LinkedList<>();
-    Map<Node, Node> parentMap = new HashMap<>();
 
     String endFloor = target.getFloor();
     queue.add(start);
@@ -33,7 +32,6 @@ public class BFS implements IPathfinding {
         for (Node node : elevatorNodes) {
           if (node.getFloor().equalsIgnoreCase(endFloor) && !node.equals(n)) {
             visited.add(node);
-            parentMap.put(node, n);
             queue.add(node);
             nodeChosen = true;
             break;
@@ -52,7 +50,6 @@ public class BFS implements IPathfinding {
           if (node.getFloor().equalsIgnoreCase(n.getFloor())
               && !visited.contains(node)) { // might have to exclude ele
             visited.add(node); // vators as well
-            parentMap.put(node, n);
             queue.add(node);
             nodeChosen = true;
             break;
@@ -73,7 +70,6 @@ public class BFS implements IPathfinding {
                 && !node.getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
               visited.addAll(nodesRevisited);
               visited.add(node);
-              parentMap.put(node, n);
               queue.add(node);
               nodeChosen = true;
               break;
@@ -92,7 +88,6 @@ public class BFS implements IPathfinding {
         for (Node node : stairNodes) {
           if (node.getFloor().equalsIgnoreCase(endFloor) && !node.equals(n)) {
             visited.add(node);
-            parentMap.put(node, n);
             queue.add(node);
             nodeChosen = true;
             break;
@@ -110,7 +105,6 @@ public class BFS implements IPathfinding {
         for (Node node : stairNodes) {
           if (node.getFloor().equalsIgnoreCase(n.getFloor()) && !node.equals(n)) {
             visited.add(node);
-            parentMap.put(node, n);
             queue.add(node);
             nodeChosen = true;
             break;
@@ -131,7 +125,6 @@ public class BFS implements IPathfinding {
                 && !node.getLocation().getNodeType().equalsIgnoreCase("STAI")) {
               visited.addAll(nodesRevisited);
               visited.add(node);
-              parentMap.put(node, n);
               queue.add(node);
               nodeChosen = true;
               break;
@@ -147,7 +140,6 @@ public class BFS implements IPathfinding {
             && !neighbor.equals(n)
             && !nodeChosen) {
           visited.add(neighbor);
-          parentMap.put(neighbor, n);
           queue.add(neighbor);
           nodeChosen = true;
         }
@@ -156,7 +148,6 @@ public class BFS implements IPathfinding {
             && !n.equals(edge.getStartNode())
             && !nodeChosen) {
           visited.add(edge.getStartNode());
-          parentMap.put(edge.getStartNode(), n);
           queue.add(edge.getStartNode());
           nodeChosen = true;
         }
@@ -165,18 +156,36 @@ public class BFS implements IPathfinding {
         int i = 1;
         ArrayList<Node> nodesRevisited = new ArrayList<Node>();
         ArrayList<Node> backupNodes = new ArrayList<Node>();
+        ArrayList<Node> nodesDone = new ArrayList<Node>();
         while (!nodeChosen) {
           for (Edge ex : visited.get(visited.size() - i).getEdges()) {
             backupNodes.add(ex.getStartNode());
             backupNodes.add(ex.getEndNode());
           }
-          nodesRevisited.add(visited.get(visited.size() - i));
+          if (!nodesRevisited.contains(visited.get(visited.size() - i))) {
+            nodesRevisited.add(visited.get(visited.size() - i));
+          }
           i++;
+          System.out.println();
+          System.out.println("revisited list size is " + nodesRevisited.size());
+          System.out.println();
+          System.out.println("visited list size is " + visited.size());
+          System.out.println();
+          System.out.println("Indicator value is " + i);
+          System.out.println();
+          System.out.println(n);
           for (Node node : backupNodes) {
+            if (nodesDone.contains(node)) {
+              continue;
+            }
+            System.out.println();
+            System.out.println("Node " + node + " from backup list");
+            nodesDone.add(node);
             if (!visited.contains(node) && node.getFloor().equalsIgnoreCase(n.getFloor())) {
+              System.out.println();
+              System.out.println("if statement triggered");
               visited.addAll(nodesRevisited);
               visited.add(node);
-              parentMap.put(node, n);
               queue.add(node);
               nodeChosen = true;
               break;

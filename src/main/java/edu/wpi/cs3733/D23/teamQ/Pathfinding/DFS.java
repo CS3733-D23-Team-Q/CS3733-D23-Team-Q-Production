@@ -21,9 +21,6 @@ public class DFS implements IPathfinding {
         path.add(current);
         return path;
       }
-      if (current.getEdges().size() == 0) {
-        System.out.println("This node is a dead end " + current);
-      }
       ArrayList<Node> nodesAvailable = new ArrayList<Node>();
       for (Edge edgePath : current.getEdges()) {
         nodesAvailable.add(edgePath.getStartNode());
