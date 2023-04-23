@@ -1,6 +1,41 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.CalendarSource;
+import com.calendarfx.model.Entry;
+import com.calendarfx.view.CalendarView;
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import java.time.LocalTime;
+import javafx.fxml.FXML;
+
 public class HomeController implements IController {
+  @FXML CalendarView Calender;
+  Qdb qdb = Qdb.getInstance();
+
+  @FXML
+  public void initialize() {
+    String username = LoginController.getLoginUsername();
+
+    Calendar serviceRequests = new Calendar("Service Requests");
+
+    CalendarSource SR = new CalendarSource("testing");
+
+    for (int i = 0; i < qdb.retrieveUserAssignServiceRequests(username).size(); i++) {
+      int num = qdb.retrieveUserAssignServiceRequests(username).get(i).getRequestID();
+      Entry<String> temp = new Entry<>("Service Request ID Num-" + num);
+      serviceRequests.addEntry(temp);
+      temp.changeStartDate(
+          qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
+      temp.changeEndDate(
+          qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
+      temp.changeStartTime(
+          LocalTime.parse(qdb.retrieveUserAssignServiceRequests(username).get(i).getTime()));
+      temp.changeEndTime(
+          LocalTime.parse(qdb.retrieveUserAssignServiceRequests(username).get(i).getTime()));
+    }
+    SR.getCalendars().add(serviceRequests);
+    Calender.getCalendarSources().add(SR);
+  }
   //  Qdb qdb = Qdb.getInstance();
   //
   //  @FXML Button ServiceHubButton;

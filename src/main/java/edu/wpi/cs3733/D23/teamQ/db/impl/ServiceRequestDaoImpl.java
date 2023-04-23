@@ -93,6 +93,16 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
+  public List<ServiceRequest> getUserAssignedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
   /**
    * deletes medicalSuppliesRequest from list of medicalSuppliesRequests
    *
