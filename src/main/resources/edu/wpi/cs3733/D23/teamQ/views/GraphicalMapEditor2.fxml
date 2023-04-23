@@ -203,7 +203,7 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXToggleButton contentDisposition="CENTER" styleClass="mfx-toggle-button-node" textFill="#012d5a" />
+                              <MFXToggleButton fx:id="edgeToggle" contentDisposition="CENTER" styleClass="mfx-toggle-button-node" textFill="#012d5a" />
                            </children>
                         </HBox>
                      </children>
