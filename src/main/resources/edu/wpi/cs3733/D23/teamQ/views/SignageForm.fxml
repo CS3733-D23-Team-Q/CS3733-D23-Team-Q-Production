@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.views.SignageForm">
+<HBox alignment="CENTER" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SignageFormController">
    <children>
       <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
          <children>
@@ -25,7 +24,7 @@
                   <VBox>
                      <children>
                         <Label text="Direction" textFill="#012d5a" />
-                        <MFXComboBox maxWidth="-Infinity" prefWidth="400.0" />
+                        <MFXComboBox fx:id="directionField" maxWidth="-Infinity" prefWidth="400.0" />
                      </children>
                      <VBox.margin>
                         <Insets top="100.0" />
@@ -33,14 +32,20 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <Label text="Origin Location" textFill="#012d5a" />
-                        <MFXFilterComboBox maxWidth="-Infinity" prefWidth="400.0" />
+                        <Label text="Kiosk" textFill="#012d5a" />
+                        <MFXComboBox fx:id="kioskField" maxWidth="-Infinity" prefWidth="400.0" />
                      </children>
                   </VBox>
                   <VBox>
                      <children>
                         <Label text="Destination Location" textFill="#012d5a" />
-                        <MFXComboBox maxWidth="-Infinity" prefWidth="400.0" />
+                        <MFXFilterComboBox fx:id="destinationField" maxWidth="-Infinity" prefWidth="400.0" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Date" textFill="#012d5a" />
+                        <MFXComboBox fx:id="dateFiield" maxWidth="-Infinity" prefWidth="400.0" />
                      </children>
                   </VBox>
                </children>
@@ -50,19 +55,19 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="848.0" spacing="400.0">
                <children>
-                  <MFXButton fx:id="deleteButton" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Delete" textFill="WHITE">
+                  <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
                   </MFXButton>
                   <HBox spacing="20.0">
                      <children>
-                        <MFXButton fx:id="backButton" onAction="#backButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Back">
+                        <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
                            <font>
                               <Font name="Roboto" size="16.0" />
                            </font>
                         </MFXButton>
-                        <MFXButton fx:id="updateButton" onAction="#updateButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Update" textFill="WHITE">
+                        <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
                            <font>
                               <Font name="Roboto" size="16.0" />
                            </font>
