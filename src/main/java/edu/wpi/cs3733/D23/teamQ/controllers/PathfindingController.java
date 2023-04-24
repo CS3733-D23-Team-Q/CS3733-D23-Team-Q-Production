@@ -72,7 +72,7 @@ public class PathfindingController {
   Date date;
   List<Date> moveDates;
   ToggleGroup dateToggle;
-  List<Triple<Button, Integer, Integer>> cfpath;
+  List<Triple<Integer, Button, Integer>> cfpath;
   Text messageText;
 
   @FXML HBox root;
@@ -305,19 +305,19 @@ public class PathfindingController {
       previousNodes.add(node);
       switch (f) {
         case "L1":
-          l1nodes.add(new Pair<>(nodeid, indexn));
+          l1nodes.add(new Pair<>(nodeid, node));
           break;
         case "L2":
-          l2nodes.add(new Pair<>(nodeid, indexn));
+          l2nodes.add(new Pair<>(nodeid, node));
           break;
         case "1":
-          ffnodes.add(new Pair<>(nodeid, indexn));
+          ffnodes.add(new Pair<>(nodeid, node));
           break;
         case "2":
-          sfnodes.add(new Pair<>(nodeid, indexn));
+          sfnodes.add(new Pair<>(nodeid, node));
           break;
         case "3":
-          tfnodes.add(new Pair<>(nodeid, indexn));
+          tfnodes.add(new Pair<>(nodeid, node));
           break;
       }
     }
@@ -353,7 +353,7 @@ public class PathfindingController {
     Pattern pattern1 = Pattern.compile(pattern);
     Matcher matcher1 = pattern1.matcher(input);
     if (matcher1.find()) {
-      nodes.add(new Pair<> (nodeid, node));
+      nodes.add(new Pair<>(nodeid, node));
     }
     return nodes;
   }
@@ -402,7 +402,7 @@ public class PathfindingController {
   public List<Line> drawLinesf(Node start, Node target, String floor)
       throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     cfnodes = setCF(cfnodes);
     if (algorithm.equals("aStar")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(
@@ -433,8 +433,8 @@ public class PathfindingController {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, -crossFloors);
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, -crossFloors);
                 cfpath.add(triple);
               }
             }
@@ -443,8 +443,8 @@ public class PathfindingController {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, crossFloors);
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, crossFloors);
                 cfpath.add(triple);
               }
             }
@@ -454,8 +454,8 @@ public class PathfindingController {
           for (int j = 0; j < cfnodes.size(); j++) {
             Integer nodeid = cfnodes.get(j).getKey();
             if (nodeid == n.getNodeID()) {
-              int index = cfnodes.get(j).getValue();
-              Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
+              Button index = cfnodes.get(j).getValue();
+              Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, 0);
               cfpath.add(triple);
             }
           }
@@ -473,8 +473,8 @@ public class PathfindingController {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, -crossFloors);
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, -crossFloors);
                 cfpath.add(triple);
               }
             }
@@ -483,8 +483,8 @@ public class PathfindingController {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, crossFloors);
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, crossFloors);
                 cfpath.add(triple);
               }
             }
@@ -494,8 +494,8 @@ public class PathfindingController {
           for (int j = 0; j < cfnodes.size(); j++) {
             Integer nodeid = cfnodes.get(j).getKey();
             if (nodeid == n.getNodeID()) {
-              int index = cfnodes.get(j).getValue();
-              Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
+              Button index = cfnodes.get(j).getValue();
+              Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, 0);
               cfpath.add(triple);
             }
           }
@@ -503,10 +503,9 @@ public class PathfindingController {
       }
     }
 
-    for (Triple<Integer, Integer, Integer> tp : cfpath) {
+    for (Triple<Integer, Button, Integer> tp : cfpath) {
       ImageView image = new ImageView();
-      Integer idx = tp.getMiddle();
-      Button node = (Button) parent.getChildren().get(idx); // problem here
+      Button node = tp.getMiddle();
       Integer move = tp.getRight();
       if (move > 0 && !(node.equals(start) || node.equals(target))) {
         node.setDisable(false);
@@ -518,7 +517,7 @@ public class PathfindingController {
         node.toFront();
         highlightedNodes.add(
             Triple.of(
-                idx,
+                node,
                 whichFloorI(floor),
                 move)); // unhighlightednodes and removeall before every drawlinesf
         node.setOnAction(
@@ -540,7 +539,7 @@ public class PathfindingController {
         image.fitHeightProperty().bind(node.heightProperty());
         node.setGraphic(image);
         node.toFront();
-        highlightedNodes.add(Triple.of(idx, whichFloorI(floor), move)); // whichFloorI(floor)
+        highlightedNodes.add(Triple.of(node, whichFloorI(floor), move)); // whichFloorI(floor)
         node.setOnAction(
             e -> {
               try {
@@ -649,7 +648,7 @@ public class PathfindingController {
     return f;
   }
 
-  public List<Pair<Integer, Integer>> setCF(List<Pair<Integer, Integer>> cfnodes) {
+  public List<Pair<Integer, Button>> setCF(List<Pair<Integer, Button>> cfnodes) {
     switch (floor) {
       case 0:
         cfnodes = l1nodes;
@@ -800,10 +799,10 @@ public class PathfindingController {
     }
   }
 
-  public void highlightt(List<Integer> nodes, String color) {
+  public void highlightt(List<Pair<Integer, Text>> nodes, String color) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    for (int i : nodes) {
-      Text child = (Text) children.get(i);
+    for (Pair<Integer, Text> i : nodes) {
+      Text child = i.getValue();
       switch (color) {
         case "lightgreen":
           child.setFill(Color.LIGHTGREEN);
@@ -839,9 +838,15 @@ public class PathfindingController {
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
-  public void highlighte(int node, int move) {
+  public void highlight(Button child, String color) {
+    String border = "-fx-border-color: ";
+    border = border + color + ";";
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    Button child = (Button) children.get(node);
+    child.setDisable(false);
+    child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
+  }
+
+  public void highlighte(Button child, int move) {
     ImageView image = new ImageView();
     child.setDisable(false);
     child.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
@@ -876,10 +881,10 @@ public class PathfindingController {
     child.toFront();
   }
 
-  public void unhighlightt(List<Integer> nodes) {
+  public void unhighlightt(List<Pair<Integer, Text>> nodes) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    for (int i : nodes) {
-      Text child = (Text) children.get(i);
+    for (Pair<Integer, Text> i : nodes) {
+      Text child = i.getValue();
       child.setFill(Color.BLUE);
     }
   }
@@ -887,6 +892,16 @@ public class PathfindingController {
   public void unhighlight(int node) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
     Button child = (Button) children.get(node);
+    child.setStyle(
+        "-fx-background-color: lightblue;"
+            + "-fx-background-insets: 0px;"
+            + "-fx-border-color: black;");
+    child.setStyle("-fx-background-color: transparent;");
+    child.setDisable(true);
+    child.setGraphic(null);
+  }
+
+  public void unhighlight(Button child) {
     child.setStyle(
         "-fx-background-color: lightblue;"
             + "-fx-background-insets: 0px;"
@@ -924,7 +939,7 @@ public class PathfindingController {
     typeChecked(servCheck, servText, "pink");
   }
 
-  public void typeChecked(CheckBox check, List<Integer> nodes, String color) {
+  public void typeChecked(CheckBox check, List<Pair<Integer, Text>> nodes, String color) {
     if (check.isSelected()) {
       highlightt(nodes, color);
     } else {
@@ -933,7 +948,7 @@ public class PathfindingController {
   }
 
   public void startSelected() throws IOException {
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     String lname = startSelect.getValue();
     if (lname != null && !lname.equals("")) {
       int index = startSelect.getSelectionModel().getSelectedIndex();
@@ -979,8 +994,7 @@ public class PathfindingController {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
-          int ind = cfnodes.get(i).getValue();
-          javafx.scene.Node node = parent.getChildren().get(ind);
+          Button node = cfnodes.get(i).getValue();
           node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
@@ -998,7 +1012,7 @@ public class PathfindingController {
   }
 
   public void endSelected() throws IOException {
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     String f = whichFloorS();
     String lname = endSelect.getValue();
     if (lname != null && !lname.equals("")) {
@@ -1034,8 +1048,7 @@ public class PathfindingController {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
-          int ind = cfnodes.get(i).getValue();
-          javafx.scene.Node node = parent.getChildren().get(ind);
+          Button node = cfnodes.get(i).getValue();
           node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
@@ -1096,7 +1109,7 @@ public class PathfindingController {
   }
 
   public void clearButtonClicked() {
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     textualPathfinding.setText(null);
     textualPathfinding.setPrefHeight(Region.USE_COMPUTED_SIZE);
     removeLines(previousPath);
