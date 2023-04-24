@@ -90,9 +90,8 @@ public class AdminDirectoryController {
                 EmployeeData employeeData = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
-                      // Handle button click event
-                      System.out.println(
-                          "Chat button clicked for: " + employeeData.getAccount().getUsername());
+                      qdb.setMessagingAccount(employeeData.getAccount());
+                      Navigation.navigate(Screen.MESSAGES);
                     });
                 button.setStyle(
                     "-fx-background-color: #012d5a; -fx-text-fill: #FFFFFF; -fx-pref-width: 100");
