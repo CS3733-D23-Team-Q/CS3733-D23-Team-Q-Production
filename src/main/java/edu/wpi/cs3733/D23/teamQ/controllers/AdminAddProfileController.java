@@ -34,7 +34,7 @@ public class AdminAddProfileController {
   @FXML private MFXFilterComboBox securityQuestion2;
   @FXML private ImageView profileImage;
   @FXML private MFXButton editPFP;
-  @FXML private MFXButton password;
+  @FXML private MFXTextField password;
 
   private ObservableList<String> getQuestions() {
     ObservableList<String> questions = FXCollections.observableArrayList();
@@ -56,8 +56,10 @@ public class AdminAddProfileController {
     password.setText("");
     securityAnswer1.setText("");
     securityAnswer2.setText("");
-    securityQuestion1.setText("");
-    securityQuestion2.setText("");
+    securityQuestion1.setText(qdb.retrieveQuestion(1).getQuestion());
+    securityQuestion2.setText(qdb.retrieveQuestion(2).getQuestion());
+    securityQuestion1.setItems(getQuestions());
+    securityQuestion2.setItems(getQuestions());
 
     Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
     ImageView imageView = new ImageView(image);
