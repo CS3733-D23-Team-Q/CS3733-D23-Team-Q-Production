@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import net.kurobako.gesturefx.GesturePane?>
+
+<HBox fx:id="root" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.GraphicalMapEditor2Controller">
+    <children>
+        <GesturePane fx:id="mapPane" fitMode="COVER" prefHeight="900.0" HBox.hgrow="ALWAYS">
+            <Group fx:id="mapGroup">
+                <Pane fx:id="nodesPane" />
+                <ImageView fx:id="mapImage" />
+            </Group>
+        </GesturePane>
+        <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefHeight="900.0" prefWidth="384.0" spacing="48.0" style="-fx-background-color: #012d5a;">
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="16.0" />
+            </padding>
+         <children>
+            <Label text="Node" textFill="#f1f1f1">
+               <font>
+                  <Font name="Roboto" size="16.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="NodeID" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="X-Coordinate" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="Y-Coordinate" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="Floor" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXFilterComboBox />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="Building" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXFilterComboBox />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="LongName" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="ShortName" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label prefWidth="86.0" text="NodeType" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MFXButton />
+                  <MFXButton />
+                  <MFXButton />
+                  <MFXButton />
+                  <MFXButton />
+               </children>
+            </HBox>
+         </children>
+        </VBox>
+    </children>
+</HBox>
