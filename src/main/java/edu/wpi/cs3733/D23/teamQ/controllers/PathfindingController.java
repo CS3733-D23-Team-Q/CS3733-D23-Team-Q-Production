@@ -216,8 +216,8 @@ public class PathfindingController {
   public void addButtons(String f) {
     List<Node> allNodes = qdb.retrieveAllNodes(); // nodes
     List<Move> allMoves = qdb.retrieveAllMoves();
-    List<Node> moveNodes = new ArrayList<>();
     List<Node> floorNodes = new ArrayList<>(); // fNodes
+    List<Move> dateMoves = new ArrayList<>();
 
     restText.removeAll(restText);
     deptText.removeAll(deptText);
@@ -250,7 +250,7 @@ public class PathfindingController {
       if (d.compareTo(date) == 0) {
         for (Node n : allNodes) {
           if (m.getNode().getNodeID() == n.getNodeID()) {
-            moveNodes.add(n);
+            dateMoves.add(m);
           }
         }
       }
@@ -270,13 +270,10 @@ public class PathfindingController {
       }
     }
 
-    for (Node n : moveNodes) {
+    for (Move m : dateMoves) {
       for (Node node : startNodes) {
-        if (node.getNodeID() == n.getNodeID()) {
-          node.setXCoord(n.getXCoord());
-          node.setYCoord(n.getYCoord());
-          node.setFloor(n.getFloor());
-          node.setBuilding(n.getBuilding());
+        if (node.getNodeID() == m.getNode().getNodeID()) {
+          node.getLocation().setLongName(m.getNode().getLocation().getLongName());
           /*
           for(Move m : dateMoves){
             for(Node node : startNodes){
@@ -303,8 +300,7 @@ public class PathfindingController {
     }
 
     boolean added = false;
-    // for (Node n : moveNodes) { // Node n : nodes
-    for (int i = 0; i < startNodes.size(); i++) {
+    for (int i = 0; i < startNodes.size(); i++) { // Node n : nodes/moveNodes
       if (i == 0 && nodeIds.size() > 0) {
         added = true;
       }
