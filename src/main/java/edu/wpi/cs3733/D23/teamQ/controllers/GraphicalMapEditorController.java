@@ -35,11 +35,14 @@ public class GraphicalMapEditorController {
 
   Node empty = new Node(-1, 0, 0, "empty", "empty", null);
 
-  @FXML private Button AddEdgeBtn;
+  @FXML
+  private Button AddEdgeBtn;
 
-  @FXML private Label alerts1;
+  @FXML
+  private Label alerts1;
 
-  @FXML private ImageView image11;
+  @FXML
+  private ImageView image11;
 
   private boolean startnodeOr = false;
 
@@ -49,45 +52,61 @@ public class GraphicalMapEditorController {
 
   private Node endnode = empty;
 
-  @FXML private TextField endnodeinitial;
+  @FXML
+  private TextField endnodeinitial;
 
-  @FXML private TextField startnodeinitial;
+  @FXML
+  private TextField startnodeinitial;
 
-  @FXML private ComboBox<String> TableChoose;
+  @FXML
+  private ComboBox<String> TableChoose;
 
-  @FXML private Button TableChooseBtn;
+  @FXML
+  private Button TableChooseBtn;
 
   private List<Text> Texts = new ArrayList<>();
-  @FXML private Button DisplayLocationBtn;
+  @FXML
+  private Button DisplayLocationBtn;
 
-  @FXML private ComboBox<String> NodeTypeChoose;
+  @FXML
+  private ComboBox<String> NodeTypeChoose;
 
   private String NodeType[] = {
-    "/", "All", "CONF", "DEPT", "ELEV", "EXIT", "INFO", "LABS", "REST", "RETL", "STAI", "BATH",
-    "SERV"
+          "/", "All", "CONF", "DEPT", "ELEV", "EXIT", "INFO", "LABS", "REST", "RETL", "STAI", "BATH",
+          "SERV"
   };
 
   private String TableType[] = {"Node Table", "Location Name Table", "Move Table", "Edge Table"};
 
-  @FXML private Button AddBtn;
+  @FXML
+  private Button AddBtn;
 
-  @FXML private Button CleBtn;
+  @FXML
+  private Button CleBtn;
 
-  @FXML private Button DelBtn;
+  @FXML
+  private Button DelBtn;
 
-  @FXML private Button DisBtn;
+  @FXML
+  private Button DisBtn;
 
-  @FXML private Button HelpBtn;
+  @FXML
+  private Button HelpBtn;
 
-  @FXML private Button HidBtn;
+  @FXML
+  private Button HidBtn;
 
-  @FXML private Button LastBtn;
+  @FXML
+  private Button LastBtn;
 
-  @FXML private Button NextBtn;
+  @FXML
+  private Button NextBtn;
 
-  @FXML private Button SetBtn;
+  @FXML
+  private Button SetBtn;
 
-  @FXML private Button FindBtn;
+  @FXML
+  private Button FindBtn;
 
   List<Integer> NodeID = new ArrayList<>();
   private double posx = 0;
@@ -96,24 +115,27 @@ public class GraphicalMapEditorController {
   private List<Line> line = new ArrayList<>();
 
   private boolean displayEdges = false;
-  @FXML private Label WhichFloor;
+  @FXML
+  private Label WhichFloor;
   List<Button> button = new ArrayList<>();
 
   File[] file = {
-    new File("src/main/resources/01_thefirstfloor.png"),
-    new File("src/main/resources/02_thesecondfloor.png"),
-    new File("src/main/resources/03_thethirdfloor.png"),
-    new File("src/main/resources/00_thelowerlevel1.png"),
-    new File("src/main/resources/00_thelowerlevel2.png")
+          new File("src/main/resources/01_thefirstfloor.png"),
+          new File("src/main/resources/02_thesecondfloor.png"),
+          new File("src/main/resources/03_thethirdfloor.png"),
+          new File("src/main/resources/00_thelowerlevel1.png"),
+          new File("src/main/resources/00_thelowerlevel2.png")
   };
 
   String[] images = new String[file.length];
 
   Image[] image = new Image[images.length];
   int currentIndex = 0;
-  @FXML private ImageView imageView;
+  @FXML
+  private ImageView imageView;
 
-  @FXML private SplitMenuButton menu;
+  @FXML
+  private SplitMenuButton menu;
 
   Qdb qdb = Qdb.getInstance();
 
@@ -121,9 +143,11 @@ public class GraphicalMapEditorController {
   Text text;
   double mouseX;
   double mouseY;
-  @FXML GridPane root;
+  @FXML
+  GridPane root;
 
-  @FXML Group parent;
+  @FXML
+  Group parent;
 
   private GesturePane pane;
 
@@ -136,26 +160,36 @@ public class GraphicalMapEditorController {
 
   private String newNodeType;
 
-  @FXML private TextField xinitial;
+  @FXML
+  private TextField xinitial;
 
-  @FXML private TextField yinitial;
+  @FXML
+  private TextField yinitial;
 
   private int nodeid;
-  @FXML private TextField buildinginitial;
+  @FXML
+  private TextField buildinginitial;
 
-  @FXML private TextField floorinitial;
+  @FXML
+  private TextField floorinitial;
 
-  @FXML private TextField longnameinitial;
+  @FXML
+  private TextField longnameinitial;
 
-  @FXML private TextField shortnameinitial;
+  @FXML
+  private TextField shortnameinitial;
 
-  @FXML private TextField nodetypeinitial;
+  @FXML
+  private TextField nodetypeinitial;
 
-  @FXML private Label alerts;
+  @FXML
+  private Label alerts;
 
-  @FXML private ImageView image1;
+  @FXML
+  private ImageView image1;
 
-  @FXML private TextField nodeidinput;
+  @FXML
+  private TextField nodeidinput;
 
   /**
    * update nodes
@@ -173,20 +207,20 @@ public class GraphicalMapEditorController {
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
             qdb.locationTable.updateRow(
-                nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
+                    nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());
             newYcoord = Integer.parseInt(yinitial.getText());
             qdb.nodeTable.updateRow(
-                nodeid,
-                new Node(
                     nodeid,
-                    newXcoord,
-                    newYcoord,
-                    newFloor,
-                    newBuilding,
-                    Qdb.getInstance().locationTable.retrieveRow(nodeid)));
+                    new Node(
+                            nodeid,
+                            newXcoord,
+                            newYcoord,
+                            newFloor,
+                            newBuilding,
+                            Qdb.getInstance().locationTable.retrieveRow(nodeid)));
             refreshNodes();
             if (displayEdges = true) {
               HideEdges();
@@ -251,13 +285,13 @@ public class GraphicalMapEditorController {
             newXcoord = Integer.parseInt(xinitial.getText());
             newYcoord = Integer.parseInt(yinitial.getText());
             Node newnode =
-                new Node(
-                    nodeid,
-                    newXcoord,
-                    newYcoord,
-                    newFloor,
-                    newBuilding,
-                    Qdb.getInstance().locationTable.retrieveRow(nodeid));
+                    new Node(
+                            nodeid,
+                            newXcoord,
+                            newYcoord,
+                            newFloor,
+                            newBuilding,
+                            Qdb.getInstance().locationTable.retrieveRow(nodeid));
             qdb.nodeTable.addRow(newnode);
             HideEdges();
             refreshNodes();
@@ -279,15 +313,15 @@ public class GraphicalMapEditorController {
     nodeidinput.setText("");
     InitialNode();
     button
-        .get(findButton(nodeid))
-        .setStyle(
-            "-fx-background-radius: 5em;"
-                + "-fx-min-width: 3px;"
-                + "-fx-min-height: 3px;"
-                + "-fx-max-width: 3px;"
-                + "-fx-max-height: 3px;"
-                + "-fx-background-insets: 0px;"
-                + "-fx-background-color: #3492D5");
+            .get(findButton(nodeid))
+            .setStyle(
+                    "-fx-background-radius: 5em;"
+                            + "-fx-min-width: 3px;"
+                            + "-fx-min-height: 3px;"
+                            + "-fx-max-width: 3px;"
+                            + "-fx-max-height: 3px;"
+                            + "-fx-background-insets: 0px;"
+                            + "-fx-background-color: #3492D5");
   }
 
   @FXML
@@ -303,69 +337,69 @@ public class GraphicalMapEditorController {
     pane.setContent(node);
     pane.setFitMode(GesturePane.FitMode.COVER);
     pane.setOnMouseClicked(
-        e -> {
-          if (e.getClickCount() == 2) {
-            Point2D pivotOnTarget =
-                pane.targetPointAt(new Point2D(e.getX(), e.getY()))
-                    .orElse(pane.targetPointAtViewportCentre());
-            pane.animate(Duration.millis(200))
-                .interpolateWith(Interpolator.EASE_BOTH)
-                .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-          }
-        });
+            e -> {
+              if (e.getClickCount() == 2) {
+                Point2D pivotOnTarget =
+                        pane.targetPointAt(new Point2D(e.getX(), e.getY()))
+                                .orElse(pane.targetPointAtViewportCentre());
+                pane.animate(Duration.millis(200))
+                        .interpolateWith(Interpolator.EASE_BOTH)
+                        .zoomBy(pane.getCurrentScale(), pivotOnTarget);
+              }
+            });
     AddEdgeBtn.setOnMouseEntered(
-        e -> {
-          AddEdgeBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              AddEdgeBtn.setCursor(Cursor.HAND);
+            });
     TableChooseBtn.setOnMouseEntered(
-        e -> {
-          TableChooseBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              TableChooseBtn.setCursor(Cursor.HAND);
+            });
     DisplayLocationBtn.setOnMouseEntered(
-        e -> {
-          DisplayLocationBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              DisplayLocationBtn.setCursor(Cursor.HAND);
+            });
 
     FindBtn.setOnMouseEntered(
-        e -> {
-          FindBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              FindBtn.setCursor(Cursor.HAND);
+            });
     DelBtn.setOnMouseEntered(
-        e -> {
-          DelBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              DelBtn.setCursor(Cursor.HAND);
+            });
     AddBtn.setOnMouseEntered(
-        e -> {
-          AddBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              AddBtn.setCursor(Cursor.HAND);
+            });
     SetBtn.setOnMouseEntered(
-        e -> {
-          SetBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              SetBtn.setCursor(Cursor.HAND);
+            });
     CleBtn.setOnMouseEntered(
-        e -> {
-          CleBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              CleBtn.setCursor(Cursor.HAND);
+            });
     DisBtn.setOnMouseEntered(
-        e -> {
-          DisBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              DisBtn.setCursor(Cursor.HAND);
+            });
     HidBtn.setOnMouseEntered(
-        e -> {
-          HidBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              HidBtn.setCursor(Cursor.HAND);
+            });
     LastBtn.setOnMouseEntered(
-        e -> {
-          LastBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              LastBtn.setCursor(Cursor.HAND);
+            });
     NextBtn.setOnMouseEntered(
-        e -> {
-          NextBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              NextBtn.setCursor(Cursor.HAND);
+            });
     HelpBtn.setOnMouseEntered(
-        e -> {
-          HelpBtn.setCursor(Cursor.HAND);
-        });
+            e -> {
+              HelpBtn.setCursor(Cursor.HAND);
+            });
     for (int i = 0; i < file.length; i++) {
       images[i] = file[i].toURI().toString();
     }
@@ -377,7 +411,9 @@ public class GraphicalMapEditorController {
     WhichFloor.setText("The First Floor");
   }
 
-  /** turn to the next floor */
+  /**
+   * turn to the next floor
+   */
   void shownext() {
     startnodeinitial.clear();
     endnodeinitial.clear();
@@ -426,104 +462,104 @@ public class GraphicalMapEditorController {
       node.setLayoutX(x);
       node.setLayoutY(y);
       node.setStyle(
-          "-fx-background-radius: 5em;"
-              + "-fx-min-width: 3px;"
-              + "-fx-min-height: 3px;"
-              + "-fx-max-width: 3px;"
-              + "-fx-max-height: 3px;"
-              + "-fx-background-insets: 0px;"
-              + "-fx-background-color: #3492D5");
+              "-fx-background-radius: 5em;"
+                      + "-fx-min-width: 3px;"
+                      + "-fx-min-height: 3px;"
+                      + "-fx-max-width: 3px;"
+                      + "-fx-max-height: 3px;"
+                      + "-fx-background-insets: 0px;"
+                      + "-fx-background-color: #3492D5");
       node.setOnMouseClicked(
-          e -> {
-            nodeidinput.setText(Integer.toString(nodeID));
-            NodeInformation(nodeID);
-            if (startnodeOr == true) {
-              startnodeinitial.setText(Integer.toString(nodeID));
-              startnode = qdb.nodeTable.retrieveRow(nodeID);
-              startnodeOr = false;
-            } else if (endnodeOr == true) {
-              endnodeinitial.setText(Integer.toString(nodeID));
-              endnode = qdb.nodeTable.retrieveRow(nodeID);
-              endnodeOr = false;
-            }
-          });
+              e -> {
+                nodeidinput.setText(Integer.toString(nodeID));
+                NodeInformation(nodeID);
+                if (startnodeOr == true) {
+                  startnodeinitial.setText(Integer.toString(nodeID));
+                  startnode = qdb.nodeTable.retrieveRow(nodeID);
+                  startnodeOr = false;
+                } else if (endnodeOr == true) {
+                  endnodeinitial.setText(Integer.toString(nodeID));
+                  endnode = qdb.nodeTable.retrieveRow(nodeID);
+                  endnodeOr = false;
+                }
+              });
       node.setOnMouseEntered(
-          e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #37AC2B");
-            node.setCursor(Cursor.HAND);
-          });
+              e -> {
+                node.setStyle(
+                        "-fx-background-radius: 5em;"
+                                + "-fx-min-width: 3px;"
+                                + "-fx-min-height: 3px;"
+                                + "-fx-max-width: 3px;"
+                                + "-fx-max-height: 3px;"
+                                + "-fx-background-insets: 0px;"
+                                + "-fx-background-color: #37AC2B");
+                node.setCursor(Cursor.HAND);
+              });
       node.setOnMouseExited(
-          e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
-          });
+              e -> {
+                node.setStyle(
+                        "-fx-background-radius: 5em;"
+                                + "-fx-min-width: 3px;"
+                                + "-fx-min-height: 3px;"
+                                + "-fx-max-width: 3px;"
+                                + "-fx-max-height: 3px;"
+                                + "-fx-background-insets: 0px;"
+                                + "-fx-background-color: #3492D5");
+              });
       node.setOnMousePressed(
-          e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #37AC2B");
-            mouseX = e.getX();
-            mouseY = e.getY();
-          });
+              e -> {
+                node.setStyle(
+                        "-fx-background-radius: 5em;"
+                                + "-fx-min-width: 3px;"
+                                + "-fx-min-height: 3px;"
+                                + "-fx-max-width: 3px;"
+                                + "-fx-max-height: 3px;"
+                                + "-fx-background-insets: 0px;"
+                                + "-fx-background-color: #37AC2B");
+                mouseX = e.getX();
+                mouseY = e.getY();
+              });
       node.setOnMouseDragged(
-          e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #37AC2B");
-            double distanceX = e.getX() - mouseX;
-            double distanceY = e.getY() - mouseY;
-            posx = node.getLayoutX() + distanceX;
-            posy = node.getLayoutY() + distanceY;
-            node.setLayoutX(posx);
-            node.setLayoutY(posy);
-            node.setCursor(Cursor.MOVE);
-          });
+              e -> {
+                node.setStyle(
+                        "-fx-background-radius: 5em;"
+                                + "-fx-min-width: 3px;"
+                                + "-fx-min-height: 3px;"
+                                + "-fx-max-width: 3px;"
+                                + "-fx-max-height: 3px;"
+                                + "-fx-background-insets: 0px;"
+                                + "-fx-background-color: #37AC2B");
+                double distanceX = e.getX() - mouseX;
+                double distanceY = e.getY() - mouseY;
+                posx = node.getLayoutX() + distanceX;
+                posy = node.getLayoutY() + distanceY;
+                node.setLayoutX(posx);
+                node.setLayoutY(posy);
+                node.setCursor(Cursor.MOVE);
+              });
       node.setOnMouseReleased(
-          e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
-            int currentX = (int) ((node.getLayoutX() + 1.5) * 5);
-            int currentY = (int) ((node.getLayoutY() + 1.5) * 5);
-            Node newNode = qdb.retrieveNode(nodeID);
-            newNode.setXCoord(currentX);
-            newNode.setYCoord(currentY);
-            // after clicking confirm button
-            qdb.updateNode(nodeID, newNode);
-            NodeInformation(nodeID);
-            if (displayEdges == true) {
-              HideEdges();
-              DisplayEdges();
-            }
-          });
+              e -> {
+                node.setStyle(
+                        "-fx-background-radius: 5em;"
+                                + "-fx-min-width: 3px;"
+                                + "-fx-min-height: 3px;"
+                                + "-fx-max-width: 3px;"
+                                + "-fx-max-height: 3px;"
+                                + "-fx-background-insets: 0px;"
+                                + "-fx-background-color: #3492D5");
+                int currentX = (int) ((node.getLayoutX() + 1.5) * 5);
+                int currentY = (int) ((node.getLayoutY() + 1.5) * 5);
+                Node newNode = qdb.retrieveNode(nodeID);
+                newNode.setXCoord(currentX);
+                newNode.setYCoord(currentY);
+                // after clicking confirm button
+                qdb.updateNode(nodeID, newNode);
+                NodeInformation(nodeID);
+                if (displayEdges == true) {
+                  HideEdges();
+                  DisplayEdges();
+                }
+              });
       parent.getChildren().add(node);
       buttons.add(node);
       NodeID.add(nodeID);
@@ -531,7 +567,9 @@ public class GraphicalMapEditorController {
     return buttons;
   }
 
-  /** if nodeid exist, the user can edit the node. Else call alert. */
+  /**
+   * if nodeid exist, the user can edit the node. Else call alert.
+   */
   public void NodeInformation(int id) {
     xinitial.setText(Integer.toString(qdb.nodeTable.retrieveRow(id).getXCoord()));
     buildinginitial.setText(qdb.nodeTable.retrieveRow(id).getBuilding());
@@ -542,7 +580,9 @@ public class GraphicalMapEditorController {
     nodetypeinitial.setText(qdb.locationTable.retrieveRow(id).getNodeType());
   }
 
-  /** initialize the node information. */
+  /**
+   * initialize the node information.
+   */
   public void InitialNode() {
     xinitial.setText("--");
     buildinginitial.setText("--");
@@ -594,10 +634,10 @@ public class GraphicalMapEditorController {
     Alert alert = new Alert();
     String floors = floor.getText();
     if (floors.equals("1")
-        || floors.equals("2")
-        || floors.equals("3")
-        || floors.equals("L1")
-        || floors.equals("L2")) {
+            || floors.equals("2")
+            || floors.equals("3")
+            || floors.equals("L1")
+            || floors.equals("L2")) {
       return true;
     } else {
       alert.setLabelAlert("This floor does not exist.", floorAlert, image);
@@ -663,7 +703,7 @@ public class GraphicalMapEditorController {
    * @return
    */
   public boolean coordAlert(
-      TextField xcoord, TextField ycoord, Label informationAlert, ImageView image) {
+          TextField xcoord, TextField ycoord, Label informationAlert, ImageView image) {
     Alert alert = new Alert();
     if (isNumber(xcoord.getText())) {
       if (isNumber(ycoord.getText())) {
@@ -689,11 +729,11 @@ public class GraphicalMapEditorController {
    * @return
    */
   public boolean locationAlert(
-      TextField longname,
-      TextField shortname,
-      TextField nodetype,
-      Label informationAlert,
-      ImageView image) {
+          TextField longname,
+          TextField shortname,
+          TextField nodetype,
+          Label informationAlert,
+          ImageView image) {
     Alert alert = new Alert();
     if (!longname.getText().equals("")) {
       if (!shortname.getText().equals("")) {
@@ -721,14 +761,16 @@ public class GraphicalMapEditorController {
   @FXML
   void helpClicked(MouseEvent event) throws IOException {
     MapEditorHelpController controller =
-        (MapEditorHelpController) Navigation.getController(Screen.MAPEDITORHELP);
+            (MapEditorHelpController) Navigation.getController(Screen.MAPEDITORHELP);
     Stage stage = newStage("Help", Screen.MAPEDITORHELP);
     controller.setStage(stage);
     stage.show();
     stage.centerOnScreen();
   }
 
-  /** refresh nodes */
+  /**
+   * refresh nodes
+   */
   void refreshNodes() {
     parent.getChildren().removeAll(button);
     button = addButtons(Floor(currentIndex));
@@ -747,13 +789,13 @@ public class GraphicalMapEditorController {
       int n = path.get(i);
       int next = path.get(i - 1);
       DoubleProperty startX =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5);
+              new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5);
       DoubleProperty startY =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5);
+              new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5);
       DoubleProperty endX =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5);
+              new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5);
       DoubleProperty endY =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5);
+              new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5);
       Line line = new BoundLine(startX, startY, endX, endY);
       parent.getChildren().add(line);
       lines.add(line);
@@ -931,22 +973,22 @@ public class GraphicalMapEditorController {
         setFloor(currentIndex);
       }
       Point2D pivotOnTarget =
-          new Point2D(
-              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
-              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
+              new Point2D(
+                      qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
+                      qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
       pane.animate(Duration.millis(200))
-          .interpolateWith(Interpolator.EASE_BOTH)
-          .zoomBy(pane.getCurrentScale(), pivotOnTarget);
+              .interpolateWith(Interpolator.EASE_BOTH)
+              .zoomBy(pane.getCurrentScale(), pivotOnTarget);
       button
-          .get(findButton(nodeid))
-          .setStyle(
-              "-fx-background-radius: 5em;"
-                  + "-fx-min-width: 3px;"
-                  + "-fx-min-height: 3px;"
-                  + "-fx-max-width: 3px;"
-                  + "-fx-max-height: 3px;"
-                  + "-fx-background-insets: 0px;"
-                  + "-fx-background-color: #37AC2B");
+              .get(findButton(nodeid))
+              .setStyle(
+                      "-fx-background-radius: 5em;"
+                              + "-fx-min-width: 3px;"
+                              + "-fx-min-height: 3px;"
+                              + "-fx-max-width: 3px;"
+                              + "-fx-max-height: 3px;"
+                              + "-fx-background-insets: 0px;"
+                              + "-fx-background-color: #37AC2B");
     } else {
       InitialNode();
     }
@@ -962,7 +1004,7 @@ public class GraphicalMapEditorController {
 
   void LocationTable() throws IOException {
     LocationController controller =
-        (LocationController) Navigation.getController(Screen.LocationName_Table);
+            (LocationController) Navigation.getController(Screen.LocationName_Table);
     Stage stage = newStage("Location Name Table", Screen.LocationName_Table);
     controller.setStage(stage);
     stage.show();
@@ -1063,7 +1105,7 @@ public class GraphicalMapEditorController {
         alert.setLabelAlert("The start node cannot be the end node", alerts1, image11);
         return false;
       } else if (edge.getStartNode().getNodeID() == alledges.get(i).getStartNode().getNodeID()
-          && edge.getEndNode().getNodeID() == alledges.get(i).getEndNode().getNodeID()) {
+              && edge.getEndNode().getNodeID() == alledges.get(i).getEndNode().getNodeID()) {
         alert.setLabelAlert("This edge exists", alerts1, image11);
         return false;
       }
@@ -1083,15 +1125,17 @@ public class GraphicalMapEditorController {
     startnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
-class BoundLine extends Line {
-  BoundLine(
-      DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
-    startXProperty().bind(startX);
-    startYProperty().bind(startY);
-    endXProperty().bind(endX);
-    endYProperty().bind(endY);
-    setStrokeWidth(0.5);
-    setStyle("-fx-stroke: blue;");
-    setMouseTransparent(true);
+  class BoundLine extends Line {
+    BoundLine(
+            DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
+      startXProperty().bind(startX);
+      startYProperty().bind(startY);
+      endXProperty().bind(endX);
+      endYProperty().bind(endY);
+      setStrokeWidth(0.5);
+      setStyle("-fx-stroke: blue;");
+      setMouseTransparent(true);
+    }
   }
 }
+
