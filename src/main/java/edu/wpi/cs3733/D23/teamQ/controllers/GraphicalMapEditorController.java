@@ -167,7 +167,7 @@ public class GraphicalMapEditorController {
   @FXML private TextField nodeidinput;
 
   /**
-   * update node
+   * update nodes
    *
    * @param event
    */
@@ -226,7 +226,7 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * delete node
+   * delete nodes
    *
    * @param event
    */
@@ -246,7 +246,7 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * find node and display the information of the node
+   * find nodes and display the information of the nodes
    *
    * @param event
    */
@@ -263,6 +263,10 @@ public class GraphicalMapEditorController {
     findOnMap();
   }
 
+  /**
+   * add nodes
+   * @param event
+   */
   @FXML
   void addclicked(MouseEvent event) {
     if (nodeIDAlerttwo(nodeidinput, alerts, image1)) {
@@ -298,6 +302,10 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * clear all information of nodes
+   * @param event
+   */
   @FXML
   void clearclicked(MouseEvent event) {
 
@@ -439,6 +447,9 @@ public class GraphicalMapEditorController {
     WhichFloor.setText("The First Floor");
   }
 
+  /**
+   * turn to the next floor
+   */
   void shownext() {
     startnodeinitial.clear();
     endnodeinitial.clear();
@@ -466,6 +477,11 @@ public class GraphicalMapEditorController {
     setFloor(currentIndex);
   }
 
+  /**
+   *add nodes on the map
+   * @param floor
+   * @return
+   */
   public List<Button> addButtons(String floor) {
     NodeID.clear();
     List<Button> buttons = new ArrayList<>();
@@ -666,7 +682,7 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * if the str is a number, return true, else false
+   * if the input is a number, return true, else false
    *
    * @param str
    * @return
@@ -694,6 +710,13 @@ public class GraphicalMapEditorController {
     return false;
   }
 
+  /**
+   * true if the floor exists, else return false and call alerts
+   * @param floor
+   * @param floorAlert
+   * @param image
+   * @return
+   */
   public boolean floorAlert(TextField floor, Label floorAlert, ImageView image) {
     Alert alert = new Alert();
     String floors = floor.getText();
@@ -709,6 +732,13 @@ public class GraphicalMapEditorController {
     return false;
   }
 
+  /**
+   * return true if the nodeId exists, else call alerts and return false
+   * @param nodeID
+   * @param nodeIDAlert
+   * @param image
+   * @return
+   */
   public boolean nodeIDAlertone(TextField nodeID, Label nodeIDAlert, ImageView image) {
     Alert alert = new Alert();
     if (isNumber(nodeID.getText())) {
@@ -725,6 +755,13 @@ public class GraphicalMapEditorController {
     return false;
   }
 
+  /**
+   * return true if the nodeID is legal and it does not exist, else call alerts and return false
+   * @param nodeID
+   * @param nodeIDAlert
+   * @param image
+   * @return
+   */
   public boolean nodeIDAlerttwo(TextField nodeID, Label nodeIDAlert, ImageView image) {
     Alert alert = new Alert();
     if (isNumber(nodeID.getText())) {
@@ -741,6 +778,14 @@ public class GraphicalMapEditorController {
     return false;
   }
 
+  /**
+   * return true if X-coord and Y-coord are legal, else call alert and return false
+   * @param xcoord
+   * @param ycoord
+   * @param informationAlert
+   * @param image
+   * @return
+   */
   public boolean coordAlert(
       TextField xcoord, TextField ycoord, Label informationAlert, ImageView image) {
     Alert alert = new Alert();
@@ -757,6 +802,15 @@ public class GraphicalMapEditorController {
     return false;
   }
 
+  /**
+   * return true if the location name is legal and is not empty, else return false
+   * @param longname
+   * @param shortname
+   * @param nodetype
+   * @param informationAlert
+   * @param image
+   * @return
+   */
   public boolean locationAlert(
       TextField longname,
       TextField shortname,
@@ -809,6 +863,12 @@ public class GraphicalMapEditorController {
     }
 
   }*/
+
+  /**
+   * open the help page
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void helpClicked(MouseEvent event) throws IOException {
     MapEditorHelpController controller =
@@ -819,12 +879,20 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
+  /**
+   * refresh nodes
+   */
   void refreshNodes() {
     parent.getChildren().removeAll(button);
     button = addButtons(Floor(currentIndex));
     // parent.getChildren().addAll(button);
   }
 
+  /**
+   * add lines
+   * @param path
+   * @return
+   */
   List<javafx.scene.shape.Line> addLines(List<Integer> path) {
     List<javafx.scene.shape.Line> lines = new ArrayList<>();
 
@@ -866,6 +934,10 @@ public class GraphicalMapEditorController {
     return lines;
   }
 
+  /**
+   * remove lines
+   * @param lines
+   */
   void removeLines(List<Line> lines) {
     if (lines.size() > 0) {
       for (Line line : lines) {
@@ -875,6 +947,11 @@ public class GraphicalMapEditorController {
     displayEdges = false;
   }
 
+  /**
+   * choose lines
+   * @param floor
+   * @return
+   */
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.edgeTable.getAllRows().size(); i++) {
@@ -888,6 +965,10 @@ public class GraphicalMapEditorController {
     return path;
   }
 
+  /**
+   * turn on the next floor
+   * @param event
+   */
   @FXML
   void NextClicked(MouseEvent event) {
 
@@ -905,6 +986,11 @@ public class GraphicalMapEditorController {
      */
   }
 
+  /**
+   * return the String type of floor by the integer type of floor.
+   * @param x
+   * @return
+   */
   String Floor(int x) {
     if (x == 0) {
       return "1";
@@ -919,6 +1005,10 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * turn on the last page
+   * @param event
+   */
   @FXML
   void LastClicked(MouseEvent event) {
     showlast();
