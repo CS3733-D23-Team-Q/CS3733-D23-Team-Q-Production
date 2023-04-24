@@ -589,10 +589,11 @@ public class PathfindingController {
       }
     }
 
+    parent.getChildren().remove(messageText);
     List<Line> lines = new ArrayList<>();
     if (fpath.size() > 0) {
       lines = addLines(fpath);
-      if (lines.size() > 0 && floor.equals(path.get(0).getFloor())) {
+      if (lines.size() > 0 && floor.equals(fpath.get(0).getKey().getFloor())) {
         Line sl = lines.get(0);
         Line el = lines.get(lines.size() - 1);
         double slx = sl.getStartX();
@@ -602,7 +603,6 @@ public class PathfindingController {
         double ax = Math.abs(slx + elx) / 2;
         double ay = Math.abs(sly + ely) / 2 - 10;
         if (messageField != null) {
-          parent.getChildren().remove(messageText);
           messageText = new Text(ax, ay, messageField.getText());
           messageText.setFill(Color.RED);
           messageText.setStyle("-fx-font-size: 8px;");
@@ -989,7 +989,7 @@ public class PathfindingController {
           }
           highlightedNodes.removeAll(highlightedNodes);
         }
-        parent.getChildren().remove(messageText);
+        // parent.getChildren().remove(messageText);
         try {
           previousPath = drawLinesf(start, target, f);
         } catch (Exception ex) {
