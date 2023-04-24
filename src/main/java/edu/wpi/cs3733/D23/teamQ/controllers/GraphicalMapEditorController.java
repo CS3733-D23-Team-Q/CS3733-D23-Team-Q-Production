@@ -116,7 +116,7 @@ public class GraphicalMapEditorController {
   @FXML private SplitMenuButton menu;
 
   Qdb qdb = Qdb.getInstance();
-  // Stage stage = App.getPrimaryStage();
+
   Alert alert = new Alert();
   Text text;
   double mouseX;
@@ -125,16 +125,7 @@ public class GraphicalMapEditorController {
 
   @FXML Group parent;
 
-  @FXML ImageView map;
-  @FXML Button addButton;
-  @FXML Button editButton;
-  @FXML Button deleteButton;
-
   private GesturePane pane;
-
-  private int xcoord;
-
-  private int ycoord;
 
   private String newBuilding;
   private String newFloor;
@@ -177,9 +168,7 @@ public class GraphicalMapEditorController {
       if (coordAlert(xinitial, yinitial, alerts, image1)) {
         if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
           if (floorAlert(floorinitial, alerts, image1)) {
-
             nodeid = Integer.parseInt(nodeidinput.getText());
-
             newLongName = longnameinitial.getText();
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
@@ -189,7 +178,6 @@ public class GraphicalMapEditorController {
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());
             newYcoord = Integer.parseInt(yinitial.getText());
-
             qdb.nodeTable.updateRow(
                 nodeid,
                 new Node(
@@ -199,26 +187,12 @@ public class GraphicalMapEditorController {
                     newFloor,
                     newBuilding,
                     Qdb.getInstance().locationTable.retrieveRow(nodeid)));
-
-            // refresh();
-            /*
-            Node n = qdb.nodeTable.retrieveRow(nodeid);
-            Button but = createButton(n);
-            parent.getChildren().remove(button.get(findButton(nodeid)));
-            parent.getChildren().set(findButton(nodeid), but);
-
-             */
-
             refreshNodes();
             if (displayEdges = true) {
               HideEdges();
               DisplayEdges();
             }
-
-            // refreshLines();
-
             findOnMap();
-            // imageView.setImage(image[currentIndex]);
           }
         }
       }
@@ -236,10 +210,7 @@ public class GraphicalMapEditorController {
       nodeid = Integer.parseInt(nodeidinput.getText());
       qdb.nodeTable.deleteRow(nodeid);
       qdb.locationTable.deleteRow(nodeid);
-      // refresh();
-
       refreshNodes();
-
     } else {
       InitialNode();
     }
@@ -252,15 +223,10 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void findclicked(MouseEvent event) {
-    /*
-    FindBtn.setOnMouseEntered(
-        e -> {
-          FindBtn.setCursor(Cursor.HAND);
-        });
-
-     */
-    HideEdges();
-    findOnMap();
+    if (displayEdges == true) {
+      HideEdges();
+      findOnMap();
+    }
   }
 
   /**
@@ -295,7 +261,6 @@ public class GraphicalMapEditorController {
             qdb.nodeTable.addRow(newnode);
             HideEdges();
             refreshNodes();
-
             findOnMap();
           }
         }
@@ -310,7 +275,6 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void clearclicked(MouseEvent event) {
-
     alert.clearLabelAlert(alerts, image1);
     nodeidinput.setText("");
     InitialNode();
@@ -328,27 +292,16 @@ public class GraphicalMapEditorController {
 
   @FXML
   public void initialize() throws IOException {
-
     NodeTypeChoose.getItems().addAll(NodeType);
     TableChoose.getItems().addAll(TableType);
-
-    /*  Text texts = new Text();
-     root.getChildren().add(texts);
-
-    */
-
     button = addButtons(Floor(currentIndex));
-
     javafx.scene.Node node = parent;
     pane = new GesturePane(node);
-
     mouseX = 0;
     mouseY = 0;
-
     root.getChildren().add(pane);
     pane.setContent(node);
     pane.setFitMode(GesturePane.FitMode.COVER);
-
     pane.setOnMouseClicked(
         e -> {
           if (e.getClickCount() == 2) {
@@ -359,17 +312,6 @@ public class GraphicalMapEditorController {
                 .interpolateWith(Interpolator.EASE_BOTH)
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
-          /*
-          if (e.getButton() == MouseButton.SECONDARY) {
-            xcoord = (int) e.getSceneX() * 5;
-            ycoord = (int) e.getSceneY() * 5;
-            nodeidinput.setText("");
-            InitialNode();
-            xinitial.setText(Integer.toString(xcoord));
-            yinitial.setText(Integer.toString(ycoord));
-          }
-
-           */
         });
     AddEdgeBtn.setOnMouseEntered(
         e -> {
@@ -424,20 +366,6 @@ public class GraphicalMapEditorController {
         e -> {
           HelpBtn.setCursor(Cursor.HAND);
         });
-    /*
-    Text texts = new Text();
-    root.setOnMouseClicked(
-        event -> {
-          String location = String.format("(%.1f,%.1f)", event.getX(), event.getY());
-          texts.setText(location);
-          texts.setX(event.getX());
-          texts.setY(event.getY());
-        });
-    root.setOnMouseReleased(event -> texts.setText(""));
-    parent.getChildren().add(texts);
-
-     */
-
     for (int i = 0; i < file.length; i++) {
       images[i] = file[i].toURI().toString();
     }
@@ -461,19 +389,13 @@ public class GraphicalMapEditorController {
     endnode = empty;
     HideEdges();
     clearLocationName();
-
     currentIndex++;
     if (currentIndex < file.length) {
-
       refreshNodes();
-
       imageView.setImage(image[currentIndex]);
-
     } else {
       currentIndex = 0;
-
       refreshNodes();
-
       imageView.setImage(image[currentIndex]);
     }
     setFloor(currentIndex);
@@ -501,12 +423,8 @@ public class GraphicalMapEditorController {
       double x = n.getXCoord() / 5 - 1.5;
       double y = n.getYCoord() / 5 - 1.5;
       Button node = new Button();
-
       node.setLayoutX(x);
       node.setLayoutY(y);
-      // node.setCenterShape(true);
-      // node.setAlignment(Pos.CENTER);
-
       node.setStyle(
           "-fx-background-radius: 5em;"
               + "-fx-min-width: 3px;"
@@ -515,7 +433,6 @@ public class GraphicalMapEditorController {
               + "-fx-max-height: 3px;"
               + "-fx-background-insets: 0px;"
               + "-fx-background-color: #3492D5");
-
       node.setOnMouseClicked(
           e -> {
             nodeidinput.setText(Integer.toString(nodeID));
@@ -541,28 +458,6 @@ public class GraphicalMapEditorController {
                     + "-fx-background-insets: 0px;"
                     + "-fx-background-color: #37AC2B");
             node.setCursor(Cursor.HAND);
-            /*
-            int x2 = n.getXCoord() / 5;
-            int y2 = n.getYCoord() / 5;
-
-             */
-            /*
-            Location location = qdb.retrieveLocation(nodeID);
-
-
-            String name = location.getShortName();
-            Pattern pattern = Pattern.compile("(?i).*hall.*");
-            if (!pattern.matcher(name).matches()) {
-              text = new Text(x2 + 3, y2 + 3, name);
-              text.setStyle("-fx-font-size: 8px;");
-              parent.getChildren().add(text);
-            } else {
-              text = new Text(x2 + 3, y2 + 3, "");
-              text.setStyle("-fx-font-size: 8px;");
-              parent.getChildren().add(text);
-            }
-
-             */
           });
       node.setOnMouseExited(
           e -> {
@@ -574,7 +469,6 @@ public class GraphicalMapEditorController {
                     + "-fx-max-height: 3px;"
                     + "-fx-background-insets: 0px;"
                     + "-fx-background-color: #3492D5");
-            //   parent.getChildren().remove(text);
           });
       node.setOnMousePressed(
           e -> {
@@ -588,12 +482,6 @@ public class GraphicalMapEditorController {
                     + "-fx-background-color: #37AC2B");
             mouseX = e.getX();
             mouseY = e.getY();
-            /*
-            mouseX = e.getSceneX() - node.getLayoutX();
-
-            mouseY = e.getSceneY() - node.getLayoutY();
-
-               */
           });
       node.setOnMouseDragged(
           e -> {
@@ -607,20 +495,10 @@ public class GraphicalMapEditorController {
                     + "-fx-background-color: #37AC2B");
             double distanceX = e.getX() - mouseX;
             double distanceY = e.getY() - mouseY;
-
             posx = node.getLayoutX() + distanceX;
             posy = node.getLayoutY() + distanceY;
-
             node.setLayoutX(posx);
             node.setLayoutY(posy);
-
-            /*
-              node.setLayoutX(e.getSceneX() - mouseX);
-              node.setLayoutY(e.getSceneY() - mouseY);
-
-            */
-            // text.setLayoutX(e.getSceneX() - mouseX + 3);
-            // text.setLayoutY(e.getSceneY() - mouseY + 3);
             node.setCursor(Cursor.MOVE);
           });
       node.setOnMouseReleased(
@@ -646,23 +524,12 @@ public class GraphicalMapEditorController {
               DisplayEdges();
             }
           });
-      /*
-      node.setOnMouseClicked(
-              e -> {
-              });
-       */
       parent.getChildren().add(node);
       buttons.add(node);
       NodeID.add(nodeID);
     }
     return buttons;
   }
-  /*
-   class Delta {
-     double x, y;
-   }
-
-  */
 
   /** if nodeid exist, the user can edit the node. Else call alert. */
   public void NodeInformation(int id) {
@@ -844,35 +711,6 @@ public class GraphicalMapEditorController {
     }
     return false;
   }
-  /*
-  @FXML
-  void AddonmapClicked(MouseEvent event) {
-    if (AddOnMap == true) {
-      AddOnMap = false;
-    } else {
-
-      /*
-
-      root.setOnMouseClicked(
-          mouseEvent -> {
-            xcoord = mouseEvent.getSceneX() * 5;
-            ycoord = mouseEvent.getSceneY() * 5;
-            xinitial.setText(Integer.toString((int) xcoord));
-            yinitial.setText(Integer.toString((int) ycoord));
-          });
-
-
-
-      xcoord = event.getSceneX() * 5;
-      ycoord = event.getSceneY() * 5;
-
-      xinitial.setText(Integer.toString((int) xcoord));
-      yinitial.setText(Integer.toString((int) ycoord));
-
-      AddOnMap = true;
-    }
-
-  }*/
 
   /**
    * open the help page
@@ -905,25 +743,6 @@ public class GraphicalMapEditorController {
    */
   List<javafx.scene.shape.Line> addLines(List<Integer> path) {
     List<javafx.scene.shape.Line> lines = new ArrayList<>();
-
-    /*
-    for (int i = path.size() - 1; i >= 1; i = i - 2) {
-      Node n = path.get(i);
-      Node next = path.get(i - 1);
-      int x1 = n.getXCoord() / 5;
-      int y1 = n.getYCoord() / 5;
-      int x2 = next.getXCoord() / 5;
-      int y2 = next.getYCoord() / 5;
-      javafx.scene.shape.Line line = new Line(x1, y1, x2, y2);
-
-      line.setStyle("-fx-stroke: blue;");
-      line.setStrokeWidth(0.5);
-      parent.getChildren().add(line);
-      lines.add(line);
-    }
-
-     */
-
     for (int i = path.size() - 1; i >= 1; i = i - 2) {
       int n = path.get(i);
       int next = path.get(i - 1);
@@ -939,7 +758,6 @@ public class GraphicalMapEditorController {
       parent.getChildren().add(line);
       lines.add(line);
     }
-
     displayEdges = true;
     return lines;
   }
@@ -950,11 +768,7 @@ public class GraphicalMapEditorController {
    * @param lines
    */
   void removeLines(List<Line> lines) {
-    if (lines.size() > 0) {
-      for (Line line : lines) {
-        parent.getChildren().remove(line);
-      }
-    }
+    parent.getChildren().removeAll(lines);
     displayEdges = false;
   }
 
@@ -984,19 +798,7 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void NextClicked(MouseEvent event) {
-
     shownext();
-    /*
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(30000);
-              } catch (Exception e) {
-              }
-            })
-        .start();
-
-     */
   }
 
   /**
@@ -1027,17 +829,6 @@ public class GraphicalMapEditorController {
   @FXML
   void LastClicked(MouseEvent event) {
     showlast();
-    /*
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(30000);
-              } catch (Exception e) {
-              }
-            })
-        .start();
-
-     */
   }
 
   void showlast() {
@@ -1050,21 +841,13 @@ public class GraphicalMapEditorController {
     HideEdges();
     clearLocationName();
     currentIndex--;
-
     if (currentIndex >= 0) {
-
       refreshNodes();
-
       button = addButtons(Floor(currentIndex));
-
       imageView.setImage(image[currentIndex]);
-      // refresh();
-
     } else {
       currentIndex = 4;
-
       refreshNodes();
-
       imageView.setImage(image[currentIndex]);
     }
     setFloor(currentIndex);
@@ -1134,82 +917,6 @@ public class GraphicalMapEditorController {
     }
     return x;
   }
-  /*
-   Button createButton(Node n) {
-     int nodeID = n.getNodeID();
-     int x = n.getXCoord() / 5;
-     int y = n.getYCoord() / 5;
-     Button node = new Button();
-     node.setLayoutX(x);
-     node.setLayoutY(y);
-     node.setStyle(
-         "-fx-background-radius: 5em;"
-             + "-fx-min-width: 3px;"
-             + "-fx-min-height: 3px;"
-             + "-fx-max-width: 3px;"
-             + "-fx-max-height: 3px;"
-             + "-fx-background-insets: 0px;");
-
-     node.setOnMouseClicked(
-         e -> {
-           nodeidinput.setText(Integer.toString(nodeID));
-           NodeInformation(nodeID);
-         });
-     node.setOnMouseEntered(
-         e -> {
-           int x2 = n.getXCoord() / 5;
-           int y2 = n.getYCoord() / 5;
-           Location location = qdb.retrieveLocation(nodeID);
-           String name = location.getShortName();
-           Pattern pattern = Pattern.compile("(?i).*hall.*");
-           if (!pattern.matcher(name).matches()) {
-             text = new Text(x2 + 3, y2 + 3, name);
-             text.setStyle("-fx-font-size: 8px;");
-             parent.getChildren().add(text);
-           } else {
-             text = new Text(x2 + 3, y2 + 3, "");
-             text.setStyle("-fx-font-size: 8px;");
-             parent.getChildren().add(text);
-           }
-         });
-     node.setOnMouseExited(
-         e -> {
-           parent.getChildren().remove(text);
-         });
-     node.setOnMousePressed(
-         e -> {
-           mouseX = e.getX();
-           mouseY = e.getY();
-         });
-     node.setOnMouseDragged(
-         e -> {
-           double distanceX = e.getX() - mouseX;
-           double distanceY = e.getY() - mouseY;
-
-           posx = node.getLayoutX() + distanceX;
-           posy = node.getLayoutY() + distanceY;
-
-           node.setLayoutX(posx);
-           node.setLayoutY(posy);
-
-           node.setCursor(Cursor.MOVE);
-         });
-     node.setOnMouseReleased(
-         e -> {
-           node.setCursor(Cursor.HAND);
-           int currentX = (int) (node.getLayoutX() * 5);
-           int currentY = (int) (node.getLayoutY() * 5);
-           Node newNode = qdb.retrieveNode(nodeID);
-           newNode.setXCoord(currentX);
-           newNode.setYCoord(currentY);
-           // after clicking confirm button
-           qdb.updateNode(nodeID, newNode);
-           NodeInformation(nodeID);
-         });
-     return node;
-   }
-
-  */
 
   void findOnMap() {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
@@ -1230,8 +937,6 @@ public class GraphicalMapEditorController {
       pane.animate(Duration.millis(200))
           .interpolateWith(Interpolator.EASE_BOTH)
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-
-      // button.get(findButton(nodeid)).setStyle("-fx-background-color: #3966af;");
       button
           .get(findButton(nodeid))
           .setStyle(
@@ -1247,28 +952,7 @@ public class GraphicalMapEditorController {
     }
   }
 
-  /*
-  void findOnMap2() {
-    nodeid = Integer.parseInt(nodeidinput.getText());
-    String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
-    if (!floor.equals(Floor(currentIndex))) {
-      currentIndex = findFloor(floor);
-    }
-    imageView.setImage(image[currentIndex]);
-    setFloor(currentIndex);
-    Point2D pivotOnTarget =
-        new Point2D(
-            qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
-            qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
-    pane.animate(Duration.millis(200))
-        .interpolateWith(Interpolator.EASE_BOTH)
-        .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-  }
-
-   */
-
   void NodeTable() throws Exception {
-
     NodeController controller = (NodeController) Navigation.getController(Screen.Node_Table);
     Stage stage = newStage("Node Table", Screen.Node_Table);
     controller.setStage(stage);
@@ -1277,7 +961,6 @@ public class GraphicalMapEditorController {
   }
 
   void LocationTable() throws IOException {
-
     LocationController controller =
         (LocationController) Navigation.getController(Screen.LocationName_Table);
     Stage stage = newStage("Location Name Table", Screen.LocationName_Table);
@@ -1287,7 +970,6 @@ public class GraphicalMapEditorController {
   }
 
   void MoveTable() throws IOException {
-
     MoveController controller = (MoveController) Navigation.getController(Screen.Move_Table);
     Stage stage = newStage("Move Table", Screen.Move_Table);
     controller.setStage(stage);
@@ -1296,7 +978,6 @@ public class GraphicalMapEditorController {
   }
 
   void EdgeTable() throws IOException {
-
     EdgeController controller = (EdgeController) Navigation.getController(Screen.Edge_Table);
     Stage stage = newStage("Edge Table", Screen.Edge_Table);
     controller.setStage(stage);
@@ -1402,13 +1083,6 @@ public class GraphicalMapEditorController {
     startnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
-  void refreshLines() {
-    //   line = addLines(chooseLines(currentIndex));
-    parent.getChildren().removeAll(line);
-    // line = addLines(chooseLines(currentIndex));
-  }
-}
-
 class BoundLine extends Line {
   BoundLine(
       DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
@@ -1416,12 +1090,6 @@ class BoundLine extends Line {
     startYProperty().bind(startY);
     endXProperty().bind(endX);
     endYProperty().bind(endY);
-    /*setStrokeWidth(2);
-    setStroke(Color.GRAY.deriveColor(0, 1, 1, 0.5));
-    setStrokeLineCap(StrokeLineCap.BUTT);
-    getStrokeDashArray().setAll(10.0, 5.0);
-
-     */
     setStrokeWidth(0.5);
     setStyle("-fx-stroke: blue;");
     setMouseTransparent(true);
