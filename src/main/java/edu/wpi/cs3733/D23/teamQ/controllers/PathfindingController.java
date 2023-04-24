@@ -618,7 +618,7 @@ public class PathfindingController {
     Text tempText = new Text(textualPathfinding.getText());
     tempText.setFont(textualPathfinding.getFont());
     double prefHeight = tempText.getLayoutBounds().getHeight();
-    textualPathfinding.setMaxHeight(313.3);
+    textualPathfinding.setMaxHeight(250);
     textualPathfinding.setPrefHeight(prefHeight);
     return lines;
   }
