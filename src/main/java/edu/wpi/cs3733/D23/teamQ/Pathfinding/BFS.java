@@ -74,6 +74,8 @@ public class BFS implements IPathfinding {
           for (Node node : elevatorNodes) {
             if (!visited.contains(node)
                 && !node.getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
+              System.out.println();
+              System.out.println("nodes revisited by ELEVATOR branch " + nodesRevisited);
               returnList.addAll(nodesRevisited);
               returnList.add(node);
               visited.add(node);
@@ -134,6 +136,8 @@ public class BFS implements IPathfinding {
                 && !node.getLocation().getNodeType().equalsIgnoreCase("STAI")) {
               returnList.addAll(nodesRevisited);
               returnList.add(node);
+              System.out.println();
+              System.out.println("Node revisted by STAIR branch " + nodesRevisited);
               visited.add(node);
               queue.add(node);
               nodeChosen = true;
@@ -184,6 +188,9 @@ public class BFS implements IPathfinding {
             if (!visited.contains(node) && node.getFloor().equalsIgnoreCase(n.getFloor())) {
               returnList.addAll(nodesRevisited);
               returnList.add(node);
+              System.out.println();
+              System.out.println(
+                  "Nodes revisted by DEAD END branch happened at node " + n + nodesRevisited);
               visited.add(node);
               queue.add(node);
               nodeChosen = true;
