@@ -92,24 +92,27 @@ public class Qdb {
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
   }
-  public Sign retrieveSign(int kiosk) {
-    return signTable.retrieveRow(kiosk);
+  public Sign retrieveSign(int idNum) {
+    return signTable.retrieveRow(idNum);
+  }
+  public List<Sign> retrieveSigns(int kiosk) {
+    return signTable.retrieveRows(kiosk);
   }
 
-  public boolean updateSign(int kiosk, Sign a) {
-    return signTable.updateRow(kiosk, a);
+  public boolean updateSign(int idNum, Sign a) {
+    return signTable.updateRow(idNum, a);
   }
 
-  public boolean deleteSign(int kiosk) {
-    return signTable.deleteRow(kiosk);
+  public boolean deleteSign(int idNum) {
+    return signTable.deleteRow(idNum);
   }
 
   public boolean addSign(Sign a) {
     return signTable.addRow(a);
   }
 
-  public int getSignIndex(int kiosk) {
-    return signTable.getIndex(kiosk);
+  public int getSignIndex(int idNum) {
+    return signTable.getIndex(idNum);
   }
   public ArrayList<Sign> retrieveAllSigns() {
     return (ArrayList<Sign>) signTable.getAllRows();

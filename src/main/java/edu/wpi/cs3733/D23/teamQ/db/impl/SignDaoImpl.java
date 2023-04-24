@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Sign;
 
 
@@ -25,32 +26,42 @@ public class SignDaoImpl implements GenDao<Sign, Integer>{
         populate();
     }
 
-    public Sign retrieveRow(Integer kiosk) {
-        int index = this.getIndex(kiosk);
+    public Sign retrieveRow(Integer idNum) {
+        int index = this.getIndex(idNum);
         return signs.get(index);
     }
 
-
-    public boolean updateRow(Integer kiosk, Sign SignWithNewChanges) {
+    public List<Sign> retrieveRows(int kiosk) {
+        List<Sign> as = new ArrayList<Sign>();
+        List<Integer> index = this.getIndexes(kiosk);
+        for (int i : index) {
+            as.add(signs.get(i));
+        }
+        return as;
+    }
+    public boolean updateRow(Integer idNum, Sign SignWithNewChanges) {
         boolean result = false;
         Connection con = GenDao.connect();
+        int newKiosk = SignWithNewChanges.getKiosk();
         String newDate = SignWithNewChanges.getDate();
         String newDestination = SignWithNewChanges.getDestination();
         String newDirection = SignWithNewChanges.getDirection();
 
         try {
             String query =
-                    "UPDATE sign SET date = ?, destination = ?, direction = ? WHERE kiosk = ?";
+                    "UPDATE sign SET kiosk =?, date = ?, destination = ?, direction = ? WHERE idnum = ?";
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, newDate);
-            pst.setString(2, newDestination);
-            pst.setString(3, newDirection);
-            pst.setInt(4, kiosk);
+            pst.setInt(1, newKiosk);
+            pst.setString(2, newDate);
+            pst.setString(3, newDestination);
+            pst.setString(4, newDirection);
+            pst.setInt(5, idNum);
 
             int rs = pst.executeUpdate();
             if (rs == 1) {
                 result = true;
-                int index = this.getIndex(kiosk);
+                int index = this.getIndex(idNum);
+                signs.get(index).setKiosk(newKiosk);
                 signs.get(index).setDate(newDate);
                 signs.get(index).setDestination(newDestination);
                 signs.get(index).setDirection(newDirection);
@@ -66,18 +77,18 @@ public class SignDaoImpl implements GenDao<Sign, Integer>{
         return result;
     }
 
-    public boolean deleteRow(Integer kiosk) {
+    public boolean deleteRow(Integer idNum) {
         Qdb qdb = Qdb.getInstance();
         boolean result = false;
         Connection con = GenDao.connect();
         try {
-            String query = "DELETE FROM sign WHERE kiosk = ?";
+            String query = "DELETE FROM sign WHERE idnum = ?";
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, kiosk);
+            pst.setInt(1, idNum);
             int rs = pst.executeUpdate();
             if (rs == 1) {
                 result = true;
-                int index = this.getIndex(kiosk);
+                int index = this.getIndex(idNum);
                 signs.remove(index);
                 System.out.println("Sign deleted successfully!");
             } else {
@@ -102,12 +113,13 @@ public class SignDaoImpl implements GenDao<Sign, Integer>{
         Connection con = GenDao.connect();
         try {
             String query =
-                    "INSERT INTO account (kiosk, date, destination, direction) VALUES(?,?,?,?)";
+                    "INSERT INTO account (idnum, kiosk, date, destination, direction) VALUES(?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, kiosk);
-            pst.setString(2, date);
-            pst.setString(3, destination);
-            pst.setString(4, direction);
+            pst.setInt(1, getAllRows().get(getAllRows().size() - 1).getIdNum() + 1);
+            pst.setInt(2, kiosk);
+            pst.setString(3, date);
+            pst.setString(4, destination);
+            pst.setString(5, direction);
 
             int rs = pst.executeUpdate();
             if (rs == 1) {
@@ -142,6 +154,7 @@ public class SignDaoImpl implements GenDao<Sign, Integer>{
                 Sign a;
                 a =
                         new Sign(
+                                rs.getInt("idnum"),
                                 rs.getInt("kiosk"),
                                 rs.getString("date"),
                                 rs.getString("destination"),
@@ -157,14 +170,24 @@ public class SignDaoImpl implements GenDao<Sign, Integer>{
         return false;
     }
 
-    public int getIndex(Integer kiosk) {
+    public int getIndex(Integer idNum) {
         for (int i = 0; i < signs.size(); i++) {
             Sign a = signs.get(i);
-            if (a.getKiosk()==kiosk) {
+            if (a.getIdNum()==idNum) {
                 return i;
             }
         }
         return -1;
+    }
+    public List<Integer> getIndexes(int kiosk) {
+        List<Integer> is = new ArrayList<Integer>();
+        for (int i = 0; i < signs.size(); i++) {
+            Sign a = signs.get(i);
+            if (a.getKiosk()== kiosk) {
+                is.add(i);
+            }
+        }
+        return is;
     }
 
 
