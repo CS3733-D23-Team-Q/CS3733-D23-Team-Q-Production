@@ -12,8 +12,11 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -39,6 +42,8 @@ public class MessagingController {
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
 
+  SimpleBooleanProperty sbp = new SimpleBooleanProperty(false);
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
@@ -57,7 +62,17 @@ public class MessagingController {
               }
             });
 
-    // Add new message listener for messages coming in
+    Bindings.when(sbp)
+        .then(
+            new ChangeListener<ObservableList<Message>>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends ObservableList<Message>> observable,
+                  ObservableList<Message> oldValue,
+                  ObservableList<Message> newValue) {
+                // Your code here to handle the list change event
+              }
+            });
 
     peopleSelector
         .valueProperty()
@@ -84,11 +99,6 @@ public class MessagingController {
                             qdb.retrieveProfileImage(receiver.getUsername()).getImageData());
                     profilePicture.setImage(pfp);
                   }
-
-                  System.out.println(
-                      qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                          .get(0)
-                          .getMessage());
 
                   for (Message m :
                       qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
