@@ -1099,4 +1099,19 @@ public class PathfindingController2 {
     startSelect.setValue(null);
     endSelect.setValue(null);
   }
+
+  public void removeNodes(){
+    List<Move> dateMoves = qdb.retrieveAllMoves();
+    for(Move m: dateMoves){
+      /*
+      for(Node nd : startNodes){
+        if(nd.getNodeID() == m.getNodeID()){
+          if(!nd.equals(qdb.retrieveNode(m.getNodeID()))){
+            startNodes.remove(nd);
+          }
+        }
+      }
+       */
+    }
+  }
 }
