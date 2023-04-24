@@ -113,8 +113,6 @@ public class GraphicalMapEditorController {
   int currentIndex = 0;
   @FXML private ImageView imageView;
 
-  @FXML private SplitMenuButton menu;
-
   Qdb qdb = Qdb.getInstance();
 
   Alert alert = new Alert();
@@ -385,14 +383,11 @@ public class GraphicalMapEditorController {
     HideEdges();
     clearLocationName();
     currentIndex++;
-    if (currentIndex < file.length) {
-      refreshNodes();
-      imageView.setImage(image[currentIndex]);
-    } else {
+    if (currentIndex >= file.length) {
       currentIndex = 0;
-      refreshNodes();
-      imageView.setImage(image[currentIndex]);
     }
+    refreshNodes();
+    imageView.setImage(image[currentIndex]);
     setFloor(currentIndex);
   }
 
@@ -415,8 +410,8 @@ public class GraphicalMapEditorController {
     }
     for (Node n : ffNodes) {
       int nodeID = n.getNodeID();
-      double x = n.getXCoord() / 5 - 1.5;
-      double y = n.getYCoord() / 5 - 1.5;
+      double x = n.getXCoord() / 5.0 - 1.5;
+      double y = n.getYCoord() / 5.0 - 1.5;
       Button node = new Button();
       node.setLayoutX(x);
       node.setLayoutY(y);
@@ -430,13 +425,14 @@ public class GraphicalMapEditorController {
               + "-fx-background-color: #3492D5");
       node.setOnMouseClicked(
           e -> {
+            alert.clearLabelAlert(alerts, image1);
             nodeidinput.setText(Integer.toString(nodeID));
             NodeInformation(nodeID);
-            if (startnodeOr == true) {
+            if (startnodeOr) {
               startnodeinitial.setText(Integer.toString(nodeID));
               startnode = qdb.nodeTable.retrieveRow(nodeID);
               startnodeOr = false;
-            } else if (endnodeOr == true) {
+            } else if (endnodeOr) {
               endnodeinitial.setText(Integer.toString(nodeID));
               endnode = qdb.nodeTable.retrieveRow(nodeID);
               endnodeOr = false;
@@ -514,10 +510,7 @@ public class GraphicalMapEditorController {
             // after clicking confirm button
             qdb.updateNode(nodeID, newNode);
             NodeInformation(nodeID);
-            if (displayEdges == true) {
-              HideEdges();
-              DisplayEdges();
-            }
+            setEdges();
           });
       parent.getChildren().add(node);
       buttons.add(node);
@@ -552,7 +545,7 @@ public class GraphicalMapEditorController {
    * if the input is a number, return true, else false
    *
    * @param str
-   * @return
+   * @return boolean
    */
   public boolean isNumber(String str) {
     if (str.equals("")) return false;
@@ -568,7 +561,7 @@ public class GraphicalMapEditorController {
    * true if the node exists, false else
    *
    * @param nodeID
-   * @return
+   * @return boolean
    */
   public boolean nodeIDExist(int nodeID) {
     for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
@@ -583,7 +576,7 @@ public class GraphicalMapEditorController {
    * @param floor
    * @param floorAlert
    * @param image
-   * @return
+   * @return boolean
    */
   public boolean floorAlert(TextField floor, Label floorAlert, ImageView image) {
     Alert alert = new Alert();
@@ -625,7 +618,7 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * return true if the nodeID is legal and it does not exist, else call alerts and return false
+   * return true if the nodeID is legal, and it does not exist, else call alerts and return false
    *
    * @param nodeID
    * @param nodeIDAlert
@@ -742,13 +735,13 @@ public class GraphicalMapEditorController {
       int n = path.get(i);
       int next = path.get(i - 1);
       DoubleProperty startX =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5);
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5.0);
       DoubleProperty startY =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5);
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5.0);
       DoubleProperty endX =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5);
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5.0);
       DoubleProperty endY =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5);
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5.0);
       Line line = new BoundLine(startX, startY, endX, endY);
       parent.getChildren().add(line);
       lines.add(line);
@@ -771,7 +764,7 @@ public class GraphicalMapEditorController {
    * choose lines
    *
    * @param floor
-   * @return
+   * @return path
    */
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
@@ -787,7 +780,7 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * turn on the next floor
+   * turn on the next floor when click the button
    *
    * @param event
    */
@@ -817,7 +810,7 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * turn on the last page
+   * turn on the last page when click the button
    *
    * @param event
    */
@@ -826,6 +819,7 @@ public class GraphicalMapEditorController {
     showlast();
   }
 
+  /** turn on the last page */
   void showlast() {
     startnodeinitial.setPromptText("Click here to choose the start node");
     endnodeinitial.setPromptText("Click here to choose the start node");
@@ -848,6 +842,11 @@ public class GraphicalMapEditorController {
     setFloor(currentIndex);
   }
 
+  /**
+   * show which floor it is on the map with the int floor
+   *
+   * @param x
+   */
   void setFloor(int x) {
     if (x == 0) {
       WhichFloor.setText("The First Floor");
@@ -862,6 +861,12 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * get the int floor from the String floor
+   *
+   * @param floor
+   * @return
+   */
   int findFloor(String floor) {
     if (floor.equals("1")) {
       return 0;
@@ -876,11 +881,17 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * show edges on the map when click the button
+   *
+   * @param event
+   */
   @FXML
   void EdgesDispalyClicked(MouseEvent event) {
     DisplayEdges();
   }
 
+  /** show edges on the map */
   void DisplayEdges() {
     if (!displayEdges) {
       line = addLines(chooseLines(currentIndex));
@@ -888,21 +899,40 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * hide edges on the map when click the button
+   *
+   * @param event
+   */
   @FXML
   void EdgesHidingClicked(MouseEvent event) {
-    if (displayEdges == true) HideEdges();
+    HideEdges();
   }
 
-  boolean nodeOnTheFloor(int node, int floor) {
-    if (qdb.nodeTable.retrieveRow(node).getFloor().equals(Floor(floor))) return true;
-    return false;
-  }
-
+  /** hide edges on the map when click the button */
   void HideEdges() {
     if (displayEdges) removeLines(line);
     displayEdges = false;
   }
 
+  /**
+   * return true if the nodes is on the floor, else return false
+   *
+   * @param node
+   * @param floor
+   * @return boolean
+   */
+  boolean nodeOnTheFloor(int node, int floor) {
+    if (qdb.nodeTable.retrieveRow(node).getFloor().equals(Floor(floor))) return true;
+    return false;
+  }
+
+  /**
+   * return the index of the node in the button list with given nodeID
+   *
+   * @param id
+   * @return
+   */
   int findButton(int id) {
     int x = 0;
     for (int i = 0; i < NodeID.size(); i++) {
@@ -913,6 +943,7 @@ public class GraphicalMapEditorController {
     return x;
   }
 
+  /** find the node on the map */
   void findOnMap() {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
@@ -925,10 +956,11 @@ public class GraphicalMapEditorController {
         imageView.setImage(image[currentIndex]);
         setFloor(currentIndex);
       }
+      alert.clearLabelAlert(alerts, image1);
       Point2D pivotOnTarget =
           new Point2D(
-              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5,
-              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5);
+              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5.0,
+              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5.0);
       pane.animate(Duration.millis(200))
           .interpolateWith(Interpolator.EASE_BOTH)
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
@@ -947,6 +979,11 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * Open a secondary stage of node table
+   *
+   * @throws Exception
+   */
   void NodeTable() throws Exception {
     NodeController controller = (NodeController) Navigation.getController(Screen.Node_Table);
     Stage stage = newStage("Node Table", Screen.Node_Table);
@@ -955,6 +992,11 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
+  /**
+   * Open a secondary stage of location name table
+   *
+   * @throws IOException
+   */
   void LocationTable() throws IOException {
     LocationController controller =
         (LocationController) Navigation.getController(Screen.LocationName_Table);
@@ -964,6 +1006,11 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
+  /**
+   * Open a secondary stage of move table
+   *
+   * @throws IOException
+   */
   void MoveTable() throws IOException {
     MoveController controller = (MoveController) Navigation.getController(Screen.Move_Table);
     Stage stage = newStage("Move Table", Screen.Move_Table);
@@ -972,6 +1019,11 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
+  /**
+   * Open a secondary stage of edge table
+   *
+   * @throws IOException
+   */
   void EdgeTable() throws IOException {
     EdgeController controller = (EdgeController) Navigation.getController(Screen.Edge_Table);
     Stage stage = newStage("Edge Table", Screen.Edge_Table);
@@ -980,6 +1032,12 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
+  /**
+   * show the location name of nodes by choosing node type, return true if there are location names
+   * on the map, return false else.
+   *
+   * @return boolean
+   */
   boolean ShowLocationName() {
     parent.getChildren().removeAll(Texts);
     Texts.clear();
@@ -989,8 +1047,8 @@ public class GraphicalMapEditorController {
       Node node1 = allNodes.get(i);
       String type = node1.getLocation().getNodeType();
       String name = node1.getLocation().getShortName();
-      int x = node1.getXCoord() / 5;
-      int y = node1.getYCoord() / 5;
+      double x = node1.getXCoord() / 5.0;
+      double y = node1.getYCoord() / 5.0;
       if (node1.getFloor().equals(Floor(currentIndex))) {
         if (check.equals("All") || type.equals(check)) {
           text = new Text(x + 3, y + 3, name);
@@ -1007,18 +1065,30 @@ public class GraphicalMapEditorController {
     return true;
   }
 
+  /** clear all the location names on the map */
   void clearLocationName() {
     if (!Texts.isEmpty()) parent.getChildren().removeAll(Texts);
   }
 
+  /**
+   * Display all the location names on the map when click the button
+   *
+   * @param event
+   */
   @FXML
   void DisplayLocationClicked(MouseEvent event) {
     boolean check = ShowLocationName();
-    if ((!Texts.isEmpty()) && check == true) {
+    if ((!Texts.isEmpty()) && check) {
       parent.getChildren().addAll(Texts);
     }
   }
 
+  /**
+   * open a secondary stage of the choosing type of table
+   *
+   * @param event
+   * @throws Exception
+   */
   @FXML
   void TableClicked(MouseEvent event) throws Exception {
     String table = TableChoose.getValue();
@@ -1033,18 +1103,26 @@ public class GraphicalMapEditorController {
     }
   }
 
+  /**
+   * add a edge with start node and end node when click the button, call alert if it is illegal
+   *
+   * @param event
+   */
   @FXML
   void AddEdgesClicked(MouseEvent event) {
     Edge addedge = new Edge(startnode, endnode);
     if (edgeAlert(addedge)) {
       qdb.edgeTable.addRow(addedge);
     }
-    if (displayEdges == true) {
-      HideEdges();
-      DisplayEdges();
-    }
+    setEdges();
   }
 
+  /**
+   * return true if the edge is legal, else return false
+   *
+   * @param edge
+   * @return
+   */
   boolean edgeAlert(Edge edge) {
     List<Edge> alledges = qdb.edgeTable.getAllRows();
     for (int i = 0; i < alledges.size(); i++) {
@@ -1066,35 +1144,46 @@ public class GraphicalMapEditorController {
     return true;
   }
 
+  /**
+   * start to choose the end node when click the button
+   *
+   * @param event
+   */
   @FXML
   void ChooseEndNodeClicked(MouseEvent event) {
     endnodeOr = true;
     endnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
+  /**
+   * start to choss the start button when click the button
+   *
+   * @param event
+   */
   @FXML
   void ChooseStartNodeClicked(MouseEvent event) {
     startnodeOr = true;
     startnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
-  class BoundLine extends Line {
-    BoundLine(
-        DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
-      startXProperty().bind(startX);
-      startYProperty().bind(startY);
-      endXProperty().bind(endX);
-      endYProperty().bind(endY);
-      setStrokeWidth(0.5);
-      setStyle("-fx-stroke: blue;");
-      setMouseTransparent(true);
-    }
-  }
-
+  /** refresh the egdes */
   void setEdges() {
-    if (displayEdges == true) {
+    if (displayEdges) {
       HideEdges();
       DisplayEdges();
     }
+  }
+}
+
+class BoundLine extends Line {
+  BoundLine(
+      DoubleProperty startX, DoubleProperty startY, DoubleProperty endX, DoubleProperty endY) {
+    startXProperty().bind(startX);
+    startYProperty().bind(startY);
+    endXProperty().bind(endX);
+    endYProperty().bind(endY);
+    setStrokeWidth(0.5);
+    setStyle("-fx-stroke: blue;");
+    setMouseTransparent(true);
   }
 }
