@@ -9,7 +9,7 @@ public enum Screen {
   MAP_EDITOR_TABLE("views/GraphicalMapEditor.fxml", "Map Editor Table"),
   //  GRAPHICAL_MAP_EDITOR("views/GraphicalMapEditor.fxml", "Graphical Map Editor"),
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
-  PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
+  PATH_FINDING("views/Pathfinding2.fxml", "Graphical Pathfinding"),
   SIGNAGE("views/Signage.fxml", "Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
