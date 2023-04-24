@@ -301,7 +301,6 @@ public class PathfindingController {
       node.setDisable(true);
       parent.getChildren().add(node);
       node.toFront();
-      int indexn = parent.getChildren().indexOf(node);
       previousNodes.add(node);
       switch (f) {
         case "L1":
@@ -335,7 +334,6 @@ public class PathfindingController {
         text.setFill(Color.BLUE);
         text.setStyle("-fx-font-size: 3px;");
         parent.getChildren().add(text);
-        int indext = parent.getChildren().indexOf(text);
         previousText.add(text);
         restText = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restText, text, nodeid);
         deptText = addSpecificNode("\\bDEPT\\b", nodetype, deptText, text, nodeid);

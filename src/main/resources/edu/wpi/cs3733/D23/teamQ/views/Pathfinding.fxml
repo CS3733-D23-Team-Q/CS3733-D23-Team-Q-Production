@@ -87,7 +87,7 @@
             </ComboBox>
             <TextField fx:id="messageField" promptText="Message">
                <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" top="5.0" />
+                  <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
                </VBox.margin>
             </TextField>
             <HBox prefHeight="0.0" prefWidth="300.0" spacing="15.0">

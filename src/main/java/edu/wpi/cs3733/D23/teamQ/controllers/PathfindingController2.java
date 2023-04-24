@@ -12,31 +12,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import javafx.util.Pair;
 import net.kurobako.gesturefx.*;
 import org.apache.commons.lang3.tuple.Triple;
 
 public class PathfindingController2 {
   Qdb qdb = Qdb.getInstance();
-  // Stage stage = App.getPrimaryStage();
   Context pathfindingAlgorithmSelection = new Context();
   BFS bfs = new BFS();
   AStar aStar = new AStar();
@@ -52,32 +47,29 @@ public class PathfindingController2 {
   List<Image> floors;
   int floor;
   List<Button> previousNodes;
-  List<Integer> restNodes;
-  List<Integer> deptNodes;
-  List<Integer> labsNodes;
-  List<Integer> infoNodes;
-  List<Integer> confNodes;
-  List<Integer> retlNodes;
-  List<Integer> servNodes;
+  List<Text> previousText;
+  List<Pair<Integer, Text>> restText;
+  List<Pair<Integer, Text>> deptText;
+  List<Pair<Integer, Text>> labsText;
+  List<Pair<Integer, Text>> infoText;
+  List<Pair<Integer, Text>> confText;
+  List<Pair<Integer, Text>> retlText;
+  List<Pair<Integer, Text>> servText;
   List<Integer> nodeIds;
-  List<Triple<Integer, Integer, Integer>> highlightedNodes;
-  List<Triple<Integer, Integer, Integer>> highlightedNodesp;
-  List<Pair<Integer, Integer>> l1nodes;
-  List<Pair<Integer, Integer>> l2nodes;
-  List<Pair<Integer, Integer>> ffnodes;
-  List<Pair<Integer, Integer>> sfnodes;
-  List<Pair<Integer, Integer>> tfnodes;
+  List<Triple<Button, Integer, Integer>> highlightedNodes;
+  List<Triple<Button, Integer, Integer>> highlightedNodesp;
+  List<Pair<Integer, Button>> l1nodes;
+  List<Pair<Integer, Button>> l2nodes;
+  List<Pair<Integer, Button>> ffnodes;
+  List<Pair<Integer, Button>> sfnodes;
+  List<Pair<Integer, Button>> tfnodes;
   List<String> allSelections;
   String algorithm;
   Date date;
   List<Date> moveDates;
   ToggleGroup dateToggle;
-  // Image upImage;
-  // Image downImage;
-  // ImageView image;
-  List<Triple<Integer, Integer, Integer>> cfpath;
+  List<Triple<Integer, Button, Integer>> cfpath;
   Text messageText;
-  // boolean elev;
 
   @FXML HBox root;
   @FXML Group parent;
@@ -103,11 +95,7 @@ public class PathfindingController2 {
 
   @FXML
   public void initialize() throws IOException {
-    // elev = false;
     cfpath = new ArrayList<>();
-    // image = new ImageView();
-    // upImage = new Image("/Up.png");
-    // downImage = new Image("/Down.png");
     dateToggle = new ToggleGroup();
     date = Date.valueOf("2023-01-01");
     moveDates = new ArrayList<>();
@@ -121,45 +109,21 @@ public class PathfindingController2 {
     highlightedNodes = new ArrayList<>();
     highlightedNodesp = new ArrayList<>();
     nodeIds = new ArrayList<>();
-    restNodes = new ArrayList<>();
-    deptNodes = new ArrayList<>();
-    labsNodes = new ArrayList<>();
-    infoNodes = new ArrayList<>();
-    confNodes = new ArrayList<>();
-    retlNodes = new ArrayList<>();
-    servNodes = new ArrayList<>();
+    restText = new ArrayList<>();
+    deptText = new ArrayList<>();
+    labsText = new ArrayList<>();
+    infoText = new ArrayList<>();
+    confText = new ArrayList<>();
+    retlText = new ArrayList<>();
+    servText = new ArrayList<>();
     previousNodes = new ArrayList<>();
-    floors = new ArrayList<>();
-    Image l1 = new Image("/00_thelowerlevel1.png");
-    Image l2 = new Image("/00_thelowerlevel2.png");
-    Image ff = new Image("/01_thefirstfloor.png");
-    Image sf = new Image("/02_thesecondfloor.png");
-    Image tf = new Image("/03_thethirdfloor.png");
-    floors.add(l1); // 0
-    floors.add(l2); // 1
-    floors.add(ff); // 2
-    floors.add(sf); // 3
-    floors.add(tf); // 4
+    previousText = new ArrayList<>();
+
     floor = 2;
     ready4Second = false;
     previousPath = new ArrayList<>();
     addButtons("1");
-    pane = new GesturePane();
-    pane.setContent(parent);
-    pane.setFitMode(GesturePane.FitMode.COVER);
-    root.getChildren().add(pane);
 
-    pane.setOnMouseClicked(
-        e -> {
-          if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
-            Point2D pivotOnTarget =
-                pane.targetPointAt(new Point2D(e.getX(), e.getY()))
-                    .orElse(pane.targetPointAtViewportCentre());
-            pane.animate(Duration.millis(200))
-                .interpolateWith(Interpolator.EASE_BOTH)
-                .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-          }
-        });
     autoComplete(startSelect);
     autoComplete(endSelect);
   }
@@ -225,13 +189,13 @@ public class PathfindingController2 {
     List<Node> moveNodes = new ArrayList<>();
     List<Node> floorNodes = new ArrayList<>(); // fNodes
 
-    restNodes.removeAll(restNodes);
-    deptNodes.removeAll(deptNodes);
-    labsNodes.removeAll(labsNodes);
-    infoNodes.removeAll(infoNodes);
-    confNodes.removeAll(confNodes);
-    retlNodes.removeAll(retlNodes);
-    servNodes.removeAll(servNodes);
+    restText.removeAll(restText);
+    deptText.removeAll(deptText);
+    labsText.removeAll(labsText);
+    infoText.removeAll(infoText);
+    confText.removeAll(confText);
+    retlText.removeAll(retlText);
+    servText.removeAll(servText);
 
     l1nodes.removeAll(l1nodes);
     l2nodes.removeAll(l2nodes);
@@ -239,10 +203,8 @@ public class PathfindingController2 {
     sfnodes.removeAll(sfnodes);
     tfnodes.removeAll(tfnodes);
 
-    // nodeIds.removeAll(nodeIds);
-    // startSelect.getItems().removeAll(allSelections);
-    // endSelect.getItems().removeAll(allSelections);
-    // allSelections.removeAll(allSelections);
+    previousNodes.removeAll(previousNodes);
+    previousText.removeAll(previousText);
 
     for (Move m : allMoves) {
       Date d = m.getDate();
@@ -268,6 +230,7 @@ public class PathfindingController2 {
             });
       }
     }
+
     boolean added = false;
     // for (Node n : moveNodes) { // Node n : nodes
     for (int i = 0; i < moveNodes.size(); i++) {
@@ -295,124 +258,71 @@ public class PathfindingController2 {
       double x = n.getXCoord() / 5 - 1.5;
       double y = n.getYCoord() / 5 - 1.5;
       int nodeid = n.getNodeID();
-      Location location = qdb.retrieveLocation(nodeid);
-      String sname = location.getShortName();
-      // String lname = location.getLongName();
-      String nodetype = location.getNodeType();
       Button node = new Button();
       node.setLayoutX(x);
       node.setLayoutY(y);
       node.setShape(new Circle(3));
       node.setMinSize(6, 6);
       node.setMaxSize(6, 6);
-      /*
-      if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
-        node.setStyle(
-            "-fx-background-color: lightblue;"
-                + "-fx-border-color: black;"
-                + "-fx-background-insets: 0px;");
-      } else {
-       */
       node.setStyle(
           "-fx-background-color: lightblue;"
               + "-fx-border-color: black;"
               + "-fx-background-insets: 0px;");
       node.setStyle("-fx-background-color: transparent;");
       node.setDisable(true);
-      // }
-      node.toFront();
       parent.getChildren().add(node);
-      int index = parent.getChildren().indexOf(node);
+      node.toFront();
+      previousNodes.add(node);
+      switch (f) {
+        case "L1":
+          l1nodes.add(new Pair<>(nodeid, node));
+          break;
+        case "L2":
+          l2nodes.add(new Pair<>(nodeid, node));
+          break;
+        case "1":
+          ffnodes.add(new Pair<>(nodeid, node));
+          break;
+        case "2":
+          sfnodes.add(new Pair<>(nodeid, node));
+          break;
+        case "3":
+          tfnodes.add(new Pair<>(nodeid, node));
+          break;
+      }
+    }
 
-      /*
+    for (Node n : floorNodes) {
+      double x = n.getXCoord() / 5 - 1.5;
+      double y = n.getYCoord() / 5 - 1.5;
+      int nodeid = n.getNodeID();
+      Location location = qdb.retrieveLocation(nodeid);
+      String sname = location.getShortName();
+      // String lname = location.getLongName();
+      String nodetype = location.getNodeType();
       if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
         text = new Text(x, y, sname);
         text.setFill(Color.BLUE);
         text.setStyle("-fx-font-size: 3px;");
         parent.getChildren().add(text);
-      }
-       */
-
-      /*
-      node.setOnMouseEntered(
-          e -> {
-            // String nodeid = "";
-            text = new Text(x + 8, y + 8, sname);
-            text.setFill(Color.BLUE);
-            text.setStyle("-fx-font-size: 8px;");
-            parent.getChildren().add(text);
-          });
-       */
-      node.setOnMouseExited(
-          e -> {
-            parent.getChildren().remove(text);
-          });
-      node.setOnMouseClicked(
-          e -> {
-            if (!ready4Second) {
-              ready4Second = true;
-              start = n;
-              removeLines(previousPath);
-              parent.getChildren().remove(messageText);
-              if (highlightedNodes.size() > 0) {
-                for (int i = 0; i < highlightedNodes.size(); i++) {
-                  if (highlightedNodes.get(i).getMiddle() == floor) {
-                    unhighlight(highlightedNodes.get(i).getLeft());
-                  }
-                }
-                highlightedNodes.removeAll(highlightedNodes);
-                highlightedNodesp.removeAll(highlightedNodesp);
-              }
-              highlight(node, "red");
-              highlightedNodes.add(Triple.of(index, floor, 0));
-            } else {
-              target = n;
-              ready4Second = false;
-              highlight(node, "red");
-              highlightedNodes.add(Triple.of(index, floor, 0));
-              try {
-                // removeLines(previousPath);
-                // progress bar of generating a new path
-                previousPath = drawLinesf(start, target, f);
-              } catch (Exception ex) {
-                throw new RuntimeException(ex);
-              }
-            }
-          });
-      previousNodes.add(node);
-      restNodes = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restNodes, index);
-      deptNodes = addSpecificNode("\\bDEPT\\b", nodetype, deptNodes, index);
-      labsNodes = addSpecificNode("\\bLABS\\b", nodetype, labsNodes, index);
-      infoNodes = addSpecificNode("\\bINFO\\b", nodetype, infoNodes, index);
-      confNodes = addSpecificNode("\\bCONF\\b", nodetype, confNodes, index);
-      retlNodes = addSpecificNode("\\bRETL\\b", nodetype, retlNodes, index);
-      servNodes = addSpecificNode("\\bSERV\\b", nodetype, servNodes, index);
-      switch (f) {
-        case "L1":
-          l1nodes.add(new Pair<>(nodeid, index));
-          break;
-        case "L2":
-          l2nodes.add(new Pair<>(nodeid, index));
-          break;
-        case "1":
-          ffnodes.add(new Pair<>(nodeid, index));
-          break;
-        case "2":
-          sfnodes.add(new Pair<>(nodeid, index));
-          break;
-        case "3":
-          tfnodes.add(new Pair<>(nodeid, index));
-          break;
+        previousText.add(text);
+        restText = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restText, text, nodeid);
+        deptText = addSpecificNode("\\bDEPT\\b", nodetype, deptText, text, nodeid);
+        labsText = addSpecificNode("\\bLABS\\b", nodetype, labsText, text, nodeid);
+        infoText = addSpecificNode("\\bINFO\\b", nodetype, infoText, text, nodeid);
+        confText = addSpecificNode("\\bCONF\\b", nodetype, confText, text, nodeid);
+        retlText = addSpecificNode("\\bRETL\\b", nodetype, retlText, text, nodeid);
+        servText = addSpecificNode("\\bSERV\\b", nodetype, servText, text, nodeid);
       }
     }
   }
 
-  public List<Integer> addSpecificNode(
-      String pattern, String input, List<Integer> nodes, int node) {
+  public List<Pair<Integer, Text>> addSpecificNode(
+      String pattern, String input, List<Pair<Integer, Text>> nodes, Text node, int nodeid) {
     Pattern pattern1 = Pattern.compile(pattern);
     Matcher matcher1 = pattern1.matcher(input);
     if (matcher1.find()) {
-      nodes.add(node);
+      nodes.add(new Pair<>(nodeid, node));
     }
     return nodes;
   }
@@ -420,6 +330,12 @@ public class PathfindingController2 {
   public void removeButtons() {
     for (Button b : previousNodes) {
       parent.getChildren().remove(b);
+    }
+  }
+
+  public void removeText() {
+    for (Text t : previousText) {
+      parent.getChildren().remove(t);
     }
   }
 
@@ -436,8 +352,6 @@ public class PathfindingController2 {
       Line line = new Line(x1, y1, x2, y2);
       line.setStyle("-fx-stroke: blue;");
       line.setStrokeWidth(3);
-      // parent.getChildren().add(line);
-      // lines.add(line);
       if (!path.get(i).getValue()) {
         parent.getChildren().add(line);
         lines.add(line);
@@ -457,7 +371,7 @@ public class PathfindingController2 {
   public List<Line> drawLinesf(Node start, Node target, String floor)
       throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     cfnodes = setCF(cfnodes);
     if (algorithm.equals("aStar")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(
@@ -475,31 +389,21 @@ public class PathfindingController2 {
       path = pathfindingAlgorithmSelection.run(start, target);
     }
 
-    /*
-    path =
-        AStar.aStar(
-            start, target);
-     */
-
     cfpath.removeAll(cfpath);
     List<Pair<Node, Boolean>> fpath = new ArrayList<>();
     for (int i = path.size() - 1; i > 0; i--) {
       Node n = path.get(i);
       Node next = path.get(i - 1);
       if (n.getFloor().equals(floor)) {
-        if (!next.getFloor()
-            .equals(n.getFloor())) { // (n.getLocation().getNodeType().equals("ELEV") ||
-          // n.getLocation().getNodeType().equals("STAI")) &&
+        if (!next.getFloor().equals(n.getFloor())) {
           fpath.add(new Pair<>(n, true));
-          // System.out.println(n.getNodeID());
           if (whichFloorI(next.getFloor()) < whichFloorI(n.getFloor())) {
             int crossFloors = whichFloorI(n.getFloor()) - whichFloorI(next.getFloor());
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, -crossFloors);
-                // System.out.println(triple.getRight());
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, -crossFloors);
                 cfpath.add(triple);
               }
             }
@@ -508,21 +412,19 @@ public class PathfindingController2 {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, crossFloors);
-                // System.out.println(triple.getRight());
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, crossFloors);
                 cfpath.add(triple);
               }
             }
           }
         } else {
           fpath.add(new Pair<>(n, false));
-          // System.out.println(n.getNodeID());
           for (int j = 0; j < cfnodes.size(); j++) {
             Integer nodeid = cfnodes.get(j).getKey();
             if (nodeid == n.getNodeID()) {
-              int index = cfnodes.get(j).getValue();
-              Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
+              Button index = cfnodes.get(j).getValue();
+              Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, 0);
               cfpath.add(triple);
             }
           }
@@ -540,9 +442,8 @@ public class PathfindingController2 {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, -crossFloors);
-                // System.out.println(triple.getRight());
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, -crossFloors);
                 cfpath.add(triple);
               }
             }
@@ -551,77 +452,41 @@ public class PathfindingController2 {
             for (int j = 0; j < cfnodes.size(); j++) {
               Integer nodeid = cfnodes.get(j).getKey();
               if (nodeid == n.getNodeID()) {
-                int index = cfnodes.get(j).getValue();
-                Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, crossFloors);
-                // System.out.println(triple.getRight());
+                Button index = cfnodes.get(j).getValue();
+                Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, crossFloors);
                 cfpath.add(triple);
               }
             }
           }
         } else {
           fpath.add(new Pair<>(n, false));
-          // System.out.println(n.getNodeID());
           for (int j = 0; j < cfnodes.size(); j++) {
             Integer nodeid = cfnodes.get(j).getKey();
             if (nodeid == n.getNodeID()) {
-              int index = cfnodes.get(j).getValue();
-              Triple<Integer, Integer, Integer> triple = Triple.of(nodeid, index, 0);
+              Button index = cfnodes.get(j).getValue();
+              Triple<Integer, Button, Integer> triple = Triple.of(nodeid, index, 0);
               cfpath.add(triple);
             }
           }
         }
       }
     }
-    List<Line> lines = new ArrayList<>();
-    if (fpath.size() > 0) {
-      lines = addLines(fpath);
-      if (lines.size() > 0 && floor.equals(path.get(0).getFloor())) {
-        Line sl = lines.get(0);
-        Line el = lines.get(lines.size() - 1);
-        double slx = sl.getStartX();
-        double sly = sl.getStartY();
-        double elx = el.getEndX();
-        double ely = el.getEndY();
-        double ax = Math.abs(slx + elx) / 2;
-        double ay = Math.abs(sly + ely) / 2 - 10;
-        if (messageField != null) {
-          System.out.println("what");
-          messageText = new Text(ax, ay, messageField.getText());
-          messageText.setFill(Color.RED);
-          messageText.setStyle("-fx-font-size: 8px;");
-          parent.getChildren().add(messageText);
-        }
-      }
-    }
-    if (path.size() == 0) {
-      alert.alertBox("No solution", "Failed to find a path");
-    }
 
-    // for (int i = 0; i < cfnodes.size(); i++) {
-    for (Triple<Integer, Integer, Integer> tp : cfpath) {
+    for (Triple<Integer, Button, Integer> tp : cfpath) {
       ImageView image = new ImageView();
-      // Integer id = tp.getLeft();
-      Integer idx = tp.getMiddle();
-      Button node = (Button) parent.getChildren().get(idx);
+      Button node = tp.getMiddle();
       Integer move = tp.getRight();
-      // System.out.println(move);
-      // if (cfnodes.get(i).getKey() == id) {
-      if (move > 0) {
+      if (move > 0 && !(node.equals(start) || node.equals(target))) {
         node.setDisable(false);
-        node.setStyle(
-            "-fx-background-color: yellow;"
-                // + "-fx-border-color: yellow;"
-                + "-fx-background-insets: 0px;");
+        node.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
         image.setImage(new Image("/Up.png"));
         image.fitWidthProperty().bind(node.widthProperty());
         image.fitHeightProperty().bind(node.heightProperty());
         node.setGraphic(image);
         node.toFront();
-        // System.out.println(whichFloorI(floor));
-        System.out.println(idx);
         highlightedNodes.add(
             Triple.of(
-                idx,
+                node,
                 whichFloorI(floor),
                 move)); // unhighlightednodes and removeall before every drawlinesf
         node.setOnAction(
@@ -635,20 +500,15 @@ public class PathfindingController2 {
               }
             });
       }
-      if (move < 0) {
+      if (move < 0 && !(node.equals(start) || node.equals(target))) {
         node.setDisable(false);
-        node.setStyle(
-            "-fx-background-color: yellow;"
-                // + "-fx-border-color: yellow;"
-                + "-fx-background-insets: 0px;");
+        node.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
         image.setImage(new Image("/Down.png"));
         image.fitWidthProperty().bind(node.widthProperty());
         image.fitHeightProperty().bind(node.heightProperty());
         node.setGraphic(image);
         node.toFront();
-        // System.out.println(whichFloorI(floor));
-        System.out.println(idx);
-        highlightedNodes.add(Triple.of(idx, whichFloorI(floor), move)); // whichFloorI(floor)
+        highlightedNodes.add(Triple.of(node, whichFloorI(floor), move)); // whichFloorI(floor)
         node.setOnAction(
             e -> {
               try {
@@ -661,17 +521,36 @@ public class PathfindingController2 {
             });
       }
     }
-    // }
-    // }
-    // textualPathfinding.setWrapText(true);
+
+    List<Line> lines = new ArrayList<>();
+    if (fpath.size() > 0) {
+      lines = addLines(fpath);
+      if (lines.size() > 0 && floor.equals(path.get(0).getFloor())) {
+        Line sl = lines.get(0);
+        Line el = lines.get(lines.size() - 1);
+        double slx = sl.getStartX();
+        double sly = sl.getStartY();
+        double elx = el.getEndX();
+        double ely = el.getEndY();
+        double ax = Math.abs(slx + elx) / 2;
+        double ay = Math.abs(sly + ely) / 2 - 10;
+        if (messageField != null) {
+          messageText = new Text(ax, ay, messageField.getText());
+          messageText.setFill(Color.RED);
+          messageText.setStyle("-fx-font-size: 8px;");
+          parent.getChildren().add(messageText);
+        }
+      }
+    }
+
+    if (path.size() == 0) {
+      alert.alertBox("No solution", "Failed to find a path");
+    }
+
     textualPathfinding.setText(toString(path));
     Text tempText = new Text(textualPathfinding.getText());
     tempText.setFont(textualPathfinding.getFont());
     double prefHeight = tempText.getLayoutBounds().getHeight();
-    /*
-           + textualPathfinding.getPadding().getTop()
-           + textualPathfinding.getPadding().getBottom();
-    */
     textualPathfinding.setMaxHeight(313.3);
     textualPathfinding.setPrefHeight(prefHeight);
     return lines;
@@ -738,7 +617,7 @@ public class PathfindingController2 {
     return f;
   }
 
-  public List<Pair<Integer, Integer>> setCF(List<Pair<Integer, Integer>> cfnodes) {
+  public List<Pair<Integer, Button>> setCF(List<Pair<Integer, Button>> cfnodes) {
     switch (floor) {
       case 0:
         cfnodes = l1nodes;
@@ -767,19 +646,46 @@ public class PathfindingController2 {
     if (nextFloor.isDisable()) {
       nextFloor.setDisable(false);
     }
+
+    if (highlightedNodes.size() > 0) {
+      for (int j = 0; j < highlightedNodes.size(); j++) {
+        if (highlightedNodes.get(j).getMiddle() == floor) {
+          unhighlight(highlightedNodes.get(j).getLeft());
+        }
+      }
+    }
+    if (highlightedNodesp.size() > 0) {
+      for (int j = 0; j < highlightedNodesp.size(); j++) {
+        if (highlightedNodesp.get(j).getMiddle() == floor) {
+          unhighlight(highlightedNodesp.get(j).getLeft());
+        }
+      }
+    }
+
     if (floor > 0) {
       floor--;
       f = whichFloorS();
     }
     Image previous = floors.get(floor);
     map.setImage(previous);
-    /*
+
+    // if on the same floor
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
-        unhighlight(highlightedNodes.get(i).getKey());
+        if (highlightedNodes.get(i).getMiddle() == floor) {
+          highlighte(highlightedNodes.get(i).getLeft(), highlightedNodes.get(i).getRight());
+        }
       }
     }
-     */
+    if (highlightedNodesp.size() > 0) {
+      for (int i = 0; i < highlightedNodesp.size(); i++) {
+        if (highlightedNodesp.get(i).getMiddle() == floor) {
+          highlight(highlightedNodesp.get(i).getLeft(), "red");
+        }
+      }
+    }
+
+    removeText();
     removeButtons();
     removeLines(previousPath); // remove previous floor's path
     addButtons(f); // add current floor's path
@@ -790,29 +696,6 @@ public class PathfindingController2 {
     confChecked();
     retlChecked();
     servChecked();
-    // if on the same floor
-    if (highlightedNodes.size() > 0) {
-      for (int i = 0; i < highlightedNodes.size(); i++) {
-        if (highlightedNodes.get(i).getMiddle() == floor) {
-          if (highlightedNodes.get(i).getRight() == 0) {
-            highlight(highlightedNodes.get(i).getLeft(), "red");
-          } else {
-            highlighte(highlightedNodes.get(i).getLeft(), highlightedNodes.get(i).getRight());
-          }
-        }
-      }
-    }
-    if (highlightedNodesp.size() > 0) {
-      for (int i = 0; i < highlightedNodesp.size(); i++) {
-        if (highlightedNodesp.get(i).getMiddle() == floor) {
-          if (highlightedNodesp.get(i).getRight() == 0) {
-            highlight(highlightedNodesp.get(i).getLeft(), "red");
-          } else {
-            highlighte(highlightedNodesp.get(i).getLeft(), highlightedNodesp.get(i).getRight());
-          }
-        }
-      }
-    }
     if (!ready4Second && start != null && target != null) {
       highlightedNodes.removeAll(highlightedNodes);
       previousPath = drawLinesf(start, target, f);
@@ -827,13 +710,31 @@ public class PathfindingController2 {
     if (previousFloor.isDisable()) {
       previousFloor.setDisable(false);
     }
+
+    if (highlightedNodes.size() > 0) {
+      for (int j = 0; j < highlightedNodes.size(); j++) {
+        if (highlightedNodes.get(j).getMiddle() == floor) {
+          unhighlight(highlightedNodes.get(j).getLeft());
+        }
+      }
+    }
+    if (highlightedNodesp.size() > 0) {
+      for (int j = 0; j < highlightedNodesp.size(); j++) {
+        if (highlightedNodesp.get(j).getMiddle() == floor) {
+          unhighlight(highlightedNodesp.get(j).getLeft());
+        }
+      }
+    }
+
     if (floor < 4) {
       floor++;
       f = whichFloorS();
     }
+
     Image next = floors.get(floor);
     map.setImage(next);
 
+    removeText();
     removeButtons();
     removeLines(previousPath);
     addButtons(f);
@@ -849,47 +750,52 @@ public class PathfindingController2 {
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
         if (highlightedNodes.get(i).getMiddle() == floor) {
-          if (highlightedNodes.get(i).getRight() == 0) {
-            highlight(highlightedNodes.get(i).getLeft(), "red");
-          } else {
-            highlighte(highlightedNodes.get(i).getLeft(), highlightedNodes.get(i).getRight());
-          }
+          highlighte(highlightedNodes.get(i).getLeft(), highlightedNodes.get(i).getRight());
         }
       }
     }
     if (highlightedNodesp.size() > 0) {
       for (int i = 0; i < highlightedNodesp.size(); i++) {
         if (highlightedNodesp.get(i).getMiddle() == floor) {
-          if (highlightedNodesp.get(i).getRight() == 0) {
-            highlight(highlightedNodesp.get(i).getLeft(), "red");
-          } else {
-            highlighte(highlightedNodesp.get(i).getLeft(), highlightedNodesp.get(i).getRight());
-          }
+          highlight(highlightedNodesp.get(i).getLeft(), "red");
         }
       }
     }
+
     if (!ready4Second && start != null && target != null) { // && previousPath.size() > 0
       highlightedNodes.removeAll(highlightedNodes);
       previousPath = drawLinesf(start, target, f);
     }
   }
 
-  public void highlight(List<Integer> nodes, String color) {
-    String border = "-fx-border-color: ";
-    border = border + color + ";";
+  public void highlightt(List<Pair<Integer, Text>> nodes, String color) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    for (int i : nodes) {
-      javafx.scene.Node child = children.get(i);
-      child.setDisable(false);
-      child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
+    for (Pair<Integer, Text> i : nodes) {
+      Text child = i.getValue();
+      switch (color) {
+        case "lightgreen":
+          child.setFill(Color.LIGHTGREEN);
+          break;
+        case "orange":
+          child.setFill(Color.ORANGE);
+          break;
+        case "purple":
+          child.setFill(Color.PURPLE);
+          break;
+        case "gray":
+          child.setFill(Color.GRAY);
+          break;
+        case "yellow":
+          child.setFill(Color.YELLOW);
+          break;
+        case "brown":
+          child.setFill(Color.BROWN);
+          break;
+        case "pink":
+          child.setFill(Color.PINK);
+          break;
+      }
     }
-  }
-
-  public void highlight(Button node, String color) {
-    String border = "-fx-border-color: ";
-    border = border + color + ";";
-    node.setDisable(false);
-    node.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
   public void highlight(int node, String color) {
@@ -901,15 +807,18 @@ public class PathfindingController2 {
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
 
-  public void highlighte(int node, int move) {
+  public void highlight(Button child, String color) {
+    String border = "-fx-border-color: ";
+    border = border + color + ";";
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    Button child = (Button) children.get(node);
+    child.setDisable(false);
+    child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
+  }
+
+  public void highlighte(Button child, int move) {
     ImageView image = new ImageView();
     child.setDisable(false);
-    child.setStyle(
-        "-fx-background-color: yellow;"
-            // + "-fx-border-color: yellow;"
-            + "-fx-background-insets: 0px;");
+    child.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
     if (move < 0) {
       image.setImage(new Image("/Down.png"));
       child.setOnAction(
@@ -941,25 +850,16 @@ public class PathfindingController2 {
     child.toFront();
   }
 
-  public void unhighlight(List<Integer> nodes) {
+  public void unhighlightt(List<Pair<Integer, Text>> nodes) {
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    for (int i : nodes) {
-      // javafx.scene.Node child = children.get(i);
-      Button child = (Button) children.get(i);
-      child.setStyle(
-          "-fx-background-color: lightblue;"
-              + "-fx-background-insets: 0px;"
-              + "-fx-border-color: black;");
-      child.setStyle("-fx-background-color: transparent;");
-      child.setGraphic(null);
-      child.setDisable(true);
+    for (Pair<Integer, Text> i : nodes) {
+      Text child = i.getValue();
+      child.setFill(Color.BLUE);
     }
   }
 
   public void unhighlight(int node) {
-    System.out.println("unhighlighted");
     ObservableList<javafx.scene.Node> children = parent.getChildren();
-    // javafx.scene.Node child = children.get(node);
     Button child = (Button) children.get(node);
     child.setStyle(
         "-fx-background-color: lightblue;"
@@ -970,46 +870,54 @@ public class PathfindingController2 {
     child.setGraphic(null);
   }
 
+  public void unhighlight(Button child) {
+    child.setStyle(
+        "-fx-background-color: lightblue;"
+            + "-fx-background-insets: 0px;"
+            + "-fx-border-color: black;");
+    child.setStyle("-fx-background-color: transparent;");
+    child.setDisable(true);
+    child.setGraphic(null);
+  }
+
   public void restChecked() {
-    typeChecked(restCheck, restNodes, "lightgreen");
+    typeChecked(restCheck, restText, "lightgreen");
   }
 
   public void deptChecked() {
-    typeChecked(deptCheck, deptNodes, "orange");
+    typeChecked(deptCheck, deptText, "orange");
   }
 
   public void labsChecked() {
-    typeChecked(labsCheck, labsNodes, "purple");
+    typeChecked(labsCheck, labsText, "purple");
   }
 
   public void infoChecked() {
-    typeChecked(infoCheck, infoNodes, "gray");
+    typeChecked(infoCheck, infoText, "gray");
   }
 
   public void confChecked() {
-    typeChecked(confCheck, confNodes, "yellow");
+    typeChecked(confCheck, confText, "yellow");
   }
 
   public void retlChecked() {
-    typeChecked(retlCheck, retlNodes, "brown");
+    typeChecked(retlCheck, retlText, "brown");
   }
 
   public void servChecked() {
-    typeChecked(servCheck, servNodes, "pink");
+    typeChecked(servCheck, servText, "pink");
   }
 
-  public void typeChecked(CheckBox check, List<Integer> nodes, String color) {
+  public void typeChecked(CheckBox check, List<Pair<Integer, Text>> nodes, String color) {
     if (check.isSelected()) {
-      highlight(nodes, color);
+      highlightt(nodes, color);
     } else {
-      unhighlight(nodes);
+      unhighlightt(nodes);
     }
   }
 
-  public void elevChecked() {}
-
   public void startSelected() throws IOException {
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     String lname = startSelect.getValue();
     if (lname != null && !lname.equals("")) {
       int index = startSelect.getSelectionModel().getSelectedIndex();
@@ -1022,24 +930,23 @@ public class PathfindingController2 {
         ready4Second = true;
         start = n;
         removeLines(previousPath);
-        parent.getChildren().remove(messageText);
-        if (highlightedNodes.size() > 0) {
-          /*
-          for (int i = 0; i < highlightedNodes.size(); i++) {
-              if (highlightedNodes.get(i).getMiddle() == floor) {
-                  // System.out.println(floor);
-                  System.out.println("----------------");
-                  System.out.println(highlightedNodes.get(i).getLeft());
-                  unhighlight(highlightedNodes.get(i).getLeft());
-              }
+      }
+
+      if (highlightedNodes.size() > 0) {
+        for (int j = 0; j < highlightedNodes.size(); j++) {
+          if (highlightedNodes.get(j).getMiddle() == floor) {
+            unhighlight(highlightedNodes.get(j).getLeft());
           }
-           */
-          cfnodes = setCF(cfnodes);
-          for (int i = 0; i < cfnodes.size(); i++) {
-            unhighlight(cfnodes.get(i).getValue()); // + 1
-          }
-          highlightedNodes.removeAll(highlightedNodes);
         }
+        highlightedNodes.removeAll(highlightedNodes);
+      }
+      if (highlightedNodesp.size() > 0) {
+        for (int j = 0; j < highlightedNodesp.size(); j++) {
+          if (highlightedNodesp.get(j).getMiddle() == floor) {
+            unhighlight(highlightedNodesp.get(j).getLeft());
+          }
+        }
+        highlightedNodesp.removeAll(highlightedNodesp);
       }
 
       if (f < floor) {
@@ -1056,31 +963,12 @@ public class PathfindingController2 {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
-
-          int ind = cfnodes.get(i).getValue();
-          javafx.scene.Node node = parent.getChildren().get(ind);
+          Button node = cfnodes.get(i).getValue();
           node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
                   + "-fx-border-color: black;"
                   + "-fx-background-insets: 0px;");
-
-          if (highlightedNodes.size() > 0) {
-            for (int j = 0; j < highlightedNodes.size(); j++) {
-              if (highlightedNodes.get(j).getMiddle() == floor) {
-                unhighlight(highlightedNodes.get(j).getLeft());
-              }
-              highlightedNodes.removeAll(highlightedNodes);
-            }
-          }
-          if (highlightedNodesp.size() > 0) {
-            for (int j = 0; j < highlightedNodesp.size(); j++) {
-              if (highlightedNodesp.get(j).getMiddle() == floor) {
-                unhighlight(highlightedNodesp.get(j).getLeft());
-              }
-              highlightedNodesp.removeAll(highlightedNodesp);
-            }
-          }
           highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodesp.add(
               Triple.of(
@@ -1093,7 +981,7 @@ public class PathfindingController2 {
   }
 
   public void endSelected() throws IOException {
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     String f = whichFloorS();
     String lname = endSelect.getValue();
     if (lname != null && !lname.equals("")) {
@@ -1106,6 +994,7 @@ public class PathfindingController2 {
       if (ready4Second) {
         target = n;
         ready4Second = false;
+        removeLines(previousPath);
         try {
           // removeLines(previousPath);
           previousPath = drawLinesf(start, target, f);
@@ -1128,8 +1017,7 @@ public class PathfindingController2 {
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
-          int ind = cfnodes.get(i).getValue();
-          javafx.scene.Node node = parent.getChildren().get(ind);
+          Button node = cfnodes.get(i).getValue();
           node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
@@ -1184,19 +1072,18 @@ public class PathfindingController2 {
 
   public void refresh() {
     String f = whichFloorS();
+    removeText();
     removeButtons();
     addButtons(f);
   }
 
   public void clearButtonClicked() {
-    List<Pair<Integer, Integer>> cfnodes = new ArrayList<>();
+    List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     textualPathfinding.setText(null);
     textualPathfinding.setPrefHeight(Region.USE_COMPUTED_SIZE);
-    // moveDates.removeAll(moveDates);
     removeLines(previousPath);
     start = null;
     target = null;
-    // previousPath.removeAll(previousPath);
     restCheck.setSelected(false);
     deptCheck.setSelected(false);
     labsCheck.setSelected(false);
@@ -1204,16 +1091,12 @@ public class PathfindingController2 {
     confCheck.setSelected(false);
     retlCheck.setSelected(false);
     servCheck.setSelected(false);
-    // unhighlight(restNodes);
-    // unhighlight(cafeNodes);
     cfnodes = setCF(cfnodes);
     for (int i = 0; i < cfnodes.size(); i++) {
       unhighlight(cfnodes.get(i).getValue()); // + 1
     }
     highlightedNodes.removeAll(highlightedNodes);
-    highlightedNodesp.removeAll(highlightedNodesp);
     startSelect.setValue(null);
     endSelect.setValue(null);
-    parent.getChildren().remove(messageText);
   }
 }
