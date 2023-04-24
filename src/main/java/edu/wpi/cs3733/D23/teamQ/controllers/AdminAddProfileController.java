@@ -17,13 +17,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 public class AdminAddProfileController {
   Qdb qdb = Qdb.getInstance();
 
-  @FXML private MFXTextField username; //UPDATE THIS IN SCENEBUILDER
+  @FXML private MFXTextField username;
   @FXML private MFXTextField firstName;
   @FXML private MFXTextField lastName;
   @FXML private MFXTextField email;
@@ -35,6 +34,7 @@ public class AdminAddProfileController {
   @FXML private MFXFilterComboBox securityQuestion2;
   @FXML private ImageView profileImage;
   @FXML private MFXButton editPFP;
+  @FXML private MFXButton password;
 
   private ObservableList<String> getQuestions() {
     ObservableList<String> questions = FXCollections.observableArrayList();
@@ -47,41 +47,36 @@ public class AdminAddProfileController {
 
   @FXML
   private void initialize() throws SQLException {
-//    Qdb qdb = Qdb.getInstance();
-//    String username = LoginController.getLoginUsername();
-//    Account account = qdb.retrieveAccount(username);
-//
-//    fullName.setText(account.getFirstName() + " " + account.getLastName());
-//    title.setText(account.getTitle());
-//    firstName.setText(account.getFirstName());
-//    lastName.setText(account.getLastName());
-//    email.setText(account.getEmail());
-//    phone.setText(Integer.toString(account.getPhoneNumber()));
-//    titleEdit.setText(account.getTitle());
-//    securityAnswer1.setText(account.getSecurityAnswer1());
-//    securityAnswer2.setText(account.getSecurityAnswer2());
-//    securityQuestion1.setText(qdb.retrieveQuestion(account.getSecurityQuestion1()).getQuestion());
-//    securityQuestion2.setText(qdb.retrieveQuestion(account.getSecurityQuestion2()).getQuestion());
-//    securityQuestion1.setItems(getQuestions());
-//    securityQuestion2.setItems(getQuestions());
-//
-//    Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
-//    ImageView imageView = new ImageView(image);
-//    imageView.setFitHeight(30.0);
-//    imageView.setFitWidth(30.0);
-//    editPFP.setText("");
-//    editPFP.setGraphic(imageView);
-//
-//    if (qdb.getProfileImageIndex(username) != -1) {
-//      Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
-//      profileImage.setImage(pfp);
-//    }
+    firstName.setText("");
+    lastName.setText("");
+    email.setText("");
+    phone.setText("");
+    titleEdit.setText("");
+    username.setText("");
+    password.setText("");
+    securityAnswer1.setText("");
+    securityAnswer2.setText("");
+    securityQuestion1.setText("");
+    securityQuestion2.setText("");
+
+    Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
+    ImageView imageView = new ImageView(image);
+    imageView.setFitHeight(30.0);
+    imageView.setFitWidth(30.0);
+    editPFP.setText("");
+    editPFP.setGraphic(imageView);
+
+    //        if (qdb.getProfileImageIndex(username) != -1) {
+    //          Image pfp =
+    // qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
+    //          profileImage.setImage(pfp);adin
+    //        }
   }
 
   @FXML
   public void donePressed() {
-//    String username = LoginController.getLoginUsername();
-//    Account account = qdb.retrieveAccount(username);
+    //    String username = LoginController.getLoginUsername();
+    //    Account account = qdb.retrieveAccount(username);
 
     Account newAccount =
         new Account(
@@ -92,18 +87,15 @@ public class AdminAddProfileController {
             qdb.getQuestionIndex(securityQuestion2.getText()) + 1,
             securityAnswer1.getText(),
             securityAnswer2.getText(),
-            account.isActive(),
-            IDNum.getInt(),
+            false,
             firstName.getText(),
             lastName.getText(),
             titleEdit.getText(),
             Integer.parseInt(phone.getText()),
-            account.getNotes(),
-            account.getTodo());
-
-    qdb.updateAccount(username, newAccount);
+            null,
+            null);
     qdb.addAccount(newAccount);
-    Navigation.navigate(Screen.PROFILE_PAGE);
+    Navigation.navigate(Screen.ADMIN_DIRECTORY);
   }
 
   public void editPFPClicked() throws SQLException {

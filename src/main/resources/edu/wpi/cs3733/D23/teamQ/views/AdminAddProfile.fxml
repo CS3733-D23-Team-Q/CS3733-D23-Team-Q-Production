@@ -92,7 +92,7 @@
                                                                         <Insets />
                                                                     </VBox.margin>
                                                                 </Text>
-                                                                <MFXTextField fx:id="email" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0">
+                                                                <MFXTextField fx:id="email" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
                                                                     <VBox.margin>
                                                                         <Insets top="5.0" />
                                                                     </VBox.margin>
@@ -111,26 +111,34 @@
                                                         </VBox>
                                                     </children>
                                                 </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                    <children>
-                                                        <VBox alignment="BOTTOM_LEFT" prefHeight="111.0" prefWidth="357.0" HBox.hgrow="ALWAYS">
-                                                            <children>
-                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title" />
-                                                                <MFXTextField fx:id="titleEdit" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
-                                                                    <VBox.margin>
-                                                                        <Insets bottom="20.0" top="5.0" />
-                                                                    </VBox.margin>
-                                                                </MFXTextField>
-                                                            </children>
-                                                        </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                                                <MFXTextField prefHeight="40.0" prefWidth="220.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <MFXTextField fx:id="titleEdit" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </MFXTextField>
                                              </children>
                                           </VBox>
-                                                    </children>
-                                                </HBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                                                <MFXTextField fx:id="username" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </MFXTextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
                                             </children></VBox>
                                         <VBox prefHeight="200.0" HBox.hgrow="ALWAYS">
                                             <children>
@@ -186,11 +194,33 @@
                                                         </VBox>
                                                     </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                    <children>
-                                                        <MFXButton fx:id="saveButton" onAction="#donePressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Save Changes" textFill="WHITE" />
-                                                    </children>
-                                                </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <MFXTextField fx:id="password" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </MFXTextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                              <MFXButton fx:id="saveButton" onAction="#donePressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Save Changes" textFill="WHITE">
+                                                   <VBox.margin>
+                                                      <Insets top="15.0" />
+                                                   </VBox.margin>
+                                                </MFXButton>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
                                             </children></VBox>
                                     </children>
                                 </HBox>
