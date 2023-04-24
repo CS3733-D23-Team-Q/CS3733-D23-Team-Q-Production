@@ -27,7 +27,8 @@ public class RefreshThread implements Runnable {
       "node",
       "profileImage",
       "security_question",
-      "serviceRequest"
+      "serviceRequest",
+      "message"
     };
     ArrayList<String> toUpdate = new ArrayList<>();
     while (true) {
@@ -35,10 +36,14 @@ public class RefreshThread implements Runnable {
         Connection conn = GenDao.connect();
         PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"timestamp\"");
         ResultSet rs = pst.executeQuery();
+        conn.close();
+        pst.close();
         while (rs.next()) {
           for (String tableName : tableNames) {
             if (rs.getString("tableName").equals(tableName)) {
               if (rs.getLong("updated_timestamp") > lastUpdate) {
+                System.out.println(lastUpdate);
+                System.out.println(rs.getLong("updated_timestamp"));
                 toUpdate.add(tableName);
               }
             }
@@ -57,8 +62,8 @@ public class RefreshThread implements Runnable {
           for (String tableName : toUpdate) {
             System.out.println("Updated " + tableName + " from client server.");
           }
+          toUpdate.clear();
         }
-        toUpdate.clear();
         Thread.sleep(2000);
       } catch (InterruptedException e) {
         throw new RuntimeException(e);
@@ -79,7 +84,8 @@ public class RefreshThread implements Runnable {
         st.setString(2, tableName);
         st.executeUpdate();
       }
-
+      connection.close();
+      st.close();
       return true;
     } catch (SQLException e) {
       e.printStackTrace();
