@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Sign;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -50,13 +51,14 @@ public class SignageFormController {
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigateRight(Screen.HOME);
   }
 
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-
+    Sign newSign = new Sign((Integer) kioskField.getValue(),dateField.getText(),destinationField.getText(),directionField.getText());
+    qdb.addSign(newSign);
     Navigation.navigateRight(Screen.SUBMISSION);
   }
 }

@@ -38,6 +38,8 @@ public class Qdb {
 
   private Account messagingAccount = null;
 
+  private int kiosk;
+
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
@@ -594,4 +596,8 @@ public class Qdb {
   public Account getMessagingAccount() {
     return messagingAccount;
   }
+
+  public void setKiosk(int k){kiosk = k;}
+
+  public int getKiosk(){return kiosk;}
 }
