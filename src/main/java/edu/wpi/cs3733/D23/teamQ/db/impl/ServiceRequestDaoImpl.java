@@ -43,8 +43,8 @@ public class ServiceRequestDaoImpl {
             new ServiceRequest(
                 rst.getInt("requestID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
                 accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
+                accountTable.retrieveRow(rst.getString("requester")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
@@ -87,6 +87,16 @@ public class ServiceRequestDaoImpl {
     for (int i = 0; i < serviceRequests.size(); i++) {
       if (serviceRequests.get(i).getRequester().getUsername().equals(user)
           || serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public List<ServiceRequest> getUserAssignedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
         list.add(serviceRequests.get(i));
       }
     }

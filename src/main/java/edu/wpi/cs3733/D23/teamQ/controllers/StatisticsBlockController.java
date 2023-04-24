@@ -38,6 +38,16 @@ public class StatisticsBlockController {
   public void statisticsExited() {}
 
   @FXML
+  public void hideBlock() {
+    statisticsHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    statisticsHB.setVisible(true);
+  }
+
+  @FXML
   public void hideSM() {
     statisticsSMPane.setVisible(false);
   }

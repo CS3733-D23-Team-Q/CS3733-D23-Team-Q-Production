@@ -106,6 +106,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
   @Override
   public boolean populate() {
     try {
+      nodes.clear();
       Connection conn = GenDao.connect();
       PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"node\"");
       ResultSet rs = pst.executeQuery();
