@@ -31,6 +31,9 @@ public class Qdb {
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
   private ServiceRequestDaoImpl serviceRequestTable;
+  private MessageDaoImpl messageTable;
+
+  private Account messagingAccount = null;
 
   private static Qdb single_instance = null;
 
@@ -57,6 +60,7 @@ public class Qdb {
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
+    messageTable = MessageDaoImpl.getInstance(accountTable);
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -109,6 +113,10 @@ public class Qdb {
 
   public List<Integer> getAccountIndexes(String email) {
     return accountTable.getIndexes(email);
+  }
+
+  public Account getAccountFromUsername(String UN) {
+    return accountTable.getAccountFromUN(UN);
   }
 
   public ArrayList<Account> retrieveAllAccounts() {
@@ -484,6 +492,7 @@ public class Qdb {
   }
 
   public boolean updateProfileImage(String username, ProfileImage x) throws SQLException {
+    updateTimestamp("profileImage");
     return profileImageTable.updateRow(username, x);
   }
 
@@ -492,6 +501,7 @@ public class Qdb {
   }
 
   public boolean addProfileImage(ProfileImage x) {
+    updateTimestamp("profileImage");
     return profileImageTable.addRow(x);
   }
 
@@ -505,6 +515,15 @@ public class Qdb {
 
   public int getProfileImageIndex(String username) {
     return profileImageTable.getIndex(username);
+  }
+
+  public ObservableList<Message> retrieveMessages(String p1, String p2) {
+    return messageTable.retrieveMessages(p1, p2);
+  }
+
+  public boolean addMessage(Message message) {
+    updateTimestamp("message");
+    return messageTable.addRow(message);
   }
 
   public boolean populate(ArrayList<String> tableNames) {
@@ -521,7 +540,9 @@ public class Qdb {
         case "node":
           nodeTable.populate();
         case "profileImage":
-          // tbd
+          profileImageTable.populate();
+        case "message":
+          messageTable.populate();
         case "serviceRequest":
           serviceRequestTable.populate();
           conferenceRequestTable.populate();
@@ -534,5 +555,13 @@ public class Qdb {
       }
     }
     return true;
+  }
+
+  public void setMessagingAccount(Account a) {
+    messagingAccount = a;
+  }
+
+  public Account getMessagingAccount() {
+    return messagingAccount;
   }
 }
