@@ -20,7 +20,7 @@ public class NavigationSubmenuAdminController {
 
   @FXML
   public void editorClicked() {
-    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
+    Navigation.navigate(Screen.MAP_EDITOR);
   }
 
   public void moveClicked() {

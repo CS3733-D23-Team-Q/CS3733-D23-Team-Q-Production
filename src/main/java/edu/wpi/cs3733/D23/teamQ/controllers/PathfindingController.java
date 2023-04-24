@@ -115,11 +115,11 @@ public class PathfindingController {
     previousNodes = new ArrayList<>();
     floors = new ArrayList<>();
     // Image gf = new Image("/00_thegroundfloor.png");
-    Image l1 = new Image("/00_thelowerlevel1.png");
-    Image l2 = new Image("/00_thelowerlevel2.png");
-    Image ff = new Image("/01_thefirstfloor.png");
-    Image sf = new Image("/02_thesecondfloor.png");
-    Image tf = new Image("/03_thethirdfloor.png");
+    Image l1 = new Image("/edu/wpi/cs3733/D23/teamQ/00_thelowerlevel1.png");
+    Image l2 = new Image("/edu/wpi/cs3733/D23/teamQ/00_thelowerlevel2.png");
+    Image ff = new Image("/edu/wpi/cs3733/D23/teamQ/01_thefirstfloor.png");
+    Image sf = new Image("/edu/wpi/cs3733/D23/teamQ/02_thesecondfloor.png");
+    Image tf = new Image("/edu/wpi/cs3733/D23/teamQ/03_thethirdfloor.png");
     // floors.add(gf); // 0
     floors.add(l1); // 0
     floors.add(l2); // 1

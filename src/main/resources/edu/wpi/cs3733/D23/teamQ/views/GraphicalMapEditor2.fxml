@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import net.kurobako.gesturefx.GesturePane?>
 
-<HBox fx:id="root" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.GraphicalMapEditor2Controller">
+<HBox fx:id="root" prefHeight="900.0" prefWidth="1300.0" stylesheets="@styles/GME.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.GraphicalMapEditor2Controller">
     <children>
         <GesturePane fx:id="mapPane" fitMode="COVER" prefHeight="900.0" HBox.hgrow="ALWAYS">
             <Group fx:id="mapGroup">
@@ -21,7 +21,7 @@
                 <ImageView fx:id="mapImage" />
             </Group>
         </GesturePane>
-        <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefHeight="900.0" prefWidth="384.0" spacing="24.0" style="-fx-background-color: #012d5a;">
+        <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefHeight="900.0" prefWidth="384.0" spacing="36.0" style="-fx-background-color: #012d5a;">
             <padding>
                 <Insets bottom="16.0" left="12.0" right="12.0" top="16.0" />
             </padding>
@@ -37,7 +37,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
                            <children>
@@ -46,7 +46,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="nodeidField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -56,7 +57,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" fx:id="xcoordField" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -66,7 +68,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="ycoordField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -76,7 +79,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXFilterComboBox />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXFilterComboBox fx:id="floorField" prefWidth="196.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -86,7 +90,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXFilterComboBox />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXFilterComboBox fx:id="buildingField" prefWidth="196.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -96,7 +101,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="longnameField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -106,7 +112,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="shortnameField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -116,22 +123,23 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="nodetypeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
+                  <HBox prefHeight="28.0" prefWidth="296.0" spacing="12.0">
+                     <children>
+                        <MFXButton fx:id="find" prefHeight="28.0" prefWidth="64.0" text="Find" />
+                        <MFXButton fx:id="delete" prefHeight="28.0" prefWidth="64.0" text="Delete" />
+                        <MFXButton fx:id="set" prefHeight="28.0" prefWidth="64.0" text="Set" />
+                        <MFXButton fx:id="add" prefHeight="28.0" prefWidth="64.0" text="Add" />
+                        <MFXButton fx:id="clear" prefHeight="28.0" prefWidth="64.0" text="Clear" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <HBox prefHeight="28.0" prefWidth="296.0" spacing="12.0">
-               <children>
-                  <MFXButton prefHeight="28.0" prefWidth="64.0" text="Find" />
-                  <MFXButton prefHeight="28.0" prefWidth="64.0" text="Delete" />
-                  <MFXButton prefHeight="28.0" prefWidth="64.0" text="Set" />
-                  <MFXButton prefHeight="28.0" prefWidth="64.0" text="Add" />
-                  <MFXButton prefHeight="28.0" prefWidth="64.0" text="Clear" />
-               </children>
-            </HBox>
             <VBox spacing="12.0">
                <children>
                   <HBox>
@@ -143,7 +151,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <VBox>
+                  <VBox spacing="6.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
                            <children>
@@ -152,7 +160,8 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="startnodeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
@@ -162,61 +171,62 @@
                                     <Font name="Roboto" size="16.0" />
                                  </font>
                               </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <MFXTextField fx:id="endnodeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="196.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <HBox prefHeight="28.0" prefWidth="296.0" spacing="36.0">
                      <children>
-                        <MFXButton prefHeight="28.0" prefWidth="96.0" text="Add Nodes" />
-                        <MFXButton prefHeight="28.0" prefWidth="96.0" text="Display Edges" />
-                        <MFXButton prefHeight="28.0" prefWidth="96.0" text="Hide Edges" />
+                        <MFXButton fx:id="addEdges" prefHeight="28.0" prefWidth="96.0" text="Add Edges" />
+                        <MFXButton fx:id="displayEdges" prefHeight="28.0" prefWidth="96.0" text="Display Edges" />
+                        <MFXButton fx:id="hideEdges" prefHeight="28.0" prefWidth="96.0" text="Hide Edges" />
                      </children>
                   </HBox>
-                  <VBox>
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
-                           <children>
-                              <Label text="Display Location Name" textFill="#f1f1f1">
-                                 <font>
-                                    <Font name="Roboto" size="16.0" />
-                                 </font>
-                              </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="128.0" HBox.hgrow="ALWAYS" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
-                           <children>
-                              <Label text="Open Table" textFill="#f1f1f1">
-                                 <font>
-                                    <Font name="Roboto" size="16.0" />
-                                 </font>
-                              </Label>
-                              <MFXTextField minHeight="-Infinity" prefHeight="40.0" prefWidth="212.0" HBox.hgrow="ALWAYS" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
                </children>
             </VBox>
-            <HBox>
+            <VBox spacing="6.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
                      <children>
-                        <Label text="Floor" textFill="#f1f1f1">
+                        <Label text="Display Location Name" textFill="#f1f1f1">
                            <font>
                               <Font name="Roboto" size="16.0" />
                            </font>
                         </Label>
-                        <MFXFilterComboBox />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <MFXFilterComboBox fx:id="dln" prefWidth="160.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="296.0">
+                     <children>
+                        <Label text="Open Table" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <MFXFilterComboBox fx:id="ot" prefWidth="160.0" />
                      </children>
                   </HBox>
                </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label text="Change Floor" textFill="#f1f1f1">
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <MFXFilterComboBox fx:id="changeFloor" prefWidth="196.0" />
+               </children>
             </HBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <MFXButton prefHeight="28.0" prefWidth="64.0" text="Help" />
+                  <MFXButton fx:id="help" onMouseClicked="#helpClicked" prefHeight="28.0" prefWidth="64.0" text="Help" />
                </children>
             </HBox>
          </children>
