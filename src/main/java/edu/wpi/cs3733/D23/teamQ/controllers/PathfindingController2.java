@@ -1100,9 +1100,9 @@ public class PathfindingController2 {
     endSelect.setValue(null);
   }
 
-  public void removeNodes(){
+  public void removeNodes() {
     List<Move> dateMoves = qdb.retrieveAllMoves();
-    for(Move m: dateMoves){
+    for (Move m : dateMoves) {
       /*
       for(Node nd : startNodes){
         if(nd.getNodeID() == m.getNodeID()){
