@@ -93,10 +93,20 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
-  public List<ServiceRequest> getUserAssignedRows(String user) {
+  public ObservableList<ServiceRequest> getUserAssignedRows(String user) {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
       if (serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)) {
         list.add(serviceRequests.get(i));
       }
     }

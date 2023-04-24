@@ -175,8 +175,12 @@ public class Qdb {
     return serviceRequestTable.getUserRows(user);
   }
 
-  public List<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
+  public ObservableList<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
     return serviceRequestTable.getUserAssignedRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    return serviceRequestTable.getUserRequestedRows(user);
   }
 
   public ServiceRequest retrieveServiceRequest(int requestID) {
