@@ -30,7 +30,7 @@ public class SignageController implements IController {
                   });
         });
 
-    //qdb
+    // qdb
 
   }
 }

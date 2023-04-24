@@ -31,7 +31,12 @@ public class Qdb {
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
   private ServiceRequestDaoImpl serviceRequestTable;
+
   private SignDaoImpl signTable;
+
+  private MessageDaoImpl messageTable;
+
+  private Account messagingAccount = null;
 
   private static Qdb single_instance = null;
 
@@ -58,7 +63,10 @@ public class Qdb {
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
+
     signTable = SignDaoImpl.getInstance();
+
+    messageTable = MessageDaoImpl.getInstance(accountTable);
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -69,6 +77,8 @@ public class Qdb {
       st.setLong(1, System.currentTimeMillis());
       st.setString(2, tableName);
       st.executeUpdate();
+      connection.close();
+      st.close();
       return true;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -110,9 +120,15 @@ public class Qdb {
   public List<Integer> getAccountIndexes(String email) {
     return accountTable.getIndexes(email);
   }
+
+  public Account getAccountFromUsername(String UN) {
+    return accountTable.getAccountFromUN(UN);
+  }
+
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
   }
+
   public Sign retrieveSign(int kiosk) {
     return signTable.retrieveRow(kiosk);
   }
@@ -132,6 +148,7 @@ public class Qdb {
   public int getSignIndex(int kiosk) {
     return signTable.getIndex(kiosk);
   }
+
   public ArrayList<Sign> retrieveAllSigns() {
     return (ArrayList<Sign>) signTable.getAllRows();
   }
@@ -505,6 +522,7 @@ public class Qdb {
   }
 
   public boolean updateProfileImage(String username, ProfileImage x) throws SQLException {
+    updateTimestamp("profileImage");
     return profileImageTable.updateRow(username, x);
   }
 
@@ -513,6 +531,7 @@ public class Qdb {
   }
 
   public boolean addProfileImage(ProfileImage x) {
+    updateTimestamp("profileImage");
     return profileImageTable.addRow(x);
   }
 
@@ -526,6 +545,15 @@ public class Qdb {
 
   public int getProfileImageIndex(String username) {
     return profileImageTable.getIndex(username);
+  }
+
+  public ObservableList<Message> retrieveMessages(String p1, String p2) {
+    return messageTable.retrieveMessages(p1, p2);
+  }
+
+  public boolean addMessage(Message message) {
+    updateTimestamp("message");
+    return messageTable.addRow(message);
   }
 
   public boolean populate(ArrayList<String> tableNames) {
@@ -542,7 +570,9 @@ public class Qdb {
         case "node":
           nodeTable.populate();
         case "profileImage":
-          // tbd
+          profileImageTable.populate();
+        case "message":
+          messageTable.populate();
         case "serviceRequest":
           serviceRequestTable.populate();
           conferenceRequestTable.populate();
@@ -555,5 +585,13 @@ public class Qdb {
       }
     }
     return true;
+  }
+
+  public void setMessagingAccount(Account a) {
+    messagingAccount = a;
+  }
+
+  public Account getMessagingAccount() {
+    return messagingAccount;
   }
 }
