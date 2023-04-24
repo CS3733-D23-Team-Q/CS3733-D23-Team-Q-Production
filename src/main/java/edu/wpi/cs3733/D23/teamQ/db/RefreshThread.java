@@ -36,8 +36,6 @@ public class RefreshThread implements Runnable {
         Connection conn = GenDao.connect();
         PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"timestamp\"");
         ResultSet rs = pst.executeQuery();
-        conn.close();
-        pst.close();
         while (rs.next()) {
           for (String tableName : tableNames) {
             if (rs.getString("tableName").equals(tableName)) {
@@ -49,6 +47,8 @@ public class RefreshThread implements Runnable {
             }
           }
         }
+        conn.close();
+        pst.close();
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
