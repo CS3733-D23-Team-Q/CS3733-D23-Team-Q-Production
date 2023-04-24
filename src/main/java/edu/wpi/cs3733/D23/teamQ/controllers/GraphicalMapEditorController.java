@@ -265,6 +265,7 @@ public class GraphicalMapEditorController {
 
   /**
    * add nodes
+   *
    * @param event
    */
   @FXML
@@ -304,6 +305,7 @@ public class GraphicalMapEditorController {
 
   /**
    * clear all information of nodes
+   *
    * @param event
    */
   @FXML
@@ -447,9 +449,7 @@ public class GraphicalMapEditorController {
     WhichFloor.setText("The First Floor");
   }
 
-  /**
-   * turn to the next floor
-   */
+  /** turn to the next floor */
   void shownext() {
     startnodeinitial.clear();
     endnodeinitial.clear();
@@ -460,6 +460,8 @@ public class GraphicalMapEditorController {
     startnode = empty;
     endnode = empty;
     HideEdges();
+    clearLocationName();
+
     currentIndex++;
     if (currentIndex < file.length) {
 
@@ -478,7 +480,8 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   *add nodes on the map
+   * add nodes on the map
+   *
    * @param floor
    * @return
    */
@@ -638,8 +641,10 @@ public class GraphicalMapEditorController {
             // after clicking confirm button
             qdb.updateNode(nodeID, newNode);
             NodeInformation(nodeID);
-            HideEdges();
-            DisplayEdges();
+            if (displayEdges == true) {
+              HideEdges();
+              DisplayEdges();
+            }
           });
       /*
       node.setOnMouseClicked(
@@ -712,6 +717,7 @@ public class GraphicalMapEditorController {
 
   /**
    * true if the floor exists, else return false and call alerts
+   *
    * @param floor
    * @param floorAlert
    * @param image
@@ -734,6 +740,7 @@ public class GraphicalMapEditorController {
 
   /**
    * return true if the nodeId exists, else call alerts and return false
+   *
    * @param nodeID
    * @param nodeIDAlert
    * @param image
@@ -757,6 +764,7 @@ public class GraphicalMapEditorController {
 
   /**
    * return true if the nodeID is legal and it does not exist, else call alerts and return false
+   *
    * @param nodeID
    * @param nodeIDAlert
    * @param image
@@ -780,6 +788,7 @@ public class GraphicalMapEditorController {
 
   /**
    * return true if X-coord and Y-coord are legal, else call alert and return false
+   *
    * @param xcoord
    * @param ycoord
    * @param informationAlert
@@ -804,6 +813,7 @@ public class GraphicalMapEditorController {
 
   /**
    * return true if the location name is legal and is not empty, else return false
+   *
    * @param longname
    * @param shortname
    * @param nodetype
@@ -866,6 +876,7 @@ public class GraphicalMapEditorController {
 
   /**
    * open the help page
+   *
    * @param event
    * @throws IOException
    */
@@ -879,9 +890,7 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
-  /**
-   * refresh nodes
-   */
+  /** refresh nodes */
   void refreshNodes() {
     parent.getChildren().removeAll(button);
     button = addButtons(Floor(currentIndex));
@@ -890,6 +899,7 @@ public class GraphicalMapEditorController {
 
   /**
    * add lines
+   *
    * @param path
    * @return
    */
@@ -936,6 +946,7 @@ public class GraphicalMapEditorController {
 
   /**
    * remove lines
+   *
    * @param lines
    */
   void removeLines(List<Line> lines) {
@@ -949,6 +960,7 @@ public class GraphicalMapEditorController {
 
   /**
    * choose lines
+   *
    * @param floor
    * @return
    */
@@ -967,6 +979,7 @@ public class GraphicalMapEditorController {
 
   /**
    * turn on the next floor
+   *
    * @param event
    */
   @FXML
@@ -988,6 +1001,7 @@ public class GraphicalMapEditorController {
 
   /**
    * return the String type of floor by the integer type of floor.
+   *
    * @param x
    * @return
    */
@@ -1007,6 +1021,7 @@ public class GraphicalMapEditorController {
 
   /**
    * turn on the last page
+   *
    * @param event
    */
   @FXML
@@ -1033,6 +1048,7 @@ public class GraphicalMapEditorController {
     startnode = empty;
     endnode = empty;
     HideEdges();
+    clearLocationName();
     currentIndex--;
 
     if (currentIndex >= 0) {
@@ -1264,7 +1280,7 @@ public class GraphicalMapEditorController {
 
     LocationController controller =
         (LocationController) Navigation.getController(Screen.LocationName_Table);
-    Stage stage = newStage("Help", Screen.LocationName_Table);
+    Stage stage = newStage("Location Name Table", Screen.LocationName_Table);
     controller.setStage(stage);
     stage.show();
     stage.centerOnScreen();
@@ -1273,7 +1289,7 @@ public class GraphicalMapEditorController {
   void MoveTable() throws IOException {
 
     MoveController controller = (MoveController) Navigation.getController(Screen.Move_Table);
-    Stage stage = newStage("Help", Screen.Move_Table);
+    Stage stage = newStage("Move Table", Screen.Move_Table);
     controller.setStage(stage);
     stage.show();
     stage.centerOnScreen();
@@ -1282,7 +1298,7 @@ public class GraphicalMapEditorController {
   void EdgeTable() throws IOException {
 
     EdgeController controller = (EdgeController) Navigation.getController(Screen.Edge_Table);
-    Stage stage = newStage("Help", Screen.Edge_Table);
+    Stage stage = newStage("Edge Table", Screen.Edge_Table);
     controller.setStage(stage);
     stage.show();
     stage.centerOnScreen();
@@ -1315,6 +1331,10 @@ public class GraphicalMapEditorController {
     return true;
   }
 
+  void clearLocationName() {
+    if (!Texts.isEmpty()) parent.getChildren().removeAll(Texts);
+  }
+
   @FXML
   void DisplayLocationClicked(MouseEvent event) {
     boolean check = ShowLocationName();
@@ -1343,8 +1363,10 @@ public class GraphicalMapEditorController {
     if (edgeAlert(addedge)) {
       qdb.edgeTable.addRow(addedge);
     }
-    HideEdges();
-    DisplayEdges();
+    if (displayEdges == true) {
+      HideEdges();
+      DisplayEdges();
+    }
   }
 
   boolean edgeAlert(Edge edge) {
@@ -1357,7 +1379,7 @@ public class GraphicalMapEditorController {
         alert.setLabelAlert("The end node cannot be empty", alerts1, image11);
         return false;
       } else if (edge.getStartNode().getNodeID() == edge.getEndNode().getNodeID()) {
-        alert.setLabelAlert("The start node and the end node cannot be the same", alerts1, image11);
+        alert.setLabelAlert("The start node cannot be the end node", alerts1, image11);
         return false;
       } else if (edge.getStartNode().getNodeID() == alledges.get(i).getStartNode().getNodeID()
           && edge.getEndNode().getNodeID() == alledges.get(i).getEndNode().getNodeID()) {
