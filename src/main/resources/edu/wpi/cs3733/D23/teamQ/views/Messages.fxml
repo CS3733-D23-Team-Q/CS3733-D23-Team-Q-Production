@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagingController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Line endY="900.0" stroke="#b4b4b4" HBox.hgrow="ALWAYS" />
+            <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <ImageView fx:id="profilePicture" fitHeight="83.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" />
+                        <Circle fx:id="activeIndicator" fill="#f1f1f1" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="1149.0" style="-fx-border-color: #0167B1;" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <MFXScrollPane fx:id="messageSP" maxWidth="1.7976931348623157E308" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="messageVbox" prefHeight="729.0" prefWidth="1456.0" />
+                     </content>
+                  </MFXScrollPane>
+                  <HBox spacing="20.0">
+                     <children>
+                        <MFXTextField fx:id="messageField" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="40.0" prefWidth="825.0" promptText="Message" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </MFXTextField>
+                        <ImageView fx:id="sendButton" fitHeight="42.0" fitWidth="41.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../paper-plane-solid.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

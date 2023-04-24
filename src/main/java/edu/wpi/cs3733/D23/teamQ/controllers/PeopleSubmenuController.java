@@ -11,9 +11,16 @@ public class PeopleSubmenuController {
   @FXML MFXButton profile;
   @FXML MFXButton directory;
 
+  @FXML MFXButton messages;
+
   @FXML
   public void profileClicked() {
     Navigation.navigate(Screen.PROFILE_PAGE);
+  }
+
+  @FXML
+  public void messagesClicked() {
+    Navigation.navigate(Screen.MESSAGES);
   }
 
   @FXML
