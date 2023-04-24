@@ -36,7 +36,6 @@ import org.apache.commons.lang3.tuple.Triple;
 
 public class PathfindingController {
   Qdb qdb = Qdb.getInstance();
-  // Stage stage = App.getPrimaryStage();
   Context pathfindingAlgorithmSelection = new Context();
   BFS bfs = new BFS();
   AStar aStar = new AStar();
@@ -53,27 +52,27 @@ public class PathfindingController {
   int floor;
   List<Button> previousNodes;
   List<Text> previousText;
-  List<Integer> restText;
-  List<Integer> deptText;
-  List<Integer> labsText;
-  List<Integer> infoText;
-  List<Integer> confText;
-  List<Integer> retlText;
-  List<Integer> servText;
+  List<Pair<Integer, Text>> restText;
+  List<Pair<Integer, Text>> deptText;
+  List<Pair<Integer, Text>> labsText;
+  List<Pair<Integer, Text>> infoText;
+  List<Pair<Integer, Text>> confText;
+  List<Pair<Integer, Text>> retlText;
+  List<Pair<Integer, Text>> servText;
   List<Integer> nodeIds;
-  List<Triple<Integer, Integer, Integer>> highlightedNodes;
-  List<Triple<Integer, Integer, Integer>> highlightedNodesp;
-  List<Pair<Integer, Integer>> l1nodes;
-  List<Pair<Integer, Integer>> l2nodes;
-  List<Pair<Integer, Integer>> ffnodes;
-  List<Pair<Integer, Integer>> sfnodes;
-  List<Pair<Integer, Integer>> tfnodes;
+  List<Triple<Button, Integer, Integer>> highlightedNodes;
+  List<Triple<Button, Integer, Integer>> highlightedNodesp;
+  List<Pair<Integer, Button>> l1nodes;
+  List<Pair<Integer, Button>> l2nodes;
+  List<Pair<Integer, Button>> ffnodes;
+  List<Pair<Integer, Button>> sfnodes;
+  List<Pair<Integer, Button>> tfnodes;
   List<String> allSelections;
   String algorithm;
   Date date;
   List<Date> moveDates;
   ToggleGroup dateToggle;
-  List<Triple<Integer, Integer, Integer>> cfpath;
+  List<Triple<Button, Integer, Integer>> cfpath;
   Text messageText;
 
   @FXML HBox root;
@@ -338,23 +337,23 @@ public class PathfindingController {
         parent.getChildren().add(text);
         int indext = parent.getChildren().indexOf(text);
         previousText.add(text);
-        restText = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restText, indext);
-        deptText = addSpecificNode("\\bDEPT\\b", nodetype, deptText, indext);
-        labsText = addSpecificNode("\\bLABS\\b", nodetype, labsText, indext);
-        infoText = addSpecificNode("\\bINFO\\b", nodetype, infoText, indext);
-        confText = addSpecificNode("\\bCONF\\b", nodetype, confText, indext);
-        retlText = addSpecificNode("\\bRETL\\b", nodetype, retlText, indext);
-        servText = addSpecificNode("\\bSERV\\b", nodetype, servText, indext);
+        restText = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restText, text, nodeid);
+        deptText = addSpecificNode("\\bDEPT\\b", nodetype, deptText, text, nodeid);
+        labsText = addSpecificNode("\\bLABS\\b", nodetype, labsText, text, nodeid);
+        infoText = addSpecificNode("\\bINFO\\b", nodetype, infoText, text, nodeid);
+        confText = addSpecificNode("\\bCONF\\b", nodetype, confText, text, nodeid);
+        retlText = addSpecificNode("\\bRETL\\b", nodetype, retlText, text, nodeid);
+        servText = addSpecificNode("\\bSERV\\b", nodetype, servText, text, nodeid);
       }
     }
   }
 
-  public List<Integer> addSpecificNode(
-      String pattern, String input, List<Integer> nodes, int node) {
+  public List<Pair<Integer, Text>> addSpecificNode(
+      String pattern, String input, List<Pair<Integer, Text>> nodes, Text node, int nodeid) {
     Pattern pattern1 = Pattern.compile(pattern);
     Matcher matcher1 = pattern1.matcher(input);
     if (matcher1.find()) {
-      nodes.add(node);
+      nodes.add(new Pair<> (nodeid, node));
     }
     return nodes;
   }
