@@ -515,11 +515,11 @@ public class Qdb {
     return profileImageTable.getIndex(username);
   }
 
-  public List<Message> retrieveMessages(String p1, String p2){
+  public List<Message> retrieveMessages(String p1, String p2) {
     return messageTable.retrieveMessages(p1, p2);
   }
 
-  public boolean addMessage(Message message){
+  public boolean addMessage(Message message) {
     updateTimestamp("message");
     return messageTable.addRow(message);
   }

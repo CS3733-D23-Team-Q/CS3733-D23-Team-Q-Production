@@ -10,8 +10,6 @@ import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.beans.value.ChangeListener;
@@ -40,8 +38,6 @@ public class MessagingController {
 
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
-
-  List<Message> messageList = new LinkedList<>();
 
   @FXML
   public void initialize() {
@@ -89,15 +85,14 @@ public class MessagingController {
                     profilePicture.setImage(pfp);
                   }
 
-                  // messageList =
-                  // qdb.getMessages(qdb.retrieveAccount(LoginController.getUsername()),
-                  // receiver);
+                  System.out.println(qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).get(0).getMessage());
 
-                  // NEED METHOD TO PULL THE DATABASE TO DISPLAY MESSAGE HISTORY
-                  // Take a list of messages in order of send date, and if sender = me call
-                  // sentHistorically()
-                  // Sender != me, call messageReceived
-
+                  for (Message m :
+                      qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
+                    if (m.getSender().getUsername().equals(LoginController.getUsername()))
+                      sentHistorically(m);
+                    else messageReceived(m);
+                  }
                 }
               }
             });
@@ -122,8 +117,15 @@ public class MessagingController {
               message,
               currentTimeMillis());
 
-      if (messageList.isEmpty()
-          || (System.currentTimeMillis() - messageList.get(messageList.size() - 1).getTimeStamp()
+      if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+          || (System.currentTimeMillis()
+                  - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                      .get(
+                          qdb.retrieveMessages(
+                                      LoginController.getUsername(), receiver.getUsername())
+                                  .size()
+                              - 1)
+                      .getTimeStamp()
               >= 3600000)) displayTime(System.currentTimeMillis());
 
       HBox hbox = new HBox();
@@ -140,17 +142,26 @@ public class MessagingController {
       hbox.getChildren().add(textFlow);
       messageVbox.getChildren().add(hbox);
 
-      // qdb.addMessage(newMessage);
-      messageList.add(newMessage);
+      qdb.addMessage(newMessage);
+
       messageField.clear();
     }
   }
 
   public void sentHistorically(Message messageSent) {
+
+    Qdb qdb = Qdb.getInstance();
+
     String message = messageSent.getMessage();
 
-    if (messageList.isEmpty()
-        || (System.currentTimeMillis() - messageList.get(messageList.size() - 1).getTimeStamp()
+    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+        || (System.currentTimeMillis()
+                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                    .get(
+                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                                .size()
+                            - 1)
+                    .getTimeStamp()
             >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
@@ -169,10 +180,19 @@ public class MessagingController {
   }
 
   public void messageReceived(Message messageReceived) {
+
+    Qdb qdb = Qdb.getInstance();
+
     String message = messageReceived.getMessage();
 
-    if (messageList.isEmpty()
-        || (System.currentTimeMillis() - messageList.get(messageList.size() - 1).getTimeStamp()
+    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+        || (System.currentTimeMillis()
+                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                    .get(
+                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                                .size()
+                            - 1)
+                    .getTimeStamp()
             >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
@@ -188,7 +208,6 @@ public class MessagingController {
     text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
-    messageList.add(messageReceived);
   }
 
   public void displayTime(long time) {
