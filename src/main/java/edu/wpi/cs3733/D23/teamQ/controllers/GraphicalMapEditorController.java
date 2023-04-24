@@ -156,133 +156,10 @@ public class GraphicalMapEditorController {
   @FXML private TextField nodeidinput;
 
   /**
-   * update nodes
+   * initialize the basic map
    *
-   * @param event
+   * @throws IOException
    */
-  @FXML
-  void setclicked(MouseEvent event) {
-    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
-      if (coordAlert(xinitial, yinitial, alerts, image1)) {
-        if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
-          if (floorAlert(floorinitial, alerts, image1)) {
-            nodeid = Integer.parseInt(nodeidinput.getText());
-            newLongName = longnameinitial.getText();
-            newNodeType = nodetypeinitial.getText();
-            newShortName = shortnameinitial.getText();
-            qdb.locationTable.updateRow(
-                nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
-            newBuilding = buildinginitial.getText();
-            newFloor = floorinitial.getText();
-            newXcoord = Integer.parseInt(xinitial.getText());
-            newYcoord = Integer.parseInt(yinitial.getText());
-            qdb.nodeTable.updateRow(
-                nodeid,
-                new Node(
-                    nodeid,
-                    newXcoord,
-                    newYcoord,
-                    newFloor,
-                    newBuilding,
-                    Qdb.getInstance().locationTable.retrieveRow(nodeid)));
-            refreshNodes();
-            setEdges();
-            findOnMap();
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * delete nodes
-   *
-   * @param event
-   */
-  @FXML
-  void deleteclicked(MouseEvent event) {
-    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
-      nodeid = Integer.parseInt(nodeidinput.getText());
-      qdb.nodeTable.deleteRow(nodeid);
-      qdb.locationTable.deleteRow(nodeid);
-      refreshNodes();
-    } else {
-      InitialNode();
-    }
-    setEdges();
-  }
-
-  /**
-   * find nodes and display the information of the nodes
-   *
-   * @param event
-   */
-  @FXML
-  void findclicked(MouseEvent event) {
-    findOnMap();
-  }
-
-  /**
-   * add nodes
-   *
-   * @param event
-   */
-  @FXML
-  void addclicked(MouseEvent event) {
-    if (nodeIDAlerttwo(nodeidinput, alerts, image1)) {
-      if (coordAlert(xinitial, yinitial, alerts, image1)) {
-        if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
-          if (floorAlert(floorinitial, alerts, image1)) {
-            nodeid = Integer.parseInt(nodeidinput.getText());
-            newLongName = longnameinitial.getText();
-            newNodeType = nodetypeinitial.getText();
-            newShortName = shortnameinitial.getText();
-
-            qdb.locationTable.addRow(new Location(nodeid, newLongName, newShortName, newNodeType));
-            newBuilding = buildinginitial.getText();
-            newFloor = floorinitial.getText();
-            newXcoord = Integer.parseInt(xinitial.getText());
-            newYcoord = Integer.parseInt(yinitial.getText());
-            Node newnode =
-                new Node(
-                    nodeid,
-                    newXcoord,
-                    newYcoord,
-                    newFloor,
-                    newBuilding,
-                    Qdb.getInstance().locationTable.retrieveRow(nodeid));
-            qdb.nodeTable.addRow(newnode);
-            refreshNodes();
-            findOnMap();
-            setEdges();
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * clear all information of nodes
-   *
-   * @param event
-   */
-  @FXML
-  void clearclicked(MouseEvent event) {
-    alert.clearLabelAlert(alerts, image1);
-    nodeidinput.setText("");
-    InitialNode();
-    button
-        .get(findButton(nodeid))
-        .setStyle(
-            "-fx-background-radius: 5em;"
-                + "-fx-min-width: 3px;"
-                + "-fx-min-height: 3px;"
-                + "-fx-max-width: 3px;"
-                + "-fx-max-height: 3px;"
-                + "-fx-background-insets: 0px;"
-                + "-fx-background-color: #3492D5");
-  }
-
   @FXML
   public void initialize() throws IOException {
     NodeTypeChoose.getItems().addAll(NodeType);
@@ -368,27 +245,6 @@ public class GraphicalMapEditorController {
     }
     imageView.setImage(image[currentIndex]);
     WhichFloor.setText("The First Floor");
-  }
-
-  /** turn to the next floor */
-  void shownext() {
-    startnodeinitial.clear();
-    endnodeinitial.clear();
-    startnodeinitial.setPromptText("Click here to choose the start node");
-    endnodeinitial.setPromptText("Click here to choose the start node");
-    startnodeOr = false;
-    endnodeOr = false;
-    startnode = empty;
-    endnode = empty;
-    HideEdges();
-    clearLocationName();
-    currentIndex++;
-    if (currentIndex >= file.length) {
-      currentIndex = 0;
-    }
-    refreshNodes();
-    imageView.setImage(image[currentIndex]);
-    setFloor(currentIndex);
   }
 
   /**
@@ -507,7 +363,6 @@ public class GraphicalMapEditorController {
             Node newNode = qdb.retrieveNode(nodeID);
             newNode.setXCoord(currentX);
             newNode.setYCoord(currentY);
-            // after clicking confirm button
             qdb.updateNode(nodeID, newNode);
             NodeInformation(nodeID);
             setEdges();
@@ -519,7 +374,137 @@ public class GraphicalMapEditorController {
     return buttons;
   }
 
-  /** if nodeid exist, the user can edit the node. Else call alert. */
+  // Below are all about node
+
+  /**
+   * find nodes and display the information of the nodes
+   *
+   * @param event
+   */
+  @FXML
+  void findclicked(MouseEvent event) {
+    findOnMap();
+  }
+
+  /**
+   * update nodes
+   *
+   * @param event
+   */
+  @FXML
+  void setclicked(MouseEvent event) {
+    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
+      if (coordAlert(xinitial, yinitial, alerts, image1)) {
+        if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
+          if (floorAlert(floorinitial, alerts, image1)) {
+            nodeid = Integer.parseInt(nodeidinput.getText());
+            newLongName = longnameinitial.getText();
+            newNodeType = nodetypeinitial.getText();
+            newShortName = shortnameinitial.getText();
+            qdb.locationTable.updateRow(
+                nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
+            newBuilding = buildinginitial.getText();
+            newFloor = floorinitial.getText();
+            newXcoord = Integer.parseInt(xinitial.getText());
+            newYcoord = Integer.parseInt(yinitial.getText());
+            qdb.nodeTable.updateRow(
+                nodeid,
+                new Node(
+                    nodeid,
+                    newXcoord,
+                    newYcoord,
+                    newFloor,
+                    newBuilding,
+                    Qdb.getInstance().locationTable.retrieveRow(nodeid)));
+            refreshNodes();
+            setEdges();
+            findOnMap();
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * delete nodes
+   *
+   * @param event
+   */
+  @FXML
+  void deleteclicked(MouseEvent event) {
+    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
+      nodeid = Integer.parseInt(nodeidinput.getText());
+      qdb.nodeTable.deleteRow(nodeid);
+      qdb.locationTable.deleteRow(nodeid);
+      refreshNodes();
+    } else {
+      InitialNode();
+    }
+    setEdges();
+  }
+
+  /**
+   * add nodes
+   *
+   * @param event
+   */
+  @FXML
+  void addclicked(MouseEvent event) {
+    if (nodeIDAlerttwo(nodeidinput, alerts, image1)) {
+      if (coordAlert(xinitial, yinitial, alerts, image1)) {
+        if (locationAlert(longnameinitial, shortnameinitial, nodetypeinitial, alerts, image1)) {
+          if (floorAlert(floorinitial, alerts, image1)) {
+            nodeid = Integer.parseInt(nodeidinput.getText());
+            newLongName = longnameinitial.getText();
+            newNodeType = nodetypeinitial.getText();
+            newShortName = shortnameinitial.getText();
+
+            qdb.locationTable.addRow(new Location(nodeid, newLongName, newShortName, newNodeType));
+            newBuilding = buildinginitial.getText();
+            newFloor = floorinitial.getText();
+            newXcoord = Integer.parseInt(xinitial.getText());
+            newYcoord = Integer.parseInt(yinitial.getText());
+            Node newnode =
+                new Node(
+                    nodeid,
+                    newXcoord,
+                    newYcoord,
+                    newFloor,
+                    newBuilding,
+                    Qdb.getInstance().locationTable.retrieveRow(nodeid));
+            qdb.nodeTable.addRow(newnode);
+            refreshNodes();
+            findOnMap();
+            setEdges();
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * clear all information of nodes
+   *
+   * @param event
+   */
+  @FXML
+  void clearclicked(MouseEvent event) {
+    alert.clearLabelAlert(alerts, image1);
+    nodeidinput.setText("");
+    InitialNode();
+    button
+        .get(findButton(nodeid))
+        .setStyle(
+            "-fx-background-radius: 5em;"
+                + "-fx-min-width: 3px;"
+                + "-fx-min-height: 3px;"
+                + "-fx-max-width: 3px;"
+                + "-fx-max-height: 3px;"
+                + "-fx-background-insets: 0px;"
+                + "-fx-background-color: #3492D5");
+  }
+
+  /** if nodeid exist, display the node information on the map. Else call alert. */
   public void NodeInformation(int id) {
     xinitial.setText(Integer.toString(qdb.nodeTable.retrieveRow(id).getXCoord()));
     buildinginitial.setText(qdb.nodeTable.retrieveRow(id).getBuilding());
@@ -542,22 +527,6 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * if the input is a number, return true, else false
-   *
-   * @param str
-   * @return boolean
-   */
-  public boolean isNumber(String str) {
-    if (str.equals("")) return false;
-    for (char c : str.toCharArray()) {
-      if (!Character.isDigit(c)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  /**
    * true if the node exists, false else
    *
    * @param nodeID
@@ -569,6 +538,197 @@ public class GraphicalMapEditorController {
     }
     return false;
   }
+
+  /** find the node on the map */
+  void findOnMap() {
+    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
+      nodeid = Integer.parseInt(nodeidinput.getText());
+      NodeInformation(nodeid);
+      String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
+      if (!floor.equals(Floor(currentIndex))) {
+        currentIndex = findFloor(floor);
+        if (!button.isEmpty()) parent.getChildren().removeAll(button);
+        button = addButtons(Floor(currentIndex));
+        imageView.setImage(image[currentIndex]);
+        setFloor(currentIndex);
+      }
+      alert.clearLabelAlert(alerts, image1);
+      Point2D pivotOnTarget =
+          new Point2D(
+              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5.0,
+              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5.0);
+      pane.animate(Duration.millis(200))
+          .interpolateWith(Interpolator.EASE_BOTH)
+          .zoomBy(pane.getCurrentScale(), pivotOnTarget);
+      button
+          .get(findButton(nodeid))
+          .setStyle(
+              "-fx-background-radius: 5em;"
+                  + "-fx-min-width: 3px;"
+                  + "-fx-min-height: 3px;"
+                  + "-fx-max-width: 3px;"
+                  + "-fx-max-height: 3px;"
+                  + "-fx-background-insets: 0px;"
+                  + "-fx-background-color: #37AC2B");
+    } else {
+      InitialNode();
+    }
+  }
+
+  /**
+   * return true if the nodes is on the floor, else return false
+   *
+   * @param node
+   * @param floor
+   * @return boolean
+   */
+  boolean nodeOnTheFloor(int node, int floor) {
+    if (qdb.nodeTable.retrieveRow(node).getFloor().equals(Floor(floor))) return true;
+    return false;
+  }
+
+  /**
+   * return the index of the node in the button list with given nodeID
+   *
+   * @param id
+   * @return
+   */
+  int findButton(int id) {
+    int x = 0;
+    for (int i = 0; i < NodeID.size(); i++) {
+      if (NodeID.get(i) == id) {
+        x = i;
+      }
+    }
+    return x;
+  }
+
+  // Below are all about turn to the page and the floors
+
+  /**
+   * turn on the next floor when click the button
+   *
+   * @param event
+   */
+  @FXML
+  void NextClicked(MouseEvent event) {
+    shownext();
+  }
+
+  /**
+   * turn on the last page when click the button
+   *
+   * @param event
+   */
+  @FXML
+  void LastClicked(MouseEvent event) {
+    showlast();
+  }
+
+  /** turn to the next floor */
+  void shownext() {
+    startnodeinitial.clear();
+    endnodeinitial.clear();
+    startnodeinitial.setPromptText("Click here to choose the start node");
+    endnodeinitial.setPromptText("Click here to choose the start node");
+    startnodeOr = false;
+    endnodeOr = false;
+    startnode = empty;
+    endnode = empty;
+    HideEdges();
+    clearLocationName();
+    currentIndex++;
+    if (currentIndex >= file.length) {
+      currentIndex = 0;
+    }
+    refreshNodes();
+    imageView.setImage(image[currentIndex]);
+    setFloor(currentIndex);
+  }
+
+  /** turn on the last page */
+  void showlast() {
+    startnodeinitial.setPromptText("Click here to choose the start node");
+    endnodeinitial.setPromptText("Click here to choose the start node");
+    startnodeOr = false;
+    endnodeOr = false;
+    startnode = empty;
+    endnode = empty;
+    HideEdges();
+    clearLocationName();
+    currentIndex--;
+    if (currentIndex >= 0) {
+      refreshNodes();
+      button = addButtons(Floor(currentIndex));
+      imageView.setImage(image[currentIndex]);
+    } else {
+      currentIndex = 4;
+      refreshNodes();
+      imageView.setImage(image[currentIndex]);
+    }
+    setFloor(currentIndex);
+  }
+
+  /**
+   * show which floor it is on the map with the int floor
+   *
+   * @param x
+   */
+  void setFloor(int x) {
+    if (x == 0) {
+      WhichFloor.setText("The First Floor");
+    } else if (x == 1) {
+      WhichFloor.setText("The Second Floor");
+    } else if (x == 2) {
+      WhichFloor.setText("The Third Floor");
+    } else if (x == 3) {
+      WhichFloor.setText("The Lower Level 1");
+    } else {
+      WhichFloor.setText("The Lower Level 2");
+    }
+  }
+
+  /**
+   * get the int floor from the String floor
+   *
+   * @param floor
+   * @return
+   */
+  int findFloor(String floor) {
+    if (floor.equals("1")) {
+      return 0;
+    } else if (floor.equals("2")) {
+      return 1;
+    } else if (floor.equals("3")) {
+      return 2;
+    } else if (floor.equals("L1")) {
+      return 3;
+    } else {
+      return 4;
+    }
+  }
+
+  /**
+   * return the String type of floor by the integer type of floor.
+   *
+   * @param x
+   * @return
+   */
+  String Floor(int x) {
+    if (x == 0) {
+      return "1";
+    } else if (x == 1) {
+      return "2";
+    } else if (x == 2) {
+      return "3";
+    } else if (x == 3) {
+      return "L1";
+    } else {
+      return "L2";
+    }
+  }
+
+  // Below are all about alerts
 
   /**
    * true if the floor exists, else return false and call alerts
@@ -586,10 +746,10 @@ public class GraphicalMapEditorController {
         || floors.equals("3")
         || floors.equals("L1")
         || floors.equals("L2")) {
+      alert.clearLabelAlert(floorAlert,image);
       return true;
-    } else {
-      alert.setLabelAlert("This floor does not exist.", floorAlert, image);
     }
+    alert.setLabelAlert("This floor does not exist.", floorAlert, image);
     return false;
   }
 
@@ -701,6 +861,36 @@ public class GraphicalMapEditorController {
   }
 
   /**
+   * return true if the edge is legal, else return false
+   *
+   * @param edge
+   * @return
+   */
+  boolean edgeAlert(Edge edge) {
+    List<Edge> alledges = qdb.edgeTable.getAllRows();
+    for (int i = 0; i < alledges.size(); i++) {
+      if (edge.getStartNode().equals(empty)) {
+        alert.setLabelAlert("The start node cannot be empty", alerts1, image11);
+        return false;
+      } else if (edge.getEndNode().equals(empty)) {
+        alert.setLabelAlert("The end node cannot be empty", alerts1, image11);
+        return false;
+      } else if (edge.getStartNode().getNodeID() == edge.getEndNode().getNodeID()) {
+        alert.setLabelAlert("The end node cannot be the start node", alerts1, image11);
+        return false;
+      } else if (edge.getStartNode().getNodeID() == alledges.get(i).getStartNode().getNodeID()
+          && edge.getEndNode().getNodeID() == alledges.get(i).getEndNode().getNodeID()) {
+        alert.setLabelAlert("This edge exists", alerts1, image11);
+        return false;
+      }
+    }
+    alert.clearLabelAlert(alerts1, image11);
+    return true;
+  }
+
+  // Below are all about the help page
+
+  /**
    * open the help page
    *
    * @param event
@@ -716,12 +906,15 @@ public class GraphicalMapEditorController {
     stage.centerOnScreen();
   }
 
+  // Below are all about refresh
+
   /** refresh nodes */
   void refreshNodes() {
     parent.getChildren().removeAll(button);
     button = addButtons(Floor(currentIndex));
-    // parent.getChildren().addAll(button);
   }
+
+  // Below are all about lines
 
   /**
    * add lines
@@ -780,108 +973,6 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * turn on the next floor when click the button
-   *
-   * @param event
-   */
-  @FXML
-  void NextClicked(MouseEvent event) {
-    shownext();
-  }
-
-  /**
-   * return the String type of floor by the integer type of floor.
-   *
-   * @param x
-   * @return
-   */
-  String Floor(int x) {
-    if (x == 0) {
-      return "1";
-    } else if (x == 1) {
-      return "2";
-    } else if (x == 2) {
-      return "3";
-    } else if (x == 3) {
-      return "L1";
-    } else {
-      return "L2";
-    }
-  }
-
-  /**
-   * turn on the last page when click the button
-   *
-   * @param event
-   */
-  @FXML
-  void LastClicked(MouseEvent event) {
-    showlast();
-  }
-
-  /** turn on the last page */
-  void showlast() {
-    startnodeinitial.setPromptText("Click here to choose the start node");
-    endnodeinitial.setPromptText("Click here to choose the start node");
-    startnodeOr = false;
-    endnodeOr = false;
-    startnode = empty;
-    endnode = empty;
-    HideEdges();
-    clearLocationName();
-    currentIndex--;
-    if (currentIndex >= 0) {
-      refreshNodes();
-      button = addButtons(Floor(currentIndex));
-      imageView.setImage(image[currentIndex]);
-    } else {
-      currentIndex = 4;
-      refreshNodes();
-      imageView.setImage(image[currentIndex]);
-    }
-    setFloor(currentIndex);
-  }
-
-  /**
-   * show which floor it is on the map with the int floor
-   *
-   * @param x
-   */
-  void setFloor(int x) {
-    if (x == 0) {
-      WhichFloor.setText("The First Floor");
-    } else if (x == 1) {
-      WhichFloor.setText("The Second Floor");
-    } else if (x == 2) {
-      WhichFloor.setText("The Third Floor");
-    } else if (x == 3) {
-      WhichFloor.setText("The Lower Level 1");
-    } else {
-      WhichFloor.setText("The Lower Level 2");
-    }
-  }
-
-  /**
-   * get the int floor from the String floor
-   *
-   * @param floor
-   * @return
-   */
-  int findFloor(String floor) {
-    if (floor.equals("1")) {
-      return 0;
-    } else if (floor.equals("2")) {
-      return 1;
-    } else if (floor.equals("3")) {
-      return 2;
-    } else if (floor.equals("L1")) {
-      return 3;
-    } else {
-      return 4;
-    }
-  }
-
-  /**
    * show edges on the map when click the button
    *
    * @param event
@@ -916,68 +1007,68 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * return true if the nodes is on the floor, else return false
+   * start to choose the end node when click the button
    *
-   * @param node
-   * @param floor
-   * @return boolean
+   * @param event
    */
-  boolean nodeOnTheFloor(int node, int floor) {
-    if (qdb.nodeTable.retrieveRow(node).getFloor().equals(Floor(floor))) return true;
-    return false;
+  @FXML
+  void ChooseEndNodeClicked(MouseEvent event) {
+    endnodeOr = true;
+    endnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
   /**
-   * return the index of the node in the button list with given nodeID
+   * start to choss the start button when click the button
    *
-   * @param id
-   * @return
+   * @param event
    */
-  int findButton(int id) {
-    int x = 0;
-    for (int i = 0; i < NodeID.size(); i++) {
-      if (NodeID.get(i) == id) {
-        x = i;
-      }
-    }
-    return x;
+  @FXML
+  void ChooseStartNodeClicked(MouseEvent event) {
+    startnodeOr = true;
+    startnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
-  /** find the node on the map */
-  void findOnMap() {
-    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
-      nodeid = Integer.parseInt(nodeidinput.getText());
-      NodeInformation(nodeid);
-      String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
-      if (!floor.equals(Floor(currentIndex))) {
-        currentIndex = findFloor(floor);
-        if (!button.isEmpty()) parent.getChildren().removeAll(button);
-        button = addButtons(Floor(currentIndex));
-        imageView.setImage(image[currentIndex]);
-        setFloor(currentIndex);
-      }
-      alert.clearLabelAlert(alerts, image1);
-      Point2D pivotOnTarget =
-          new Point2D(
-              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5.0,
-              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5.0);
-      pane.animate(Duration.millis(200))
-          .interpolateWith(Interpolator.EASE_BOTH)
-          .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-      button
-          .get(findButton(nodeid))
-          .setStyle(
-              "-fx-background-radius: 5em;"
-                  + "-fx-min-width: 3px;"
-                  + "-fx-min-height: 3px;"
-                  + "-fx-max-width: 3px;"
-                  + "-fx-max-height: 3px;"
-                  + "-fx-background-insets: 0px;"
-                  + "-fx-background-color: #37AC2B");
-    } else {
-      InitialNode();
+  /** refresh the egdes */
+  void setEdges() {
+    if (displayEdges) {
+      HideEdges();
+      DisplayEdges();
     }
   }
+
+  /**
+   * add an edge with start node and end node when click the button, call alert if it is illegal
+   *
+   * @param event
+   */
+  @FXML
+  void AddEdgesClicked(MouseEvent event) {
+    Edge addedge = new Edge(startnode, endnode);
+    if (edgeAlert(addedge)) {
+      qdb.edgeTable.addRow(addedge);
+    }
+    setEdges();
+  }
+
+  // Below are about type confirm
+
+  /**
+   * if the input is a number, return true, else false
+   *
+   * @param str
+   * @return boolean
+   */
+  public boolean isNumber(String str) {
+    if (str.equals("")) return false;
+    for (char c : str.toCharArray()) {
+      if (!Character.isDigit(c)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Below are about tables
 
   /**
    * Open a secondary stage of node table
@@ -1033,6 +1124,28 @@ public class GraphicalMapEditorController {
   }
 
   /**
+   * open a secondary stage of the choosing type of table
+   *
+   * @param event
+   * @throws Exception
+   */
+  @FXML
+  void TableClicked(MouseEvent event) throws Exception {
+    String table = TableChoose.getValue();
+    if (table.equals("Node Table")) {
+      NodeTable();
+    } else if (table.equals("Location Name Table")) {
+      LocationTable();
+    } else if (table.equals("Move Table")) {
+      MoveTable();
+    } else {
+      EdgeTable();
+    }
+  }
+
+  // Below are about the text location name
+
+  /**
    * show the location name of nodes by choosing node type, return true if there are location names
    * on the map, return false else.
    *
@@ -1080,97 +1193,6 @@ public class GraphicalMapEditorController {
     boolean check = ShowLocationName();
     if ((!Texts.isEmpty()) && check) {
       parent.getChildren().addAll(Texts);
-    }
-  }
-
-  /**
-   * open a secondary stage of the choosing type of table
-   *
-   * @param event
-   * @throws Exception
-   */
-  @FXML
-  void TableClicked(MouseEvent event) throws Exception {
-    String table = TableChoose.getValue();
-    if (table.equals("Node Table")) {
-      NodeTable();
-    } else if (table.equals("Location Name Table")) {
-      LocationTable();
-    } else if (table.equals("Move Table")) {
-      MoveTable();
-    } else {
-      EdgeTable();
-    }
-  }
-
-  /**
-   * add a edge with start node and end node when click the button, call alert if it is illegal
-   *
-   * @param event
-   */
-  @FXML
-  void AddEdgesClicked(MouseEvent event) {
-    Edge addedge = new Edge(startnode, endnode);
-    if (edgeAlert(addedge)) {
-      qdb.edgeTable.addRow(addedge);
-    }
-    setEdges();
-  }
-
-  /**
-   * return true if the edge is legal, else return false
-   *
-   * @param edge
-   * @return
-   */
-  boolean edgeAlert(Edge edge) {
-    List<Edge> alledges = qdb.edgeTable.getAllRows();
-    for (int i = 0; i < alledges.size(); i++) {
-      if (edge.getStartNode().equals(empty)) {
-        alert.setLabelAlert("The start node cannot be empty", alerts1, image11);
-        return false;
-      } else if (edge.getEndNode().equals(empty)) {
-        alert.setLabelAlert("The end node cannot be empty", alerts1, image11);
-        return false;
-      } else if (edge.getStartNode().getNodeID() == edge.getEndNode().getNodeID()) {
-        alert.setLabelAlert("The end node cannot be the start node", alerts1, image11);
-        return false;
-      } else if (edge.getStartNode().getNodeID() == alledges.get(i).getStartNode().getNodeID()
-          && edge.getEndNode().getNodeID() == alledges.get(i).getEndNode().getNodeID()) {
-        alert.setLabelAlert("This edge exists", alerts1, image11);
-        return false;
-      }
-    }
-    return true;
-  }
-
-  /**
-   * start to choose the end node when click the button
-   *
-   * @param event
-   */
-  @FXML
-  void ChooseEndNodeClicked(MouseEvent event) {
-    endnodeOr = true;
-    endnodeinitial.setPromptText("Please Click a node as the start node");
-  }
-
-  /**
-   * start to choss the start button when click the button
-   *
-   * @param event
-   */
-  @FXML
-  void ChooseStartNodeClicked(MouseEvent event) {
-    startnodeOr = true;
-    startnodeinitial.setPromptText("Please Click a node as the start node");
-  }
-
-  /** refresh the egdes */
-  void setEdges() {
-    if (displayEdges) {
-      HideEdges();
-      DisplayEdges();
     }
   }
 }
