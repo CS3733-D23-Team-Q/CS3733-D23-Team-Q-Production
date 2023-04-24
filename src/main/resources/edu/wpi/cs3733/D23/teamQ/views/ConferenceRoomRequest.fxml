@@ -115,7 +115,7 @@
                   <Insets left="30.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox prefHeight="200.0" prefWidth="150.0" />
             <VBox prefHeight="407.0" prefWidth="400.0" spacing="30.0">
                <children>
                   <VBox>
@@ -125,13 +125,32 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="foodField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Food Choice">
+                        <MFXFilterComboBox fx:id="foodField" onAction="#FoodSelected" prefHeight="40.0" prefWidth="400.0" promptText="Select a Food Choice">
                            <font>
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </MFXFilterComboBox>
                      </children>
                   </VBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="BrunchFood" fitHeight="194.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/Brunch%20spread.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="SnackFood" fitHeight="194.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/snack%20spread.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="DinnerFood" fitHeight="194.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/dinner%20spread.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" />

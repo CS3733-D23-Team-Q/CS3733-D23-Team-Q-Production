@@ -8,7 +8,9 @@ import io.github.palexdev.materialfx.controls.*;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class FlowerRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -32,6 +34,11 @@ public class FlowerRequestController {
   @FXML MFXButton resetButton;
   @FXML MFXButton cancelButton;
   @FXML MFXButton submitButton;
+  @FXML private ImageView RosesImage;
+  @FXML private ImageView DaisiesImage;
+  @FXML private ImageView TulipsImage;
+  @FXML private ImageView SunflowersImage;
+  @FXML private ImageView LiliesImage;
 
   /**
    * Initializes the Flower Request Choice Box's Switches screens to the Home page when Cancel
@@ -49,6 +56,12 @@ public class FlowerRequestController {
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.flowerTypeField.setValue("");
     this.flowerTypeField.setItems(TypeOfFlowers);
+
+    RosesImage.setOpacity(0.0);
+    DaisiesImage.setOpacity(0.0);
+    TulipsImage.setOpacity(0.0);
+    SunflowersImage.setOpacity(0.0);
+    LiliesImage.setOpacity(0.0);
   }
 
   @FXML
@@ -60,6 +73,12 @@ public class FlowerRequestController {
     flowerTypeField.setValue("");
     bouquetChoiceField.clear();
     specialInstructionsField.clear();
+
+    RosesImage.setOpacity(0.0);
+    DaisiesImage.setOpacity(0.0);
+    TulipsImage.setOpacity(0.0);
+    SunflowersImage.setOpacity(0.0);
+    LiliesImage.setOpacity(0.0);
   }
 
   @FXML
@@ -85,5 +104,44 @@ public class FlowerRequestController {
 
     qdb.addFlowerRequest(newFR);
     Navigation.navigateRight(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void FlowerSelected(ActionEvent event) {
+    if (flowerTypeField.getText().equals("Roses")) {
+      RosesImage.setOpacity(1.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getText().equals("Daisies")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(1.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getText().equals("Tulips")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(1.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getText().equals("Sunflowers")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(1.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getText().equals("Lilies")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(1.0);
+    }
   }
 }

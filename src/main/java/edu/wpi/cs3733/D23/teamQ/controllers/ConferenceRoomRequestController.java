@@ -10,8 +10,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 public class ConferenceRoomRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -34,6 +36,9 @@ public class ConferenceRoomRequestController {
   @FXML Button resetButton;
   @FXML Button cancelButton;
   @FXML Button submitButton;
+  @FXML private ImageView BrunchFood;
+  @FXML private ImageView DinnerFood;
+  @FXML private ImageView SnackFood;
 
   @FXML
   public void initialize() {
@@ -46,6 +51,10 @@ public class ConferenceRoomRequestController {
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.foodField.setValue("");
     this.foodField.setItems(foodOptionsList);
+
+    BrunchFood.setOpacity(0.0);
+    DinnerFood.setOpacity(0.0);
+    SnackFood.setOpacity(0.0);
   }
 
   @FXML
@@ -56,6 +65,9 @@ public class ConferenceRoomRequestController {
     timeField.setValue("");
     foodField.setValue("");
     specialInstructionsField.clear();
+    BrunchFood.setOpacity(0.0);
+    DinnerFood.setOpacity(0.0);
+    SnackFood.setOpacity(0.0);
   }
 
   @FXML
@@ -79,5 +91,24 @@ public class ConferenceRoomRequestController {
 
     qdb.addConferenceRequest(cr);
     Navigation.navigateRight(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void FoodSelected(ActionEvent event) {
+    if (foodField.getText().equals("Brunch spread")) {
+      BrunchFood.setOpacity(1.0);
+      DinnerFood.setOpacity(0.0);
+      SnackFood.setOpacity(0.0);
+    }
+    if (foodField.getText().equals("Dinner spread")) {
+      BrunchFood.setOpacity(0.0);
+      DinnerFood.setOpacity(1.0);
+      SnackFood.setOpacity(0.0);
+    }
+    if (foodField.getText().equals("Snack spread")) {
+      BrunchFood.setOpacity(0.0);
+      DinnerFood.setOpacity(0.0);
+      SnackFood.setOpacity(1.0);
+    }
   }
 }
