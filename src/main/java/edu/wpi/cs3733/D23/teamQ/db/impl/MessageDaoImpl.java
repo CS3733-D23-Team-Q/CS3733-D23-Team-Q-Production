@@ -2,6 +2,9 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,8 +65,8 @@ public class MessageDaoImpl {
     }
   }
 
-  public List<Message> retrieveMessages(String p1, String p2) {
-    List<Message> messageList = new ArrayList<>();
+  public ObservableList<Message> retrieveMessages(String p1, String p2) {
+    ObservableList<Message> messageList = FXCollections.observableArrayList();
     String[] people = {p1, p2};
     Arrays.sort(people);
     for (Message m : messages) {

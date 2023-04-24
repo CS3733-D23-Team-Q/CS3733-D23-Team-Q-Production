@@ -515,7 +515,7 @@ public class Qdb {
     return profileImageTable.getIndex(username);
   }
 
-  public List<Message> retrieveMessages(String p1, String p2) {
+  public ObservableList<Message> retrieveMessages(String p1, String p2) {
     return messageTable.retrieveMessages(p1, p2);
   }
 
