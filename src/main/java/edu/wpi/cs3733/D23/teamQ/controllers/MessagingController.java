@@ -85,6 +85,9 @@ public class MessagingController {
                 Matcher matcher = pattern.matcher(newValue.toString());
                 String result;
                 if (matcher.find()) {
+
+                  sbp.set(true);
+
                   if (!messageVbox.getChildren().isEmpty()) {
                     messageVbox.getChildren().clear();
                   }
@@ -100,6 +103,12 @@ public class MessagingController {
                     profilePicture.setImage(pfp);
                   }
 
+                  if (!qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                      .isEmpty())
+                    displayTime(
+                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                            .get(0)
+                            .getTimeStamp());
                   for (Message m :
                       qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
                     if (m.getSender().getUsername().equals(LoginController.getUsername()))
