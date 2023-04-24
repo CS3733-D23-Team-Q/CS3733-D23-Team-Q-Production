@@ -6,9 +6,10 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.*;
+
 import java.util.Optional;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class ListServiceRequestController {
   @FXML TableView<ServiceRequest> yourRequestsTable;
@@ -36,6 +38,19 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
   @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
   @FXML TableColumn<ServiceRequest, MFXComboBox<ServiceRequest.Progress>> progressDropdownColumn;
+
+  @FXML HBox conferenceRequestEdit;
+  @FXML MFXFilterComboBox confAssigneeField;
+  @FXML MFXFilterComboBox confLocationField;
+  @FXML MFXDatePicker confDateField;
+  @FXML MFXFilterComboBox confTimeField;
+  @FXML MFXFilterComboBox confFoodField;
+  @FXML MFXTextField confInstructionsField;
+
+
+
+
+
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
