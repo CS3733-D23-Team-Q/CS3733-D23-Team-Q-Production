@@ -74,12 +74,12 @@ public class BFS implements IPathfinding {
           for (Node node : elevatorNodes) {
             if (!visited.contains(node)
                 && !node.getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
-              System.out.println();
-              System.out.println("nodes revisited by ELEVATOR branch " + nodesRevisited);
               returnList.addAll(nodesRevisited);
               returnList.add(node);
               visited.add(node);
               queue.add(node);
+              System.out.println();
+              System.out.println("nodes revisited by ELEVATOR branch " + nodesRevisited);
               nodeChosen = true;
               break;
             }
@@ -172,8 +172,8 @@ public class BFS implements IPathfinding {
         int i = 1;
         ArrayList<Node> nodesRevisited = new ArrayList<Node>();
         ArrayList<Node> backupNodes = new ArrayList<Node>();
-        ArrayList<Node> nodesDone = new ArrayList<Node>();
         while (!nodeChosen) {
+          backupNodes.clear();
           for (Edge ex : visited.get(visited.size() - i).getEdges()) {
             backupNodes.add(ex.getStartNode());
             backupNodes.add(ex.getEndNode());
@@ -181,10 +181,6 @@ public class BFS implements IPathfinding {
           nodesRevisited.add(visited.get(visited.size() - i));
           i++;
           for (Node node : backupNodes) {
-            if (nodesDone.contains(node)) {
-              continue;
-            }
-            nodesDone.add(node);
             if (!visited.contains(node) && node.getFloor().equalsIgnoreCase(n.getFloor())) {
               returnList.addAll(nodesRevisited);
               returnList.add(node);
