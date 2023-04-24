@@ -108,35 +108,35 @@ public class FlowerRequestController {
 
   @FXML
   public void FlowerSelected(ActionEvent event) {
-    if (flowerTypeField.getText().equals("Roses")) {
+    if (flowerTypeField.getValue().equals("Roses")) {
       RosesImage.setOpacity(1.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(0.0);
       SunflowersImage.setOpacity(0.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getText().equals("Daisies")) {
+    if (flowerTypeField.getValue().equals("Daisies")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(1.0);
       TulipsImage.setOpacity(0.0);
       SunflowersImage.setOpacity(0.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getText().equals("Tulips")) {
+    if (flowerTypeField.getValue().equals("Tulips")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(1.0);
       SunflowersImage.setOpacity(0.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getText().equals("Sunflowers")) {
+    if (flowerTypeField.getValue().equals("Sunflowers")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(0.0);
       SunflowersImage.setOpacity(1.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getText().equals("Lilies")) {
+    if (flowerTypeField.getValue().equals("Lilies")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(0.0);

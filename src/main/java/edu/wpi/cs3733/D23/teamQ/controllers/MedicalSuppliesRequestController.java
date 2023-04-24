@@ -136,35 +136,35 @@ public class MedicalSuppliesRequestController {
 
   @FXML
   public void ItemSelected(ActionEvent event) {
-    if (itemRequestedField.getText().equals("Bandaids")) {
+    if (itemRequestedField.getValue().equals("Bandaids")) {
       BandaidsImage.setOpacity(1.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
       TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Cotton Balls")) {
+    if (itemRequestedField.getValue().equals("Cotton Balls")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(1.0);
       GauzeImage.setOpacity(0.0);
       TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Gauze")) {
+    if (itemRequestedField.getValue().equals("Gauze")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(1.0);
       TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Tongue Depressers")) {
+    if (itemRequestedField.getValue().equals("Tongue Depressers")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
       TongueDepresserImage.setOpacity(1.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Syringe")) {
+    if (itemRequestedField.getValue().equals("Syringe")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);

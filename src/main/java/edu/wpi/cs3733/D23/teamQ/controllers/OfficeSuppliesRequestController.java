@@ -107,35 +107,35 @@ public class OfficeSuppliesRequestController {
 
   @FXML
   public void ItemSelected(ActionEvent event) {
-    if (itemRequestedField.getText().equals("Printer Paper (by ream)")) {
+    if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {
       PrinterPaperImage.setOpacity(1.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Pencil")) {
+    if (itemRequestedField.getValue().equals("Pencil")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(1.0);
       PenImage.setOpacity(0.0);
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Pen")) {
+    if (itemRequestedField.getValue().equals("Pen")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(1.0);
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Highlighter")) {
+    if (itemRequestedField.getValue().equals("Highlighter")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);
       HighlighterImage.setOpacity(1.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Notepad")) {
+    if (itemRequestedField.getValue().equals("Notepad")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);

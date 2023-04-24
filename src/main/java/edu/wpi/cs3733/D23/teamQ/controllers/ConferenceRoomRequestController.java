@@ -65,6 +65,7 @@ public class ConferenceRoomRequestController {
     timeField.setValue("");
     foodField.setValue("");
     specialInstructionsField.clear();
+
     BrunchFood.setOpacity(0.0);
     DinnerFood.setOpacity(0.0);
     SnackFood.setOpacity(0.0);
@@ -95,17 +96,17 @@ public class ConferenceRoomRequestController {
 
   @FXML
   public void FoodSelected(ActionEvent event) {
-    if (foodField.getText().equals("Brunch spread")) {
+    if (foodField.getValue().equals("Brunch spread")) {
       BrunchFood.setOpacity(1.0);
       DinnerFood.setOpacity(0.0);
       SnackFood.setOpacity(0.0);
     }
-    if (foodField.getText().equals("Dinner spread")) {
+    if (foodField.getValue().equals("Dinner spread")) {
       BrunchFood.setOpacity(0.0);
       DinnerFood.setOpacity(1.0);
       SnackFood.setOpacity(0.0);
     }
-    if (foodField.getText().equals("Snack spread")) {
+    if (foodField.getValue().equals("Snack spread")) {
       BrunchFood.setOpacity(0.0);
       DinnerFood.setOpacity(0.0);
       SnackFood.setOpacity(1.0);

@@ -98,25 +98,25 @@ public class FurnitureDeliveryRequestController {
 
   @FXML
   public void ItemSelected(ActionEvent event) {
-    if (itemRequestedField.getText().equals("Desk")) {
+    if (itemRequestedField.getValue().equals("Desk")) {
       DeskImage.setOpacity(1.0);
       DeskChairImage.setOpacity(0.0);
       CouchImage.setOpacity(0.0);
       ExaminationTableImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Desk Chair")) {
+    if (itemRequestedField.getValue().equals("Desk Chair")) {
       DeskImage.setOpacity(0.0);
       DeskChairImage.setOpacity(1.0);
       CouchImage.setOpacity(0.0);
       ExaminationTableImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Couch")) {
+    if (itemRequestedField.getValue().equals("Couch")) {
       DeskImage.setOpacity(0.0);
       DeskChairImage.setOpacity(0.0);
       CouchImage.setOpacity(1.0);
       ExaminationTableImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getText().equals("Examination Table")) {
+    if (itemRequestedField.getValue().equals("Examination Table")) {
       DeskImage.setOpacity(0.0);
       DeskChairImage.setOpacity(0.0);
       CouchImage.setOpacity(0.0);
