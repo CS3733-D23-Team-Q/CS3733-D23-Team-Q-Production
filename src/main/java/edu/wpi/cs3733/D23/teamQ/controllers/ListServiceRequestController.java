@@ -292,7 +292,7 @@ public class ListServiceRequestController {
     ConferenceRequest cr =
         new ConferenceRequest(
             conferenceRequest.getRequestID(),
-            conferenceRequest.getNode(),
+            qdb.getNodeFromLocation(confLocationField.getValue().toString()),
             qdb.retrieveAccount(confAssigneeField.getText()),
             conferenceRequest.getRequester(),
             confInstructionsField.getText(),
