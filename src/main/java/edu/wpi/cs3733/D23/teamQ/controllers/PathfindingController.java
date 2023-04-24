@@ -14,7 +14,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -709,6 +708,7 @@ public class PathfindingController {
     if (highlightedNodesp.size() > 0) {
       for (int i = 0; i < highlightedNodesp.size(); i++) {
         if (highlightedNodesp.get(i).getMiddle() == floor) {
+          System.out.println("why not");
           highlight(highlightedNodesp.get(i).getLeft(), "red");
         }
       }
@@ -783,22 +783,21 @@ public class PathfindingController {
         }
       }
     }
-    if (highlightedNodesp.size() > 0) {
-      for (int i = 0; i < highlightedNodesp.size(); i++) {
-        if (highlightedNodesp.get(i).getMiddle() == floor) {
-          highlight(highlightedNodesp.get(i).getLeft(), "red");
-        }
-      }
-    }
-
     if (!ready4Second && start != null && target != null) { // && previousPath.size() > 0
       highlightedNodes.removeAll(highlightedNodes);
       previousPath = drawLinesf(start, target, f);
     }
+    if (highlightedNodesp.size() > 0) {
+      for (int i = 0; i < highlightedNodesp.size(); i++) {
+        if (highlightedNodesp.get(i).getMiddle() == floor) {
+          System.out.println("that's sad");
+          highlight(highlightedNodesp.get(i).getLeft(), "red");
+        }
+      }
+    }
   }
 
   public void highlightt(List<Pair<Integer, Text>> nodes, String color) {
-    ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (Pair<Integer, Text> i : nodes) {
       Text child = i.getValue();
       switch (color) {
@@ -827,19 +826,9 @@ public class PathfindingController {
     }
   }
 
-  public void highlight(int node, String color) {
-    String border = "-fx-border-color: ";
-    border = border + color + ";";
-    ObservableList<javafx.scene.Node> children = parent.getChildren();
-    Button child = (Button) children.get(node);
-    child.setDisable(false);
-    child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
-  }
-
   public void highlight(Button child, String color) {
     String border = "-fx-border-color: ";
     border = border + color + ";";
-    ObservableList<javafx.scene.Node> children = parent.getChildren();
     child.setDisable(false);
     child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
   }
@@ -880,23 +869,10 @@ public class PathfindingController {
   }
 
   public void unhighlightt(List<Pair<Integer, Text>> nodes) {
-    ObservableList<javafx.scene.Node> children = parent.getChildren();
     for (Pair<Integer, Text> i : nodes) {
       Text child = i.getValue();
       child.setFill(Color.BLUE);
     }
-  }
-
-  public void unhighlight(int node) {
-    ObservableList<javafx.scene.Node> children = parent.getChildren();
-    Button child = (Button) children.get(node);
-    child.setStyle(
-        "-fx-background-color: lightblue;"
-            + "-fx-background-insets: 0px;"
-            + "-fx-border-color: black;");
-    child.setStyle("-fx-background-color: transparent;");
-    child.setDisable(true);
-    child.setGraphic(null);
   }
 
   public void unhighlight(Button child) {
@@ -996,14 +972,10 @@ public class PathfindingController {
           node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
-                  + "-fx-border-color: black;"
+                  + "-fx-border-color: red;"
                   + "-fx-background-insets: 0px;");
-          highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodesp.add(
-              Triple.of(
-                  cfnodes.get(i).getValue(),
-                  floor,
-                  0)); // int index = parent.getChildren().indexOf(node);
+              Triple.of(node, floor, 0)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
@@ -1050,14 +1022,10 @@ public class PathfindingController {
           node.setDisable(false);
           node.setStyle(
               "-fx-background-color: lightblue;"
-                  + "-fx-border-color: black;"
+                  + "-fx-border-color: red;"
                   + "-fx-background-insets: 0px;");
-          highlight(cfnodes.get(i).getValue(), "red"); // button
           highlightedNodesp.add(
-              Triple.of(
-                  cfnodes.get(i).getValue(),
-                  floor,
-                  0)); // int index = parent.getChildren().indexOf(node);
+              Triple.of(node, floor, 0)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
@@ -1125,6 +1093,7 @@ public class PathfindingController {
       unhighlight(cfnodes.get(i).getValue()); // + 1
     }
     highlightedNodes.removeAll(highlightedNodes);
+    highlightedNodesp.removeAll(highlightedNodesp);
     startSelect.setValue(null);
     endSelect.setValue(null);
   }
