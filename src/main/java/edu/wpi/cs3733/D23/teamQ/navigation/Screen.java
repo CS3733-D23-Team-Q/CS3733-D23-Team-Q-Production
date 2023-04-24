@@ -11,6 +11,8 @@ public enum Screen {
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
   PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
   SIGNAGE("views/Signage.fxml", "Signage"),
+  ADD_SIGNAGE("views/SignageForm.fxml", "Add newSignage"),
+  SELECT_SIGNAGE("views/SignageInput.fxml", "Display Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
   SERVICE_PLACEHOLDER("views/ServiceRequestPlaceholder.fxml", "Placeholder"),

@@ -597,7 +597,11 @@ public class Qdb {
     return messagingAccount;
   }
 
-  public void setKiosk(int k){kiosk = k;}
+  public void setKiosk(int k) {
+    kiosk = k;
+  }
 
-  public int getKiosk(){return kiosk;}
+  public int getKiosk() {
+    return kiosk;
+  }
 }
