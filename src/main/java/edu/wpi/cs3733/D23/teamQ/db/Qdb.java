@@ -33,6 +33,8 @@ public class Qdb {
   private ServiceRequestDaoImpl serviceRequestTable;
   private MessageDaoImpl messageTable;
 
+  private Account messagingAccount = null;
+
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
@@ -553,5 +555,13 @@ public class Qdb {
       }
     }
     return true;
+  }
+
+  public void setMessagingAccount(Account a) {
+    messagingAccount = a;
+  }
+
+  public Account getMessagingAccount() {
+    return messagingAccount;
   }
 }
