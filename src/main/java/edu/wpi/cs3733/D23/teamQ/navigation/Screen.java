@@ -38,6 +38,7 @@ public enum Screen {
   PROFILE_PAGE("views/ProfilePage1.fxml", "Profile Page"),
 
   CONFIRM("views/Confirm.fxml", "Confirm"),
+  MESSAGES("views/Messages.fxml", "Messages"),
   ALERT("views/Alert.fxml", "Alert"),
   Move_Table("views/Move.fxml", "MoveTable"),
   Node_Table("views/Node.fxml", "MoveTable"),

@@ -111,6 +111,7 @@ public class LoginController {
       App.getRController().showMenu(true);
 
       loginUsername = usernameField.getText();
+      qdb.getAccountFromUsername(loginUsername).setActive(true);
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
       Navigation.navigate(Screen.HOME);
     } else {
