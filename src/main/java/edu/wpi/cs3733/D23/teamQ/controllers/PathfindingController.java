@@ -697,6 +697,17 @@ public class PathfindingController {
     Image previous = floors.get(floor);
     map.setImage(previous);
 
+    removeText();
+    removeButtons();
+    removeLines(previousPath); // remove previous floor's path
+    addButtons(f); // add current floor's path
+    restChecked();
+    deptChecked();
+    labsChecked();
+    infoChecked();
+    confChecked();
+    retlChecked();
+    servChecked();
     // if on the same floor
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
@@ -713,18 +724,6 @@ public class PathfindingController {
         }
       }
     }
-
-    removeText();
-    removeButtons();
-    removeLines(previousPath); // remove previous floor's path
-    addButtons(f); // add current floor's path
-    restChecked();
-    deptChecked();
-    labsChecked();
-    infoChecked();
-    confChecked();
-    retlChecked();
-    servChecked();
     if (!ready4Second && start != null && target != null) {
       highlightedNodes.removeAll(highlightedNodes);
       previousPath = drawLinesf(start, target, f);
@@ -783,10 +782,6 @@ public class PathfindingController {
         }
       }
     }
-    if (!ready4Second && start != null && target != null) { // && previousPath.size() > 0
-      highlightedNodes.removeAll(highlightedNodes);
-      previousPath = drawLinesf(start, target, f);
-    }
     if (highlightedNodesp.size() > 0) {
       for (int i = 0; i < highlightedNodesp.size(); i++) {
         if (highlightedNodesp.get(i).getMiddle() == floor) {
@@ -794,6 +789,10 @@ public class PathfindingController {
           highlight(highlightedNodesp.get(i).getLeft(), "red");
         }
       }
+    }
+    if (!ready4Second && start != null && target != null) { // && previousPath.size() > 0
+      highlightedNodes.removeAll(highlightedNodes);
+      previousPath = drawLinesf(start, target, f);
     }
   }
 
