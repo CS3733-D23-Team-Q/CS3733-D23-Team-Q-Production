@@ -213,7 +213,7 @@
                         <Insets bottom="50.0" right="30.0" />
                      </HBox.margin>
                   </MFXButton>
-                  <MFXButton fx:id="confSaveButton"  prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #012d5a;" text="Save Changes" textFill="WHITE">
+                  <MFXButton fx:id="confUpdateButton" onAction="#confUpdateClicked" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #012d5a;" text="Update" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="50.0" right="40.0" />
                      </HBox.margin>

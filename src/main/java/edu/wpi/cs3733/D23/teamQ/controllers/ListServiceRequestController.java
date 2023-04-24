@@ -7,9 +7,12 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import io.github.palexdev.materialfx.controls.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -36,6 +39,18 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
   @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
   @FXML TableColumn<ServiceRequest, MFXComboBox<ServiceRequest.Progress>> progressDropdownColumn;
+
+  ObservableList<String> timeList =
+      FXCollections.observableArrayList(
+          "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00",
+          "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00",
+          "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
+          "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
+          "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
+
+  ObservableList<String> foodOptionsList =
+      FXCollections.observableArrayList(
+          "Brunch spread", "Dinner spread", "Snack spread", "No food");
 
   @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
@@ -118,7 +133,10 @@ public class ListServiceRequestController {
                     event -> {
                       if (qdb.retrieveConferenceRequest(serviceRequest.getRequestID()) != null) {
                         conferenceRequestEdit.setVisible(true);
-                        setConferenceFields(qdb.retrieveConferenceRequest(serviceRequest.getRequestID()));
+                        setConferenceFields(
+                            qdb.retrieveConferenceRequest(serviceRequest.getRequestID()));
+                        conferenceRequest =
+                            qdb.retrieveConferenceRequest(serviceRequest.getRequestID());
                       }
                     });
                 Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
@@ -254,7 +272,36 @@ public class ListServiceRequestController {
   }
 
   public void setConferenceFields(ConferenceRequest cr) {
+    confTimeField.setItems(timeList);
+    confAssigneeField.setItems(qdb.getAllNames());
+    String[] nodeType = {"CONF"};
+    confLocationField.setItems(qdb.getAllLongNames(nodeType));
+    confFoodField.setItems(foodOptionsList);
 
+    confAssigneeField.setText(cr.getAssigneeUsername());
+    confTimeField.setText(cr.getTime());
+    confLocationField.setText(qdb.retrieveLocation(cr.getNodeID()).getLongName());
+    confFoodField.setText(cr.getFoodChoice());
+    confInstructionsField.setText(cr.getSpecialInstructions());
+    confDateField.setValue(
+        LocalDate.of(
+            cr.getDate().getYear() + 1900, cr.getDate().getMonth() + 1, cr.getDate().getDate()));
+  }
+
+  public void confUpdateClicked() {
+    ConferenceRequest cr =
+        new ConferenceRequest(
+            conferenceRequest.getRequestID(),
+            conferenceRequest.getNode(),
+            qdb.retrieveAccount(confAssigneeField.getText()),
+            conferenceRequest.getRequester(),
+            confInstructionsField.getText(),
+            Date.valueOf(confDateField.getValue()),
+            confTimeField.getText(),
+            conferenceRequest.getProgress().ordinal(),
+            confFoodField.getText());
+    qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
+    conferenceRequestEdit.setVisible(false);
   }
 
   public static ConferenceRequest getConferenceRequest() {
