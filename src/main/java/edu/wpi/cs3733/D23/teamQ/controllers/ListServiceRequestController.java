@@ -7,9 +7,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import io.github.palexdev.materialfx.controls.*;
-
 import java.util.Optional;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -18,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class ListServiceRequestController {
   @FXML TableView<ServiceRequest> yourRequestsTable;
@@ -39,18 +37,13 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
   @FXML TableColumn<ServiceRequest, MFXComboBox<ServiceRequest.Progress>> progressDropdownColumn;
 
-  @FXML HBox conferenceRequestEdit;
+  @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
   @FXML MFXFilterComboBox confLocationField;
   @FXML MFXDatePicker confDateField;
   @FXML MFXFilterComboBox confTimeField;
   @FXML MFXFilterComboBox confFoodField;
   @FXML MFXTextField confInstructionsField;
-
-
-
-
-
 
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -72,6 +65,7 @@ public class ListServiceRequestController {
   @FXML
   public void initialize() {
     String username = LoginController.getLoginUsername();
+    conferenceRequestEdit.setVisible(false);
 
     yourRequestsTable.setStyle("-fx-table-column-border-visible: false;");
     assignedRequestTable.setStyle("-fx-table-column-border-visible: false;");
@@ -122,8 +116,10 @@ public class ListServiceRequestController {
                 ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
-                      System.out.println(
-                          "Edit button clicked for: " + serviceRequest.getRequestID());
+                      if (qdb.retrieveConferenceRequest(serviceRequest.getRequestID()) != null) {
+                        conferenceRequestEdit.setVisible(true);
+                        setConferenceFields(qdb.retrieveConferenceRequest(serviceRequest.getRequestID()));
+                      }
                     });
                 Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
                 ImageView imageView = new ImageView(image);
@@ -251,6 +247,14 @@ public class ListServiceRequestController {
         });
 
     assignedRequestTable.setItems(userAssignedRequests);
+  }
+
+  public void confCancelClicked() {
+    conferenceRequestEdit.setVisible(false);
+  }
+
+  public void setConferenceFields(ConferenceRequest cr) {
+
   }
 
   public static ConferenceRequest getConferenceRequest() {

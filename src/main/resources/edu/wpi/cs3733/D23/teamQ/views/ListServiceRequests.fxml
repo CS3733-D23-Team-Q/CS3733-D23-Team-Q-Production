@@ -103,12 +103,12 @@
             </VBox>
          </children>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 40;">
+      <VBox fx:id="conferenceRequestEdit" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 40;">
          <StackPane.margin>
             <Insets bottom="200.0" left="200.0" right="200.0" top="250.0" />
          </StackPane.margin>
          <children>
-            <HBox fx:id="conferenceRequestEdit" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -208,12 +208,12 @@
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <MFXButton fx:id="confCancelButton" prefHeight="60.0" prefWidth="120.0" text="Cancel">
+                  <MFXButton fx:id="confCancelButton" onAction="#confCancelClicked" prefHeight="60.0" prefWidth="120.0" text="Cancel">
                      <HBox.margin>
                         <Insets bottom="50.0" right="30.0" />
                      </HBox.margin>
                   </MFXButton>
-                  <MFXButton fx:id="confSaveButton" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #012d5a;" text="Save Changes" textFill="WHITE">
+                  <MFXButton fx:id="confSaveButton"  prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #012d5a;" text="Save Changes" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="50.0" right="40.0" />
                      </HBox.margin>
