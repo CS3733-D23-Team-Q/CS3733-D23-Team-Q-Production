@@ -15,21 +15,24 @@
 
 <VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="116.0" prefWidth="1360.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="129.0" prefWidth="1360.0">
                <children>
-                  <ImageView fitHeight="125.0" fitWidth="818.0">
+                  <ImageView fitHeight="129.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
                         <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
                      </image>
                   </ImageView>
-                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form ">
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form " StackPane.alignment="CENTER">
                      <font>
                         <Font name="Roboto Bold" size="36.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
             </StackPane>
          </children>
       </VBox>
@@ -38,7 +41,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox prefHeight="678.0" prefWidth="504.0" spacing="30.0">
                <children>
-                  <VBox>
+                  <VBox prefWidth="400.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
                            <font>
@@ -97,8 +100,8 @@
                   <Insets left="30.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="200.0" />
-            <VBox prefHeight="200.0" prefWidth="400.0" spacing="30.0">
+            <VBox prefHeight="200.0" prefWidth="150.0" />
+            <VBox prefHeight="200.0" prefWidth="400.0">
                <children>
                   <VBox>
                      <children>
@@ -107,9 +110,38 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="entreeField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Entree" />
+                        <MFXFilterComboBox fx:id="entreeField" onAction="#EntreeSelected" prefHeight="40.0" prefWidth="400.0" promptText="Select an Entree" />
                      </children>
                   </VBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="ChickenImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/chicken.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="SteakImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/steak.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="PorkImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/pork.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="FishImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/fish.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="VegetarianImage" fitHeight="150.0" fitWidth="246.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/vegetarian.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                   <VBox prefHeight="58.0" prefWidth="748.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Drink">
@@ -117,9 +149,33 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="drinkField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Drink" />
+                        <MFXFilterComboBox fx:id="drinkField" onAction="#DrinkSelected" prefHeight="40.0" prefWidth="400.0" promptText="Select a Drink" />
                      </children>
                   </VBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="WaterImage" fitHeight="150.0" fitWidth="232.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/water%20bottle.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="CokeImage" fitHeight="150.0" fitWidth="122.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/coke%20can.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="CoffeeImage" fitHeight="150.0" fitWidth="233.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/coffee.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="TeaImage" fitHeight="150.0" fitWidth="234.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/tea.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                   <VBox>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Side">
@@ -127,11 +183,35 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="sideField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Side">
+                        <MFXFilterComboBox fx:id="sideField" onAction="#SideSelected" prefHeight="40.0" prefWidth="400.0" promptText="Select a Side">
                            <font>
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </MFXFilterComboBox>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="FriesImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/fries.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="OnionRingsImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/onion%20rings.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="SoupImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/soup.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="SaladImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/salad.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                </children>
@@ -142,24 +222,28 @@
             <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="848.0" spacing="400.0">
+      <HBox prefHeight="100.0" prefWidth="1360.0" spacing="400.0">
          <children>
             <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
                <font>
                   <Font name="Roboto" size="16.0" />
                </font>
             </MFXButton>
-            <HBox spacing="20.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox spacing="30.0">
                <children>
                   <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                  <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
                   </MFXButton>
                </children>
             </HBox>
