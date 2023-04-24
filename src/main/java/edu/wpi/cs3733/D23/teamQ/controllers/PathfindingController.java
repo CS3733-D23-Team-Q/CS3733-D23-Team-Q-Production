@@ -97,7 +97,6 @@ public class PathfindingController {
     date = Date.valueOf("2023-01-01");
     moveDates = new ArrayList<>();
     algorithm = "aStar";
-    ad
     floors = new ArrayList<>();
     // Image gf = new Image("/00_thegroundfloor.png");
     Image l1 = new Image("/edu/wpi/cs3733/D23/teamQ/00_thelowerlevel1.png");
