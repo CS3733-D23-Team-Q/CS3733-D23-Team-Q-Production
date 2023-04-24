@@ -104,6 +104,7 @@ public class OfficeSuppliesRequestController {
     qdb.addOfficeSuppliesRequest(newOSR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }
+
   @FXML
   public void ItemSelected(ActionEvent event) {
     if (itemRequestedField.getText().equals("Printer Paper (by ream)")) {
@@ -141,6 +142,5 @@ public class OfficeSuppliesRequestController {
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(1.0);
     }
-
   }
 }

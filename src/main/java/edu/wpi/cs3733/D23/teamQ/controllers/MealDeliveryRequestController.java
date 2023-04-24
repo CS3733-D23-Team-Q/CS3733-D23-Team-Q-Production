@@ -62,7 +62,6 @@ public class MealDeliveryRequestController {
   @FXML private ImageView SoupImage;
   @FXML private ImageView SaladImage;
 
-
   @FXML
   public void initialize() {
     this.assigneeField.setValue("");
@@ -148,6 +147,7 @@ public class MealDeliveryRequestController {
     qdb.addMealRequest(newMR);
     Navigation.navigateRight(Screen.SUBMISSION);
   }
+
   @FXML
   public void EntreeSelected(ActionEvent event) {
     if (entreeField.getText().equals("Chicken")) {
@@ -185,8 +185,8 @@ public class MealDeliveryRequestController {
       FishImage.setOpacity(0.0);
       VegetarianImage.setOpacity(1.0);
     }
-
   }
+
   @FXML
   public void DrinkSelected(ActionEvent event) {
     if (drinkField.getText().equals("Water")) {
@@ -241,6 +241,5 @@ public class MealDeliveryRequestController {
       SoupImage.setOpacity(0.0);
       SaladImage.setOpacity(1.0);
     }
-
   }
 }

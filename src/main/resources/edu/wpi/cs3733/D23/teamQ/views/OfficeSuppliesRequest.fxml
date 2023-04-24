@@ -120,7 +120,7 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="250.0" />
+            <VBox prefHeight="200.0" prefWidth="150.0" />
             <VBox prefHeight="200.0" prefWidth="400.0" spacing="30.0">
                <children>
                   <VBox>
