@@ -600,7 +600,7 @@ public class PathfindingController {
         double sly = sl.getStartY();
         double elx = el.getEndX();
         double ely = el.getEndY();
-        double ax = Math.abs(slx + elx) / 2;
+        double ax = Math.abs(slx + elx) / 2 + 5;
         double ay = Math.abs(sly + ely) / 2 - 10;
         if (messageField != null) {
           messageText = new Text(ax, ay, messageField.getText());
