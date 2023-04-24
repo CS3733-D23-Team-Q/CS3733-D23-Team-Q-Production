@@ -97,22 +97,7 @@ public class PathfindingController {
     date = Date.valueOf("2023-01-01");
     moveDates = new ArrayList<>();
     algorithm = "aStar";
-    allSelections = new ArrayList<>();
-    l1nodes = new ArrayList<>();
-    l2nodes = new ArrayList<>();
-    ffnodes = new ArrayList<>();
-    sfnodes = new ArrayList<>();
-    tfnodes = new ArrayList<>();
-    highlightedNodes = new ArrayList<>();
-    nodeIds = new ArrayList<>();
-    restNodes = new ArrayList<>();
-    deptNodes = new ArrayList<>();
-    labsNodes = new ArrayList<>();
-    infoNodes = new ArrayList<>();
-    confNodes = new ArrayList<>();
-    retlNodes = new ArrayList<>();
-    servNodes = new ArrayList<>();
-    previousNodes = new ArrayList<>();
+    ad
     floors = new ArrayList<>();
     // Image gf = new Image("/00_thegroundfloor.png");
     Image l1 = new Image("/edu/wpi/cs3733/D23/teamQ/00_thelowerlevel1.png");
