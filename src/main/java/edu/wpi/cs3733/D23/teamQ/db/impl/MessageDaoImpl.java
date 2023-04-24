@@ -71,7 +71,7 @@ public class MessageDaoImpl {
       String uname2 = m.getReceiver().getUsername();
       String[] people2 = {uname1, uname2};
       Arrays.sort(people2);
-      if (people.equals(people2)) {
+      if (people[0].equals(people2[0]) && people[1].equals(people2[1])) {
         messageList.add(m);
       }
     }

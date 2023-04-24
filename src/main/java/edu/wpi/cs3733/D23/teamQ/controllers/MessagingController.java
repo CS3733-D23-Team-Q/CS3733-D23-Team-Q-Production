@@ -85,7 +85,10 @@ public class MessagingController {
                     profilePicture.setImage(pfp);
                   }
 
-                  System.out.println(qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).get(0).getMessage());
+                  System.out.println(
+                      qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                          .get(0)
+                          .getMessage());
 
                   for (Message m :
                       qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
