@@ -28,6 +28,7 @@ public class Qdb {
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
   private ServiceRequestDaoImpl serviceRequestTable;
+  private SignDaoImpl signTable;
 
   private static Qdb single_instance = null;
 
@@ -54,6 +55,7 @@ public class Qdb {
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
+    signTable = SignDaoImpl.getInstance();
   }
 
   public Account retrieveAccount(String username) {
@@ -87,9 +89,30 @@ public class Qdb {
   public List<Integer> getAccountIndexes(String email) {
     return accountTable.getIndexes(email);
   }
-
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
+  }
+  public Sign retrieveSign(int kiosk) {
+    return signTable.retrieveRow(kiosk);
+  }
+
+  public boolean updateSign(int kiosk, Sign a) {
+    return signTable.updateRow(kiosk, a);
+  }
+
+  public boolean deleteSign(int kiosk) {
+    return signTable.deleteRow(kiosk);
+  }
+
+  public boolean addSign(Sign a) {
+    return signTable.addRow(a);
+  }
+
+  public int getSignIndex(int kiosk) {
+    return signTable.getIndex(kiosk);
+  }
+  public ArrayList<Sign> retrieveAllSigns() {
+    return (ArrayList<Sign>) signTable.getAllRows();
   }
 
   public ConferenceRequest retrieveConferenceRequest(int requestID) {
