@@ -599,9 +599,10 @@ public class PathfindingController {
         double sly = sl.getStartY();
         double elx = el.getEndX();
         double ely = el.getEndY();
-        double ax = elx; // Math.abs(slx + elx) / 2
+        double ax = Math.abs(slx + elx) / 2;
         double ay = Math.abs(sly + ely) / 2 - 10;
         if (messageField != null) {
+          parent.getChildren().remove(messageText);
           messageText = new Text(ax, ay, messageField.getText());
           messageText.setFill(Color.RED);
           messageText.setStyle("-fx-font-size: 8px;");
@@ -707,6 +708,7 @@ public class PathfindingController {
 
   public void previousFloorClicked() throws IOException {
     String f = "";
+    // parent.getChildren().remove(messageText);
     if (floor == 1) {
       previousFloor.setDisable(true);
     }
@@ -756,6 +758,7 @@ public class PathfindingController {
 
   public void nextFloorClicked() throws IOException {
     String f = "";
+    // parent.getChildren().remove(messageText);
     if (floor == 3) {
       nextFloor.setDisable(true);
     }
@@ -916,6 +919,7 @@ public class PathfindingController {
       start = n;
       target = null;
       removeLines(previousPath);
+      parent.getChildren().remove(messageText);
       // }
 
       if (highlightedNodes.size() > 0) {
@@ -977,6 +981,15 @@ public class PathfindingController {
         target = n;
         // ready4Second = false;
         removeLines(previousPath);
+        if (highlightedNodes.size() > 0) {
+          for (int j = 0; j < highlightedNodes.size(); j++) {
+            if (highlightedNodes.get(j).getMiddle() == floor) {
+              unhighlight(highlightedNodes.get(j).getLeft());
+            }
+          }
+          highlightedNodes.removeAll(highlightedNodes);
+        }
+        parent.getChildren().remove(messageText);
         try {
           previousPath = drawLinesf(start, target, f);
         } catch (Exception ex) {
@@ -1084,5 +1097,7 @@ public class PathfindingController {
     highlightedNodesp.removeAll(highlightedNodesp);
     startSelect.setValue(null);
     endSelect.setValue(null);
+    messageField.setText(null);
+    parent.getChildren().remove(messageText);
   }
 }
