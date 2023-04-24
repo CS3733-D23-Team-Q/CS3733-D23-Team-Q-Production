@@ -89,12 +89,15 @@ public class Qdb {
   public List<Integer> getAccountIndexes(String email) {
     return accountTable.getIndexes(email);
   }
+
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
   }
+
   public Sign retrieveSign(int idNum) {
     return signTable.retrieveRow(idNum);
   }
+
   public List<Sign> retrieveSigns(int kiosk) {
     return signTable.retrieveRows(kiosk);
   }
@@ -114,6 +117,7 @@ public class Qdb {
   public int getSignIndex(int idNum) {
     return signTable.getIndex(idNum);
   }
+
   public ArrayList<Sign> retrieveAllSigns() {
     return (ArrayList<Sign>) signTable.getAllRows();
   }
