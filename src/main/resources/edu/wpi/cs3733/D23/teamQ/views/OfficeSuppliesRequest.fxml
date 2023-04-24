@@ -15,16 +15,19 @@
 
 <VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.OfficeSuppliesRequestController">
    <children>
-      <VBox prefHeight="154.0" prefWidth="848.0">
+      <VBox prefHeight="119.0" prefWidth="1360.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="124.0" prefWidth="1360.0">
                <children>
-                  <ImageView fitHeight="125.0" fitWidth="818.0">
+                  <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
                         <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/istockphoto-999271266-612x612.jpg" />
                      </image>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
                   </ImageView>
-                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Office Supplies Form">
+                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Office Supplies Form" StackPane.alignment="CENTER">
                      <font>
                         <Font name="Roboto Bold" size="36.0" />
                      </font>
@@ -33,6 +36,9 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
             </StackPane>
          </children>
          <opaqueInsets>
@@ -141,6 +147,35 @@
                         <MFXTextField fx:id="quantityField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Quantity" />
                      </children>
                   </VBox>
+                  <StackPane prefHeight="209.0" prefWidth="340.0">
+                     <children>
+                        <ImageView fx:id="PrinterPaperImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/PrinterPaper.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="PencilImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/Pencils.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="PenImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/pen%20pack.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="HighlighterImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/highlihgtersfd.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="NotepadImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/Notepad.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" />

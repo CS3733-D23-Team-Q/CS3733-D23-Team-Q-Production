@@ -45,7 +45,7 @@ public class MedicalSuppliesRequestController {
   @FXML private ImageView BandaidsImage;
   @FXML private ImageView CottonBallsImage;
   @FXML private ImageView GauzeImage;
-  @FXML private ImageView TongueDepressersImage;
+  @FXML private ImageView TongueDepresserImage;
   @FXML private ImageView SyringeImage;
 
   @FXML
@@ -62,7 +62,7 @@ public class MedicalSuppliesRequestController {
     BandaidsImage.setOpacity(0.0);
     CottonBallsImage.setOpacity(0.0);
     GauzeImage.setOpacity(0.0);
-    TongueDepressersImage.setOpacity(0.0);
+    TongueDepresserImage.setOpacity(0.0);
     SyringeImage.setOpacity(0.0);
   }
 
@@ -79,7 +79,7 @@ public class MedicalSuppliesRequestController {
     BandaidsImage.setOpacity(0.0);
     CottonBallsImage.setOpacity(0.0);
     GauzeImage.setOpacity(0.0);
-    TongueDepressersImage.setOpacity(0.0);
+    TongueDepresserImage.setOpacity(0.0);
     SyringeImage.setOpacity(0.0);
   }
 
@@ -140,35 +140,35 @@ public class MedicalSuppliesRequestController {
       BandaidsImage.setOpacity(1.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
-      TongueDepressersImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
     if (itemRequestedField.getText().equals("Cotton Balls")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(1.0);
       GauzeImage.setOpacity(0.0);
-      TongueDepressersImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
     if (itemRequestedField.getText().equals("Gauze")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(1.0);
-      TongueDepressersImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
     if (itemRequestedField.getText().equals("Tongue Depressers")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
-      TongueDepressersImage.setOpacity(1.0);
+      TongueDepresserImage.setOpacity(1.0);
       SyringeImage.setOpacity(0.0);
     }
     if (itemRequestedField.getText().equals("Syringe")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
-      TongueDepressersImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(1.0);
     }
   }

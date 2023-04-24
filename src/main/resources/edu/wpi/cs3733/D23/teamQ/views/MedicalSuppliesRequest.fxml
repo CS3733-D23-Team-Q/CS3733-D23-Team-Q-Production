@@ -158,7 +158,7 @@
                                     <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/tongue%20depresser.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="SyringImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                              <ImageView fx:id="SyringeImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/syringe.jpg" />
                                  </image>
