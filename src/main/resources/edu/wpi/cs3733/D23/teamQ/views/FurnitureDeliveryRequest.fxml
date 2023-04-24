@@ -15,11 +15,11 @@
 
 <VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FurnitureDeliveryRequestController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="99.0" prefWidth="1360.0">
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="125.0" fitWidth="818.0">
+                  <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
                         <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/testingads.jpg" />
                      </image>
@@ -30,6 +30,9 @@
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
             </StackPane>
          </children>
       </VBox>
@@ -38,7 +41,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox prefHeight="558.0" prefWidth="487.0" spacing="30.0" style="-fx-background-color: #f1f1f1;">
                <children>
-                  <VBox>
+                  <VBox prefWidth="400.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
                            <font>
@@ -109,7 +112,7 @@
                   <Insets left="30.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="200.0" />
+            <VBox prefHeight="200.0" prefWidth="150.0" />
             <VBox prefHeight="200.0" prefWidth="400.0" spacing="30.0">
                <children>
                   <VBox>
@@ -119,13 +122,37 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="itemRequestedField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Furniture Item">
+                        <MFXFilterComboBox fx:id="itemRequestedField" onAction="#ItemSelected" prefHeight="40.0" prefWidth="400.0" promptText="Select a Furniture Item">
                            <font>
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </MFXFilterComboBox>
                      </children>
                   </VBox>
+                  <StackPane prefHeight="209.0" prefWidth="340.0">
+                     <children>
+                        <ImageView fx:id="DeskImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/desk%20image.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="DeskChairImage" fitHeight="209.0" fitWidth="206.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/desk%20chair%20image.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="CouchImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/COUCH.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="ExaminationTableImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/examination%20table%20sd.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" />

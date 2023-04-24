@@ -10,8 +10,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 public class FurnitureDeliveryRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -35,6 +37,11 @@ public class FurnitureDeliveryRequestController {
   @FXML Button cancelButton;
   @FXML Button submitButton;
 
+  @FXML private ImageView DeskImage;
+  @FXML private ImageView DeskChairImage;
+  @FXML private ImageView CouchImage;
+  @FXML private ImageView ExaminationTableImage;
+
   @FXML
   public void initialize() {
     this.assigneeField.setValue("");
@@ -45,6 +52,11 @@ public class FurnitureDeliveryRequestController {
     this.timeField.setItems(timeList);
     this.itemRequestedField.setValue("");
     this.itemRequestedField.setItems(itemList);
+
+    DeskImage.setOpacity(0.0);
+    DeskChairImage.setOpacity(0.0);
+    CouchImage.setOpacity(0.0);
+    ExaminationTableImage.setOpacity(0.0);
   }
 
   @FXML
@@ -55,6 +67,11 @@ public class FurnitureDeliveryRequestController {
     this.timeField.setValue("");
     this.itemRequestedField.setValue("");
     this.specialInstructionsField.clear();
+
+    DeskImage.setOpacity(0.0);
+    DeskChairImage.setOpacity(0.0);
+    CouchImage.setOpacity(0.0);
+    ExaminationTableImage.setOpacity(0.0);
   }
 
   @FXML
@@ -77,5 +94,33 @@ public class FurnitureDeliveryRequestController {
             itemRequestedField.getValue().toString());
     qdb.addFurnitureRequest(newFR);
     Navigation.navigateRight(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getText().equals("Desk")) {
+      DeskImage.setOpacity(1.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getText().equals("Desk Chair")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(1.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getText().equals("Couch")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(1.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getText().equals("Examination Table")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(1.0);
+    }
   }
 }
