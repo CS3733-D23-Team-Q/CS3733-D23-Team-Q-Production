@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 public class RefreshThread implements Runnable {
   private long lastUpdate = System.currentTimeMillis();
+  Qdb qdb = Qdb.getInstance();
 
   public void run() {
+    System.out.println(qdb);
     try {
       System.out.println("Database refresh thread is now running.");
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-
-    Qdb qdb = Qdb.getInstance();
 
     String[] tableNames = {
       "account",
@@ -30,32 +30,31 @@ public class RefreshThread implements Runnable {
       "serviceRequest",
       "message"
     };
+
     ArrayList<String> toUpdate = new ArrayList<>();
+
     while (true) {
       try {
         Connection conn = GenDao.connect();
         PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"timestamp\"");
         ResultSet rs = pst.executeQuery();
-        conn.close();
-        pst.close();
         while (rs.next()) {
           for (String tableName : tableNames) {
             if (rs.getString("tableName").equals(tableName)) {
               if (rs.getLong("updated_timestamp") > lastUpdate) {
-                System.out.println(lastUpdate);
-                System.out.println(rs.getLong("updated_timestamp"));
                 toUpdate.add(tableName);
               }
             }
           }
         }
+        conn.close();
+        pst.close();
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
 
       try {
         if (toUpdate.size() > 0) {
-          System.out.println(toUpdate);
           qdb.populate(toUpdate);
           setTimestamps(toUpdate);
           lastUpdate = System.currentTimeMillis();
