@@ -560,7 +560,7 @@ public class PathfindingController {
         double sly = sl.getStartY();
         double elx = el.getEndX();
         double ely = el.getEndY();
-        double ax = Math.abs(slx + elx) / 2;
+        double ax = elx; // Math.abs(slx + elx) / 2
         double ay = Math.abs(sly + ely) / 2 - 10;
         if (messageField != null) {
           messageText = new Text(ax, ay, messageField.getText());
@@ -675,21 +675,6 @@ public class PathfindingController {
       nextFloor.setDisable(false);
     }
 
-    if (highlightedNodes.size() > 0) {
-      for (int j = 0; j < highlightedNodes.size(); j++) {
-        if (highlightedNodes.get(j).getMiddle() == floor) {
-          unhighlight(highlightedNodes.get(j).getLeft());
-        }
-      }
-    }
-    if (highlightedNodesp.size() > 0) {
-      for (int j = 0; j < highlightedNodesp.size(); j++) {
-        if (highlightedNodesp.get(j).getMiddle() == floor) {
-          unhighlight(highlightedNodesp.get(j).getLeft());
-        }
-      }
-    }
-
     if (floor > 0) {
       floor--;
       f = whichFloorS();
@@ -737,21 +722,6 @@ public class PathfindingController {
     }
     if (previousFloor.isDisable()) {
       previousFloor.setDisable(false);
-    }
-
-    if (highlightedNodes.size() > 0) {
-      for (int j = 0; j < highlightedNodes.size(); j++) {
-        if (highlightedNodes.get(j).getMiddle() == floor) {
-          unhighlight(highlightedNodes.get(j).getLeft());
-        }
-      }
-    }
-    if (highlightedNodesp.size() > 0) {
-      for (int j = 0; j < highlightedNodesp.size(); j++) {
-        if (highlightedNodesp.get(j).getMiddle() == floor) {
-          unhighlight(highlightedNodesp.get(j).getLeft());
-        }
-      }
     }
 
     if (floor < 4) {
