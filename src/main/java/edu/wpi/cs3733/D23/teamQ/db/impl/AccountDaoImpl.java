@@ -232,8 +232,8 @@ public class AccountDaoImpl implements GenDao<Account, String> {
 
   public int getQuestionId(String question) {
     int q = 0;
-    Connection con = GenDao.connect();
     try {
+      Connection con = GenDao.connect();
       String query = "SELECT id FROM security_question WHERE question = ?";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setString(1, question);
