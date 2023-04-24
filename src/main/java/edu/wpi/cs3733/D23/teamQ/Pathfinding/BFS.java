@@ -23,6 +23,15 @@ public class BFS implements IPathfinding {
       Node n = queue.poll();
       boolean nodeChosen = false;
       if (n == target) {
+        for (int i = 0; i < returnList.size(); i++) {
+          if (i + 1 < returnList.size()
+              && !returnList.get(i).hasConnection(returnList.get(i + 1))) {
+            System.out.println();
+            System.out.println("OOPS at node " + returnList.get(i));
+            System.out.println();
+            System.out.println("Next node is " + returnList.get(i + 1));
+          }
+        }
         return returnList;
       }
       if (n.getLocation().getNodeType().equalsIgnoreCase("ELEV")

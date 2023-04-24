@@ -59,6 +59,15 @@ public class Node {
         + this.location;
   }
 
+  public boolean hasConnection(Node another) {
+    for (Edge ex : this.getEdges()) {
+      if (ex.getStartNode().equals(another) || ex.getEndNode().equals(another)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public void addBranch(Edge e) {
     this.edges.add(e);
   }
