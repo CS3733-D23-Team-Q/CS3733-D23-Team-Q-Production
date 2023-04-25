@@ -71,7 +71,9 @@ public class OfficeSuppliesRequestDisplayController {
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
 
-    if (ListServiceRequestController.getOfficeRequest().getItem().equals("Printer Paper (by ream)")) {
+    if (ListServiceRequestController.getOfficeRequest()
+        .getItem()
+        .equals("Printer Paper (by ream)")) {
       PrinterPaperImage.setOpacity(1.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);
