@@ -7,7 +7,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import java.awt.*;
 import java.util.ArrayList;
 import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
@@ -16,7 +15,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -45,12 +43,19 @@ public class Pathfinding2Controller {
   @FXML MFXFilterComboBox destinationField;
 
   @FXML MFXCheckbox confCheck;
+  boolean confHighlighted;
   @FXML MFXCheckbox deptCheck;
+  boolean deptHighlighted;
   @FXML MFXCheckbox infoCheck;
+  boolean infoHighlighted;
   @FXML MFXCheckbox labsCheck;
+  boolean labsHighlighted;
   @FXML MFXCheckbox restCheck;
+  boolean restHighlighted;
   @FXML MFXCheckbox retlCheck;
+  boolean retlHighlighted;
   @FXML MFXCheckbox servCheck;
+  boolean servHighlighted;
   @FXML MFXButton clearButton;
 
   ObservableList<String> floorChoices =
@@ -97,6 +102,14 @@ public class Pathfinding2Controller {
     algorithmField.setItems(algorithmChoices);
     startingField.setItems(qdb.getAllLongNames());
     destinationField.setItems(qdb.getAllLongNames());
+
+    confHighlighted = false;
+    deptHighlighted = false;
+    infoHighlighted = false;
+    labsHighlighted = false;
+    restHighlighted = false;
+    retlHighlighted = false;
+    servHighlighted = false;
 
     startingField
         .valueProperty()
@@ -162,44 +175,31 @@ public class Pathfinding2Controller {
                 }
               }
             });
-    addCircles("1");
+    addCircles();
   }
 
   @FXML
-  public void addCircles(String curFloor) {
+  public void addCircles() {
     nodesPane.getChildren().clear();
     ArrayList<Node> nodes = qdb.retrieveAllNodes();
     for (int i = 0; i < nodes.size(); i++) {
       Node n = nodes.get(i);
-      if (n.getFloor().equals(curFloor)) {
+      if (n.getFloor().equals(currentFloor)) {
         Circle circle = new Circle();
         nodesPane.getChildren().add(circle);
         circle.setCenterX(n.getXCoord());
         circle.setCenterY(n.getYCoord());
         circle.setRadius(12);
         circle.setStyle("-fx-fill: #012d5a");
-        Label label = new Label();
-        nodesPane.getChildren().add(label);
-        label.setText(n.getLocation().getLongName());
-        label.setLayoutX(n.getXCoord() - 50);
-        label.setLayoutY(n.getYCoord() - 50);
-        label.setStyle("-fx-text-fill: #012d5a; -fx-font-size: 32; -fx-font-weight: bold");
-        label.setVisible(false);
-        circle.setOnMouseEntered(
-            (event) -> {
-              label.setVisible(true);
-              circle.setStyle("-fx-fill: #0167B1");
-            });
-        circle.setOnMouseExited(
-            (event) -> {
-              label.setVisible(false);
-              circle.setStyle("-fx-fill: #012d5a");
-            });
-        circle.setOnMouseClicked(
-            (event) -> {
-              circle.setRadius(20);
-              floorSwap(n.getFloor());
-            });
+        //        Label label = new Label();
+        //        nodesPane.getChildren().add(label);
+        //        label.setText(n.getLocation().getLongName());
+        //        label.setLayoutX(n.getXCoord() - 50);
+        //        label.setLayoutY(n.getYCoord() - 50);
+        //        label.setStyle("-fx-text-fill: #012d5a; -fx-font-size: 32; -fx-font-weight:
+        // bold");
+        //        label.setVisible(false);
+        circle.setOnMouseClicked((event) -> {});
       }
     }
   }
@@ -224,46 +224,129 @@ public class Pathfinding2Controller {
       if (newFloor.equals("L1")) {
         mapImage.setImage(ll1);
         currentFloor = "L1";
-        addCircles("L1");
+        addCircles();
       } else if (newFloor.equals("L2")) {
         mapImage.setImage(ll2);
         currentFloor = "L2";
-        addCircles("L2");
+        addCircles();
       } else if (newFloor.equals("1")) {
         mapImage.setImage(ff);
         currentFloor = "1";
-        addCircles("1");
+        addCircles();
       } else if (newFloor.equals("2")) {
         mapImage.setImage(sf);
         currentFloor = "2";
-        addCircles("2");
+        addCircles();
       } else if (newFloor.equals("3")) {
         mapImage.setImage(tf);
         currentFloor = "3";
-        addCircles("3");
+        addCircles();
       }
     }
   }
 
   @FXML
-  public void confChecked() {}
+  public void highlightNodes(String type) {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals(type)) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+      }
+    }
+  }
 
   @FXML
-  public void deptChecked() {}
+  public void confChecked() {
+    if (!confHighlighted) {
+      highlightNodes("CONF");
+      confHighlighted = true;
+    } else {
+      addCircles();
+      confHighlighted = false;
+    }
+  }
 
   @FXML
-  public void infoChecked() {}
+  public void deptChecked() {
+    if (!deptHighlighted) {
+      highlightNodes("DEPT");
+      deptHighlighted = true;
+    } else {
+      addCircles();
+      deptHighlighted = false;
+    }
+  }
 
   @FXML
-  public void labsChecked() {}
+  public void infoChecked() {
+    if (!infoHighlighted) {
+      highlightNodes("INFO");
+      infoHighlighted = true;
+    } else {
+      addCircles();
+      infoHighlighted = false;
+    }
+  }
 
   @FXML
-  public void restChecked() {}
+  public void labsChecked() {
+    if (!labsHighlighted) {
+      highlightNodes("LABS");
+      labsHighlighted = true;
+    } else {
+      addCircles();
+      labsHighlighted = false;
+    }
+  }
 
   @FXML
-  public void clearClicked() {}
+  public void restChecked() {
+    if (!restHighlighted) {
+      highlightNodes("REST");
+      restHighlighted = true;
+    } else {
+      addCircles();
+      restHighlighted = false;
+    }
+  }
 
-  public void retlChecked() {}
+  @FXML
+  public void retlChecked() {
+    if (!retlHighlighted) {
+      highlightNodes("RETL");
+      retlHighlighted = true;
+    } else {
+      addCircles();
+      retlHighlighted = false;
+    }
+  }
 
-  public void servChecked() {}
+  @FXML
+  public void servChecked() {
+    if (!servHighlighted) {
+      highlightNodes("SERV");
+      servHighlighted = true;
+    } else {
+      addCircles();
+      servHighlighted = false;
+    }
+  }
+
+  @FXML
+  public void clearClicked() {
+    confHighlighted = false;
+    deptHighlighted = false;
+    infoHighlighted = false;
+    labsHighlighted = false;
+    restHighlighted = false;
+    retlHighlighted = false;
+    servHighlighted = false;
+    addCircles();
+  }
 }
