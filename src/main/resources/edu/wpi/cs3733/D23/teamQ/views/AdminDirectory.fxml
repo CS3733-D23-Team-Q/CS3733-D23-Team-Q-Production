@@ -30,7 +30,7 @@
                     </StackPane>
                </children>
             </HBox>
-            <MFXButton fx:id="addButton" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100;" text="+">
+            <MFXButton fx:id="addButton" onAction="#addButtonClicked" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100;" text="+">
                <StackPane.margin>
                   <Insets left="1150.0" />
                </StackPane.margin>
