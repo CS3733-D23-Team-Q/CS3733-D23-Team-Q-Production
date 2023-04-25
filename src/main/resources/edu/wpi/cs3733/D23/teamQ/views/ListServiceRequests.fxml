@@ -874,5 +874,159 @@
             <Insets bottom="200.0" left="200.0" right="200.0" top="250.0" />
          </StackPane.margin>
       </VBox>
+      <VBox fx:id="medicalRequestEdit" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 40;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <StackPane maxWidth="275.0" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+                     <children>
+                        <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Medical Supplies Request">
+                           <font>
+                              <Font name="Roboto Bold" size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </StackPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXFilterComboBox fx:id="medicalAssigneeField" maxWidth="400.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" promptText="Select an Assignee">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </MFXFilterComboBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXFilterComboBox fx:id="medicalLocationField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Location">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </MFXFilterComboBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" minHeight="-Infinity" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXDatePicker fx:id="medicalDateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Select a Date">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </MFXDatePicker>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXTextField fx:id="medicalInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXFilterComboBox fx:id="medicalTimeField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Time">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </MFXFilterComboBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Requested">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXFilterComboBox fx:id="medicalItemField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Food Choice" text="Select Item">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </MFXFilterComboBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
+                                 <font>
+                                    <Font name="Roboto Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <MFXTextField fx:id="medicalQuantityField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" text="Quantity" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MFXButton onAction="#medicalCancelClicked" prefHeight="60.0" prefWidth="120.0" text="Cancel">
+                     <HBox.margin>
+                        <Insets bottom="50.0" right="30.0" />
+                     </HBox.margin>
+                  </MFXButton>
+                  <MFXButton onAction="#medicalUpdateClicked" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #012d5a;" text="Update" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="50.0" right="40.0" />
+                     </HBox.margin>
+                  </MFXButton>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+         <StackPane.margin>
+            <Insets bottom="200.0" left="200.0" right="200.0" top="250.0" />
+         </StackPane.margin>
+      </VBox>
    </children>
 </StackPane>

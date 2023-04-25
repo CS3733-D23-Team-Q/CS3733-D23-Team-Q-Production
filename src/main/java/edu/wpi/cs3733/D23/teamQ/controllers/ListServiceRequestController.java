@@ -14,6 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -65,6 +66,10 @@ public class ListServiceRequestController {
   ObservableList<String> sideList =
       FXCollections.observableArrayList("Fries", "Onion Rings", "Soup", "Salad");
 
+  ObservableList<String> medicalItemList =
+      FXCollections.observableArrayList(
+          "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
+
   @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
   @FXML MFXFilterComboBox confLocationField;
@@ -109,6 +114,15 @@ public class ListServiceRequestController {
   @FXML MFXFilterComboBox mealSideField;
   @FXML MFXFilterComboBox mealEntreeField;
 
+  @FXML VBox medicalRequestEdit;
+  @FXML MFXFilterComboBox medicalAssigneeField;
+  @FXML MFXFilterComboBox medicalLocationField;
+  @FXML MFXDatePicker medicalDateField;
+  @FXML MFXTextField medicalInstructionsField;
+  @FXML MFXFilterComboBox medicalTimeField;
+  @FXML MFXFilterComboBox medicalItemField;
+  @FXML MFXTextField medicalQuantityField;
+
   private static ServiceRequest serviceRequestChange;
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -137,6 +151,7 @@ public class ListServiceRequestController {
     officeRequestEdit.setVisible(false);
     furnitureRequestEdit.setVisible(false);
     mealRequestEdit.setVisible(false);
+    medicalRequestEdit.setVisible(false);
 
     yourRequestsTable.setStyle("-fx-table-column-border-visible: false;");
     assignedRequestTable.setStyle("-fx-table-column-border-visible: false;");
@@ -187,39 +202,43 @@ public class ListServiceRequestController {
                 ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
+                      serviceRequestChange = serviceRequest;
                       if (qdb.retrieveConferenceRequest(serviceRequest.getRequestID()) != null) {
                         conferenceRequestEdit.setVisible(true);
-                        setConferenceFields(
-                            qdb.retrieveConferenceRequest(serviceRequest.getRequestID()));
-                        conferenceRequest =
+                        ConferenceRequest cr =
                             qdb.retrieveConferenceRequest(serviceRequest.getRequestID());
-                        serviceRequestChange = serviceRequest;
+                        setConferenceFields(cr);
+                        conferenceRequest = cr;
                       } else if (qdb.retrieveFlowerRequest(serviceRequest.getRequestID()) != null) {
                         flowerRequestEdit.setVisible(true);
-                        setFlowerFields(qdb.retrieveFlowerRequest(serviceRequest.getRequestID()));
-                        flowerRequest = qdb.retrieveFlowerRequest(serviceRequest.getRequestID());
-                        serviceRequestChange = serviceRequest;
+                        FlowerRequest fr = qdb.retrieveFlowerRequest(serviceRequest.getRequestID());
+                        setFlowerFields(fr);
+                        flowerRequest = fr;
                       } else if (qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID())
                           != null) {
                         officeRequestEdit.setVisible(true);
-                        setOfficeFields(
-                            qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID()));
-                        officeSuppliesRequest =
+                        OfficeSuppliesRequest or =
                             qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID());
-                        serviceRequestChange = serviceRequest;
+                        setOfficeFields(or);
+                        officeSuppliesRequest = or;
                       } else if (qdb.retrieveFurnitureRequest(serviceRequest.getRequestID())
                           != null) {
                         furnitureRequestEdit.setVisible(true);
-                        setFurnitureFields(
-                            qdb.retrieveFurnitureRequest(serviceRequest.getRequestID()));
-                        furnitureRequest =
+                        FurnitureRequest fr =
                             qdb.retrieveFurnitureRequest(serviceRequest.getRequestID());
-                        serviceRequestChange = serviceRequest;
+                        setFurnitureFields(fr);
+                        furnitureRequest = fr;
                       } else if (qdb.retrieveMealRequest(serviceRequest.getRequestID()) != null) {
                         mealRequestEdit.setVisible(true);
-                        setMealFields(qdb.retrieveMealRequest(serviceRequest.getRequestID()));
-                        mealRequest = qdb.retrieveMealRequest(serviceRequest.getRequestID());
-                        serviceRequestChange = serviceRequest;
+                        MealRequest mr = qdb.retrieveMealRequest(serviceRequest.getRequestID());
+                        setMealFields(mr);
+                        mealRequest = mr;
+                      } else {
+                        medicalRequestEdit.setVisible(true);
+                        MedicalSuppliesRequest mr =
+                            qdb.retrieveMedicalSuppliesRequest(serviceRequest.getRequestID());
+                        setMedicalFields(mr);
+                        medicalSuppliesRequest = mr;
                       }
                     });
                 Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
@@ -384,8 +403,7 @@ public class ListServiceRequestController {
             conferenceRequest.getProgress().ordinal(),
             confFoodField.getText());
     qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
-    //    yourRequestsTable.getItems().remove(serviceRequestChange);
-    //    yourRequestsTable.refresh();
+    yourRequestsTable.refresh();
     conferenceRequestEdit.setVisible(false);
   }
 
@@ -482,6 +500,29 @@ public class ListServiceRequestController {
   }
 
   public void mealUpdateClicked() {}
+
+  public void setMedicalFields(MedicalSuppliesRequest mr) {
+    medicalItemField.setItems(medicalItemList);
+    medicalAssigneeField.setItems(qdb.getAllLongNames());
+    medicalLocationField.setItems(qdb.getAllLongNames());
+    medicalTimeField.setItems(timeList);
+
+    medicalAssigneeField.setText(mr.getAssigneeUsername());
+    medicalTimeField.setText(mr.getTime());
+    medicalLocationField.setText(qdb.retrieveLocation(mr.getNodeID()).getLongName());
+    medicalInstructionsField.setText(mr.getSpecialInstructions());
+    medicalDateField.setValue(
+        LocalDate.of(
+            mr.getDate().getYear() + 1900, mr.getDate().getMonth() + 1, mr.getDate().getDate()));
+    medicalItemField.setText(mr.getItem());
+    medicalQuantityField.setText(Integer.toString(mr.getQuantity()));
+  }
+
+  public void medicalCancelClicked(ActionEvent actionEvent) {
+    medicalRequestEdit.setVisible(false);
+  }
+
+  public void medicalUpdateClicked(ActionEvent actionEvent) {}
 
   public static ConferenceRequest getConferenceRequest() {
     return conferenceRequest;
