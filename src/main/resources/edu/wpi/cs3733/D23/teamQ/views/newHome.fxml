@@ -75,7 +75,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="alertsField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Alerts Will Show Here">
+                                    <TextArea fx:id="alertsField" editable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Alerts Will Show Here">
                                        <effect>
                                           <ColorAdjust brightness="-0.14">
                                              <input>
