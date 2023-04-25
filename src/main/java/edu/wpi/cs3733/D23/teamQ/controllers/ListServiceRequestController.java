@@ -302,6 +302,36 @@ public class ListServiceRequestController {
             }
           };
         });
+    progressDropdownColumn.setCellFactory(
+        column -> {
+          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
+            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
+
+            {
+              comboBox.setPrefHeight(20);
+              comboBox.setItems(progressValues);
+              comboBox.setOnAction(
+                  event -> {
+                    ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
+                    serviceRequest.setProgress(comboBox.getValue());
+                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
+                    yourRequestsTable.refresh();
+                  });
+            }
+
+            @Override
+            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
+              super.updateItem(item, empty);
+              if (empty) {
+                setGraphic(null);
+              } else {
+                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
+                comboBox.setValue(serviceRequest.getProgress());
+                setGraphic(comboBox);
+              }
+            }
+          };
+        });
 
     yourRequestsTable.setItems(userRequestedRequests);
 

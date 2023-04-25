@@ -115,7 +115,7 @@ public class ServiceRequestDaoImpl {
 
   public ObservableList<ServiceRequest> getAllRequestsObservable() {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
-    for(int i = 0; i < serviceRequests.size(); i++) {
+    for (int i = 0; i < serviceRequests.size(); i++) {
       list.add(serviceRequests.get(i));
     }
     return list;
