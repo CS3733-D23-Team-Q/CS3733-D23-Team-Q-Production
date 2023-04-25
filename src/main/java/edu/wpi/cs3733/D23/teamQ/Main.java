@@ -7,8 +7,7 @@ public class Main {
   public static Thread refresh = new Thread(new RefreshThread());
 
   public static void main(String[] args) {
-    Qdb qdb = Qdb.getInstance();
-    System.out.println(qdb);
+    Qdb.getInstance();
     refresh.start();
     App.launch(App.class, args);
   }

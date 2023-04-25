@@ -14,7 +14,6 @@ public class RefreshThread implements Runnable {
   Qdb qdb = Qdb.getInstance();
 
   public void run() {
-    System.out.println(qdb);
     try {
       System.out.println("Database refresh thread is now running.");
     } catch (Exception e) {
