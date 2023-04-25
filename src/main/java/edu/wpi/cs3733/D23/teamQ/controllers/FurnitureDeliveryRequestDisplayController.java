@@ -1,21 +1,18 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-import static edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController.getFurnitureRequest;
-
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
 public class FurnitureDeliveryRequestDisplayController {
 
@@ -26,50 +23,39 @@ public class FurnitureDeliveryRequestDisplayController {
   @FXML MFXButton backButton;
   @FXML MFXButton updateButton;
 
-  @FXML MFXFilterComboBox assigneeField;
-  @FXML MFXFilterComboBox roomNumberField;
+  @FXML ChoiceBox assigneeField;
+  @FXML ChoiceBox roomNumberField;
   @FXML MFXDatePicker dateField;
-  ObservableList<String> timeList =
-      FXCollections.observableArrayList(
-          "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00",
-          "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00",
-          "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
-          "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
-          "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
-  @FXML MFXFilterComboBox timeField;
-  @FXML MFXFilterComboBox furnitureChoiceField;
+  @FXML MFXTextField timeField;
+  @FXML ChoiceBox furnitureChoiceField;
+  @FXML MFXTextField itemRequestedField;
   @FXML MFXTextField specialInstructionsField;
 
   @FXML
   public void initialize() {
-    Qdb qdb = Qdb.getInstance();
-    timeField.setItems(timeList);
     furnitureChoiceField.setItems(TypeOfFurniture);
-    assigneeField.setText(getFurnitureRequest().getAssignee().getUsername());
-    roomNumberField.setText(
-        qdb.retrieveNode(ListServiceRequestController.getFurnitureRequest().getNodeID())
-            .getLocation()
-            .getLongName());
+    assigneeField.setValue(ListServiceRequestController.getFurnitureRequest().getAssignee());
+    roomNumberField.setValue(ListServiceRequestController.getFurnitureRequest().getNode());
     dateField.setValue(
         LocalDate.of(
-            ListServiceRequestController.getFurnitureRequest().getDate().getYear() + 1900,
-            ListServiceRequestController.getFurnitureRequest().getDate().getMonth() + 1,
-            ListServiceRequestController.getFurnitureRequest().getDate().getDate()));
-    timeField.setText(ListServiceRequestController.getFurnitureRequest().getTime());
+            ListServiceRequestController.getConferenceRequest().getDate().getYear(),
+            ListServiceRequestController.getConferenceRequest().getDate().getMonth(),
+            ListServiceRequestController.getConferenceRequest().getDate().getDay()));
+    timeField.setText(ListServiceRequestController.getConferenceRequest().getTime());
     specialInstructionsField.setText(
-        ListServiceRequestController.getFurnitureRequest().getSpecialInstructions());
-    furnitureChoiceField.setText(getFurnitureRequest().getItem());
+        ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+    furnitureChoiceField.setValue(ListServiceRequestController.getFurnitureRequest().getItem());
   }
 
   @FXML
   public void deleteButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-    qdb.deleteFurnitureRequest(getFurnitureRequest().getRequestID());
+    qdb.deleteFurnitureRequest(ListServiceRequestController.getFurnitureRequest().getRequestID());
   }
 
   @FXML
   public void backButtonClicked() {
-    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -79,16 +65,17 @@ public class FurnitureDeliveryRequestDisplayController {
 
     FurnitureRequest newFurR =
         new FurnitureRequest(
-            getFurnitureRequest().getRequestID(),
-            getFurnitureRequest().getNode(),
-            getFurnitureRequest().getRequester(),
-            (Account) assigneeField.getValue(),
-            specialInstructionsField.getText(),
+            ListServiceRequestController.getFurnitureRequest().getRequestID(),
+            "temp requester",
+            0,
+            "temp assignee",
+            ListServiceRequestController.getFurnitureRequest().getNode(),
+            (String) specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            getFurnitureRequest().getProgress().ordinal(),
-            furnitureChoiceField.getValue().toString());
+            (String) furnitureChoiceField.getValue());
 
-    qdb.updateFurnitureRequest(getFurnitureRequest().getRequestID(), newFurR);
+    qdb.updateFurnitureRequest(
+        ListServiceRequestController.getFurnitureRequest().getRequestID(), newFurR);
   }
 }

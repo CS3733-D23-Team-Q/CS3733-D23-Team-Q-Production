@@ -1,49 +1,47 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Person;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class DirectoryController {
 
-  @FXML private TableColumn<edu.wpi.cs3733.D23.teamQ.db.obj.Account, String> Email;
+  @FXML private TableColumn<edu.wpi.cs3733.D23.teamQ.db.obj.Person, String> Email;
 
-  @FXML private TableColumn<Account, String> FirstName;
+  @FXML private TableColumn<Person, String> FirstName;
 
-  @FXML private TableColumn<Account, String> LastName;
+  @FXML private TableColumn<Person, String> LastName;
 
-  @FXML private TableColumn<Account, Number> PhoneNumber;
+  @FXML private TableColumn<Person, Number> PhoneNumber;
 
-  @FXML private TableColumn<Account, String> Title;
+  @FXML private TableColumn<Person, String> Title;
 
-  @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
-
-  Account accountSelected;
+  @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Person> Person;
 
   /** used to put Nodes from database arraylist to observablelist */
-  public ObservableList<Account> Accounts() {
-    ObservableList<Account> account = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().retrieveAllAccounts().size(); i++) {
-      account.add(Qdb.getInstance().retrieveAllAccounts().get(i));
+  public ObservableList<Person> People() {
+    ObservableList<Person> person = FXCollections.observableArrayList();
+    for (int i = 0; i < Qdb.getInstance().personTable.getAllRows().size(); i++) {
+      person.add(Qdb.getInstance().personTable.getAllRows().get(i));
     }
-    return account;
+    return person;
   }
 
   public void initialize() {
     /** input the Title to the table */
     Title.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
+        new Callback<TableColumn.CellDataFeatures<Person, String>, ObservableValue<String>>() {
           @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+          public ObservableValue<String> call(TableColumn.CellDataFeatures<Person, String> param) {
             SimpleStringProperty titles = new SimpleStringProperty(param.getValue().getTitle());
             return titles;
           }
@@ -51,9 +49,9 @@ public class DirectoryController {
 
     /** input the FirstName to the table */
     FirstName.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
+        new Callback<TableColumn.CellDataFeatures<Person, String>, ObservableValue<String>>() {
           @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+          public ObservableValue<String> call(TableColumn.CellDataFeatures<Person, String> param) {
             SimpleStringProperty firstName =
                 new SimpleStringProperty(param.getValue().getFirstName());
             return firstName;
@@ -62,9 +60,9 @@ public class DirectoryController {
 
     /** input the LastName to the table */
     LastName.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
+        new Callback<TableColumn.CellDataFeatures<Person, String>, ObservableValue<String>>() {
           @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+          public ObservableValue<String> call(TableColumn.CellDataFeatures<Person, String> param) {
             SimpleStringProperty lastName =
                 new SimpleStringProperty(param.getValue().getLastName());
             return lastName;
@@ -73,19 +71,21 @@ public class DirectoryController {
 
     /** input the Email to the table */
     Email.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
+        new Callback<TableColumn.CellDataFeatures<Person, String>, ObservableValue<String>>() {
           @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty email = new SimpleStringProperty(param.getValue().getEmail());
+          public ObservableValue<String> call(TableColumn.CellDataFeatures<Person, String> param) {
+            SimpleStringProperty email =
+                new SimpleStringProperty(
+                    Qdb.getInstance().getEmailWithAUsername(param.getValue().getUsername()));
             return email;
           }
         });
 
     /** input the phoneNumber to the table */
     PhoneNumber.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, Number>, ObservableValue<Number>>() {
+        new Callback<TableColumn.CellDataFeatures<Person, Number>, ObservableValue<Number>>() {
           @Override
-          public ObservableValue<Number> call(TableColumn.CellDataFeatures<Account, Number> param) {
+          public ObservableValue<Number> call(TableColumn.CellDataFeatures<Person, Number> param) {
             SimpleIntegerProperty phoneNumbers =
                 new SimpleIntegerProperty(param.getValue().getPhoneNumber());
             return phoneNumbers;
@@ -93,8 +93,20 @@ public class DirectoryController {
         });
 
     /** set the information tableview */
-    account.setItems(Accounts());
+    Person.setItems(People());
   }
 
-  public void tableClicked(MouseEvent mouseEvent) {}
+  public void mapClicked(ActionEvent actionEvent) {}
+
+  public void edgeClicked(ActionEvent actionEvent) {}
+
+  public void locationClicked(ActionEvent actionEvent) {}
+
+  public void moveClicked(ActionEvent actionEvent) {}
+
+  public void BackClicked(ActionEvent actionEvent) {}
+
+  public void homeClicked(ActionEvent actionEvent) {}
+
+  public void exitClicked(ActionEvent actionEvent) {}
 }

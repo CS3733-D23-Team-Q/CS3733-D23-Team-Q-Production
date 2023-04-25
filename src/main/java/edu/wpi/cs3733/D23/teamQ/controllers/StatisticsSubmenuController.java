@@ -9,11 +9,24 @@ import javafx.scene.layout.VBox;
 public class StatisticsSubmenuController {
   @FXML VBox statisticsSM;
   @FXML MFXButton statistics;
+  @FXML MenuRootController mrc;
 
   @FXML
   public void statisticsClicked() {
     Navigation.navigate(Screen.STATISTICS);
   }
 
-  public void setMCController(MenuController menuController) {}
+  @FXML
+  public void stsmExited() {
+    mrc.showStatSM(false);
+  }
+
+  public void setVisible(boolean v) {
+    statisticsSM.toFront();
+    statisticsSM.setVisible(v);
+  }
+
+  public void setRootController(MenuRootController mrc) {
+    this.mrc = mrc;
+  }
 }

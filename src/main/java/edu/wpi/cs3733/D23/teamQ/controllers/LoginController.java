@@ -2,61 +2,59 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.App;
+import edu.wpi.cs3733.D23.teamQ.SecondaryStage;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXPasswordField;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lombok.Getter;
-import net.kurobako.gesturefx.GesturePane;
 
-public class LoginController {
+public class LoginController extends SecondaryStage implements IController {
   AccountDaoImpl dao = AccountDaoImpl.getInstance();
   static String user;
   Alert alert = new Alert();
   Qdb qdb = Qdb.getInstance();
   @FXML Label loginAlert;
   @FXML ImageView alertImage;
-  @FXML MFXTextField usernameField;
-  @FXML MFXPasswordField passwordField;
-  @FXML MFXButton fpButton;
-  @FXML MFXButton login;
-  @FXML MFXButton exit;
-  @FXML GesturePane imagePane;
+  @FXML TextField usernameField;
+  @FXML TextField passwordField;
+  @FXML Button loginButton;
+  @FXML Button FPButton;
+  @FXML Button CAButton;
+
+  @FXML Button quitButton;
 
   @Getter private static String loginUsername;
   @Getter private static String loginEmail;
 
-  @FXML
-  public void initialize() {
-    Image hImage = new Image(App.class.getResourceAsStream("Hospital1.jpeg"));
-    ImageView imageView = new ImageView(hImage);
-    imageView.setOpacity(0.75);
-    imagePane.setContent(imageView);
-  }
+  public void initialize() {}
 
   @FXML
-  public void exitClicked() {
-
+  public void quitButtonClicked() {
     Platform.exit();
   }
 
+  /**
+   * Whenever the Enter key is pressed inside the username textfield, change the focus to the
+   * password textfield.
+   *
+   * @param e A key pressed event received from the username textfield.
+   */
   @FXML
-  public void usernameEntered(KeyEvent e) {
+  public void usernameFieldEntered(KeyEvent e) {
     if (e.getCode().equals(KeyCode.ENTER)) {
       passwordField.requestFocus();
     }
@@ -65,12 +63,12 @@ public class LoginController {
   @FXML
   public void passwordFieldEntered(KeyEvent e) throws IOException {
     if (e.getCode().equals(KeyCode.ENTER)) {
-      loginClicked();
+      loginButtonClicked();
     }
   }
 
   @FXML
-  public void loginClicked() throws IOException {
+  public void loginButtonClicked() throws IOException {
     String username = usernameField.getText();
     String enteredPassword = passwordField.getText();
     String actualPassword = "";
@@ -115,12 +113,17 @@ public class LoginController {
     }
   }
 
+  public static String getUsername() {
+    return user;
+  }
+
   @FXML
-  public void fpbuttonClicked() throws IOException {
+  public void FPButtonClicked() throws IOException {
     ForgotPasswordController.display();
   }
 
-  public static String getUsername() {
-    return user;
+  @FXML
+  public void CAButtonClicked() throws IOException {
+    CreateAccountController.display();
   }
 }

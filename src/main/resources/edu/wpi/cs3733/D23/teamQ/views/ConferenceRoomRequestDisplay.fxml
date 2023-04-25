@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
-<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ConferenceRoomRequestDisplayController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ConferenceRoomRequestDisplayController">
    <children>
       <VBox prefHeight="558.0" prefWidth="848.0" spacing="30.0">
          <children>
@@ -22,7 +22,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox>
@@ -32,7 +32,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox minHeight="-Infinity">
@@ -52,7 +52,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
+                  <MFXTextField fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
                </children>
             </VBox>
             <VBox>
@@ -62,7 +62,7 @@
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Text>
-                  <MFXFilterComboBox fx:id="foodField" prefHeight="40.0" prefWidth="400.0" />
+                  <MFXComboBox fx:id="foodField" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
             <VBox>

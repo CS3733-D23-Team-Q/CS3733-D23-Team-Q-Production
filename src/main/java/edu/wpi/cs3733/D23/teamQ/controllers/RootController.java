@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 public class RootController {
   @FXML public AnchorPane rootCenter;
   @FXML public AnchorPane rootRight;
-  @FXML MenuController menuController;
+  @FXML MenuRootController menuController;
 
   @FXML
   public void initialize() {}
