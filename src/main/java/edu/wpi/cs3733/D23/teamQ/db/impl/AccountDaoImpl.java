@@ -127,7 +127,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(6, a.getSecurityAnswer1());
       pst.setString(7, a.getSecurityAnswer2());
       pst.setBoolean(8, a.isActive());
-      pst.setInt(9, a.getIDNum());
+      pst.setInt(9, getAllRows().get(getAllRows().size() - 1).getIDNum() + 1);
       pst.setString(10, a.getFirstName());
       pst.setString(11, a.getLastName());
       pst.setString(12, a.getTitle());

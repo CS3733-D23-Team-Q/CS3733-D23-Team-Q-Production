@@ -5,16 +5,22 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import java.time.LocalTime;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 
 public class HomeController implements IController {
   @FXML CalendarView Calender;
+  @FXML private Text UserMessage;
   Qdb qdb = Qdb.getInstance();
 
   @FXML
   public void initialize() {
     String username = LoginController.getLoginUsername();
+    Account account = qdb.retrieveAccount(username);
+
+    UserMessage.setText("Welcome Back " + account.getFirstName() + "!");
 
     Calendar serviceRequests = new Calendar("Service Requests");
 
