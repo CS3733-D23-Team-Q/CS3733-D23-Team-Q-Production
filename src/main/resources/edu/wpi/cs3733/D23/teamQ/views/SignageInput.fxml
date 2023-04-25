@@ -35,7 +35,7 @@
                   <VBox>
                      <children>
                         <Label text="Date" textFill="#012d5a" />
-                        <MFXComboBox fx:id="dateFiield" maxWidth="-Infinity" prefWidth="400.0" />
+                        <MFXComboBox fx:id="dateField" maxWidth="-Infinity" prefWidth="400.0" />
                      </children>
                   </VBox>
                </children>

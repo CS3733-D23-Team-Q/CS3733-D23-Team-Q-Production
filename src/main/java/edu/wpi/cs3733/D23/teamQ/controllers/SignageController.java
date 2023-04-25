@@ -1,28 +1,14 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Sign;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 public class SignageController implements IController {
   @FXML AnchorPane signageRoot;
@@ -31,7 +17,7 @@ public class SignageController implements IController {
 
   @FXML
   public void initialize() {
-  Qdb qdb = Qdb.getInstance();
+    Qdb qdb = Qdb.getInstance();
     Platform.runLater(
         () -> {
           this.signageRoot
@@ -48,8 +34,6 @@ public class SignageController implements IController {
                     }
                   });
         });
-
-
 
       if (!signageVbox.getChildren().isEmpty()) {
           signageVbox.getChildren().clear();

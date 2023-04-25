@@ -33,13 +33,13 @@ public class SignageFormController {
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
-    directionField.setText("");
+
     directionField.setItems(directions);
-    destinationField.setText("");
+
     destinationField.setItems(qdb.getAllLongNames());
-    kioskField.setText("");
+
     kioskField.setItems(kiosks);
-    dateField.setText("");
+
     dateField.setItems(dates);
   }
 
@@ -61,8 +61,14 @@ public class SignageFormController {
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
-
-    Sign newSign = new Sign((Integer) kioskField.getValue(),dateField.getText(),destinationField.getText(),directionField.getText());
+    Sign newSign =
+        new Sign(
+            (Integer) kioskField.getValue(),
+            dateField.getText(),
+            destinationField.getText(),
+            directionField.getText());
     qdb.addSign(newSign);
+    Navigation.navigate(Screen.HOME);
+
   }
 }
