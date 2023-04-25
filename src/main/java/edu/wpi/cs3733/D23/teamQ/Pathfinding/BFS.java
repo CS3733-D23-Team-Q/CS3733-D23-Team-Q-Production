@@ -66,6 +66,20 @@ public class BFS implements IPathfinding {
             visited.add(node); // vators as well
             queue.add(node);
             returnList.add(node);
+            System.out.println();
+            System.out.println(
+                " nodes seen by ELEVATOR SAME FLOOR branch "
+                    + elevatorNodes
+                    + "AT NODE "
+                    + n.getNodeID()
+                    + " WITH SNAME "
+                    + n.getLocation().getShortName()
+                    + " AND WENT TO NODE "
+                    + node.getLocation().getNodeType()
+                    + " WITH NODE ID "
+                    + node.getNodeID()
+                    + " AND NAME "
+                    + node.getLocation().getShortName());
             nodeChosen = true;
             break;
           }
@@ -82,13 +96,26 @@ public class BFS implements IPathfinding {
           i++;
           for (Node node : elevatorNodes) {
             if (!visited.contains(node)
+                && node.getFloor().equalsIgnoreCase(n.getFloor())
                 && !node.getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
               returnList.addAll(nodesRevisited);
               returnList.add(node);
               visited.add(node);
               queue.add(node);
               System.out.println();
-              System.out.println("nodes revisited by ELEVATOR branch " + nodesRevisited);
+              System.out.println(
+                  "nodes revisited by ELEVATOR branch "
+                      + " WITH PREVIOUS NODE "
+                      + returnList.get(returnList.size())
+                      + nodesRevisited
+                      + "AT NODE "
+                      + n.getNodeID()
+                      + " AND WENT TO NODE "
+                      + node.getLocation().getNodeType()
+                      + " WITH NODE ID "
+                      + node.getNodeID()
+                      + " AND NAME "
+                      + node.getLocation().getShortName());
               nodeChosen = true;
               break;
             }
@@ -208,3 +235,9 @@ public class BFS implements IPathfinding {
     return returnList;
   }
 }
+
+  /*public ArrayList<Node> fixPath(Node start, Node end) {
+    ArrayList fixedPart = AStar.aStarElev(start, end);
+    fixedPart.remove(end);
+    return fixedPart;
+  }*/
