@@ -63,6 +63,8 @@ public class HomeController implements IController, Subscriber {
   }
 
   public boolean update(List<String> context) {
+    //    AudioClip sound = new AudioClip(getClass().getResourceAsStream("alert.wav").toString());
+    //    sound.play();
     return setAlerts();
   }
   //  Qdb qdb = Qdb.getInstance();
