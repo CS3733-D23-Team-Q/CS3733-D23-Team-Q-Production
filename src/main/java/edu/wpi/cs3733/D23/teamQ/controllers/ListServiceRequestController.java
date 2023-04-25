@@ -10,6 +10,8 @@ import io.github.palexdev.materialfx.controls.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Optional;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -137,9 +139,9 @@ public class ListServiceRequestController {
   String username = LoginController.getLoginUsername();
 
   // work on these
-  ObservableList<ServiceRequest> userRequestedRequests =
+  ObservableList<ServiceRequest> userRequestedRequests = qdb.getUserRequestedRows(username);
+  ObservableList<ServiceRequest> userAssignedRequests =
       qdb.retrieveUserAssignServiceRequests(username);
-  ObservableList<ServiceRequest> userAssignedRequests = qdb.getUserRequestedRows(username);
 
   public ListServiceRequestController() {}
 
@@ -161,11 +163,12 @@ public class ListServiceRequestController {
 
     yourRequestLocation.setCellValueFactory(
         cellData -> {
-          StringProperty locationProperty = new SimpleStringProperty();
-          ServiceRequest sr = cellData.getValue();
-          String location = qdb.retrieveLocation(sr.getNodeID()).getLongName();
-          locationProperty.set(location);
-          return locationProperty;
+          ServiceRequest serviceRequest = cellData.getValue();
+          Node node = serviceRequest.getNode();
+          Location location = node.getLocation();
+          StringBinding locationNameBinding =
+              Bindings.createStringBinding(() -> location.getLongName());
+          return locationNameBinding;
         });
 
     yourRequestInstructions.setCellValueFactory(new PropertyValueFactory<>("specialInstructions"));
@@ -174,7 +177,7 @@ public class ListServiceRequestController {
         cellData -> {
           StringProperty assigneeProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
-          String assignee = sr.getRequester().getUsername();
+          String assignee = sr.getAssignee().getUsername();
           assigneeProperty.set(assignee);
           return assigneeProperty;
         });
@@ -314,7 +317,7 @@ public class ListServiceRequestController {
         cellData -> {
           StringProperty requesterProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
-          String requester = sr.getAssignee().getUsername();
+          String requester = sr.getRequester().getUsername();
           requesterProperty.set(requester);
           return requesterProperty;
         });
@@ -380,7 +383,18 @@ public class ListServiceRequestController {
     confLocationField.setItems(qdb.getAllLongNames(nodeType));
     confFoodField.setItems(foodOptionsList);
 
-    confAssigneeField.setText(cr.getAssigneeUsername());
+    Account assigneeAccount = cr.getAssignee();
+    String assigneeString =
+        assigneeAccount.getUsername()
+            + ", ("
+            + assigneeAccount.getFirstName()
+            + " "
+            + assigneeAccount.getLastName()
+            + ", "
+            + assigneeAccount.getTitle()
+            + ")";
+
+    confAssigneeField.setValue(assigneeString);
     confTimeField.setText(cr.getTime());
     confLocationField.setText(qdb.retrieveLocation(cr.getNodeID()).getLongName());
     confFoodField.setText(cr.getFoodChoice());
@@ -396,7 +410,7 @@ public class ListServiceRequestController {
             conferenceRequest.getRequestID(),
             qdb.getNodeFromLocation(confLocationField.getText()),
             conferenceRequest.getRequester(),
-            qdb.retrieveAccount(confAssigneeField.getText()),
+            qdb.retrieveAccount(confAssigneeField.getValue().toString().split(",")[0]),
             confInstructionsField.getText(),
             Date.valueOf(confDateField.getValue()),
             confTimeField.getText(),
@@ -413,7 +427,18 @@ public class ListServiceRequestController {
     flowerChoiceField.setItems(TypeOfFlowers);
     flowerLocationField.setItems(qdb.getAllLongNames());
 
-    flowerAssigneeField.setText(fr.getAssigneeUsername());
+    Account assigneeAccount = fr.getAssignee();
+    String assigneeString =
+            assigneeAccount.getUsername()
+                    + ", ("
+                    + assigneeAccount.getFirstName()
+                    + " "
+                    + assigneeAccount.getLastName()
+                    + ", "
+                    + assigneeAccount.getTitle()
+                    + ")";
+
+    flowerAssigneeField.setValue(assigneeString);
     flowerTimeField.setText(fr.getTime());
     flowerLocationField.setText(qdb.retrieveLocation(fr.getNodeID()).getLongName());
     flowerInstructionsField.setText(fr.getSpecialInstructions());
@@ -436,7 +461,18 @@ public class ListServiceRequestController {
     officeLocationField.setItems(qdb.getAllLongNames());
     officeTimeField.setItems(timeList);
 
-    officeAssigneeField.setText(or.getAssigneeUsername());
+    Account assigneeAccount = or.getAssignee();
+    String assigneeString =
+            assigneeAccount.getUsername()
+                    + ", ("
+                    + assigneeAccount.getFirstName()
+                    + " "
+                    + assigneeAccount.getLastName()
+                    + ", "
+                    + assigneeAccount.getTitle()
+                    + ")";
+
+    officeAssigneeField.setValue(assigneeString);
     officeTimeField.setText(or.getTime());
     officeLocationField.setText(qdb.retrieveLocation(or.getNodeID()).getLongName());
     officeInstructionsField.setText(or.getSpecialInstructions());
@@ -459,7 +495,18 @@ public class ListServiceRequestController {
     furnitureTimeField.setItems(timeList);
     furnitureChoiceField.setItems(furnitureList);
 
-    furnitureAssigneeField.setText(fr.getAssigneeUsername());
+    Account assigneeAccount = fr.getAssignee();
+    String assigneeString =
+            assigneeAccount.getUsername()
+                    + ", ("
+                    + assigneeAccount.getFirstName()
+                    + " "
+                    + assigneeAccount.getLastName()
+                    + ", "
+                    + assigneeAccount.getTitle()
+                    + ")";
+
+    furnitureAssigneeField.setValue(assigneeString);
     furnitureTimeField.setText(fr.getTime());
     furnitureLocationField.setText(qdb.retrieveLocation(fr.getNodeID()).getLongName());
     furnitureInstructionsField.setText(fr.getSpecialInstructions());
@@ -483,7 +530,18 @@ public class ListServiceRequestController {
     mealSideField.setItems(sideList);
     mealEntreeField.setItems(entreeList);
 
-    mealAssigneeField.setText(mr.getAssigneeUsername());
+    Account assigneeAccount = mr.getAssignee();
+    String assigneeString =
+            assigneeAccount.getUsername()
+                    + ", ("
+                    + assigneeAccount.getFirstName()
+                    + " "
+                    + assigneeAccount.getLastName()
+                    + ", "
+                    + assigneeAccount.getTitle()
+                    + ")";
+
+    mealAssigneeField.setValue(assigneeString);
     mealTimeField.setText(mr.getTime());
     mealLocationField.setText(qdb.retrieveLocation(mr.getNodeID()).getLongName());
     mealInstructionsField.setText(mr.getSpecialInstructions());
@@ -507,7 +565,18 @@ public class ListServiceRequestController {
     medicalLocationField.setItems(qdb.getAllLongNames());
     medicalTimeField.setItems(timeList);
 
-    medicalAssigneeField.setText(mr.getAssigneeUsername());
+    Account assigneeAccount = mr.getAssignee();
+    String assigneeString =
+            assigneeAccount.getUsername()
+                    + ", ("
+                    + assigneeAccount.getFirstName()
+                    + " "
+                    + assigneeAccount.getLastName()
+                    + ", "
+                    + assigneeAccount.getTitle()
+                    + ")";
+
+    medicalAssigneeField.setValue(assigneeString);
     medicalTimeField.setText(mr.getTime());
     medicalLocationField.setText(qdb.retrieveLocation(mr.getNodeID()).getLongName());
     medicalInstructionsField.setText(mr.getSpecialInstructions());
