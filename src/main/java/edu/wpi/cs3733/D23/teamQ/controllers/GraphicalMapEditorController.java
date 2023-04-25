@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -432,13 +433,55 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
+    int countEdge = 0;
+    int countMove = 0;
+    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
+      nodeid = Integer.parseInt(nodeidinput.getText());
+
+      List<Edge> edges = qdb.retrieveAllEdges();
+      List<Move> moves = qdb.retrieveAllMoves();
+
+      while (countEdge < edges.size()) {
+        for (int i = 0; i < edges.size(); i++) {
+          countEdge = i + 1;
+          Edge edge = edges.get(i);
+          if (edge.getStartNode().getNodeID() == nodeid
+              || edge.getEndNode().getNodeID() == nodeid) {
+            qdb.deleteEdge(edge.getEdgeID());
+            i -= 1;
+            countEdge -= 1;
+          }
+        }
+      }
+
+      while (countMove < moves.size()) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i + 1;
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+            i -= 1;
+            countMove -= 1;
+          }
+        }
+      }
+
+      qdb.deleteNode(nodeid);
+      qdb.deleteLocation(nodeid);
+    } else {
+      InitialNode();
+    }
+    refreshNodes();
+    setEdges();
+  }
+  /*
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
       /*
       qdb.nodeTable.deleteRow(nodeid);
       qdb.locationTable.deleteRow(nodeid);
 
-       */
+
 
       qdb.deleteNode(nodeid);
       qdb.deleteMove(nodeid);
@@ -448,6 +491,9 @@ public class GraphicalMapEditorController {
     }
     setEdges();
   }
+
+
+   */
 
   /**
    * add nodes
