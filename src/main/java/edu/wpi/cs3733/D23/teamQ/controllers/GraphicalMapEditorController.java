@@ -434,8 +434,14 @@ public class GraphicalMapEditorController {
   void deleteclicked(MouseEvent event) {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
+      /*
       qdb.nodeTable.deleteRow(nodeid);
       qdb.locationTable.deleteRow(nodeid);
+
+       */
+
+      qdb.deleteNode(nodeid);
+      qdb.deleteMove(nodeid);
       refreshNodes();
     } else {
       InitialNode();
