@@ -19,7 +19,11 @@ public class HomeController implements IController, Subscriber {
   @FXML CalendarView Calender;
   @FXML private Text UserMessage;
   @FXML TextArea alertsField;
+  @FXML TextArea notesField;
   Qdb qdb = Qdb.getInstance();
+
+  //  String username = LoginController.getLoginUsername();
+  //  Account account = qdb.retrieveAccount(username);
 
   @FXML
   public void initialize() {
@@ -27,6 +31,8 @@ public class HomeController implements IController, Subscriber {
     Account account = qdb.retrieveAccount(username);
 
     UserMessage.setText("Welcome Back " + account.getFirstName() + "!");
+
+    notesField.setText(account.getNotes());
 
     setAlerts();
 
@@ -49,6 +55,14 @@ public class HomeController implements IController, Subscriber {
     }
     SR.getCalendars().add(serviceRequests);
     Calender.getCalendarSources().add(SR);
+  }
+
+  public void textChange() {
+    String username = LoginController.getLoginUsername();
+    Account account = qdb.retrieveAccount(username);
+    account.setNotes(notesField.getText());
+    qdb.updateAccount(username, account);
+    notesField.setText(account.getNotes());
   }
 
   private boolean setAlerts() {

@@ -67,14 +67,6 @@
                                     <Font name="Roboto Light" size="20.0" />
                                  </font>
                               </Label>
-                              <Hyperlink prefHeight="37.0" prefWidth="183.0" text="Setup Dual Factor">
-                                 <font>
-                                    <Font name="Roboto Light" size="20.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="12.0" />
-                                 </padding>
-                              </Hyperlink>
                            </children>
                            <padding>
                               <Insets left="78.0" />
