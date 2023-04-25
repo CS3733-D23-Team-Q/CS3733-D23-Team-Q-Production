@@ -11,6 +11,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -40,6 +42,9 @@ public class LoginController {
 
   @Getter private static String loginUsername;
   @Getter private static String loginEmail;
+  String[] adminArray = new String[]{"admin", "asjacob", "cam40419", "Dushman", "jhkeselman", "John101", "kjcoleman", "kliu5", "kwang"};
+  ArrayList<String> admins = (ArrayList<String>) Arrays.asList(adminArray);
+  @Getter private static boolean isAdmin;
 
   @FXML
   public void initialize() {
@@ -114,6 +119,7 @@ public class LoginController {
       qdb.getAccountFromUsername(loginUsername).setActive(true);
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
       Navigation.navigate(Screen.HOME);
+//      isAdmin =
     } else {
       alertImage.setVisible(true);
       loginAlert.setVisible(true);
