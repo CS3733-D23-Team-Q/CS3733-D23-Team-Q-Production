@@ -127,7 +127,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(6, a.getSecurityAnswer1());
       pst.setString(7, a.getSecurityAnswer2());
       pst.setBoolean(8, a.isActive());
-      pst.setInt(9, a.getIDNum());
+      pst.setInt(9, getAllRows().get(getAllRows().size() - 1).getIDNum() + 1);
       pst.setString(10, a.getFirstName());
       pst.setString(11, a.getLastName());
       pst.setString(12, a.getTitle());
@@ -199,6 +199,16 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     return -1;
   }
 
+  public Account getAccountFromUN(String UN) {
+    Account a = new Account("null");
+    for (int i = 0; i < accounts.size(); i++) {
+      if (accounts.get(i).getUsername().equals(UN)) {
+        return accounts.get(i);
+      }
+    }
+    return a;
+  }
+
   public List<Integer> getIndexes(String email) {
     List<Integer> is = new ArrayList<Integer>();
     for (int i = 0; i < accounts.size(); i++) {
@@ -222,8 +232,8 @@ public class AccountDaoImpl implements GenDao<Account, String> {
 
   public int getQuestionId(String question) {
     int q = 0;
-    Connection con = GenDao.connect();
     try {
+      Connection con = GenDao.connect();
       String query = "SELECT id FROM security_question WHERE question = ?";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setString(1, question);

@@ -84,6 +84,7 @@ public class DirectoryController {
 
             @Override
             protected void updateItem(Button item, boolean empty) {
+              Qdb qdb = Qdb.getInstance();
               super.updateItem(item, empty);
               if (empty) {
                 setGraphic(null);
@@ -91,8 +92,8 @@ public class DirectoryController {
                 EmployeeData employeeData = getTableView().getItems().get(getIndex());
                 button.setOnAction(
                     event -> {
-                      System.out.println(
-                          "Chat button clicked for: " + employeeData.getAccount().getUsername());
+                      qdb.setMessagingAccount(employeeData.getAccount());
+                      Navigation.navigate(Screen.MESSAGES);
                     });
                 button.setStyle(
                     "-fx-background-color: #012d5a; -fx-text-fill: #FFFFFF; -fx-pref-width: 100");
