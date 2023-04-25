@@ -93,11 +93,16 @@ public class BFS implements IPathfinding {
             elevatorNodes.add(ex.getEndNode());
           }
           nodesRevisited.add(visited.get(visited.size() - i)); // list of nodes we go back to
+          System.out.println("ADDED NODE " + visited.get(visited.size() - i));
           i++;
           for (Node node : elevatorNodes) {
             if (!visited.contains(node)
                 && node.getFloor().equalsIgnoreCase(n.getFloor())
                 && !node.getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
+              System.out.println();
+              System.out.println(
+                  "BEFORE ADDING TO LIST, PREVIOUS NODE IS " + returnList.get(returnList.size()));
+              System.out.println();
               returnList.addAll(nodesRevisited);
               returnList.add(node);
               visited.add(node);
@@ -106,8 +111,8 @@ public class BFS implements IPathfinding {
               System.out.println(
                   "nodes revisited by ELEVATOR branch "
                       + " WITH PREVIOUS NODE "
-                      + returnList.get(returnList.size())
-                      + nodesRevisited
+                      + returnList.get(returnList.size() - 1)
+                      // + nodesRevisited
                       + "AT NODE "
                       + n.getNodeID()
                       + " AND WENT TO NODE "
