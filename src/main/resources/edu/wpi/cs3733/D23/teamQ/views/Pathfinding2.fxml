@@ -18,8 +18,8 @@
     <children>
         <GesturePane fx:id="mapPane" fitMode="COVER" prefHeight="900.0" HBox.hgrow="ALWAYS">
             <Group fx:id="mapGroup">
-                <Pane fx:id="nodesPane" />
                 <ImageView fx:id="mapImage" />
+                <Pane fx:id="nodesPane" />
             </Group>
         </GesturePane>
         <VBox minWidth="-Infinity" prefHeight="900.0" prefWidth="240.0" spacing="48.0" style="-fx-background-color: #012d5a;">
