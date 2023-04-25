@@ -267,6 +267,10 @@ public class MessagingController implements Subscriber {
       Image pfp =
           qdb.convertByteaToImage(qdb.retrieveProfileImage(receiver.getUsername()).getImageData());
       profilePicture.setImage(pfp);
+      Circle ppClip = new Circle(30);
+      ppClip.setTranslateX(profilePicture.getFitWidth() / 2);
+      ppClip.setTranslateY(profilePicture.getFitHeight() / 2);
+      profilePicture.setClip(ppClip);
     }
 
     if (!qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty())
