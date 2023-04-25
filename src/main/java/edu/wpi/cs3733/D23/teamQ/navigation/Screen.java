@@ -62,7 +62,8 @@ public enum Screen {
   VIEW_PROFILE("views/ViewProfile.fxml", "View Profile"),
 
   ABOUT("views/About.fxml", "About"),
-  CREDITS("views/Credits.fxml", "Credits");
+  CREDITS("views/Credits.fxml", "Credits"),
+  CREATE_ALERT("views/CreateAlert.fxml", "Create Alert");
 
   private final String filename;
   private final String title;
