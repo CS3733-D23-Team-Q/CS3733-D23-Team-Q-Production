@@ -15,30 +15,26 @@
 
 <VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ConferenceRoomRequestController">
    <children>
-      <VBox prefHeight="125.0" prefWidth="850.0">
+      <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
-                     <image>
-                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/conferenceroom.jpg" />
-                     </image>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                  </ImageView>
-                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Request Form ">
-                     <font>
-                        <Font name="Roboto Bold" size="36.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="30.0" />
-               </VBox.margin>
-            </StackPane>
+            <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
+               <image>
+                  <Image url="@../../../../../../conferenceroom.jpg" />
+               </image>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </ImageView>
+            <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Request Form ">
+               <font>
+                  <Font name="Roboto Bold" size="36.0" />
+               </font>
+            </Text>
          </children>
-      </VBox>
+         <VBox.margin>
+            <Insets bottom="30.0" />
+         </VBox.margin>
+      </StackPane>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
@@ -136,17 +132,17 @@
                      <children>
                         <ImageView fx:id="BrunchFood" fitHeight="194.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/Brunch%20spread.jpg" />
+                              <Image url="@../../../../../../Brunch%20spread.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="SnackFood" fitHeight="194.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/snack%20spread.jpg" />
+                              <Image url="@../../../../../../snack%20spread.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="DinnerFood" fitHeight="194.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/dinner%20spread.jpg" />
+                              <Image url="@../../../../../../dinner%20spread.jpg" />
                            </image>
                         </ImageView>
                      </children>

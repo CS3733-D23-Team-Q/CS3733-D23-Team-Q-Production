@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
-                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
+                        <Image url="@../../../../../../220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
                      </image>
                   </ImageView>
                   <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form " StackPane.alignment="CENTER">
@@ -117,27 +117,27 @@
                      <children>
                         <ImageView fx:id="ChickenImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/chicken.jpg" />
+                              <Image url="@../../../../../../chicken.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="SteakImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/steak.jpg" />
+                              <Image url="@../../../../../../steak.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="PorkImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/pork.jpg" />
+                              <Image url="@../../../../../../pork.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="FishImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/fish.jpg" />
+                              <Image url="@../../../../../../fish.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="VegetarianImage" fitHeight="150.0" fitWidth="246.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/vegetarian.jpg" />
+                              <Image url="@../../../../../../vegetarian.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -156,22 +156,22 @@
                      <children>
                         <ImageView fx:id="WaterImage" fitHeight="150.0" fitWidth="232.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/water%20bottle.jpg" />
+                              <Image url="@../../../../../../water%20bottle.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="CokeImage" fitHeight="150.0" fitWidth="122.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/coke%20can.jpg" />
+                              <Image url="@../../../../../../coke%20can.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="CoffeeImage" fitHeight="150.0" fitWidth="233.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/coffee.jpg" />
+                              <Image url="@../../../../../../coffee.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="TeaImage" fitHeight="150.0" fitWidth="234.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/tea.jpg" />
+                              <Image url="@../../../../../../tea.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -192,22 +192,22 @@
                            <children>
                               <ImageView fx:id="FriesImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/fries.jpg" />
+                                    <Image url="@../../../../../../fries.jpg" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="OnionRingsImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/onion%20rings.jpg" />
+                                    <Image url="@../../../../../../onion%20rings.jpg" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="SoupImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/soup.jpg" />
+                                    <Image url="@../../../../../../soup.jpg" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="SaladImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/salad.jpg" />
+                                    <Image url="@../../../../../../salad.jpg" />
                                  </image>
                               </ImageView>
                            </children>

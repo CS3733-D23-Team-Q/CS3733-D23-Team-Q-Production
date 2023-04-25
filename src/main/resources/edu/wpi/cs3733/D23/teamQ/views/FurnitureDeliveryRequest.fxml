@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
-                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/testingads.jpg" />
+                        <Image url="@../../../../../../testingads.jpg" />
                      </image>
                   </ImageView>
                   <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Furniture Delivery Form ">
@@ -133,22 +133,22 @@
                      <children>
                         <ImageView fx:id="DeskImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/desk%20image.jpg" />
+                              <Image url="@../../../../../../desk%20image.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="DeskChairImage" fitHeight="209.0" fitWidth="206.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/desk%20chair%20image.jpg" />
+                              <Image url="@../../../../../../desk%20chair%20image.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="CouchImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/COUCH.jpg" />
+                              <Image url="@../../../../../../COUCH.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="ExaminationTableImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/examination%20table%20sd.jpg" />
+                              <Image url="@../../../../../../examination%20table%20sd.jpg" />
                            </image>
                         </ImageView>
                      </children>
