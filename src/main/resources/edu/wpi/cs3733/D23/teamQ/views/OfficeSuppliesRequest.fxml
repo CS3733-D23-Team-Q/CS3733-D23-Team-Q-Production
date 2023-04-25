@@ -191,6 +191,7 @@
                   <Font name="Roboto" size="16.0" />
                </font>
             </MFXButton>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox spacing="20.0">
                <children>
                   <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
@@ -202,6 +203,9 @@
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
                   </MFXButton>
                </children>
             </HBox>

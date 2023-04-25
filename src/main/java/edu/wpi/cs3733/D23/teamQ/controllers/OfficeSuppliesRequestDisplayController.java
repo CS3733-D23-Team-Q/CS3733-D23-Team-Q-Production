@@ -13,7 +13,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class OfficeSuppliesRequestDisplayController {
 
@@ -40,6 +42,12 @@ public class OfficeSuppliesRequestDisplayController {
   @FXML MFXTextField quantityField;
   @FXML MFXTextField specialInstructionsField;
 
+  @FXML private ImageView PrinterPaperImage;
+  @FXML private ImageView PencilImage;
+  @FXML private ImageView PenImage;
+  @FXML private ImageView HighlighterImage;
+  @FXML private ImageView NotepadImage;
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
@@ -62,6 +70,42 @@ public class OfficeSuppliesRequestDisplayController {
     itemRequestedField.setText(ListServiceRequestController.getOfficeRequest().getItem());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
+
+    if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {
+      PrinterPaperImage.setOpacity(1.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Pencil")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(1.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Pen")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(1.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Highlighter")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(1.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Notepad")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(1.0);
+    }
   }
 
   @FXML
@@ -95,5 +139,43 @@ public class OfficeSuppliesRequestDisplayController {
 
     qdb.updateOfficeSuppliesRequest(
         ListServiceRequestController.getOfficeRequest().getRequestID(), newOR);
+  }
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {
+      PrinterPaperImage.setOpacity(1.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Pencil")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(1.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Pen")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(1.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Highlighter")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(1.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Notepad")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(1.0);
+    }
   }
 }
