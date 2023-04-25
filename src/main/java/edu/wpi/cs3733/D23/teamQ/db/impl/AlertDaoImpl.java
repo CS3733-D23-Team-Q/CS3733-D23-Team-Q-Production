@@ -67,9 +67,8 @@ public class AlertDaoImpl {
     try {
       String query = "INSERT INTO alert (\"alertID\", timestamp, message) VALUES(?,?,?)";
       PreparedStatement pst = conn.prepareStatement(query);
-      pst.setInt(1, a.getAlertID());
-      pst.setLong(2, a.getTimestamp());
-      pst.setString(3, a.getMessage());
+      pst.setLong(1, a.getTimestamp());
+      pst.setString(2, a.getMessage());
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
