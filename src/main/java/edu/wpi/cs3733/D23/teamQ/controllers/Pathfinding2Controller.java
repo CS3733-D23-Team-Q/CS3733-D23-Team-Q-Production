@@ -3,9 +3,11 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.Pathfinding.*;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
+import java.util.ArrayList;
 import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -97,14 +99,19 @@ public class Pathfinding2Controller {
                 String floor = (String) newValue;
                 if (floor.equals("Lower Level 1")) {
                   mapImage.setImage(ll1);
+                  addCircles("L1");
                 } else if (floor.equals("Lower Level 2")) {
                   mapImage.setImage(ll2);
+                  addCircles("L2");
                 } else if (floor.equals("First Floor")) {
                   mapImage.setImage(ff);
+                  addCircles("1");
                 } else if (floor.equals("Second Floor")) {
                   mapImage.setImage(sf);
+                  addCircles("2");
                 } else if (floor.equals("Third Floor")) {
                   mapImage.setImage(tf);
+                  addCircles("3");
                 }
               }
             });
@@ -130,23 +137,39 @@ public class Pathfinding2Controller {
                 }
               }
             });
-
-    Circle circle = new Circle();
-
-    nodesPane.getChildren().add(circle);
-
-    circle.setCenterX(500);
-    circle.setCenterY(500);
-    circle.setRadius(500);
-    circle.setStyle("-fx-fill: red");
-    circle.setOnMouseClicked(
-        (event) -> {
-          System.out.println("somehting");
-        });
-
+    addCircles("1");
     //    Line line = new Line();
     //    line.setStartX(12);
     //    line.setEndX(22);
+  }
+
+  @FXML
+  public void addCircles(String curFloor) {
+    nodesPane.getChildren().clear();
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(curFloor)) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(10);
+        circle.setStyle("-fx-fill: #012d5a");
+        circle.setOnMouseEntered(
+            (event) -> {
+              circle.setStyle("-fx-fill: #0167B1");
+            });
+        circle.setOnMouseExited(
+            (event) -> {
+              circle.setStyle("-fx-fill: #012d5a");
+            });
+        circle.setOnMouseClicked(
+            (event) -> {
+              System.out.println(n.getLocation().getLongName());
+            });
+      }
+    }
   }
 
   @FXML
