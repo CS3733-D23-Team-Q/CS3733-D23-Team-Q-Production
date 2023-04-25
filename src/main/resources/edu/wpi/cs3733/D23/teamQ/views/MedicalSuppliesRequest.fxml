@@ -17,11 +17,11 @@
    <children>
       <VBox prefHeight="116.0" prefWidth="1360.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="117.0" prefWidth="1360.0">
                <children>
                   <ImageView blendMode="MULTIPLY" fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
-                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/medsupp.jpg" />
+                        <Image url="@../../../../../../../../../../Downloads/Medsupp.jpg" />
                      </image>
                      <StackPane.margin>
                         <Insets bottom="30.0" />
@@ -31,6 +31,9 @@
                      <font>
                         <Font name="Roboto Bold" size="36.0" />
                      </font>
+                     <StackPane.margin>
+                        <Insets bottom="30.0" />
+                     </StackPane.margin>
                   </Text>
                </children>
             </StackPane>
