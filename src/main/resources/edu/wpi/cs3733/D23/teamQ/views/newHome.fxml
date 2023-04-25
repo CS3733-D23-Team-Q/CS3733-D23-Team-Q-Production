@@ -59,22 +59,9 @@
                            <children>
                               <VBox prefHeight="529.0" prefWidth="746.0">
                                  <children>
-                                    <StackPane prefHeight="175.0" prefWidth="741.0">
-                                       <children>
-                                          <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#e2e2e2" height="163.0" stroke="BLACK" strokeType="INSIDE" width="553.0">
-                                             <StackPane.margin>
-                                                <Insets />
-                                             </StackPane.margin>
-                                          </Rectangle>
-                                          <Label alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="239.0" text="No commitments!" textAlignment="CENTER">
-                                             <font>
-                                                <Font size="30.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </StackPane>
+                                    <StackPane prefHeight="175.0" prefWidth="741.0" />
                                     <CalendarHeaderView minWidth="-Infinity" prefWidth="500.0" />
-                                    <CalendarView fx:id="Calender" minWidth="-Infinity" prefHeight="384.0" prefWidth="650.0" />
+                                    <CalendarView fx:id="Calender" minWidth="-Infinity" prefHeight="820.0" prefWidth="741.0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets />
@@ -83,7 +70,7 @@
                               <StackPane minWidth="-Infinity" prefHeight="529.0" prefWidth="250.0">
                                  <children>
                                     <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
-                                    <Label prefHeight="46.0" prefWidth="39.0" text="To Do:" textAlignment="CENTER">
+                                    <Label prefHeight="46.0" prefWidth="39.0" text="Alerts" textAlignment="CENTER">
                                        <padding>
                                           <Insets bottom="500.0" />
                                        </padding>
@@ -91,7 +78,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="toDoField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Write Here:">
+                                    <TextArea fx:id="alertsField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="487.0" prefWidth="250.0" promptText="Write Here:">
                                        <effect>
                                           <ColorAdjust brightness="-0.14">
                                              <input>
