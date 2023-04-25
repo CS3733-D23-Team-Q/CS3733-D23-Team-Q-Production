@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -432,10 +433,37 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
+    int countEdge = 0;
+    int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
-      qdb.deleteNode(nodeid);
+      List<Edge> edges = qdb.retrieveAllEdges();
+      List<Move> moves = qdb.retrieveAllMoves();
+      while (countEdge < edges.size() - 1) {
+        for (int i = 0; i < edges.size(); i++) {
+          countEdge = i;
+          Edge edge = edges.get(i);
+          if (edge.getStartNode().getNodeID() == nodeid
+              || edge.getEndNode().getNodeID() == nodeid) {
+            qdb.deleteEdge(edge.getEdgeID());
+          }
+        }
+      }
+
+      while (countMove < moves.size() -1 ) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i;
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+          }
+        }
+      }
+
+
+
       qdb.deleteLocation(nodeid);
+      qdb.deleteNode(nodeid);
       refreshNodes();
     } else {
       InitialNode();
@@ -958,11 +986,14 @@ public class GraphicalMapEditorController {
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
-      int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
-      int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
-      if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
-        path.add(start);
-        path.add(target);
+      if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
+          && !(qdb.retrieveAllEdges().get(i).getEndNode() == null)) {
+        int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
+        int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
+        if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
+          path.add(start);
+          path.add(target);
+        }
       }
     }
     return path;
@@ -1148,6 +1179,7 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   boolean ShowLocationName() {
+    int count = 1;
     parent.getChildren().removeAll(Texts);
     Texts.clear();
     List<Node> allNodes = qdb.retrieveAllNodes();
@@ -1160,8 +1192,24 @@ public class GraphicalMapEditorController {
       double y = node1.getYCoord() / 5.0;
       if (node1.getFloor().equals(Floor(currentIndex))) {
         if (check.equals("All") || type.equals(check)) {
-          text = new Text(x + 3, y + 3, name);
-          text.setStyle("-fx-font-size: 6px;");
+          if (node1.getNodeID() % 10 == 5) {
+            if (count == 0) {
+              text = new Text(x + 3, y, name);
+              count += 1;
+            } else {
+              text = new Text(x - 5, y - 3, name);
+              count -= 1;
+            }
+          } else {
+            if (count == 0) {
+              text = new Text(x + 3, y + 3, name);
+              count += 1;
+            } else {
+              text = new Text(x - 5, y + 3, name);
+              count -= 1;
+            }
+          }
+          text.setStyle("-fx-font-size: 3px;" + "-fx-font-weight: bold");
           Texts.add(text);
         } else if (check.equals("/")) {
           parent.getChildren().removeAll(Texts);
