@@ -65,6 +65,7 @@ public class Qdb {
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
     messageTable = MessageDaoImpl.getInstance(accountTable);
+    alertTable = AlertDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -637,5 +638,9 @@ public class Qdb {
     updateTimestamp("alert");
     alertTable.addRow(a);
     return true;
+  }
+
+  public List<Alert> retrieveAllAlerts() {
+    return alertTable.getAllRows();
   }
 }
