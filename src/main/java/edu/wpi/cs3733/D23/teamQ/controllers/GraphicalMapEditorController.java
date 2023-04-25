@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -432,8 +433,32 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
+    int countEdge = 0;
+    int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
+      List<Edge> edges = qdb.retrieveAllEdges();
+      List<Move> moves = qdb.retrieveAllMoves();
+      while (countEdge != edges.size()) {
+        for (int i = 0; i < edges.size(); i++) {
+          countEdge = i;
+          Edge edge = edges.get(i);
+          if (edge.getStartNode().getNodeID() == nodeid
+              || edge.getEndNode().getNodeID() == nodeid) {
+            qdb.deleteEdge(edge.getEdgeID());
+          }
+        }
+      }
+      while(countMove != moves.size()){
+        for(int i =0; i< moves.size(); i++){
+          countMove = i ;
+          Move move = moves.get(i);
+          if(move.getNode().getNodeID() == nodeid){
+            qdb.deleteMove(move.getMoveID());
+          }
+        }
+      }
+
       qdb.deleteNode(nodeid);
       qdb.deleteLocation(nodeid);
       refreshNodes();
@@ -958,14 +983,14 @@ public class GraphicalMapEditorController {
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
-      if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
+       if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
           && !(qdb.retrieveAllEdges().get(i).getEndNode() == null)) {
-        int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
-        int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
-        if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
-          path.add(start);
-          path.add(target);
-        }
+      int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
+      int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
+      if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
+        path.add(start);
+        path.add(target);
+         }
       }
     }
     return path;
