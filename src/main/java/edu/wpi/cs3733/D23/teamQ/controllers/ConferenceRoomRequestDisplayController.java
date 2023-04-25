@@ -10,7 +10,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class ConferenceRoomRequestDisplayController implements IController {
 
@@ -36,6 +38,9 @@ public class ConferenceRoomRequestDisplayController implements IController {
   @FXML MFXFilterComboBox timeField;
   @FXML MFXFilterComboBox foodField;
   @FXML MFXTextField specialInstructionsField;
+  @FXML private ImageView BrunchFood;
+  @FXML private ImageView DinnerFood;
+  @FXML private ImageView SnackFood;
 
   @FXML
   public void initialize() {
@@ -61,6 +66,21 @@ public class ConferenceRoomRequestDisplayController implements IController {
     foodField.setText(ListServiceRequestController.getConferenceRequest().getFoodChoice());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
+    if (foodField.getValue().equals("Brunch spread")) {
+      BrunchFood.setOpacity(1.0);
+      DinnerFood.setOpacity(0.0);
+      SnackFood.setOpacity(0.0);
+    }
+    if (foodField.getValue().equals("Dinner spread")) {
+      BrunchFood.setOpacity(0.0);
+      DinnerFood.setOpacity(1.0);
+      SnackFood.setOpacity(0.0);
+    }
+    if (foodField.getValue().equals("Snack spread")) {
+      BrunchFood.setOpacity(0.0);
+      DinnerFood.setOpacity(0.0);
+      SnackFood.setOpacity(1.0);
+    }
   }
 
   @FXML
@@ -94,5 +114,24 @@ public class ConferenceRoomRequestDisplayController implements IController {
     qdb.updateConferenceRequest(
         ListServiceRequestController.getConferenceRequest().getRequestID(), newCCR);
     Navigation.navigateRight(Screen.HOME);
+  }
+
+  @FXML
+  public void FoodSelected(ActionEvent event) {
+    if (foodField.getValue().equals("Brunch spread")) {
+      BrunchFood.setOpacity(1.0);
+      DinnerFood.setOpacity(0.0);
+      SnackFood.setOpacity(0.0);
+    }
+    if (foodField.getValue().equals("Dinner spread")) {
+      BrunchFood.setOpacity(0.0);
+      DinnerFood.setOpacity(1.0);
+      SnackFood.setOpacity(0.0);
+    }
+    if (foodField.getValue().equals("Snack spread")) {
+      BrunchFood.setOpacity(0.0);
+      DinnerFood.setOpacity(0.0);
+      SnackFood.setOpacity(1.0);
+    }
   }
 }

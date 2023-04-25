@@ -13,7 +13,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class FlowerRequestDisplayController {
 
@@ -38,6 +40,11 @@ public class FlowerRequestDisplayController {
   @FXML MFXFilterComboBox flowerTypeField;
   @FXML MFXTextField bouquetChoiceField;
   @FXML MFXTextField specialInstructionsField;
+  @FXML private ImageView RosesImage;
+  @FXML private ImageView DaisiesImage;
+  @FXML private ImageView TulipsImage;
+  @FXML private ImageView SunflowersImage;
+  @FXML private ImageView LiliesImage;
 
   @FXML
   public void initialize() {
@@ -65,6 +72,42 @@ public class FlowerRequestDisplayController {
     flowerTypeField.setText(ListServiceRequestController.getFlowerRequest().getFlowerType());
     bouquetChoiceField.setText(
         String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
+
+    if (flowerTypeField.getValue().equals("Roses")) {
+      RosesImage.setOpacity(1.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Daisies")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(1.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Tulips")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(1.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Sunflowers")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(1.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Lilies")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(1.0);
+    }
   }
 
   @FXML
@@ -97,5 +140,44 @@ public class FlowerRequestDisplayController {
             Integer.parseInt((String) bouquetChoiceField.getText()));
 
     qdb.updateFlowerRequest(ListServiceRequestController.getFlowerRequest().getRequestID(), newFR);
+  }
+
+  @FXML
+  public void FlowerSelected(ActionEvent event) {
+    if (flowerTypeField.getValue().equals("Roses")) {
+      RosesImage.setOpacity(1.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Daisies")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(1.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Tulips")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(1.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Sunflowers")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(1.0);
+      LiliesImage.setOpacity(0.0);
+    }
+    if (flowerTypeField.getValue().equals("Lilies")) {
+      RosesImage.setOpacity(0.0);
+      DaisiesImage.setOpacity(0.0);
+      TulipsImage.setOpacity(0.0);
+      SunflowersImage.setOpacity(0.0);
+      LiliesImage.setOpacity(1.0);
+    }
   }
 }

@@ -13,7 +13,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class MealDeliveryRequestDisplayController {
 
@@ -43,6 +45,22 @@ public class MealDeliveryRequestDisplayController {
   @FXML MFXFilterComboBox entreeField;
   @FXML MFXFilterComboBox sideField;
 
+  @FXML private ImageView WaterImage;
+  @FXML private ImageView CokeImage;
+  @FXML private ImageView CoffeeImage;
+  @FXML private ImageView TeaImage;
+
+  @FXML private ImageView ChickenImage;
+  @FXML private ImageView SteakImage;
+  @FXML private ImageView PorkImage;
+  @FXML private ImageView FishImage;
+  @FXML private ImageView VegetarianImage;
+
+  @FXML private ImageView FriesImage;
+  @FXML private ImageView OnionRingsImage;
+  @FXML private ImageView SoupImage;
+  @FXML private ImageView SaladImage;
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
@@ -64,6 +82,93 @@ public class MealDeliveryRequestDisplayController {
     drinkField.setText(ListServiceRequestController.getMealRequest().getDrink());
     entreeField.setText(ListServiceRequestController.getMealRequest().getEntree());
     sideField.setText(ListServiceRequestController.getMealRequest().getSide());
+
+
+      if (entreeField.getValue().equals("Chicken")) {
+        ChickenImage.setOpacity(1.0);
+        SteakImage.setOpacity(0.0);
+        PorkImage.setOpacity(0.0);
+        FishImage.setOpacity(0.0);
+        VegetarianImage.setOpacity(0.0);
+      }
+      if (entreeField.getValue().equals("Steak")) {
+        ChickenImage.setOpacity(0.0);
+        SteakImage.setOpacity(1.0);
+        PorkImage.setOpacity(0.0);
+        FishImage.setOpacity(0.0);
+        VegetarianImage.setOpacity(0.0);
+      }
+      if (entreeField.getValue().equals("Pork")) {
+        ChickenImage.setOpacity(0.0);
+        SteakImage.setOpacity(0.0);
+        PorkImage.setOpacity(1.0);
+        FishImage.setOpacity(0.0);
+        VegetarianImage.setOpacity(0.0);
+      }
+      if (entreeField.getValue().equals("Fish")) {
+        ChickenImage.setOpacity(0.0);
+        SteakImage.setOpacity(0.0);
+        PorkImage.setOpacity(0.0);
+        FishImage.setOpacity(1.0);
+        VegetarianImage.setOpacity(0.0);
+      }
+      if (entreeField.getValue().equals("Vegetarian")) {
+        ChickenImage.setOpacity(0.0);
+        SteakImage.setOpacity(0.0);
+        PorkImage.setOpacity(0.0);
+        FishImage.setOpacity(0.0);
+        VegetarianImage.setOpacity(1.0);
+      }
+
+      if (drinkField.getValue().equals("Water")) {
+        WaterImage.setOpacity(1.0);
+        CokeImage.setOpacity(0.0);
+        CoffeeImage.setOpacity(0.0);
+        TeaImage.setOpacity(0.0);
+      }
+      if (drinkField.getValue().equals("Coke")) {
+        WaterImage.setOpacity(0.0);
+        CokeImage.setOpacity(1.0);
+        CoffeeImage.setOpacity(0.0);
+        TeaImage.setOpacity(0.0);
+      }
+      if (drinkField.getValue().equals("Coffee")) {
+        WaterImage.setOpacity(0.0);
+        CokeImage.setOpacity(0.0);
+        CoffeeImage.setOpacity(1.0);
+        TeaImage.setOpacity(0.0);
+      }
+      if (drinkField.getValue().equals("Tea")) {
+        WaterImage.setOpacity(0.0);
+        CokeImage.setOpacity(0.0);
+        CoffeeImage.setOpacity(0.0);
+        TeaImage.setOpacity(1.0);
+      }
+
+      if (sideField.getValue().equals("Fries")) {
+        FriesImage.setOpacity(1.0);
+        OnionRingsImage.setOpacity(0.0);
+        SoupImage.setOpacity(0.0);
+        SaladImage.setOpacity(0.0);
+      }
+      if (sideField.getValue().equals("Onion Rings")) {
+        FriesImage.setOpacity(0.0);
+        OnionRingsImage.setOpacity(1.0);
+        SoupImage.setOpacity(0.0);
+        SaladImage.setOpacity(0.0);
+      }
+      if (sideField.getValue().equals("Soup")) {
+        FriesImage.setOpacity(0.0);
+        OnionRingsImage.setOpacity(0.0);
+        SoupImage.setOpacity(1.0);
+        SaladImage.setOpacity(0.0);
+      }
+      if (sideField.getValue().equals("Salad")) {
+        FriesImage.setOpacity(0.0);
+        OnionRingsImage.setOpacity(0.0);
+        SoupImage.setOpacity(0.0);
+        SaladImage.setOpacity(1.0);
+      }
   }
 
   @FXML
@@ -96,5 +201,100 @@ public class MealDeliveryRequestDisplayController {
             entreeField.getValue().toString(),
             sideField.getValue().toString());
     qdb.updateMealRequest(ListServiceRequestController.getMealRequest().getRequestID(), newMR);
+  }
+
+  @FXML
+  public void EntreeSelected(ActionEvent event) {
+    if (entreeField.getValue().equals("Chicken")) {
+      ChickenImage.setOpacity(1.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Steak")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(1.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Pork")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(1.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Fish")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(1.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Vegetarian")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(1.0);
+    }
+  }
+
+  @FXML
+  public void DrinkSelected(ActionEvent event) {
+    if (drinkField.getValue().equals("Water")) {
+      WaterImage.setOpacity(1.0);
+      CokeImage.setOpacity(0.0);
+      CoffeeImage.setOpacity(0.0);
+      TeaImage.setOpacity(0.0);
+    }
+    if (drinkField.getValue().equals("Coke")) {
+      WaterImage.setOpacity(0.0);
+      CokeImage.setOpacity(1.0);
+      CoffeeImage.setOpacity(0.0);
+      TeaImage.setOpacity(0.0);
+    }
+    if (drinkField.getValue().equals("Coffee")) {
+      WaterImage.setOpacity(0.0);
+      CokeImage.setOpacity(0.0);
+      CoffeeImage.setOpacity(1.0);
+      TeaImage.setOpacity(0.0);
+    }
+    if (drinkField.getValue().equals("Tea")) {
+      WaterImage.setOpacity(0.0);
+      CokeImage.setOpacity(0.0);
+      CoffeeImage.setOpacity(0.0);
+      TeaImage.setOpacity(1.0);
+    }
+  }
+
+  @FXML
+  public void SideSelected(ActionEvent event) {
+    if (sideField.getValue().equals("Fries")) {
+      FriesImage.setOpacity(1.0);
+      OnionRingsImage.setOpacity(0.0);
+      SoupImage.setOpacity(0.0);
+      SaladImage.setOpacity(0.0);
+    }
+    if (sideField.getValue().equals("Onion Rings")) {
+      FriesImage.setOpacity(0.0);
+      OnionRingsImage.setOpacity(1.0);
+      SoupImage.setOpacity(0.0);
+      SaladImage.setOpacity(0.0);
+    }
+    if (sideField.getValue().equals("Soup")) {
+      FriesImage.setOpacity(0.0);
+      OnionRingsImage.setOpacity(0.0);
+      SoupImage.setOpacity(1.0);
+      SaladImage.setOpacity(0.0);
+    }
+    if (sideField.getValue().equals("Salad")) {
+      FriesImage.setOpacity(0.0);
+      OnionRingsImage.setOpacity(0.0);
+      SoupImage.setOpacity(0.0);
+      SaladImage.setOpacity(1.0);
+    }
   }
 }
