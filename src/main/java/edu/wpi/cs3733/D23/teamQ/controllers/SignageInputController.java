@@ -38,7 +38,7 @@ public class SignageInputController {
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.HOME);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML

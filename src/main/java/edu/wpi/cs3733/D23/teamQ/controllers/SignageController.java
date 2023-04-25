@@ -1,10 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Sign;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -28,7 +30,7 @@ public class SignageController implements IController {
     for (Sign s : qdb.retrieveSigns(qdb.getKiosk(), qdb.getDate())) {
       System.out.println(s.getDestination());
       HBox hbox = new HBox();
-      hbox.setAlignment(Pos.CENTER_RIGHT);
+      hbox.setAlignment(Pos.CENTER);
       hbox.setPadding(new Insets(4, 16, 4, 640));
 
       Text text = new Text(s.getDestination());
@@ -37,10 +39,12 @@ public class SignageController implements IController {
           "-fx-background-color: #0167B1; -fx-background-radius: 10px; -fx-padding: 12 20 12 20;");
       text.setStyle("-fx-font-family: Roboto");
       text.setFill(Color.WHITE);
-      text.setFont(Font.font(30));
+      text.setFont(Font.font(40));
       hbox.getChildren().add(textFlow);
 
-      ImageView dir = new ImageView("resources/rightArrow.png");
+      ImageView dir =
+          new ImageView(
+              new Image(App.class.getResourceAsStream("edu/wpi/cs3733/D23/teamQ/rightArrow.png")));
       if (s.getDirection().equals("Right")) dir.setRotate(0);
       if (s.getDirection().equals("Down")) dir.setRotate(90);
       if (s.getDirection().equals("Left")) dir.setRotate(180);

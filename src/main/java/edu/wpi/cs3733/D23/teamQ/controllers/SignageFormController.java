@@ -52,7 +52,7 @@ public class SignageFormController {
   @FXML
   public void cancelButtonClicked() {
 
-    Navigation.navigateRight(Screen.HOME);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
