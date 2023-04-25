@@ -27,11 +27,14 @@ public class SignDaoImpl implements GenDao<Sign, Integer> {
     return signs.get(index);
   }
 
-  public List<Sign> retrieveRows(int kiosk) {
+  public List<Sign> retrieveRows(int kiosk, String date) {
     List<Sign> as = new ArrayList<Sign>();
     List<Integer> index = this.getIndexes(kiosk);
     for (int i : index) {
-      as.add(signs.get(i));
+      if(signs.get(i).getDate().equals(date)){
+        as.add(signs.get(i));
+      }
+
     }
     return as;
   }

@@ -139,8 +139,8 @@ public class Qdb {
 
   }
 
-  public List<Sign> retrieveSigns(int kiosk) {
-    return signTable.retrieveRows(kiosk);
+  public List<Sign> retrieveSigns(int kiosk, String date) {
+    return signTable.retrieveRows(kiosk, date);
   }
 
   public boolean updateSign(int idNum, Sign a) {
