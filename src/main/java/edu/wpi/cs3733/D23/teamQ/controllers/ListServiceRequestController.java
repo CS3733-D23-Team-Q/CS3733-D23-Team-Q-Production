@@ -337,23 +337,18 @@ public class ListServiceRequestController {
           return dateProperty;
         });
 
-    // Set up the cell factory for the progress column
-    progressDropdownColumn.setCellValueFactory(new PropertyValueFactory<>("progress"));
     progressDropdownColumn.setCellFactory(
         column -> {
           return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
             private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
 
             {
-              // Set up the options for the ComboBox
               comboBox.setPrefHeight(20);
               comboBox.setItems(progressValues);
-              // Set the value of the ComboBox when changed
               comboBox.setOnAction(
                   event -> {
                     ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
                     serviceRequest.setProgress(comboBox.getValue());
-                    // Update the progress value in the database
                     qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
                     yourRequestsTable.refresh();
                   });
@@ -365,7 +360,8 @@ public class ListServiceRequestController {
               if (empty) {
                 setGraphic(null);
               } else {
-                comboBox.setValue(item);
+                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
+                comboBox.setValue(serviceRequest.getProgress());
                 setGraphic(comboBox);
               }
             }

@@ -568,4 +568,8 @@ public class Qdb {
   public Account getMessagingAccount() {
     return messagingAccount;
   }
+
+  public ObservableList<ServiceRequest> getAllServiceRequestsObservable() {
+    return serviceRequestTable.getAllRequestsObservable();
+  }
 }
