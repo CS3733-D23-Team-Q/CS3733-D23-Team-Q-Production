@@ -1148,6 +1148,7 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   boolean ShowLocationName() {
+    int count = 1;
     parent.getChildren().removeAll(Texts);
     Texts.clear();
     List<Node> allNodes = qdb.retrieveAllNodes();
@@ -1160,8 +1161,24 @@ public class GraphicalMapEditorController {
       double y = node1.getYCoord() / 5.0;
       if (node1.getFloor().equals(Floor(currentIndex))) {
         if (check.equals("All") || type.equals(check)) {
-          text = new Text(x + 3, y + 3, name);
-          text.setStyle("-fx-font-size: 6px;");
+          if (node1.getNodeID() % 10 == 5) {
+            if (count == 0) {
+              text = new Text(x + 3, y, name);
+              count += 1;
+            } else {
+              text = new Text(x - 5, y - 3, name);
+              count -= 1;
+            }
+          } else {
+            if (count == 0) {
+              text = new Text(x + 3, y + 3, name);
+              count += 1;
+            } else {
+              text = new Text(x - 5, y + 3, name);
+              count -= 1;
+            }
+          }
+          text.setStyle("-fx-font-size: 3px;" + "-fx-font-weight: bold");
           Texts.add(text);
         } else if (check.equals("/")) {
           parent.getChildren().removeAll(Texts);
