@@ -12,7 +12,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class MedicalSuppliesRequestDisplayController {
 
@@ -39,6 +41,12 @@ public class MedicalSuppliesRequestDisplayController {
   @FXML MFXTextField quantityField;
   @FXML MFXTextField specialInstructionsField;
 
+  @FXML private ImageView BandaidsImage;
+  @FXML private ImageView CottonBallsImage;
+  @FXML private ImageView GauzeImage;
+  @FXML private ImageView TongueDepresserImage;
+  @FXML private ImageView SyringeImage;
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
@@ -61,6 +69,41 @@ public class MedicalSuppliesRequestDisplayController {
     itemRequestedField.setText(ListServiceRequestController.getMedicalRequest().getItem());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getMedicalRequest().getQuantity()));
+    if (itemRequestedField.getValue().equals("Bandaids")) {
+      BandaidsImage.setOpacity(1.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Cotton Balls")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(1.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Gauze")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(1.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Tongue Depressers")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(1.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Syringe")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(1.0);
+    }
   }
 
   @FXML
@@ -95,5 +138,44 @@ public class MedicalSuppliesRequestDisplayController {
 
     qdb.updateMedicalSuppliesRequest(
         ListServiceRequestController.getMedicalRequest().getRequestID(), newMSP);
+  }
+
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getValue().equals("Bandaids")) {
+      BandaidsImage.setOpacity(1.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Cotton Balls")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(1.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Gauze")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(1.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Tongue Depressers")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(1.0);
+      SyringeImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Syringe")) {
+      BandaidsImage.setOpacity(0.0);
+      CottonBallsImage.setOpacity(0.0);
+      GauzeImage.setOpacity(0.0);
+      TongueDepresserImage.setOpacity(0.0);
+      SyringeImage.setOpacity(1.0);
+    }
   }
 }

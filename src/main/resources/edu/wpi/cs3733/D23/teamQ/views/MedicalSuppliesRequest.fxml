@@ -194,6 +194,9 @@
                             <font>
                                 <Font name="Roboto" size="16.0" />
                             </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
                         </MFXButton>
                     </children>
                 </HBox>

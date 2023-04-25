@@ -2,114 +2,206 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="848.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MedicalSuppliesRequestController">
+<VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MedicalSuppliesRequestDisplayController">
     <children>
-        <VBox prefHeight="558.0" prefWidth="848.0" spacing="30.0">
+        <VBox prefHeight="116.0" prefWidth="1360.0">
             <children>
-                <VBox>
+                <StackPane prefHeight="150.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
+                        <ImageView blendMode="MULTIPLY" fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
+                            <image>
+                                <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/medsupp.jpg" />
+                            </image>
+                            <StackPane.margin>
+                                <Insets bottom="30.0" />
+                            </StackPane.margin>
+                        </ImageView>
+                        <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Supplies Delivery Form ">
                             <font>
-                                <Font name="Roboto Bold" size="16.0" />
+                                <Font name="Roboto Bold" size="36.0" />
                             </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="assigneeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
                     </children>
-                </VBox>
-                <VBox>
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
-                            <font>
-                                <Font name="Roboto Bold" size="16.0" />
-                            </font>
-                        </Text>
-                        <MFXFilterComboBox fx:id="roomNumberField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
-                    </children>
-                </VBox>
-                <VBox minHeight="-Infinity">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
-                            <font>
-                                <Font name="Roboto Bold" size="16.0" />
-                            </font>
-                        </Text>
-                        <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
-                    </children>
-                </VBox>
-                <VBox>
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
-                            <font>
-                                <Font name="Roboto Bold" size="16.0" />
-                            </font>
-                        </Text>
-                        <MFXFilterComboBox fx:id="timeField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Time" />
-                    </children>
-                </VBox>
-                <VBox>
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Requested">
-                            <font>
-                                <Font name="Roboto Bold" size="16.0" />
-                            </font>
-                        </Text>
-                        <MFXFilterComboBox fx:id="itemRequestedField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" />
-                    </children>
-                </VBox>
-                <VBox>
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
-                            <font>
-                                <Font name="Roboto Bold" size="16.0" />
-                            </font>
-                        </Text>
-                        <MFXTextField fx:id="quantityField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Quantity" />
-                    </children>
-                </VBox>
-                <VBox>
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
-                            <font>
-                                <Font name="Roboto Bold" size="16.0" />
-                            </font>
-                        </Text>
-                        <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
-                    </children>
-                </VBox>
+                </StackPane>
             </children>
-            <padding>
-                <Insets left="30.0" top="30.0" />
-            </padding>
         </VBox>
-        <HBox layoutX="1.0" layoutY="714.0" prefHeight="100.0" prefWidth="848.0" spacing="400.0">
+        <HBox>
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" />
+                <VBox prefHeight="590.0" prefWidth="511.0" spacing="30.0">
+                    <children>
+                        <VBox>
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assignee">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXFilterComboBox fx:id="assigneeField" prefHeight="40.0" prefWidth="400.0" promptText="Select an Assignee">
+                                    <font>
+                                        <Font name="Roboto" size="12.0" />
+                                    </font>
+                                </MFXFilterComboBox>
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXFilterComboBox fx:id="roomNumberField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Location">
+                                    <font>
+                                        <Font name="Roboto" size="12.0" />
+                                    </font>
+                                </MFXFilterComboBox>
+                            </children>
+                        </VBox>
+                        <VBox minHeight="-Infinity">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Select a Date" />
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXFilterComboBox fx:id="timeField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Time">
+                                    <font>
+                                        <Font name="Roboto" size="12.0" />
+                                    </font>
+                                </MFXFilterComboBox>
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Special Instructions">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets left="30.0" />
+                    </padding>
+                </VBox>
+                <VBox prefHeight="912.0" prefWidth="150.0" />
+                <VBox prefHeight="200.0" prefWidth="400.0" spacing="30.0">
+                    <children>
+                        <VBox>
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Requested">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXFilterComboBox fx:id="itemRequestedField" onAction="#ItemSelected" prefHeight="40.0" prefWidth="400.0" promptText="Select an Item">
+                                    <font>
+                                        <Font name="Roboto" size="12.0" />
+                                    </font>
+                                </MFXFilterComboBox>
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <MFXTextField fx:id="quantityField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Quantity" />
+                                <StackPane prefHeight="209.0" prefWidth="340.0">
+                                    <VBox.margin>
+                                        <Insets top="30.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <ImageView fx:id="BandaidsImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/bandaids.jpg" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fx:id="CottonBallsImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/cottonballs.jpg" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fx:id="GauzeImage" fitHeight="209.0" fitWidth="295.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/gauze.jpg" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fx:id="TongueDepresserImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/tongue%20depresser.jpg" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fx:id="SyringeImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/syringe.jpg" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets left="30.0" right="30.0" />
+                    </padding>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" />
+            </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="848.0" spacing="400.0">
             <children>
                 <MFXButton fx:id="deleteButton" onAction="#deleteButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Delete" textFill="WHITE">
                     <font>
                         <Font name="Roboto" size="16.0" />
                     </font>
                 </MFXButton>
+                <HBox prefHeight="100.0" prefWidth="200.0" />
                 <HBox spacing="20.0">
                     <children>
                         <MFXButton fx:id="backButton" onAction="#backButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Back">
                             <font>
                                 <Font name="Roboto" size="16.0" />
-                            </font></MFXButton>
+                            </font>
+                        </MFXButton>
                         <MFXButton fx:id="updateButton" onAction="#updateButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Update" textFill="WHITE">
                             <font>
                                 <Font name="Roboto" size="16.0" />
                             </font>
                         </MFXButton>
                     </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
                 </HBox>
             </children>
             <padding>
@@ -117,4 +209,4 @@
             </padding>
         </HBox>
     </children>
-</AnchorPane>
+</VBox>
