@@ -7,6 +7,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
+import java.awt.*;
 import java.util.ArrayList;
 import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
@@ -15,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -34,6 +36,7 @@ public class Pathfinding2Controller {
   Djikstra djikstra = new Djikstra();
   Node startNode;
   Node destinationNode;
+  String currentFloor;
   @FXML GesturePane mapPane;
   @FXML Pane nodesPane;
   @FXML ImageView mapImage;
@@ -85,6 +88,7 @@ public class Pathfinding2Controller {
         });
     floorField.setValue(null);
     floorField.setItems(floorChoices);
+    currentFloor = "1";
     Circle c = new Circle();
     c.setOnMouseClicked((event) -> {});
 
@@ -102,7 +106,7 @@ public class Pathfinding2Controller {
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 String lName = (String) newValue;
                 Node n = qdb.getNodeFromLocation(lName);
-                startNode = n;
+                floorSwap(n.getFloor());
               }
             });
     destinationField
@@ -113,8 +117,7 @@ public class Pathfinding2Controller {
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 String lName = (String) newValue;
                 Node n = qdb.getNodeFromLocation(lName);
-                destinationNode = n;
-                drawLine();
+                floorSwap(n.getFloor());
               }
             });
     floorField
@@ -125,20 +128,15 @@ public class Pathfinding2Controller {
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 String floor = (String) newValue;
                 if (floor.equals("Lower Level 1")) {
-                  mapImage.setImage(ll1);
-                  addCircles("L1");
+                  floorSwap("L1");
                 } else if (floor.equals("Lower Level 2")) {
-                  mapImage.setImage(ll2);
-                  addCircles("L2");
+                  floorSwap("L2");
                 } else if (floor.equals("First Floor")) {
-                  mapImage.setImage(ff);
-                  addCircles("1");
+                  floorSwap("1");
                 } else if (floor.equals("Second Floor")) {
-                  mapImage.setImage(sf);
-                  addCircles("2");
+                  floorSwap("2");
                 } else if (floor.equals("Third Floor")) {
-                  mapImage.setImage(tf);
-                  addCircles("3");
+                  floorSwap("3");
                 }
               }
             });
@@ -165,9 +163,6 @@ public class Pathfinding2Controller {
               }
             });
     addCircles("1");
-    //    Line line = new Line();
-    //    line.setStartX(12);
-    //    line.setEndX(22);
   }
 
   @FXML
@@ -181,19 +176,29 @@ public class Pathfinding2Controller {
         nodesPane.getChildren().add(circle);
         circle.setCenterX(n.getXCoord());
         circle.setCenterY(n.getYCoord());
-        circle.setRadius(10);
+        circle.setRadius(12);
         circle.setStyle("-fx-fill: #012d5a");
+        Label label = new Label();
+        nodesPane.getChildren().add(label);
+        label.setText(n.getLocation().getLongName());
+        label.setLayoutX(n.getXCoord() - 50);
+        label.setLayoutY(n.getYCoord() - 50);
+        label.setStyle("-fx-text-fill: #012d5a; -fx-font-size: 32; -fx-font-weight: bold");
+        label.setVisible(false);
         circle.setOnMouseEntered(
             (event) -> {
+              label.setVisible(true);
               circle.setStyle("-fx-fill: #0167B1");
             });
         circle.setOnMouseExited(
             (event) -> {
+              label.setVisible(false);
               circle.setStyle("-fx-fill: #012d5a");
             });
         circle.setOnMouseClicked(
             (event) -> {
-              System.out.println(n.getLocation().getLongName());
+              circle.setRadius(20);
+              floorSwap(n.getFloor());
             });
       }
     }
@@ -209,6 +214,35 @@ public class Pathfinding2Controller {
     line.setEndY(destinationNode.getYCoord());
     line.setStyle("-fx-fill: #0167B1");
     line.setStrokeWidth(8);
+  }
+
+  public void nodeSelected() {}
+
+  @FXML
+  public void floorSwap(String newFloor) {
+    if (!currentFloor.equals(newFloor)) {
+      if (newFloor.equals("L1")) {
+        mapImage.setImage(ll1);
+        currentFloor = "L1";
+        addCircles("L1");
+      } else if (newFloor.equals("L2")) {
+        mapImage.setImage(ll2);
+        currentFloor = "L2";
+        addCircles("L2");
+      } else if (newFloor.equals("1")) {
+        mapImage.setImage(ff);
+        currentFloor = "1";
+        addCircles("1");
+      } else if (newFloor.equals("2")) {
+        mapImage.setImage(sf);
+        currentFloor = "2";
+        addCircles("2");
+      } else if (newFloor.equals("3")) {
+        mapImage.setImage(tf);
+        currentFloor = "3";
+        addCircles("3");
+      }
+    }
   }
 
   @FXML
