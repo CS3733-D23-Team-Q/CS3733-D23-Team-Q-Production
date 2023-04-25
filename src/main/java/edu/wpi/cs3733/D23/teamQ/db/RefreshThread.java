@@ -6,9 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import javafx.application.Platform;
 
 public class RefreshThread implements Runnable {
   private long lastUpdate = System.currentTimeMillis();
+  Qdb qdb = Qdb.getInstance();
 
   public void run() {
     try {
@@ -16,8 +19,6 @@ public class RefreshThread implements Runnable {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-
-    Qdb qdb = Qdb.getInstance();
 
     String[] tableNames = {
       "account",
@@ -27,9 +28,13 @@ public class RefreshThread implements Runnable {
       "node",
       "profileImage",
       "security_question",
-      "serviceRequest"
+      "serviceRequest",
+      "message",
+      "alert"
     };
+
     ArrayList<String> toUpdate = new ArrayList<>();
+
     while (true) {
       try {
         Connection conn = GenDao.connect();
@@ -44,21 +49,23 @@ public class RefreshThread implements Runnable {
             }
           }
         }
+        conn.close();
+        pst.close();
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
 
       try {
         if (toUpdate.size() > 0) {
-          System.out.println(toUpdate);
           qdb.populate(toUpdate);
+          Platform.runLater(() -> qdb.notifySubscribers(Arrays.stream(tableNames).toList()));
           setTimestamps(toUpdate);
           lastUpdate = System.currentTimeMillis();
           for (String tableName : toUpdate) {
             System.out.println("Updated " + tableName + " from client server.");
           }
+          toUpdate.clear();
         }
-        toUpdate.clear();
         Thread.sleep(2000);
       } catch (InterruptedException e) {
         throw new RuntimeException(e);
@@ -79,7 +86,8 @@ public class RefreshThread implements Runnable {
         st.setString(2, tableName);
         st.executeUpdate();
       }
-
+      connection.close();
+      st.close();
       return true;
     } catch (SQLException e) {
       e.printStackTrace();

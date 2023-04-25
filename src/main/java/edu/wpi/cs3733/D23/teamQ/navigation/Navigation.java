@@ -115,6 +115,36 @@ public class Navigation {
     }
   }
 
+  public static void noMenuNavigate(final Screen screen) {
+    App.getRootBorder().setLeft(null);
+    App.getRootBorder().setRight(null);
+    final String filename = screen.getFilename();
+    final String title = screen.getTitle();
+
+    try {
+      final var resource = App.class.getResource(filename);
+      final FXMLLoader loader = new FXMLLoader(resource);
+      Node n = loader.load();
+      App.getRootCenter().getChildren().clear();
+      App.getRootCenter().getChildren().add(n);
+      AnchorPane.setTopAnchor(n, 0.0);
+      AnchorPane.setLeftAnchor(n, 0.0);
+      AnchorPane.setRightAnchor(n, 0.0);
+      AnchorPane.setBottomAnchor(n, 0.0);
+      Stage primaryStage = App.getPrimaryStage();
+      primaryStage.setTitle(title);
+      Scene scene = primaryStage.getScene();
+      scene
+          .getStylesheets()
+          .add(
+              Navigation.class
+                  .getResource("/edu/wpi/cs3733/D23/teamQ/views/styles/Home.css")
+                  .toExternalForm());
+    } catch (IOException | NullPointerException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static IController getController(final Screen screen) throws IOException {
     final String filename = screen.getFilename();
     final var loader = new FXMLLoader(App.class.getResource(filename));

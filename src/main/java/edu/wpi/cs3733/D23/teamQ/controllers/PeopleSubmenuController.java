@@ -11,15 +11,21 @@ public class PeopleSubmenuController {
   @FXML MFXButton profile;
   @FXML MFXButton directory;
 
+  @FXML MFXButton messages;
+
   @FXML
   public void profileClicked() {
     Navigation.navigate(Screen.PROFILE_PAGE);
   }
 
   @FXML
+  public void messagesClicked() {
+    Navigation.navigate(Screen.MESSAGES);
+  }
+
+  @FXML
   public void directoryClicked() {
-    if (LoginController.getLoginUsername()
-        .equals("admin")) // checks if admin and if so can edit directory
+    if (LoginController.isAdmin()) // checks if admin and if so can edit directory
     {
       Navigation.navigate(Screen.ADMIN_DIRECTORY);
     } else {

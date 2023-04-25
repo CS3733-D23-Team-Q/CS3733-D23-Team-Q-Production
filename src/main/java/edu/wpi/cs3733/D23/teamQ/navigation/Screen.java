@@ -11,6 +11,8 @@ public enum Screen {
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
   PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
   SIGNAGE("views/Signage.fxml", "Signage"),
+  ADD_SIGNAGE("views/SignageForm.fxml", "Add newSignage"),
+  SELECT_SIGNAGE("views/SignageInput.fxml", "Display Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
   SERVICE_PLACEHOLDER("views/ServiceRequestPlaceholder.fxml", "Placeholder"),
@@ -38,6 +40,7 @@ public enum Screen {
   PROFILE_PAGE("views/ProfilePage1.fxml", "Profile Page"),
 
   CONFIRM("views/Confirm.fxml", "Confirm"),
+  MESSAGES("views/Messages.fxml", "Messages"),
   ALERT("views/Alert.fxml", "Alert"),
   Move_Table("views/Move.fxml", "MoveTable"),
   Node_Table("views/Node.fxml", "MoveTable"),
@@ -47,6 +50,7 @@ public enum Screen {
 
   DIRECTORY("views/Directory.fxml", "Directory"),
   ADMIN_DIRECTORY("views/AdminDirectory.fxml", "Admin Directory"),
+  ADMIN_ADD_PROFILE("views/AdminAddProfile.fxml", "Admin Add Profile"),
   EDIT_DIRECTORY("views/EditDirectory.fxml", "Edit Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
