@@ -438,7 +438,6 @@ public class GraphicalMapEditorController {
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
-      /*
 
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
@@ -470,8 +469,6 @@ public class GraphicalMapEditorController {
       if (moves.get(moves.size() - 1).getNode().getNodeID() == nodeid) {
         qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
       }
-
-     */
 
       qdb.deleteNode(nodeid);
       qdb.deleteLocation(nodeid);
