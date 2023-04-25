@@ -8,6 +8,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.animation.Interpolator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,18 +46,25 @@ public class Pathfinding2Controller {
 
   @FXML MFXCheckbox confCheck;
   boolean confHighlighted;
+  HashMap<Integer, Circle> confMap = new HashMap<>();
   @FXML MFXCheckbox deptCheck;
   boolean deptHighlighted;
+  HashMap<Integer, Circle> deptMap = new HashMap<>();
   @FXML MFXCheckbox infoCheck;
   boolean infoHighlighted;
+  HashMap<Integer, Circle> infoMap = new HashMap<>();
   @FXML MFXCheckbox labsCheck;
   boolean labsHighlighted;
+  HashMap<Integer, Circle> labsMap = new HashMap<>();
   @FXML MFXCheckbox restCheck;
   boolean restHighlighted;
+  HashMap<Integer, Circle> restMap = new HashMap<>();
   @FXML MFXCheckbox retlCheck;
   boolean retlHighlighted;
+  HashMap<Integer, Circle> retlMap = new HashMap<>();
   @FXML MFXCheckbox servCheck;
   boolean servHighlighted;
+  HashMap<Integer, Circle> servMap = new HashMap<>();
   @FXML MFXButton clearButton;
 
   ObservableList<String> floorChoices =
@@ -242,111 +251,304 @@ public class Pathfinding2Controller {
         currentFloor = "3";
         addCircles();
       }
+      if (confHighlighted) {
+        highlightConf();
+      }
+      if (deptHighlighted) {
+        highlightDept();
+      }
+      if (infoHighlighted) {
+        highlightInfo();
+      }
+      if (labsHighlighted) {
+        highlightLabs();
+      }
+      if (restHighlighted) {
+        highlightRest();
+      }
+      if (retlHighlighted) {
+        highlightRetl();
+      }
+      if (servHighlighted) {
+        highlightServ();
+      }
     }
   }
 
   @FXML
-  public void highlightNodes(String type) {
+  public void highlightConf() {
     ArrayList<Node> nodes = qdb.retrieveAllNodes();
     for (int i = 0; i < nodes.size(); i++) {
       Node n = nodes.get(i);
-      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals(type)) {
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals("CONF")) {
         Circle circle = new Circle();
         nodesPane.getChildren().add(circle);
         circle.setCenterX(n.getXCoord());
         circle.setCenterY(n.getYCoord());
         circle.setRadius(16);
         circle.setStyle("-fx-fill: #5A015A");
+        confMap.put(i, circle);
       }
     }
+    confHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightConf() {
+    confCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : confMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    confHighlighted = false;
+  }
+
+  @FXML
+  public void highlightDept() {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals("DEPT")) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+        deptMap.put(i, circle);
+      }
+    }
+    deptHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightDept() {
+    deptCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : deptMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    deptHighlighted = false;
+  }
+
+  @FXML
+  public void highlightInfo() {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals("INFO")) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+        infoMap.put(i, circle);
+      }
+    }
+    infoHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightInfo() {
+    infoCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : infoMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    infoHighlighted = false;
+  }
+
+  @FXML
+  public void highlightLabs() {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals("LABS")) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+        labsMap.put(i, circle);
+      }
+    }
+    labsHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightLabs() {
+    labsCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : labsMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    labsHighlighted = false;
+  }
+
+  @FXML
+  public void highlightRest() {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor)
+          && (n.getLocation().getNodeType().equals("REST")
+              || n.getLocation().getNodeType().equals("BATH"))) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+        restMap.put(i, circle);
+      }
+    }
+    restHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightRest() {
+    restCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : restMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    restHighlighted = false;
+  }
+
+  @FXML
+  public void highlightRetl() {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals("RETL")) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+        retlMap.put(i, circle);
+      }
+    }
+    retlHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightRetl() {
+    retlCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : retlMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    retlHighlighted = false;
+  }
+
+  @FXML
+  public void highlightServ() {
+    ArrayList<Node> nodes = qdb.retrieveAllNodes();
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+      if (n.getFloor().equals(currentFloor) && n.getLocation().getNodeType().equals("SERV")) {
+        Circle circle = new Circle();
+        nodesPane.getChildren().add(circle);
+        circle.setCenterX(n.getXCoord());
+        circle.setCenterY(n.getYCoord());
+        circle.setRadius(16);
+        circle.setStyle("-fx-fill: #5A015A");
+        servMap.put(i, circle);
+      }
+    }
+    servHighlighted = true;
+  }
+
+  @FXML
+  public void unhighlightServ() {
+    servCheck.setSelected(false);
+    for (Map.Entry<Integer, Circle> entry : servMap.entrySet()) {
+      Circle c = entry.getValue();
+      nodesPane.getChildren().remove(c);
+    }
+    servHighlighted = false;
+  }
+
+  @FXML
+  public void unhighlightAll() {
+    unhighlightConf();
+    unhighlightDept();
+    unhighlightInfo();
+    unhighlightLabs();
+    unhighlightRest();
+    unhighlightRetl();
+    unhighlightServ();
   }
 
   @FXML
   public void confChecked() {
     if (!confHighlighted) {
-      highlightNodes("CONF");
-      confHighlighted = true;
+      highlightConf();
     } else {
-      addCircles();
-      confHighlighted = false;
+      unhighlightConf();
     }
   }
 
   @FXML
   public void deptChecked() {
     if (!deptHighlighted) {
-      highlightNodes("DEPT");
-      deptHighlighted = true;
+      highlightDept();
     } else {
-      addCircles();
-      deptHighlighted = false;
+      unhighlightDept();
     }
   }
 
   @FXML
   public void infoChecked() {
     if (!infoHighlighted) {
-      highlightNodes("INFO");
-      infoHighlighted = true;
+      highlightInfo();
     } else {
-      addCircles();
-      infoHighlighted = false;
+      unhighlightInfo();
     }
   }
 
   @FXML
   public void labsChecked() {
     if (!labsHighlighted) {
-      highlightNodes("LABS");
-      labsHighlighted = true;
+      highlightLabs();
     } else {
-      addCircles();
-      labsHighlighted = false;
+      unhighlightLabs();
     }
   }
 
   @FXML
   public void restChecked() {
     if (!restHighlighted) {
-      highlightNodes("REST");
-      restHighlighted = true;
+      highlightRest();
     } else {
-      addCircles();
-      restHighlighted = false;
+      unhighlightRest();
     }
   }
 
   @FXML
   public void retlChecked() {
     if (!retlHighlighted) {
-      highlightNodes("RETL");
-      retlHighlighted = true;
+      highlightRetl();
     } else {
-      addCircles();
-      retlHighlighted = false;
+      unhighlightRetl();
     }
   }
 
   @FXML
   public void servChecked() {
     if (!servHighlighted) {
-      highlightNodes("SERV");
-      servHighlighted = true;
+      highlightServ();
     } else {
-      addCircles();
-      servHighlighted = false;
+      unhighlightServ();
     }
   }
 
   @FXML
   public void clearClicked() {
-    confHighlighted = false;
-    deptHighlighted = false;
-    infoHighlighted = false;
-    labsHighlighted = false;
-    restHighlighted = false;
-    retlHighlighted = false;
-    servHighlighted = false;
-    addCircles();
+    unhighlightAll();
   }
 }
