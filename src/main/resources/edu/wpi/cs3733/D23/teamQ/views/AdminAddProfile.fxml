@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" stylesheets="@styles/Profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.AdminAddProfileController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <HBox fx:id="myHBox" alignment="TOP_CENTER" prefHeight="350.0" prefWidth="200.0" styleClass="my-hbox" />
+            </children>
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <HBox prefHeight="300.0" prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets top="195.0" />
+                    </VBox.margin>
+                    <children>
+                        <StackPane prefHeight="300.0" prefWidth="300.0">
+                            <children>
+                                <ImageView fx:id="profileImage" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
+                                    <image>
+                                        <Image url="@../../../../../../../../../../../../Downloads/default-profile.png" />
+                                    </image>
+                                </ImageView>
+                                <MFXButton fx:id="editPFP" onAction="#editPFPClicked" style="-fx-background-radius: 100;">
+                                    <StackPane.margin>
+                                        <Insets left="220.0" top="230.0" />
+                                    </StackPane.margin>
+                                </MFXButton>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="125.0" />
+                            </HBox.margin>
+                        </StackPane>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <StackPane prefHeight="150.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets bottom="40.0" left="125.0" right="125.0" top="30.0" />
+                            </HBox.margin>
+                            <children>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox prefHeight="200.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                                                                    <VBox.margin>
+                                                                        <Insets />
+                                                                    </VBox.margin></Text>
+                                                                <MFXTextField fx:id="firstName" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin></MFXTextField>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+                                                                <MFXTextField fx:id="lastName" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin></MFXTextField>
+                                                            </children>
+                                                            <HBox.margin>
+                                                                <Insets />
+                                                            </HBox.margin>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+                                                                    <VBox.margin>
+                                                                        <Insets />
+                                                                    </VBox.margin>
+                                                                </Text>
+                                                                <MFXTextField fx:id="email" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin>
+                                                                </MFXTextField>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+                                                                <MFXTextField fx:id="phone" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin>
+                                                                </MFXTextField>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <MFXTextField fx:id="titleEdit" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </MFXTextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                                                <MFXTextField fx:id="username" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </MFXTextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                            </children></VBox>
+                                        <VBox prefHeight="200.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Security Question 1" />
+                                                                <MFXFilterComboBox fx:id="securityQuestion1" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin>
+                                                                </MFXFilterComboBox>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Security Question 2" />
+                                                                <MFXFilterComboBox fx:id="securityQuestion2" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin>
+                                                                </MFXFilterComboBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Security Answer 1">
+                                                                    <VBox.margin>
+                                                                        <Insets />
+                                                                    </VBox.margin>
+                                                                </Text>
+                                                                <MFXTextField fx:id="securityAnswer1" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin>
+                                                                </MFXTextField>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Security Answer 2" />
+                                                                <MFXTextField fx:id="securityAnswer2" alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="220.0">
+                                                                    <VBox.margin>
+                                                                        <Insets top="5.0" />
+                                                                    </VBox.margin>
+                                                                </MFXTextField>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <MFXTextField fx:id="password" alignment="CENTER" maxHeight="40.0" maxWidth="220.0" minHeight="40.0" prefHeight="40.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </MFXTextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                              <MFXButton fx:id="saveButton" onAction="#donePressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Create" textFill="WHITE">
+                                                   <VBox.margin>
+                                                      <Insets top="15.0" />
+                                                   </VBox.margin>
+                                                </MFXButton>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                            </children></VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </StackPane>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>
