@@ -450,7 +450,7 @@ public class GraphicalMapEditorController {
         }
       }
 
-      while (countMove < moves.size() -1 ) {
+      while (countMove < moves.size() - 1) {
         for (int i = 0; i < moves.size(); i++) {
           countMove = i;
           Move move = moves.get(i);
@@ -459,8 +459,6 @@ public class GraphicalMapEditorController {
           }
         }
       }
-
-
 
       qdb.deleteLocation(nodeid);
       qdb.deleteNode(nodeid);
