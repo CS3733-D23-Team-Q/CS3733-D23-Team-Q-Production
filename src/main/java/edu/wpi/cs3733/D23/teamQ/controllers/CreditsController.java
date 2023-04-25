@@ -19,10 +19,13 @@ public class CreditsController {
   @FXML MFXButton alert;
   @FXML MFXButton alertBox;
   @FXML MFXButton blueLogo;
+  @FXML MFXButton brunchSpread;
   @FXML MFXButton chevronLeft;
   @FXML MFXButton chevronRight;
   @FXML MFXButton close;
+  @FXML MFXButton conferenceRoomTitle;
   @FXML MFXButton confirm;
+  @FXML MFXButton dinnerSpread;
   @FXML MFXButton down;
   @FXML MFXButton edge;
   @FXML MFXButton exit;
@@ -48,6 +51,7 @@ public class CreditsController {
   @FXML MFXButton srBlue;
   @FXML MFXButton settings;
   @FXML MFXButton settingsBlue;
+  @FXML MFXButton snackSpread;
   @FXML MFXButton stat;
   @FXML MFXButton statBlue;
   @FXML MFXButton up;
@@ -63,6 +67,42 @@ public class CreditsController {
   @FXML MFXButton shapiro;
   @FXML MFXButton textLogo;
   @FXML MFXButton thirdFloor;
+  @FXML MFXButton bandaids;
+  @FXML MFXButton chicken;
+  @FXML MFXButton coffee;
+  @FXML MFXButton coke;
+  @FXML MFXButton cotton;
+  @FXML MFXButton couch;
+  @FXML MFXButton daisies;
+  @FXML MFXButton depressors;
+  @FXML MFXButton desk;
+  @FXML MFXButton deskChair;
+  @FXML MFXButton examTable;
+  @FXML MFXButton fish;
+  @FXML MFXButton frenchFries;
+  @FXML MFXButton furnitureTitle;
+  @FXML MFXButton gauze;
+  @FXML MFXButton highlighters;
+  @FXML MFXButton indexCards;
+  @FXML MFXButton lilies;
+  @FXML MFXButton mealTitle;
+  @FXML MFXButton medSupplies;
+  @FXML MFXButton notepadsClicked;
+  @FXML MFXButton officeSuppliesTitle;
+  @FXML MFXButton onionRings;
+  @FXML MFXButton pens;
+  @FXML MFXButton pencils;
+  @FXML MFXButton pork;
+  @FXML MFXButton roses;
+  @FXML MFXButton salad;
+  @FXML MFXButton soup;
+  @FXML MFXButton steak;
+  @FXML MFXButton sunflowers;
+  @FXML MFXButton syringe;
+  @FXML MFXButton tea;
+  @FXML MFXButton tulips;
+  @FXML MFXButton water;
+  @FXML MFXButton vegetables;
 
   // software
   @FXML MFXButton figma;
@@ -119,6 +159,12 @@ public class CreditsController {
   }
 
   @FXML
+  public void brunchSpreadClicked() {
+    linkDisplay.setText(
+            "https://www.google.com/search?q=brunch+spread&sxsrf=APwXEdeL0Yb-g694zWTp6lgSiCfbaZb4_w:1682449731163&source=lnms&tbm=isch&sa=X&ved=2ahUKEwia3c_U3cX-AhWMk4kEHYwsDawQ0pQJegQIBhAC&biw=1536&bih=713&dpr=2.5#imgrc=P8XhWPc9aIJAIM");
+  }
+
+  @FXML
   public void chevronLeftClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/chevron-left?f=classic&s=solid");
   }
@@ -134,8 +180,18 @@ public class CreditsController {
   }
 
   @FXML
+  public void crtClicked() {
+    linkDisplay.setText("https://www.google.com/search?q=office+couch+horizontal+image&tbm=isch&ved=2ahUKEwiFo__j1sD-AhWrAFkFHU6HCnMQ2-cCegQIABAA&oq=office+couch+horizontal+image&gs_lcp=CgNpbWcQAzoECCMQJ1CTCFiyEmCKHmgAcAB4AIABOogBrAOSAQE4mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=9X5FZMXUJ6uB5NoPzo6qmAc&bih=713&biw=1536#imgrc=_TaBQN-lmf47LM");
+  }
+  @FXML
   public void confirmClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/circle-check?f=classic&s=regular");
+  }
+
+  @FXML
+  public void dinnerSpreadClicked() {
+    linkDisplay.setText(
+            "https://www.google.com/search?q=dinner+spread+&tbm=isch&ved=2ahUKEwjonL7DqcH-AhUnGN4AHVe2CioQ2-cCegQIABAA&oq=dinner+spread+&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBAgAEB4yBggAEAUQHjIGCAAQBRAeMgYIABAFEB4yBggAEAUQHjIGCAAQBRAeMgYIABAFEB4yBggAEAUQHlDbCljbCmCdDmgAcAB4AIABb4gBywGSAQMxLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=udVFZKjcJaew-LYP1-yq0AI&bih=713&biw=1536#imgrc=KDn0YzfkbaKHHM");
   }
 
   @FXML
@@ -266,6 +322,12 @@ public class CreditsController {
   @FXML
   public void settingsBlueClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+  }
+
+  @FXML
+  public void snackSpreadClicked() {
+    linkDisplay.setText(
+            "https://www.google.com/search?q=snack+spread+&tbm=isch&ved=2ahUKEwiMnNn-qcH-AhXDMt4AHZwhD3AQ2-cCegQIABAA&oq=snack+spread+&gs_lcp=CgNpbWcQAzIFCAAQgAQyBAgAEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB5QsQpYsQpgxgxoAHAAeACAAWeIAcYBkgEDMS4xmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=NdZFZMytMMPl-LYPnMO8gAc&bih=713&biw=1536#imgrc=HszP5SQsvSRJIM");
   }
 
   @FXML
