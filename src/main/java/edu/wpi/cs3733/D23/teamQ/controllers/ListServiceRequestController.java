@@ -429,14 +429,14 @@ public class ListServiceRequestController {
 
     Account assigneeAccount = fr.getAssignee();
     String assigneeString =
-            assigneeAccount.getUsername()
-                    + ", ("
-                    + assigneeAccount.getFirstName()
-                    + " "
-                    + assigneeAccount.getLastName()
-                    + ", "
-                    + assigneeAccount.getTitle()
-                    + ")";
+        assigneeAccount.getUsername()
+            + ", ("
+            + assigneeAccount.getFirstName()
+            + " "
+            + assigneeAccount.getLastName()
+            + ", "
+            + assigneeAccount.getTitle()
+            + ")";
 
     flowerAssigneeField.setValue(assigneeString);
     flowerTimeField.setText(fr.getTime());
@@ -453,7 +453,24 @@ public class ListServiceRequestController {
     flowerRequestEdit.setVisible(false);
   }
 
-  public void flowerUpdateClicked() {}
+  public void flowerUpdateClicked() {
+    FlowerRequest fr =
+        new FlowerRequest(
+            flowerRequest.getRequestID(),
+            qdb.getNodeFromLocation(flowerLocationField.getText()),
+            flowerRequest.getRequester(),
+            qdb.retrieveAccount(flowerAssigneeField.getValue().toString().split(",")[0]),
+            flowerInstructionsField.getText(),
+            Date.valueOf(flowerDateField.getValue()),
+            flowerTimeField.getText(),
+            flowerRequest.getProgress().ordinal(),
+            flowerChoiceField.getText(),
+            Integer.parseInt(flowerBouquetField.getText()));
+
+    qdb.updateFlowerRequest(flowerRequest.getRequestID(), fr);
+    yourRequestsTable.refresh();
+    flowerRequestEdit.setVisible(false);
+  }
 
   public void setOfficeFields(OfficeSuppliesRequest or) {
     officeItemField.setItems(itemList);
@@ -463,14 +480,14 @@ public class ListServiceRequestController {
 
     Account assigneeAccount = or.getAssignee();
     String assigneeString =
-            assigneeAccount.getUsername()
-                    + ", ("
-                    + assigneeAccount.getFirstName()
-                    + " "
-                    + assigneeAccount.getLastName()
-                    + ", "
-                    + assigneeAccount.getTitle()
-                    + ")";
+        assigneeAccount.getUsername()
+            + ", ("
+            + assigneeAccount.getFirstName()
+            + " "
+            + assigneeAccount.getLastName()
+            + ", "
+            + assigneeAccount.getTitle()
+            + ")";
 
     officeAssigneeField.setValue(assigneeString);
     officeTimeField.setText(or.getTime());
@@ -487,7 +504,23 @@ public class ListServiceRequestController {
     officeRequestEdit.setVisible(false);
   }
 
-  public void officeUpdateClicked() {}
+  public void officeUpdateClicked() {
+    OfficeSuppliesRequest or =
+        new OfficeSuppliesRequest(
+            officeSuppliesRequest.getRequestID(),
+            qdb.getNodeFromLocation(officeLocationField.getText()),
+            officeSuppliesRequest.getRequester(),
+            qdb.retrieveAccount(officeAssigneeField.getValue().toString().split(",")[0]),
+            officeInstructionsField.getText(),
+            Date.valueOf(officeDateField.getValue()),
+            officeTimeField.getText(),
+            officeSuppliesRequest.getProgress().ordinal(),
+            officeItemField.getText(),
+            Integer.parseInt(officeQuantityField.getText()));
+    qdb.updateOfficeSuppliesRequest(officeSuppliesRequest.getRequestID(), or);
+    yourRequestsTable.refresh();
+    officeRequestEdit.setVisible(false);
+  }
 
   public void setFurnitureFields(FurnitureRequest fr) {
     furnitureAssigneeField.setItems(qdb.getAllLongNames());
@@ -497,14 +530,14 @@ public class ListServiceRequestController {
 
     Account assigneeAccount = fr.getAssignee();
     String assigneeString =
-            assigneeAccount.getUsername()
-                    + ", ("
-                    + assigneeAccount.getFirstName()
-                    + " "
-                    + assigneeAccount.getLastName()
-                    + ", "
-                    + assigneeAccount.getTitle()
-                    + ")";
+        assigneeAccount.getUsername()
+            + ", ("
+            + assigneeAccount.getFirstName()
+            + " "
+            + assigneeAccount.getLastName()
+            + ", "
+            + assigneeAccount.getTitle()
+            + ")";
 
     furnitureAssigneeField.setValue(assigneeString);
     furnitureTimeField.setText(fr.getTime());
@@ -520,7 +553,22 @@ public class ListServiceRequestController {
     furnitureRequestEdit.setVisible(false);
   }
 
-  public void furnitureUpdateClicked() {}
+  public void furnitureUpdateClicked() {
+    FurnitureRequest fr =
+        new FurnitureRequest(
+            furnitureRequest.getRequestID(),
+            qdb.getNodeFromLocation(furnitureLocationField.getText()),
+            furnitureRequest.getRequester(),
+            qdb.retrieveAccount(furnitureAssigneeField.getValue().toString().split(",")[0]),
+            furnitureInstructionsField.getText(),
+            Date.valueOf(furnitureDateField.getValue()),
+            furnitureTimeField.getText(),
+            furnitureRequest.getProgress().ordinal(),
+            furnitureChoiceField.getText());
+    qdb.updateFurnitureRequest(furnitureRequest.getRequestID(), fr);
+    yourRequestsTable.refresh();
+    furnitureRequestEdit.setVisible(false);
+  }
 
   private void setMealFields(MealRequest mr) {
     mealAssigneeField.setItems(qdb.getAllLongNames());
@@ -532,14 +580,14 @@ public class ListServiceRequestController {
 
     Account assigneeAccount = mr.getAssignee();
     String assigneeString =
-            assigneeAccount.getUsername()
-                    + ", ("
-                    + assigneeAccount.getFirstName()
-                    + " "
-                    + assigneeAccount.getLastName()
-                    + ", "
-                    + assigneeAccount.getTitle()
-                    + ")";
+        assigneeAccount.getUsername()
+            + ", ("
+            + assigneeAccount.getFirstName()
+            + " "
+            + assigneeAccount.getLastName()
+            + ", "
+            + assigneeAccount.getTitle()
+            + ")";
 
     mealAssigneeField.setValue(assigneeString);
     mealTimeField.setText(mr.getTime());
@@ -557,7 +605,24 @@ public class ListServiceRequestController {
     mealRequestEdit.setVisible(false);
   }
 
-  public void mealUpdateClicked() {}
+  public void mealUpdateClicked() {
+    MealRequest mr =
+        new MealRequest(
+            mealRequest.getRequestID(),
+            qdb.getNodeFromLocation(mealLocationField.getText()),
+            mealRequest.getRequester(),
+            qdb.retrieveAccount(mealAssigneeField.getValue().toString().split(",")[0]),
+            mealInstructionsField.getText(),
+            Date.valueOf(mealDateField.getValue()),
+            mealTimeField.getText(),
+            mealRequest.getProgress().ordinal(),
+            mealDrinkField.getText(),
+            mealEntreeField.getText(),
+            mealSideField.getText());
+    qdb.updateMealRequest(mealRequest.getRequestID(), mr);
+    yourRequestsTable.refresh();
+    mealRequestEdit.setVisible(false);
+  }
 
   public void setMedicalFields(MedicalSuppliesRequest mr) {
     medicalItemField.setItems(medicalItemList);
@@ -567,14 +632,14 @@ public class ListServiceRequestController {
 
     Account assigneeAccount = mr.getAssignee();
     String assigneeString =
-            assigneeAccount.getUsername()
-                    + ", ("
-                    + assigneeAccount.getFirstName()
-                    + " "
-                    + assigneeAccount.getLastName()
-                    + ", "
-                    + assigneeAccount.getTitle()
-                    + ")";
+        assigneeAccount.getUsername()
+            + ", ("
+            + assigneeAccount.getFirstName()
+            + " "
+            + assigneeAccount.getLastName()
+            + ", "
+            + assigneeAccount.getTitle()
+            + ")";
 
     medicalAssigneeField.setValue(assigneeString);
     medicalTimeField.setText(mr.getTime());
@@ -591,7 +656,23 @@ public class ListServiceRequestController {
     medicalRequestEdit.setVisible(false);
   }
 
-  public void medicalUpdateClicked(ActionEvent actionEvent) {}
+  public void medicalUpdateClicked(ActionEvent actionEvent) {
+    MedicalSuppliesRequest mr =
+        new MedicalSuppliesRequest(
+            medicalSuppliesRequest.getRequestID(),
+            qdb.getNodeFromLocation(medicalLocationField.getText()),
+            medicalSuppliesRequest.getRequester(),
+            qdb.retrieveAccount(medicalAssigneeField.getValue().toString().split(",")[0]),
+            medicalInstructionsField.getText(),
+            Date.valueOf(medicalDateField.getValue()),
+            medicalTimeField.getText(),
+            medicalSuppliesRequest.getProgress().ordinal(),
+            medicalItemField.getText(),
+            Integer.parseInt(medicalQuantityField.getText()));
+    qdb.updateMedicalSuppliesRequest(medicalSuppliesRequest.getRequestID(), mr);
+    yourRequestsTable.refresh();
+    medicalRequestEdit.setVisible(false);
+  }
 
   public static ConferenceRequest getConferenceRequest() {
     return conferenceRequest;
