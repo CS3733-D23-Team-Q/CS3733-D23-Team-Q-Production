@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
-import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.Connection;
@@ -13,15 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 public class Qdb {
-  private ArrayList<Subscriber> subscribers = new ArrayList<>();
-
   private AccountDaoImpl accountTable;
 
-  private LocationDaoImpl locationTable;
+  public LocationDaoImpl locationTable;
 
-  private NodeDaoImpl nodeTable;
-  private EdgeDaoImpl edgeTable;
-  private MoveDaoImpl moveTable;
+  public NodeDaoImpl nodeTable;
+  public EdgeDaoImpl edgeTable;
+  public MoveDaoImpl moveTable;
   private ProfileImageDaoImpl profileImageTable;
 
   private QuestionDaoImpl questionTable;
@@ -80,20 +77,6 @@ public class Qdb {
     } catch (SQLException e) {
       e.printStackTrace();
       return false;
-    }
-  }
-
-  public void subscribe(Subscriber s) {
-    subscribers.add(s);
-  }
-
-  public void unsubscribe(Subscriber s) {
-    subscribers.remove(s);
-  }
-
-  public void notifySubscribers(List<String> context) {
-    for (Subscriber s : subscribers) {
-      s.update(context);
     }
   }
 
@@ -235,14 +218,6 @@ public class Qdb {
     return (ArrayList<Edge>) edgeTable.getAllRows();
   }
 
-  public boolean edgesToCSV(String filename) {
-    return edgeTable.toCSV(filename);
-  }
-
-  public boolean edgesFromCSV(String filename) {
-    return edgeTable.importCSV(filename);
-  }
-
   public Node retrieveNode(int nodeID) {
     return nodeTable.retrieveRow(nodeID);
   }
@@ -266,14 +241,6 @@ public class Qdb {
     return (ArrayList<Node>) nodeTable.getAllRows();
   }
 
-  public boolean nodesToCSV(String filename) {
-    return nodeTable.toCSV(filename);
-  }
-
-  public boolean nodesFromCSV(String filename) {
-    return nodeTable.importCSV(filename);
-  }
-
   public Location retrieveLocation(int nodeID) {
     return locationTable.retrieveRow(nodeID);
   }
@@ -295,14 +262,6 @@ public class Qdb {
 
   public ArrayList<Location> retrieveAllLocations() {
     return (ArrayList<Location>) locationTable.getAllRows();
-  }
-
-  public boolean locationsToCSV(String filename) {
-    return locationTable.toCSV(filename);
-  }
-
-  public boolean locationsFromCSV(String filename) {
-    return locationTable.importCSV(filename);
   }
 
   public ObservableList<String> getAllLongNames(String[] nodeTypes) {
@@ -334,14 +293,6 @@ public class Qdb {
 
   public ArrayList<Move> retrieveAllMoves() {
     return (ArrayList<Move>) moveTable.getAllRows();
-  }
-
-  public boolean movesToCSV(String filename) {
-    return moveTable.toCSV(filename);
-  }
-
-  public boolean movesFromCSV(String filename) {
-    return moveTable.importCSV(filename);
   }
 
   public Question retrieveQuestion(int ID) {
@@ -603,7 +554,6 @@ public class Qdb {
           patientTransportRequestTable.populate();
       }
     }
-    // notifySubscribers(tableNames);
     return true;
   }
 

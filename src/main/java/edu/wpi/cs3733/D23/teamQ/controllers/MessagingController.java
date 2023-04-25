@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import static java.lang.System.currentTimeMillis;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
@@ -11,7 +10,6 @@ import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.beans.binding.Bindings;
@@ -34,7 +32,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-public class MessagingController implements Subscriber {
+public class MessagingController {
   Account receiver;
   @FXML ImageView sendButton;
   @FXML VBox messageVbox;
@@ -50,7 +48,6 @@ public class MessagingController implements Subscriber {
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
-    qdb.subscribe(this);
 
     peopleSelector.setValue("");
     peopleSelector.setItems(qdb.getAllNames());
@@ -277,15 +274,6 @@ public class MessagingController implements Subscriber {
     for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
       if (m.getSender().getUsername().equals(LoginController.getUsername())) sentHistorically(m);
       else messageReceived(m);
-    }
-  }
-
-  public boolean update(List<String> context) {
-    if (context.contains("message")) {
-      setup();
-      return true;
-    } else {
-      return false;
     }
   }
 }
