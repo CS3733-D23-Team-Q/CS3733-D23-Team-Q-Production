@@ -287,11 +287,11 @@ public class GraphicalMapEditorController {
             NodeInformation(nodeID);
             if (startnodeOr) {
               startnodeinitial.setText(Integer.toString(nodeID));
-              startnode = qdb.nodeTable.retrieveRow(nodeID);
+              startnode = qdb.retrieveNode(nodeID);
               startnodeOr = false;
             } else if (endnodeOr) {
               endnodeinitial.setText(Integer.toString(nodeID));
-              endnode = qdb.nodeTable.retrieveRow(nodeID);
+              endnode = qdb.retrieveNode(nodeID);
               endnodeOr = false;
             }
           });
@@ -402,13 +402,13 @@ public class GraphicalMapEditorController {
             newLongName = longnameinitial.getText();
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
-            qdb.locationTable.updateRow(
+            qdb.updateLocation(
                 nodeid, new Location(nodeid, newLongName, newShortName, newNodeType));
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());
             newYcoord = Integer.parseInt(yinitial.getText());
-            qdb.nodeTable.updateRow(
+            qdb.updateNode(
                 nodeid,
                 new Node(
                     nodeid,
@@ -416,7 +416,7 @@ public class GraphicalMapEditorController {
                     newYcoord,
                     newFloor,
                     newBuilding,
-                    Qdb.getInstance().locationTable.retrieveRow(nodeid)));
+                    Qdb.getInstance().retrieveLocation(nodeid)));
             refreshNodes();
             setEdges();
             findOnMap();
@@ -511,7 +511,7 @@ public class GraphicalMapEditorController {
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
 
-            qdb.locationTable.addRow(new Location(nodeid, newLongName, newShortName, newNodeType));
+            qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());
@@ -523,8 +523,8 @@ public class GraphicalMapEditorController {
                     newYcoord,
                     newFloor,
                     newBuilding,
-                    Qdb.getInstance().locationTable.retrieveRow(nodeid));
-            qdb.nodeTable.addRow(newnode);
+                    Qdb.getInstance().retrieveLocation(nodeid));
+            qdb.addNode(newnode);
             refreshNodes();
             findOnMap();
             setEdges();
@@ -558,13 +558,13 @@ public class GraphicalMapEditorController {
 
   /** if nodeid exist, display the node information on the map. Else call alert. */
   public void NodeInformation(int id) {
-    xinitial.setText(Integer.toString(qdb.nodeTable.retrieveRow(id).getXCoord()));
-    buildinginitial.setText(qdb.nodeTable.retrieveRow(id).getBuilding());
-    yinitial.setText(Integer.toString(qdb.nodeTable.retrieveRow(id).getYCoord()));
-    floorinitial.setText(qdb.nodeTable.retrieveRow(id).getFloor());
-    longnameinitial.setText(qdb.locationTable.retrieveRow(id).getLongName());
-    shortnameinitial.setText(qdb.locationTable.retrieveRow(id).getShortName());
-    nodetypeinitial.setText(qdb.locationTable.retrieveRow(id).getNodeType());
+    xinitial.setText(Integer.toString(qdb.retrieveNode(id).getXCoord()));
+    buildinginitial.setText(qdb.retrieveNode(id).getBuilding());
+    yinitial.setText(Integer.toString(qdb.retrieveNode(id).getYCoord()));
+    floorinitial.setText(qdb.retrieveNode(id).getFloor());
+    longnameinitial.setText(qdb.retrieveLocation(id).getLongName());
+    shortnameinitial.setText(qdb.retrieveLocation(id).getShortName());
+    nodetypeinitial.setText(qdb.retrieveLocation(id).getNodeType());
   }
 
   /** initialize the node information. */
@@ -585,8 +585,8 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   public boolean nodeIDExist(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
-      if (nodeID == Qdb.getInstance().nodeTable.getAllRows().get(i).getNodeID()) return true;
+    for (int i = 0; i < Qdb.getInstance().retrieveAllNodes().size(); i++) {
+      if (nodeID == Qdb.getInstance().retrieveAllNodes().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -596,7 +596,7 @@ public class GraphicalMapEditorController {
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
       NodeInformation(nodeid);
-      String floor = qdb.nodeTable.retrieveRow(nodeid).getFloor();
+      String floor = qdb.retrieveNode(nodeid).getFloor();
       if (!floor.equals(Floor(currentIndex))) {
         currentIndex = findFloor(floor);
         if (!button.isEmpty()) parent.getChildren().removeAll(button);
@@ -607,8 +607,8 @@ public class GraphicalMapEditorController {
       alert.clearLabelAlert(alerts, image1);
       Point2D pivotOnTarget =
           new Point2D(
-              qdb.nodeTable.retrieveRow(nodeid).getXCoord() / 5.0,
-              qdb.nodeTable.retrieveRow(nodeid).getYCoord() / 5.0);
+              qdb.retrieveNode(nodeid).getXCoord() / 5.0,
+              qdb.retrieveNode(nodeid).getYCoord() / 5.0);
       pane.animate(Duration.millis(200))
           .interpolateWith(Interpolator.EASE_BOTH)
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
@@ -635,7 +635,7 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   boolean nodeOnTheFloor(int node, int floor) {
-    if (qdb.nodeTable.retrieveRow(node).getFloor().equals(Floor(floor))) return true;
+    if (qdb.retrieveNode(node).getFloor().equals(Floor(floor))) return true;
     return false;
   }
 
@@ -919,7 +919,7 @@ public class GraphicalMapEditorController {
    * @return
    */
   boolean edgeAlert(Edge edge) {
-    List<Edge> alledges = qdb.edgeTable.getAllRows();
+    List<Edge> alledges = qdb.retrieveAllEdges();
     for (int i = 0; i < alledges.size(); i++) {
       if (edge.getStartNode().equals(empty)) {
         alert.setLabelAlert("The start node cannot be empty", alerts1, image11);
@@ -979,14 +979,10 @@ public class GraphicalMapEditorController {
     for (int i = path.size() - 1; i >= 1; i = i - 2) {
       int n = path.get(i);
       int next = path.get(i - 1);
-      DoubleProperty startX =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5.0);
-      DoubleProperty startY =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5.0);
-      DoubleProperty endX =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5.0);
-      DoubleProperty endY =
-          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5.0);
+      DoubleProperty startX = new SimpleDoubleProperty(qdb.retrieveNode(n).getXCoord() / 5.0);
+      DoubleProperty startY = new SimpleDoubleProperty(qdb.retrieveNode(n).getYCoord() / 5.0);
+      DoubleProperty endX = new SimpleDoubleProperty(qdb.retrieveNode(next).getXCoord() / 5.0);
+      DoubleProperty endY = new SimpleDoubleProperty(qdb.retrieveNode(next).getYCoord() / 5.0);
       Line line = new BoundLine(startX, startY, endX, endY);
       parent.getChildren().add(line);
       lines.add(line);
@@ -1013,9 +1009,9 @@ public class GraphicalMapEditorController {
    */
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
-    for (int i = 0; i < qdb.edgeTable.getAllRows().size(); i++) {
-      int start = qdb.edgeTable.getAllRows().get(i).getStartNode().getNodeID();
-      int target = qdb.edgeTable.getAllRows().get(i).getEndNode().getNodeID();
+    for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
+      int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
+      int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
       if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
         path.add(start);
         path.add(target);
@@ -1097,7 +1093,7 @@ public class GraphicalMapEditorController {
   void AddEdgesClicked(MouseEvent event) {
     Edge addedge = new Edge(startnode, endnode);
     if (edgeAlert(addedge)) {
-      qdb.edgeTable.addRow(addedge);
+      qdb.addEdge(addedge);
     }
     setEdges();
   }
@@ -1206,7 +1202,7 @@ public class GraphicalMapEditorController {
   boolean ShowLocationName() {
     parent.getChildren().removeAll(Texts);
     Texts.clear();
-    List<Node> allNodes = qdb.nodeTable.getAllRows();
+    List<Node> allNodes = qdb.retrieveAllNodes();
     String check = NodeTypeChoose.getValue();
     for (int i = 0; i < allNodes.size(); i++) {
       Node node1 = allNodes.get(i);

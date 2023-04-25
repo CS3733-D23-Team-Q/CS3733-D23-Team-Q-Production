@@ -19,6 +19,8 @@ import javafx.util.Callback;
 
 public class EdgeController implements IController {
 
+  Qdb qdb = Qdb.getInstance();
+
   static Stage stage;
 
   public void setStage(Stage stage) {
@@ -57,8 +59,8 @@ public class EdgeController implements IController {
   /** used to put Edges from database arraylist to observablelist */
   public ObservableList<Edge> edges() {
     ObservableList<Edge> edge = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().edgeTable.getAllRows().size(); i++) {
-      edge.add(Qdb.getInstance().edgeTable.getAllRows().get(i));
+    for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
+      edge.add(qdb.retrieveAllEdges().get(i));
     }
     return edge;
   }

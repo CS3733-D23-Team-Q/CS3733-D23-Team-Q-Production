@@ -19,7 +19,7 @@ public class Qdb {
   public NodeDaoImpl nodeTable;
   public EdgeDaoImpl edgeTable;
   public MoveDaoImpl moveTable;
-  private ProfileImageDaoImpl profileImageTable;
+  public ProfileImageDaoImpl profileImageTable;
 
   private QuestionDaoImpl questionTable;
 
