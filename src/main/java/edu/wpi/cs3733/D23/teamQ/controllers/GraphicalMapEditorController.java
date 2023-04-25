@@ -286,11 +286,11 @@ public class GraphicalMapEditorController {
             NodeInformation(nodeID);
             if (startnodeOr) {
               startnodeinitial.setText(Integer.toString(nodeID));
-              startnode = qdb.retrieveNode(nodeID);
+              startnode = qdb.nodeTable.retrieveRow(nodeID);
               startnodeOr = false;
             } else if (endnodeOr) {
               endnodeinitial.setText(Integer.toString(nodeID));
-              endnode = qdb.retrieveNode(nodeID);
+              endnode = qdb.nodeTable.retrieveRow(nodeID);
               endnodeOr = false;
             }
           });
@@ -533,8 +533,8 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   public boolean nodeIDExist(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().retrieveAllNodes().size(); i++) {
-      if (nodeID == Qdb.getInstance().retrieveAllNodes().get(i).getNodeID()) return true;
+    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
+      if (nodeID == Qdb.getInstance().nodeTable.getAllRows().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -860,7 +860,6 @@ public class GraphicalMapEditorController {
     return false;
   }
 
-
   /**
    * return true if the edge is legal, else return false
    *
@@ -917,6 +916,28 @@ public class GraphicalMapEditorController {
 
   // Below are all about lines
 
+  /**
+   * add lines
+   *
+   * @param path
+   * @return
+   */
+  List<javafx.scene.shape.Line> addLines(List<Integer> path) {
+    List<javafx.scene.shape.Line> lines = new ArrayList<>();
+    for (int i = path.size() - 1; i >= 1; i = i - 2) {
+      int n = path.get(i);
+      int next = path.get(i - 1);
+      DoubleProperty startX =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getXCoord() / 5.0);
+      DoubleProperty startY =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(n).getYCoord() / 5.0);
+      DoubleProperty endX =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getXCoord() / 5.0);
+      DoubleProperty endY =
+          new SimpleDoubleProperty(qdb.nodeTable.retrieveRow(next).getYCoord() / 5.0);
+      Line line = new BoundLine(startX, startY, endX, endY);
+      parent.getChildren().add(line);
+      lines.add(line);
     }
     displayEdges = true;
     return lines;
@@ -996,7 +1017,6 @@ public class GraphicalMapEditorController {
     endnodeinitial.setPromptText("Please Click a node as the start node");
   }
 
-
   /**
    * start to choss the start button when click the button
    *
@@ -1007,7 +1027,6 @@ public class GraphicalMapEditorController {
     startnodeOr = true;
     startnodeinitial.setPromptText("Please Click a node as the start node");
   }
-
 
   /** refresh the egdes */
   void setEdges() {
@@ -1135,7 +1154,7 @@ public class GraphicalMapEditorController {
   boolean ShowLocationName() {
     parent.getChildren().removeAll(Texts);
     Texts.clear();
-    List<Node> allNodes = qdb.retrieveAllNodes();
+    List<Node> allNodes = qdb.nodeTable.getAllRows();
     String check = NodeTypeChoose.getValue();
     for (int i = 0; i < allNodes.size(); i++) {
       Node node1 = allNodes.get(i);

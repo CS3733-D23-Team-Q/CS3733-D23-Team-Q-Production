@@ -74,13 +74,11 @@ public class NodeController implements IController {
 
   @FXML private TableColumn<Node, Number> Ycoord;
 
-  Qdb qdb = Qdb.getInstance();
-
   /** used to put Nodes from database arraylist to observablelist */
   public ObservableList<Node> nodes() {
     ObservableList<Node> node = FXCollections.observableArrayList();
-    for (int i = 0; i < qdb.retrieveAllNodes().size(); i++) {
-      node.add(qdb.retrieveAllNodes().get(i));
+    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
+      node.add(Qdb.getInstance().nodeTable.getAllRows().get(i));
     }
     return node;
   }
@@ -192,14 +190,16 @@ public class NodeController implements IController {
                   newXcoord = Integer.parseInt(XInput.getText());
                   newYcoord = Integer.parseInt(YInput.getText());
 
-                  qdb.addNode(
-                      new Node(
-                          nodeIDEdit,
-                          newXcoord,
-                          newYcoord,
-                          newFloor,
-                          newBuilding,
-                          qdb.retrieveLocation(nodeIDEdit)));
+                  Qdb.getInstance()
+                      .nodeTable
+                      .addRow(
+                          new Node(
+                              nodeIDEdit,
+                              newXcoord,
+                              newYcoord,
+                              newFloor,
+                              newBuilding,
+                              Qdb.getInstance().locationTable.retrieveRow(nodeIDEdit)));
                   node.setItems(nodes());
                 } else {
                   alert.setLabelAlert(
@@ -255,7 +255,7 @@ public class NodeController implements IController {
         alert.clearLabelAlert(InformationAlert, image2);
         alert.clearLabelAlert(nodeIDAlert, image);
 
-        qdb.deleteNode(nodeIDEdit);
+        Qdb.getInstance().nodeTable.deleteRow(nodeIDEdit);
         node.setItems(nodes());
 
         // Here to call confirm
@@ -293,15 +293,17 @@ public class NodeController implements IController {
                   newXcoord = Integer.parseInt(XInput.getText());
                   newYcoord = Integer.parseInt(YInput.getText());
 
-                  qdb.updateNode(
-                      nodeIDEdit,
-                      new Node(
+                  Qdb.getInstance()
+                      .nodeTable
+                      .updateRow(
                           nodeIDEdit,
-                          newXcoord,
-                          newYcoord,
-                          newFloor,
-                          newBuilding,
-                          qdb.retrieveLocation(nodeIDEdit)));
+                          new Node(
+                              nodeIDEdit,
+                              newXcoord,
+                              newYcoord,
+                              newFloor,
+                              newBuilding,
+                              Qdb.getInstance().locationTable.retrieveRow(nodeIDEdit)));
 
                   node.setItems(nodes());
 
@@ -353,16 +355,16 @@ public class NodeController implements IController {
     return true;
   }
 
-  public boolean nodeIDExist(int nodeID) {
-    for (int i = 0; i < qdb.retrieveAllNodes().size(); i++) {
-      if (nodeID == qdb.retrieveAllNodes().get(i).getNodeID()) return true;
+  public static boolean nodeIDExist(int nodeID) {
+    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
+      if (nodeID == Qdb.getInstance().nodeTable.getAllRows().get(i).getNodeID()) return true;
     }
     return false;
   }
 
   public boolean locationExist(int nodeID) {
-    for (int i = 0; i < qdb.retrieveAllLocations().size(); i++) {
-      if (nodeID == qdb.retrieveAllLocations().get(i).getNodeID()) return true;
+    for (int i = 0; i < Qdb.getInstance().locationTable.getAllRows().size(); i++) {
+      if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -370,7 +372,7 @@ public class NodeController implements IController {
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = qdb.nodesToCSV(path);
+    boolean success = Qdb.getInstance().nodeTable.toCSV(path);
     if (success) {
       Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
@@ -382,7 +384,7 @@ public class NodeController implements IController {
   @FXML
   void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = qdb.nodesFromCSV(path);
+    boolean success = Qdb.getInstance().nodeTable.importCSV(path);
     if (success) {
       Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {

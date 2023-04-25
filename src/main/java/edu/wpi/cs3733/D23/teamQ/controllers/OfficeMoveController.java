@@ -27,7 +27,7 @@ public class OfficeMoveController {
   @FXML private TableColumn<Move, String> date;
 
   public ObservableList<Move> getFutureMoves() {
-    List<Move> allMoves = qdb.retrieveAllMoves();
+    List<Move> allMoves = qdb.moveTable.getAllRows();
     ObservableList<Move> futureMoves = FXCollections.observableArrayList();
 
     Date currentDate = new Date(System.currentTimeMillis());
@@ -42,7 +42,7 @@ public class OfficeMoveController {
   }
 
   public ObservableList<Integer> getNodeIDs() {
-    List<Node> allNodes = qdb.retrieveAllNodes();
+    List<Node> allNodes = qdb.nodeTable.getAllRows();
     ObservableList<Integer> ids = FXCollections.observableArrayList();
 
     for (Node node : allNodes) {
