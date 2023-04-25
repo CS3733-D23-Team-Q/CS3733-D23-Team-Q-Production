@@ -603,7 +603,7 @@ public class Qdb {
           patientTransportRequestTable.populate();
       }
     }
-    // notifySubscribers(tableNames);
+    notifySubscribers(tableNames);
     return true;
   }
 
