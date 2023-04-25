@@ -41,7 +41,7 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> assignedRequestInstructions;
   @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
   @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
-  @FXML TableColumn<ServiceRequest, MFXComboBox<ServiceRequest.Progress>> progressDropdownColumn;
+  @FXML TableColumn<ServiceRequest, ServiceRequest.Progress> progressDropdownColumn;
 
   ObservableList<String> timeList =
       FXCollections.observableArrayList(
@@ -71,6 +71,12 @@ public class ListServiceRequestController {
   ObservableList<String> medicalItemList =
       FXCollections.observableArrayList(
           "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
+
+  ObservableList<ServiceRequest.Progress> progressValues =
+      FXCollections.observableArrayList(
+          ServiceRequest.Progress.BLANK,
+          ServiceRequest.Progress.PROCESSING,
+          ServiceRequest.Progress.DONE);
 
   @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
@@ -331,38 +337,35 @@ public class ListServiceRequestController {
           return dateProperty;
         });
 
+    // Set up the cell factory for the progress column
+    progressDropdownColumn.setCellValueFactory(new PropertyValueFactory<>("progress"));
     progressDropdownColumn.setCellFactory(
         column -> {
-          return new TableCell<ServiceRequest, MFXComboBox<ServiceRequest.Progress>>() {
+          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
             private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
 
             {
               // Set up the options for the ComboBox
               comboBox.setPrefHeight(20);
-              comboBox.getItems().addAll(ServiceRequest.Progress.values());
+              comboBox.setItems(progressValues);
               // Set the value of the ComboBox when changed
               comboBox.setOnAction(
                   event -> {
                     ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
                     serviceRequest.setProgress(comboBox.getValue());
-                    // Update the ServiceRequest object and refresh the TableView
-                    // with the new value
-                    // You may need to call a method to update the progress
-                    // in your application logic
+                    // Update the progress value in the database
+                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
                     yourRequestsTable.refresh();
                   });
             }
 
             @Override
-            protected void updateItem(MFXComboBox<ServiceRequest.Progress> item, boolean empty) {
+            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
               super.updateItem(item, empty);
               if (empty) {
                 setGraphic(null);
               } else {
-                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                // Set the value of the ComboBox based on the progress
-                // value of the ServiceRequest object
-                comboBox.setValue(serviceRequest.getProgress());
+                comboBox.setValue(item);
                 setGraphic(comboBox);
               }
             }
