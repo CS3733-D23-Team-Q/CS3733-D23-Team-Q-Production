@@ -958,11 +958,14 @@ public class GraphicalMapEditorController {
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
-      int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
-      int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
-      if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
-        path.add(start);
-        path.add(target);
+      if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
+          && !(qdb.retrieveAllEdges().get(i).getEndNode() == null)) {
+        int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
+        int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
+        if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
+          path.add(start);
+          path.add(target);
+        }
       }
     }
     return path;
