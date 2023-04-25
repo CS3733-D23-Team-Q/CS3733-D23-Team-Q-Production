@@ -40,6 +40,8 @@ public class Qdb {
 
   private int kiosk;
 
+  private String date;
+
   private static Qdb single_instance = null;
 
   public static synchronized Qdb getInstance() {
@@ -123,20 +125,16 @@ public class Qdb {
     return accountTable.getIndexes(email);
   }
 
-
   public Account getAccountFromUsername(String UN) {
     return accountTable.getAccountFromUN(UN);
   }
-
 
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
   }
 
-
   public Sign retrieveSign(int idNum) {
     return signTable.retrieveRow(idNum);
-
   }
 
   public List<Sign> retrieveSigns(int kiosk, String date) {
@@ -611,5 +609,13 @@ public class Qdb {
 
   public int getKiosk() {
     return kiosk;
+  }
+
+  public void setDate(String d) {
+    d = date;
+  }
+
+  public String getDate() {
+    return date;
   }
 }

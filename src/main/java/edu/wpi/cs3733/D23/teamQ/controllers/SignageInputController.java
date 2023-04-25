@@ -45,6 +45,7 @@ public class SignageInputController {
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     qdb.setKiosk((Integer) kioskField.getValue());
-    Navigation.navigateRight(Screen.SIGNAGE);
+    qdb.setDate(dateField.getText());
+    Navigation.navigate(Screen.SIGNAGE);
   }
 }
