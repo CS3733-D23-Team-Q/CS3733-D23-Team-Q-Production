@@ -38,8 +38,8 @@ public class SignageController implements IController {
     for (Sign s : qdb.retrieveSigns(qdb.getKiosk(), qdb.getDate())) {
       System.out.println(s.getDestination());
       HBox hbox = new HBox();
-      hbox.setAlignment(Pos.CENTER);
-      hbox.setPadding(new Insets(4, 16, 4, 16));
+      hbox.setAlignment(Pos.CENTER_LEFT);
+      hbox.setPadding(new Insets(4, 16, 4, 500));
 
       if (s.getDirection().equals("Here")) {
         Text text = new Text("Stop here for " + s.getDestination());
@@ -58,7 +58,6 @@ public class SignageController implements IController {
         text.setStyle("-fx-font-family: Roboto");
         text.setFill(Color.WHITE);
         text.setFont(Font.font(40));
-        hbox.getChildren().add(textFlow);
         ImageView dir = new ImageView(new Image(App.class.getResourceAsStream("rightArrow.png")));
         dir.setPreserveRatio(true);
         dir.setFitHeight(70);
@@ -67,6 +66,7 @@ public class SignageController implements IController {
         if (s.getDirection().equals("Left")) dir.setRotate(180);
         if (s.getDirection().equals("Up")) dir.setRotate(270);
         hbox.getChildren().add(dir);
+        hbox.getChildren().add(textFlow);
       }
       signageVbox.getChildren().add(hbox);
     }
