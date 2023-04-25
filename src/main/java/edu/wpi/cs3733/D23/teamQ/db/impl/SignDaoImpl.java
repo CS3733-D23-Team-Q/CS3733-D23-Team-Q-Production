@@ -18,6 +18,7 @@ public class SignDaoImpl {
   }
 
   private SignDaoImpl() {
+    System.out.println(signs.size());
     populate();
   }
 
@@ -65,6 +66,7 @@ public class SignDaoImpl {
   }
 
   public List<Sign> getAllRows() {
+
     return signs;
   }
 
@@ -106,8 +108,7 @@ public class SignDaoImpl {
                 rs.getInt("kiosk"),
                 rs.getString("date"),
                 rs.getString("destination"),
-                rs.getString("directions")));
-
+                rs.getString("direction")));
       }
       conn.close();
       stm.close();
