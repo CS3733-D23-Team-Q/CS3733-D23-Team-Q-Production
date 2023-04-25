@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.App;
+import edu.wpi.cs3733.D23.teamQ.Main;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
@@ -67,7 +68,7 @@ public class LoginController {
 
   @FXML
   public void exitClicked() {
-
+    Main.refresh.stop();
     Platform.exit();
   }
 

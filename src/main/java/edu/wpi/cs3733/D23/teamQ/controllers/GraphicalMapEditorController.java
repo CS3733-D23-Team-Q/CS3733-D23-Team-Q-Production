@@ -286,11 +286,11 @@ public class GraphicalMapEditorController {
             NodeInformation(nodeID);
             if (startnodeOr) {
               startnodeinitial.setText(Integer.toString(nodeID));
-              startnode = qdb.nodeTable.retrieveRow(nodeID);
+              startnode = qdb.retrieveNode(nodeID);
               startnodeOr = false;
             } else if (endnodeOr) {
               endnodeinitial.setText(Integer.toString(nodeID));
-              endnode = qdb.nodeTable.retrieveRow(nodeID);
+              endnode = qdb.retrieveNode(nodeID);
               endnodeOr = false;
             }
           });
@@ -533,8 +533,8 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   public boolean nodeIDExist(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().nodeTable.getAllRows().size(); i++) {
-      if (nodeID == Qdb.getInstance().nodeTable.getAllRows().get(i).getNodeID()) return true;
+    for (int i = 0; i < Qdb.getInstance().retrieveAllNodes().size(); i++) {
+      if (nodeID == Qdb.getInstance().retrieveAllNodes().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -1154,7 +1154,7 @@ public class GraphicalMapEditorController {
   boolean ShowLocationName() {
     parent.getChildren().removeAll(Texts);
     Texts.clear();
-    List<Node> allNodes = qdb.nodeTable.getAllRows();
+    List<Node> allNodes = qdb.retrieveAllNodes();
     String check = NodeTypeChoose.getValue();
     for (int i = 0; i < allNodes.size(); i++) {
       Node node1 = allNodes.get(i);

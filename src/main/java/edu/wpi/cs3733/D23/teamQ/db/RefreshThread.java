@@ -6,9 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import javafx.application.Platform;
 
 public class RefreshThread implements Runnable {
   private long lastUpdate = System.currentTimeMillis();
+  Qdb qdb = Qdb.getInstance();
 
   public void run() {
     try {
@@ -16,8 +19,6 @@ public class RefreshThread implements Runnable {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-
-    Qdb qdb = Qdb.getInstance();
 
     String[] tableNames = {
       "account",
@@ -28,35 +29,36 @@ public class RefreshThread implements Runnable {
       "profileImage",
       "security_question",
       "serviceRequest",
-      "message"
+      "message",
+      "alert"
     };
+
     ArrayList<String> toUpdate = new ArrayList<>();
+
     while (true) {
       try {
         Connection conn = GenDao.connect();
         PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"timestamp\"");
         ResultSet rs = pst.executeQuery();
-        conn.close();
-        pst.close();
         while (rs.next()) {
           for (String tableName : tableNames) {
             if (rs.getString("tableName").equals(tableName)) {
               if (rs.getLong("updated_timestamp") > lastUpdate) {
-                System.out.println(lastUpdate);
-                System.out.println(rs.getLong("updated_timestamp"));
                 toUpdate.add(tableName);
               }
             }
           }
         }
+        conn.close();
+        pst.close();
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
 
       try {
         if (toUpdate.size() > 0) {
-          System.out.println(toUpdate);
           qdb.populate(toUpdate);
+          Platform.runLater(() -> qdb.notifySubscribers(Arrays.stream(tableNames).toList()));
           setTimestamps(toUpdate);
           lastUpdate = System.currentTimeMillis();
           for (String tableName : toUpdate) {
