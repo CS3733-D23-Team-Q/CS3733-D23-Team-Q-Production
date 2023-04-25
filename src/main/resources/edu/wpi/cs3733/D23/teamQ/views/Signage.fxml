@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="signageRoot" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SignageController">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SignageController">
    <children>
-      <VBox fx:id="signageVbox" alignment="TOP_CENTER" prefHeight="900.0" prefWidth="1360.0">
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Brigham and Women's Hospital" textFill="#012d5a">
-               <font>
-                  <Font name="Roboto Bold" size="24.0" />
-               </font>
-            </Label>
+            <Line endY="900.0" stroke="#b4b4b4" HBox.hgrow="ALWAYS" />
+            <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label text="Brigham and Women's Hospital " textFill="#012d5a">
+                           <font>
+                              <Font name="Roboto Bold" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="signageVbox" prefHeight="729.0" prefWidth="1456.0" />
+               </children>
+            </VBox>
          </children>
-         <padding>
-            <Insets top="10.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

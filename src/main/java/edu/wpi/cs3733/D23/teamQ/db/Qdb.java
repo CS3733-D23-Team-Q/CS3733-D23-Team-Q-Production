@@ -133,28 +133,12 @@ public class Qdb {
     return (ArrayList<Account>) accountTable.getAllRows();
   }
 
-  public Sign retrieveSign(int idNum) {
-    return signTable.retrieveRow(idNum);
-  }
-
   public List<Sign> retrieveSigns(int kiosk, String date) {
     return signTable.retrieveRows(kiosk, date);
   }
 
-  public boolean updateSign(int idNum, Sign a) {
-    return signTable.updateRow(idNum, a);
-  }
-
-  public boolean deleteSign(int idNum) {
-    return signTable.deleteRow(idNum);
-  }
-
   public boolean addSign(Sign a) {
     return signTable.addRow(a);
-  }
-
-  public int getSignIndex(int idNum) {
-    return signTable.getIndex(idNum);
   }
 
   public ArrayList<Sign> retrieveAllSigns() {

@@ -2,16 +2,10 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Sign;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,29 +14,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class SignageController implements IController {
-  @FXML AnchorPane signageRoot;
 
   @FXML VBox signageVbox;
 
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
-    Platform.runLater(
-        () -> {
-          this.signageRoot
-              .getScene()
-              .addEventHandler(
-                  KeyEvent.KEY_TYPED,
-                  new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent event) {
-                      if (event.getCharacter().equals("\u001b")) {
-                        signageRoot.getScene().removeEventHandler(KeyEvent.KEY_TYPED, this);
-                        Navigation.navigate(Screen.HOME);
-                      }
-                    }
-                  });
-        });
 
     if (!signageVbox.getChildren().isEmpty()) {
       signageVbox.getChildren().clear();
