@@ -48,6 +48,7 @@ public enum Screen {
 
   DIRECTORY("views/Directory.fxml", "Directory"),
   ADMIN_DIRECTORY("views/AdminDirectory.fxml", "Admin Directory"),
+  ADMIN_ADD_PROFILE("views/AdminAddProfile.fxml", "Admin Add Profile"),
   EDIT_DIRECTORY("views/EditDirectory.fxml", "Edit Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
