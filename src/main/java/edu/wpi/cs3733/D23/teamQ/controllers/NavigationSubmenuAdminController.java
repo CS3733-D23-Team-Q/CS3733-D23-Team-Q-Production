@@ -10,6 +10,10 @@ public class NavigationSubmenuAdminController {
   @FXML VBox navigationSM;
   @FXML MFXButton pathfinder;
 
+  @FXML MFXButton addSignButton;
+
+  @FXML MFXButton displaySignButton;
+
   @FXML MFXButton editor;
   @FXML MFXButton oMover;
 
@@ -25,5 +29,13 @@ public class NavigationSubmenuAdminController {
 
   public void moveClicked() {
     Navigation.navigate(Screen.OFFICE_MOVE);
+  }
+
+  public void addSignButtonClicked() {
+    Navigation.navigate(Screen.ADD_SIGNAGE);
+  };
+
+  public void displaySignButtonClicked() {
+    Navigation.navigate(Screen.SELECT_SIGNAGE);
   }
 }

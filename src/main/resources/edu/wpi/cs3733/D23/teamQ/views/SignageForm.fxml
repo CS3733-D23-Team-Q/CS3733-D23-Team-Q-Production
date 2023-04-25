@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xxml version="1.0" encoding="UTF-8"?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.SignageFormController">
+   <children>
+      <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
+         <children>
+            <Label text="Add New Signage" textFill="#012d5a">
+               <font>
+                  <Font name="Roboto Bold" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="681.0" prefWidth="400.0" spacing="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Direction" textFill="#012d5a" />
+                        <MFXComboBox fx:id="directionField" maxWidth="-Infinity" prefWidth="400.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="100.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Kiosk" textFill="#012d5a" />
+                        <MFXComboBox fx:id="kioskField" maxWidth="-Infinity" prefWidth="400.0" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Destination Location" textFill="#012d5a" />
+                        <MFXFilterComboBox fx:id="destinationField" maxWidth="-Infinity" prefWidth="400.0" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Date" textFill="#012d5a" />
+                        <MFXComboBox fx:id="dateField" maxWidth="-Infinity" prefWidth="400.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="848.0" spacing="400.0">
+               <children>
+                  <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <HBox spacing="20.0">
+                     <children>
+                        <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </MFXButton>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+         <HBox.margin>
+            <Insets top="50.0" />
+         </HBox.margin>
+      </VBox>
+   </children>
+</HBox>

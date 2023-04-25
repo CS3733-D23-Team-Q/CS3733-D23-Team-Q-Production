@@ -29,12 +29,12 @@
                      <children>
                         <VBox prefHeight="108.0" prefWidth="296.0" spacing="12.0">
                            <children>
-                              <MFXTextField fx:id="usernameField" onKeyPressed="#usernameEntered" prefHeight="48.0" prefWidth="296.0" promptText="Username or Email.">
+                              <MFXTextField fx:id="usernameField" onKeyPressed="#usernameEntered" prefHeight="48.0" prefWidth="296.0" promptText="Username or Email">
                                  <font>
                                     <Font name="Roboto" size="12.0" />
                                  </font>
                               </MFXTextField>
-                              <MFXPasswordField fx:id="passwordField" onKeyPressed="#passwordFieldEntered" prefHeight="48.0" prefWidth="296.0" promptText="Password." />
+                              <MFXPasswordField fx:id="passwordField" onKeyPressed="#passwordFieldEntered" prefHeight="48.0" prefWidth="296.0" promptText="Password" />
                               <Label fx:id="loginAlert" prefHeight="28.0" prefWidth="296.0" visible="false">
                                  <graphic>
                                     <ImageView fx:id="alertImage" fitHeight="22.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
