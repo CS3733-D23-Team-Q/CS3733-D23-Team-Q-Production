@@ -13,9 +13,6 @@ import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
 public class HomeController implements IController, Subscriber {
@@ -66,8 +63,8 @@ public class HomeController implements IController, Subscriber {
   }
 
   public boolean update(List<String> context) {
-//    AudioClip sound = new AudioClip(getClass().getResourceAsStream("alert.wav").toString());
-//    sound.play();
+    //    AudioClip sound = new AudioClip(getClass().getResourceAsStream("alert.wav").toString());
+    //    sound.play();
     return setAlerts();
   }
   //  Qdb qdb = Qdb.getInstance();

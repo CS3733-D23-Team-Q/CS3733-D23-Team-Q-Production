@@ -65,10 +65,10 @@ public class Qdb {
     mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
     furnitureRequestTable = FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
     patientTransportRequestTable =
-            PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
+        PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
     officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     medicalSuppliesRequestTable =
-            MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+        MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
 
@@ -80,9 +80,9 @@ public class Qdb {
 
   private boolean updateTimestamp(String tableName) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"timestamp\" SET updated_timestamp = ? WHERE \"tableName\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"timestamp\" SET updated_timestamp = ? WHERE \"tableName\" = ?")) {
       st.setLong(1, System.currentTimeMillis());
       st.setString(2, tableName);
       st.executeUpdate();
@@ -680,7 +680,5 @@ public class Qdb {
 
   public List<Alert> retrieveAllAlerts() {
     return alertTable.getAllRows();
-
-
   }
 }
