@@ -439,7 +439,7 @@ public class GraphicalMapEditorController {
       nodeid = Integer.parseInt(nodeidinput.getText());
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
-      while (countEdge != edges.size()) {
+      while (countEdge < edges.size() - 1) {
         for (int i = 0; i < edges.size(); i++) {
           countEdge = i;
           Edge edge = edges.get(i);
@@ -449,18 +449,21 @@ public class GraphicalMapEditorController {
           }
         }
       }
-      while(countMove != moves.size()){
-        for(int i =0; i< moves.size(); i++){
-          countMove = i ;
+
+      while (countMove < moves.size() -1 ) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i;
           Move move = moves.get(i);
-          if(move.getNode().getNodeID() == nodeid){
+          if (move.getNode().getNodeID() == nodeid) {
             qdb.deleteMove(move.getMoveID());
           }
         }
       }
 
-      qdb.deleteNode(nodeid);
+
+
       qdb.deleteLocation(nodeid);
+      qdb.deleteNode(nodeid);
       refreshNodes();
     } else {
       InitialNode();
@@ -983,14 +986,14 @@ public class GraphicalMapEditorController {
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
-       if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
+      if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
           && !(qdb.retrieveAllEdges().get(i).getEndNode() == null)) {
-      int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
-      int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
-      if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
-        path.add(start);
-        path.add(target);
-         }
+        int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
+        int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
+        if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
+          path.add(start);
+          path.add(target);
+        }
       }
     }
     return path;
