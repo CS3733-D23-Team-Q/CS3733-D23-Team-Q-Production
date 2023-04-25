@@ -746,7 +746,7 @@ public class GraphicalMapEditorController {
         || floors.equals("3")
         || floors.equals("L1")
         || floors.equals("L2")) {
-      alert.clearLabelAlert(floorAlert,image);
+      alert.clearLabelAlert(floorAlert, image);
       return true;
     }
     alert.setLabelAlert("This floor does not exist.", floorAlert, image);
