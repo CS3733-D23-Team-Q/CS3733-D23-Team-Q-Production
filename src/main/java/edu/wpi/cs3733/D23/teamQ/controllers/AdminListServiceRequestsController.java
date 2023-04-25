@@ -120,6 +120,8 @@ public class AdminListServiceRequestsController {
   @FXML MFXFilterComboBox medicalItemField;
   @FXML MFXTextField medicalQuantityField;
 
+  @FXML MFXToggleButton toggleButton;
+
   private static ServiceRequest serviceRequestChange;
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -134,8 +136,18 @@ public class AdminListServiceRequestsController {
   String username = LoginController.getLoginUsername();
 
   ObservableList<ServiceRequest> allRequests = qdb.getAllServiceRequestsObservable();
+  ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
 
   public void initialize() {
+    toggleButton.setOnAction(
+        event -> {
+          if (toggleButton.isSelected()) {
+            requestsTable.setItems(allOutstandingRequests);
+          } else {
+            requestsTable.setItems(allRequests);
+          }
+          requestsTable.refresh();
+        });
     conferenceRequestEdit.setVisible(false);
     flowerRequestEdit.setVisible(false);
     officeRequestEdit.setVisible(false);

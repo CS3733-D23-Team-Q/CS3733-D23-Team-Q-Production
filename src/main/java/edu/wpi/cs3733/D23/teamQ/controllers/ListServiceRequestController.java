@@ -41,7 +41,9 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> assignedRequestInstructions;
   @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
   @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
-  @FXML TableColumn<ServiceRequest, ServiceRequest.Progress> progressDropdownColumn;
+  @FXML TableColumn<ServiceRequest, String> progressDropdownColumn;
+
+  @FXML MFXToggleButton toggleButton;
 
   ObservableList<String> timeList =
       FXCollections.observableArrayList(
@@ -72,11 +74,11 @@ public class ListServiceRequestController {
       FXCollections.observableArrayList(
           "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
 
-  ObservableList<ServiceRequest.Progress> progressValues =
+  ObservableList<String> progressValues =
       FXCollections.observableArrayList(
-          ServiceRequest.Progress.BLANK,
-          ServiceRequest.Progress.PROCESSING,
-          ServiceRequest.Progress.DONE);
+          ServiceRequest.Progress.BLANK.name(),
+          ServiceRequest.Progress.PROCESSING.name(),
+          ServiceRequest.Progress.DONE.name());
 
   @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
@@ -149,10 +151,29 @@ public class ListServiceRequestController {
   ObservableList<ServiceRequest> userAssignedRequests =
       qdb.retrieveUserAssignServiceRequests(username);
 
+  ObservableList<ServiceRequest> userRequestedOutstandingRequests =
+      qdb.getUserRequestedOutstandingRows(username);
+  ObservableList<ServiceRequest> userAssignedOutstandingRequests =
+      qdb.getUserAssignedOutstandingRows(username);
+
   public ListServiceRequestController() {}
 
   @FXML
   public void initialize() {
+
+    toggleButton.setOnAction(
+        event -> {
+          if (toggleButton.isSelected()) {
+            yourRequestsTable.setItems(userRequestedOutstandingRequests);
+            assignedRequestTable.setItems(userAssignedOutstandingRequests);
+          } else {
+            yourRequestsTable.setItems(userRequestedRequests);
+            assignedRequestTable.setItems(userAssignedRequests);
+          }
+          yourRequestsTable.refresh();
+          assignedRequestTable.refresh();
+        });
+
     String username = LoginController.getLoginUsername();
     conferenceRequestEdit.setVisible(false);
     flowerRequestEdit.setVisible(false);
@@ -304,8 +325,8 @@ public class ListServiceRequestController {
         });
     progressDropdownColumn.setCellFactory(
         column -> {
-          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
-            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
+          return new TableCell<ServiceRequest, String>() {
+            private final MFXComboBox<String> comboBox = new MFXComboBox<>();
 
             {
               comboBox.setPrefHeight(20);
@@ -313,20 +334,21 @@ public class ListServiceRequestController {
               comboBox.setOnAction(
                   event -> {
                     ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                    serviceRequest.setProgress(comboBox.getValue());
+                    serviceRequest.setProgress(
+                        ServiceRequest.Progress.valueOf(comboBox.getValue()));
                     qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
                     yourRequestsTable.refresh();
                   });
             }
 
             @Override
-            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
+            protected void updateItem(String item, boolean empty) {
               super.updateItem(item, empty);
               if (empty) {
                 setGraphic(null);
               } else {
                 ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                comboBox.setValue(serviceRequest.getProgress());
+                comboBox.setValue(serviceRequest.getProgress().name());
                 setGraphic(comboBox);
               }
             }
@@ -365,37 +387,6 @@ public class ListServiceRequestController {
           String dateTime = sr.getDate().toString() + " " + sr.getTime();
           dateProperty.set(dateTime);
           return dateProperty;
-        });
-
-    progressDropdownColumn.setCellFactory(
-        column -> {
-          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
-            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
-
-            {
-              comboBox.setPrefHeight(20);
-              comboBox.setItems(progressValues);
-              comboBox.setOnAction(
-                  event -> {
-                    ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                    serviceRequest.setProgress(comboBox.getValue());
-                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
-                    yourRequestsTable.refresh();
-                  });
-            }
-
-            @Override
-            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
-              super.updateItem(item, empty);
-              if (empty) {
-                setGraphic(null);
-              } else {
-                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                comboBox.setValue(serviceRequest.getProgress());
-                setGraphic(comboBox);
-              }
-            }
-          };
         });
 
     assignedRequestTable.setItems(userAssignedRequests);

@@ -572,4 +572,16 @@ public class Qdb {
   public ObservableList<ServiceRequest> getAllServiceRequestsObservable() {
     return serviceRequestTable.getAllRequestsObservable();
   }
+
+  public ObservableList<ServiceRequest> getAllOutstandingServingRequests() {
+    return serviceRequestTable.getAllOutstandingRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    return serviceRequestTable.getUserAssignedOutstandingRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    return serviceRequestTable.getUserRequestedOutstandingRows(user);
+  }
 }

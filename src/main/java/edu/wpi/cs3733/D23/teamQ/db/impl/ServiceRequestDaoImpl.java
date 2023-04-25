@@ -103,6 +103,17 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
   public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
@@ -113,10 +124,31 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
   public ObservableList<ServiceRequest> getAllRequestsObservable() {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
       list.add(serviceRequests.get(i));
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
     }
     return list;
   }
