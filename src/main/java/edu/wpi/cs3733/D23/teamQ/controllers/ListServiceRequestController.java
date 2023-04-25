@@ -47,10 +47,23 @@ public class ListServiceRequestController {
           "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
-
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
           "Brunch spread", "Dinner spread", "Snack spread", "No food");
+  ObservableList<String> TypeOfFlowers =
+      FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
+  ObservableList<String> itemList =
+      FXCollections.observableArrayList(
+          "Printer Paper (by ream)", "Pencil", "Pen", "Highlighter", "Notepad");
+
+  ObservableList<String> furnitureList =
+      FXCollections.observableArrayList("Desk", "Desk Chair", "Couch", "Examination Table");
+  ObservableList<String> drinkList =
+      FXCollections.observableArrayList("Water", "Coke", "Coffee", "Tea");
+  ObservableList<String> entreeList =
+      FXCollections.observableArrayList("Chicken", "Steak", "Pork", "Fish", "Vegetarian");
+  ObservableList<String> sideList =
+      FXCollections.observableArrayList("Fries", "Onion Rings", "Soup", "Salad");
 
   @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
@@ -60,6 +73,43 @@ public class ListServiceRequestController {
   @FXML MFXFilterComboBox confFoodField;
   @FXML MFXTextField confInstructionsField;
 
+  @FXML VBox flowerRequestEdit;
+  @FXML MFXFilterComboBox flowerAssigneeField;
+  @FXML MFXFilterComboBox flowerLocationField;
+  @FXML MFXDatePicker flowerDateField;
+  @FXML MFXTextField flowerInstructionsField;
+  @FXML MFXFilterComboBox flowerTimeField;
+  @FXML MFXFilterComboBox flowerChoiceField;
+  @FXML MFXTextField flowerBouquetField;
+
+  @FXML VBox officeRequestEdit;
+  @FXML MFXFilterComboBox officeAssigneeField;
+  @FXML MFXFilterComboBox officeLocationField;
+  @FXML MFXDatePicker officeDateField;
+  @FXML MFXTextField officeInstructionsField;
+  @FXML MFXFilterComboBox officeTimeField;
+  @FXML MFXFilterComboBox officeItemField;
+  @FXML MFXTextField officeQuantityField;
+
+  @FXML VBox furnitureRequestEdit;
+  @FXML MFXFilterComboBox furnitureAssigneeField;
+  @FXML MFXFilterComboBox furnitureLocationField;
+  @FXML MFXDatePicker furnitureDateField;
+  @FXML MFXTextField furnitureInstructionsField;
+  @FXML MFXFilterComboBox furnitureTimeField;
+  @FXML MFXFilterComboBox furnitureChoiceField;
+
+  @FXML VBox mealRequestEdit;
+  @FXML MFXFilterComboBox mealAssigneeField;
+  @FXML MFXFilterComboBox mealLocationField;
+  @FXML MFXDatePicker mealDateField;
+  @FXML MFXTextField mealInstructionsField;
+  @FXML MFXFilterComboBox mealTimeField;
+  @FXML MFXFilterComboBox mealDrinkField;
+  @FXML MFXFilterComboBox mealSideField;
+  @FXML MFXFilterComboBox mealEntreeField;
+
+  private static ServiceRequest serviceRequestChange;
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
 
@@ -71,9 +121,11 @@ public class ListServiceRequestController {
 
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getLoginUsername();
-  ObservableList<ServiceRequest> userAssignedRequests =
+
+  // work on these
+  ObservableList<ServiceRequest> userRequestedRequests =
       qdb.retrieveUserAssignServiceRequests(username);
-  ObservableList<ServiceRequest> userRequestedRequests = qdb.getUserRequestedRows(username);
+  ObservableList<ServiceRequest> userAssignedRequests = qdb.getUserRequestedRows(username);
 
   public ListServiceRequestController() {}
 
@@ -81,6 +133,10 @@ public class ListServiceRequestController {
   public void initialize() {
     String username = LoginController.getLoginUsername();
     conferenceRequestEdit.setVisible(false);
+    flowerRequestEdit.setVisible(false);
+    officeRequestEdit.setVisible(false);
+    furnitureRequestEdit.setVisible(false);
+    mealRequestEdit.setVisible(false);
 
     yourRequestsTable.setStyle("-fx-table-column-border-visible: false;");
     assignedRequestTable.setStyle("-fx-table-column-border-visible: false;");
@@ -103,7 +159,7 @@ public class ListServiceRequestController {
         cellData -> {
           StringProperty assigneeProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
-          String assignee = sr.getAssignee().getUsername();
+          String assignee = sr.getRequester().getUsername();
           assigneeProperty.set(assignee);
           return assigneeProperty;
         });
@@ -137,6 +193,33 @@ public class ListServiceRequestController {
                             qdb.retrieveConferenceRequest(serviceRequest.getRequestID()));
                         conferenceRequest =
                             qdb.retrieveConferenceRequest(serviceRequest.getRequestID());
+                        serviceRequestChange = serviceRequest;
+                      } else if (qdb.retrieveFlowerRequest(serviceRequest.getRequestID()) != null) {
+                        flowerRequestEdit.setVisible(true);
+                        setFlowerFields(qdb.retrieveFlowerRequest(serviceRequest.getRequestID()));
+                        flowerRequest = qdb.retrieveFlowerRequest(serviceRequest.getRequestID());
+                        serviceRequestChange = serviceRequest;
+                      } else if (qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID())
+                          != null) {
+                        officeRequestEdit.setVisible(true);
+                        setOfficeFields(
+                            qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID()));
+                        officeSuppliesRequest =
+                            qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID());
+                        serviceRequestChange = serviceRequest;
+                      } else if (qdb.retrieveFurnitureRequest(serviceRequest.getRequestID())
+                          != null) {
+                        furnitureRequestEdit.setVisible(true);
+                        setFurnitureFields(
+                            qdb.retrieveFurnitureRequest(serviceRequest.getRequestID()));
+                        furnitureRequest =
+                            qdb.retrieveFurnitureRequest(serviceRequest.getRequestID());
+                        serviceRequestChange = serviceRequest;
+                      } else if (qdb.retrieveMealRequest(serviceRequest.getRequestID()) != null) {
+                        mealRequestEdit.setVisible(true);
+                        setMealFields(qdb.retrieveMealRequest(serviceRequest.getRequestID()));
+                        mealRequest = qdb.retrieveMealRequest(serviceRequest.getRequestID());
+                        serviceRequestChange = serviceRequest;
                       }
                     });
                 Image image = new Image(getClass().getResourceAsStream("/EditButton.png"));
@@ -212,7 +295,7 @@ public class ListServiceRequestController {
         cellData -> {
           StringProperty requesterProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
-          String requester = sr.getRequester().getUsername();
+          String requester = sr.getAssignee().getUsername();
           requesterProperty.set(requester);
           return requesterProperty;
         });
@@ -292,17 +375,113 @@ public class ListServiceRequestController {
     ConferenceRequest cr =
         new ConferenceRequest(
             conferenceRequest.getRequestID(),
-            qdb.getNodeFromLocation(confLocationField.getValue().toString()),
-            qdb.retrieveAccount(confAssigneeField.getText()),
+            qdb.getNodeFromLocation(confLocationField.getText()),
             conferenceRequest.getRequester(),
+            qdb.retrieveAccount(confAssigneeField.getText()),
             confInstructionsField.getText(),
             Date.valueOf(confDateField.getValue()),
             confTimeField.getText(),
             conferenceRequest.getProgress().ordinal(),
             confFoodField.getText());
     qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
+    //    yourRequestsTable.getItems().remove(serviceRequestChange);
+    //    yourRequestsTable.refresh();
     conferenceRequestEdit.setVisible(false);
   }
+
+  public void setFlowerFields(FlowerRequest fr) {
+    flowerTimeField.setItems(timeList);
+    flowerAssigneeField.setItems(qdb.getAllNames());
+    flowerChoiceField.setItems(TypeOfFlowers);
+    flowerLocationField.setItems(qdb.getAllLongNames());
+
+    flowerAssigneeField.setText(fr.getAssigneeUsername());
+    flowerTimeField.setText(fr.getTime());
+    flowerLocationField.setText(qdb.retrieveLocation(fr.getNodeID()).getLongName());
+    flowerInstructionsField.setText(fr.getSpecialInstructions());
+    flowerDateField.setValue(
+        LocalDate.of(
+            fr.getDate().getYear() + 1900, fr.getDate().getMonth() + 1, fr.getDate().getDate()));
+    flowerChoiceField.setText(fr.getFlowerType());
+    flowerBouquetField.setText(Integer.toString(fr.getNumberOfBouquets()));
+  }
+
+  public void flowerCancelClicked() {
+    flowerRequestEdit.setVisible(false);
+  }
+
+  public void flowerUpdateClicked() {}
+
+  public void setOfficeFields(OfficeSuppliesRequest or) {
+    officeItemField.setItems(itemList);
+    officeAssigneeField.setItems(qdb.getAllLongNames());
+    officeLocationField.setItems(qdb.getAllLongNames());
+    officeTimeField.setItems(timeList);
+
+    officeAssigneeField.setText(or.getAssigneeUsername());
+    officeTimeField.setText(or.getTime());
+    officeLocationField.setText(qdb.retrieveLocation(or.getNodeID()).getLongName());
+    officeInstructionsField.setText(or.getSpecialInstructions());
+    officeDateField.setValue(
+        LocalDate.of(
+            or.getDate().getYear() + 1900, or.getDate().getMonth() + 1, or.getDate().getDate()));
+    officeItemField.setText(or.getItem());
+    officeQuantityField.setText(Integer.toString(or.getQuantity()));
+  }
+
+  public void officeCancelClicked() {
+    officeRequestEdit.setVisible(false);
+  }
+
+  public void officeUpdateClicked() {}
+
+  public void setFurnitureFields(FurnitureRequest fr) {
+    furnitureAssigneeField.setItems(qdb.getAllLongNames());
+    furnitureLocationField.setItems(qdb.getAllLongNames());
+    furnitureTimeField.setItems(timeList);
+    furnitureChoiceField.setItems(furnitureList);
+
+    furnitureAssigneeField.setText(fr.getAssigneeUsername());
+    furnitureTimeField.setText(fr.getTime());
+    furnitureLocationField.setText(qdb.retrieveLocation(fr.getNodeID()).getLongName());
+    furnitureInstructionsField.setText(fr.getSpecialInstructions());
+    furnitureDateField.setValue(
+        LocalDate.of(
+            fr.getDate().getYear() + 1900, fr.getDate().getMonth() + 1, fr.getDate().getDate()));
+    furnitureChoiceField.setText(fr.getItem());
+  }
+
+  public void furnitureCancelClicked() {
+    furnitureRequestEdit.setVisible(false);
+  }
+
+  public void furnitureUpdateClicked() {}
+
+  private void setMealFields(MealRequest mr) {
+    mealAssigneeField.setItems(qdb.getAllLongNames());
+    mealLocationField.setItems(qdb.getAllLongNames());
+    mealTimeField.setItems(timeList);
+    mealDrinkField.setItems(drinkList);
+    mealSideField.setItems(sideList);
+    mealEntreeField.setItems(entreeList);
+
+    mealAssigneeField.setText(mr.getAssigneeUsername());
+    mealTimeField.setText(mr.getTime());
+    mealLocationField.setText(qdb.retrieveLocation(mr.getNodeID()).getLongName());
+    mealInstructionsField.setText(mr.getSpecialInstructions());
+    mealDateField.setValue(
+        LocalDate.of(
+            mr.getDate().getYear() + 1900, mr.getDate().getMonth() + 1, mr.getDate().getDate()));
+    mealEntreeField.setText(mr.getEntree());
+    mealSideField.setText(mr.getSide());
+    mealDrinkField.setText(mr.getDrink());
+  }
+
+  public void mealCancelClicked() {
+    mealRequestEdit.setVisible(false);
+  }
+
+  public void mealUpdateClicked() {}
 
   public static ConferenceRequest getConferenceRequest() {
     return conferenceRequest;

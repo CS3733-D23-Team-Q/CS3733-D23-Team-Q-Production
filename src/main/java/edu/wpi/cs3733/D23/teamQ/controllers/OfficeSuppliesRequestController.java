@@ -78,7 +78,7 @@ public class OfficeSuppliesRequestController {
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            ListServiceRequestController.getOfficeRequest().getProgress().ordinal(),
+            0,
             (String) itemRequestedField.getValue(),
             Integer.parseInt(quantityField.getText()));
     qdb.addOfficeSuppliesRequest(newOSR);

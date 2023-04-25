@@ -263,4 +263,25 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     }
     return names;
   }
+
+  public static void main(String[] args) {
+    Account newAccount =
+        new Account(
+            "etstetsvtvde",
+            "testetstestet",
+            "test",
+            1,
+            2,
+            "test",
+            "test",
+            true,
+            "test",
+            "test",
+            "test",
+            123,
+            null,
+            null);
+    AccountDaoImpl dao = new AccountDaoImpl();
+    dao.addRow(newAccount);
+  }
 }
