@@ -140,6 +140,7 @@ public class OfficeSuppliesRequestDisplayController {
     qdb.updateOfficeSuppliesRequest(
         ListServiceRequestController.getOfficeRequest().getRequestID(), newOR);
   }
+
   @FXML
   public void ItemSelected(ActionEvent event) {
     if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {

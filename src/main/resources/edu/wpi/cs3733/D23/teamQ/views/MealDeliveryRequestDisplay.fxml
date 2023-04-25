@@ -19,7 +19,7 @@
          <children>
             <StackPane prefHeight="129.0" prefWidth="1360.0">
                <children>
-                  <ImageView fitHeight="129.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
+                  <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
                         <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
                      </image>
