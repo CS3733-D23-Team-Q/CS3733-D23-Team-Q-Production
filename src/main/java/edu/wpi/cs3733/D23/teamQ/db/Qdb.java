@@ -575,7 +575,7 @@ public class Qdb {
     return messageTable.addRow(message);
   }
 
-  public boolean populate(ArrayList<String> tableNames) {
+  public synchronized boolean populate(ArrayList<String> tableNames) {
     for (String tableName : tableNames) {
       switch (tableName) {
         case "account":
@@ -603,7 +603,6 @@ public class Qdb {
           patientTransportRequestTable.populate();
       }
     }
-    notifySubscribers(tableNames);
     return true;
   }
 

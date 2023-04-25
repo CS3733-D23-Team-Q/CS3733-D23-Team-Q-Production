@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.application.Platform;
 
 public class RefreshThread implements Runnable {
@@ -56,13 +57,8 @@ public class RefreshThread implements Runnable {
 
       try {
         if (toUpdate.size() > 0) {
-          Platform.runLater(
-              new Runnable() {
-                @Override
-                public void run() {
-                  qdb.populate(toUpdate);
-                }
-              });
+          qdb.populate(toUpdate);
+          Platform.runLater(() -> qdb.notifySubscribers(Arrays.stream(tableNames).toList()));
           setTimestamps(toUpdate);
           lastUpdate = System.currentTimeMillis();
           for (String tableName : toUpdate) {
