@@ -34,10 +34,17 @@ public class Qdb {
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
   private ServiceRequestDaoImpl serviceRequestTable;
+
+  private SignDaoImpl signTable;
+
   private MessageDaoImpl messageTable;
   private AlertDaoImpl alertTable;
 
   private Account messagingAccount = null;
+
+  private int kiosk;
+
+  private String date;
 
   private static Qdb single_instance = null;
 
@@ -58,21 +65,24 @@ public class Qdb {
     mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
     furnitureRequestTable = FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
     patientTransportRequestTable =
-        PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
+            PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
     officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     medicalSuppliesRequestTable =
-        MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
+            MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
+
+    signTable = SignDaoImpl.getInstance();
+
     messageTable = MessageDaoImpl.getInstance(accountTable);
     alertTable = AlertDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
     try (Connection connection = GenDao.connect();
-        PreparedStatement st =
-            connection.prepareStatement(
-                "UPDATE \"timestamp\" SET updated_timestamp = ? WHERE \"tableName\" = ?")) {
+         PreparedStatement st =
+                 connection.prepareStatement(
+                         "UPDATE \"timestamp\" SET updated_timestamp = ? WHERE \"tableName\" = ?")) {
       st.setLong(1, System.currentTimeMillis());
       st.setString(2, tableName);
       st.executeUpdate();
@@ -140,6 +150,18 @@ public class Qdb {
 
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
+  }
+
+  public List<Sign> retrieveSigns(int kiosk, String date) {
+    return signTable.retrieveRows(kiosk, date);
+  }
+
+  public boolean addSign(Sign a) {
+    return signTable.addRow(a);
+  }
+
+  public ArrayList<Sign> retrieveAllSigns() {
+    return (ArrayList<Sign>) signTable.getAllRows();
   }
 
   public ConferenceRequest retrieveConferenceRequest(int requestID) {
@@ -618,6 +640,22 @@ public class Qdb {
     return messagingAccount;
   }
 
+  public void setKiosk(int k) {
+    kiosk = k;
+  }
+
+  public int getKiosk() {
+    return kiosk;
+  }
+
+  public void setDate(String d) {
+    date = d;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
   public Alert retrieveAlert(int ID) {
     return alertTable.retrieveRow(ID);
   }
@@ -642,5 +680,7 @@ public class Qdb {
 
   public List<Alert> retrieveAllAlerts() {
     return alertTable.getAllRows();
+
+
   }
 }
