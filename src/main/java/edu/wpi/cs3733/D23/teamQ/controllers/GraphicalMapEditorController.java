@@ -433,10 +433,13 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
+
     int countEdge = 0;
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
+      /*
+
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
       while (countEdge < edges.size() - 1) {
@@ -449,8 +452,12 @@ public class GraphicalMapEditorController {
           }
         }
       }
+      if (edges.get(edges.size() - 1).getStartNode().getNodeID() == nodeid
+          || edges.get(edges.size() - 1).getEndNode().getNodeID() == nodeid) {
+        qdb.deleteEdge(edges.get(edges.size() - 1).getEdgeID());
+      }
 
-      while (countMove < moves.size() -1 ) {
+      while (countMove < moves.size() - 1) {
         for (int i = 0; i < moves.size(); i++) {
           countMove = i;
           Move move = moves.get(i);
@@ -460,10 +467,15 @@ public class GraphicalMapEditorController {
         }
       }
 
+      if (moves.get(moves.size() - 1).getNode().getNodeID() == nodeid) {
+        qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
+      }
 
+     */
 
-      qdb.deleteLocation(nodeid);
       qdb.deleteNode(nodeid);
+      qdb.deleteLocation(nodeid);
+
       refreshNodes();
     } else {
       InitialNode();
