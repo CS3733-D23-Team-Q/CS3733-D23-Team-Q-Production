@@ -136,7 +136,7 @@
                                     <MFXButton fx:id="cotton" onAction="#cottonClicked" prefHeight="36.0" prefWidth="320.0" text="Cotton Balls" />
                                     <MFXButton fx:id="couch" onAction="#couchClicked" prefHeight="36.0" prefWidth="320.0" text="Couch" />
                                     <MFXButton fx:id="daisies" onAction="#daisiesClicked" prefHeight="36.0" prefWidth="320.0" text="Daisies" />
-                                    <MFXButton fx:id="depressors" onAction="#despressorsClicked" prefHeight="36.0" prefWidth="320.0" text="Depressors" />
+                                    <MFXButton fx:id="depressors" onAction="#depressorsClicked" prefHeight="36.0" prefWidth="320.0" text="Depressors" />
                                     <MFXButton fx:id="desk" onAction="#deskClicked" prefHeight="36.0" prefWidth="320.0" text="Desk" />
                                     <MFXButton fx:id="deskChair" onAction="#deskChairClicked" prefHeight="36.0" prefWidth="320.0" text="Desk Chair" />
                                     <MFXButton fx:id="dinnerSpread" onAction="#dinnerSpreadClicked" prefHeight="36.0" prefWidth="320.0" text="Dinner Spread" />
