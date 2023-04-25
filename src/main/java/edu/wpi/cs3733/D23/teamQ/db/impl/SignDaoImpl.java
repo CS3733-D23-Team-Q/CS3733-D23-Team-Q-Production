@@ -68,29 +68,54 @@ public class SignDaoImpl {
     return signs;
   }
 
+  //  public boolean populate() {
+  //    Connection con = GenDao.connect();
+  //    try {
+  //      String query = "SELECT * FROM sign";
+  //      Statement st = con.createStatement();
+  //      ResultSet rs = st.executeQuery(query);
+  //      while (rs.next()) {
+  //        System.out.println("HEEEEREEE");
+  //        Sign a;
+  //        a = new Sign(
+  //                rs.getInt("kiosk"),
+  //                rs.getString("date"),
+  //                rs.getString("destination"),
+  //                rs.getString("directions"));
+  //        signs.add(a);
+  //        System.out.println("HAHASHDIUeh");
+  //      }
+  //      System.out.println(signs.get(0));
+  //      con.close();
+  //      st.close();
+  //      return true;
+  //    } catch (Exception e) {
+  //      System.out.println(e.getMessage());
+  //    }
+  //    return false;
+  //  }
+
   public boolean populate() {
-    Connection con = GenDao.connect();
     try {
-      String query = "SELECT * FROM sign";
-      Statement st = con.createStatement();
-      ResultSet rs = st.executeQuery(query);
+      Connection conn = GenDao.connect();
+      Statement stm = conn.createStatement();
+      ResultSet rs = stm.executeQuery("Select * From \"sign\"");
       while (rs.next()) {
-        Sign a;
-        a =
+        signs.add(
             new Sign(
                 rs.getInt("kiosk"),
                 rs.getString("date"),
                 rs.getString("destination"),
-                rs.getString("directions"));
-        signs.add(a);
+                rs.getString("directions")));
+
       }
-      con.close();
-      st.close();
+      conn.close();
+      stm.close();
       return true;
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      return false;
     }
-    return false;
   }
 
   public List<Integer> getIndexes(int kiosk) {

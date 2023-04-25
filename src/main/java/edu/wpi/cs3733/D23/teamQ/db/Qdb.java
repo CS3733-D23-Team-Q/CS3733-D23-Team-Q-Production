@@ -596,7 +596,7 @@ public class Qdb {
   }
 
   public void setDate(String d) {
-    d = date;
+    date = d;
   }
 
   public String getDate() {
