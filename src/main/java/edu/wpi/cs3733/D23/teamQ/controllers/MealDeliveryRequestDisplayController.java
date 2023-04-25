@@ -83,35 +83,35 @@ public class MealDeliveryRequestDisplayController {
     entreeField.setText(ListServiceRequestController.getMealRequest().getEntree());
     sideField.setText(ListServiceRequestController.getMealRequest().getSide());
 
-    if (entreeField.getValue().equals("Chicken")) {
+    if (ListServiceRequestController.getMealRequest().getEntree().equals("Chicken")) {
       ChickenImage.setOpacity(1.0);
       SteakImage.setOpacity(0.0);
       PorkImage.setOpacity(0.0);
       FishImage.setOpacity(0.0);
       VegetarianImage.setOpacity(0.0);
     }
-    if (entreeField.getValue().equals("Steak")) {
+    if (ListServiceRequestController.getMealRequest().getEntree().equals("Steak")) {
       ChickenImage.setOpacity(0.0);
       SteakImage.setOpacity(1.0);
       PorkImage.setOpacity(0.0);
       FishImage.setOpacity(0.0);
       VegetarianImage.setOpacity(0.0);
     }
-    if (entreeField.getValue().equals("Pork")) {
+    if (ListServiceRequestController.getMealRequest().getEntree().equals("Pork")) {
       ChickenImage.setOpacity(0.0);
       SteakImage.setOpacity(0.0);
       PorkImage.setOpacity(1.0);
       FishImage.setOpacity(0.0);
       VegetarianImage.setOpacity(0.0);
     }
-    if (entreeField.getValue().equals("Fish")) {
+    if (ListServiceRequestController.getMealRequest().getEntree().equals("Fish")) {
       ChickenImage.setOpacity(0.0);
       SteakImage.setOpacity(0.0);
       PorkImage.setOpacity(0.0);
       FishImage.setOpacity(1.0);
       VegetarianImage.setOpacity(0.0);
     }
-    if (entreeField.getValue().equals("Vegetarian")) {
+    if (ListServiceRequestController.getMealRequest().getEntree().equals("Vegetarian")) {
       ChickenImage.setOpacity(0.0);
       SteakImage.setOpacity(0.0);
       PorkImage.setOpacity(0.0);
@@ -119,50 +119,50 @@ public class MealDeliveryRequestDisplayController {
       VegetarianImage.setOpacity(1.0);
     }
 
-    if (drinkField.getValue().equals("Water")) {
+    if (ListServiceRequestController.getMealRequest().getDrink().equals("Water")) {
       WaterImage.setOpacity(1.0);
       CokeImage.setOpacity(0.0);
       CoffeeImage.setOpacity(0.0);
       TeaImage.setOpacity(0.0);
     }
-    if (drinkField.getValue().equals("Coke")) {
+    if (ListServiceRequestController.getMealRequest().getDrink().equals("Coke")) {
       WaterImage.setOpacity(0.0);
       CokeImage.setOpacity(1.0);
       CoffeeImage.setOpacity(0.0);
       TeaImage.setOpacity(0.0);
     }
-    if (drinkField.getValue().equals("Coffee")) {
+    if (ListServiceRequestController.getMealRequest().getDrink().equals("Coffee")) {
       WaterImage.setOpacity(0.0);
       CokeImage.setOpacity(0.0);
       CoffeeImage.setOpacity(1.0);
       TeaImage.setOpacity(0.0);
     }
-    if (drinkField.getValue().equals("Tea")) {
+    if (ListServiceRequestController.getMealRequest().getDrink().equals("Tea")) {
       WaterImage.setOpacity(0.0);
       CokeImage.setOpacity(0.0);
       CoffeeImage.setOpacity(0.0);
       TeaImage.setOpacity(1.0);
     }
 
-    if (sideField.getValue().equals("Fries")) {
+    if (ListServiceRequestController.getMealRequest().getSide().equals("Fries")) {
       FriesImage.setOpacity(1.0);
       OnionRingsImage.setOpacity(0.0);
       SoupImage.setOpacity(0.0);
       SaladImage.setOpacity(0.0);
     }
-    if (sideField.getValue().equals("Onion Rings")) {
+    if (ListServiceRequestController.getMealRequest().getSide().equals("Onion Rings")) {
       FriesImage.setOpacity(0.0);
       OnionRingsImage.setOpacity(1.0);
       SoupImage.setOpacity(0.0);
       SaladImage.setOpacity(0.0);
     }
-    if (sideField.getValue().equals("Soup")) {
+    if (ListServiceRequestController.getMealRequest().getSide().equals("Soup")) {
       FriesImage.setOpacity(0.0);
       OnionRingsImage.setOpacity(0.0);
       SoupImage.setOpacity(1.0);
       SaladImage.setOpacity(0.0);
     }
-    if (sideField.getValue().equals("Salad")) {
+    if (ListServiceRequestController.getMealRequest().getSide().equals("Salad")) {
       FriesImage.setOpacity(0.0);
       OnionRingsImage.setOpacity(0.0);
       SoupImage.setOpacity(0.0);

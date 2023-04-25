@@ -66,17 +66,17 @@ public class ConferenceRoomRequestDisplayController implements IController {
     foodField.setText(ListServiceRequestController.getConferenceRequest().getFoodChoice());
     specialInstructionsField.setText(
         ListServiceRequestController.getConferenceRequest().getSpecialInstructions());
-    if (foodField.getValue().equals("Brunch spread")) {
+    if (ListServiceRequestController.getConferenceRequest().getFoodChoice().equals("Brunch spread")) {
       BrunchFood.setOpacity(1.0);
       DinnerFood.setOpacity(0.0);
       SnackFood.setOpacity(0.0);
     }
-    if (foodField.getValue().equals("Dinner spread")) {
+    if (ListServiceRequestController.getConferenceRequest().getFoodChoice().equals("Dinner spread")) {
       BrunchFood.setOpacity(0.0);
       DinnerFood.setOpacity(1.0);
       SnackFood.setOpacity(0.0);
     }
-    if (foodField.getValue().equals("Snack spread")) {
+    if (ListServiceRequestController.getConferenceRequest().getFoodChoice().equals("Snack spread")) {
       BrunchFood.setOpacity(0.0);
       DinnerFood.setOpacity(0.0);
       SnackFood.setOpacity(1.0);

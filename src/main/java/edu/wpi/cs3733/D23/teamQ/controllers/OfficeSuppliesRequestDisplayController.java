@@ -71,35 +71,35 @@ public class OfficeSuppliesRequestDisplayController {
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getOfficeRequest().getQuantity()));
 
-    if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {
+    if (ListServiceRequestController.getOfficeRequest().getItem().equals("Printer Paper (by ream)")) {
       PrinterPaperImage.setOpacity(1.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Pencil")) {
+    if (ListServiceRequestController.getOfficeRequest().getItem().equals("Pencil")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(1.0);
       PenImage.setOpacity(0.0);
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Pen")) {
+    if (ListServiceRequestController.getOfficeRequest().getItem().equals("Pen")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(1.0);
       HighlighterImage.setOpacity(0.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Highlighter")) {
+    if (ListServiceRequestController.getOfficeRequest().getItem().equals("Highlighter")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);
       HighlighterImage.setOpacity(1.0);
       NotepadImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Notepad")) {
+    if (ListServiceRequestController.getOfficeRequest().getItem().equals("Notepad")) {
       PrinterPaperImage.setOpacity(0.0);
       PencilImage.setOpacity(0.0);
       PenImage.setOpacity(0.0);

@@ -67,25 +67,25 @@ public class FurnitureDeliveryRequestDisplayController {
         ListServiceRequestController.getFurnitureRequest().getSpecialInstructions());
     itemRequestedField.setText(getFurnitureRequest().getItem());
 
-    if (itemRequestedField.getValue().equals("Desk")) {
+    if (getFurnitureRequest().getItem().equals("Desk")) {
       DeskImage.setOpacity(1.0);
       DeskChairImage.setOpacity(0.0);
       CouchImage.setOpacity(0.0);
       ExaminationTableImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Desk Chair")) {
+    if (getFurnitureRequest().getItem().equals("Desk Chair")) {
       DeskImage.setOpacity(0.0);
       DeskChairImage.setOpacity(1.0);
       CouchImage.setOpacity(0.0);
       ExaminationTableImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Couch")) {
+    if (getFurnitureRequest().getItem().equals("Couch")) {
       DeskImage.setOpacity(0.0);
       DeskChairImage.setOpacity(0.0);
       CouchImage.setOpacity(1.0);
       ExaminationTableImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Examination Table")) {
+    if (getFurnitureRequest().getItem().equals("Examination Table")) {
       DeskImage.setOpacity(0.0);
       DeskChairImage.setOpacity(0.0);
       CouchImage.setOpacity(0.0);

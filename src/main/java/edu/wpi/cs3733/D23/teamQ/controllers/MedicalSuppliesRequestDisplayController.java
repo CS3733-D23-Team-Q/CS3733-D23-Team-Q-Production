@@ -69,35 +69,35 @@ public class MedicalSuppliesRequestDisplayController {
     itemRequestedField.setText(ListServiceRequestController.getMedicalRequest().getItem());
     quantityField.setText(
         String.valueOf(ListServiceRequestController.getMedicalRequest().getQuantity()));
-    if (itemRequestedField.getValue().equals("Bandaids")) {
+    if (ListServiceRequestController.getMedicalRequest().getItem().equals("Bandaids")) {
       BandaidsImage.setOpacity(1.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
       TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Cotton Balls")) {
+    if (ListServiceRequestController.getMedicalRequest().getItem().equals("Cotton Balls")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(1.0);
       GauzeImage.setOpacity(0.0);
       TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Gauze")) {
+    if (ListServiceRequestController.getMedicalRequest().getItem().equals("Gauze")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(1.0);
       TongueDepresserImage.setOpacity(0.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Tongue Depressers")) {
+    if (ListServiceRequestController.getMedicalRequest().getItem().equals("Tongue Depressers")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);
       TongueDepresserImage.setOpacity(1.0);
       SyringeImage.setOpacity(0.0);
     }
-    if (itemRequestedField.getValue().equals("Syringe")) {
+    if (ListServiceRequestController.getMedicalRequest().getItem().equals("Syringe")) {
       BandaidsImage.setOpacity(0.0);
       CottonBallsImage.setOpacity(0.0);
       GauzeImage.setOpacity(0.0);

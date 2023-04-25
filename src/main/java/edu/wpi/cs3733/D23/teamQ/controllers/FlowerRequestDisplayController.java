@@ -73,35 +73,35 @@ public class FlowerRequestDisplayController {
     bouquetChoiceField.setText(
         String.valueOf(ListServiceRequestController.getFlowerRequest().getNumberOfBouquets()));
 
-    if (flowerTypeField.getValue().equals("Roses")) {
+    if (ListServiceRequestController.getFlowerRequest().getFlowerType().equals("Roses")) {
       RosesImage.setOpacity(1.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(0.0);
       SunflowersImage.setOpacity(0.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getValue().equals("Daisies")) {
+    if (ListServiceRequestController.getFlowerRequest().getFlowerType().equals("Daisies")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(1.0);
       TulipsImage.setOpacity(0.0);
       SunflowersImage.setOpacity(0.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getValue().equals("Tulips")) {
+    if (ListServiceRequestController.getFlowerRequest().getFlowerType().equals("Tulips")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(1.0);
       SunflowersImage.setOpacity(0.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getValue().equals("Sunflowers")) {
+    if (ListServiceRequestController.getFlowerRequest().getFlowerType().equals("Sunflowers")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(0.0);
       SunflowersImage.setOpacity(1.0);
       LiliesImage.setOpacity(0.0);
     }
-    if (flowerTypeField.getValue().equals("Lilies")) {
+    if (ListServiceRequestController.getFlowerRequest().getFlowerType().equals("Lilies")) {
       RosesImage.setOpacity(0.0);
       DaisiesImage.setOpacity(0.0);
       TulipsImage.setOpacity(0.0);
