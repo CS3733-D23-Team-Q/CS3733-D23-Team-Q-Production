@@ -95,6 +95,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
   @Override
   public boolean populate() {
     try {
+      edges.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"edge\"");

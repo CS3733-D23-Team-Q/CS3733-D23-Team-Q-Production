@@ -2,116 +2,213 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ProfileImage;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import javafx.beans.property.SimpleIntegerProperty;
+import java.util.List;
+import java.util.Optional;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.util.Callback;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import lombok.Getter;
 
 public class AdminDirectoryController {
+  @FXML TableView<EmployeeData> directoryTable;
+  @FXML TableColumn<EmployeeData, Image> profileImageColumn;
+  @FXML TableColumn<EmployeeData, String> nameColumn;
+  @FXML TableColumn<EmployeeData, String> titleColumn;
+  @FXML TableColumn<EmployeeData, String> statusColumn;
+  @FXML TableColumn<EmployeeData, Button> chatButtonColumn;
+  @FXML TableColumn<EmployeeData, Button> viewProfileButtonColumn;
+  @FXML TableColumn<EmployeeData, Button> deleteButtonColumn;
+  Qdb qdb = Qdb.getInstance();
+  List<Account> allAccounts = qdb.retrieveAllAccounts();
+  List<ProfileImage> allProfileImages = qdb.getAllProfileImages();
 
-  @FXML private TableColumn<edu.wpi.cs3733.D23.teamQ.db.obj.Account, String> Email;
-
-  @FXML private TableColumn<Account, String> FirstName;
-
-  @FXML private TableColumn<Account, String> LastName;
-
-  @FXML private TableColumn<Account, Number> PhoneNumber;
-
-  @FXML private TableColumn<Account, String> Title;
-
-  @FXML private TableView<edu.wpi.cs3733.D23.teamQ.db.obj.Account> account;
-
-  /** used to put Nodes from database arraylist to observablelist */
-  public ObservableList<Account> Accounts() {
-    ObservableList<Account> account = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().retrieveAllAccounts().size(); i++) {
-      account.add(Qdb.getInstance().retrieveAllAccounts().get(i));
-    }
-    return account;
-  }
+  private static String viewProfileUsername;
 
   public void initialize() {
-    /** input the Title to the table */
-    Title.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty titles = new SimpleStringProperty(param.getValue().getTitle());
-            return titles;
-          }
+    profileImageColumn.setCellValueFactory(
+        cellData ->
+            new SimpleObjectProperty<>(
+                qdb.convertByteaToImage(cellData.getValue().getProfileImage().getImageData())));
+
+    profileImageColumn.setCellFactory(
+        column -> {
+          return new TableCell<EmployeeData, Image>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(Image image, boolean empty) {
+              super.updateItem(image, empty);
+              if (image == null || empty) {
+                setGraphic(null);
+              } else {
+                imageView.setImage(image);
+                imageView.setFitWidth(80); // Set the desired width for the image
+                imageView.setPreserveRatio(true);
+                setGraphic(imageView);
+              }
+            }
+          };
         });
 
-    /** input the FirstName to the table */
-    FirstName.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty firstName =
-                new SimpleStringProperty(param.getValue().getFirstName());
-            return firstName;
-          }
+    nameColumn.setCellValueFactory(
+        cellData ->
+            new SimpleStringProperty(
+                cellData.getValue().getAccount().getFirstName()
+                    + " "
+                    + cellData.getValue().getAccount().getLastName()));
+
+    titleColumn.setCellValueFactory(
+        cellData -> new SimpleStringProperty(cellData.getValue().getAccount().getTitle()));
+
+    statusColumn.setCellValueFactory(
+        cellData -> {
+          EmployeeData employeeData = cellData.getValue();
+          boolean status = employeeData.getAccount().isActive();
+          String statusString = status ? "Online" : "Offline";
+          return new SimpleStringProperty(statusString);
         });
 
-    /** input the LastName to the table */
-    LastName.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty lastName =
-                new SimpleStringProperty(param.getValue().getLastName());
-            return lastName;
-          }
+    chatButtonColumn.setCellFactory(
+        column -> {
+          return new TableCell<EmployeeData, Button>() {
+            private final Button button = new Button("Chat");
+
+            @Override
+            protected void updateItem(Button item, boolean empty) {
+              super.updateItem(item, empty);
+              if (empty) {
+                setGraphic(null);
+              } else {
+                EmployeeData employeeData = getTableView().getItems().get(getIndex());
+                button.setOnAction(
+                    event -> {
+                      qdb.setMessagingAccount(employeeData.getAccount());
+                      Navigation.navigate(Screen.MESSAGES);
+                    });
+                button.setStyle(
+                    "-fx-background-color: #012d5a; -fx-text-fill: #FFFFFF; -fx-pref-width: 100");
+                setGraphic(button);
+              }
+            }
+          };
         });
 
-    /** input the Email to the table */
-    Email.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-            SimpleStringProperty email = new SimpleStringProperty(param.getValue().getEmail());
-            return email;
-          }
+    viewProfileButtonColumn.setCellFactory(
+        column -> {
+          return new TableCell<EmployeeData, Button>() {
+            private final Button button = new Button("View Profile");
+
+            @Override
+            protected void updateItem(Button item, boolean empty) {
+              super.updateItem(item, empty);
+              if (empty) {
+                setGraphic(null);
+              } else {
+                EmployeeData employeeData = getTableView().getItems().get(getIndex());
+                button.setOnAction(
+                    event -> {
+                      viewProfileUsername = employeeData.getAccount().getUsername();
+                      Navigation.navigate(Screen.VIEW_PROFILE);
+                    });
+                Image image = new Image(getClass().getResourceAsStream("/ViewProfile.png"));
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(20.0);
+                imageView.setFitWidth(20.0);
+                button.setText("");
+                button.setGraphic(imageView);
+                button.setStyle("-fx-background-color: transparent;");
+                setGraphic(button);
+              }
+            }
+          };
         });
 
-    /** input the phoneNumber to the table */
-    PhoneNumber.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, Number>, ObservableValue<Number>>() {
-          @Override
-          public ObservableValue<Number> call(TableColumn.CellDataFeatures<Account, Number> param) {
-            SimpleIntegerProperty phoneNumbers =
-                new SimpleIntegerProperty(param.getValue().getPhoneNumber());
-            return phoneNumbers;
-          }
+    deleteButtonColumn.setCellFactory(
+        column -> {
+          return new TableCell<EmployeeData, Button>() {
+            private final Button button = new Button("View Profile");
+
+            @Override
+            protected void updateItem(Button item, boolean empty) {
+              super.updateItem(item, empty);
+              if (empty) {
+                setGraphic(null);
+              } else {
+                EmployeeData employeeData = getTableView().getItems().get(getIndex());
+                button.setOnAction(
+                    event -> {
+                      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                      alert.setTitle("Confirmation");
+                      alert.setHeaderText("Delete Employee");
+                      alert.setContentText("Are you sure you want to delete this employee?");
+                      alert.initOwner(button.getScene().getWindow());
+
+                      Optional<ButtonType> result = alert.showAndWait();
+                      if (result.isPresent() && result.get() == ButtonType.OK) {
+                        qdb.deleteAccount(employeeData.getAccount().getUsername());
+                        directoryTable.getItems().remove(employeeData);
+                        directoryTable.refresh();
+                      }
+                    });
+                Image image = new Image(getClass().getResourceAsStream("/DeleteButton.png"));
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(20.0);
+                imageView.setFitWidth(20.0);
+                button.setText("");
+                button.setGraphic(imageView);
+                button.setStyle("-fx-background-color: transparent;");
+                setGraphic(button);
+              }
+            }
+          };
         });
 
-    /** set the information tableview */
-    account.setItems(Accounts());
+    directoryTable.setItems(populateData());
+    directoryTable.getStyleClass().add("noheader");
   }
 
-  public void mapClicked(ActionEvent actionEvent) {}
+  @Getter
+  public static class EmployeeData {
+    private final Account account;
+    private final ProfileImage profileImage;
 
-  public void edgeClicked(ActionEvent actionEvent) {}
+    public EmployeeData(Account account, ProfileImage profileImage) {
+      this.account = account;
+      this.profileImage = profileImage;
+    }
+  }
 
-  public void locationClicked(ActionEvent actionEvent) {}
+  public ObservableList<EmployeeData> populateData() {
+    ObservableList<EmployeeData> allData = FXCollections.observableArrayList();
 
-  public void moveClicked(ActionEvent actionEvent) {}
+    for (Account account : allAccounts) {
+      if (account.getUsername().equals("admin")) {
+        continue;
+      }
+      if (qdb.getProfileImageIndex(account.getUsername()) != -1) {
+        ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
+        EmployeeData employeeData = new EmployeeData(account, pfp);
+        allData.add(employeeData);
+      } else {
+        Image image = new Image(getClass().getResourceAsStream("/default-profile.png"));
+        byte[] imageData = qdb.convertImageToBytea(image);
+        ProfileImage tempProfileImage = new ProfileImage(account.getUsername(), imageData);
+        EmployeeData employeeData = new EmployeeData(account, tempProfileImage);
+        allData.add(employeeData);
+      }
+    }
+    return allData;
+  }
 
-  public void BackClicked(ActionEvent actionEvent) {}
-
-  public void homeClicked(ActionEvent actionEvent) {}
-
-  public void exitClicked(ActionEvent actionEvent) {}
-
-  @FXML
-  void EditDirectoryClicked(ActionEvent event) {
-    Navigation.navigate(Screen.EDIT_DIRECTORY);
+  public static String getViewProfileUsername() {
+    return viewProfileUsername;
   }
 }

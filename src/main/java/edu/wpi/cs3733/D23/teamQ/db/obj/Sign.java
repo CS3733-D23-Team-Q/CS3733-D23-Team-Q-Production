@@ -13,6 +13,7 @@ public class Sign {
   String destination;
   String direction;
 
+
   public Sign(int idNum, int kiosk, String date, String destination, String direction) {
     this.idNum = idNum;
     this.kiosk = kiosk;
@@ -20,7 +21,6 @@ public class Sign {
     this.destination = destination;
     this.direction = direction;
   }
-
   public Sign(int kiosk, String date, String destination, String direction) {
     this.kiosk = kiosk;
     this.date = date;

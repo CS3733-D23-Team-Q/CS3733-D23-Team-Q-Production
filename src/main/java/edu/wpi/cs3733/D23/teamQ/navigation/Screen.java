@@ -17,7 +17,7 @@ public enum Screen {
   CONFERENCE_ROOM_REQUEST("views/ConferenceRoomRequest.fxml", "Conference Room Request"),
   FLOWER_REQUEST("views/FlowerRequest.fxml", "Flower Request"),
   FLOWER_REQUEST_SUBMISSION("views/FlowerRequestSubmission.fxml", "Flower Request Submission"),
-  SETTINGS("views/Settings.fxml", "Settings"),
+  SETTINGS("views/SettingsPage.fxml", "Settings"),
   CONFERENCE_ROOM_REQUEST_DISPLAY(
       "views/ConferenceRoomRequestDisplay.fxml", "Conference Room Request Display"),
   FLOWER_REQUEST_DISPLAY("views/FlowerRequestDisplay.fxml", "Flower Request Display"),
@@ -38,6 +38,7 @@ public enum Screen {
   PROFILE_PAGE("views/ProfilePage1.fxml", "Profile Page"),
 
   CONFIRM("views/Confirm.fxml", "Confirm"),
+  MESSAGES("views/Messages.fxml", "Messages"),
   ALERT("views/Alert.fxml", "Alert"),
   Move_Table("views/Move.fxml", "MoveTable"),
   Node_Table("views/Node.fxml", "MoveTable"),
@@ -54,6 +55,9 @@ public enum Screen {
   MAPEDITORHELP("views/MapEditorHelp.fxml", "Help"),
 
   OFFICE_MOVE("views/OfficeMove.fxml", "Office Moves"),
+
+  VIEW_PROFILE("views/ViewProfile.fxml", "View Profile"),
+
   ABOUT("views/About.fxml", "About"),
   CREDITS("views/Credits.fxml", "Credits");
 

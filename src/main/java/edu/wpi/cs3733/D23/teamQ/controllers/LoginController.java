@@ -88,6 +88,8 @@ public class LoginController {
         passwordReact(username, enteredPassword, actualPassword);
       }
     } else {
+      alertImage.setVisible(true);
+      loginAlert.setVisible(true);
       alert.setLabelAlert("User doesn't exist", loginAlert, alertImage);
     }
   }
@@ -98,7 +100,7 @@ public class LoginController {
       user = username;
       Account a = qdb.retrieveAccount(username);
       a.setActive(true);
-      qdb.updateAccount(username, a);
+      // qdb.updateAccount(username, a);
       alert.clearLabelAlert(loginAlert, alertImage);
       Screen menuScreen = Screen.MENU_PANE;
       final String filename = menuScreen.getFilename();
@@ -107,10 +109,14 @@ public class LoginController {
       Node n = loader.load();
       App.getRootBorder().setLeft(n);
       App.getRController().showMenu(true);
-      Navigation.navigate(Screen.HOME);
+
       loginUsername = usernameField.getText();
+      qdb.getAccountFromUsername(loginUsername).setActive(true);
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
+      Navigation.navigate(Screen.HOME);
     } else {
+      alertImage.setVisible(true);
+      loginAlert.setVisible(true);
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }
   }

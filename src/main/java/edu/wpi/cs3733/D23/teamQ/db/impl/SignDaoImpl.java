@@ -46,7 +46,7 @@ public class SignDaoImpl implements GenDao<Sign, Integer> {
 
     try {
       String query =
-          "UPDATE sign SET kiosk =?, date = ?, destination = ?, direction = ? WHERE idnum = ?";
+              "UPDATE sign SET kiosk =?, date = ?, destination = ?, direction = ? WHERE idnum = ?";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setInt(1, newKiosk);
       pst.setString(2, newDate);
@@ -110,7 +110,7 @@ public class SignDaoImpl implements GenDao<Sign, Integer> {
     Connection con = GenDao.connect();
     try {
       String query =
-          "INSERT INTO account (idnum, kiosk, date, destination, direction) VALUES(?,?,?,?,?)";
+              "INSERT INTO account (idnum, kiosk, date, destination, direction) VALUES(?,?,?,?,?)";
       PreparedStatement pst = con.prepareStatement(query);
       pst.setInt(1, getAllRows().get(getAllRows().size() - 1).getIdNum() + 1);
       pst.setInt(2, kiosk);
@@ -148,12 +148,12 @@ public class SignDaoImpl implements GenDao<Sign, Integer> {
       while (rs.next()) {
         Sign a;
         a =
-            new Sign(
-                rs.getInt("idnum"),
-                rs.getInt("kiosk"),
-                rs.getString("date"),
-                rs.getString("destination"),
-                rs.getString("directions"));
+                new Sign(
+                        rs.getInt("idnum"),
+                        rs.getInt("kiosk"),
+                        rs.getString("date"),
+                        rs.getString("destination"),
+                        rs.getString("directions"));
         signs.add(a);
       }
       con.close();
