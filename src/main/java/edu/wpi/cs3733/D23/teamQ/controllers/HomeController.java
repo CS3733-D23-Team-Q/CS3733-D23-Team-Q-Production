@@ -11,6 +11,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
@@ -45,25 +47,25 @@ public class HomeController implements IController, Subscriber {
     //        notesField.appendText("TextField Text Changed (newValue: " + newValue + ")\n");
     //      }
     //    });
-    //    notesField
-    //        .textProperty()
-    //        .addListener(
-    //            new ChangeListener<String>() {
-    //              @Override
-    //              public void changed(
-    //                  final ObservableValue<? extends String> observable,
-    //                  final String oldValue,
-    //                  final String newValue) {
-    //                //                String username = LoginController.getLoginUsername();
-    //                //                Account account = qdb.retrieveAccount(username);
-    //                //                notesField.setText(account.getNotes());
-    //                account.setNotes(notesField.getText());
-    //                System.out.println("here: " + notesField.getText());
-    //                qdb.updateAccount(username, account);
-    //                System.out.println("account notes: " + account.getNotes());
-    //                //                notesField.setText(account.getNotes());
-    //              }
-    //            });
+    notesField
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  final ObservableValue<? extends String> observable,
+                  final String oldValue,
+                  final String newValue) {
+                //                String username = LoginController.getLoginUsername();
+                //                Account account = qdb.retrieveAccount(username);
+                //                notesField.setText(account.getNotes());
+                account.setNotes(notesField.getText());
+                System.out.println("here: " + notesField.getText());
+                qdb.updateAccount(username, account);
+                System.out.println("account notes: " + account.getNotes());
+                //                notesField.setText(account.getNotes());
+              }
+            });
 
     setAlerts();
 
