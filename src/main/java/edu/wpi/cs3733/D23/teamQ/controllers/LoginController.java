@@ -12,7 +12,6 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -42,9 +41,8 @@ public class LoginController {
 
   @Getter private static String loginUsername;
   @Getter private static String loginEmail;
-  String[] adminArray = new String[]{"admin", "asjacob", "cam40419", "Dushman", "jhkeselman", "John101", "kjcoleman", "kliu5", "kwang"};
-  ArrayList<String> admins = (ArrayList<String>) Arrays.asList(adminArray);
-  @Getter private static boolean isAdmin;
+  ArrayList<String> admins = new ArrayList<>();
+  @Getter private static boolean isAdmin = false;
 
   @FXML
   public void initialize() {
@@ -52,6 +50,19 @@ public class LoginController {
     ImageView imageView = new ImageView(hImage);
     imageView.setOpacity(0.75);
     imagePane.setContent(imageView);
+    admins.add("admin");
+    admins.add("asjacob");
+    admins.add("cam40419");
+    admins.add("Dushman");
+    admins.add("jhkeselman");
+    admins.add("John101");
+    admins.add("kjcoleman");
+    admins.add("kliu5");
+    admins.add("kwang");
+    admins.add("odzabolotnev");
+    admins.add("ssjohn");
+    admins.add("wmerry");
+    admins.add("yxue");
   }
 
   @FXML
@@ -114,12 +125,11 @@ public class LoginController {
       Node n = loader.load();
       App.getRootBorder().setLeft(n);
       App.getRController().showMenu(true);
-
       loginUsername = usernameField.getText();
       qdb.getAccountFromUsername(loginUsername).setActive(true);
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
       Navigation.navigate(Screen.HOME);
-//      isAdmin =
+      isAdmin = admins.contains(loginUsername);
     } else {
       alertImage.setVisible(true);
       loginAlert.setVisible(true);
