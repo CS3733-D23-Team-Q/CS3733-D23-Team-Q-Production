@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -31,6 +32,8 @@ public class Pathfinding2Controller {
   BFS bfs = new BFS();
   DFS dfs = new DFS();
   Djikstra djikstra = new Djikstra();
+  Node startNode;
+  Node destinationNode;
   @FXML GesturePane mapPane;
   @FXML Pane nodesPane;
   @FXML ImageView mapImage;
@@ -65,7 +68,6 @@ public class Pathfinding2Controller {
   public void initialize() {
     mapImage.setImage(ff);
     mapPane.zoomTo(0, 0, Point2D.ZERO);
-
     nodesPane.setMinWidth(ll1.getWidth());
     nodesPane.setMinHeight(ll1.getHeight());
     mapPane.setOnMouseClicked(
@@ -89,7 +91,32 @@ public class Pathfinding2Controller {
     pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
     algorithmField.setValue(null);
     algorithmField.setItems(algorithmChoices);
+    startingField.setItems(qdb.getAllLongNames());
+    destinationField.setItems(qdb.getAllLongNames());
 
+    startingField
+        .valueProperty()
+        .addListener(
+            new ChangeListener() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                String lName = (String) newValue;
+                Node n = qdb.getNodeFromLocation(lName);
+                startNode = n;
+              }
+            });
+    destinationField
+        .valueProperty()
+        .addListener(
+            new ChangeListener() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                String lName = (String) newValue;
+                Node n = qdb.getNodeFromLocation(lName);
+                destinationNode = n;
+                drawLine();
+              }
+            });
     floorField
         .valueProperty()
         .addListener(
@@ -170,6 +197,18 @@ public class Pathfinding2Controller {
             });
       }
     }
+  }
+
+  @FXML
+  public void drawLine() {
+    Line line = new Line();
+    nodesPane.getChildren().add(line);
+    line.setStartX(startNode.getXCoord());
+    line.setStartY(startNode.getYCoord());
+    line.setEndX(destinationNode.getXCoord());
+    line.setEndY(destinationNode.getYCoord());
+    line.setStyle("-fx-fill: #0167B1");
+    line.setStrokeWidth(8);
   }
 
   @FXML
