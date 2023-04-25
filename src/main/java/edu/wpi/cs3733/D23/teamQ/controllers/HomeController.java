@@ -11,6 +11,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
@@ -20,6 +22,7 @@ public class HomeController implements IController, Subscriber {
   @FXML private Text UserMessage;
   @FXML TextArea alertsField;
   @FXML TextArea notesField;
+
   Qdb qdb = Qdb.getInstance();
 
   //  String username = LoginController.getLoginUsername();
@@ -33,6 +36,36 @@ public class HomeController implements IController, Subscriber {
     UserMessage.setText("Welcome Back " + account.getFirstName() + "!");
 
     notesField.setText(account.getNotes());
+    //    notesField.textProperty().addListener(final ObservableValue<String> observable, final
+    // String oldValue, final String newValue);
+
+    //    notesField.textProperty().addListener(new ChangeListener<String>() {
+    //      @Override
+    //      public void changed(ObservableValue<? extends String> observable,
+    //                          String oldValue, String newValue) {
+    //
+    //        notesField.appendText("TextField Text Changed (newValue: " + newValue + ")\n");
+    //      }
+    //    });
+    notesField
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  final ObservableValue<? extends String> observable,
+                  final String oldValue,
+                  final String newValue) {
+                //                String username = LoginController.getLoginUsername();
+                //                Account account = qdb.retrieveAccount(username);
+                //                notesField.setText(account.getNotes());
+                account.setNotes(notesField.getText());
+                System.out.println("here: " + notesField.getText());
+                qdb.updateAccount(username, account);
+                System.out.println("account notes: " + account.getNotes());
+                //                notesField.setText(account.getNotes());
+              }
+            });
 
     setAlerts();
 
@@ -57,13 +90,32 @@ public class HomeController implements IController, Subscriber {
     Calender.getCalendarSources().add(SR);
   }
 
-  public void textChange() {
-    String username = LoginController.getLoginUsername();
-    Account account = qdb.retrieveAccount(username);
-    account.setNotes(notesField.getText());
-    qdb.updateAccount(username, account);
-    notesField.setText(account.getNotes());
-  }
+  //  public void stupidTest() {
+  //    String username = LoginController.getLoginUsername();
+  //    Account account = qdb.retrieveAccount(username);
+  //    notesField.setText(account.getNotes());
+  //  }
+
+  //  public void textChange() {
+  //    String username = LoginController.getLoginUsername();
+  //    Account account = qdb.retrieveAccount(username);
+  //    //    notesField.setText(account.getNotes());
+  //    account.setNotes(notesField.getText());
+  //    qdb.updateAccount(username, account);
+  //    notesField.setText(account.getNotes());
+  //  }
+
+  //  public void refresh() {
+  //    String username = LoginController.getLoginUsername();
+  //    Account account = qdb.retrieveAccount(username);
+  //    notesField.setText(account.getNotes());
+  //  }
+
+  //  public void textSave() {
+  //    String username = LoginController.getLoginUsername();
+  //    Account account = qdb.retrieveAccount(username);
+  //    notesField.setText(account.getNotes());
+  //  }
 
   private boolean setAlerts() {
     List<Alert> alerts = qdb.retrieveAllAlerts();
@@ -79,6 +131,7 @@ public class HomeController implements IController, Subscriber {
   public boolean update(List<String> context) {
     return setAlerts();
   }
+
   //  Qdb qdb = Qdb.getInstance();
   //
   //  @FXML Button ServiceHubButton;
