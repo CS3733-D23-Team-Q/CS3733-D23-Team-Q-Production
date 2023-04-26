@@ -449,6 +449,24 @@ public class GraphicalMapEditorController {
           }
         }
       }
+      if (edges.get(edges.size() - 1).getStartNode().getNodeID() == nodeid
+          || edges.get(edges.size() - 1).getEndNode().getNodeID() == nodeid) {
+        qdb.deleteEdge(edges.get(edges.size() - 1).getEdgeID());
+      }
+
+      while (countMove < moves.size() - 1) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i;
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+          }
+        }
+      }
+
+      if (moves.get(moves.size() - 1).getNode().getNodeID() == nodeid) {
+        qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
+      }
 
       while (countMove < moves.size() - 1) {
         for (int i = 0; i < moves.size(); i++) {
