@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D23.teamQ.navigation;
 
-import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-
 public enum Screen {
   ROOT("views/Root.fxml", "Root"),
   HOME("views/Home.fxml", "Home"),
