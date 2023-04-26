@@ -718,30 +718,30 @@ public class Qdb {
         myWriter.write(o.toString() + "/n");
       }
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      return false;
     }
     return true;
   }
 
   private GenDao nameToTable(String tableName) {
     switch (tableName) {
-      case "account":
+      case "Accounts":
         return accountTable;
-      case "edge":
+      case "Edges":
         return edgeTable;
-      case "locationName":
+      case "Locations":
         return locationTable;
-      case "move":
+      case "Moves":
         return moveTable;
-      case "node":
+      case "Nodes":
         return nodeTable;
-      case "message":
+      case "Messages":
         return messageTable;
-      case "alert":
+      case "Alerts":
         return alertTable;
-      case "sign":
+      case "Signs":
         return signTable;
-      case "serviceRequest":
+      case "Service requests":
         return serviceRequestTable;
     }
     return null;
