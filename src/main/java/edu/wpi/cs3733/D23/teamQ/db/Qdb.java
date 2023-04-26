@@ -100,13 +100,13 @@ public class Qdb {
   }
 
   public void subscribe(Subscriber s) {
-    while (notifying){}
+    while (notifying) {}
     System.out.println("Adding subscriber");
     subscribers.add(s);
   }
 
   public void unsubscribe(Subscriber s) {
-    while (notifying){}
+    while (notifying) {}
     subscribers.remove(s);
   }
 
