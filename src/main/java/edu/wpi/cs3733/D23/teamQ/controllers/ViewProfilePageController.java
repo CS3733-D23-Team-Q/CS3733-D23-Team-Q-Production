@@ -26,7 +26,7 @@ public class ViewProfilePageController {
   public void initialize() {
     String loggedInUser = LoginController.getLoginUsername();
     String username;
-    if (loggedInUser.equals("admin")) {
+    if (LoginController.isAdmin()) {
       username = AdminDirectoryController.getViewProfileUsername();
     } else {
       username = DirectoryController.getViewProfileUsername();
