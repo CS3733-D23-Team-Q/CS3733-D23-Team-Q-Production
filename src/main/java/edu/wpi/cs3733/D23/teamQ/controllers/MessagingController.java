@@ -279,6 +279,7 @@ public class MessagingController implements Subscriber {
               .get(0)
               .getTimeStamp());
     for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
+      m.setRead(true);
       if (m.getSender().getUsername().equals(LoginController.getUsername())) sentHistorically(m);
       else messageReceived(m);
     }
