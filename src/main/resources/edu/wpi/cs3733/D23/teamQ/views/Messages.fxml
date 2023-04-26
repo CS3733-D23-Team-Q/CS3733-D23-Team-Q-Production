@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
@@ -49,9 +50,24 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <ImageView fx:id="profilePicture" fitHeight="83.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="profilePicture" fitHeight="83.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin></ImageView>
                         <Circle fx:id="activeIndicator" fill="#f1f1f1" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                        <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="1108.0" style="-fx-border-color: #0167B1;" HBox.hgrow="ALWAYS" />
+                        <StackPane alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="827.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="personLabel" text="PERSON" visible="false">
+                                 <font>
+                                    <Font name="Roboto" size="24.0" />
+                                 </font>
+                              </Label>
+                              <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="871.0" style="-fx-border-color: #0167B1;" visible="false" />
+                           </children>
+                           <padding>
+                              <Insets left="100.0" />
+                           </padding>
+                        </StackPane>
                      </children>
                   </HBox>
                   <MFXScrollPane fx:id="messageSP" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="695.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">

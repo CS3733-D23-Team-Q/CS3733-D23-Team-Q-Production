@@ -14,12 +14,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,13 +40,15 @@ public class MessagingController implements Subscriber {
   @FXML MFXScrollPane messageSP;
   @FXML MFXFilterComboBox peopleSelector;
 
+  @FXML Label personLabel;
+
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
   @FXML ImageView composeButton;
   @FXML VBox accountVbox;
   @FXML MFXScrollPane accountSP;
 
-  SimpleBooleanProperty sbp = new SimpleBooleanProperty(false);
+  // SimpleBooleanProperty sbp = new SimpleBooleanProperty(false);
 
   @FXML
   public void initialize() {
@@ -111,7 +113,10 @@ public class MessagingController implements Subscriber {
   }
 
   @FXML
-  public void composeButtonClicked() {}
+  public void composeButtonClicked() {
+    personLabel.setVisible(false);
+    peopleSelector.setVisible(true);
+  }
 
   @FXML
   public void sendButtonClicked() {
@@ -240,7 +245,10 @@ public class MessagingController implements Subscriber {
 
   public void populateMessages() {
     Qdb qdb = Qdb.getInstance();
-    sbp.set(true);
+    // sbp.set(true);
+    peopleSelector.setVisible(false);
+    personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
+    personLabel.setVisible(true);
 
     if (!messageVbox.getChildren().isEmpty()) {
       messageVbox.getChildren().clear();
@@ -252,6 +260,8 @@ public class MessagingController implements Subscriber {
       Image pfp =
           qdb.convertByteaToImage(qdb.retrieveProfileImage(receiver.getUsername()).getImageData());
       profilePicture.setImage(pfp);
+      profilePicture.setFitHeight(120);
+      profilePicture.setFitHeight(120);
       Circle ppClip = new Circle(30);
       ppClip.setTranslateX(profilePicture.getFitWidth() / 2);
       ppClip.setTranslateY(profilePicture.getFitHeight() / 2);
