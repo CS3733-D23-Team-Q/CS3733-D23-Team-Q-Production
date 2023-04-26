@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Edge;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -432,49 +433,53 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
-
     int countEdge = 0;
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
-      /*
+      List<Edge> edges = qdb.retrieveAllEdges();
+      List<Move> moves = qdb.retrieveAllMoves();
+      while (countEdge < edges.size() - 1) {
+        for (int i = 0; i < edges.size(); i++) {
+          countEdge = i;
+          Edge edge = edges.get(i);
+          if (edge.getStartNode().getNodeID() == nodeid
+              || edge.getEndNode().getNodeID() == nodeid) {
+            qdb.deleteEdge(edge.getEdgeID());
+          }
+        }
+      }
+      if (edges.get(edges.size() - 1).getStartNode().getNodeID() == nodeid
+          || edges.get(edges.size() - 1).getEndNode().getNodeID() == nodeid) {
+        qdb.deleteEdge(edges.get(edges.size() - 1).getEdgeID());
+      }
 
-       List<Edge> edges = qdb.retrieveAllEdges();
-       List<Move> moves = qdb.retrieveAllMoves();
-       while (countEdge < edges.size() - 1) {
-         for (int i = 0; i < edges.size(); i++) {
-           countEdge = i;
-           Edge edge = edges.get(i);
-           if (edge.getStartNode().getNodeID() == nodeid
-               || edge.getEndNode().getNodeID() == nodeid) {
-             qdb.deleteEdge(edge.getEdgeID());
-           }
-         }
-       }
-       if (edges.get(edges.size() - 1).getStartNode().getNodeID() == nodeid
-           || edges.get(edges.size() - 1).getEndNode().getNodeID() == nodeid) {
-         qdb.deleteEdge(edges.get(edges.size() - 1).getEdgeID());
-       }
+      while (countMove < moves.size() - 1) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i;
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+          }
+        }
+      }
 
-       while (countMove < moves.size() - 1) {
-         for (int i = 0; i < moves.size(); i++) {
-           countMove = i;
-           Move move = moves.get(i);
-           if (move.getNode().getNodeID() == nodeid) {
-             qdb.deleteMove(move.getMoveID());
-           }
-         }
-       }
+      if (moves.get(moves.size() - 1).getNode().getNodeID() == nodeid) {
+        qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
+      }
 
-       if (moves.get(moves.size() - 1).getNode().getNodeID() == nodeid) {
-         qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
-       }
+      while (countMove < moves.size() - 1) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i;
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+          }
+        }
+      }
 
-      */
-
-      qdb.deleteNode(nodeid);
       qdb.deleteLocation(nodeid);
-
+      qdb.deleteNode(nodeid);
       refreshNodes();
     } else {
       InitialNode();

@@ -44,7 +44,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     Connection conn = GenDao.connect();
     try {
       String query =
-          "UPDATE account SET password = ?, email = ?, security_question_1 = ?, security_question_2 = ?, security_answer_1 = ?, security_answer_2 = ?, active = ?, \"IDNum\" = ?, \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\" = ? WHERE username = ?";
+          "UPDATE account SET password = ?, email = ?, security_question_1 = ?, security_question_2 = ?, security_answer_1 = ?, security_answer_2 = ?, active = ?, \"IDNum\" = ?, \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\" = ?, notes = ?, todo = ? WHERE username = ?";
       PreparedStatement pst = conn.prepareStatement(query);
       pst.setString(1, a.getPassword());
       pst.setString(2, a.getEmail());
@@ -58,7 +58,9 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(10, a.getLastName());
       pst.setString(11, a.getTitle());
       pst.setInt(12, a.getPhoneNumber());
-      pst.setString(13, uname);
+      pst.setString(13, a.getNotes());
+      pst.setString(14, a.getTodo());
+      pst.setString(15, uname);
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
