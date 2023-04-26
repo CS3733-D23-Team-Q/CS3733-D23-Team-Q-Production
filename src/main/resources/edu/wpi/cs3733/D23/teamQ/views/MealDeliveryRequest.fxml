@@ -15,27 +15,23 @@
 
 <VBox prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
    <children>
-      <VBox prefHeight="116.0" prefWidth="1360.0">
+      <StackPane prefHeight="129.0" prefWidth="1360.0">
          <children>
-            <StackPane prefHeight="129.0" prefWidth="1360.0">
-               <children>
-                  <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
-                     <image>
-                        <Image url="@../../../../../../220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
-                     </image>
-                  </ImageView>
-                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form " StackPane.alignment="CENTER">
-                     <font>
-                        <Font name="Roboto Bold" size="36.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" />
-               </padding>
-            </StackPane>
+            <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
+               <image>
+                  <Image url="@../../../../../../220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form " StackPane.alignment="CENTER">
+               <font>
+                  <Font name="Roboto Bold" size="36.0" />
+               </font>
+            </Text>
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="30.0" />
+         </padding>
+      </StackPane>
       <HBox>
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />

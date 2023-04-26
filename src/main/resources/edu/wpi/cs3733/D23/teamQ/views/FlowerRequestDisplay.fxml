@@ -15,30 +15,26 @@
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.FlowerRequestDisplayController">
    <children>
-      <VBox prefHeight="130.0" prefWidth="1360.0">
+      <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
          <children>
-            <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="1360.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/FlowerImage.jpg" />
-                     </image>
-                     <StackPane.margin>
-                        <Insets bottom="30.0" />
-                     </StackPane.margin>
-                  </ImageView>
-                  <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Delivery Form " StackPane.alignment="CENTER">
-                     <font>
-                        <Font name="Roboto Bold" size="36.0" />
-                     </font>
-                     <StackPane.margin>
-                        <Insets bottom="30.0" />
-                     </StackPane.margin>
-                  </Text>
-               </children>
-            </StackPane>
+            <ImageView fitHeight="150.0" fitWidth="1360.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/FlowerImage.jpg" />
+               </image>
+               <StackPane.margin>
+                  <Insets bottom="30.0" />
+               </StackPane.margin>
+            </ImageView>
+            <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower Delivery Form " StackPane.alignment="CENTER">
+               <font>
+                  <Font name="Roboto Bold" size="36.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="30.0" />
+               </StackPane.margin>
+            </Text>
          </children>
-      </VBox>
+      </StackPane>
       <HBox prefHeight="558.0" prefWidth="848.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
@@ -146,27 +142,27 @@
                      <children>
                         <ImageView fx:id="RosesImage" fitHeight="216.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/rosesbouquet.jpg" />
+                              <Image url="@../../../../../../rosesbouquet.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="TulipsImage" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/tulips%20bouquet.jpg" />
+                              <Image url="@../../../../../../tulips%20bouquet.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="DaisiesImage" fitHeight="216.0" fitWidth="290.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/daisies%20bouquet.jpg" />
+                              <Image url="@../../../../../../daisies%20bouquet.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="SunflowersImage" fitHeight="216.0" fitWidth="326.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/sunflowers%20bouquet.jpg" />
+                              <Image url="@../../../../../../sunflowers%20bouquet.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="LiliesImage" fitHeight="216.0" fitWidth="279.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/lilies%20bouquet.jpg" />
+                              <Image url="@../../../../../../lilies%20bouquet.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -176,8 +172,10 @@
                   <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
       <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
             <HBox prefHeight="4.0" prefWidth="1360.0">
