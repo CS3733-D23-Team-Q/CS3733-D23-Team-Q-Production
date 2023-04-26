@@ -65,6 +65,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       st.setString(6, newRequest.getItem());
       st.setInt(7, newRequest.getQuantity());
       st.setString(8, newRequest.getSpecialInstructions());
+      st.setInt(9, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {

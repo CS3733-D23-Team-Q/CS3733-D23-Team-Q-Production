@@ -30,7 +30,6 @@ public class ServiceRequestSubmenuController {
   @FXML
   public void editClicked() {
     Navigation.navigate(Screen.LIST_REQUESTS);
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
   }
 
   @FXML
