@@ -14,10 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -59,6 +57,7 @@ public class MessagingController implements Subscriber {
     peopleSelector.setItems(qdb.getAllNames());
 
     messageSP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    accountSP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
     if (qdb.getMessagingAccount() != null) {
       receiver = qdb.getMessagingAccount();
@@ -86,17 +85,16 @@ public class MessagingController implements Subscriber {
               }
             });
 
-
     accountVbox
-            .heightProperty()
-            .addListener(
-                    new ChangeListener<Number>() {
-                      @Override
-                      public void changed(
-                              ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        accountSP.setVvalue((double) newValue);
-                      }
-                    });
+        .heightProperty()
+        .addListener(
+            new ChangeListener<Number>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                accountSP.setVvalue((double) newValue);
+              }
+            });
 
     peopleSelector
         .valueProperty()
@@ -179,16 +177,15 @@ public class MessagingController implements Subscriber {
 
     String message = messageSent.getMessage();
 
-        if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-            || (System.currentTimeMillis()
-                    - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                        .get(
-                            qdb.retrieveMessages(LoginController.getUsername(),
-     receiver.getUsername())
-                                    .size()
-                                - 1)
-                        .getTimeStamp()
-                >= 3600000)) displayTime(System.currentTimeMillis());
+    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+        || (System.currentTimeMillis()
+                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                    .get(
+                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                                .size()
+                            - 1)
+                    .getTimeStamp()
+            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -211,16 +208,15 @@ public class MessagingController implements Subscriber {
     messageReceived.setRead(true);
     String message = messageReceived.getMessage();
 
-        if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-            || (System.currentTimeMillis()
-                    - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                        .get(
-                            qdb.retrieveMessages(LoginController.getUsername(),
-     receiver.getUsername())
-                                    .size()
-                                - 1)
-                        .getTimeStamp()
-                >= 3600000)) displayTime(System.currentTimeMillis());
+    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+        || (System.currentTimeMillis()
+                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                    .get(
+                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+                                .size()
+                            - 1)
+                    .getTimeStamp()
+            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_LEFT);
