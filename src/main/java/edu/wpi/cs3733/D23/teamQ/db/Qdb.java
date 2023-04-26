@@ -99,14 +99,14 @@ public class Qdb {
   }
 
   public void subscribe(Subscriber s) {
-    if (!subscribers.contains(s)){
+    if (!subscribers.contains(s)) {
       System.out.println("Adding subscriber");
       subscribers.add(s);
     }
   }
 
   public void unsubscribe(Subscriber s) {
-    if (!subscribers.contains(s)){
+    if (!subscribers.contains(s)) {
       System.out.println("Removing subscriber");
       subscribers.remove(s);
     }
