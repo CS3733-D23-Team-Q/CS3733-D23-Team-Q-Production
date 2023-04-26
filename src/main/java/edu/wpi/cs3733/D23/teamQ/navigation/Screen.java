@@ -11,6 +11,8 @@ public enum Screen {
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
   PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
   SIGNAGE("views/Signage.fxml", "Signage"),
+  ADD_SIGNAGE("views/SignageForm.fxml", "Add newSignage"),
+  SELECT_SIGNAGE("views/SignageInput.fxml", "Display Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
   SERVICE_PLACEHOLDER("views/ServiceRequestPlaceholder.fxml", "Placeholder"),
@@ -50,6 +52,7 @@ public enum Screen {
 
   DIRECTORY("views/Directory.fxml", "Directory"),
   ADMIN_DIRECTORY("views/AdminDirectory.fxml", "Admin Directory"),
+  ADMIN_ADD_PROFILE("views/AdminAddProfile.fxml", "Admin Add Profile"),
   EDIT_DIRECTORY("views/EditDirectory.fxml", "Edit Directory"),
   STATISTICS("views/Statistics.fxml", "Statistics"),
   SUBMISSION("views/SubmissionPage.fxml", "Service Request Submitted"),
@@ -61,7 +64,8 @@ public enum Screen {
   VIEW_PROFILE("views/ViewProfile.fxml", "View Profile"),
 
   ABOUT("views/About.fxml", "About"),
-  CREDITS("views/Credits.fxml", "Credits");
+  CREDITS("views/Credits.fxml", "Credits"),
+  CREATE_ALERT("views/CreateAlert.fxml", "Create Alert");
 
   private final String filename;
   private final String title;

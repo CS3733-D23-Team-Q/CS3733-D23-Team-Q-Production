@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.db;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
+import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.Connection;
@@ -12,13 +13,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 public class Qdb {
+  private ArrayList<Subscriber> subscribers = new ArrayList<>();
+
   private AccountDaoImpl accountTable;
 
-  public LocationDaoImpl locationTable;
+  private LocationDaoImpl locationTable;
 
-  public NodeDaoImpl nodeTable;
-  public EdgeDaoImpl edgeTable;
-  public MoveDaoImpl moveTable;
+  private NodeDaoImpl nodeTable;
+  private EdgeDaoImpl edgeTable;
+  private MoveDaoImpl moveTable;
   private ProfileImageDaoImpl profileImageTable;
 
   private QuestionDaoImpl questionTable;
@@ -31,9 +34,17 @@ public class Qdb {
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
   private ServiceRequestDaoImpl serviceRequestTable;
+
+  private SignDaoImpl signTable;
+
   private MessageDaoImpl messageTable;
+  private AlertDaoImpl alertTable;
 
   private Account messagingAccount = null;
+
+  private int kiosk;
+
+  private String date;
 
   private static Qdb single_instance = null;
 
@@ -60,7 +71,11 @@ public class Qdb {
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
+
+    signTable = SignDaoImpl.getInstance();
+
     messageTable = MessageDaoImpl.getInstance(accountTable);
+    alertTable = AlertDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -77,6 +92,20 @@ public class Qdb {
     } catch (SQLException e) {
       e.printStackTrace();
       return false;
+    }
+  }
+
+  public void subscribe(Subscriber s) {
+    subscribers.add(s);
+  }
+
+  public void unsubscribe(Subscriber s) {
+    subscribers.remove(s);
+  }
+
+  public void notifySubscribers(List<String> context) {
+    for (Subscriber s : subscribers) {
+      s.update(context);
     }
   }
 
@@ -123,6 +152,18 @@ public class Qdb {
     return (ArrayList<Account>) accountTable.getAllRows();
   }
 
+  public List<Sign> retrieveSigns(int kiosk, String date) {
+    return signTable.retrieveRows(kiosk, date);
+  }
+
+  public boolean addSign(Sign a) {
+    return signTable.addRow(a);
+  }
+
+  public ArrayList<Sign> retrieveAllSigns() {
+    return (ArrayList<Sign>) signTable.getAllRows();
+  }
+
   public ConferenceRequest retrieveConferenceRequest(int requestID) {
     return conferenceRequestTable.retrieveRow(requestID);
   }
@@ -142,7 +183,7 @@ public class Qdb {
   public boolean addConferenceRequest(ConferenceRequest cr) {
     updateTimestamp("serviceRequest");
     conferenceRequestTable.addRow(cr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<ConferenceRequest> retrieveAllConferenceRequests() {
@@ -168,7 +209,7 @@ public class Qdb {
   public boolean addFlowerRequest(FlowerRequest fr) {
     updateTimestamp("serviceRequest");
     flowerRequestTable.addRow(fr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<FlowerRequest> retrieveAllFlowerRequests() {
@@ -222,6 +263,14 @@ public class Qdb {
     return (ArrayList<Edge>) edgeTable.getAllRows();
   }
 
+  public boolean edgesToCSV(String filename) {
+    return edgeTable.toCSV(filename);
+  }
+
+  public boolean edgesFromCSV(String filename) {
+    return edgeTable.importCSV(filename);
+  }
+
   public Node retrieveNode(int nodeID) {
     return nodeTable.retrieveRow(nodeID);
   }
@@ -245,6 +294,14 @@ public class Qdb {
     return (ArrayList<Node>) nodeTable.getAllRows();
   }
 
+  public boolean nodesToCSV(String filename) {
+    return nodeTable.toCSV(filename);
+  }
+
+  public boolean nodesFromCSV(String filename) {
+    return nodeTable.importCSV(filename);
+  }
+
   public Location retrieveLocation(int nodeID) {
     return locationTable.retrieveRow(nodeID);
   }
@@ -266,6 +323,14 @@ public class Qdb {
 
   public ArrayList<Location> retrieveAllLocations() {
     return (ArrayList<Location>) locationTable.getAllRows();
+  }
+
+  public boolean locationsToCSV(String filename) {
+    return locationTable.toCSV(filename);
+  }
+
+  public boolean locationsFromCSV(String filename) {
+    return locationTable.importCSV(filename);
   }
 
   public ObservableList<String> getAllLongNames(String[] nodeTypes) {
@@ -297,6 +362,14 @@ public class Qdb {
 
   public ArrayList<Move> retrieveAllMoves() {
     return (ArrayList<Move>) moveTable.getAllRows();
+  }
+
+  public boolean movesToCSV(String filename) {
+    return moveTable.toCSV(filename);
+  }
+
+  public boolean movesFromCSV(String filename) {
+    return moveTable.importCSV(filename);
   }
 
   public Question retrieveQuestion(int ID) {
@@ -353,7 +426,7 @@ public class Qdb {
   public boolean addMealRequest(MealRequest mr) {
     updateTimestamp("serviceRequest");
     mealRequestTable.addRow(mr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<MealRequest> retrieveAllMealRequests() {
@@ -379,7 +452,7 @@ public class Qdb {
   public boolean addFurnitureRequest(FurnitureRequest fr) {
     updateTimestamp("serviceRequest");
     furnitureRequestTable.addRow(fr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<FurnitureRequest> retrieveAllFurnitureRequests() {
@@ -405,7 +478,7 @@ public class Qdb {
   public boolean addPatientTransportRequest(PatientTransportRequest ptr) {
     updateTimestamp("serviceRequest");
     patientTransportRequestTable.addRow(ptr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<PatientTransportRequest> retrieveAllPatientTransportRequests() {
@@ -431,7 +504,7 @@ public class Qdb {
   public boolean addOfficeSuppliesRequest(OfficeSuppliesRequest osr) {
     updateTimestamp("serviceRequest");
     officeSuppliesRequestTable.addRow(osr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<OfficeSuppliesRequest> retrieveAllOfficeSuppliesRequests() {
@@ -465,7 +538,7 @@ public class Qdb {
   public boolean addMedicalSuppliesRequest(MedicalSuppliesRequest msr) {
     updateTimestamp("serviceRequest");
     medicalSuppliesRequestTable.addRow(msr);
-    return serviceRequestTable.populate();
+    return true;
   }
 
   public ArrayList<MedicalSuppliesRequest> retrieveAllMedicalSuppliesRequests() {
@@ -530,7 +603,7 @@ public class Qdb {
     return messageTable.addRow(message);
   }
 
-  public boolean populate(ArrayList<String> tableNames) {
+  public synchronized boolean populate(ArrayList<String> tableNames) {
     for (String tableName : tableNames) {
       switch (tableName) {
         case "account":
@@ -547,6 +620,8 @@ public class Qdb {
           profileImageTable.populate();
         case "message":
           messageTable.populate();
+        case "alert":
+          alertTable.populate();
         case "serviceRequest":
           serviceRequestTable.populate();
           conferenceRequestTable.populate();
@@ -567,6 +642,48 @@ public class Qdb {
 
   public Account getMessagingAccount() {
     return messagingAccount;
+  }
+
+  public void setKiosk(int k) {
+    kiosk = k;
+  }
+
+  public int getKiosk() {
+    return kiosk;
+  }
+
+  public void setDate(String d) {
+    date = d;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public Alert retrieveAlert(int ID) {
+    return alertTable.retrieveRow(ID);
+  }
+
+  public boolean updateAlert(int ID, Alert a) {
+    updateTimestamp("alert");
+    alertTable.updateRow(ID, a);
+    return alertTable.updateRow(ID, a);
+  }
+
+  public boolean deleteAlert(int ID) {
+    updateTimestamp("alert");
+    alertTable.deleteRow(ID);
+    return alertTable.deleteRow(ID);
+  }
+
+  public boolean addAlert(Alert a) {
+    updateTimestamp("alert");
+    alertTable.addRow(a);
+    return true;
+  }
+
+  public List<Alert> retrieveAllAlerts() {
+    return alertTable.getAllRows();
   }
 
   public ObservableList<ServiceRequest> getAllServiceRequestsObservable() {
