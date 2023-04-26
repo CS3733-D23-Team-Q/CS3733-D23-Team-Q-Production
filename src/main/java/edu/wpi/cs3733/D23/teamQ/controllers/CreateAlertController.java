@@ -32,5 +32,6 @@ public class CreateAlertController {
   public void submitButtonClicked() {
     Alert a = new Alert(System.currentTimeMillis(), input.getText());
     qdb.addAlert(a);
+    Navigation.navigate(Screen.HOME);
   }
 }
