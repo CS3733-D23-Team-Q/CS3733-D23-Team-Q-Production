@@ -76,7 +76,8 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
                 accountTable.retrieveRow(rst.getString("sender")),
                 accountTable.retrieveRow(rst.getString("receiver")),
                 rst.getString("message"),
-                rst.getLong("timestamp")));
+                rst.getLong("timestamp"),
+                rst.getBoolean("read")));
       }
       conn.close();
       stm.close();

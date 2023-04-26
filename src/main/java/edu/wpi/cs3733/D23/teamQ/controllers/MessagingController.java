@@ -14,8 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -196,7 +198,7 @@ public class MessagingController implements Subscriber {
   public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
-
+    messageReceived.setRead(true);
     String message = messageReceived.getMessage();
 
     //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
