@@ -16,8 +16,8 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
   public ConferenceRequest(
       int requestID,
       Node node,
-      Account requester,
       Account assignee,
+      Account requester,
       String specialInstructions,
       Date date,
       String time,
@@ -29,8 +29,8 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
 
   public ConferenceRequest(
       Node node,
-      Account requester,
       Account assignee,
+      Account requester,
       String specialInstructions,
       Date date,
       String time,
