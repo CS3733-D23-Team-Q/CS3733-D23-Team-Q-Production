@@ -715,7 +715,7 @@ public class Qdb {
       }
       FileWriter myWriter = new FileWriter(filename);
       for (Object o : table.getAllRows()) {
-        myWriter.write(o.toString() + "/n");
+        myWriter.write(o.toString() + "\n");
       }
     } catch (IOException e) {
       return false;
