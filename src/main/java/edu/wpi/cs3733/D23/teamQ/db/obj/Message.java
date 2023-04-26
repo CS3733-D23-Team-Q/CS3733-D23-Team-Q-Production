@@ -27,4 +27,8 @@ public class Message {
     this.timeStamp = timeStamp;
     this.read = read;
   }
+
+  public String toString() {
+    return sender.getUsername() + "," + receiver.getUsername() + "," + message + "," + timeStamp;
+  }
 }

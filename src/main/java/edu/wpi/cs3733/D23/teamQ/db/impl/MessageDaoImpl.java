@@ -8,11 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 
-public class MessageDaoImpl {
+@Getter
+public class MessageDaoImpl implements GenDao<Message, Integer> {
   private List<Message> messages = new ArrayList<>();
   private AccountDaoImpl accountTable;
   private static MessageDaoImpl single_instance = null;
+  private String fileName = "Messages.csv";
 
   public static synchronized MessageDaoImpl getInstance(AccountDaoImpl accountTable) {
     if (single_instance == null) single_instance = new MessageDaoImpl(accountTable);
@@ -23,6 +26,26 @@ public class MessageDaoImpl {
   private MessageDaoImpl(AccountDaoImpl accountTable) {
     this.accountTable = accountTable;
     populate();
+  }
+
+  @Override
+  public List<Message> getAllRows() {
+    return null;
+  }
+
+  @Override
+  public Message retrieveRow(Integer ID) {
+    return null;
+  }
+
+  @Override
+  public boolean updateRow(Integer ID, Message x) throws SQLException {
+    return false;
+  }
+
+  @Override
+  public boolean deleteRow(Integer ID) throws SQLException {
+    return false;
   }
 
   public boolean addRow(Message m) {

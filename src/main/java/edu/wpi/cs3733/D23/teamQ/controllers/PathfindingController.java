@@ -611,13 +611,14 @@ public class PathfindingController {
     if (path.size() == 0) {
       alert.alertBox("No solution", "Failed to find a path");
     }
-
-    textualPathfinding.setText(toString(path));
-    Text tempText = new Text(textualPathfinding.getText());
-    tempText.setFont(textualPathfinding.getFont());
-    double prefHeight = tempText.getLayoutBounds().getHeight();
-    textualPathfinding.setMaxHeight(250);
-    textualPathfinding.setPrefHeight(prefHeight);
+    if (path.size() > 0) {
+      textualPathfinding.setText(toString(path));
+      Text tempText = new Text(textualPathfinding.getText());
+      tempText.setFont(textualPathfinding.getFont());
+      double prefHeight = tempText.getLayoutBounds().getHeight();
+      textualPathfinding.setMaxHeight(250);
+      textualPathfinding.setPrefHeight(prefHeight);
+    }
     return lines;
   }
 

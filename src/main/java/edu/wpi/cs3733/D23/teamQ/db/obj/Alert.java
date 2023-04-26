@@ -15,4 +15,14 @@ public class Alert {
     this.timestamp = timestamp;
     this.message = message;
   }
+
+  public Alert(long timestamp, String message) {
+    this.timestamp = timestamp;
+    this.message = message;
+  }
+
+  @Override
+  public String toString() {
+    return timestamp + "," + message + "," + alertID;
+  }
 }

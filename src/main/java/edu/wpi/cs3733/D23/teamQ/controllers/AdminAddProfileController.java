@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,6 +36,7 @@ public class AdminAddProfileController {
   @FXML private ImageView profileImage;
   @FXML private MFXButton editPFP;
   @FXML private MFXTextField password;
+  @FXML private MFXButton backButton;
 
   private ObservableList<String> getQuestions() {
     ObservableList<String> questions = FXCollections.observableArrayList();
@@ -117,5 +119,10 @@ public class AdminAddProfileController {
         qdb.updateProfileImage(username, newPFP);
       }
     }
+  }
+
+  @FXML
+  void backButtonPressed(ActionEvent event) {
+    Navigation.navigate(Screen.ADMIN_DIRECTORY);
   }
 }

@@ -44,6 +44,9 @@ public class MessagingController implements Subscriber {
 
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
+  @FXML ImageView composeButton;
+  @FXML VBox accountVbox;
+  @FXML MFXScrollPane accountSP;
 
   SimpleBooleanProperty sbp = new SimpleBooleanProperty(false);
 
@@ -69,7 +72,7 @@ public class MessagingController implements Subscriber {
               + ", "
               + receiver.getTitle()
               + ")");
-      setup();
+      populateMessages();
     }
 
     messageVbox
@@ -115,7 +118,7 @@ public class MessagingController implements Subscriber {
                 if (matcher.find()) {
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
-                  setup();
+                  populateMessages();
                 }
               }
             });
@@ -127,6 +130,9 @@ public class MessagingController implements Subscriber {
       sendButtonClicked();
     }
   }
+
+  @FXML
+  public void composeButtonClicked() {}
 
   @FXML
   public void sendButtonClicked() {
@@ -171,7 +177,7 @@ public class MessagingController implements Subscriber {
     }
   }
 
-  public void sentHistorically(Message messageSent) {
+  public void populateSent(Message messageSent) {
 
     Qdb qdb = Qdb.getInstance();
 
@@ -203,7 +209,7 @@ public class MessagingController implements Subscriber {
     messageVbox.getChildren().add(hbox);
   }
 
-  public void messageReceived(Message messageReceived) {
+  public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
 
@@ -253,7 +259,7 @@ public class MessagingController implements Subscriber {
     messageVbox.getChildren().add(hbox);
   }
 
-  public void setup() {
+  public void populateMessages() {
     Qdb qdb = Qdb.getInstance();
     sbp.set(true);
 
@@ -280,14 +286,14 @@ public class MessagingController implements Subscriber {
               .getTimeStamp());
     for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
       m.setRead(true);
-      if (m.getSender().getUsername().equals(LoginController.getUsername())) sentHistorically(m);
-      else messageReceived(m);
+      if (m.getSender().getUsername().equals(LoginController.getUsername())) populateSent(m);
+      else populateReceived(m);
     }
   }
 
   public boolean update(List<String> context) {
     if (context.contains("message")) {
-      setup();
+      populateMessages();
       return true;
     } else {
       return false;
