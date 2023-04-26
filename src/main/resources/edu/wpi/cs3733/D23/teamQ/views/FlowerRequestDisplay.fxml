@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="1360.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../../../../../../../OneDrive/Desktop/UI%20Stuff/entree/FlowerImage.jpg" />
+                  <Image url="@../../../../../../plswork.jpg" />
                </image>
                <StackPane.margin>
                   <Insets bottom="30.0" />
