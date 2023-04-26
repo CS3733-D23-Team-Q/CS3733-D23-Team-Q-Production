@@ -50,7 +50,6 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void initialize() {
-    System.out.println("Starting messaging page");
     Qdb qdb = Qdb.getInstance();
     qdb.subscribe(this);
 
