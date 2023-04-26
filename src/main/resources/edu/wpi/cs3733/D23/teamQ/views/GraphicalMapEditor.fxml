@@ -27,9 +27,9 @@
             <ImageView fx:id="imageView" fitHeight="680.0" fitWidth="1000.0" layoutX="-1.0" layoutY="-0.1" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
-      <VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="348.0" style="-fx-background-color: #142A53;" GridPane.columnIndex="1">
+      <VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="348.0" style="-fx-background-color: #012d5a;" GridPane.columnIndex="1">
          <children>
-            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="304.0" style="-fx-background-color: #142A53;">
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="304.0" style="-fx-background-color: 012d5a;">
                <children>
                   <Label fx:id="WhichFloor" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="186.0" style="-fx-font-size: 16;" stylesheets="@styles/Home.css" textFill="WHITE">
                      <font>
@@ -141,27 +141,27 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="FindBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#findclicked" prefHeight="25.0" prefWidth="60.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Find" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="FindBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#findclicked" prefHeight="25.0" prefWidth="60.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Find" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="DelBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#deleteclicked" prefHeight="36.0" prefWidth="64.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Delete" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button fx:id="DelBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#deleteclicked" prefHeight="36.0" prefWidth="64.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Delete" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="SetBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#setclicked" prefHeight="34.0" prefWidth="64.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Set" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <Button fx:id="SetBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#setclicked" prefHeight="34.0" prefWidth="64.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Set" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="AddBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#addclicked" prefHeight="36.0" prefWidth="64.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Add" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <Button fx:id="AddBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#addclicked" prefHeight="36.0" prefWidth="64.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Add" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="CleBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#clearclicked" prefHeight="48.0" prefWidth="65.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Clear" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                  <Button fx:id="CleBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#clearclicked" prefHeight="48.0" prefWidth="65.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Clear" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -211,9 +211,9 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="304.0">
                <children>
-                  <Button fx:id="AddEdgeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#AddEdgesClicked" prefHeight="31.0" prefWidth="154.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Add Edges" textFill="WHITE" />
-                  <Button fx:id="DisBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#EdgesDispalyClicked" prefHeight="32.0" prefWidth="167.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Display Edges" textFill="WHITE" />
-                  <Button fx:id="HidBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#EdgesHidingClicked" prefHeight="32.0" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #142A53;" text="Hide Edges" textFill="WHITE" />
+                  <Button fx:id="AddEdgeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#AddEdgesClicked" prefHeight="31.0" prefWidth="154.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Add Edges" textFill="WHITE" />
+                  <Button fx:id="DisBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#EdgesDispalyClicked" prefHeight="32.0" prefWidth="167.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Display Edges" textFill="WHITE" />
+                  <Button fx:id="HidBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#EdgesHidingClicked" prefHeight="32.0" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #012d5a;" text="Hide Edges" textFill="WHITE" />
                </children>
             </HBox>
             <GridPane alignment="CENTER" prefHeight="64.0" prefWidth="366.0">
@@ -231,12 +231,12 @@
                </rowConstraints>
                <children>
                   <ComboBox fx:id="NodeTypeChoose" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="142.0" style="-fx-background-color: #F1F1F1;" styleClass="button-slider" stylesheets="@styles/Home.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                  <Button fx:id="DisplayLocationBtn" mnemonicParsing="false" onMouseClicked="#DisplayLocationClicked" prefHeight="32.0" prefWidth="199.0" style="-fx-background-color: #142A53;" text="Display Locaton Name" textFill="WHITE" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                  <Button fx:id="DisplayLocationBtn" mnemonicParsing="false" onMouseClicked="#DisplayLocationClicked" prefHeight="32.0" prefWidth="199.0" style="-fx-background-color: #012d5a;" text="Display Locaton Name" textFill="WHITE" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
                   <ComboBox fx:id="TableChoose" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="142.0" style="-fx-background-color: #F1F1F1;" styleClass="button-slider" stylesheets="@styles/Home.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
-                  <Button fx:id="TableChooseBtn" mnemonicParsing="false" onMouseClicked="#TableClicked" prefHeight="32.0" prefWidth="199.0" style="-fx-background-color: #142A53;" text="Open the Table" textFill="WHITE" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                  <Button fx:id="TableChooseBtn" mnemonicParsing="false" onMouseClicked="#TableClicked" prefHeight="32.0" prefWidth="199.0" style="-fx-background-color: #012d5a;" text="Open the Table" textFill="WHITE" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -256,15 +256,15 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="NextBtn" mnemonicParsing="false" onMouseClicked="#NextClicked" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="Next Floor   -&gt;" textFill="WHITE" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-                              <Button fx:id="LastBtn" mnemonicParsing="false" onMouseClicked="#LastClicked" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="&lt;-    Last Floor" textFill="WHITE" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                              <Button fx:id="NextBtn" mnemonicParsing="false" onMouseClicked="#NextClicked" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #012d5a; -fx-font-size: 16;" text="Next Floor   -&gt;" textFill="WHITE" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                              <Button fx:id="LastBtn" mnemonicParsing="false" onMouseClicked="#LastClicked" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #012d5a; -fx-font-size: 16;" text="&lt;-    Last Floor" textFill="WHITE" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
                            </children>
                         </GridPane>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="304.0">
                      <children>
-                        <Button fx:id="HelpBtn" alignment="CENTER" contentDisplay="RIGHT" minHeight="19.0" mnemonicParsing="false" onMouseClicked="#helpClicked" prefHeight="44.0" prefWidth="304.0" style="-fx-background-color: #142A53; -fx-font-size: 16;" text="Help" textFill="WHITE">
+                        <Button fx:id="HelpBtn" alignment="CENTER" contentDisplay="RIGHT" minHeight="19.0" mnemonicParsing="false" onMouseClicked="#helpClicked" prefHeight="44.0" prefWidth="304.0" style="-fx-background-color: #012d5a; -fx-font-size: 16;" text="Help" textFill="WHITE">
                            <font>
                               <Font size="10.0" />
                            </font>
