@@ -5,13 +5,16 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
   private List<OfficeSuppliesRequest> officeSuppliesRequests =
       new ArrayList<OfficeSuppliesRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
+  private String fileName = "Office_Supplies_Requests.csv";
 
   public static synchronized OfficeSuppliesRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -65,6 +68,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       st.setString(6, newRequest.getItem());
       st.setInt(7, newRequest.getQuantity());
       st.setString(8, newRequest.getSpecialInstructions());
+      st.setInt(9, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {

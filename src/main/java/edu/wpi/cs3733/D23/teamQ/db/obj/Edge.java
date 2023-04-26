@@ -23,15 +23,6 @@ public class Edge {
 
   public Edge() {}
 
-  public String toString() {
-    return "edgeID: "
-        + this.edgeID
-        + ", startNode: "
-        + this.startNode
-        + ", endNode: "
-        + this.endNode;
-  }
-
   public int getWeight() {
     int xDist = Math.abs(this.getStartNode().getXCoord() - this.getEndNode().getXCoord());
     int yDist = Math.abs(this.getStartNode().getYCoord() - this.getEndNode().getYCoord());
@@ -45,5 +36,9 @@ public class Edge {
 
   public Node getEndNode() {
     return endNode;
+  }
+
+  public String toString() {
+    return edgeID + "," + startNode.getNodeID() + "," + endNode.getNodeID();
   }
 }
