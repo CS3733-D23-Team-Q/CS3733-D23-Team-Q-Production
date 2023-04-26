@@ -10,8 +10,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 public class MealDeliveryRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -44,6 +46,22 @@ public class MealDeliveryRequestController {
   ObservableList<String> sideList =
       FXCollections.observableArrayList("Fries", "Onion Rings", "Soup", "Salad");
 
+  @FXML private ImageView WaterImage;
+  @FXML private ImageView CokeImage;
+  @FXML private ImageView CoffeeImage;
+  @FXML private ImageView TeaImage;
+
+  @FXML private ImageView ChickenImage;
+  @FXML private ImageView SteakImage;
+  @FXML private ImageView PorkImage;
+  @FXML private ImageView FishImage;
+  @FXML private ImageView VegetarianImage;
+
+  @FXML private ImageView FriesImage;
+  @FXML private ImageView OnionRingsImage;
+  @FXML private ImageView SoupImage;
+  @FXML private ImageView SaladImage;
+
   @FXML
   public void initialize() {
     this.assigneeField.setValue("");
@@ -58,6 +76,22 @@ public class MealDeliveryRequestController {
     this.entreeField.setItems(entreeList);
     this.sideField.setValue("");
     this.sideField.setItems(sideList);
+
+    WaterImage.setOpacity(0.0);
+    CokeImage.setOpacity(0.0);
+    CoffeeImage.setOpacity(0.0);
+    TeaImage.setOpacity(0.0);
+
+    ChickenImage.setOpacity(0.0);
+    SteakImage.setOpacity(0.0);
+    PorkImage.setOpacity(0.0);
+    FishImage.setOpacity(0.0);
+    VegetarianImage.setOpacity(0.0);
+
+    FriesImage.setOpacity(0.0);
+    OnionRingsImage.setOpacity(0.0);
+    SoupImage.setOpacity(0.0);
+    SaladImage.setOpacity(0.0);
   }
 
   @FXML
@@ -70,6 +104,22 @@ public class MealDeliveryRequestController {
     entreeField.setValue("");
     sideField.setValue("");
     specialInstructionsField.clear();
+
+    WaterImage.setOpacity(0.0);
+    CokeImage.setOpacity(0.0);
+    CoffeeImage.setOpacity(0.0);
+    TeaImage.setOpacity(0.0);
+
+    ChickenImage.setOpacity(0.0);
+    SteakImage.setOpacity(0.0);
+    PorkImage.setOpacity(0.0);
+    FishImage.setOpacity(0.0);
+    VegetarianImage.setOpacity(0.0);
+
+    FriesImage.setOpacity(0.0);
+    OnionRingsImage.setOpacity(0.0);
+    SoupImage.setOpacity(0.0);
+    SaladImage.setOpacity(0.0);
   }
 
   @FXML
@@ -95,6 +145,101 @@ public class MealDeliveryRequestController {
             sideField.getText());
 
     qdb.addMealRequest(newMR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void EntreeSelected(ActionEvent event) {
+    if (entreeField.getValue().equals("Chicken")) {
+      ChickenImage.setOpacity(1.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Steak")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(1.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Pork")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(1.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Fish")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(1.0);
+      VegetarianImage.setOpacity(0.0);
+    }
+    if (entreeField.getValue().equals("Vegetarian")) {
+      ChickenImage.setOpacity(0.0);
+      SteakImage.setOpacity(0.0);
+      PorkImage.setOpacity(0.0);
+      FishImage.setOpacity(0.0);
+      VegetarianImage.setOpacity(1.0);
+    }
+  }
+
+  @FXML
+  public void DrinkSelected(ActionEvent event) {
+    if (drinkField.getValue().equals("Water")) {
+      WaterImage.setOpacity(1.0);
+      CokeImage.setOpacity(0.0);
+      CoffeeImage.setOpacity(0.0);
+      TeaImage.setOpacity(0.0);
+    }
+    if (drinkField.getValue().equals("Coke")) {
+      WaterImage.setOpacity(0.0);
+      CokeImage.setOpacity(1.0);
+      CoffeeImage.setOpacity(0.0);
+      TeaImage.setOpacity(0.0);
+    }
+    if (drinkField.getValue().equals("Coffee")) {
+      WaterImage.setOpacity(0.0);
+      CokeImage.setOpacity(0.0);
+      CoffeeImage.setOpacity(1.0);
+      TeaImage.setOpacity(0.0);
+    }
+    if (drinkField.getValue().equals("Tea")) {
+      WaterImage.setOpacity(0.0);
+      CokeImage.setOpacity(0.0);
+      CoffeeImage.setOpacity(0.0);
+      TeaImage.setOpacity(1.0);
+    }
+  }
+
+  @FXML
+  public void SideSelected(ActionEvent event) {
+    if (sideField.getValue().equals("Fries")) {
+      FriesImage.setOpacity(1.0);
+      OnionRingsImage.setOpacity(0.0);
+      SoupImage.setOpacity(0.0);
+      SaladImage.setOpacity(0.0);
+    }
+    if (sideField.getValue().equals("Onion Rings")) {
+      FriesImage.setOpacity(0.0);
+      OnionRingsImage.setOpacity(1.0);
+      SoupImage.setOpacity(0.0);
+      SaladImage.setOpacity(0.0);
+    }
+    if (sideField.getValue().equals("Soup")) {
+      FriesImage.setOpacity(0.0);
+      OnionRingsImage.setOpacity(0.0);
+      SoupImage.setOpacity(1.0);
+      SaladImage.setOpacity(0.0);
+    }
+    if (sideField.getValue().equals("Salad")) {
+      FriesImage.setOpacity(0.0);
+      OnionRingsImage.setOpacity(0.0);
+      SoupImage.setOpacity(0.0);
+      SaladImage.setOpacity(1.0);
+    }
   }
 }
