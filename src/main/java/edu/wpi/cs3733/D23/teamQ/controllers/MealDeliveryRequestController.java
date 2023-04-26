@@ -145,7 +145,7 @@ public class MealDeliveryRequestController {
             sideField.getText());
 
     qdb.addMealRequest(newMR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 
   @FXML

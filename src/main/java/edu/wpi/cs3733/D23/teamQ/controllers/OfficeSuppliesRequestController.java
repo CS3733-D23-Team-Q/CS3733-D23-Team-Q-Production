@@ -102,7 +102,7 @@ public class OfficeSuppliesRequestController {
             (String) itemRequestedField.getValue(),
             Integer.parseInt(quantityField.getText()));
     qdb.addOfficeSuppliesRequest(newOSR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 
   @FXML

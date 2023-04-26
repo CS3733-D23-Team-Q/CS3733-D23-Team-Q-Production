@@ -103,7 +103,7 @@ public class MedicalSuppliesRequestController {
             itemRequestedField.getValue().toString(),
             Integer.parseInt(quantityField.getText()));
     qdb.addMedicalSuppliesRequest(newMSR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 
   public void deleteButtonClicked(ActionEvent actionEvent) {

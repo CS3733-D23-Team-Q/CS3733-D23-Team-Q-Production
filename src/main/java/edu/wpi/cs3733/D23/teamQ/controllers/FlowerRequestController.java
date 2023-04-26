@@ -103,7 +103,7 @@ public class FlowerRequestController {
             Integer.parseInt(bouquetChoiceField.getText()));
 
     qdb.addFlowerRequest(newFR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 
   @FXML

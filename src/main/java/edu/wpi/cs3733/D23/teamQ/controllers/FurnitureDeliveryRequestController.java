@@ -93,7 +93,7 @@ public class FurnitureDeliveryRequestController {
             0,
             itemRequestedField.getValue().toString());
     qdb.addFurnitureRequest(newFR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 
   @FXML
