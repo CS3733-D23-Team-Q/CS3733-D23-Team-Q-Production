@@ -34,10 +34,17 @@ public class Qdb {
   private OfficeSuppliesRequestDaoImpl officeSuppliesRequestTable;
   private MedicalSuppliesRequestDaoImpl medicalSuppliesRequestTable;
   private ServiceRequestDaoImpl serviceRequestTable;
+
+  private SignDaoImpl signTable;
+
   private MessageDaoImpl messageTable;
   private AlertDaoImpl alertTable;
 
   private Account messagingAccount = null;
+
+  private int kiosk;
+
+  private String date;
 
   private static Qdb single_instance = null;
 
@@ -64,6 +71,9 @@ public class Qdb {
         MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
     serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
     profileImageTable = ProfileImageDaoImpl.getInstance();
+
+    signTable = SignDaoImpl.getInstance();
+
     messageTable = MessageDaoImpl.getInstance(accountTable);
     alertTable = AlertDaoImpl.getInstance();
   }
@@ -140,6 +150,18 @@ public class Qdb {
 
   public ArrayList<Account> retrieveAllAccounts() {
     return (ArrayList<Account>) accountTable.getAllRows();
+  }
+
+  public List<Sign> retrieveSigns(int kiosk, String date) {
+    return signTable.retrieveRows(kiosk, date);
+  }
+
+  public boolean addSign(Sign a) {
+    return signTable.addRow(a);
+  }
+
+  public ArrayList<Sign> retrieveAllSigns() {
+    return (ArrayList<Sign>) signTable.getAllRows();
   }
 
   public ConferenceRequest retrieveConferenceRequest(int requestID) {
@@ -616,6 +638,22 @@ public class Qdb {
 
   public Account getMessagingAccount() {
     return messagingAccount;
+  }
+
+  public void setKiosk(int k) {
+    kiosk = k;
+  }
+
+  public int getKiosk() {
+    return kiosk;
+  }
+
+  public void setDate(String d) {
+    date = d;
+  }
+
+  public String getDate() {
+    return date;
   }
 
   public Alert retrieveAlert(int ID) {
