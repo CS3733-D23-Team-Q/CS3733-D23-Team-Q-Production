@@ -5,10 +5,15 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Sign;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-public class SignDaoImpl {
+@Getter
+@Setter
+public class SignDaoImpl implements GenDao<Sign, Integer> {
   private static SignDaoImpl single_instance = null;
   private List<Sign> signs = new ArrayList<Sign>();
+  private String fileName = "Signage.csv";
 
   public static synchronized SignDaoImpl getInstance() {
     if (single_instance == null) {
@@ -68,6 +73,21 @@ public class SignDaoImpl {
   public List<Sign> getAllRows() {
 
     return signs;
+  }
+
+  @Override
+  public Sign retrieveRow(Integer ID) {
+    return null;
+  }
+
+  @Override
+  public boolean updateRow(Integer ID, Sign x) throws SQLException {
+    return false;
+  }
+
+  @Override
+  public boolean deleteRow(Integer ID) throws SQLException {
+    return false;
   }
 
   //  public boolean populate() {

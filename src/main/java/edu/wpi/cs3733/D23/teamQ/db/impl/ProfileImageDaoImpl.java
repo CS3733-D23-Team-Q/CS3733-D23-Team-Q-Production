@@ -11,7 +11,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 
-public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
+public class ProfileImageDaoImpl {
   private static ProfileImageDaoImpl single_instance = null;
   private List<ProfileImage> profileImages = new ArrayList<ProfileImage>();
 
@@ -30,18 +30,15 @@ public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
     return single_instance;
   }
 
-  @Override
   public List<ProfileImage> getAllRows() {
     return profileImages;
   }
 
-  @Override
   public ProfileImage retrieveRow(String username) {
     int index = this.getIndex(username);
     return profileImages.get(index);
   }
 
-  @Override
   public boolean updateRow(String username, ProfileImage x) throws SQLException {
     boolean result = false;
     byte[] imageData = x.getImageData();
@@ -68,7 +65,6 @@ public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
     return result;
   }
 
-  @Override
   public boolean deleteRow(String username) throws SQLException {
     boolean result = false;
     try (Connection connection = GenDao.connect()) {
@@ -93,7 +89,6 @@ public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
     return result;
   }
 
-  @Override
   public boolean addRow(ProfileImage x) {
     boolean result = false;
     String username = x.getUsername();
@@ -118,7 +113,6 @@ public class ProfileImageDaoImpl implements GenDao<ProfileImage, String> {
     return result;
   }
 
-  @Override
   public boolean populate() {
     Connection connection = GenDao.connect();
     try {
