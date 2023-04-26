@@ -5,12 +5,15 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
+  private String fileName = "Meal_Requests.csv";
 
   public static synchronized MealRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {

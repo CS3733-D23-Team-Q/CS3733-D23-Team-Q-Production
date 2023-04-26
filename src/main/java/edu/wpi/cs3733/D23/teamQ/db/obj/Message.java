@@ -45,4 +45,8 @@ public class Message {
   public void setTimeStamp(long timeStamp) {
     this.timeStamp = timeStamp;
   }
+
+  public String toString() {
+    return sender.getUsername() + "," + receiver.getUsername() + "," + message + "," + timeStamp;
+  }
 }

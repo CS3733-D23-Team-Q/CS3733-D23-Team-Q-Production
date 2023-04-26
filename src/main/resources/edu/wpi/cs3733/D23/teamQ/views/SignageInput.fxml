@@ -13,7 +13,7 @@
    <children>
       <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
          <children>
-            <Label text="Add New Signage" textFill="#012d5a">
+            <Label text=" Display Signage" textFill="#012d5a">
                <font>
                   <Font name="Roboto Bold" size="24.0" />
                </font>

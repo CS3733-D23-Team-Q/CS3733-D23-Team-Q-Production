@@ -10,5 +10,6 @@ public class SubmissionController {
 
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
+    requestID.setText("");
   }
 }
