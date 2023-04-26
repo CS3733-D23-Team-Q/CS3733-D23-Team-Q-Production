@@ -85,14 +85,14 @@ public class SettingsController {
   }
 
   public void submitButtonClicked() {
-    if (filenameField.getText().equals("")){
-      if (qdb.exportToCSV(tableField.getText())){
+    if (filenameField.getText().equals("")) {
+      if (qdb.exportToCSV(tableField.getText())) {
         System.out.println("Exported Successfully!");
       } else {
         System.out.println("Failed to Export.");
       }
     } else {
-      if (qdb.exportToCSV(tableField.getText(), filenameField.getText())){
+      if (qdb.exportToCSV(tableField.getText(), filenameField.getText())) {
         System.out.println("Exported Successfully");
       } else {
         System.out.println("Failed to Export.");
