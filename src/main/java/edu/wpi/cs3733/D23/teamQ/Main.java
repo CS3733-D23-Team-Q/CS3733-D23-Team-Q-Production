@@ -8,7 +8,7 @@ public class Main {
 
   public static void main(String[] args) {
     Qdb.getInstance();
-    App.launch(App.class, args);
     refresh.start();
+    App.launch(App.class, args);
   }
 }

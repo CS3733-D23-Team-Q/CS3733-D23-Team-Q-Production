@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 public class Qdb {
+  private boolean notifying = false;
   private ArrayList<Subscriber> subscribers = new ArrayList<>();
 
   private AccountDaoImpl accountTable;
@@ -99,17 +100,23 @@ public class Qdb {
   }
 
   public void subscribe(Subscriber s) {
+    while (notifying){}
+    System.out.println("Adding subscriber");
     subscribers.add(s);
   }
 
   public void unsubscribe(Subscriber s) {
+    while (notifying){}
     subscribers.remove(s);
   }
 
   public synchronized void notifySubscribers(List<String> context) {
+    notifying = true;
     for (Subscriber s : subscribers) {
+      System.out.println("Notifying subscribers");
       s.update(context);
     }
+    notifying = false;
   }
 
   public Account retrieveAccount(String username) {
