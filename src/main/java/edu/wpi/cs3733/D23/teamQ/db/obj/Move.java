@@ -26,13 +26,6 @@ public class Move {
   }
 
   public String toString() {
-    return "moveID: "
-        + this.moveID
-        + "node: "
-        + this.node.getNodeID()
-        + ", longName: "
-        + this.longName
-        + ", date: "
-        + this.date;
+    return this.moveID + "," + this.node.getNodeID() + "," + this.longName + "," + this.date;
   }
 }

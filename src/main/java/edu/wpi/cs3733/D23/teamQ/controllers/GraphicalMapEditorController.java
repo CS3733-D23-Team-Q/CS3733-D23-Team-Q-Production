@@ -433,53 +433,45 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
-
     int countEdge = 0;
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
-      /*
 
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
-      while (countEdge < edges.size() - 1) {
+
+      while (countEdge < edges.size()) {
         for (int i = 0; i < edges.size(); i++) {
-          countEdge = i;
+          countEdge = i + 1;
           Edge edge = edges.get(i);
           if (edge.getStartNode().getNodeID() == nodeid
               || edge.getEndNode().getNodeID() == nodeid) {
             qdb.deleteEdge(edge.getEdgeID());
+            i -= 1;
+            countEdge -= 1;
           }
         }
       }
-      if (edges.get(edges.size() - 1).getStartNode().getNodeID() == nodeid
-          || edges.get(edges.size() - 1).getEndNode().getNodeID() == nodeid) {
-        qdb.deleteEdge(edges.get(edges.size() - 1).getEdgeID());
-      }
 
-      while (countMove < moves.size() - 1) {
+      while (countMove < moves.size()) {
         for (int i = 0; i < moves.size(); i++) {
-          countMove = i;
+          countMove = i + 1;
           Move move = moves.get(i);
           if (move.getNode().getNodeID() == nodeid) {
             qdb.deleteMove(move.getMoveID());
+            i -= 1;
+            countMove -= 1;
           }
         }
       }
 
-      if (moves.get(moves.size() - 1).getNode().getNodeID() == nodeid) {
-        qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
-      }
-
-     */
-
       qdb.deleteNode(nodeid);
       qdb.deleteLocation(nodeid);
-
-      refreshNodes();
     } else {
       InitialNode();
     }
+    refreshNodes();
     setEdges();
   }
 
@@ -499,7 +491,16 @@ public class GraphicalMapEditorController {
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
 
-            qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
+            List<Location> loca = qdb.retrieveAllLocations();
+            boolean check = true;
+            for (int i = 0; i < loca.size(); i++) {
+              if (nodeid == loca.get(i).getNodeID()) {
+                check = false;
+              }
+            }
+            if (check) {
+              qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
+            }
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());

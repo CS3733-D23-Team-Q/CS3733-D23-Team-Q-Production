@@ -5,10 +5,13 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
-public class AlertDaoImpl {
+@Getter
+public class AlertDaoImpl implements GenDao<Alert, Integer> {
   private static AlertDaoImpl single_instance = null;
   private List<Alert> alerts = new ArrayList<>();
+  private String fileName = "Alerts.csv";
 
   public static synchronized AlertDaoImpl getInstance() {
     if (single_instance == null) {
@@ -65,11 +68,10 @@ public class AlertDaoImpl {
     boolean result = false;
     Connection conn = GenDao.connect();
     try {
-      String query = "INSERT INTO alert (\"alertID\", timestamp, message) VALUES(?,?,?)";
+      String query = "INSERT INTO alert (timestamp, message) VALUES(?,?)";
       PreparedStatement pst = conn.prepareStatement(query);
-      pst.setInt(1, a.getAlertID());
-      pst.setLong(2, a.getTimestamp());
-      pst.setString(3, a.getMessage());
+      pst.setLong(1, a.getTimestamp());
+      pst.setString(2, a.getMessage());
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
@@ -108,6 +110,11 @@ public class AlertDaoImpl {
 
   public List<Alert> getAllRows() {
     return alerts;
+  }
+
+  @Override
+  public Alert retrieveRow(Integer ID) {
+    return null;
   }
 
   public int getIndex(int ID) {

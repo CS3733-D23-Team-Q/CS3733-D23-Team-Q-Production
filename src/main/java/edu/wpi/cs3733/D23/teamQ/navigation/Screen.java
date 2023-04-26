@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.navigation;
 
 public enum Screen {
   ROOT("views/Root.fxml", "Root"),
-  HOME("views/newHome.fxml", "Home"),
+  HOME("views/Home.fxml", "Home"),
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),
@@ -11,6 +11,8 @@ public enum Screen {
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
   PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
   SIGNAGE("views/Signage.fxml", "Signage"),
+  ADD_SIGNAGE("views/SignageForm.fxml", "Add newSignage"),
+  SELECT_SIGNAGE("views/SignageInput.fxml", "Display Signage"),
   HELP("views/Help.fxml", "Help"),
   SERVICE_REQUEST_HUB("views/ServiceRequestHub.fxml", "Selector"),
   SERVICE_PLACEHOLDER("views/ServiceRequestPlaceholder.fxml", "Placeholder"),
@@ -33,6 +35,8 @@ public enum Screen {
   MEDICAL_SUPPLIES_REQUEST_DISPLAY(
       "views/MedicalSuppliesRequestDisplay.fxml", "Medical Supplies Request Display"),
   LIST_REQUESTS("views/ListServiceRequests.fxml", "List of Service Requests"),
+
+  ADMIN_LIST_REQUESTS("views/AdminListServiceRequests.fxml", "Admin List of Service Requests"),
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
   PROFILE_PAGE("views/ProfilePage1.fxml", "Profile Page"),
@@ -60,7 +64,8 @@ public enum Screen {
   VIEW_PROFILE("views/ViewProfile.fxml", "View Profile"),
 
   ABOUT("views/About.fxml", "About"),
-  CREDITS("views/Credits.fxml", "Credits");
+  CREDITS("views/Credits.fxml", "Credits"),
+  CREATE_ALERT("views/CreateAlert.fxml", "Create Alert");
 
   private final String filename;
   private final String title;
