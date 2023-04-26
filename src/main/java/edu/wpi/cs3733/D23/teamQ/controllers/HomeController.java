@@ -12,13 +12,16 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class HomeController implements IController, Subscriber {
   @FXML CalendarView Calender;
   @FXML private Text UserMessage;
-  @FXML TextArea alertsField;
+  @FXML ScrollPane alertPane;
+  @FXML VBox alertBox;
   Qdb qdb = Qdb.getInstance();
 
   @FXML
@@ -51,21 +54,23 @@ public class HomeController implements IController, Subscriber {
     Calender.getCalendarSources().add(SR);
   }
 
-  private boolean setAlerts() {
+  @FXML
+  private void setAlerts() {
     List<Alert> alerts = qdb.retrieveAllAlerts();
-    String alertString = "";
-    for (Alert a : alerts) {
-      Date currentDate = new Date(a.getTimestamp());
-      alertString = alertString + a.getMessage() + "\n" + currentDate + "\n";
+    for (int i = 0; i < alerts.size(); i++) {
+      Label l = new Label();
+      Date d = new Date(alerts.get(i).getTimestamp());
+      l.setText(d + ": " + alerts.get(i).getMessage());
+      l.setStyle("-fx-font: roboto; -fx-font-size: 16");
+      alertBox.getChildren().add(l);
     }
-    alertsField.setText(alertString);
-    return true;
   }
 
   public boolean update(List<String> context) {
     //    AudioClip sound = new AudioClip(getClass().getResourceAsStream("alert.wav").toString());
     //    sound.play();
-    return setAlerts();
+    if (context.contains("alert")) setAlerts();
+    return false;
   }
   //  Qdb qdb = Qdb.getInstance();
   //

@@ -79,7 +79,9 @@
                                                 <Font name="Roboto Regular" size="16.0" />
                                              </font>
                                           </Label>
-                                          <MFXScrollPane fx:id="alertPane" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS" />
+                                          <MFXScrollPane fx:id="alertPane" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS" >
+                                             <VBox fx:id="alertBox"></VBox>
+                                          </MFXScrollPane>
                                        </children>
                                     </VBox>
                                  </children>
