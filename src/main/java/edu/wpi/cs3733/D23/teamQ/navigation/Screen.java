@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.navigation;
 
 public enum Screen {
   ROOT("views/Root.fxml", "Root"),
-  HOME("views/Home2.fxml", "Home"),
+  HOME("views/Home.fxml", "Home"),
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
   FORGOT_PASSWORD("views/ForgotPassword.fxml", "Reset Password"),

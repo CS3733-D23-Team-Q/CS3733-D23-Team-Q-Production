@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.calendarfx.view.CalendarHeaderView?>
 <?import com.calendarfx.view.CalendarView?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
@@ -8,119 +7,78 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import net.kurobako.gesturefx.GesturePane?>
 
-<AnchorPane fx:id="anchorField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.HomeController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.HomeController">
    <children>
-      <VBox prefHeight="919.0" prefWidth="1382.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GesturePane fx:id="titleImage" disable="true" fitMode="COVER" hbarPolicy="NEVER" opacity="0.75" prefHeight="225.0" prefWidth="1360.0" vbarPolicy="NEVER" />
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="285.0" fitWidth="1600.0" opacity="0.6" pickOnBounds="true" preserveRatio="true" smooth="false">
-                     <image>
-                        <Image url="@../ShapiroCenter.jpg" />
-                     </image>
-                  </ImageView>
-                  <HBox prefHeight="0.0" prefWidth="1360.0">
-                     <children>
-                        <Text fx:id="UserMessage" fill="#012d5a" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back User!" translateX="50.0" translateY="50.0" wrappingWidth="799.1573028564453">
-                           <font>
-                              <Font name="Roboto" size="36.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </HBox>
-               </children>
-            </StackPane>
-            <Text fill="#012d5a" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Commitments:" wrappingWidth="413.4875946044922">
+            <Label fx:id="title" text="Welcome Back User!" textFill="#012d5a">
                <font>
                   <Font name="Roboto" size="36.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" top="20.0" />
-               </VBox.margin>
-            </Text>
-            <HBox prefHeight="0.0" prefWidth="1360.0">
+               </font></Label>
+         </children>
+         <padding>
+            <Insets left="12.0" right="12.0" />
+         </padding>
+      </HBox>
+      <HBox>
+         <children>
+            <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <HBox spacing="24.0">
                <children>
-                  <VBox prefHeight="482.0" prefWidth="1360.0">
+                  <VBox prefHeight="642.0" prefWidth="640.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox prefHeight="608.0" prefWidth="451.0">
-                           <children>
-                              <VBox prefHeight="529.0" prefWidth="746.0">
-                                 <children>
-                                    <StackPane prefHeight="0.0" prefWidth="741.0" />
-                                    <CalendarHeaderView minWidth="-Infinity" prefWidth="500.0" />
-                                    <CalendarView fx:id="Calender" minWidth="-Infinity" prefHeight="674.0" prefWidth="741.0" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                              <HBox prefHeight="100.0" prefWidth="320.0" HBox.hgrow="ALWAYS" />
-                              <VBox prefHeight="512.0" prefWidth="320.0">
-                                 <children>
-                                    <Label text="Label" textFill="#012d5a">
-                                       <font>
-                                          <Font name="Roboto" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <MFXScrollPane prefHeight="512.0" prefWidth="320.0" style="-fx-background-color: #f1f1f1; -fx-border-color: #f1f1f1;">
-                                       <content>
-                                          <VBox fx:id="alertBox" prefHeight="512.0" prefWidth="320.0" style="-fx-background-color: #f1f1f1; -fx-border-color: #f1f1f1;" />
-                                       </content>
-                                    </MFXScrollPane>
-                                 </children>
-                              </VBox>
-                              <HBox prefHeight="100.0" prefWidth="320.0" HBox.hgrow="ALWAYS" />
-                              <StackPane minWidth="-Infinity" prefHeight="468.0" prefWidth="279.0">
-                                 <children>
-                                    <Rectangle fx:id="notesBox" arcHeight="10.0" arcWidth="10.0" fill="#b4b4b4" height="530.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="252.0" />
-                                    <TextArea fx:id="notesField" maxHeight="-Infinity" onMouseExited="#saveNotes" prefHeight="512.0" prefWidth="252.0" promptText="Write Here:">
-                                       <effect>
-                                          <ColorAdjust brightness="-0.14">
-                                             <input>
-                                                <Glow />
-                                             </input>
-                                          </ColorAdjust>
-                                       </effect>
-                                       <StackPane.margin>
-                                          <Insets top="20.0" />
-                                       </StackPane.margin>
-                                    </TextArea>
-                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="64.0" text="Notes" textFill="#012d5a">
-                                       <padding>
-                                          <Insets bottom="500.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="Roboto" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <opaqueInsets>
-                                    <Insets left="300.0" />
-                                 </opaqueInsets>
-                                 <padding>
-                                    <Insets left="30.0" />
-                                 </padding>
-                              </StackPane>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="61.0" left="50.0" />
-                           </VBox.margin>
-                        </HBox>
+                        <Label prefHeight="32.0" text="Alerts" textFill="#012d5a">
+                           <font>
+                              <Font name="Roboto" size="28.0" />
+                           </font>
+                        </Label>
+                        <MFXScrollPane prefHeight="610.0" prefWidth="384.0" style="-fx-background-color: #f1f1f1;">
+                           <content>
+                              <VBox fx:id="alertBox" prefHeight="610.0" spacing="4.0" />
+                           </content>
+                        </MFXScrollPane>
                      </children>
+                     <padding>
+                        <Insets bottom="4.0" left="8.0" right="4.0" top="4.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="642.0" prefWidth="384.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;">
+                     <children>
+                        <Label prefHeight="32.0" text="Notes" textFill="#012d5a">
+                           <font>
+                              <Font name="Roboto" size="28.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="notesField" maxHeight="-Infinity" onMouseExited="#saveNotes" prefHeight="610.0" prefWidth="384.0" promptText="Write Here:">
+                           <effect>
+                              <ColorAdjust brightness="-0.14">
+                                 <input>
+                                    <Glow />
+                                 </input>
+                              </ColorAdjust>
+                           </effect>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                     <padding>
+                        <Insets bottom="4.0" left="8.0" right="4.0" top="4.0" />
+                     </padding>
                   </VBox>
                </children>
             </HBox>
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="16.0" left="12.0" right="12.0" top="16.0" />
+         </padding>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
