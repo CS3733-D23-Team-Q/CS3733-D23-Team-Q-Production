@@ -547,11 +547,15 @@ public class Qdb {
   }
 
   public boolean deleteServiceRequest(int requestID) {
+    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+    System.out.println(stackTraceElements);
     updateTimestamp("serviceRequest");
     return serviceRequestTable.deleteRow(requestID);
   }
 
   public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
+    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+    System.out.println(stackTraceElements);
     updateTimestamp("serviceRequest");
     return serviceRequestTable.updateRow(requestID, sr);
   }
