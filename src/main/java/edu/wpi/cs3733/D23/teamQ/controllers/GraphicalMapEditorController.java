@@ -447,15 +447,15 @@ public class GraphicalMapEditorController {
           if (edge.getStartNode().getNodeID() == nodeid
               || edge.getEndNode().getNodeID() == nodeid) {
             qdb.deleteEdge(edge.getEdgeID());
-            countEdge -=1;
-            i -=1;
+            countEdge -= 1;
+            i -= 1;
           }
         }
       }
 
       while (countMove < moves.size()) {
         for (int i = 0; i < moves.size(); i++) {
-          countMove = i +1 ;
+          countMove = i + 1;
           Move move = moves.get(i);
           if (move.getNode().getNodeID() == nodeid) {
             qdb.deleteMove(move.getMoveID());
