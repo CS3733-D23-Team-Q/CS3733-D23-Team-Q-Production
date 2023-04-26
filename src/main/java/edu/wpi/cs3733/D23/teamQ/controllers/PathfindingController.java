@@ -742,7 +742,7 @@ public class PathfindingController {
       }
     }
 
-    cfnodes = setCF(cfnodes);
+    cfnodes = setCF(cfnodes); // gets updated after the add button()
     if (highlightedNodesp.size() > 0) {
       for (int i = 0; i < highlightedNodesp.size(); i++) {
         for (int j = 0; j < cfnodes.size(); j++) {
@@ -952,7 +952,6 @@ public class PathfindingController {
           nextFloorClicked();
         }
       }
-
       cfnodes = setCF(cfnodes);
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
