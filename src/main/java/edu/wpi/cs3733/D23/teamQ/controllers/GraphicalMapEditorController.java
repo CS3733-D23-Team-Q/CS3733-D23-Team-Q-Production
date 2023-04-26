@@ -433,12 +433,10 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
-
     int countEdge = 0;
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
-
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
       while (countEdge < edges.size() - 1) {
@@ -470,9 +468,18 @@ public class GraphicalMapEditorController {
         qdb.deleteMove(moves.get(moves.size() - 1).getMoveID());
       }
 
-      qdb.deleteNode(nodeid);
-      qdb.deleteLocation(nodeid);
+      while (countMove < moves.size() - 1) {
+        for (int i = 0; i < moves.size(); i++) {
+          countMove = i;
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+          }
+        }
+      }
 
+      qdb.deleteLocation(nodeid);
+      qdb.deleteNode(nodeid);
       refreshNodes();
     } else {
       InitialNode();
