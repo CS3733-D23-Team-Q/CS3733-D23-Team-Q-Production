@@ -933,10 +933,13 @@ public class PathfindingController {
         }
         highlightedNodes.removeAll(highlightedNodes);
       }
+      cfnodes = setCF(cfnodes);
       if (highlightedNodesp.size() > 0) {
-        for (int j = 0; j < highlightedNodesp.size(); j++) {
-          if (highlightedNodesp.get(j).getMiddle() == floor) {
-            unhighlight(highlightedNodesp.get(j).getLeft());
+        for (int i = 0; i < highlightedNodesp.size(); i++) {
+          for (int j = 0; j < cfnodes.size(); j++) {
+            if (cfnodes.get(j).getKey().equals(highlightedNodesp.get(i).getRight())) {
+              unhighlight(cfnodes.get(j).getValue());
+            }
           }
         }
         highlightedNodesp.removeAll(highlightedNodesp);
@@ -953,7 +956,7 @@ public class PathfindingController {
         }
       }
 
-      cfnodes = setCF(cfnodes);
+      cfnodes = setCF(cfnodes); // gets updated after add buttons
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
           Button node = cfnodes.get(i).getValue();
@@ -1018,7 +1021,7 @@ public class PathfindingController {
         }
       }
 
-      cfnodes = setCF(cfnodes);
+      cfnodes = setCF(cfnodes); // gets updated after add buttons
       for (int i = 0; i < cfnodes.size(); i++) {
         if (cfnodes.get(i).getKey() == nodeid) {
           Button node = cfnodes.get(i).getValue();
