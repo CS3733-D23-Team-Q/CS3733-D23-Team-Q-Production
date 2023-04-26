@@ -24,7 +24,8 @@ public class RefreshThread implements Runnable {
     "security_question",
     "serviceRequest",
     "message",
-    "alert"
+    "alert",
+    "sign"
   };
 
   private ArrayList<String> toUpdate = new ArrayList<>();

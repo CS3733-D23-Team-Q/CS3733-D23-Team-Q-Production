@@ -4,6 +4,9 @@ import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -620,6 +623,8 @@ public class Qdb {
           profileImageTable.populate();
         case "message":
           messageTable.populate();
+        case "sign":
+          signTable.populate();
         case "alert":
           alertTable.populate();
         case "serviceRequest":
@@ -684,5 +689,57 @@ public class Qdb {
 
   public List<Alert> retrieveAllAlerts() {
     return alertTable.getAllRows();
+  }
+
+  public boolean exportToCSV(String tableName) {
+    return csvMaker(tableName, "");
+  }
+
+  public boolean exportToCSV(String tableName, String filename) {
+    return csvMaker(tableName, filename);
+  }
+
+  private boolean csvMaker(String tableName, String filename) {
+    GenDao table = nameToTable(tableName);
+    if (filename.equals("")) {
+      filename = table.getFileName();
+    }
+    try {
+      File myObj = new File(filename);
+      if (myObj.createNewFile()) {
+        System.out.println("File created: " + myObj.getName());
+      }
+      FileWriter myWriter = new FileWriter(filename);
+      for (Object o : table.getAllRows()) {
+        myWriter.write(o.toString() + "/n");
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return true;
+  }
+
+  private GenDao nameToTable(String tableName) {
+    switch (tableName) {
+      case "account":
+        return accountTable;
+      case "edge":
+        return edgeTable;
+      case "locationName":
+        return locationTable;
+      case "move":
+        return moveTable;
+      case "node":
+        return nodeTable;
+      case "message":
+        return messageTable;
+      case "alert":
+        return alertTable;
+      case "sign":
+        return signTable;
+      case "serviceRequest":
+        return serviceRequestTable;
+    }
+    return null;
   }
 }

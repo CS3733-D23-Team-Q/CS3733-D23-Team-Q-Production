@@ -5,13 +5,16 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequest, Integer> {
   private List<MedicalSuppliesRequest> medicalSuppliesRequests =
       new ArrayList<MedicalSuppliesRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MedicalSuppliesRequestDaoImpl single_instance = null;
+  private String fileName = "Medical_Supplies_Requests.csv";
 
   public static synchronized MedicalSuppliesRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {

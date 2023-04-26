@@ -11,10 +11,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ServiceRequestDaoImpl {
+public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
   private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
+  private String fileName = "Service_Requests.csv";
 
   private static ServiceRequestDaoImpl single_instance = null;
 
@@ -122,6 +123,11 @@ public class ServiceRequestDaoImpl {
     int index = this.getIndex(requestID);
     serviceRequests.remove(index);
     return true;
+  }
+
+  @Override
+  public boolean addRow(ServiceRequest x) {
+    return false;
   }
 
   public boolean updateRow(Integer requestID, ServiceRequest newRequest) {
