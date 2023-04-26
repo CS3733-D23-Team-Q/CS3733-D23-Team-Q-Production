@@ -30,8 +30,10 @@ public class DFS implements IPathfinding {
         System.out.println(" AT CURRENT " + current.getNodeID());
         nodesAvailable.add(edgePath.getStartNode());
         System.out.println();
-        System.out.println(" ADDED Node " +  );
+        System.out.println(" ADDED Node " + edgePath.getStartNode().getNodeID());
         nodesAvailable.add(edgePath.getEndNode());
+        System.out.println();
+        System.out.println(" ADDED NODE " + edgePath.getEndNode().getNodeID());
       }
       if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV") // block used to guide
               && current.getFloor().equalsIgnoreCase(end.getFloor())
