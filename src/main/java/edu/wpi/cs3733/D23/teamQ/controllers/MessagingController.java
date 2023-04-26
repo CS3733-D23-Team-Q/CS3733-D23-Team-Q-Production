@@ -124,7 +124,13 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void composeButtonClicked() {
+    if (!messageVbox.getChildren().isEmpty()) {
+      messageVbox.getChildren().clear();
+    }
+
     personLabel.setVisible(false);
+    profilePicture.setVisible(false);
+    activeIndicator.setVisible(false);
     peopleSelector.setVisible(true);
   }
 
@@ -257,10 +263,12 @@ public class MessagingController implements Subscriber {
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
     personLabel.setVisible(true);
+    profilePicture.setVisible(true);
+    activeIndicator.setVisible(true);
 
-    if (!messageVbox.getChildren().isEmpty()) {
-      messageVbox.getChildren().clear();
-    }
+//    if (!messageVbox.getChildren().isEmpty()) {
+//      messageVbox.getChildren().clear();
+//    }
     if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
     else activeIndicator.setStyle("-fx-fill: #CE3C49");
 
