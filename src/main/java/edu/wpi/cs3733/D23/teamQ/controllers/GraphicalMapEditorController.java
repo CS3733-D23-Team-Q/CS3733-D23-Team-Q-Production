@@ -446,7 +446,7 @@ public class GraphicalMapEditorController {
           countEdge = i + 1;
           Edge edge = edges.get(i);
           if (edge.getStartNode().getNodeID() == nodeid
-                  || edge.getEndNode().getNodeID() == nodeid) {
+              || edge.getEndNode().getNodeID() == nodeid) {
             qdb.deleteEdge(edge.getEdgeID());
             i -= 1;
             countEdge -= 1;
@@ -491,7 +491,16 @@ public class GraphicalMapEditorController {
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
 
-            qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
+            List<Location> loca = qdb.retrieveAllLocations();
+            boolean check = true;
+            for (int i = 0; i < loca.size(); i++) {
+              if (nodeid == loca.get(i).getNodeID()) {
+                check = false;
+              }
+            }
+            if (check) {
+              qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
+            }
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());
