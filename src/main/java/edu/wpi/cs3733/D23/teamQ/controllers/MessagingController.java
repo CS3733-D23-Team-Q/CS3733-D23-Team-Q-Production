@@ -101,7 +101,7 @@ public class MessagingController implements Subscriber {
                                         LoginController.getUsername(), receiver.getUsername())
                                     .size()
                                 - 1);
-                if (m.getSender() == receiver) messageReceived(m);
+                if (m.getSender() == receiver) populateReceived(m);
               }
             });
 
@@ -212,7 +212,7 @@ public class MessagingController implements Subscriber {
   public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
-
+    messageReceived.setRead(true);
     String message = messageReceived.getMessage();
 
     //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
@@ -285,7 +285,6 @@ public class MessagingController implements Subscriber {
               .get(0)
               .getTimeStamp());
     for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
-      m.setRead(true);
       if (m.getSender().getUsername().equals(LoginController.getUsername())) populateSent(m);
       else populateReceived(m);
     }
