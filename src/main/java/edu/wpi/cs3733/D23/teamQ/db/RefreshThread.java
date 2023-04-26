@@ -34,6 +34,7 @@ public class RefreshThread implements Runnable {
   public void run() {
     while (true) {
       if (checkUpdates().size() > 0) {
+        System.out.println("Updating from server --> " + toUpdate);
         doUpdates();
         toUpdate.clear();
         lastUpdate = System.currentTimeMillis();

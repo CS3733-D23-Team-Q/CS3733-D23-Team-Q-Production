@@ -296,6 +296,7 @@ public class MessagingController implements Subscriber {
   }
 
   public boolean update(List<String> context) {
+    System.out.println("Updating messages page");
     if (context.contains("message")) {
       populateMessages();
       return true;
