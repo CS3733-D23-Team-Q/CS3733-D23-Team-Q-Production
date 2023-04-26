@@ -61,7 +61,7 @@ public class HomeController implements IController, Subscriber {
       Label l = new Label();
       Date d = new Date(alerts.get(i).getTimestamp());
       l.setText(d + ": " + alerts.get(i).getMessage());
-      l.setStyle("-fx-font: roboto; -fx-font-size: 16");
+      l.setStyle("-fx-font-family: roboto; -fx-font-size: 16");
       alertBox.getChildren().add(l);
     }
   }
