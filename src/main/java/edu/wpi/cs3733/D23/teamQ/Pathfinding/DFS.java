@@ -39,7 +39,7 @@ public class DFS implements IPathfinding {
           ) {
             openList.add(node);
             openList.remove(current);
-            // path.add(current);
+            path.add(current);
             visitedList.add(current);
             nextChosen = true;
           }
@@ -73,7 +73,8 @@ public class DFS implements IPathfinding {
               && !nextChosen) {
             openList.add(backup);
             openList.remove(current);
-             path.add(current);
+            path.add(current);
+            // path.add(backup);
             visitedList.add(current);
             nextChosen = true;
             System.out.println();
@@ -102,8 +103,9 @@ public class DFS implements IPathfinding {
               && floor.equalsIgnoreCase(previousNode.getFloor())) {
             openList.add(previousNode);
             openList.remove(current);
-            // path.add(current);
+            //path.add(current);
             path.addAll(revisitedNodes);
+            // path.add(previousNode);
             visitedList.add(current);
             nextChosen = true;
             System.out.println();
