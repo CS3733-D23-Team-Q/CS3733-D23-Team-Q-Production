@@ -192,7 +192,7 @@
                         <Font name="Roboto" size="16.0" />
                      </font>
                   </MFXButton>
-                  <HBox prefHeight="32.0" prefWidth="400.0">
+                  <HBox prefHeight="32.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
