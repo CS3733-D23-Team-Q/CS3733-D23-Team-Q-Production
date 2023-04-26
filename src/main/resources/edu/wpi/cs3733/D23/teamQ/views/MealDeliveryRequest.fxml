@@ -32,7 +32,7 @@
             <Insets bottom="30.0" />
          </padding>
       </StackPane>
-      <HBox minHeight="-Infinity">
+      <HBox minHeight="-Infinity" prefHeight="630.0" prefWidth="1360.0" VBox.vgrow="ALWAYS">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox prefHeight="678.0" prefWidth="429.0" spacing="30.0">
@@ -97,7 +97,7 @@
                </padding>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="150.0" />
-            <VBox prefHeight="200.0" prefWidth="400.0">
+            <VBox prefHeight="639.0" prefWidth="400.0">
                <children>
                   <VBox>
                      <children>
@@ -212,7 +212,7 @@
                   </VBox>
                </children>
                <padding>
-                  <Insets left="30.0" right="30.0" />
+                  <Insets right="30.0" />
                </padding>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" />

@@ -32,10 +32,10 @@
             </Text>
          </children>
          <VBox.margin>
-            <Insets />
+            <Insets bottom="30.0" />
          </VBox.margin>
       </StackPane>
-      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <HBox prefHeight="630.0" prefWidth="1360.0" VBox.vgrow="ALWAYS">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox prefHeight="407.0" prefWidth="432.0" spacing="30.0">
@@ -155,7 +155,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <HBox prefHeight="20.0" prefWidth="1360.0" VBox.vgrow="ALWAYS" />
       <HBox prefHeight="100.0" prefWidth="848.0">
          <children>
             <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
