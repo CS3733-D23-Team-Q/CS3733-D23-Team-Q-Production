@@ -1,14 +1,15 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
+import org.apache.commons.collections.list.AbstractLinkedList;
 
 @Getter
 public class MessageDaoImpl implements GenDao<Message, Integer> {
@@ -102,5 +103,46 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
       }
     }
     return messageList;
+  }
+
+  public ObservableList<Message> retrieveRecentMessages(String person){
+    ObservableList<Message> messageList = FXCollections.observableArrayList();
+    for (Account a : accountTable.getAllRows()) {
+      messageList.add(retrieveMostRecent(a.getUsername(), person));
+    }
+    return sortByTimestamp(messageList);
+  }
+
+  private ObservableList<Message> sortByTimestamp(ObservableList<Message> messageList) {
+    Comparator<Message> comparator = new Comparator<Message>() {
+      public int compare(Message m1, Message m2) {
+        long t1 = m1.getTimeStamp();
+        long t2 = m2.getTimeStamp();
+        return Long.compare(t1, t2);
+      }
+    };
+    Collections.sort(messageList, comparator);
+    return messageList;
+  }
+
+  private Message retrieveMostRecent(String username, String person){
+    List<Message> messageList = new ArrayList<>();
+    Long time = null;
+    Message latest = null;
+    for (Message m : messages){
+      String uname1 = m.getSender().getUsername();
+      String uname2 = m.getReceiver().getUsername();
+      if (uname1.equals(username) || uname2.equals(username)) {
+        if (uname1.equals(person) || uname2.equals(person)){
+          if (latest == null){
+            latest = m;
+            time = m.getTimeStamp();
+          } else if (latest.getTimeStamp() > time){
+            time = m.getTimeStamp();
+          }
+        }
+      }
+    }
+    return latest;
   }
 }

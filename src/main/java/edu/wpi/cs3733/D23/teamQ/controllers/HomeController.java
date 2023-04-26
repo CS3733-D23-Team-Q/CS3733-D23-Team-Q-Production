@@ -87,6 +87,7 @@ public class HomeController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) {
-    return setAlerts();
+    initialize();
+    return true;
   }
 }
