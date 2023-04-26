@@ -2,10 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import io.github.palexdev.materialfx.controls.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -25,26 +21,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-public class ListServiceRequestController {
-  @FXML TableView<ServiceRequest> yourRequestsTable;
-  @FXML TableColumn<ServiceRequest, Integer> yourRequestID;
-  @FXML TableColumn<ServiceRequest, String> yourRequestProgress;
-  @FXML TableColumn<ServiceRequest, String> yourRequestLocation;
-  @FXML TableColumn<ServiceRequest, String> yourRequestInstructions;
-  @FXML TableColumn<ServiceRequest, String> yourRequestAssignee;
-  @FXML TableColumn<ServiceRequest, String> yourRequestDate;
+public class AdminListServiceRequestsController {
+  @FXML TableView<ServiceRequest> requestsTable;
+  @FXML TableColumn<ServiceRequest, Integer> requestIDColumn;
+  @FXML TableColumn<ServiceRequest, String> requesterColumn;
+  @FXML TableColumn<ServiceRequest, String> assigneeColumn;
+  @FXML TableColumn<ServiceRequest, String> dateColumn;
+  @FXML TableColumn<ServiceRequest, String> locationColumn;
+  @FXML TableColumn<ServiceRequest, String> instructionsColumn;
+  @FXML TableColumn<ServiceRequest, ServiceRequest.Progress> progressColumn;
   @FXML TableColumn<ServiceRequest, MFXButton> editButtonColumn;
   @FXML TableColumn<ServiceRequest, MFXButton> deleteButtonColumn;
-
-  @FXML TableView<ServiceRequest> assignedRequestTable;
-  @FXML TableColumn<ServiceRequest, Integer> assignedRequestID;
-  @FXML TableColumn<ServiceRequest, String> assignedRequestLocation;
-  @FXML TableColumn<ServiceRequest, String> assignedRequestInstructions;
-  @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
-  @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
-  @FXML TableColumn<ServiceRequest, String> progressDropdownColumn;
-
-  @FXML MFXToggleButton toggleButton;
 
   ObservableList<String> timeList =
       FXCollections.observableArrayList(
@@ -75,11 +62,11 @@ public class ListServiceRequestController {
       FXCollections.observableArrayList(
           "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
 
-  ObservableList<String> progressValues =
+  ObservableList<ServiceRequest.Progress> progressValues =
       FXCollections.observableArrayList(
-          ServiceRequest.Progress.BLANK.name(),
-          ServiceRequest.Progress.PROCESSING.name(),
-          ServiceRequest.Progress.DONE.name());
+          ServiceRequest.Progress.BLANK,
+          ServiceRequest.Progress.PROCESSING,
+          ServiceRequest.Progress.DONE);
 
   @FXML VBox conferenceRequestEdit;
   @FXML MFXFilterComboBox confAssigneeField;
@@ -134,6 +121,8 @@ public class ListServiceRequestController {
   @FXML MFXFilterComboBox medicalItemField;
   @FXML MFXTextField medicalQuantityField;
 
+  @FXML MFXToggleButton toggleButton;
+
   private static ServiceRequest serviceRequestChange;
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -147,35 +136,19 @@ public class ListServiceRequestController {
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getLoginUsername();
 
-  // work on these
-  ObservableList<ServiceRequest> userRequestedRequests = qdb.getUserRequestedRows(username);
-  ObservableList<ServiceRequest> userAssignedRequests =
-      qdb.retrieveUserAssignServiceRequests(username);
+  ObservableList<ServiceRequest> allRequests = qdb.getAllServiceRequestsObservable();
+  ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
 
-  ObservableList<ServiceRequest> userRequestedOutstandingRequests =
-      qdb.getUserRequestedOutstandingRows(username);
-  ObservableList<ServiceRequest> userAssignedOutstandingRequests =
-      qdb.getUserAssignedOutstandingRows(username);
-
-  public ListServiceRequestController() {}
-
-  @FXML
   public void initialize() {
-
     toggleButton.setOnAction(
         event -> {
           if (toggleButton.isSelected()) {
-            yourRequestsTable.setItems(userRequestedOutstandingRequests);
-            assignedRequestTable.setItems(userAssignedOutstandingRequests);
+            requestsTable.setItems(allOutstandingRequests);
           } else {
-            yourRequestsTable.setItems(userRequestedRequests);
-            assignedRequestTable.setItems(userAssignedRequests);
+            requestsTable.setItems(allRequests);
           }
-          yourRequestsTable.refresh();
-          assignedRequestTable.refresh();
+          requestsTable.refresh();
         });
-
-    String username = LoginController.getLoginUsername();
     conferenceRequestEdit.setVisible(false);
     flowerRequestEdit.setVisible(false);
     officeRequestEdit.setVisible(false);
@@ -183,13 +156,8 @@ public class ListServiceRequestController {
     mealRequestEdit.setVisible(false);
     medicalRequestEdit.setVisible(false);
 
-    yourRequestsTable.setStyle("-fx-table-column-border-visible: false;");
-    assignedRequestTable.setStyle("-fx-table-column-border-visible: false;");
-
-    yourRequestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    yourRequestProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
-
-    yourRequestLocation.setCellValueFactory(
+    requestIDColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    locationColumn.setCellValueFactory(
         cellData -> {
           ServiceRequest serviceRequest = cellData.getValue();
           Node node = serviceRequest.getNode();
@@ -198,10 +166,7 @@ public class ListServiceRequestController {
               Bindings.createStringBinding(() -> location.getLongName());
           return locationNameBinding;
         });
-
-    yourRequestInstructions.setCellValueFactory(new PropertyValueFactory<>("specialInstructions"));
-
-    yourRequestAssignee.setCellValueFactory(
+    assigneeColumn.setCellValueFactory(
         cellData -> {
           StringProperty assigneeProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
@@ -209,8 +174,8 @@ public class ListServiceRequestController {
           assigneeProperty.set(assignee);
           return assigneeProperty;
         });
-
-    yourRequestDate.setCellValueFactory(
+    instructionsColumn.setCellValueFactory(new PropertyValueFactory<>("specialInstructions"));
+    dateColumn.setCellValueFactory(
         cellData -> {
           StringProperty dateProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
@@ -308,8 +273,8 @@ public class ListServiceRequestController {
                       Optional<ButtonType> result = alert.showAndWait();
                       if (result.isPresent() && result.get() == ButtonType.OK) {
                         qdb.deleteServiceRequest(serviceRequest.getRequestID());
-                        yourRequestsTable.getItems().remove(serviceRequest);
-                        yourRequestsTable.refresh();
+                        requestsTable.getItems().remove(serviceRequest);
+                        requestsTable.refresh();
                       }
                     });
                 Image image = new Image(getClass().getResourceAsStream("/DeleteButton.png"));
@@ -324,10 +289,11 @@ public class ListServiceRequestController {
             }
           };
         });
-    progressDropdownColumn.setCellFactory(
+
+    progressColumn.setCellFactory(
         column -> {
-          return new TableCell<ServiceRequest, String>() {
-            private final MFXComboBox<String> comboBox = new MFXComboBox<>();
+          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
+            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
 
             {
               comboBox.setPrefHeight(20);
@@ -335,44 +301,27 @@ public class ListServiceRequestController {
               comboBox.setOnAction(
                   event -> {
                     ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                    serviceRequest.setProgress(
-                        ServiceRequest.Progress.valueOf(comboBox.getValue()));
+                    serviceRequest.setProgress(comboBox.getValue());
                     qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
-                    yourRequestsTable.refresh();
+                    requestsTable.refresh();
                   });
             }
 
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
               super.updateItem(item, empty);
               if (empty) {
                 setGraphic(null);
               } else {
                 ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                comboBox.setValue(serviceRequest.getProgress().name());
+                comboBox.setValue(serviceRequest.getProgress());
                 setGraphic(comboBox);
               }
             }
           };
         });
 
-    yourRequestsTable.setItems(userRequestedRequests);
-
-    // Set data for assignedRequestTable
-    assignedRequestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-
-    assignedRequestLocation.setCellValueFactory(
-        cellData -> {
-          StringProperty locationProperty = new SimpleStringProperty();
-          ServiceRequest sr = cellData.getValue();
-          String location = qdb.retrieveLocation(sr.getNodeID()).getLongName();
-          locationProperty.set(location);
-          return locationProperty;
-        });
-
-    assignedRequestInstructions.setCellValueFactory(
-        new PropertyValueFactory<>("specialInstructions"));
-    assignedRequestRequester.setCellValueFactory(
+    requesterColumn.setCellValueFactory(
         cellData -> {
           StringProperty requesterProperty = new SimpleStringProperty();
           ServiceRequest sr = cellData.getValue();
@@ -381,16 +330,7 @@ public class ListServiceRequestController {
           return requesterProperty;
         });
 
-    assignedRequestDate.setCellValueFactory(
-        cellData -> {
-          StringProperty dateProperty = new SimpleStringProperty();
-          ServiceRequest sr = cellData.getValue();
-          String dateTime = sr.getDate().toString() + " " + sr.getTime();
-          dateProperty.set(dateTime);
-          return dateProperty;
-        });
-
-    assignedRequestTable.setItems(userAssignedRequests);
+    requestsTable.setItems(allRequests);
   }
 
   public void confCancelClicked() {
@@ -438,7 +378,7 @@ public class ListServiceRequestController {
             conferenceRequest.getProgress().ordinal(),
             confFoodField.getText());
     qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
-    yourRequestsTable.refresh();
+    requestsTable.refresh();
     conferenceRequestEdit.setVisible(false);
   }
 
@@ -489,7 +429,7 @@ public class ListServiceRequestController {
             Integer.parseInt(flowerBouquetField.getText()));
 
     qdb.updateFlowerRequest(flowerRequest.getRequestID(), fr);
-    yourRequestsTable.refresh();
+    requestsTable.refresh();
     flowerRequestEdit.setVisible(false);
   }
 
@@ -539,7 +479,7 @@ public class ListServiceRequestController {
             officeItemField.getText(),
             Integer.parseInt(officeQuantityField.getText()));
     qdb.updateOfficeSuppliesRequest(officeSuppliesRequest.getRequestID(), or);
-    yourRequestsTable.refresh();
+    requestsTable.refresh();
     officeRequestEdit.setVisible(false);
   }
 
@@ -587,7 +527,7 @@ public class ListServiceRequestController {
             furnitureRequest.getProgress().ordinal(),
             furnitureChoiceField.getText());
     qdb.updateFurnitureRequest(furnitureRequest.getRequestID(), fr);
-    yourRequestsTable.refresh();
+    requestsTable.refresh();
     furnitureRequestEdit.setVisible(false);
   }
 
@@ -641,7 +581,7 @@ public class ListServiceRequestController {
             mealEntreeField.getText(),
             mealSideField.getText());
     qdb.updateMealRequest(mealRequest.getRequestID(), mr);
-    yourRequestsTable.refresh();
+    requestsTable.refresh();
     mealRequestEdit.setVisible(false);
   }
 
@@ -691,31 +631,7 @@ public class ListServiceRequestController {
             medicalItemField.getText(),
             Integer.parseInt(medicalQuantityField.getText()));
     qdb.updateMedicalSuppliesRequest(medicalSuppliesRequest.getRequestID(), mr);
-    yourRequestsTable.refresh();
+    requestsTable.refresh();
     medicalRequestEdit.setVisible(false);
-  }
-
-  public static ConferenceRequest getConferenceRequest() {
-    return conferenceRequest;
-  }
-
-  public static FlowerRequest getFlowerRequest() {
-    return flowerRequest;
-  }
-
-  public static MealRequest getMealRequest() {
-    return mealRequest;
-  }
-
-  public static FurnitureRequest getFurnitureRequest() {
-    return furnitureRequest;
-  }
-
-  public static OfficeSuppliesRequest getOfficeRequest() {
-    return officeSuppliesRequest;
-  }
-
-  public static MedicalSuppliesRequest getMedicalRequest() {
-    return medicalSuppliesRequest;
   }
 }

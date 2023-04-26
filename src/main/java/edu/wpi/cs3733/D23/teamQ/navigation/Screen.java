@@ -35,6 +35,8 @@ public enum Screen {
   MEDICAL_SUPPLIES_REQUEST_DISPLAY(
       "views/MedicalSuppliesRequestDisplay.fxml", "Medical Supplies Request Display"),
   LIST_REQUESTS("views/ListServiceRequests.fxml", "List of Service Requests"),
+
+  ADMIN_LIST_REQUESTS("views/AdminListServiceRequests.fxml", "Admin List of Service Requests"),
   PATIENT_TRANSPORT_REQUEST("views/PatientTransportRequest.fxml", "Patient Transport Request"),
   EDIT_PROFILE("views/EditProfile.fxml", "Edit Profile Page"),
   PROFILE_PAGE("views/ProfilePage1.fxml", "Profile Page"),

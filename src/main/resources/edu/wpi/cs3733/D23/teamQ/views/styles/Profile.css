@@ -12,9 +12,6 @@
     -fx-font-weight: bold;
 }
 
-/*.directory .table-column {*/
-/*    -fx-alignment: CENTER;*/
-/*}*/
 
 .noheader .column-header-background {
     -fx-max-height: 0;

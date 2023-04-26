@@ -224,8 +224,12 @@ public class Qdb {
     return serviceRequestTable.getUserRows(user);
   }
 
-  public List<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
+  public ObservableList<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
     return serviceRequestTable.getUserAssignedRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    return serviceRequestTable.getUserRequestedRows(user);
   }
 
   public ServiceRequest retrieveServiceRequest(int requestID) {
@@ -547,15 +551,11 @@ public class Qdb {
   }
 
   public boolean deleteServiceRequest(int requestID) {
-    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-    System.out.println(stackTraceElements);
     updateTimestamp("serviceRequest");
     return serviceRequestTable.deleteRow(requestID);
   }
 
   public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
-    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-    System.out.println(stackTraceElements);
     updateTimestamp("serviceRequest");
     return serviceRequestTable.updateRow(requestID, sr);
   }
@@ -684,5 +684,21 @@ public class Qdb {
 
   public List<Alert> retrieveAllAlerts() {
     return alertTable.getAllRows();
+  }
+
+  public ObservableList<ServiceRequest> getAllServiceRequestsObservable() {
+    return serviceRequestTable.getAllRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingServingRequests() {
+    return serviceRequestTable.getAllOutstandingRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    return serviceRequestTable.getUserAssignedOutstandingRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    return serviceRequestTable.getUserRequestedOutstandingRows(user);
   }
 }
