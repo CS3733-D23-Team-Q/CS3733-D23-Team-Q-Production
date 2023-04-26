@@ -39,7 +39,7 @@ public class DFS implements IPathfinding {
           ) {
             openList.add(node);
             openList.remove(current);
-            path.add(current);
+            // path.add(current);
             visitedList.add(current);
             nextChosen = true;
           }
@@ -73,7 +73,7 @@ public class DFS implements IPathfinding {
               && !nextChosen) {
             openList.add(backup);
             openList.remove(current);
-            path.add(current);
+             path.add(current);
             visitedList.add(current);
             nextChosen = true;
             System.out.println();
@@ -85,9 +85,9 @@ public class DFS implements IPathfinding {
       int i = 1;
       while (!nextChosen) {
         Node previous = path.get(path.size() - i);
-        System.out.println("WENT BACK TO " + previous.getNodeID());
+        System.out.println("WENT BACK TO " + previous.getNodeID() + " with I " + i);
         ArrayList<Node> revisitedNodes = new ArrayList<Node>();
-        revisitedNodes.add(previous);
+        if (!revisitedNodes.contains(previous)) revisitedNodes.add(previous);
         ArrayList<Node> previousNodes = new ArrayList<Node>();
         i++;
         for (Edge previousEdge : previous.getEdges()) {
@@ -98,11 +98,11 @@ public class DFS implements IPathfinding {
           if (!path.contains(previousNode)
               && !nextChosen
               && !previousNode.equals(current)
-              // && !visitedList.contains(previousNode)
+              && !visitedList.contains(previousNode)
               && floor.equalsIgnoreCase(previousNode.getFloor())) {
             openList.add(previousNode);
             openList.remove(current);
-            path.add(current);
+            // path.add(current);
             path.addAll(revisitedNodes);
             visitedList.add(current);
             nextChosen = true;
@@ -114,6 +114,7 @@ public class DFS implements IPathfinding {
                     + revisitedNodes
                     + " TO "
                     + previousNode);
+            break;
           }
         }
       }
