@@ -23,7 +23,6 @@ public class Edge {
 
   public Edge() {}
 
-
   public int getWeight() {
     int xDist = Math.abs(this.getStartNode().getXCoord() - this.getEndNode().getXCoord());
     int yDist = Math.abs(this.getStartNode().getYCoord() - this.getEndNode().getYCoord());

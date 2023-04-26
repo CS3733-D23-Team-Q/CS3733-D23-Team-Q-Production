@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,10 @@ public class SettingsController {
   @FXML private Label emailDisplay;
   @FXML private Label phoneDisplay;
 
+  @FXML MFXFilterComboBox tableField;
+  @FXML MFXTextField filenameField;
+  @FXML MFXButton submitButton;
+
   ObservableList<String> fontList = FXCollections.observableArrayList("Small", "Normal", "Large");
   ObservableList<String> voiceList =
       FXCollections.observableArrayList("Wilson Wong", "Siri", "Morgan Freeman");
@@ -34,6 +39,18 @@ public class SettingsController {
   ObservableList<String> algorithmList =
       FXCollections.observableArrayList("A*", "Dijkstra", "BFS", "DFS", "Q*");
 
+  ObservableList<String> tableList =
+      FXCollections.observableArrayList(
+          "Accounts",
+          "Edges",
+          "Locations",
+          "Moves",
+          "Nodes",
+          "Messages",
+          "Alerts",
+          "Signs",
+          "Service requests");
+
   @FXML MFXButton backButton;
 
   @FXML
@@ -41,6 +58,7 @@ public class SettingsController {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
 
+    tableField.setItems(tableList);
     this.fontField.setValue("");
     this.fontField.setItems(fontList);
     this.voiceField.setValue("");
@@ -64,5 +82,21 @@ public class SettingsController {
 
   public void backButtonClicked() {
     Navigation.navigate(Screen.HOME);
+  }
+
+  public void submitButtonClicked() {
+    if (filenameField.getText().equals("")){
+      if (qdb.exportToCSV(tableField.getText())){
+        System.out.println("Exported Successfully!");
+      } else {
+        System.out.println("Failed to Export.");
+      }
+    } else {
+      if (qdb.exportToCSV(tableField.getText(), filenameField.getText())){
+        System.out.println("Exported Successfully");
+      } else {
+        System.out.println("Failed to Export.");
+      }
+    }
   }
 }
