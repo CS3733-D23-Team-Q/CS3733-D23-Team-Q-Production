@@ -35,7 +35,7 @@
       <HBox>
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
-            <VBox prefHeight="558.0" prefWidth="487.0" spacing="30.0" style="-fx-background-color: #f1f1f1;">
+            <VBox prefHeight="558.0" prefWidth="428.0" spacing="30.0" style="-fx-background-color: #f1f1f1;">
                <children>
                   <VBox prefWidth="400.0">
                      <children>

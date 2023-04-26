@@ -32,13 +32,13 @@
             </Text>
          </children>
          <VBox.margin>
-            <Insets bottom="30.0" />
+            <Insets />
          </VBox.margin>
       </StackPane>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
-            <VBox prefHeight="493.0" prefWidth="506.0" spacing="30.0">
+            <VBox prefHeight="407.0" prefWidth="432.0" spacing="30.0">
                <children>
                   <VBox>
                      <children>

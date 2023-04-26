@@ -41,7 +41,7 @@
       <HBox>
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" />
-            <VBox prefHeight="590.0" prefWidth="477.0" spacing="30.0">
+            <VBox prefHeight="590.0" prefWidth="430.0" spacing="30.0">
                <children>
                   <VBox>
                      <children>
