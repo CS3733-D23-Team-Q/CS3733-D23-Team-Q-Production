@@ -39,8 +39,8 @@ public class DFS implements IPathfinding {
         for (Node node : nodesAvailable) {
           if (node.getFloor().equalsIgnoreCase(current.getFloor())
               && !visitedList.contains(node)
-              && !node.equals(current
-          ) && !nextChosen // find a nonelevator
+              && !node.equals(current)
+              && !nextChosen // find a nonelevator
           ) {
             System.out.println();
             System.out.println(
