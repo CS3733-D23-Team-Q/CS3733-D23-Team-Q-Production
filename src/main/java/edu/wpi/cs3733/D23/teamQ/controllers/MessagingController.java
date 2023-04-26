@@ -50,6 +50,7 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void initialize() {
+    System.out.println("Starting messaging page");
     Qdb qdb = Qdb.getInstance();
     qdb.subscribe(this);
 
@@ -124,9 +125,6 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void composeButtonClicked() {
-    if (!messageVbox.getChildren().isEmpty()) {
-      messageVbox.getChildren().clear();
-    }
 
     personLabel.setVisible(false);
     profilePicture.setVisible(false);
@@ -266,9 +264,9 @@ public class MessagingController implements Subscriber {
     profilePicture.setVisible(true);
     activeIndicator.setVisible(true);
 
-    //    if (!messageVbox.getChildren().isEmpty()) {
-    //      messageVbox.getChildren().clear();
-    //    }
+        if (!messageVbox.getChildren().isEmpty()) {
+          messageVbox.getChildren().clear();
+        }
     if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
     else activeIndicator.setStyle("-fx-fill: #CE3C49");
 
