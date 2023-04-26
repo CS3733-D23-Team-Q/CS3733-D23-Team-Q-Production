@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.Main;
+import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
@@ -10,15 +12,19 @@ public class SignoutSubmenuController {
   @FXML VBox signoutSM;
   @FXML MFXButton signout;
   @FXML MFXButton exit;
+  Qdb qdb = Qdb.getInstance();
 
   @FXML
   public void signoutClicked() {
     Navigation.logout();
+    qdb.getAccountFromUsername(LoginController.getLoginUsername()).setActive(false);
   }
 
   @FXML
   public void exitClicked() {
     Platform.exit();
+    Main.refresh.stop();
+    qdb.getAccountFromUsername(LoginController.getLoginUsername()).setActive(false);
   }
 
   @FXML

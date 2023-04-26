@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.Alert;
 import edu.wpi.cs3733.D23.teamQ.App;
+import edu.wpi.cs3733.D23.teamQ.Main;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.impl.AccountDaoImpl;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
@@ -11,6 +12,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -40,18 +42,33 @@ public class LoginController {
 
   @Getter private static String loginUsername;
   @Getter private static String loginEmail;
+  ArrayList<String> admins = new ArrayList<>();
+  @Getter private static boolean isAdmin = false;
 
   @FXML
   public void initialize() {
-    Image hImage = new Image(App.class.getResourceAsStream("Hospital1.jpeg"));
+    Image hImage = new Image(App.class.getResourceAsStream("Hospital.jpeg"));
     ImageView imageView = new ImageView(hImage);
     imageView.setOpacity(0.75);
     imagePane.setContent(imageView);
+    admins.add("admin");
+    admins.add("asjacob");
+    admins.add("cam40419");
+    admins.add("Dushman");
+    admins.add("jhkeselman");
+    admins.add("John101");
+    admins.add("kjcoleman");
+    admins.add("kliu5");
+    admins.add("kwang");
+    admins.add("odzabolotnev");
+    admins.add("ssjohn");
+    admins.add("wmerry");
+    admins.add("yxue");
   }
 
   @FXML
   public void exitClicked() {
-
+    Main.refresh.stop();
     Platform.exit();
   }
 
@@ -88,6 +105,8 @@ public class LoginController {
         passwordReact(username, enteredPassword, actualPassword);
       }
     } else {
+      alertImage.setVisible(true);
+      loginAlert.setVisible(true);
       alert.setLabelAlert("User doesn't exist", loginAlert, alertImage);
     }
   }
@@ -98,7 +117,7 @@ public class LoginController {
       user = username;
       Account a = qdb.retrieveAccount(username);
       a.setActive(true);
-      qdb.updateAccount(username, a);
+      // qdb.updateAccount(username, a);
       alert.clearLabelAlert(loginAlert, alertImage);
       Screen menuScreen = Screen.MENU_PANE;
       final String filename = menuScreen.getFilename();
@@ -107,10 +126,14 @@ public class LoginController {
       Node n = loader.load();
       App.getRootBorder().setLeft(n);
       App.getRController().showMenu(true);
-      Navigation.navigate(Screen.HOME);
       loginUsername = usernameField.getText();
+      qdb.getAccountFromUsername(loginUsername).setActive(true);
       loginEmail = dao.retrieveRow(loginUsername).getEmail();
+      Navigation.navigate(Screen.HOME);
+      isAdmin = admins.contains(loginUsername);
     } else {
+      alertImage.setVisible(true);
+      loginAlert.setVisible(true);
       alert.setLabelAlert("Wrong password", loginAlert, alertImage);
     }
   }

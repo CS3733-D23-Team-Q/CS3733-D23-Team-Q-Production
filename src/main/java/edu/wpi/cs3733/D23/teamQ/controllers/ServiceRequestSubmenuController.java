@@ -10,16 +10,30 @@ public class ServiceRequestSubmenuController {
   @FXML VBox servicerequestSM;
   @FXML MFXButton create;
   @FXML MFXButton edit;
+  @FXML ServiceRequestBlockController srbc;
 
   @FXML
-  public void createClicked() {
-    Navigation.navigate(Screen.SERVICE_REQUEST_HUB);
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+  public void createEntered() {
+    srbc.srCreationSMPane.setVisible(true);
+  }
+
+  @FXML
+  public void editEntered() {
+    srbc.srCreationSMPane.setVisible(false);
+  }
+
+  @FXML
+  public void servicerequestSMEntered() {
+    srbc.srCreationSMPane.setVisible(false);
   }
 
   @FXML
   public void editClicked() {
     Navigation.navigate(Screen.LIST_REQUESTS);
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+  }
+
+  @FXML
+  public void setSRBC(ServiceRequestBlockController srbc) {
+    this.srbc = srbc;
   }
 }

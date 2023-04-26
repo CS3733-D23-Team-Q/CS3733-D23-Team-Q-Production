@@ -12,10 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 
+@Getter
 public class LocationDaoImpl implements GenDao<Location, Integer> {
   private List<Location> locations = new ArrayList<Location>();
   private static LocationDaoImpl single_instance = null;
+  private String fileName = "Locations.csv";
 
   private LocationDaoImpl() {
     populate();
@@ -100,6 +103,7 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
 
   public boolean populate() {
     try {
+      locations.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"locationName\"");

@@ -11,10 +11,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ServiceRequestDaoImpl {
+public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
   private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
+  private String fileName = "Service_Requests.csv";
 
   private static ServiceRequestDaoImpl single_instance = null;
 
@@ -93,6 +94,66 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
+  public ObservableList<ServiceRequest> getUserAssignedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      list.add(serviceRequests.get(i));
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
   /**
    * deletes medicalSuppliesRequest from list of medicalSuppliesRequests
    *
@@ -114,11 +175,16 @@ public class ServiceRequestDaoImpl {
     return true;
   }
 
+  @Override
+  public boolean addRow(ServiceRequest x) {
+    return false;
+  }
+
   public boolean updateRow(Integer requestID, ServiceRequest newRequest) {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?"
+                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -129,6 +195,7 @@ public class ServiceRequestDaoImpl {
       st.setDate(6, newRequest.getDate());
       st.setString(7, newRequest.getTime());
       st.setInt(8, newRequest.getProgress().ordinal());
+      st.setInt(9, requestID);
       st.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();

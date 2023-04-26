@@ -13,11 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lombok.Getter;
 
+@Getter
 public class NodeDaoImpl implements GenDao<Node, Integer> {
   private List<Node> nodes = new ArrayList<>();
   private LocationDaoImpl locationTable;
   private static NodeDaoImpl single_instance = null;
+  private String fileName = "Nodes.csv";
 
   private NodeDaoImpl(LocationDaoImpl locationTable) {
     this.locationTable = locationTable;
@@ -106,6 +109,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
   @Override
   public boolean populate() {
     try {
+      nodes.clear();
       Connection conn = GenDao.connect();
       PreparedStatement pst = conn.prepareStatement("SELECT * FROM \"node\"");
       ResultSet rs = pst.executeQuery();

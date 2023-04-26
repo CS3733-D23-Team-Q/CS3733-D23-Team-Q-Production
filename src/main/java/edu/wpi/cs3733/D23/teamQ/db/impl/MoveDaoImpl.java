@@ -10,12 +10,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lombok.Getter;
 
+@Getter
 public class MoveDaoImpl implements GenDao<Move, Integer> {
   private List<Move> moves = new ArrayList<>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private static MoveDaoImpl single_instance = null;
+  private String fileName = "Moves.csv";
 
   public static synchronized MoveDaoImpl getInstance(NodeDaoImpl nodeTable) {
     if (single_instance == null) single_instance = new MoveDaoImpl(nodeTable);
@@ -108,6 +111,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
   @Override
   public boolean populate() {
     try {
+      moves.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From move");

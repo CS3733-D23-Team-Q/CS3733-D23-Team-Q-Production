@@ -16,6 +16,9 @@ public class Account {
   private String title;
   private int phoneNumber;
 
+  private String notes;
+  private String todo;
+
   public Account(
       String username,
       String password,
@@ -29,7 +32,9 @@ public class Account {
       String firstName,
       String lastName,
       String title,
-      int phoneNumber) {
+      int phoneNumber,
+      String notes,
+      String todo) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -43,6 +48,8 @@ public class Account {
     this.lastName = lastName;
     this.title = title;
     this.phoneNumber = phoneNumber;
+    this.notes = notes;
+    this.todo = todo;
   }
 
   public Account(
@@ -57,7 +64,9 @@ public class Account {
       String firstName,
       String lastName,
       String title,
-      int phoneNumber) {
+      int phoneNumber,
+      String notes,
+      String todo) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -70,6 +79,23 @@ public class Account {
     this.lastName = lastName;
     this.title = title;
     this.phoneNumber = phoneNumber;
+    this.notes = notes;
+    this.todo = todo;
+  }
+
+  public Account(String username) {
+    this.username = username;
+    this.password = null;
+    this.email = null;
+    this.securityQuestion1 = 2;
+    this.securityQuestion2 = 1;
+    this.securityAnswer1 = null;
+    this.securityAnswer2 = null;
+    this.active = true;
+    this.firstName = null;
+    this.lastName = null;
+    this.title = null;
+    this.phoneNumber = 0;
   }
 
   public String getUsername() {
@@ -174,5 +200,52 @@ public class Account {
 
   public void setPhoneNumber(int PN) {
     this.phoneNumber = PN;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getTodo() {
+    return todo;
+  }
+
+  public void setTodo(String todo) {
+    this.todo = todo;
+  }
+
+  @Override
+  public String toString() {
+    return username
+        + ","
+        + password
+        + ","
+        + email
+        + ","
+        + securityQuestion1
+        + ","
+        + securityQuestion2
+        + ","
+        + securityAnswer1
+        + ","
+        + securityAnswer2
+        + ","
+        + active
+        + ","
+        + firstName
+        + ","
+        + lastName
+        + ","
+        + title
+        + ","
+        + phoneNumber
+        + ","
+        + todo
+        + ","
+        + notes;
   }
 }

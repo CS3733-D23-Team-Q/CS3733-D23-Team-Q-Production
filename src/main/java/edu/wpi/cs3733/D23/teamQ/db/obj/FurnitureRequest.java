@@ -15,8 +15,8 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
   public FurnitureRequest(
       int requestID,
       Node node,
-      Account requester,
       Account assignee,
+      Account requester,
       String specialInstructions,
       Date date,
       String time,
@@ -28,8 +28,8 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
 
   public FurnitureRequest(
       Node node,
-      Account requester,
       Account assignee,
+      Account requester,
       String specialInstructions,
       Date date,
       String time,

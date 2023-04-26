@@ -11,12 +11,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lombok.Getter;
 
+@Getter
 public class EdgeDaoImpl implements GenDao<Edge, Integer> {
   private List<Edge> edges = new ArrayList<>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private static EdgeDaoImpl single_instance = null;
+  private String fileName = "Edges.csv";
 
   private EdgeDaoImpl(NodeDaoImpl nodeTable) {
     this.nodeTable = nodeTable;
@@ -95,6 +98,7 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
   @Override
   public boolean populate() {
     try {
+      edges.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"edge\"");

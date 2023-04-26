@@ -22,7 +22,7 @@ public class NavigationBlockController {
   @FXML
   public void anchorEntered() throws IOException {
     mc.closeAll();
-    if (LoginController.getLoginUsername().equals("admin")) {
+    if (LoginController.isAdmin()) {
       navigationSMPane.getChildren().clear();
       String filename = "views/NavigationSubmenuAdmin.fxml";
       final var resource = App.class.getResource(filename);
@@ -54,6 +54,16 @@ public class NavigationBlockController {
 
   @FXML
   public void navigationExited() {}
+
+  @FXML
+  public void hideBlock() {
+    navigationHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    navigationHB.setVisible(true);
+  }
 
   @FXML
   public void hideSM() {

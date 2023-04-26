@@ -5,13 +5,18 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.PatientTransportRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRequest, Integer> {
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static PatientTransportRequestDaoImpl single_instance = null;
+  private String fileName = "Patient_Transport_Requests.csv";
 
   public static synchronized PatientTransportRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {

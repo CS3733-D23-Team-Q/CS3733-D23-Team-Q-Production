@@ -19,13 +19,6 @@ public class Location {
   }
 
   public String toString() {
-    return "node: "
-        + this.nodeID
-        + ", longName: "
-        + this.longName
-        + ", shortName: "
-        + this.shortName
-        + ", nodeType: "
-        + this.nodeType;
+    return nodeID + "," + longName + "," + shortName + "," + nodeType;
   }
 }
