@@ -106,7 +106,7 @@ public class Qdb {
     subscribers.remove(s);
   }
 
-  public void notifySubscribers(List<String> context) {
+  public synchronized void notifySubscribers(List<String> context) {
     for (Subscriber s : subscribers) {
       s.update(context);
     }
