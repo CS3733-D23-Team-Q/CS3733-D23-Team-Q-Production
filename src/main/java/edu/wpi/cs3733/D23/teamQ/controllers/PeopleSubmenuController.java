@@ -12,6 +12,7 @@ public class PeopleSubmenuController {
   @FXML MFXButton directory;
 
   @FXML MFXButton messages;
+  @FXML MFXButton createAlert;
 
   @FXML
   public void profileClicked() {
@@ -31,5 +32,10 @@ public class PeopleSubmenuController {
     } else {
       Navigation.navigate(Screen.DIRECTORY);
     }
+  }
+
+  @FXML
+  public void createAlertClicked() {
+    Navigation.navigate(Screen.CREATE_ALERT);
   }
 }
