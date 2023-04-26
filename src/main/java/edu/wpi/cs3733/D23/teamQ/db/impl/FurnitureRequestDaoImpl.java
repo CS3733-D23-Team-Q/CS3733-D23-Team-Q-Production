@@ -68,6 +68,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
       st.setDate(7, newRequest.getDate());
       st.setString(8, newRequest.getTime());
       st.setString(9, newRequest.getItem());
+      st.setInt(10, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {

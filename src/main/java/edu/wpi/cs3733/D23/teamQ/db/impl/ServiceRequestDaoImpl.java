@@ -44,8 +44,8 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
             new ServiceRequest(
                 rst.getInt("requestID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
                 accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
@@ -94,10 +94,60 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
     return list;
   }
 
-  public List<ServiceRequest> getUserAssignedRows(String user) {
+  public ObservableList<ServiceRequest> getUserAssignedRows(String user) {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
       if (serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      list.add(serviceRequests.get(i));
+    }
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getProgress().ordinal() != 2) {
         list.add(serviceRequests.get(i));
       }
     }
@@ -134,7 +184,7 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?"
+                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -145,6 +195,7 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
       st.setDate(6, newRequest.getDate());
       st.setString(7, newRequest.getTime());
       st.setInt(8, newRequest.getProgress().ordinal());
+      st.setInt(9, requestID);
       st.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();

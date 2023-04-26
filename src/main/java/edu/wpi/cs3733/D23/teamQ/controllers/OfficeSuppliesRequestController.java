@@ -10,8 +10,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 public class OfficeSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -37,6 +39,12 @@ public class OfficeSuppliesRequestController {
   @FXML Button cancelButton;
   @FXML Button submitButton;
 
+  @FXML private ImageView PrinterPaperImage;
+  @FXML private ImageView PencilImage;
+  @FXML private ImageView PenImage;
+  @FXML private ImageView HighlighterImage;
+  @FXML private ImageView NotepadImage;
+
   @FXML
   public void initialize() {
     this.assigneeField.setValue("");
@@ -47,6 +55,12 @@ public class OfficeSuppliesRequestController {
     this.itemRequestedField.setItems(itemList);
     this.timeField.setValue("");
     this.timeField.setItems(timeList);
+
+    PrinterPaperImage.setOpacity(0.0);
+    PencilImage.setOpacity(0.0);
+    PenImage.setOpacity(0.0);
+    HighlighterImage.setOpacity(0.0);
+    NotepadImage.setOpacity(0.0);
   }
 
   @FXML
@@ -58,6 +72,12 @@ public class OfficeSuppliesRequestController {
     dateField.clear();
     specialInstructionsField.clear();
     quantityField.clear();
+
+    PrinterPaperImage.setOpacity(0.0);
+    PencilImage.setOpacity(0.0);
+    PenImage.setOpacity(0.0);
+    HighlighterImage.setOpacity(0.0);
+    NotepadImage.setOpacity(0.0);
   }
 
   @FXML
@@ -73,15 +93,54 @@ public class OfficeSuppliesRequestController {
     OfficeSuppliesRequest newOSR =
         new OfficeSuppliesRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(LoginController.getUsername()),
             qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
+            qdb.retrieveAccount(LoginController.getUsername()),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
-            ListServiceRequestController.getOfficeRequest().getProgress().ordinal(),
+            0,
             (String) itemRequestedField.getValue(),
             Integer.parseInt(quantityField.getText()));
     qdb.addOfficeSuppliesRequest(newOSR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {
+      PrinterPaperImage.setOpacity(1.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Pencil")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(1.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Pen")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(1.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Highlighter")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(1.0);
+      NotepadImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Notepad")) {
+      PrinterPaperImage.setOpacity(0.0);
+      PencilImage.setOpacity(0.0);
+      PenImage.setOpacity(0.0);
+      HighlighterImage.setOpacity(0.0);
+      NotepadImage.setOpacity(1.0);
+    }
   }
 }

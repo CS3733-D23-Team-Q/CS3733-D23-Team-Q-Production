@@ -15,7 +15,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 public class FurnitureDeliveryRequestDisplayController {
 
@@ -37,14 +39,19 @@ public class FurnitureDeliveryRequestDisplayController {
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
-  @FXML MFXFilterComboBox furnitureChoiceField;
   @FXML MFXTextField specialInstructionsField;
+  @FXML MFXFilterComboBox itemRequestedField;
+
+  @FXML private ImageView DeskImage;
+  @FXML private ImageView DeskChairImage;
+  @FXML private ImageView CouchImage;
+  @FXML private ImageView ExaminationTableImage;
 
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
     timeField.setItems(timeList);
-    furnitureChoiceField.setItems(TypeOfFurniture);
+    itemRequestedField.setItems(TypeOfFurniture);
     assigneeField.setText(getFurnitureRequest().getAssignee().getUsername());
     roomNumberField.setText(
         qdb.retrieveNode(ListServiceRequestController.getFurnitureRequest().getNodeID())
@@ -58,7 +65,32 @@ public class FurnitureDeliveryRequestDisplayController {
     timeField.setText(ListServiceRequestController.getFurnitureRequest().getTime());
     specialInstructionsField.setText(
         ListServiceRequestController.getFurnitureRequest().getSpecialInstructions());
-    furnitureChoiceField.setText(getFurnitureRequest().getItem());
+    itemRequestedField.setText(getFurnitureRequest().getItem());
+
+    if (getFurnitureRequest().getItem().equals("Desk")) {
+      DeskImage.setOpacity(1.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (getFurnitureRequest().getItem().equals("Desk Chair")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(1.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (getFurnitureRequest().getItem().equals("Couch")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(1.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (getFurnitureRequest().getItem().equals("Examination Table")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(1.0);
+    }
   }
 
   @FXML
@@ -87,8 +119,36 @@ public class FurnitureDeliveryRequestDisplayController {
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
             getFurnitureRequest().getProgress().ordinal(),
-            furnitureChoiceField.getValue().toString());
+            itemRequestedField.getValue().toString());
 
     qdb.updateFurnitureRequest(getFurnitureRequest().getRequestID(), newFurR);
+  }
+
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getValue().equals("Desk")) {
+      DeskImage.setOpacity(1.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Desk Chair")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(1.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Couch")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(1.0);
+      ExaminationTableImage.setOpacity(0.0);
+    }
+    if (itemRequestedField.getValue().equals("Examination Table")) {
+      DeskImage.setOpacity(0.0);
+      DeskChairImage.setOpacity(0.0);
+      CouchImage.setOpacity(0.0);
+      ExaminationTableImage.setOpacity(1.0);
+    }
   }
 }

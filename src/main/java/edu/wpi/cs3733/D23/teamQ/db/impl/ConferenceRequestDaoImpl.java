@@ -71,7 +71,8 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
       st.setString(6, newRequest.getSpecialInstructions());
       st.setDate(7, newRequest.getDate());
       st.setString(8, newRequest.getTime());
-      st.setString(7, newRequest.getFoodChoice());
+      st.setString(9, newRequest.getFoodChoice());
+      st.setInt(10, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {

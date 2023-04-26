@@ -231,6 +231,10 @@ public class Qdb {
     return serviceRequestTable.getUserAssignedRows(user);
   }
 
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    return serviceRequestTable.getUserRequestedRows(user);
+  }
+
   public ServiceRequest retrieveServiceRequest(int requestID) {
     return serviceRequestTable.retrieveRow(requestID);
   }
@@ -741,5 +745,21 @@ public class Qdb {
         return serviceRequestTable;
     }
     return null;
+  }
+
+  public ObservableList<ServiceRequest> getAllServiceRequestsObservable() {
+    return serviceRequestTable.getAllRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingServingRequests() {
+    return serviceRequestTable.getAllOutstandingRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    return serviceRequestTable.getUserAssignedOutstandingRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    return serviceRequestTable.getUserRequestedOutstandingRows(user);
   }
 }
