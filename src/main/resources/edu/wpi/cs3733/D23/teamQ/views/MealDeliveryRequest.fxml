@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                <image>
-                  <Image url="@../../../../../../220615-delish-seo-04-harissa-grilled-chicken-horizontal-1748-eb-1656350158.jpg" />
+                  <Image url="@../MealDeliveryTitle.jpg" />
                </image>
             </ImageView>
             <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form " StackPane.alignment="CENTER">

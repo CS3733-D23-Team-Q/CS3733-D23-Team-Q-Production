@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import net.kurobako.gesturefx.GesturePane?>
+
+
+<VBox fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequest2Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GesturePane fx:id="titlePane" hbarPolicy="NEVER" prefHeight="128.0" prefWidth="1360.0" vbarPolicy="NEVER" />
+      <HBox>
+         <children>
+            <Label prefHeight="48.0" text="Meal Delivery Request" textFill="#012d5a">
+               <font>
+                  <Font name="Roboto" size="36.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="700.0" prefWidth="1360.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+         </children>
+      </HBox>
+      <VBox VBox.vgrow="ALWAYS" />
+      <HBox prefHeight="24.0" prefWidth="1360.0">
+         <children>
+            <MFXButton />
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <MFXButton />
+                  <MFXButton />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="4.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
