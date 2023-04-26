@@ -263,9 +263,9 @@ public class MessagingController implements Subscriber {
     profilePicture.setVisible(true);
     activeIndicator.setVisible(true);
 
-        if (!messageVbox.getChildren().isEmpty()) {
-          messageVbox.getChildren().clear();
-        }
+    if (!messageVbox.getChildren().isEmpty()) {
+      messageVbox.getChildren().clear();
+    }
     if (receiver.isActive()) activeIndicator.setStyle("-fx-fill: #37AC2B");
     else activeIndicator.setStyle("-fx-fill: #CE3C49");
 
