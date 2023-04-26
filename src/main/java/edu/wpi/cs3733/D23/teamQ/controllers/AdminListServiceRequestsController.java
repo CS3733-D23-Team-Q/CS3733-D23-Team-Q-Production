@@ -435,7 +435,7 @@ public class AdminListServiceRequestsController {
 
   public void setOfficeFields(OfficeSuppliesRequest or) {
     officeItemField.setItems(itemList);
-    officeAssigneeField.setItems(qdb.getAllLongNames());
+    officeAssigneeField.setItems(qdb.getAllNames());
     officeLocationField.setItems(qdb.getAllLongNames());
     officeTimeField.setItems(timeList);
 
@@ -484,7 +484,7 @@ public class AdminListServiceRequestsController {
   }
 
   public void setFurnitureFields(FurnitureRequest fr) {
-    furnitureAssigneeField.setItems(qdb.getAllLongNames());
+    furnitureAssigneeField.setItems(qdb.getAllNames());
     furnitureLocationField.setItems(qdb.getAllLongNames());
     furnitureTimeField.setItems(timeList);
     furnitureChoiceField.setItems(furnitureList);
@@ -532,7 +532,7 @@ public class AdminListServiceRequestsController {
   }
 
   private void setMealFields(MealRequest mr) {
-    mealAssigneeField.setItems(qdb.getAllLongNames());
+    mealAssigneeField.setItems(qdb.getAllNames());
     mealLocationField.setItems(qdb.getAllLongNames());
     mealTimeField.setItems(timeList);
     mealDrinkField.setItems(drinkList);
@@ -587,7 +587,7 @@ public class AdminListServiceRequestsController {
 
   public void setMedicalFields(MedicalSuppliesRequest mr) {
     medicalItemField.setItems(medicalItemList);
-    medicalAssigneeField.setItems(qdb.getAllLongNames());
+    medicalAssigneeField.setItems(qdb.getAllNames());
     medicalLocationField.setItems(qdb.getAllLongNames());
     medicalTimeField.setItems(timeList);
 
