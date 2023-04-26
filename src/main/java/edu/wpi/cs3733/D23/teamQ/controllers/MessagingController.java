@@ -14,11 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -44,6 +42,9 @@ public class MessagingController implements Subscriber {
 
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
+  @FXML ImageView composeButton;
+  @FXML VBox accountVbox;
+  @FXML MFXScrollPane accountSP;
 
   SimpleBooleanProperty sbp = new SimpleBooleanProperty(false);
 
@@ -69,7 +70,7 @@ public class MessagingController implements Subscriber {
               + ", "
               + receiver.getTitle()
               + ")");
-      setup();
+      populateMessages();
     }
 
     messageVbox
@@ -80,25 +81,6 @@ public class MessagingController implements Subscriber {
               public void changed(
                   ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 messageSP.setVvalue((double) newValue);
-              }
-            });
-
-    Bindings.when(sbp)
-        .then(
-            new ChangeListener<ObservableList<Message>>() {
-              @Override
-              public void changed(
-                  ObservableValue<? extends ObservableList<Message>> observable,
-                  ObservableList<Message> oldValue,
-                  ObservableList<Message> newValue) {
-                Message m =
-                    qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                        .get(
-                            qdb.retrieveMessages(
-                                        LoginController.getUsername(), receiver.getUsername())
-                                    .size()
-                                - 1);
-                if (m.getSender() == receiver) messageReceived(m);
               }
             });
 
@@ -115,7 +97,7 @@ public class MessagingController implements Subscriber {
                 if (matcher.find()) {
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
-                  setup();
+                  populateMessages();
                 }
               }
             });
@@ -127,6 +109,9 @@ public class MessagingController implements Subscriber {
       sendButtonClicked();
     }
   }
+
+  @FXML
+  public void composeButtonClicked() {}
 
   @FXML
   public void sendButtonClicked() {
@@ -171,7 +156,7 @@ public class MessagingController implements Subscriber {
     }
   }
 
-  public void sentHistorically(Message messageSent) {
+  public void populateSent(Message messageSent) {
 
     Qdb qdb = Qdb.getInstance();
 
@@ -203,7 +188,7 @@ public class MessagingController implements Subscriber {
     messageVbox.getChildren().add(hbox);
   }
 
-  public void messageReceived(Message messageReceived) {
+  public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
 
@@ -253,7 +238,7 @@ public class MessagingController implements Subscriber {
     messageVbox.getChildren().add(hbox);
   }
 
-  public void setup() {
+  public void populateMessages() {
     Qdb qdb = Qdb.getInstance();
     sbp.set(true);
 
@@ -279,14 +264,14 @@ public class MessagingController implements Subscriber {
               .get(0)
               .getTimeStamp());
     for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
-      if (m.getSender().getUsername().equals(LoginController.getUsername())) sentHistorically(m);
-      else messageReceived(m);
+      if (m.getSender().getUsername().equals(LoginController.getUsername())) populateSent(m);
+      else populateReceived(m);
     }
   }
 
   public boolean update(List<String> context) {
     if (context.contains("message")) {
-      setup();
+      populateMessages();
       return true;
     } else {
       return false;

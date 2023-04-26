@@ -103,7 +103,7 @@ public class DFS implements IPathfinding {
               && floor.equalsIgnoreCase(previousNode.getFloor())) {
             openList.add(previousNode);
             openList.remove(current);
-            //path.add(current);
+            // path.add(current);
             path.addAll(revisitedNodes);
             // path.add(previousNode);
             visitedList.add(current);
