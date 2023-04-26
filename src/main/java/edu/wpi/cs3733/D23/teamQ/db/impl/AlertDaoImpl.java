@@ -65,7 +65,7 @@ public class AlertDaoImpl {
     boolean result = false;
     Connection conn = GenDao.connect();
     try {
-      String query = "INSERT INTO alert (\"alertID\", timestamp, message) VALUES(?,?,?)";
+      String query = "INSERT INTO alert (\"alertID\", timestamp, message) VALUES(?,?)";
       PreparedStatement pst = conn.prepareStatement(query);
       pst.setLong(1, a.getTimestamp());
       pst.setString(2, a.getMessage());
