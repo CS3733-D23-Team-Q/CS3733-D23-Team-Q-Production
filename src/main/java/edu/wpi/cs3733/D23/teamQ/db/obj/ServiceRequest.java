@@ -52,4 +52,8 @@ public class ServiceRequest {
     this.nodeID = node.getNodeID();
     this.assigneeUsername = assignee.getUsername();
   }
+
+  public String toString(){
+    return requestID + "," + node.getNodeID() + "," + assignee.getUsername() + "," + requester.getUsername() + "," + specialInstructions + "," + date.toString() + "," + time + "," + progress.ordinal();
+  }
 }

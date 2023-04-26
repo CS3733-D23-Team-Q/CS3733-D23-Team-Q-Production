@@ -45,18 +45,15 @@ public class Node {
   }
 
   public String toString() {
-    return "nodeID: "
-        + this.nodeID
-        + ", xCoord: "
+    return this.nodeID
+        + ","
         + this.xCoord
-        + ", yCoord: "
+        + ","
         + this.yCoord
-        + ", floor: "
+        + ","
         + this.floor
-        + ", building: "
-        + this.building
-        + ", location: "
-        + this.location;
+        + ","
+        + this.building;
   }
 
   public void addBranch(Edge e) {
