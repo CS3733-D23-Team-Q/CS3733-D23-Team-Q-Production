@@ -21,9 +21,6 @@ public class DFS implements IPathfinding {
         path.add(current);
         return path;
       }
-      if (current.getEdges().size() == 0) {
-        System.out.println("This node is a dead end " + current);
-      }
       ArrayList<Node> nodesAvailable = new ArrayList<Node>();
       for (Edge edgePath : current.getEdges()) {
         System.out.println();
@@ -42,7 +39,8 @@ public class DFS implements IPathfinding {
         for (Node node : nodesAvailable) {
           if (node.getFloor().equalsIgnoreCase(current.getFloor())
               && !visitedList.contains(node)
-              && !node.equals(current) // find a nonelevator
+              && !node.equals(current
+          ) && !nextChosen // find a nonelevator
           ) {
             System.out.println();
             System.out.println(
