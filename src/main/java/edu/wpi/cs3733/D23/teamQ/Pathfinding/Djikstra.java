@@ -36,7 +36,7 @@ public class Djikstra implements IPathfinding {
           elevatorTargets.add(these.getEndNode());
         }
         for (Node node : elevatorTargets) {
-          if (node.getFloor().equalsIgnoreCase(end.getFloor())) {
+          if (node.getFloor().equalsIgnoreCase(end.getFloor()) && !node.equals(current)) {
             Node chosenElev = node;
             openList.add(chosenElev);
             openList.remove(current);
@@ -47,34 +47,36 @@ public class Djikstra implements IPathfinding {
           }
         }
       }
-      for (Edge thisOne :
-          current.getEdges()) { // main choice block for start nodes, used to calc distance
-        if (!closedList.contains(thisOne.getStartNode())
-            && !thisOne.getStartNode().equals(current)
-            && !path.contains(thisOne.getStartNode())
-            //   && thisOne.getStartNode()
-            && !nextChosen) {
-          double xDist = Math.abs(end.getXCoord() - thisOne.getStartNode().getXCoord());
-          double yDist = Math.abs(end.getYCoord() - thisOne.getStartNode().getYCoord());
-          double weight = Math.sqrt(xDist * xDist + yDist * yDist);
-          if (weight < lowestLocalCost) {
-            lowestLocalCost = weight;
-            chosen = thisOne.getStartNode();
-            System.out.println();
-          }
-        } else if (!closedList.contains(
-                thisOne.getEndNode()) // main choice block for end nodes, used to cacl
-            && !thisOne.getEndNode().equals(current) // distance
-            && !path.contains(thisOne.getEndNode())
-            && thisOne.getEndNode().getFloor().equalsIgnoreCase(start.getFloor())
-            && !nextChosen) {
-          double xDist = Math.abs(end.getXCoord() - thisOne.getEndNode().getXCoord());
-          double yDist = Math.abs(end.getYCoord() - thisOne.getEndNode().getYCoord());
-          double weight = Math.sqrt(xDist * xDist + yDist * yDist);
-          if (weight < lowestLocalCost) {
-            lowestLocalCost = weight;
-            chosen = thisOne.getEndNode();
-            System.out.println();
+      if (!nextChosen) {
+        for (Edge thisOne :
+            current.getEdges()) { // main choice block for start nodes, used to calc distance
+          if (!closedList.contains(thisOne.getStartNode())
+              && thisOne.getStartNode().getFloor().equalsIgnoreCase(current.getFloor())
+              && !thisOne.getStartNode().equals(current)
+              && !path.contains(thisOne.getStartNode())
+          //   && thisOne.getStartNode()
+          ) {
+            double xDist = Math.abs(end.getXCoord() - thisOne.getStartNode().getXCoord());
+            double yDist = Math.abs(end.getYCoord() - thisOne.getStartNode().getYCoord());
+            double weight = Math.sqrt(xDist * xDist + yDist * yDist);
+            if (weight < lowestLocalCost) {
+              lowestLocalCost = weight;
+              chosen = thisOne.getStartNode();
+              System.out.println();
+            }
+          } else if (!closedList.contains(
+                  thisOne.getEndNode()) // main choice block for end nodes, used to cacl
+              && !thisOne.getEndNode().equals(current) // distance
+              && !path.contains(thisOne.getEndNode())
+              && thisOne.getEndNode().getFloor().equalsIgnoreCase(current.getFloor())) {
+            double xDist = Math.abs(end.getXCoord() - thisOne.getEndNode().getXCoord());
+            double yDist = Math.abs(end.getYCoord() - thisOne.getEndNode().getYCoord());
+            double weight = Math.sqrt(xDist * xDist + yDist * yDist);
+            if (weight < lowestLocalCost) {
+              lowestLocalCost = weight;
+              chosen = thisOne.getEndNode();
+              System.out.println();
+            }
           }
         }
       }
@@ -83,17 +85,12 @@ public class Djikstra implements IPathfinding {
       }
       if (chosen == null) {
         ArrayList<Node> altNodes = new ArrayList<Node>(); // backup block
-        for (Node node : closedList) {
-          for (Edge edge : node.getEdges()) {
-            altNodes.add(edge.getStartNode());
-            altNodes.add(edge.getEndNode());
-          }
+        for (Edge edge : closedList.get(closedList.size() - 1).getEdges()) {
+          altNodes.add(edge.getStartNode());
+          altNodes.add(edge.getEndNode());
         }
         for (Node node2 : altNodes) {
-          if (!closedList.contains(node2)
-                  && node2.getLocation().getNodeType().equalsIgnoreCase("ELEV")
-              || !closedList.contains(node2)
-                  && node2.getLocation().getNodeType().equalsIgnoreCase("STAI")) { // "ELEV", STAI
+          if (!closedList.contains(node2) && !node2.equals(current)) { // "ELEV", STAI
             chosen = node2;
           }
         }
@@ -106,55 +103,15 @@ public class Djikstra implements IPathfinding {
             "The chosen node was an elevator/stair at node "
                 + chosen.getNodeID()
                 + " and it was a "
-                + chosen.getLocation().getNodeType());
+                + chosen.getLocation().getNodeType()
+                + " from current "
+                + current);
       }
       if (chosen == null) {
         System.out.println("COUNTERMEAUSRES LULW");
       }
       if (!path.contains(current)) {
         path.add(current);
-      }
-      if (chosen
-                  .getLocation()
-                  .getNodeType()
-                  .equalsIgnoreCase("ELEV") // this block is used to send the path
-              && chosen
-                  .getFloor()
-                  .equalsIgnoreCase(end.getFloor()) // "through" an elevator when on the same
-              && current.getLocation().getNodeType().equalsIgnoreCase("ELEV")
-          || chosen.getLocation().getNodeType().equalsIgnoreCase("STAI") // floor as a target node
-              && chosen.getFloor().equalsIgnoreCase(end.getFloor())
-              && current.getLocation().getNodeType().equalsIgnoreCase("STAI")) {
-        System.out.println();
-        System.out.println("Was at node " + current + "and went to " + chosen);
-        ArrayList<Node> availableList =
-            new ArrayList<Node>(); // list of nodes available from an elevator/stair
-        ArrayList<Node> availableClone = new ArrayList<Node>();
-        for (Edge edge : current.getEdges()) { // get all available edges
-          availableList.add(edge.getStartNode());
-          availableList.add(edge.getEndNode());
-          availableClone.add(edge.getStartNode());
-          availableClone.add(edge.getEndNode());
-        }
-        for (Node node : availableClone) { // removes visited nodes from available list
-          if (availableList.contains(node) && path.contains(node)
-              || availableList.contains(node) && closedList.contains(node)
-              || node.equals(current)) {
-            availableList.remove(node);
-          }
-        }
-        for (Node node : availableList) { // this loop is used to find a non-elevetor or stair node
-          if (!node.getLocation()
-                  .getNodeType()
-                  .equalsIgnoreCase("ELEV") // if its not a stair or elevator
-              || !node.getLocation().getNodeType().equalsIgnoreCase("STAI")) {
-            chosen = node;
-            nextChosen = true;
-            System.out.println();
-            System.out.println("Picked node " + node);
-            break;
-          }
-        }
       }
       if (!openList.contains(chosen)) {
         openList.add(chosen);
