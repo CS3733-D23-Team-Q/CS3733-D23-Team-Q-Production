@@ -54,11 +54,13 @@ public class EdgeController implements IController {
 
   @FXML private TableColumn<Edge, Number> EdgeID;
 
+  Qdb qdb = Qdb.getInstance();
+
   /** used to put Edges from database arraylist to observablelist */
   public ObservableList<Edge> edges() {
     ObservableList<Edge> edge = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().edgeTable.getAllRows().size(); i++) {
-      edge.add(Qdb.getInstance().edgeTable.getAllRows().get(i));
+    for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
+      edge.add(qdb.retrieveAllEdges().get(i));
     }
     return edge;
   }
@@ -133,7 +135,7 @@ public class EdgeController implements IController {
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().edgeTable.toCSV(path);
+    boolean success = qdb.edgesToCSV(path);
     if (success) {
       Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
@@ -145,7 +147,7 @@ public class EdgeController implements IController {
   @FXML
   void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().edgeTable.importCSV(path);
+    boolean success = qdb.edgesFromCSV(path);
     if (success) {
       Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {

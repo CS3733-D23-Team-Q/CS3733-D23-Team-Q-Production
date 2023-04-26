@@ -5,14 +5,20 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
-public class HomeController implements IController {
+public class HomeController implements IController, Subscriber {
   @FXML CalendarView Calender;
   @FXML private Text UserMessage;
+  @FXML TextArea alertsField;
   Qdb qdb = Qdb.getInstance();
 
   @FXML
@@ -21,6 +27,8 @@ public class HomeController implements IController {
     Account account = qdb.retrieveAccount(username);
 
     UserMessage.setText("Welcome Back " + account.getFirstName() + "!");
+
+    setAlerts();
 
     Calendar serviceRequests = new Calendar("Service Requests");
 
@@ -41,6 +49,23 @@ public class HomeController implements IController {
     }
     SR.getCalendars().add(serviceRequests);
     Calender.getCalendarSources().add(SR);
+  }
+
+  private boolean setAlerts() {
+    List<Alert> alerts = qdb.retrieveAllAlerts();
+    String alertString = "";
+    for (Alert a : alerts) {
+      Date currentDate = new Date(a.getTimestamp());
+      alertString = alertString + a.getMessage() + "\n" + currentDate + "\n";
+    }
+    alertsField.setText(alertString);
+    return true;
+  }
+
+  public boolean update(List<String> context) {
+    //    AudioClip sound = new AudioClip(getClass().getResourceAsStream("alert.wav").toString());
+    //    sound.play();
+    return setAlerts();
   }
   //  Qdb qdb = Qdb.getInstance();
   //

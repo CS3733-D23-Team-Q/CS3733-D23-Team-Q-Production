@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class LocationController implements IController {
+  Qdb qdb = Qdb.getInstance();
 
   static Stage stage;
 
@@ -71,8 +72,8 @@ public class LocationController implements IController {
   /** used to put Locations from database arraylist to observablelist */
   public ObservableList<Location> locations() {
     ObservableList<Location> location = FXCollections.observableArrayList();
-    for (int i = 0; i < Qdb.getInstance().locationTable.getAllRows().size(); i++) {
-      location.add(Qdb.getInstance().locationTable.getAllRows().get(i));
+    for (int i = 0; i < qdb.retrieveAllLocations().size(); i++) {
+      location.add(qdb.retrieveAllLocations().get(i));
     }
     return location;
   }
@@ -178,10 +179,8 @@ public class LocationController implements IController {
               newNodeType = NodeTypeInput.getText();
               newShortName = ShortNameInput.getText();
 
-              Qdb.getInstance()
-                  .locationTable
-                  .updateRow(
-                      nodeIDedit, new Location(nodeIDedit, newLongName, newShortName, newNodeType));
+              qdb.updateLocation(
+                  nodeIDedit, new Location(nodeIDedit, newLongName, newShortName, newNodeType));
 
               locationname.setItems(locations());
             } else {
@@ -229,9 +228,7 @@ public class LocationController implements IController {
               newNodeType = NodeTypeInput.getText();
               newShortName = ShortNameInput.getText();
 
-              Qdb.getInstance()
-                  .locationTable
-                  .addRow(new Location(nodeIDedit, newLongName, newShortName, newNodeType));
+              qdb.addLocation(new Location(nodeIDedit, newLongName, newShortName, newNodeType));
 
               locationname.setItems(locations());
             } else {
@@ -271,7 +268,7 @@ public class LocationController implements IController {
       if (nodeIDExistLocation(nodeIDedit)) {
         alert.clearLabelAlert(InformationAlert, image2);
         alert.clearLabelAlert(nodeIDAlert, image);
-        Qdb.getInstance().locationTable.deleteRow(nodeIDedit);
+        qdb.deleteLocation(nodeIDedit);
         locationname.setItems(locations());
 
         // Here to call confirm
@@ -287,8 +284,8 @@ public class LocationController implements IController {
   }
 
   public boolean nodeIDExistLocation(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().locationTable.getAllRows().size(); i++) {
-      if (nodeID == Qdb.getInstance().locationTable.getAllRows().get(i).getNodeID()) return true;
+    for (int i = 0; i < qdb.retrieveAllLocations().size(); i++) {
+      if (nodeID == qdb.retrieveAllLocations().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -296,7 +293,7 @@ public class LocationController implements IController {
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().locationTable.toCSV(path);
+    boolean success = qdb.locationsToCSV(path);
     if (success) {
       Confirm.confirmBox("Export Successfully", "Export Successfully");
     } else {
@@ -308,7 +305,7 @@ public class LocationController implements IController {
   @FXML
   void ImportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
-    boolean success = Qdb.getInstance().locationTable.importCSV(path);
+    boolean success = qdb.locationsFromCSV(path);
     if (success) {
       Confirm.confirmBox("Import Successfully", "Import Successfully");
     } else {
