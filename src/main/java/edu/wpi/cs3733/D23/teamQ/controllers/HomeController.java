@@ -12,19 +12,22 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class HomeController implements IController, Subscriber {
   @FXML CalendarView Calender;
   @FXML private Text UserMessage;
-  @FXML TextArea alertsField;
+  @FXML VBox alertBox;
   @FXML TextArea notesField;
 
   Qdb qdb = Qdb.getInstance();
 
   @FXML
   public void initialize() {
+    qdb.subscribe(this);
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
 
@@ -63,13 +66,15 @@ public class HomeController implements IController, Subscriber {
   }
 
   private boolean setAlerts() {
+    alertBox.getChildren().clear();
     List<Alert> alerts = qdb.retrieveAllAlerts();
-    String alertString = "";
-    for (Alert a : alerts) {
-      Date currentDate = new Date(a.getTimestamp());
-      alertString = alertString + a.getMessage() + "\n" + currentDate + "\n";
+    for (int i = 0; i < alerts.size(); i++) {
+      Label l = new Label();
+      Date d = new Date(alerts.get(i).getTimestamp());
+      l.setText(d + ": " + alerts.get(i).getMessage());
+      l.setStyle("-fx-font-family: roboto; -fx-font-size: 16");
+      alertBox.getChildren().add(l);
     }
-    alertsField.setText(alertString);
     return true;
   }
 
