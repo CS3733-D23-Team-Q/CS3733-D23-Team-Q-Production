@@ -611,7 +611,6 @@ public class PathfindingController {
     if (path.size() == 0) {
       alert.alertBox("No solution", "Failed to find a path");
     }
-
     if (path.size() > 0) {
       textualPathfinding.setText(toString(path));
       Text tempText = new Text(textualPathfinding.getText());

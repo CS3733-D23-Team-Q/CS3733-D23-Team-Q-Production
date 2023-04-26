@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 
+@Getter
 public class AccountDaoImpl implements GenDao<Account, String> {
   private static AccountDaoImpl single_instance = null;
   private List<Account> accounts = new ArrayList<Account>();
+  private String fileName = "Account.csv";
 
   public static synchronized AccountDaoImpl getInstance() {
     if (single_instance == null) {

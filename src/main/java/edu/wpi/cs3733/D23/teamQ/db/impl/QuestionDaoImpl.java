@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionDaoImpl implements GenDao<Question, Integer> {
+public class QuestionDaoImpl {
   private List<Question> questions = new ArrayList<Question>();
   private static QuestionDaoImpl single_instance = null;
 
@@ -80,7 +80,6 @@ public class QuestionDaoImpl implements GenDao<Question, Integer> {
     return result;
   }
 
-  @Override
   public List<Question> getAllRows() {
     return questions;
   }

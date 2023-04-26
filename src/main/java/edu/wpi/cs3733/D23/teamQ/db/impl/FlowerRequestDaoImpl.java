@@ -8,12 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
   private List<FlowerRequest> flowerRequests = new ArrayList<FlowerRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static FlowerRequestDaoImpl single_instance = null;
+  private String fileName = "Flower_Requests.csv";
 
   public static synchronized FlowerRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -56,7 +59,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ?"
+                "UPDATE \"flowerRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?, \"typeOfFlower\" = ?, \"bouquetSize\" = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);

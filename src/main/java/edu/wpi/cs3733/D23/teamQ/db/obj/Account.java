@@ -217,4 +217,35 @@ public class Account {
   public void setTodo(String todo) {
     this.todo = todo;
   }
+
+  @Override
+  public String toString() {
+    return username
+        + ","
+        + password
+        + ","
+        + email
+        + ","
+        + securityQuestion1
+        + ","
+        + securityQuestion2
+        + ","
+        + securityAnswer1
+        + ","
+        + securityAnswer2
+        + ","
+        + active
+        + ","
+        + firstName
+        + ","
+        + lastName
+        + ","
+        + title
+        + ","
+        + phoneNumber
+        + ","
+        + todo
+        + ","
+        + notes;
+  }
 }

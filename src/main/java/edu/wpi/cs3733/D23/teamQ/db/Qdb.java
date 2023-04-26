@@ -4,6 +4,9 @@ import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -224,8 +227,12 @@ public class Qdb {
     return serviceRequestTable.getUserRows(user);
   }
 
-  public List<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
+  public ObservableList<ServiceRequest> retrieveUserAssignServiceRequests(String user) {
     return serviceRequestTable.getUserAssignedRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    return serviceRequestTable.getUserRequestedRows(user);
   }
 
   public ServiceRequest retrieveServiceRequest(int requestID) {
@@ -547,11 +554,15 @@ public class Qdb {
   }
 
   public boolean deleteServiceRequest(int requestID) {
+    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+    System.out.println(stackTraceElements);
     updateTimestamp("serviceRequest");
     return serviceRequestTable.deleteRow(requestID);
   }
 
   public boolean updateServiceRequest(int requestID, ServiceRequest sr) {
+    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+    System.out.println(stackTraceElements);
     updateTimestamp("serviceRequest");
     return serviceRequestTable.updateRow(requestID, sr);
   }
@@ -616,6 +627,8 @@ public class Qdb {
           profileImageTable.populate();
         case "message":
           messageTable.populate();
+        case "sign":
+          signTable.populate();
         case "alert":
           alertTable.populate();
         case "serviceRequest":
@@ -680,5 +693,73 @@ public class Qdb {
 
   public List<Alert> retrieveAllAlerts() {
     return alertTable.getAllRows();
+  }
+
+  public boolean exportToCSV(String tableName) {
+    return csvMaker(tableName, "");
+  }
+
+  public boolean exportToCSV(String tableName, String filename) {
+    return csvMaker(tableName, filename);
+  }
+
+  private boolean csvMaker(String tableName, String filename) {
+    GenDao table = nameToTable(tableName);
+    if (filename.equals("")) {
+      filename = table.getFileName();
+    }
+    try {
+      File myObj = new File(filename);
+      if (myObj.createNewFile()) {
+        System.out.println("File created: " + myObj.getName());
+      }
+      FileWriter myWriter = new FileWriter(filename);
+      for (Object o : table.getAllRows()) {
+        myWriter.write(o.toString() + "\n");
+      }
+    } catch (IOException e) {
+      return false;
+    }
+    return true;
+  }
+
+  private GenDao nameToTable(String tableName) {
+    switch (tableName) {
+      case "Accounts":
+        return accountTable;
+      case "Edges":
+        return edgeTable;
+      case "Locations":
+        return locationTable;
+      case "Moves":
+        return moveTable;
+      case "Nodes":
+        return nodeTable;
+      case "Messages":
+        return messageTable;
+      case "Alerts":
+        return alertTable;
+      case "Signs":
+        return signTable;
+      case "Service requests":
+        return serviceRequestTable;
+    }
+    return null;
+  }
+
+  public ObservableList<ServiceRequest> getAllServiceRequestsObservable() {
+    return serviceRequestTable.getAllRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingServingRequests() {
+    return serviceRequestTable.getAllOutstandingRequestsObservable();
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    return serviceRequestTable.getUserAssignedOutstandingRows(user);
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    return serviceRequestTable.getUserRequestedOutstandingRows(user);
   }
 }

@@ -5,13 +5,16 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integer> {
   private List<ConferenceRequest> conferenceRequests = new ArrayList<ConferenceRequest>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static ConferenceRequestDaoImpl single_instance = null;
+  private String fileName = "Conference_Room_Requests.csv";
 
   public static synchronized ConferenceRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -68,7 +71,8 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
       st.setString(6, newRequest.getSpecialInstructions());
       st.setDate(7, newRequest.getDate());
       st.setString(8, newRequest.getTime());
-      st.setString(7, newRequest.getFoodChoice());
+      st.setString(9, newRequest.getFoodChoice());
+      st.setInt(10, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {

@@ -24,7 +24,8 @@ public class RefreshThread implements Runnable {
     "security_question",
     "serviceRequest",
     "message",
-    "alert"
+    "alert",
+    "sign"
   };
 
   private ArrayList<String> toUpdate = new ArrayList<>();
@@ -35,6 +36,7 @@ public class RefreshThread implements Runnable {
       if (checkUpdates().size() > 0) {
         doUpdates();
         toUpdate.clear();
+        lastUpdate = System.currentTimeMillis();
       }
       Thread.sleep(2000);
     }
