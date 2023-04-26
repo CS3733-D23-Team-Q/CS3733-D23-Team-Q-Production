@@ -56,7 +56,6 @@ public class ViewProfilePageController {
 
   public void backButtonPressed() {
     String username = LoginController.getLoginUsername();
-    System.out.println(username);
     if (LoginController.isAdmin()) {
       Navigation.navigate(Screen.ADMIN_DIRECTORY);
     } else {
