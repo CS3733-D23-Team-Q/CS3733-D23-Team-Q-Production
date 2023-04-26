@@ -29,12 +29,7 @@ public class ServiceRequestSubmenuController {
 
   @FXML
   public void editClicked() {
-    boolean admin = LoginController.isAdmin();
-    if (admin) {
-      Navigation.navigate(Screen.ADMIN_LIST_REQUESTS);
-    } else {
-      Navigation.navigate(Screen.LIST_REQUESTS);
-    }
+    Navigation.navigate(Screen.LIST_REQUESTS);
   }
 
   @FXML
