@@ -18,7 +18,7 @@ public class Sign {
     this.direction = direction;
   }
 
-  public String toString(){
+  public String toString() {
     return kiosk + "," + date + "," + destination + "," + direction;
   }
 }

@@ -220,6 +220,32 @@ public class Account {
 
   @Override
   public String toString() {
-    return username + "," + password + "," + email + "," + securityQuestion1 + "," + securityQuestion2 + "," + securityAnswer1 + "," + securityAnswer2 + "," + active + "," + firstName + "," + lastName + "," + title + "," + phoneNumber + "," + todo+ "," + notes;
+    return username
+        + ","
+        + password
+        + ","
+        + email
+        + ","
+        + securityQuestion1
+        + ","
+        + securityQuestion2
+        + ","
+        + securityAnswer1
+        + ","
+        + securityAnswer2
+        + ","
+        + active
+        + ","
+        + firstName
+        + ","
+        + lastName
+        + ","
+        + title
+        + ","
+        + phoneNumber
+        + ","
+        + todo
+        + ","
+        + notes;
   }
 }
