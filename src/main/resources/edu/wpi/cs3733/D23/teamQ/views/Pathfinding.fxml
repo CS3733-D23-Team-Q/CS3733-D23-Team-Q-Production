@@ -138,7 +138,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <TextArea fx:id="textualPathfinding" promptText="Textual Directions">
+            <TextArea fx:id="textualPathfinding" editable="false" focusTraversable="false" promptText="Textual Directions">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" />
                </VBox.margin>
