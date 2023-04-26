@@ -37,7 +37,7 @@ public class RefreshThread implements Runnable {
         toUpdate.clear();
         lastUpdate = System.currentTimeMillis();
       }
-      Thread.sleep(2000);
+      Thread.sleep(3000);
     }
   }
 
