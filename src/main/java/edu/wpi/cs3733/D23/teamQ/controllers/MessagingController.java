@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -52,6 +53,8 @@ public class MessagingController implements Subscriber {
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
     qdb.subscribe(this);
+
+    populateAccounts();
 
     peopleSelector.setValue("");
     peopleSelector.setItems(qdb.getAllNames());
@@ -143,16 +146,18 @@ public class MessagingController implements Subscriber {
               message,
               currentTimeMillis());
 
-      if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-          || (System.currentTimeMillis()
-                  - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                      .get(
-                          qdb.retrieveMessages(
-                                      LoginController.getUsername(), receiver.getUsername())
-                                  .size()
-                              - 1)
-                      .getTimeStamp()
-              >= 3600000)) displayTime(System.currentTimeMillis());
+      //      if (qdb.retrieveMessages(LoginController.getUsername(),
+      // receiver.getUsername()).isEmpty()
+      //          || (System.currentTimeMillis()
+      //                  - qdb.retrieveMessages(LoginController.getUsername(),
+      // receiver.getUsername())
+      //                      .get(
+      //                          qdb.retrieveMessages(
+      //                                      LoginController.getUsername(), receiver.getUsername())
+      //                                  .size()
+      //                              - 1)
+      //                      .getTimeStamp()
+      //              >= 3600000)) displayTime(System.currentTimeMillis());
 
       HBox hbox = new HBox();
       hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -180,15 +185,16 @@ public class MessagingController implements Subscriber {
 
     String message = messageSent.getMessage();
 
-    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-        || (System.currentTimeMillis()
-                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                    .get(
-                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                                .size()
-                            - 1)
-                    .getTimeStamp()
-            >= 3600000)) displayTime(System.currentTimeMillis());
+    //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+    //        || (System.currentTimeMillis()
+    //                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+    //                    .get(
+    //                        qdb.retrieveMessages(LoginController.getUsername(),
+    // receiver.getUsername())
+    //                                .size()
+    //                            - 1)
+    //                    .getTimeStamp()
+    //            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -211,15 +217,16 @@ public class MessagingController implements Subscriber {
     messageReceived.setRead(true);
     String message = messageReceived.getMessage();
 
-    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-        || (System.currentTimeMillis()
-                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                    .get(
-                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                                .size()
-                            - 1)
-                    .getTimeStamp()
-            >= 3600000)) displayTime(System.currentTimeMillis());
+    //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+    //        || (System.currentTimeMillis()
+    //                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+    //                    .get(
+    //                        qdb.retrieveMessages(LoginController.getUsername(),
+    // receiver.getUsername())
+    //                                .size()
+    //                            - 1)
+    //                    .getTimeStamp()
+    //            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_LEFT);
@@ -256,7 +263,6 @@ public class MessagingController implements Subscriber {
 
   public void populateMessages() {
     Qdb qdb = Qdb.getInstance();
-    // sbp.set(true);
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
     personLabel.setVisible(true);
@@ -299,6 +305,72 @@ public class MessagingController implements Subscriber {
       return true;
     } else {
       return false;
+    }
+  }
+
+  public void populateAccounts() {
+    Qdb qdb = Qdb.getInstance();
+    for (Message m : qdb.retrieveRecentMessages(LoginController.getUsername())) {
+      String person;
+      String message = m.getMessage();
+      String username;
+      ImageView profileImage = new ImageView();
+
+      if (message.length() > 40) message = message.substring(0, 40) + "...";
+
+      if (m.getSender().getUsername().equals(LoginController.getUsername())) {
+        person = m.getReceiver().getFirstName() + " " + m.getReceiver().getLastName();
+        username = m.getReceiver().getUsername();
+      } else {
+        person = m.getSender().getFirstName() + " " + m.getSender().getLastName();
+        username = m.getSender().getUsername();
+      }
+
+      if (qdb.getProfileImageIndex(username) != -1) {
+        Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
+        profileImage.setImage(pfp);
+        profileImage.setFitHeight(40);
+        profileImage.setFitHeight(40);
+        Circle ppClip = new Circle(15);
+        ppClip.setTranslateX(profileImage.getFitWidth() / 2);
+        ppClip.setTranslateY(profileImage.getFitHeight() / 2);
+        profileImage.setClip(ppClip);
+      }
+
+      HBox hbox = new HBox();
+      hbox.setMaxWidth(300);
+      VBox vbox = new VBox();
+      vbox.setMaxWidth(200);
+      HBox hbox1 = new HBox();
+      hbox1.setMaxWidth(200);
+      HBox hbox2 = new HBox();
+      hbox2.setMaxWidth(200);
+      hbox.setAlignment(Pos.CENTER_LEFT);
+      hbox.setPadding(new Insets(4, 16, 4, 16));
+      Text ptext = new Text(person);
+      Text mtext = new Text(message);
+      ptext.setFont(Font.font(18));
+      mtext.setFont(Font.font(12));
+      ptext.setStyle("-fx-font-family: Roboto; -fx-font-weight: bold;");
+      mtext.setStyle("-fx-font-family: Roboto; ");
+      hbox1.getChildren().add(ptext);
+      hbox2.getChildren().add(mtext);
+      vbox.getChildren().add(hbox1);
+      vbox.getChildren().add(hbox2);
+      Line line = new Line(0, 0, 300, 0);
+      line.setFill(Color.GRAY);
+      line.setStrokeWidth(0.5);
+      // hbox.getChildren().add(profileImage);
+      hbox.getChildren().add(vbox);
+      accountVbox.getChildren().add(line);
+      accountVbox.getChildren().add(hbox);
+      hbox.setUserData(m);
+
+      hbox.setOnMouseClicked(
+          event -> {
+            receiver = qdb.getAccountFromUsername(username);
+            populateMessages();
+          });
     }
   }
 }
