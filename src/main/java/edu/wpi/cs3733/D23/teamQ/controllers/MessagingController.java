@@ -320,6 +320,7 @@ public class MessagingController implements Subscriber {
         if (context.contains("message")) {
             List<Message> recents = qdb.retrieveRecentMessages(LoginController.getUsername());
             Message recent = recents.get(0);
+            populateAccounts();
             if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
                 populateMessages();
                 populateAccounts();
@@ -327,9 +328,6 @@ public class MessagingController implements Subscriber {
                 Media media = new Media(new File(path).toURI().toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.play();
-                return true;
-            } else if (recent.getSender().equals(LoginController.getUsername())) {
-                populateAccounts();
                 return true;
             } else {
                 return false;
