@@ -29,7 +29,7 @@ public class AdminListServiceRequestsController {
   @FXML TableColumn<ServiceRequest, String> dateColumn;
   @FXML TableColumn<ServiceRequest, String> locationColumn;
   @FXML TableColumn<ServiceRequest, String> instructionsColumn;
-  @FXML TableColumn<ServiceRequest, ServiceRequest.Progress> progressColumn;
+  @FXML TableColumn<ServiceRequest, MFXButton> progressColumn;
   @FXML TableColumn<ServiceRequest, MFXButton> editButtonColumn;
   @FXML TableColumn<ServiceRequest, MFXButton> deleteButtonColumn;
 
@@ -140,6 +140,13 @@ public class AdminListServiceRequestsController {
   ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
 
   public void initialize() {
+    requestsTable.setRowFactory(
+        tv -> {
+          TableRow<ServiceRequest> row = new TableRow<>();
+          row.setPrefHeight(50);
+          return row;
+        });
+
     toggleButton.setOnAction(
         event -> {
           if (toggleButton.isSelected()) {
@@ -320,7 +327,67 @@ public class AdminListServiceRequestsController {
     //            }
     //          };
     //        });
-    progressColumn.setCellValueFactory(new PropertyValueFactory<>("progress"));
+    // progressColumn.setCellValueFactory(new PropertyValueFactory<>("progress"));
+    progressColumn.setCellFactory(
+        column ->
+            new TableCell<ServiceRequest, MFXButton>() {
+              private final MFXButton button = new MFXButton();
+
+              {
+                button.setOnAction(
+                    event -> {
+                      ServiceRequest request = getTableView().getItems().get(getIndex());
+                      switch (request.getProgress()) {
+                        case BLANK:
+                          request.setProgress(ServiceRequest.Progress.BLANK);
+                          // qdb.updateServiceRequest(request.getRequestID(), request);
+                          button.getStyleClass().setAll("grey-button");
+                          button.setText("BLANK");
+                          break;
+                        case PROCESSING:
+                          request.setProgress(ServiceRequest.Progress.PROCESSING);
+                          // qdb.updateServiceRequest(request.getRequestID(), request);
+                          button.getStyleClass().setAll("yellow-button");
+                          button.setText("PROCESSING");
+                          break;
+                        case DONE:
+                          request.setProgress(ServiceRequest.Progress.DONE);
+                          // qdb.updateServiceRequest(request.getRequestID(), request);
+                          button.getStyleClass().setAll("green-button");
+                          button.setText("DONE");
+                          break;
+                      }
+                      commitEdit(button);
+                      qdb.updateServiceRequest(request.getRequestID(), request); // Update database
+                    });
+              }
+
+              @Override
+              protected void updateItem(MFXButton item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                  setGraphic(null);
+                } else {
+                  ServiceRequest request = getTableView().getItems().get(getIndex());
+                  button.getStyleClass().setAll(getButtonStyle(request.getProgress()));
+                  button.setText(request.getProgress().name());
+                  setGraphic(button);
+                }
+              }
+
+              private String getButtonStyle(ServiceRequest.Progress progress) {
+                switch (progress) {
+                  case BLANK:
+                    return "grey-button";
+                  case PROCESSING:
+                    return "yellow-button";
+                  case DONE:
+                    return "green-button";
+                  default:
+                    return "";
+                }
+              }
+            });
 
     requesterColumn.setCellValueFactory(
         cellData -> {
@@ -379,6 +446,7 @@ public class AdminListServiceRequestsController {
             conferenceRequest.getProgress().ordinal(),
             confFoodField.getText());
     qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
     requestsTable.refresh();
     conferenceRequestEdit.setVisible(false);
   }
@@ -430,6 +498,7 @@ public class AdminListServiceRequestsController {
             Integer.parseInt(flowerBouquetField.getText()));
 
     qdb.updateFlowerRequest(flowerRequest.getRequestID(), fr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
     requestsTable.refresh();
     flowerRequestEdit.setVisible(false);
   }
@@ -528,6 +597,7 @@ public class AdminListServiceRequestsController {
             furnitureRequest.getProgress().ordinal(),
             furnitureChoiceField.getText());
     qdb.updateFurnitureRequest(furnitureRequest.getRequestID(), fr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
     requestsTable.refresh();
     furnitureRequestEdit.setVisible(false);
   }
@@ -582,6 +652,7 @@ public class AdminListServiceRequestsController {
             mealEntreeField.getText(),
             mealSideField.getText());
     qdb.updateMealRequest(mealRequest.getRequestID(), mr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
     requestsTable.refresh();
     mealRequestEdit.setVisible(false);
   }
@@ -632,6 +703,7 @@ public class AdminListServiceRequestsController {
             medicalItemField.getText(),
             Integer.parseInt(medicalQuantityField.getText()));
     qdb.updateMedicalSuppliesRequest(medicalSuppliesRequest.getRequestID(), mr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
     requestsTable.refresh();
     medicalRequestEdit.setVisible(false);
   }

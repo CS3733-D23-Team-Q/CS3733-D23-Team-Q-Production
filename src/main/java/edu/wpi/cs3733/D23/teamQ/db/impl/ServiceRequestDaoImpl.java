@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.*;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -141,6 +143,14 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
     for (int i = 0; i < serviceRequests.size(); i++) {
       list.add(serviceRequests.get(i));
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 
@@ -151,6 +161,14 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
         list.add(serviceRequests.get(i));
       }
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 
