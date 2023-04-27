@@ -99,15 +99,22 @@ public class Qdb {
   }
 
   public void subscribe(Subscriber s) {
-    subscribers.add(s);
+    if (!subscribers.contains(s)) {
+      System.out.println("Adding subscriber");
+      subscribers.add(s);
+    }
   }
 
   public void unsubscribe(Subscriber s) {
-    subscribers.remove(s);
+    if (!subscribers.contains(s)) {
+      System.out.println("Removing subscriber");
+      subscribers.remove(s);
+    }
   }
 
-  public void notifySubscribers(List<String> context) {
+  public synchronized void notifySubscribers(List<String> context) {
     for (Subscriber s : subscribers) {
+      System.out.println("Notifying subscribers");
       s.update(context);
     }
   }
@@ -603,6 +610,10 @@ public class Qdb {
 
   public ObservableList<Message> retrieveMessages(String p1, String p2) {
     return messageTable.retrieveMessages(p1, p2);
+  }
+
+  public ObservableList<Message> retrieveRecentMessages(String username) {
+    return messageTable.retrieveRecentMessages(username);
   }
 
   public boolean addMessage(Message message) {
