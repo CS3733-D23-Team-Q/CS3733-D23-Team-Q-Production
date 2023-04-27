@@ -113,13 +113,11 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
 
   private ObservableList<Message> sortByTimestamp(ObservableList<Message> messageList) {
     Comparator<Message> comparator =
-        new Comparator<Message>() {
-          public int compare(Message m1, Message m2) {
-            long t1 = m1.getTimeStamp();
-            long t2 = m2.getTimeStamp();
-            return Long.compare(t1, t2);
-          }
-        };
+            (m1, m2) -> {
+              long t1 = m1.getTimeStamp();
+              long t2 = m2.getTimeStamp();
+              return Long.compare(t1, t2);
+            };
     Collections.sort(messageList, comparator);
     return messageList;
   }
