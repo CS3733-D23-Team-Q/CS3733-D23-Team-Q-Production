@@ -1,11 +1,10 @@
 package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
@@ -76,7 +75,8 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
                 accountTable.retrieveRow(rst.getString("sender")),
                 accountTable.retrieveRow(rst.getString("receiver")),
                 rst.getString("message"),
-                rst.getLong("timestamp")));
+                rst.getLong("timestamp"),
+                rst.getBoolean("read")));
       }
       conn.close();
       stm.close();
@@ -101,5 +101,26 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
       }
     }
     return messageList;
+  }
+
+  public ObservableList<Message> retrieveRecentMessages(String person) {
+    ObservableList<Message> messageList = FXCollections.observableArrayList();
+    for (Account a : accountTable.getAllRows()) {
+      List<Message> recent = retrieveMessages(a.getUsername(), person);
+      if (recent.size() > 0) {
+        Message m = recent.get(recent.size() - 1);
+        if (!messageList.contains(m)) {
+          messageList.add(m);
+        }
+      }
+    }
+    SortByTimestampParameter.sortByTimestamp(messageList);
+    return messageList;
+  }
+
+  public class SortByTimestampParameter {
+    public static void sortByTimestamp(List<Message> list) {
+      Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
+    }
   }
 }

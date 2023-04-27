@@ -42,7 +42,7 @@ public class ListServiceRequestController {
   @FXML TableColumn<ServiceRequest, String> assignedRequestInstructions;
   @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
   @FXML TableColumn<ServiceRequest, String> assignedRequestDate;
-  @FXML TableColumn<ServiceRequest, String> progressDropdownColumn;
+  @FXML TableColumn<ServiceRequest, MFXButton> progressDropdownColumn;
 
   @FXML MFXToggleButton toggleButton;
 
@@ -325,36 +325,61 @@ public class ListServiceRequestController {
           };
         });
     progressDropdownColumn.setCellFactory(
-        column -> {
-          return new TableCell<ServiceRequest, String>() {
-            private final MFXComboBox<String> comboBox = new MFXComboBox<>();
+        column ->
+            new TableCell<ServiceRequest, MFXButton>() {
+              private final MFXButton button = new MFXButton();
 
-            {
-              comboBox.setPrefHeight(20);
-              comboBox.setItems(progressValues);
-              comboBox.setOnAction(
-                  event -> {
-                    ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                    serviceRequest.setProgress(
-                        ServiceRequest.Progress.valueOf(comboBox.getValue()));
-                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
-                    yourRequestsTable.refresh();
-                  });
-            }
-
-            @Override
-            protected void updateItem(String item, boolean empty) {
-              super.updateItem(item, empty);
-              if (empty) {
-                setGraphic(null);
-              } else {
-                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                comboBox.setValue(serviceRequest.getProgress().name());
-                setGraphic(comboBox);
+              {
+                button.setOnAction(
+                    event -> {
+                      ServiceRequest request = getTableView().getItems().get(getIndex());
+                      switch (request.getProgress()) {
+                        case BLANK:
+                          request.setProgress(ServiceRequest.Progress.PROCESSING);
+                          button.getStyleClass().setAll("yellow-button");
+                          button.setText("PROCESSING");
+                          break;
+                        case PROCESSING:
+                          request.setProgress(ServiceRequest.Progress.DONE);
+                          button.getStyleClass().setAll("green-button");
+                          button.setText("DONE");
+                          break;
+                        case DONE:
+                          request.setProgress(ServiceRequest.Progress.BLANK);
+                          button.getStyleClass().setAll("grey-button");
+                          button.setText("BLANK");
+                          break;
+                      }
+                      qdb.updateServiceRequest(request.getRequestID(), request); // Update database
+                    });
               }
-            }
-          };
-        });
+
+              @Override
+              protected void updateItem(MFXButton item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                  setGraphic(null);
+                } else {
+                  ServiceRequest request = getTableView().getItems().get(getIndex());
+                  button.getStyleClass().setAll(getButtonStyle(request.getProgress()));
+                  button.setText(request.getProgress().name());
+                  setGraphic(button);
+                }
+              }
+
+              private String getButtonStyle(ServiceRequest.Progress progress) {
+                switch (progress) {
+                  case BLANK:
+                    return "grey-button";
+                  case PROCESSING:
+                    return "yellow-button";
+                  case DONE:
+                    return "green-button";
+                  default:
+                    return "";
+                }
+              }
+            });
 
     yourRequestsTable.setItems(userRequestedRequests);
 

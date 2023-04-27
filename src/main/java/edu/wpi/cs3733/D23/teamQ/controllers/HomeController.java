@@ -66,6 +66,21 @@ public class HomeController implements Subscriber {
     }
     SR.getCalendars().add(serviceRequests);
     calendar.getCalendarSources().add(SR);
+
+    // adding moves to calendar
+    Calendar moves = new Calendar("Moves");
+    CalendarSource m = new CalendarSource("testing 2");
+
+    for (int i = 0; i < qdb.retrieveAllMoves().size(); i++) {
+      int currMove = qdb.retrieveAllMoves().get(i).getMoveID();
+      Entry<String> temp = new Entry<>("Move ID- " + currMove);
+      moves.addEntry(temp);
+      temp.changeStartDate(qdb.retrieveAllMoves().get(i).getDate().toLocalDate());
+      temp.changeEndDate(qdb.retrieveAllMoves().get(i).getDate().toLocalDate());
+      temp.setFullDay(true);
+    }
+    m.getCalendars().add(moves);
+    calendar.getCalendarSources().add(m);
   }
 
   public void saveNotes() {
@@ -103,7 +118,13 @@ public class HomeController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) {
+    if (context.contains("alert")) {
+      setAlerts();
+    }
+    if (context.contains("serviceRequest")) {
+      // set calendar
+    }
     updateTime();
-    return setAlerts();
+    return true;
   }
 }
