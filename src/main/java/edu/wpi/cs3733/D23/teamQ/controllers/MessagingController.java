@@ -306,8 +306,8 @@ public class MessagingController implements Subscriber {
   public boolean update(List<String> context) {
     if (context.contains("message")) {
       List<Message> recents = qdb.retrieveRecentMessages(LoginController.getUsername());
-      Message recent = recents.get(recents.size()-1);
-      if (recent.getReceiver().equals(LoginController.getUsername())){
+      Message recent = recents.get(0);
+      if (recent.getReceiver().equals(LoginController.getUsername())) {
         populateMessages();
         populateAccounts();
         String path = getClass().getResource("/alert.wav").getPath();
