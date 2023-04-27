@@ -9,7 +9,6 @@ public class DFS implements IPathfinding {
     ArrayList<Node> visitedList = new ArrayList<Node>(); // list of visited nodes
     ArrayList<Node> openList = new ArrayList<Node>();
     ArrayList<Node> path = new ArrayList<Node>(); // path list if I need it
-    //  String floor = start.getFloor();
     openList.add(start);
     visitedList.add(start);
     while (!openList.isEmpty()) {
@@ -35,16 +34,8 @@ public class DFS implements IPathfinding {
               && !node.equals(current)
               && !nextChosen // find a nonelevator
           ) {
-            /*  System.out.println();
-            System.out.println(
-                " ADDED NODE "
-                    + node.getNodeID()
-                    + " FROM "
-                    + current.getNodeID()
-                    + " USING ELEVATORS SAME FLOOR ");*/
             openList.add(node);
             openList.remove(current);
-            //  path.add(current);
             visitedList.add(current);
             nextChosen = true;
           }
@@ -56,16 +47,8 @@ public class DFS implements IPathfinding {
               .getFloor()
               .equalsIgnoreCase((current.getEdges().get(0).getEndNode().getFloor()))
           && !nextChosen) {
-        /*  System.out.println();
-        System.out.println(
-            " ADDED NODE "
-                + current.getEdges().get(0).getEndNode().getNodeID()
-                + " FROM "
-                + current.getNodeID()
-                + " USING BRANCH FROM END NODES");*/
         openList.add(current.getEdges().get(0).getEndNode());
         openList.remove(current);
-        //  path.add(current);
         visitedList.add(current);
         nextChosen = true;
       } else if (!visitedList.contains(current.getEdges().get(0).getStartNode())
@@ -74,16 +57,8 @@ public class DFS implements IPathfinding {
               .getFloor()
               .equalsIgnoreCase((current.getEdges().get(0).getStartNode().getFloor()))
           && !nextChosen) {
-        /* System.out.println();
-        System.out.println(
-            " ADDED NODE "
-                + current.getEdges().get(0).getStartNode().getNodeID()
-                + " FROM "
-                + current.getNodeID()
-                + " USING BRANCH START NODES");*/
         openList.add(current.getEdges().get(0).getStartNode());
         openList.remove(current);
-        //  path.add(current);
         visitedList.add(current);
         nextChosen = true;
       } else {
@@ -94,18 +69,8 @@ public class DFS implements IPathfinding {
               && !nextChosen) {
             openList.add(backup);
             openList.remove(current);
-            // path.add(current);
-            // path.add(backup);
             visitedList.add(current);
             nextChosen = true;
-            /* System.out.println();
-            System.out.println(
-                " FROM BACKUP BRANCH AT CURRRENT "
-                    + current.getNodeID()
-                    + " WENT TO "
-                    + backup.getNodeID()
-                    + " EDGES WERE "
-                    + nodesAvailable);*/
           }
         }
       }
@@ -131,9 +96,7 @@ public class DFS implements IPathfinding {
               && current.getFloor().equalsIgnoreCase(previousNode.getFloor())) {
             openList.add(previousNode);
             openList.remove(current);
-            // path.add(current);
             path.addAll(revisitedNodes);
-            // path.add(previousNode);
             visitedList.add(current);
             nextChosen = true;
             System.out.println();
