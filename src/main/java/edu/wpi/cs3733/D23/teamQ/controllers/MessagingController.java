@@ -306,10 +306,9 @@ public class MessagingController implements Subscriber {
     }
   }
 
-  // qdb.retrieveRecentMessages(LoginController.getUsername())
   public void populateAccounts() {
     Qdb qdb = Qdb.getInstance();
-    for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
+    for (Message m : qdb.retrieveRecentMessages(LoginController.getUsername())) {
       String person;
       String message = m.getMessage();
       String username;
@@ -361,6 +360,14 @@ public class MessagingController implements Subscriber {
       hbox.getChildren().add(profileImage);
       hbox.getChildren().add(vbox);
       accountVbox.getChildren().add(hbox);
+      hbox.setUserData(m);
+
+      String finalMessage = message;
+      hbox.setOnMouseClicked(
+          event -> {
+              receiver= qdb.getAccountFromUsername(username);
+              populateMessages();
+          });
     }
   }
 }
