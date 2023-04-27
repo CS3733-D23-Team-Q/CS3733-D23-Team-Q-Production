@@ -65,10 +65,10 @@ public class RefreshThread implements Runnable {
   }
 
   private void doUpdates() {
-    qdb.populate(toUpdate);
-    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
+    Platform.runLater(() -> qdb.populate(toUpdate));
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
+    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
   }
 }
