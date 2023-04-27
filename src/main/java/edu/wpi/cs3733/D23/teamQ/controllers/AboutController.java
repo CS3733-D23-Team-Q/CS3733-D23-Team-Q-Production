@@ -181,7 +181,7 @@ public class AboutController {
 
   @FXML
   public void cameronShow() {
-    cameron1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    cameron1.setText("Broken more than 35 bones");
     cameron2.setText("");
     cameron3.setText("");
   }
