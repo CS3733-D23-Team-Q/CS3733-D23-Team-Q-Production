@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import java.net.URL;
 
 public class CreditsController {
   @FXML Label linkDisplay;
@@ -122,7 +123,8 @@ public class CreditsController {
   final ClipboardContent content = new ClipboardContent();
 
   @FXML
-  public void initialize() {}
+  public void initialize() {
+  }
 
   @FXML
   public void clearClicked() {
