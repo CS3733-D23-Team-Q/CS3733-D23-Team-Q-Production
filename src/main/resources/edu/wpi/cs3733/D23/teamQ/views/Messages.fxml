@@ -38,7 +38,7 @@
                         <Insets left="70.0" />
                      </padding>
                   </HBox>
-                  <MFXScrollPane fx:id="accountSP" maxWidth="-Infinity" prefHeight="810.0" prefWidth="300.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
+                  <MFXScrollPane fx:id="accountSP" hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="810.0" prefWidth="300.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="accountVbox" maxWidth="-Infinity" prefHeight="796.0" prefWidth="300.0" />
                      </content>
@@ -78,7 +78,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <MFXScrollPane fx:id="messageSP" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="695.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
+                  <MFXScrollPane fx:id="messageSP" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="695.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="messageVbox" prefHeight="729.0" prefWidth="1153.0" />
                      </content>
