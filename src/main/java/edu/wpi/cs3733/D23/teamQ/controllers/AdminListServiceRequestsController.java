@@ -290,36 +290,37 @@ public class AdminListServiceRequestsController {
           };
         });
 
-    progressColumn.setCellFactory(
-        column -> {
-          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
-            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
-
-            {
-              comboBox.setPrefHeight(20);
-              comboBox.setItems(progressValues);
-              comboBox.setOnAction(
-                  event -> {
-                    ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                    serviceRequest.setProgress(comboBox.getValue());
-                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
-                    requestsTable.refresh();
-                  });
-            }
-
-            @Override
-            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
-              super.updateItem(item, empty);
-              if (empty) {
-                setGraphic(null);
-              } else {
-                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-                comboBox.setValue(serviceRequest.getProgress());
-                setGraphic(comboBox);
-              }
-            }
-          };
-        });
+    //    progressColumn.setCellFactory(
+    //        column -> {
+    //          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
+    //            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
+    //
+    //            {
+    //              comboBox.setPrefHeight(20);
+    //              comboBox.setItems(progressValues);
+    //              comboBox.setOnAction(
+    //                  event -> {
+    //                    ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
+    //                    serviceRequest.setProgress(comboBox.getValue());
+    //                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
+    //                    requestsTable.refresh();
+    //                  });
+    //            }
+    //
+    //            @Override
+    //            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
+    //              super.updateItem(item, empty);
+    //              if (empty) {
+    //                setGraphic(null);
+    //              } else {
+    //                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
+    //                comboBox.setValue(serviceRequest.getProgress());
+    //                setGraphic(comboBox);
+    //              }
+    //            }
+    //          };
+    //        });
+    progressColumn.setCellValueFactory(new PropertyValueFactory<>("progress"));
 
     requesterColumn.setCellValueFactory(
         cellData -> {
@@ -435,7 +436,7 @@ public class AdminListServiceRequestsController {
 
   public void setOfficeFields(OfficeSuppliesRequest or) {
     officeItemField.setItems(itemList);
-    officeAssigneeField.setItems(qdb.getAllLongNames());
+    officeAssigneeField.setItems(qdb.getAllNames());
     officeLocationField.setItems(qdb.getAllLongNames());
     officeTimeField.setItems(timeList);
 
@@ -484,7 +485,7 @@ public class AdminListServiceRequestsController {
   }
 
   public void setFurnitureFields(FurnitureRequest fr) {
-    furnitureAssigneeField.setItems(qdb.getAllLongNames());
+    furnitureAssigneeField.setItems(qdb.getAllNames());
     furnitureLocationField.setItems(qdb.getAllLongNames());
     furnitureTimeField.setItems(timeList);
     furnitureChoiceField.setItems(furnitureList);
@@ -532,7 +533,7 @@ public class AdminListServiceRequestsController {
   }
 
   private void setMealFields(MealRequest mr) {
-    mealAssigneeField.setItems(qdb.getAllLongNames());
+    mealAssigneeField.setItems(qdb.getAllNames());
     mealLocationField.setItems(qdb.getAllLongNames());
     mealTimeField.setItems(timeList);
     mealDrinkField.setItems(drinkList);
@@ -587,7 +588,7 @@ public class AdminListServiceRequestsController {
 
   public void setMedicalFields(MedicalSuppliesRequest mr) {
     medicalItemField.setItems(medicalItemList);
-    medicalAssigneeField.setItems(qdb.getAllLongNames());
+    medicalAssigneeField.setItems(qdb.getAllNames());
     medicalLocationField.setItems(qdb.getAllLongNames());
     medicalTimeField.setItems(timeList);
 

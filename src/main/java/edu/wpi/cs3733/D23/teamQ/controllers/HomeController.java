@@ -9,10 +9,12 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -24,6 +26,7 @@ public class HomeController implements Subscriber {
   Qdb qdb = Qdb.getInstance();
   @FXML GesturePane titleImage;
   @FXML Label title;
+  @FXML Label datetime;
   @FXML VBox alertBox;
   @FXML TextArea notesField;
   @FXML CalendarView calendar;
@@ -34,6 +37,7 @@ public class HomeController implements Subscriber {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
     title.setText("Welcome Back " + account.getFirstName() + "!");
+    updateTime();
 
     Image im = new Image(App.class.getResourceAsStream("ShapiroCenter.jpg"));
     ImageView iv = new ImageView(im);
@@ -74,19 +78,32 @@ public class HomeController implements Subscriber {
   private boolean setAlerts() {
     alertBox.getChildren().clear();
     List<Alert> alerts = qdb.retrieveAllAlerts();
-    for (int i = 0; i < alerts.size(); i++) {
+    for (int i = alerts.size() - 1; i >= 0; i--) {
       Label l = new Label();
       Date d = new Date(alerts.get(i).getTimestamp());
       l.setText(d + ": " + alerts.get(i).getMessage());
+      l.setPadding(new Insets(4, 6, 4, 6));
+      l.setMaxWidth(512);
+      l.setMinHeight(24);
+      l.setWrapText(true);
       l.setStyle(
-          "-fx-text-fill: #CE3C49; -fx-font-family: Roboto; -fx-font-size: 14; -fx-font-weight: bold");
+          "-fx-text-fill: #CE3C49; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #CE3C49; -fx-border-radius: 16");
       alertBox.getChildren().add(l);
     }
     return true;
   }
 
+  public void updateTime() {
+    Long time = System.currentTimeMillis();
+    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
+    java.sql.Date resultDate = new java.sql.Date(time);
+    String timeString = sdf.format(resultDate);
+    datetime.setText(timeString);
+  }
+
   @Override
   public boolean update(List<String> context) {
+    updateTime();
     return setAlerts();
   }
 }

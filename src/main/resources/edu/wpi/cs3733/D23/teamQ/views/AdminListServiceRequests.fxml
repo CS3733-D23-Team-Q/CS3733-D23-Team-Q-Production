@@ -24,7 +24,7 @@
                      <children>
                         <StackPane maxWidth="275.0" prefWidth="275.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
                            <children>
-                              <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Service Requests">
+                              <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="All Service Requests">
                                  <font>
                                     <Font name="Roboto Bold" size="24.0" />
                                  </font>
