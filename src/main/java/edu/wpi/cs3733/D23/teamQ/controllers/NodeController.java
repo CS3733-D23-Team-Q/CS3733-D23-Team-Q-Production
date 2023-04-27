@@ -255,7 +255,7 @@ public class NodeController implements IController {
         alert.clearLabelAlert(InformationAlert, image2);
         alert.clearLabelAlert(nodeIDAlert, image);
 
-        qdb.deleteNode(nodeIDEdit);
+        // qdb.deleteNode(nodeIDEdit);
         node.setItems(nodes());
 
         // Here to call confirm

@@ -23,10 +23,12 @@ public class ViewProfilePageController {
   @FXML private Text status;
   @FXML private MFXButton backButton;
 
+  @FXML private MFXButton chatButton;
+
   public void initialize() {
     String loggedInUser = LoginController.getLoginUsername();
     String username;
-    if (loggedInUser.equals("admin")) {
+    if (LoginController.isAdmin()) {
       username = AdminDirectoryController.getViewProfileUsername();
     } else {
       username = DirectoryController.getViewProfileUsername();
@@ -56,11 +58,24 @@ public class ViewProfilePageController {
 
   public void backButtonPressed() {
     String username = LoginController.getLoginUsername();
-    System.out.println(username);
-    if (username.equals("admin")) {
+    if (LoginController.isAdmin()) {
       Navigation.navigate(Screen.ADMIN_DIRECTORY);
     } else {
       Navigation.navigate(Screen.DIRECTORY);
     }
+  }
+
+  public void chatButtonClicked() {
+
+    String loggedInUser = LoginController.getLoginUsername();
+    String username;
+    if (LoginController.isAdmin()) {
+      username = AdminDirectoryController.getViewProfileUsername();
+    } else {
+      username = DirectoryController.getViewProfileUsername();
+    }
+
+    qdb.setMessagingAccount(qdb.getAccountFromUsername(username));
+    Navigation.navigate(Screen.MESSAGES);
   }
 }
