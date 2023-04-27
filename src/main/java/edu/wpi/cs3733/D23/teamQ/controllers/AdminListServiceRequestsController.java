@@ -339,25 +339,21 @@ public class AdminListServiceRequestsController {
                       ServiceRequest request = getTableView().getItems().get(getIndex());
                       switch (request.getProgress()) {
                         case BLANK:
-                          request.setProgress(ServiceRequest.Progress.BLANK);
-                          // qdb.updateServiceRequest(request.getRequestID(), request);
-                          button.getStyleClass().setAll("grey-button");
-                          button.setText("BLANK");
-                          break;
-                        case PROCESSING:
                           request.setProgress(ServiceRequest.Progress.PROCESSING);
-                          // qdb.updateServiceRequest(request.getRequestID(), request);
                           button.getStyleClass().setAll("yellow-button");
                           button.setText("PROCESSING");
                           break;
-                        case DONE:
+                        case PROCESSING:
                           request.setProgress(ServiceRequest.Progress.DONE);
-                          // qdb.updateServiceRequest(request.getRequestID(), request);
                           button.getStyleClass().setAll("green-button");
                           button.setText("DONE");
                           break;
+                        case DONE:
+                          request.setProgress(ServiceRequest.Progress.BLANK);
+                          button.getStyleClass().setAll("grey-button");
+                          button.setText("BLANK");
+                          break;
                       }
-                      commitEdit(button);
                       qdb.updateServiceRequest(request.getRequestID(), request); // Update database
                     });
               }
