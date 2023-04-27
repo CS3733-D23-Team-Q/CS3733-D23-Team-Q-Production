@@ -114,7 +114,6 @@ public class Qdb {
 
   public synchronized void notifySubscribers(List<String> context) {
     for (Subscriber s : subscribers) {
-      System.out.println("Notifying subscribers");
       s.update(context);
     }
   }
