@@ -416,7 +416,7 @@ public class GraphicalMapEditorController {
                     newYcoord,
                     newFloor,
                     newBuilding,
-                    Qdb.getInstance().retrieveLocation(nodeid)));
+                    qdb.retrieveLocation(nodeid)));
             refreshNodes();
             setEdges();
             findOnMap();
@@ -474,26 +474,6 @@ public class GraphicalMapEditorController {
     refreshNodes();
     setEdges();
   }
-  /*
-    if (nodeIDAlertone(nodeidinput, alerts, image1)) {
-      nodeid = Integer.parseInt(nodeidinput.getText());
-      /*
-      qdb.nodeTable.deleteRow(nodeid);
-      qdb.locationTable.deleteRow(nodeid);
-
-
-
-      qdb.deleteNode(nodeid);
-      qdb.deleteMove(nodeid);
-      refreshNodes();
-    } else {
-      InitialNode();
-    }
-    setEdges();
-  }
-
-
-   */
 
   /**
    * add nodes
@@ -511,7 +491,16 @@ public class GraphicalMapEditorController {
             newNodeType = nodetypeinitial.getText();
             newShortName = shortnameinitial.getText();
 
-            qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
+            List<Location> loca = qdb.retrieveAllLocations();
+            boolean check = true;
+            for (int i = 0; i < loca.size(); i++) {
+              if (nodeid == loca.get(i).getNodeID()) {
+                check = false;
+              }
+            }
+            if (check) {
+              qdb.addLocation(new Location(nodeid, newLongName, newShortName, newNodeType));
+            }
             newBuilding = buildinginitial.getText();
             newFloor = floorinitial.getText();
             newXcoord = Integer.parseInt(xinitial.getText());
@@ -523,7 +512,7 @@ public class GraphicalMapEditorController {
                     newYcoord,
                     newFloor,
                     newBuilding,
-                    Qdb.getInstance().retrieveLocation(nodeid));
+                    qdb.retrieveLocation(nodeid));
             qdb.addNode(newnode);
             refreshNodes();
             findOnMap();
@@ -1010,11 +999,14 @@ public class GraphicalMapEditorController {
   List<Integer> chooseLines(int floor) {
     List<Integer> path = new ArrayList<>();
     for (int i = 0; i < qdb.retrieveAllEdges().size(); i++) {
-      int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
-      int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
-      if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
-        path.add(start);
-        path.add(target);
+      if (!(qdb.retrieveAllEdges().get(i).getStartNode() == null)
+          && !(qdb.retrieveAllEdges().get(i).getEndNode() == null)) {
+        int start = qdb.retrieveAllEdges().get(i).getStartNode().getNodeID();
+        int target = qdb.retrieveAllEdges().get(i).getEndNode().getNodeID();
+        if (nodeOnTheFloor(start, floor) && nodeOnTheFloor(target, floor)) {
+          path.add(start);
+          path.add(target);
+        }
       }
     }
     return path;
@@ -1200,6 +1192,7 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   boolean ShowLocationName() {
+    int count = 1;
     parent.getChildren().removeAll(Texts);
     Texts.clear();
     List<Node> allNodes = qdb.retrieveAllNodes();
@@ -1212,8 +1205,24 @@ public class GraphicalMapEditorController {
       double y = node1.getYCoord() / 5.0;
       if (node1.getFloor().equals(Floor(currentIndex))) {
         if (check.equals("All") || type.equals(check)) {
-          text = new Text(x + 3, y + 3, name);
-          text.setStyle("-fx-font-size: 6px;");
+          if (node1.getNodeID() % 10 == 5) {
+            if (count == 0) {
+              text = new Text(x + 3, y, name);
+              count += 1;
+            } else {
+              text = new Text(x - 5, y - 3, name);
+              count -= 1;
+            }
+          } else {
+            if (count == 0) {
+              text = new Text(x + 3, y + 3, name);
+              count += 1;
+            } else {
+              text = new Text(x - 5, y + 3, name);
+              count -= 1;
+            }
+          }
+          text.setStyle("-fx-font-size: 3px;" + "-fx-font-weight: bold");
           Texts.add(text);
         } else if (check.equals("/")) {
           parent.getChildren().removeAll(Texts);
