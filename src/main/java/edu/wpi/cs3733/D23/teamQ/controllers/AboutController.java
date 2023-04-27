@@ -51,7 +51,8 @@ public class AboutController {
 
   @FXML
   public void kenyonShow() {
-    kenyon1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    kenyon1.setText("Favorite color is green");
+    kenyon1.setStyle("-fx-text-fill: green");
     kenyon2.setText("");
     kenyon3.setText("");
   }
@@ -59,13 +60,14 @@ public class AboutController {
   @FXML
   public void kenyonHide() {
     kenyon1.setText("Kenyon Coleman");
+    kenyon1.setStyle("-fx-text-fill: #012d5a");
     kenyon2.setText("Assistant Lead Software Engineer");
     kenyon3.setText("Computer Science, 2025");
   }
 
   @FXML
   public void olegShow() {
-    oleg1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    oleg1.setText("BIG athfinding fan");
     oleg2.setText("");
     oleg3.setText("");
   }
@@ -79,7 +81,7 @@ public class AboutController {
 
   @FXML
   public void ashleyShow() {
-    ashley1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    ashley1.setText("Andrew Garfield Spiderman fan");
     ashley2.setText("");
     ashley3.setText("");
   }
@@ -149,7 +151,7 @@ public class AboutController {
 
   @FXML
   public void willShow() {
-    will1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    will1.setText("Plays In Hill House the Band");
     will2.setText("");
     will3.setText("");
   }
