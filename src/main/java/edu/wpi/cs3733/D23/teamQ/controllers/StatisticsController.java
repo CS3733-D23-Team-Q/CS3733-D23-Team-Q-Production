@@ -1,42 +1,123 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import javafx.scene.chart.*;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
+import io.github.palexdev.materialfx.controls.MFXScrollPane;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.chart.*;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.StackPane;
-
-import java.sql.Date;
-import java.time.LocalDate;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class StatisticsController {
   Qdb qdb = Qdb.getInstance();
-  @FXML Label users;
-  @FXML Label nodes;
-  @FXML Label requests;
+
+  @FXML VBox vbox;
+  @FXML MFXScrollPane sp;
 
   @FXML
   public void initialize() {
-    users.setText("Total users: " + qdb.retrieveAllAccounts().size());
-    nodes.setText("Total nodes: " + qdb.retrieveAllNodes().size());
-    requests.setText("Total requests: " + qdb.retrieveAllServiceRequests().size());
-//
-//    BarChart<Date, Number> chart = new BarChart<>(new DateAxis(), new NumberAxis());
-//    chart.setTitle("Sales by Date");
-//
-//    // Add data to the chart
-//    XYChart.Series<Date, Number> series = new XYChart.Series<>();
-//    series.setName("Sales");
-//    series.getData().add(new XYChart.Data<>(LocalDate.of(2022, 1, 1), 100));
-//    series.getData().add(new XYChart.Data<>(LocalDate.of(2022, 2, 1), 200));
-//    series.getData().add(new XYChart.Data<>(LocalDate.of(2022, 3, 1), 150));
-//    series.getData().add(new XYChart.Data<>(LocalDate.of(2022, 4, 1), 300));
-//    chart.getData().add(series);
+    Qdb qdb = Qdb.getInstance();
 
+    vbox.heightProperty()
+        .addListener(
+            new ChangeListener<Number>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                sp.setVvalue((double) newValue);
+              }
+            });
+    messages();
+    serviceRequests();
+    serviceRequestPieChart();
+  }
 
+  public void messages() {
+    Map<String, Integer> messageCounts = new HashMap<>();
+    for (Message message : qdb.retrieveMessages("wmerry", "cam40419")) {
+      String date = new SimpleDateFormat("MMM-dd-yyy").format(new Date(message.getTimeStamp()));
+      if (!messageCounts.containsKey(date)) {
+        messageCounts.put(date, 0);
+      }
+      messageCounts.put(date, messageCounts.get(date) + 1);
+    }
+
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+
+    BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+    barChart.setTitle("Messages Sent Per Day");
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.setName("Messages");
+    for (String date : messageCounts.keySet()) {
+      series.getData().add(new XYChart.Data<>(date, messageCounts.get(date)));
+    }
+
+    barChart.getData().add(series);
+    vbox.getChildren().add(barChart);
+  }
+
+  public void serviceRequests() {
+    Map<String, Integer> srCounts = new HashMap<>();
+    for (ServiceRequest sr : qdb.getAllServiceRequestsObservable()) {
+      String date = new SimpleDateFormat("MMM-dd-yyy").format(sr.getDate());
+      if (!srCounts.containsKey(date)) {
+        srCounts.put(date, 0);
+      }
+      srCounts.put(date, srCounts.get(date) + 1);
+    }
+
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+
+    BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+    barChart.setTitle("Service Requests Per Day");
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.setName("Service Request");
+    for (String date : srCounts.keySet()) {
+      series.getData().add(new XYChart.Data<>(date, srCounts.get(date)));
+    }
+    barChart.getData().add(series);
+    vbox.getChildren().add(barChart);
+  }
+
+  public void serviceRequestPieChart() {
+    Qdb qdb = Qdb.getInstance();
+    PieChart.Data slice1 =
+        new PieChart.Data("Conference Room Requests", qdb.retrieveAllConferenceRequests().size());
+    PieChart.Data slice2 =
+        new PieChart.Data("Flower Requests", qdb.retrieveAllFlowerRequests().size());
+    PieChart.Data slice3 =
+        new PieChart.Data("Office Supply Requests", qdb.retrieveAllOfficeSuppliesRequests().size());
+    PieChart.Data slice4 =
+        new PieChart.Data("Furniture Requests", qdb.retrieveAllFurnitureRequests().size());
+    PieChart.Data slice5 =
+        new PieChart.Data("Meal Delivery Requests", qdb.retrieveAllMealRequests().size());
+    PieChart.Data slice6 =
+        new PieChart.Data(
+            "Medial Supply Requests", qdb.retrieveAllMedicalSuppliesRequests().size());
+
+    PieChart pieChart = new PieChart();
+    pieChart.getData().add(slice1);
+    pieChart.getData().add(slice2);
+    pieChart.getData().add(slice3);
+    pieChart.getData().add(slice4);
+    pieChart.getData().add(slice5);
+    pieChart.getData().add(slice6);
+    vbox.getChildren().add(new Label("Service Requests by type"));
+    vbox.getChildren().add(pieChart);
   }
 }
