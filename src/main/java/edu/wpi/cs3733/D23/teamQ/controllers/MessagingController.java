@@ -236,7 +236,6 @@ public class MessagingController implements Subscriber {
   }
 
   public void displayTime(long time) {
-
     SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
     Date resultDate = new Date(time);
     String timeString = sdf.format(resultDate);
