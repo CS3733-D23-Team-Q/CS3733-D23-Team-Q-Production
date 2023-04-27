@@ -25,6 +25,7 @@ public class DFS implements IPathfinding {
       for (Edge edgePath : current.getEdges()) {
         System.out.println();
         System.out.println(" AT CURRENT " + current.getNodeID());
+
         nodesAvailable.add(edgePath.getStartNode());
         System.out.println();
         System.out.println(" ADDED Node " + edgePath.getStartNode().getNodeID());
@@ -42,13 +43,13 @@ public class DFS implements IPathfinding {
               && !node.equals(current)
               && !nextChosen // find a nonelevator
           ) {
-            System.out.println();
+            /*  System.out.println();
             System.out.println(
                 " ADDED NODE "
                     + node.getNodeID()
                     + " FROM "
                     + current.getNodeID()
-                    + " USING ELEVATORS SAME FLOOR ");
+                    + " USING ELEVATORS SAME FLOOR ");*/
             openList.add(node);
             openList.remove(current);
             path.add(current);
@@ -62,13 +63,13 @@ public class DFS implements IPathfinding {
           && !current.equals(current.getEdges().get(0).getEndNode())
           && floor.equalsIgnoreCase(current.getEdges().get(0).getEndNode().getFloor())
           && !nextChosen) {
-        System.out.println();
+        /*  System.out.println();
         System.out.println(
             " ADDED NODE "
                 + current.getEdges().get(0).getEndNode().getNodeID()
                 + " FROM "
                 + current.getNodeID()
-                + " USING BRANCH FROM END NODES");
+                + " USING BRANCH FROM END NODES");*/
         openList.add(current.getEdges().get(0).getEndNode());
         openList.remove(current);
         path.add(current);
@@ -79,13 +80,13 @@ public class DFS implements IPathfinding {
           && !current.equals(current.getEdges().get(0).getStartNode())
           && floor.equalsIgnoreCase(current.getEdges().get(0).getStartNode().getFloor())
           && !nextChosen) {
-        System.out.println();
+        /* System.out.println();
         System.out.println(
             " ADDED NODE "
                 + current.getEdges().get(0).getStartNode().getNodeID()
                 + " FROM "
                 + current.getNodeID()
-                + " USING BRANCH START NODES");
+                + " USING BRANCH START NODES");*/
         openList.add(current.getEdges().get(0).getStartNode());
         openList.remove(current);
         path.add(current);
@@ -103,23 +104,28 @@ public class DFS implements IPathfinding {
             // path.add(backup);
             visitedList.add(current);
             nextChosen = true;
-            System.out.println();
+            /* System.out.println();
             System.out.println(
                 " FROM BACKUP BRANCH AT CURRRENT "
                     + current.getNodeID()
                     + " WENT TO "
                     + backup.getNodeID()
                     + " EDGES WERE "
-                    + nodesAvailable);
+                    + nodesAvailable);*/
           }
         }
       }
       int i = 1;
+      ArrayList<Node> revisitedNodes = new ArrayList<Node>();
       while (!nextChosen) {
         Node previous = path.get(path.size() - i);
         // System.out.println("WENT BACK TO " + previous.getNodeID() + " with I " + i);
-        ArrayList<Node> revisitedNodes = new ArrayList<Node>();
-        revisitedNodes.add(previous);
+        // ArrayList<Node> revisitedNodes = new ArrayList<Node>();
+        if (!revisitedNodes.contains(previous)) {
+          revisitedNodes.add(previous);
+        }
+        System.out.println();
+        System.out.println(" REVISITED NODE " + previous.getNodeID() + " USING INDEX " + i);
         ArrayList<Node> previousNodes = new ArrayList<Node>();
         i++;
         for (Edge previousEdge : previous.getEdges()) {
@@ -136,7 +142,7 @@ public class DFS implements IPathfinding {
             openList.remove(current);
             // path.add(current);
             path.addAll(revisitedNodes);
-            // path.add(previousNode);
+            path.add(previousNode);
             visitedList.add(current);
             nextChosen = true;
             System.out.println();
@@ -145,6 +151,8 @@ public class DFS implements IPathfinding {
                     + current.getNodeID()
                     + " WITH PATH "
                     + revisitedNodes
+                    + " AND SIZE "
+                    + revisitedNodes.size()
                     + " TO "
                     + previousNode.getNodeID());
             break;
