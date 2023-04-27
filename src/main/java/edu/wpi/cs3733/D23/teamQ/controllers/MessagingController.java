@@ -59,8 +59,6 @@ public class MessagingController implements Subscriber {
     messageSP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     accountSP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-    populateAccounts();
-
     if (qdb.getMessagingAccount() != null) {
       receiver = qdb.getMessagingAccount();
       qdb.setMessagingAccount(null);
@@ -112,6 +110,7 @@ public class MessagingController implements Subscriber {
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
                   populateMessages();
+                  populateAccounts();
                 }
               }
             });
@@ -307,22 +306,56 @@ public class MessagingController implements Subscriber {
     }
   }
 
+  // qdb.retrieveRecentMessages(LoginController.getUsername())
   public void populateAccounts() {
     Qdb qdb = Qdb.getInstance();
-    for (Message m : qdb.retrieveRecentMessages(LoginController.getUsername())) {
+    for (Message m : qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())) {
       String person;
+      String message = m.getMessage();
+      String username;
+      ImageView profileImage = new ImageView();
+
+      if (message.length() > 40) message = message.substring(0, 40) + "...";
+
       if (m.getSender().getUsername().equals(LoginController.getUsername())) {
         person = m.getReceiver().getFirstName() + " " + m.getReceiver().getLastName();
+        username = m.getReceiver().getUsername();
       } else {
         person = m.getSender().getFirstName() + " " + m.getSender().getLastName();
+        username = m.getSender().getUsername();
+      }
+
+      if (qdb.getProfileImageIndex(username) != -1) {
+        Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
+        profileImage.setImage(pfp);
+        profileImage.setFitHeight(40);
+        profileImage.setFitHeight(40);
+        Circle ppClip = new Circle(15);
+        ppClip.setTranslateX(profileImage.getFitWidth() / 2);
+        ppClip.setTranslateY(profileImage.getFitHeight() / 2);
+        profileImage.setClip(ppClip);
       }
 
       HBox hbox = new HBox();
-      hbox.setAlignment(Pos.CENTER_LEFT);
-      hbox.setPadding(new Insets(4, 16, 4, 16));
-      Text text = new Text(person);
-      text.setFont(Font.font(18));
-      hbox.getChildren().add(text);
+      VBox vbox = new VBox();
+      HBox hbox1 = new HBox();
+      HBox hbox2 = new HBox();
+      hbox1.setAlignment(Pos.CENTER_LEFT);
+      hbox1.setPadding(new Insets(4, 16, 4, 16));
+      hbox2.setAlignment(Pos.CENTER_LEFT);
+      hbox2.setPadding(new Insets(4, 16, 4, 16));
+      Text ptext = new Text(person);
+      Text mtext = new Text(message);
+      ptext.setFont(Font.font(18));
+      mtext.setFont(Font.font(12));
+      ptext.setStyle("-fx-font-family: Roboto; -fx-font-weight: bold;");
+      mtext.setStyle("-fx-font-family: Roboto; ");
+      hbox1.getChildren().add(ptext);
+      hbox2.getChildren().add(mtext);
+      vbox.getChildren().add(hbox1);
+      vbox.getChildren().add(hbox2);
+      hbox.getChildren().add(profileImage);
+      hbox.getChildren().add(vbox);
       accountVbox.getChildren().add(hbox);
     }
   }
