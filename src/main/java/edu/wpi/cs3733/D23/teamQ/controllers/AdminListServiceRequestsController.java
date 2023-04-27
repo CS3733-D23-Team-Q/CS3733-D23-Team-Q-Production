@@ -139,8 +139,8 @@ public class AdminListServiceRequestsController {
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getLoginUsername();
 
-  ObservableList<ServiceRequest> allRequests = qdb.getAllServiceRequestsObservable();
-  ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
+  // ObservableList<ServiceRequest> allRequests = qdb.getAllServiceRequestsObservable();
+  // ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
 
   public void initialize() {
     requestsTable.setRowFactory(
@@ -153,12 +153,14 @@ public class AdminListServiceRequestsController {
     final FilteredList<ServiceRequest>[] filteredRequests = new FilteredList[] {null};
     toggleButton.setOnAction(
         event -> {
-          filteredRequests[0] = new FilteredList<>(allOutstandingRequests, b -> true);
+          filteredRequests[0] =
+              new FilteredList<>(qdb.getAllOutstandingServingRequests(), b -> true);
           if (toggleButton.isSelected()) {
-            requestsTable.setItems(allOutstandingRequests);
+            requestsTable.setItems(qdb.getAllOutstandingServingRequests());
           } else {
-            requestsTable.setItems(allRequests);
-            filteredRequests[0] = new FilteredList<>(allRequests, b -> true);
+            requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+            filteredRequests[0] =
+                new FilteredList<>(qdb.getAllServiceRequestsObservable(), b -> true);
           }
           requestsTable.refresh();
         });
@@ -370,7 +372,7 @@ public class AdminListServiceRequestsController {
           return requesterProperty;
         });
 
-    filteredRequests[0] = new FilteredList<>(allRequests, b -> true);
+    filteredRequests[0] = new FilteredList<>(qdb.getAllServiceRequestsObservable(), b -> true);
 
     searchBox
         .textProperty()
@@ -412,7 +414,7 @@ public class AdminListServiceRequestsController {
               requestsTable.setItems(sortedRequests);
             }));
 
-    requestsTable.setItems(allRequests);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
   }
 
   public void confCancelClicked() {
