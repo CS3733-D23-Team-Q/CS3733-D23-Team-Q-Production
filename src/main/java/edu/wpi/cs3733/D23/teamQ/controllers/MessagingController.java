@@ -337,9 +337,13 @@ public class MessagingController implements Subscriber {
       }
 
       HBox hbox = new HBox();
+      hbox.setMaxWidth(300);
       VBox vbox = new VBox();
+      vbox.setMaxWidth(200);
       HBox hbox1 = new HBox();
+      hbox1.setMaxWidth(200);
       HBox hbox2 = new HBox();
+      hbox2.setMaxWidth(200);
       hbox1.setAlignment(Pos.CENTER_LEFT);
       hbox1.setPadding(new Insets(4, 16, 4, 16));
       hbox2.setAlignment(Pos.CENTER_LEFT);
