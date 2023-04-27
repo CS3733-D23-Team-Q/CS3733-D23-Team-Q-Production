@@ -53,6 +53,8 @@ public class MessagingController implements Subscriber {
     Qdb qdb = Qdb.getInstance();
     qdb.subscribe(this);
 
+    populateAccounts();
+
     peopleSelector.setValue("");
     peopleSelector.setItems(qdb.getAllNames());
 
@@ -110,7 +112,7 @@ public class MessagingController implements Subscriber {
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
                   populateMessages();
-                  populateAccounts();
+
                 }
               }
             });
@@ -362,11 +364,10 @@ public class MessagingController implements Subscriber {
       accountVbox.getChildren().add(hbox);
       hbox.setUserData(m);
 
-      String finalMessage = message;
       hbox.setOnMouseClicked(
           event -> {
-              receiver= qdb.getAccountFromUsername(username);
-              populateMessages();
+            receiver = qdb.getAccountFromUsername(username);
+            populateMessages();
           });
     }
   }
