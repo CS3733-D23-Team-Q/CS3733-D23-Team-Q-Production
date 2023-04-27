@@ -911,7 +911,10 @@ public class CreditsController {
   @FXML
   public void figmaClicked() {
     linkDisplay.setText("https://www.figma.com/");
-    browser.getEngine().load("https://www.google.com/search?q=figma&oq=figma&aqs=chrome..69i57j69i60l5.1704j0j1&sourceid=chrome&ie=UTF-8");
+    browser
+        .getEngine()
+        .load(
+            "https://www.google.com/search?q=figma&oq=figma&aqs=chrome..69i57j69i60l5.1704j0j1&sourceid=chrome&ie=UTF-8");
   }
 
   @FXML
@@ -923,7 +926,10 @@ public class CreditsController {
   @FXML
   public void intellijClicked() {
     linkDisplay.setText("https://www.jetbrains.com/idea/");
-    browser.getEngine().load("https://www.google.com/search?q=intellij&oq=intellij&aqs=chrome.0.69i59l3j0i67i433i650l2j69i61l3.1443j0j4&sourceid=chrome&ie=UTF-8");
+    browser
+        .getEngine()
+        .load(
+            "https://www.google.com/search?q=intellij&oq=intellij&aqs=chrome.0.69i59l3j0i67i433i650l2j69i61l3.1443j0j4&sourceid=chrome&ie=UTF-8");
   }
 
   @FXML
