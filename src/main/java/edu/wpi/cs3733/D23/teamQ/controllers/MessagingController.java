@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -112,7 +113,6 @@ public class MessagingController implements Subscriber {
                   result = matcher.group(0);
                   receiver = qdb.retrieveAccount(result);
                   populateMessages();
-
                 }
               }
             });
@@ -345,10 +345,8 @@ public class MessagingController implements Subscriber {
       hbox1.setMaxWidth(200);
       HBox hbox2 = new HBox();
       hbox2.setMaxWidth(200);
-      hbox1.setAlignment(Pos.CENTER_LEFT);
-      hbox1.setPadding(new Insets(4, 16, 4, 16));
-      hbox2.setAlignment(Pos.CENTER_LEFT);
-      hbox2.setPadding(new Insets(4, 16, 4, 16));
+      hbox.setAlignment(Pos.CENTER_LEFT);
+      hbox.setPadding(new Insets(4, 16, 4, 16));
       Text ptext = new Text(person);
       Text mtext = new Text(message);
       ptext.setFont(Font.font(18));
@@ -359,8 +357,12 @@ public class MessagingController implements Subscriber {
       hbox2.getChildren().add(mtext);
       vbox.getChildren().add(hbox1);
       vbox.getChildren().add(hbox2);
-      hbox.getChildren().add(profileImage);
+      Line line = new Line(0, 0, 300, 0);
+      line.setFill(Color.GRAY);
+      line.setStrokeWidth(0.5);
+      // hbox.getChildren().add(profileImage);
       hbox.getChildren().add(vbox);
+      accountVbox.getChildren().add(line);
       accountVbox.getChildren().add(hbox);
       hbox.setUserData(m);
 
