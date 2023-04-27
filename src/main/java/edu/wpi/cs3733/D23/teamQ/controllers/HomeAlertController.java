@@ -4,8 +4,5 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class HomeAlertController {
-    @FXML
-    Label num;
-
-
+  @FXML Label num;
 }
