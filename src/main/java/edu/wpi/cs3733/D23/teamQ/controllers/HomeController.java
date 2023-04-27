@@ -67,7 +67,7 @@ public class HomeController implements Subscriber {
     SR.getCalendars().add(serviceRequests);
     calendar.getCalendarSources().add(SR);
 
-    // adding moves o calendar
+    // adding moves to calendar
     Calendar moves = new Calendar("Moves");
     CalendarSource m = new CalendarSource("testing 2");
 
@@ -75,21 +75,12 @@ public class HomeController implements Subscriber {
       int currMove = qdb.retrieveAllMoves().get(i).getMoveID();
       Entry<String> temp = new Entry<>("Move ID- " + currMove);
       moves.addEntry(temp);
-      //            temp.changeStartDate(qdb.retrieveAllMoves().get(i).getDate().toLocalDate());
-      //            temp.changeEndDate(qdb.retrieveAllMoves().get(i).getDate().toLocalDate());
-      //            temp.changeStartTime();
       temp.changeStartDate(qdb.retrieveAllMoves().get(i).getDate().toLocalDate());
       temp.changeEndDate(qdb.retrieveAllMoves().get(i).getDate().toLocalDate());
       temp.setFullDay(true);
-
-      //      temp.fullDayProperty();
-      //      System.out.println("here");
     }
     m.getCalendars().add(moves);
     calendar.getCalendarSources().add(m);
-    //      int num = qdb.retrieveMove()
-    //    }
-
   }
 
   public void saveNotes() {
