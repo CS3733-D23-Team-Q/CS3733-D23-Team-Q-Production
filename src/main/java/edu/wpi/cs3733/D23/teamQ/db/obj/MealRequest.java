@@ -26,7 +26,7 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
       String drink,
       String entree,
       String side) {
-    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
+    super(requestID, node, requester, assignee, specialInstructions, date, time, progress);
     this.drink = drink;
     this.entree = entree;
     this.side = side;
@@ -43,7 +43,7 @@ public class MealRequest extends ServiceRequest implements IServiceRequest {
       String drink,
       String entree,
       String side) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, requester, assignee, specialInstructions, date, time, progress);
     this.drink = drink;
     this.entree = entree;
     this.side = side;

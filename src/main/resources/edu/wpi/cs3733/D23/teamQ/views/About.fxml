@@ -21,7 +21,7 @@
             </Text>
          </children>
       </StackPane>
-      <HBox prefHeight="100.0" prefWidth="1360.0" VBox.vgrow="ALWAYS">
+      <HBox prefWidth="1360.0" VBox.vgrow="ALWAYS">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
@@ -38,12 +38,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="327.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Kenyon Coleman" textFill="#012d5a">
+                                          <Label fx:id="kenyon1" text="Kenyon Coleman" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Asst. Lead Software Engineer" textFill="#012d5a">
+                                          <Label fx:id="kenyon2" text="Assistant Lead Software Engineer" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="kenyon3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -53,7 +58,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="kenyonImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#kenyonShow" onMouseExited="#kenyonHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../KenyonHeadshot.png" />
                                        </image>
@@ -64,12 +69,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Oleg Zabolotnev" textFill="#012d5a">
+                                          <Label fx:id="oleg1" text="Oleg Zabolotnev" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Full-Time Software Engineer" textFill="#012d5a">
+                                          <Label fx:id="oleg2" text="Full-Time Software Engineer" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="oleg3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -79,7 +89,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="olegImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#olegShow" onMouseExited="#olegHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../OlegHeadshot.png" />
                                        </image>
@@ -90,12 +100,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Ashley Jacobs" textFill="#012d5a">
+                                          <Label fx:id="ashley1" text="Ashley Jacobs" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Scrum Master" textFill="#012d5a">
+                                          <Label fx:id="ashley2" text="Scrum Master" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="ashley3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -105,7 +120,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="ashleyImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#ashleyShow" onMouseExited="#ashleyHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../AshleyHeadshot.png" />
                                        </image>
@@ -116,12 +131,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Sophia John" textFill="#012d5a">
+                                          <Label fx:id="sophia1" text="Sophia John" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Product Owner" textFill="#012d5a">
+                                          <Label fx:id="sophia2" text="Product Owner" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="sophia3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -131,7 +151,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="sophiaImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#sophiaShow" onMouseExited="#sophiaHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../SophiaHeadshot.png" />
                                        </image>
@@ -142,12 +162,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Josh Keselman" textFill="#012d5a">
+                                          <Label fx:id="josh1" text="Josh Keselman" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Documentation Analyst" textFill="#012d5a">
+                                          <Label fx:id="josh2" text="Documentation Analyst" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="josh3" text="Robotics Engineering, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -157,7 +182,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="joshImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#joshShow" onMouseExited="#joshHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../JoshHeadshot.png" />
                                        </image>
@@ -175,12 +200,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Kelu (Lydia) Liu" textFill="#012d5a">
+                                          <Label fx:id="lydia1" text="Kelu (Lydia) Liu" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Asst. Lead Software Engineer" textFill="#012d5a">
+                                          <Label fx:id="lydia2" text="Assistant Lead Software Engineer" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lydia3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -190,7 +220,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="lydiaImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#lydiaShow" onMouseExited="#lydiaHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../LydiaHeadshot.png" />
                                        </image>
@@ -201,12 +231,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Yuran (Amy) Xue" textFill="#012d5a">
+                                          <Label fx:id="amy1" text="Yuran (Amy) Xue" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Full-Time Software Engineer" textFill="#012d5a">
+                                          <Label fx:id="amy2" text="Full-Time Software Engineer" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="amy3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -216,7 +251,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="amyImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#amyShow" onMouseExited="#amyHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../AmyHeadshot.png" />
                                        </image>
@@ -227,12 +262,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Will Merry" textFill="#012d5a">
+                                          <Label fx:id="will1" text="Will Merry" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Project Manager" textFill="#012d5a">
+                                          <Label fx:id="will2" text="Project Manager" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="will3" text="Robotics Engineering, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -242,7 +282,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="willImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#willShow" onMouseExited="#willHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../WillHeadshot.png" />
                                        </image>
@@ -253,12 +293,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Dov Ushman" textFill="#012d5a">
+                                          <Label fx:id="dov1" text="Dov Ushman" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Asst. Lead Software Engineer" textFill="#012d5a">
+                                          <Label fx:id="dov2" text="Assistant Lead Software Engineer" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="dov3" text="Computer Science, 2026" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -268,7 +313,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="dovImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#dovShow" onMouseExited="#dovHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../DovHeadshot.png" />
                                        </image>
@@ -279,12 +324,17 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="Cameron Robbins" textFill="#012d5a">
+                                          <Label fx:id="cameron1" text="Cameron Robbins" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Lead Software Engineer" textFill="#012d5a">
+                                          <Label fx:id="cameron2" text="Lead Software Engineer" textFill="#012d5a">
+                                             <font>
+                                                <Font name="Roboto" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cameron3" text="Computer Science, 2025" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="18.0" />
                                              </font>
@@ -294,7 +344,7 @@
                                           <Insets left="64.0" />
                                        </padding>
                                     </VBox>
-                                    <ImageView fitHeight="112.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="cameronImage" fitHeight="112.0" fitWidth="112.0" onMouseEntered="#cameronShow" onMouseExited="#cameronHide" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../../../../CameronHeadshot.png" />
                                        </image>
@@ -373,6 +423,15 @@
                   </VBox>
                </children>
             </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="48.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+         <children>
+            <Label text="The Brigham &amp; Women's Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes" textFill="#f1f1f1">
+               <font>
+                  <Font name="Roboto" size="18.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
    </children>
