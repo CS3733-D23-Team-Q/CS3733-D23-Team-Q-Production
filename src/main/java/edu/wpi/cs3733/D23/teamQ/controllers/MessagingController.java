@@ -262,6 +262,7 @@ public class MessagingController implements Subscriber {
   }
 
   public void populateMessages() {
+    messageVbox.getChildren().clear();
     Qdb qdb = Qdb.getInstance();
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
@@ -302,6 +303,7 @@ public class MessagingController implements Subscriber {
     System.out.println("Updating messages page");
     if (context.contains("message")) {
       populateMessages();
+      populateAccounts();
       return true;
     } else {
       return false;
@@ -309,6 +311,7 @@ public class MessagingController implements Subscriber {
   }
 
   public void populateAccounts() {
+    accountVbox.getChildren().clear();
     Qdb qdb = Qdb.getInstance();
     for (Message m : qdb.retrieveRecentMessages(LoginController.getUsername())) {
       String person;

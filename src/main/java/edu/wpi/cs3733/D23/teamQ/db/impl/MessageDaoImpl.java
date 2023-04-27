@@ -106,40 +106,21 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
   public ObservableList<Message> retrieveRecentMessages(String person) {
     ObservableList<Message> messageList = FXCollections.observableArrayList();
     for (Account a : accountTable.getAllRows()) {
-      messageList.add(retrieveMostRecent(a.getUsername(), person));
-    }
-    return sortByTimestamp(messageList);
-  }
-
-  private ObservableList<Message> sortByTimestamp(ObservableList<Message> messageList) {
-    Comparator<Message> comparator =
-            (m1, m2) -> {
-              long t1 = m1.getTimeStamp();
-              long t2 = m2.getTimeStamp();
-              return Long.compare(t1, t2);
-            };
-    Collections.sort(messageList, comparator);
-    return messageList;
-  }
-
-  private Message retrieveMostRecent(String username, String person) {
-    List<Message> messageList = new ArrayList<>();
-    Long time = null;
-    Message latest = null;
-    for (Message m : messages) {
-      String uname1 = m.getSender().getUsername();
-      String uname2 = m.getReceiver().getUsername();
-      if (uname1.equals(username) || uname2.equals(username)) {
-        if (uname1.equals(person) || uname2.equals(person)) {
-          if (latest == null) {
-            latest = m;
-            time = m.getTimeStamp();
-          } else if (latest.getTimeStamp() > time) {
-            time = m.getTimeStamp();
-          }
+      List<Message> recent = retrieveMessages(a.getUsername(), person);
+      if (recent.size() > 0) {
+        Message m = recent.get(recent.size() - 1);
+        if (!messageList.contains(m)) {
+          messageList.add(m);
         }
       }
     }
-    return latest;
+    SortByTimestampParameter.sortByTimestamp(messageList);
+    return messageList;
+  }
+
+  public class SortByTimestampParameter {
+    public static void sortByTimestamp(List<Message> list) {
+      Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
+    }
   }
 }
