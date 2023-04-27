@@ -9,6 +9,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -26,6 +27,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -301,6 +304,12 @@ public class MessagingController implements Subscriber {
 
   public boolean update(List<String> context) {
     System.out.println("Updating messages page");
+
+    String path = getClass().getResource("/alert.wav").getPath();
+    Media media = new Media(new File(path).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.play();
+
     if (context.contains("message")) {
       populateMessages();
       populateAccounts();
