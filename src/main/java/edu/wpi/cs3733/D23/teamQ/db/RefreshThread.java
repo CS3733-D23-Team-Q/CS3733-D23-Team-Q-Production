@@ -67,7 +67,7 @@ public class RefreshThread implements Runnable {
 
   private void doUpdates() {
     qdb.populate(toUpdate);
-    Platform.runLater(() -> qdb.notifySubscribers(Arrays.stream(tableNames).toList()));
+    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
