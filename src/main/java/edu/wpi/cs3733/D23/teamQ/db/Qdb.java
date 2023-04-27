@@ -82,7 +82,6 @@ public class Qdb {
   }
 
   private boolean updateTimestamp(String tableName) {
-    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
