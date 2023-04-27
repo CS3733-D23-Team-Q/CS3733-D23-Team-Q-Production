@@ -305,14 +305,13 @@ public class MessagingController implements Subscriber {
   public boolean update(List<String> context) {
     System.out.println("Updating messages page");
 
-    String path = getClass().getResource("/alert.wav").getPath();
-    Media media = new Media(new File(path).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
-    mediaPlayer.play();
-
     if (context.contains("message")) {
       populateMessages();
       populateAccounts();
+//      String path = getClass().getResource("/alert.wav").getPath();
+//      Media media = new Media(new File(path).toURI().toString());
+//      MediaPlayer mediaPlayer = new MediaPlayer(media);
+//      mediaPlayer.play();
       return true;
     } else {
       return false;
