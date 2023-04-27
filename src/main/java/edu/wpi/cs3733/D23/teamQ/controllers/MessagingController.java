@@ -59,6 +59,8 @@ public class MessagingController implements Subscriber {
     messageSP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     accountSP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+    populateAccounts();
+
     if (qdb.getMessagingAccount() != null) {
       receiver = qdb.getMessagingAccount();
       qdb.setMessagingAccount(null);
@@ -143,16 +145,18 @@ public class MessagingController implements Subscriber {
               message,
               currentTimeMillis());
 
-      if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-          || (System.currentTimeMillis()
-                  - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                      .get(
-                          qdb.retrieveMessages(
-                                      LoginController.getUsername(), receiver.getUsername())
-                                  .size()
-                              - 1)
-                      .getTimeStamp()
-              >= 3600000)) displayTime(System.currentTimeMillis());
+      //      if (qdb.retrieveMessages(LoginController.getUsername(),
+      // receiver.getUsername()).isEmpty()
+      //          || (System.currentTimeMillis()
+      //                  - qdb.retrieveMessages(LoginController.getUsername(),
+      // receiver.getUsername())
+      //                      .get(
+      //                          qdb.retrieveMessages(
+      //                                      LoginController.getUsername(), receiver.getUsername())
+      //                                  .size()
+      //                              - 1)
+      //                      .getTimeStamp()
+      //              >= 3600000)) displayTime(System.currentTimeMillis());
 
       HBox hbox = new HBox();
       hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -180,15 +184,16 @@ public class MessagingController implements Subscriber {
 
     String message = messageSent.getMessage();
 
-    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-        || (System.currentTimeMillis()
-                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                    .get(
-                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                                .size()
-                            - 1)
-                    .getTimeStamp()
-            >= 3600000)) displayTime(System.currentTimeMillis());
+    //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+    //        || (System.currentTimeMillis()
+    //                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+    //                    .get(
+    //                        qdb.retrieveMessages(LoginController.getUsername(),
+    // receiver.getUsername())
+    //                                .size()
+    //                            - 1)
+    //                    .getTimeStamp()
+    //            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -211,15 +216,16 @@ public class MessagingController implements Subscriber {
     messageReceived.setRead(true);
     String message = messageReceived.getMessage();
 
-    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
-        || (System.currentTimeMillis()
-                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                    .get(
-                        qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
-                                .size()
-                            - 1)
-                    .getTimeStamp()
-            >= 3600000)) displayTime(System.currentTimeMillis());
+    //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
+    //        || (System.currentTimeMillis()
+    //                - qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername())
+    //                    .get(
+    //                        qdb.retrieveMessages(LoginController.getUsername(),
+    // receiver.getUsername())
+    //                                .size()
+    //                            - 1)
+    //                    .getTimeStamp()
+    //            >= 3600000)) displayTime(System.currentTimeMillis());
 
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_LEFT);
@@ -256,7 +262,6 @@ public class MessagingController implements Subscriber {
 
   public void populateMessages() {
     Qdb qdb = Qdb.getInstance();
-    // sbp.set(true);
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
     personLabel.setVisible(true);
@@ -299,6 +304,26 @@ public class MessagingController implements Subscriber {
       return true;
     } else {
       return false;
+    }
+  }
+
+  public void populateAccounts() {
+    Qdb qdb = Qdb.getInstance();
+    for (Message m : qdb.retrieveRecentMessages(LoginController.getUsername())) {
+      String person;
+      if (m.getSender().getUsername().equals(LoginController.getUsername())) {
+        person = m.getReceiver().getFirstName() + " " + m.getReceiver().getLastName();
+      } else {
+        person = m.getSender().getFirstName() + " " + m.getSender().getLastName();
+      }
+
+      HBox hbox = new HBox();
+      hbox.setAlignment(Pos.CENTER_LEFT);
+      hbox.setPadding(new Insets(4, 16, 4, 16));
+      Text text = new Text(person);
+      text.setFont(Font.font(18));
+      hbox.getChildren().add(text);
+      accountVbox.getChildren().add(hbox);
     }
   }
 }

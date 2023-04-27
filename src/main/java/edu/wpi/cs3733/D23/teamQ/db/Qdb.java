@@ -612,7 +612,7 @@ public class Qdb {
     return messageTable.retrieveMessages(p1, p2);
   }
 
-  public ObservableList<Message> retrieveRecentMessages(String username){
+  public ObservableList<Message> retrieveRecentMessages(String username) {
     return messageTable.retrieveRecentMessages(username);
   }
 
