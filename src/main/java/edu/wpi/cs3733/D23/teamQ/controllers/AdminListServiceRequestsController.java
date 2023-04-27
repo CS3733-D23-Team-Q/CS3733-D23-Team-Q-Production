@@ -26,7 +26,6 @@ import javafx.scene.layout.VBox;
 public class AdminListServiceRequestsController {
   @FXML TableView<ServiceRequest> requestsTable;
   @FXML TableColumn<ServiceRequest, Integer> requestIDColumn;
-  @FXML TableColumn<ServiceRequest, String> requestTypeColumn;
   @FXML TableColumn<ServiceRequest, String> requesterColumn;
   @FXML TableColumn<ServiceRequest, String> assigneeColumn;
   @FXML TableColumn<ServiceRequest, String> dateColumn;
@@ -171,25 +170,7 @@ public class AdminListServiceRequestsController {
     medicalRequestEdit.setVisible(false);
 
     requestIDColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    requestTypeColumn.setCellValueFactory(
-        cellData -> {
-          StringProperty requestProperty = new SimpleStringProperty();
-          ServiceRequest serviceRequest = cellData.getValue();
-          if (qdb.retrieveConferenceRequest(serviceRequest.getRequestID()) != null) {
-            requestProperty.set("Conference");
-          } else if (qdb.retrieveFlowerRequest(serviceRequest.getRequestID()) != null) {
-            requestProperty.set("Flower");
-          } else if (qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID()) != null) {
-            requestProperty.set("Office Supplies");
-          } else if (qdb.retrieveFurnitureRequest(serviceRequest.getRequestID()) != null) {
-            requestProperty.set("Furniture");
-          } else if (qdb.retrieveMealRequest(serviceRequest.getRequestID()) != null) {
-            requestProperty.set("Meal");
-          } else {
-            requestProperty.set("Medical Supplies");
-          }
-          return requestProperty;
-        });
+
     locationColumn.setCellValueFactory(
         cellData -> {
           ServiceRequest serviceRequest = cellData.getValue();
