@@ -103,6 +103,14 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
         list.add(serviceRequests.get(i));
       }
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 
@@ -114,6 +122,14 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
         list.add(serviceRequests.get(i));
       }
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 
@@ -124,6 +140,14 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
         list.add(serviceRequests.get(i));
       }
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 
@@ -135,6 +159,14 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
         list.add(serviceRequests.get(i));
       }
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 

@@ -39,7 +39,7 @@ public class OfficeSuppliesRequest extends ServiceRequest implements IServiceReq
       int progress,
       String item,
       int quantity) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, requester, assignee, specialInstructions, date, time, progress);
     this.item = item;
     this.quantity = quantity;
   }

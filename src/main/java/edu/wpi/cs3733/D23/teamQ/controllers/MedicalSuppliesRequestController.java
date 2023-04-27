@@ -94,8 +94,8 @@ public class MedicalSuppliesRequestController {
     MedicalSuppliesRequest newMSR =
         new MedicalSuppliesRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
