@@ -82,6 +82,7 @@ public class Qdb {
   }
 
   private boolean updateTimestamp(String tableName) {
+    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
@@ -555,7 +556,6 @@ public class Qdb {
   }
 
   public ServiceRequest retrieveLastRequest() {
-    serviceRequestTable.populate();
     return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
   }
 
