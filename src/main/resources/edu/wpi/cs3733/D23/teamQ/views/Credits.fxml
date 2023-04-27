@@ -132,7 +132,7 @@
                                     <MFXButton fx:id="brunchSpread" onAction="#brunchSpreadClicked" prefHeight="36.0" prefWidth="320.0" text="Brunch Spread" />
                                     <MFXButton fx:id="chicken" onAction="#chickenClicked" prefHeight="36.0" prefWidth="320.0" text="Chicken" />
                                     <MFXButton fx:id="coffee" onAction="#coffeeClicked" prefHeight="36.0" prefWidth="320.0" text="Coffee" />
-                                    <MFXButton fx:id="coke" onAction="#cokeClicked" prefHeight="36.0" prefWidth="320.0" text="Coke" />
+                                    <MFXButton fx:id="coke" onAction="#cokeClicked" prefHeight="36.0" prefWidth="320.0" text="Coca Cola" />
                                     <MFXButton fx:id="cotton" onAction="#cottonClicked" prefHeight="36.0" prefWidth="320.0" text="Cotton Balls" />
                                     <MFXButton fx:id="couch" onAction="#couchClicked" prefHeight="36.0" prefWidth="320.0" text="Couch" />
                                     <MFXButton fx:id="daisies" onAction="#daisiesClicked" prefHeight="36.0" prefWidth="320.0" text="Daisies" />

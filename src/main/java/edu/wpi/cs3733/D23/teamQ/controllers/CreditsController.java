@@ -65,7 +65,6 @@ public class CreditsController {
 
   // images
   @FXML MFXButton firstFloor;
-  @FXML MFXButton groundFloor;
   @FXML MFXButton exterior;
   @FXML MFXButton imagemark;
   @FXML MFXButton lowerLevel1;
@@ -486,21 +485,21 @@ public class CreditsController {
   @FXML
   public void exteriorClicked() {
     linkDisplay.setText(
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
+        "https://www.google.com/search?sxsrf=APwXEddd-Ep01zoWn5uciUWSBJ25O_8pVQ:1682638416210&q=brigham+and+womens&tbm=isch&sa=X&ved=2ahUKEwiPhdXInMv-AhUrlIkEHV37ADEQ0pQJegQIDBAB&biw=1920&bih=975&dpr=1#imgrc=bClRAwSIX7lnGM");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
+            "https://www.google.com/search?sxsrf=APwXEddd-Ep01zoWn5uciUWSBJ25O_8pVQ:1682638416210&q=brigham+and+womens&tbm=isch&sa=X&ved=2ahUKEwiPhdXInMv-AhUrlIkEHV37ADEQ0pQJegQIDBAB&biw=1920&bih=975&dpr=1#imgrc=bClRAwSIX7lnGM");
   }
 
   @FXML
   public void imagemarkClicked() {
     linkDisplay.setText(
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnndc.org%2Fnndc-members%2Fbrigham-and-womens-hospital%2F&psig=AOvVaw2acGby4gEVm2jrpGbZVryV&ust=1682277038806000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCICFmb2Yvv4CFQAAAAAdAAAAABAE");
+        "https://www.google.com/search?sxsrf=APwXEddd-Ep01zoWn5uciUWSBJ25O_8pVQ:1682638416210&q=brigham+and+womens&tbm=isch&sa=X&ved=2ahUKEwiPhdXInMv-AhUrlIkEHV37ADEQ0pQJegQIDBAB&biw=1920&bih=975&dpr=1#imgrc=49t192Y2QwyyFM");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnndc.org%2Fnndc-members%2Fbrigham-and-womens-hospital%2F&psig=AOvVaw2acGby4gEVm2jrpGbZVryV&ust=1682277038806000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCICFmb2Yvv4CFQAAAAAdAAAAABAE");
+            "https://www.google.com/search?sxsrf=APwXEddd-Ep01zoWn5uciUWSBJ25O_8pVQ:1682638416210&q=brigham+and+womens&tbm=isch&sa=X&ved=2ahUKEwiPhdXInMv-AhUrlIkEHV37ADEQ0pQJegQIDBAB&biw=1920&bih=975&dpr=1#imgrc=49t192Y2QwyyFM");
   }
 
   @FXML
@@ -524,21 +523,21 @@ public class CreditsController {
   @FXML
   public void shapiroClicked() {
     linkDisplay.setText(
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
+        "https://www.google.com/search?q=brigham+and+womens+shapiro+center&tbm=isch&ved=2ahUKEwi16p-unMv-AhUKI2IAHU1sDMwQ2-cCegQIABAA&oq=brigham+and+womens+shapiro+center&gs_lcp=CgNpbWcQAzoECCMQJzoGCAAQCBAeOgcIABAYEIAEOggIABAIEAcQHlCVA1jdFmD6F2gAcAB4AIABlgGIAc4KkgEEMTkuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=GAZLZLX-MIrGiLMPzdix4Aw&bih=975&biw=1920#imgrc=p4y5NZ0AbxvtoM");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.massgeneralbrigham.org%2Fen%2Fpatient-care%2Finternational%2Fabout%2Fbrigham-and-womens-hospital&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAa");
+            "https://www.google.com/search?q=brigham+and+womens+shapiro+center&tbm=isch&ved=2ahUKEwi16p-unMv-AhUKI2IAHU1sDMwQ2-cCegQIABAA&oq=brigham+and+womens+shapiro+center&gs_lcp=CgNpbWcQAzoECCMQJzoGCAAQCBAeOgcIABAYEIAEOggIABAIEAcQHlCVA1jdFmD6F2gAcAB4AIABlgGIAc4KkgEEMTkuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=GAZLZLX-MIrGiLMPzdix4Aw&bih=975&biw=1920#imgrc=p4y5NZ0AbxvtoM");
   }
 
   @FXML
   public void textLogoClicked() {
     linkDisplay.setText(
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brighamandwomens.org%2F&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAE");
+        "https://www.google.com/search?sxsrf=APwXEdeNdve84CbPbbF0FHSnKPajFW1CIQ:1682638303412&q=brighams+and+womens&tbm=isch&sa=X&ved=2ahUKEwjrwfCSnMv-AhWBjIkEHXAgDEgQ0pQJegQICxAB&biw=1920&bih=975&dpr=1#imgrc=6C5ju2DfcMKaiM");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brighamandwomens.org%2F&psig=AOvVaw3BJrJRgE9gd9oMf_708U4Z&ust=1682276866487000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDX6uqXvv4CFQAAAAAdAAAAABAE");
+            "https://www.google.com/search?sxsrf=APwXEdeNdve84CbPbbF0FHSnKPajFW1CIQ:1682638303412&q=brighams+and+womens&tbm=isch&sa=X&ved=2ahUKEwjrwfCSnMv-AhWBjIkEHXAgDEgQ0pQJegQICxAB&biw=1920&bih=975&dpr=1#imgrc=6C5ju2DfcMKaiM");
   }
 
   @FXML
