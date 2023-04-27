@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="192.0" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.HomeAlertController">
-    <children>
-        <MFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="160.0" text="Sign out" />
-    </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.HomeAlertController">
     <padding>
         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
     </padding>
+   <children>
+      <StackPane>
+         <children>
+            <Circle fill="#ce3c49" radius="24.0" stroke="#ce3c49" strokeType="INSIDE" />
+            <Label fx:id="num" text="X" textFill="#f1f1f1">
+               <font>
+                  <Font name="Roboto" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </children>
 </VBox>
