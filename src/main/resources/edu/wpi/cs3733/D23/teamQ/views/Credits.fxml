@@ -255,7 +255,10 @@
                         <Font name="Roboto" size="16.0" />
                      </font>
                   </MFXButton>
-                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS"></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <WebView fx:id="browser" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                     </children></VBox>
                   <HBox alignment="BOTTOM_RIGHT">
                      <children>
                         <MFXButton fx:id="clear" onAction="#clearClicked" prefHeight="36.0" prefWidth="128.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" text="Clear" textFill="#f1f1f1">
