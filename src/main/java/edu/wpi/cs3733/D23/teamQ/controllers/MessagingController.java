@@ -52,6 +52,8 @@ public class MessagingController implements Subscriber {
   @FXML VBox accountVbox;
   @FXML MFXScrollPane accountSP;
 
+  Qdb qdb = Qdb.getInstance();
+
   @FXML
   public void initialize() {
     Qdb qdb = Qdb.getInstance();
@@ -266,7 +268,6 @@ public class MessagingController implements Subscriber {
 
   public void populateMessages() {
     messageVbox.getChildren().clear();
-    Qdb qdb = Qdb.getInstance();
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
     personLabel.setVisible(true);
@@ -303,16 +304,21 @@ public class MessagingController implements Subscriber {
   }
 
   public boolean update(List<String> context) {
-    System.out.println("Updating messages page");
-
     if (context.contains("message")) {
-      populateMessages();
-      populateAccounts();
-//      String path = getClass().getResource("/alert.wav").getPath();
-//      Media media = new Media(new File(path).toURI().toString());
-//      MediaPlayer mediaPlayer = new MediaPlayer(media);
-//      mediaPlayer.play();
-      return true;
+      List<Message> recents = qdb.retrieveRecentMessages(LoginController.getUsername());
+      Message recent = recents.get(recents.size()-1);
+      if (recent.getReceiver().equals(LoginController.getUsername())){
+        populateMessages();
+        populateAccounts();
+        String path = getClass().getResource("/alert.wav").getPath();
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+        return true;
+      } else {
+        return false;
+      }
+
     } else {
       return false;
     }
