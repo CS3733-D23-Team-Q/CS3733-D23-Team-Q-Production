@@ -35,11 +35,11 @@ public class RefreshThread implements Runnable {
     while (true) {
       if (checkUpdates().size() > 0) {
         System.out.println("Updating from server --> " + toUpdate);
-        doUpdates();
-        toUpdate.clear();
-        lastUpdate = System.currentTimeMillis();
       }
-      Thread.sleep(2000);
+      doUpdates();
+      toUpdate.clear();
+      lastUpdate = System.currentTimeMillis();
+      Thread.sleep(1000);
     }
   }
 

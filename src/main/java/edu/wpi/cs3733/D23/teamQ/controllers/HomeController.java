@@ -103,7 +103,12 @@ public class HomeController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) {
-    initialize();
+    if (context.contains("alert")) {
+      setAlerts();
+    }
+    if (context.contains("serviceRequest")) {
+      // set calendar
+    }
     updateTime();
     return true;
   }
