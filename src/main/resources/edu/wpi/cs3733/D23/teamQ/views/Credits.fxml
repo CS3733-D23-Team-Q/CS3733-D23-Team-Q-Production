@@ -146,7 +146,6 @@
                                     <MFXButton fx:id="frenchFries" onAction="#frenchFriesClicked" prefHeight="36.0" prefWidth="320.0" text="French Fries" />
                                     <MFXButton fx:id="furnitureTitle" onAction="#ftClicked" prefHeight="36.0" prefWidth="320.0" text="Furniture" />
                                     <MFXButton fx:id="gauze" onAction="#gauzeClicked" prefHeight="36.0" prefWidth="320.0" text="Gauze" />
-                                    <MFXButton fx:id="groundFloor" onAction="#groundFloorClicked" prefHeight="36.0" prefWidth="320.0" text="Ground Floor" />
                                     <MFXButton fx:id="highlighters" onAction="#highlightersClicked" prefHeight="36.0" prefWidth="320.0" text="Highlighters" />
                                     <MFXButton fx:id="exterior" onAction="#exteriorClicked" prefHeight="36.0" prefWidth="320.0" text="Hospital Exterior" />
                                     <MFXButton fx:id="imagemark" onAction="#imagemarkClicked" prefHeight="36.0" prefWidth="320.0" text="Hospital Imagemark" />
