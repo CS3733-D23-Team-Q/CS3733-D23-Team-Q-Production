@@ -67,7 +67,7 @@ public class AboutController {
 
   @FXML
   public void olegShow() {
-    oleg1.setText("BIG athfinding fan");
+    oleg1.setText("BIG pathfinding fan");
     oleg2.setText("");
     oleg3.setText("");
   }
@@ -95,7 +95,7 @@ public class AboutController {
 
   @FXML
   public void sophiaShow() {
-    sophia1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    sophia1.setText("I like to paint");
     sophia2.setText("");
     sophia3.setText("");
   }
@@ -109,7 +109,7 @@ public class AboutController {
 
   @FXML
   public void joshShow() {
-    josh1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    josh1.setText("Favorite Book: Name of the Wind");
     josh2.setText("");
     josh3.setText("");
   }
@@ -123,7 +123,8 @@ public class AboutController {
 
   @FXML
   public void lydiaShow() {
-    lydia1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    lydia1.setText("Favorite color is yellow");
+    lydia1.setStyle("-fx-text-fill: #FDE541");
     lydia2.setText("");
     lydia3.setText("");
   }
@@ -131,13 +132,14 @@ public class AboutController {
   @FXML
   public void lydiaHide() {
     lydia1.setText("Kelu Liu");
+    lydia1.setStyle("-fx-text-fill: #012d5a");
     lydia2.setText("Assistant Lead Software Engineer");
     lydia3.setText("Computer Science, 2025");
   }
 
   @FXML
   public void amyShow() {
-    amy1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    amy1.setText("Favorite color is blue");
     amy2.setText("");
     amy3.setText("");
   }
@@ -165,7 +167,7 @@ public class AboutController {
 
   @FXML
   public void dovShow() {
-    dov1.setText("QUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTEQUOTE");
+    dov1.setText("Has a golden-doodle");
     dov2.setText("");
     dov3.setText("");
   }
