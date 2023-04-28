@@ -6,6 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -29,7 +30,7 @@
       </HBox>
       <HBox prefHeight="700.0" prefWidth="1360.0">
          <children>
-            <VBox prefWidth="680.0">
+            <VBox prefWidth="680.0" spacing="30.0">
                <children>
                   <VBox prefWidth="680.0">
                      <children>
@@ -37,6 +38,9 @@
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
                         </Text>
                         <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select and Assignee">
                            <VBox.margin>
@@ -51,6 +55,9 @@
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
                         </Text>
                         <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Location">
                            <VBox.margin>
@@ -65,6 +72,9 @@
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
                         </Text>
                         <MFXDatePicker prefHeight="40.0" prefWidth="450.0" promptText="Select a Date">
                            <VBox.margin>
@@ -79,6 +89,9 @@
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
                         </Text>
                         <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Time">
                            <VBox.margin>
@@ -93,6 +106,9 @@
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
                         </Text>
                         <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Special Instructions">
                            <VBox.margin>
@@ -106,16 +122,89 @@
                <children>
                   <VBox prefWidth="680.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entree">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
                         </Text>
-                        <MFXFilterComboBox prefHeight="40.0" prefWidth="450.0">
+                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select an Entree">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
                         </MFXFilterComboBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entree Selected:">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Roboto" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fx:id="EntreeImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets left="255.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="680.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Drink">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Drink">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                        </MFXFilterComboBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Drink Selected:">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                        </Text>
+                        <ImageView fx:id="DrinkImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets left="255.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="680.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Side">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Roboto Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Side">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                        </MFXFilterComboBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Side Selected:">
+                           <VBox.margin>
+                              <Insets left="130.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Roboto" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fx:id="SideImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets left="255.0" />
+                           </VBox.margin>
+                        </ImageView>
                      </children>
                   </VBox>
                </children>
