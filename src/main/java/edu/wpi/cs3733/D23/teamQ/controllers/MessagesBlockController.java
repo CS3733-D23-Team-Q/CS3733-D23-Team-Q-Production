@@ -17,7 +17,7 @@ public class MessagesBlockController implements Subscriber {
   @FXML AnchorPane anchor;
   @FXML HBox messagesHB;
   @FXML MFXButton messages;
-  @FXML ImageView homeIcon;
+  @FXML ImageView messagesIcon;
   @FXML AnchorPane messagesAlertPane;
   @FXML MessagesAlertController messagesAlertController;
   @FXML MenuController mc;
@@ -32,13 +32,13 @@ public class MessagesBlockController implements Subscriber {
   public void anchorEntered() {
     mc.closeAll();
     messages.setStyle("-fx-background-color: #f1f1f1; -fx-text-fill: #012d5a");
-    homeIcon.setImage(new Image(App.class.getResourceAsStream("HomeBlue.png")));
+    messagesIcon.setImage(new Image(App.class.getResourceAsStream("MessagesBlue.png")));
   }
 
   @FXML
   public void anchorExited() {
     messages.setStyle("-fx-background-color: #012d5a; -fx-text-fill: #f1f1f1");
-    homeIcon.setImage(new Image(App.class.getResourceAsStream("Home.png")));
+    messagesIcon.setImage(new Image(App.class.getResourceAsStream("Messages.png")));
   }
 
   public void messagesClicked() {
@@ -71,11 +71,9 @@ public class MessagesBlockController implements Subscriber {
   public boolean update(List<String> context) {
     if (context.contains("message")) {
       int numForUser = qdb.getNumUnread(LoginController.getLoginUsername());
-      if(numForUser > 0) {
-        if(numForUser < 9)
-          messagesAlertController.setNum("" + numForUser);
-        else
-          messagesAlertController.setNum("9+");
+      if (numForUser > 0) {
+        if (numForUser < 9) messagesAlertController.setNum("" + numForUser);
+        else messagesAlertController.setNum("9+");
         messagesAlertPane.setVisible(true);
       }
     }

@@ -12,9 +12,9 @@
          <children>
             <MFXButton fx:id="messages" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#messagesClicked" onMouseEntered="#messagesEntered" onMouseExited="#messagesExited" prefHeight="54.0" prefWidth="240.0" text="Messages">
                <graphic>
-                  <ImageView fx:id="homeIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="messagesIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Home.png" />
+                        <Image url="@../Messages.png" />
                      </image>
                   </ImageView>
                </graphic>
