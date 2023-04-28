@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import java.sql.Date;
@@ -30,6 +32,8 @@ public class StatisticsController {
     messages();
     serviceRequests();
     serviceRequestPieChart();
+    alerts();
+    nodes();
     sp.setVvalue(vbox.getHeight());
   }
 
@@ -56,6 +60,7 @@ public class StatisticsController {
     }
 
     barChart.getData().add(series);
+    barChart.setMinHeight(300);
     vbox.getChildren().add(barChart);
   }
 
@@ -81,6 +86,7 @@ public class StatisticsController {
       series.getData().add(new XYChart.Data<>(date, srCounts.get(date)));
     }
     barChart.getData().add(series);
+    barChart.setMinHeight(300);
     vbox.getChildren().add(barChart);
   }
 
@@ -115,5 +121,59 @@ public class StatisticsController {
     srNum.setFont(Font.font(16));
     vbox.getChildren().add(srNum);
     vbox.getChildren().add(pieChart);
+  }
+
+  public void alerts() {
+    Map<String, Integer> alertCounts = new HashMap<>();
+    for (Alert alert : qdb.retrieveAllAlerts()) {
+      String date = new SimpleDateFormat("MMM-dd-yyy").format(new Date(alert.getTimestamp()));
+      if (!alertCounts.containsKey(date)) {
+        alertCounts.put(date, 0);
+      }
+      alertCounts.put(date, alertCounts.get(date) + 1);
+    }
+
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+
+    BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+    barChart.setTitle("Alerts Sent Per Day");
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.setName("Alerts");
+    for (String date : alertCounts.keySet()) {
+      series.getData().add(new XYChart.Data<>(date, alertCounts.get(date)));
+    }
+
+    barChart.getData().add(series);
+    barChart.setMinHeight(300);
+    vbox.getChildren().add(barChart);
+  }
+
+  public void nodes() {
+    Map<String, Integer> nodeCounts = new HashMap<>();
+    for (Node node : qdb.retrieveAllNodes()) {
+      String floor = node.getFloor();
+      if (!nodeCounts.containsKey(floor)) {
+        nodeCounts.put(floor, 0);
+      }
+      nodeCounts.put(floor, nodeCounts.get(floor) + 1);
+    }
+
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+
+    BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+    barChart.setTitle("Nodes by Floor");
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.setName("Nodes");
+    for (String date : nodeCounts.keySet()) {
+      series.getData().add(new XYChart.Data<>(date, nodeCounts.get(date)));
+    }
+
+    barChart.getData().add(series);
+    barChart.setMinHeight(300);
+    vbox.getChildren().add(barChart);
   }
 }
