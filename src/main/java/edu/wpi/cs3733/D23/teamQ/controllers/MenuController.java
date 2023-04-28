@@ -33,7 +33,6 @@ public class MenuController {
 
   @FXML
   public void closeAll() {
-    homeBlockController.hideAlert();
     peopleBlockController.hideSM();
     navigationBlockController.hideSM();
     srBlockController.hideSM();

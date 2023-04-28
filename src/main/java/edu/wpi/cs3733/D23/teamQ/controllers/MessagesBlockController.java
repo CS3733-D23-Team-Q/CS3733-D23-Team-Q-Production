@@ -13,13 +13,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-public class HomeBlockController implements Subscriber {
+public class MessagesBlockController implements Subscriber {
   @FXML AnchorPane anchor;
-  @FXML HBox homeHB;
-  @FXML MFXButton home;
+  @FXML HBox messagesHB;
+  @FXML MFXButton messages;
   @FXML ImageView homeIcon;
-  @FXML AnchorPane homeAlertPane;
-  @FXML HomeAlertController homeAlertController;
+  @FXML AnchorPane messagesAlertPane;
+  @FXML MessagesAlertController messagesAlertController;
   @FXML MenuController mc;
   Qdb qdb = Qdb.getInstance();
 
@@ -31,27 +31,27 @@ public class HomeBlockController implements Subscriber {
   @FXML
   public void anchorEntered() {
     mc.closeAll();
-    home.setStyle("-fx-background-color: #f1f1f1; -fx-text-fill: #012d5a");
+    messages.setStyle("-fx-background-color: #f1f1f1; -fx-text-fill: #012d5a");
     homeIcon.setImage(new Image(App.class.getResourceAsStream("HomeBlue.png")));
   }
 
   @FXML
   public void anchorExited() {
-    home.setStyle("-fx-background-color: #012d5a; -fx-text-fill: #f1f1f1");
+    messages.setStyle("-fx-background-color: #012d5a; -fx-text-fill: #f1f1f1");
     homeIcon.setImage(new Image(App.class.getResourceAsStream("Home.png")));
   }
 
-  public void homeClicked() {
+  public void messagesClicked() {
     mc.showAll();
     Navigation.navigate(Screen.HOME);
-    homeAlertPane.setVisible(false);
+    messagesAlertPane.setVisible(false);
   }
 
   @FXML
-  public void homeEntered() {}
+  public void messagesEntered() {}
 
   @FXML
-  public void homeExited() {}
+  public void messagesExited() {}
 
   public void setMCController(MenuController MC) {
     mc = MC;
@@ -60,7 +60,8 @@ public class HomeBlockController implements Subscriber {
   @Override
   public boolean update(List<String> context) {
     if (context.contains("alert")) {
-      homeAlertPane.setVisible(true);
+      messagesAlertPane.setVisible(true);
+      messagesAlertController.setNum("9");
     }
     return false;
   }

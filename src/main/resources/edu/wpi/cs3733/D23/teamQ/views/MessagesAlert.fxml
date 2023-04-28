@@ -7,15 +7,15 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.HomeAlertController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="12.0" styleClass="hbox" stylesheets="@styles/Submenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagesAlertController">
     <padding>
         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
     </padding>
    <children>
       <StackPane>
          <children>
-            <Circle fill="#ce3c49" radius="24.0" stroke="#ce3c49" strokeType="INSIDE" />
-            <Label fx:id="num" text="!" textFill="#f1f1f1">
+            <Circle fill="#37ac2b" radius="24.0" stroke="#37ac2b" strokeType="INSIDE" />
+            <Label fx:id="num" text="X" textFill="#f1f1f1">
                <font>
                   <Font name="Roboto" size="36.0" />
                </font>
