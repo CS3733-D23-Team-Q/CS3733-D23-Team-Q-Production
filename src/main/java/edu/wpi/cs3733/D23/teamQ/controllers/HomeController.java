@@ -151,7 +151,7 @@ public class HomeController implements Subscriber {
       boolean isToday = isSameDay(today, d);
       l.setText(d + ": " + alerts.get(i).getMessage());
       l.setPadding(new Insets(4, 6, 4, 6));
-      l.setMaxWidth(512);
+      l.setMaxWidth(480);
       l.setMinHeight(24);
       l.setWrapText(true);
       if (isToday)
