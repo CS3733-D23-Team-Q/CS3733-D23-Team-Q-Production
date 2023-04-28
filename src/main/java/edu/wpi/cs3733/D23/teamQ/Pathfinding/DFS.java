@@ -95,10 +95,7 @@ public class DFS implements IPathfinding {
       ArrayList<Node> revisitedNodes = new ArrayList<Node>();
       while (!nextChosen) {
         Node previous = path.get(path.size() - i);
-        System.out.println(
-            "WENT BACK TO " + previous.getNodeID() + " with I " + i + " AT " + current.getNodeID());
         revisitedNodes.add(previous);
-        System.out.println();
         ArrayList<Node> previousNodes = new ArrayList<Node>();
         i++;
         if (i > 2000) {
@@ -125,7 +122,7 @@ public class DFS implements IPathfinding {
               if (path.contains(node3)) {
                 for (int g = path.size() - 1; g > 0; g--) {
                   retracedPath.add(path.get(g));
-                  if (retracedPath.get(g).equals(node3)) {
+                  if (path.get(g).equals(node3)) {
                     path.addAll(retracedPath);
                     path.add(node2);
                     path.add(end);
