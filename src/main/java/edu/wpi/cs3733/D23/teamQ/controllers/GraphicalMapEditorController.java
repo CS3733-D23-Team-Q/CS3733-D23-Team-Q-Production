@@ -453,7 +453,7 @@ public class GraphicalMapEditorController {
           countEdge++;
         }
       }
-
+      if(!moves.isEmpty())
       while (countMove < moves.size()) {
         for (int i = countMove; i < moves.size(); i++) {
           Move move = moves.get(i);
