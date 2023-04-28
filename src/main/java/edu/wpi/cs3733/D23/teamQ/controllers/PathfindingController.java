@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import java.io.IOException;
@@ -93,11 +94,13 @@ public class PathfindingController {
   @FXML CheckBox servCheck;
   @FXML MFXFilterComboBox<String> startSelect;
   @FXML MFXFilterComboBox<String> endSelect;
-  @FXML RadioMenuItem aStarSelect;
-  @FXML RadioMenuItem bfsSelect;
-  @FXML RadioMenuItem dfsSelect;
-  @FXML RadioMenuItem djikstraSelect;
-  @FXML Menu dateMenu;
+  // @FXML RadioMenuItem aStarSelect;
+  // @FXML RadioMenuItem bfsSelect;
+  // @FXML RadioMenuItem dfsSelect;
+  // @FXML RadioMenuItem djikstraSelect;
+  // @FXML Menu dateMenu;
+  @FXML MFXComboBox<String> dateSelect;
+  @FXML MFXComboBox<String> algorithmSelect;
   @FXML TextField messageField;
   @FXML MFXScrollPane textualPathfinding;
   @FXML VBox textArea;
@@ -177,10 +180,18 @@ public class PathfindingController {
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
         });
+    setUpAlgos();
     /*
     autoComplete(startSelect);
     autoComplete(endSelect);
      */
+  }
+
+  public void setUpAlgos() {
+    algorithmSelect.getItems().add("aStar");
+    algorithmSelect.getItems().add("bfs");
+    algorithmSelect.getItems().add("dfs");
+    algorithmSelect.getItems().add("djikstra");
   }
 
   /*
@@ -281,6 +292,7 @@ public class PathfindingController {
           }
         }
       }
+      /*
       // add a variable to ignore the duplicates
       if (!moveDates.contains(d)) {
         moveDates.add(d);
@@ -293,6 +305,26 @@ public class PathfindingController {
         item.setOnAction(
             e -> {
               dateSelected(item);
+            });
+      }
+       */
+      if (!moveDates.contains(d)) {
+        moveDates.add(d);
+        dateSelect.getItems().add(d.toString());
+        if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
+          dateSelect.setValue(d.toString());
+        }
+        dateSelect.setOnAction(
+            e -> {
+              dateSelected();
+            });
+      }
+      if (!moveDates.contains(d)) {
+        moveDates.add(d);
+        dateSelect.getItems().add(d.toString());
+        dateSelect.setOnAction(
+            e -> {
+              dateSelected();
             });
       }
     }
@@ -1150,40 +1182,82 @@ public class PathfindingController {
     }
   }
 
-  public void aStarSelected() {
-    if (aStarSelect.isSelected()) {
-      clearButtonClicked();
-      algorithm = "aStar";
+  public void algorithmSelected() {
+    String algo = algorithmSelect.getValue();
+    if (algo != null && !algo.equals("")) {
+      switch (algo) {
+        case "aStar":
+          {
+            clearButtonClicked();
+            algorithm = "aStar";
+          }
+          break;
+        case "bfs":
+          {
+            clearButtonClicked();
+            algorithm = "bfs";
+          }
+          break;
+        case "dfs":
+          {
+            clearButtonClicked();
+            algorithm = "dfs";
+          }
+          break;
+        case "djikstra":
+          {
+            clearButtonClicked();
+            algorithm = "djikstra";
+          }
+          break;
+      }
     }
+  }
+
+  /*
+  public void aStarSelected() {
+      if (aStarSelect.isSelected()) {
+          clearButtonClicked();
+          algorithm = "aStar";
+      }
   }
 
   public void bfsSelected() {
-    if (bfsSelect.isSelected()) {
-      clearButtonClicked();
-      algorithm = "bfs";
-    }
+      if (bfsSelect.isSelected()) {
+          clearButtonClicked();
+          algorithm = "bfs";
+      }
   }
 
   public void dfsSelected() {
-    if (dfsSelect.isSelected()) {
-      clearButtonClicked();
-      algorithm = "dfs";
-    }
+      if (dfsSelect.isSelected()) {
+          clearButtonClicked();
+          algorithm = "dfs";
+      }
   }
 
   public void djikstraSelected() {
-    if (djikstraSelect.isSelected()) {
-      clearButtonClicked();
-      algorithm = "djikstra";
-    }
+      if (djikstraSelect.isSelected()) {
+          clearButtonClicked();
+          algorithm = "djikstra";
+      }
   }
+   */
 
-  public void dateSelected(RadioMenuItem itemSelect) {
+  public void dateSelected() { // RadioMenuItem itemSelect
+    String d = dateSelect.getValue();
+    if (d != null && !d.equals("")) {
+      clearButtonClicked();
+      date = Date.valueOf(d);
+      refresh();
+    }
+    /*
     if (itemSelect.isSelected()) {
       clearButtonClicked();
       date = Date.valueOf(itemSelect.getText());
       refresh();
     }
+     */
   }
 
   public void refresh() {
