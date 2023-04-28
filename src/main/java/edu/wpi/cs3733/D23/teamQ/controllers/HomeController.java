@@ -12,7 +12,9 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -137,21 +139,33 @@ public class HomeController implements Subscriber {
   }
 
   private boolean setAlerts() {
+    Date today = new Date(System.currentTimeMillis());
     alertBox.getChildren().clear();
     List<Alert> alerts = qdb.retrieveAllAlerts();
     for (int i = alerts.size() - 1; i >= 0; i--) {
       Label l = new Label();
       Date d = new Date(alerts.get(i).getTimestamp());
+      boolean isToday = isSameDay(today, d);
       l.setText(d + ": " + alerts.get(i).getMessage());
       l.setPadding(new Insets(4, 6, 4, 6));
       l.setMaxWidth(512);
       l.setMinHeight(24);
       l.setWrapText(true);
-      l.setStyle(
-          "-fx-text-fill: #CE3C49; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #CE3C49; -fx-border-radius: 16");
+      if (isToday)
+        l.setStyle(
+            "-fx-text-fill: #CE3C49; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #CE3C49; -fx-border-radius: 16");
+      else
+        l.setStyle(
+            "-fx-text-fill: #012d5a; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #012d5a; -fx-border-radius: 16");
       alertBox.getChildren().add(l);
     }
     return true;
+  }
+
+  public static boolean isSameDay(Date date1, Date date2) {
+    LocalDate localDate1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate localDate2 = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    return localDate1.isEqual(localDate2);
   }
 
   public void updateTime() {
