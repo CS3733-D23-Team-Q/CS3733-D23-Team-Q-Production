@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FlowerRequest extends ServiceRequest implements IServiceRequest {
+  private static final String type = "Flower Request";
   private String note;
   private String flowerType;
   private int numberOfBouquets;
@@ -25,7 +26,7 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
       int progress,
       String flowerType,
       int numberOfBouquets) {
-    super(requestID, node, requester, assignee, specialInstructions, date, time, progress);
+    super(requestID, node, requester, assignee, specialInstructions, date, time, progress, type);
     this.note = note;
     this.flowerType = flowerType;
     this.numberOfBouquets = numberOfBouquets;
@@ -41,7 +42,7 @@ public class FlowerRequest extends ServiceRequest implements IServiceRequest {
       int progress,
       String flowerType,
       int numberOfBouquets) {
-    super(0, node, requester, assignee, specialInstructions, date, time, progress);
+    super(0, node, requester, assignee, specialInstructions, date, time, progress, type);
     this.note = note;
     this.flowerType = flowerType;
     this.numberOfBouquets = numberOfBouquets;
