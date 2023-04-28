@@ -8,7 +8,6 @@
    <children>
       <MFXButton fx:id="profile" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#profileClicked" prefHeight="53.0" prefWidth="160.0" text="Profile" />
       <MFXButton fx:id="directory" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#directoryClicked" prefHeight="53.0" prefWidth="160.0" text="Directory" />
-      <MFXButton fx:id="messages" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#messagesClicked" prefHeight="53.0" prefWidth="160.0" text="Messages" />
    </children>
    <padding>
       <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />

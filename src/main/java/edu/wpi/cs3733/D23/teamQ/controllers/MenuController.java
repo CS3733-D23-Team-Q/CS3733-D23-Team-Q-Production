@@ -12,7 +12,7 @@ public class MenuController {
   @FXML MessagesBlockController messagesBlockController;
   @FXML NavigationBlockController navigationBlockController;
   @FXML ServiceRequestBlockController srBlockController;
-  @FXML SettingsBlockController settingsBlockController;
+  @FXML InformationBlockController informationBlockController;
   @FXML SignoutBlockController signoutBlockController;
 
   @FXML
@@ -22,7 +22,7 @@ public class MenuController {
     messagesBlockController.setMCController(this);
     navigationBlockController.setMCController(this);
     srBlockController.setMCController(this);
-    settingsBlockController.setMCController(this);
+    informationBlockController.setMCController(this);
     signoutBlockController.setMCController(this);
   }
 
@@ -36,7 +36,7 @@ public class MenuController {
     peopleBlockController.hideSM();
     navigationBlockController.hideSM();
     srBlockController.hideSM();
-    settingsBlockController.hideSM();
+    informationBlockController.hideSM();
     signoutBlockController.hideSM();
   }
 
@@ -46,7 +46,7 @@ public class MenuController {
     messagesBlockController.showBlock();
     navigationBlockController.showBlock();
     srBlockController.showBlock();
-    settingsBlockController.showBlock();
+    informationBlockController.showBlock();
     signoutBlockController.showBlock();
   }
 
@@ -56,7 +56,7 @@ public class MenuController {
     messagesBlockController.hideBlock();
     navigationBlockController.hideBlock();
     srBlockController.hideBlock();
-    settingsBlockController.hideBlock();
+    informationBlockController.hideBlock();
     signoutBlockController.hideBlock();
   }
 
