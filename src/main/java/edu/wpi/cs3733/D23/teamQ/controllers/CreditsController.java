@@ -167,26 +167,24 @@ public class CreditsController {
   // icons
   @FXML
   public void alertClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
+    linkDisplay.setText("https://fontawesome.com/search?q=circle-&o=r");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void alertBoxClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=regular");
-    browser
-        .getEngine()
-        .load("https://fontawesome.com/icons/circle-exclamation?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void blueLogoClicked() {
     linkDisplay.setText(
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw2Viz7R1kroR73Q--3Ku8uM&ust=1682277692166000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIibuPSavv4CFQAAAAAdAAAAABAE");
+        "https://www.google.com/search?sxsrf=APwXEde8MECqt6J4IVl5nQVqOzgD4d3yng:1682640548016&q=brigham+and+women%27s+logo&tbm=isch&sa=X&ved=2ahUKEwjNsZjBpMv-AhWujYkEHZCLBDEQ0pQJegQICxAB&biw=1920&bih=975&dpr=1#imgrc=AYRa1RgNcMIynM");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw2Viz7R1kroR73Q--3Ku8uM&ust=1682277692166000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIibuPSavv4CFQAAAAAdAAAAABAE");
+            "https://www.google.com/search?sxsrf=APwXEde8MECqt6J4IVl5nQVqOzgD4d3yng:1682640548016&q=brigham+and+women%27s+logo&tbm=isch&sa=X&ved=2ahUKEwjNsZjBpMv-AhWujYkEHZCLBDEQ0pQJegQICxAB&biw=1920&bih=975&dpr=1#imgrc=AYRa1RgNcMIynM");
   }
 
   @FXML
@@ -202,25 +200,25 @@ public class CreditsController {
   @FXML
   public void chevronLeftClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/chevron-left?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/chevron-left?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void chevronRightClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/chevron-right?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/chevron-right?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void closeClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/xmark?f=classic&s=light");
-    browser.getEngine().load("https://fontawesome.com/icons/xmark?f=classic&s=light");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void confirmClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/circle-check?f=classic&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/circle-check?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -236,25 +234,25 @@ public class CreditsController {
   @FXML
   public void downClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/arrow-down?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/arrow-down?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void edgeClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/code-merge?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/code-merge?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void exitClicked() {
     linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
-    browser.getEngine().load("https://freeicons.io/controls-icons/exit-icon-39607");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void exitBlueClicked() {
     linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
-    browser.getEngine().load("https://freeicons.io/controls-icons/exit-icon-39607");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -272,13 +270,13 @@ public class CreditsController {
   @FXML
   public void leftArrowClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/arrow-left?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/arrow-left?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void locClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/location-dot?f=sharp&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/location-dot?f=sharp&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -290,47 +288,47 @@ public class CreditsController {
   @FXML
   public void logoClicked() {
     linkDisplay.setText(
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw1-aU9VafVfv0WsXljuKITf&ust=1682278518253000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLiQp_6dvv4CFQAAAAAdAAAAABAE");
+        "https://www.google.com/search?sxsrf=APwXEde8MECqt6J4IVl5nQVqOzgD4d3yng:1682640548016&q=brigham+and+women%27s+logo&tbm=isch&sa=X&ved=2ahUKEwjNsZjBpMv-AhWujYkEHZCLBDEQ0pQJegQICxAB&biw=1920&bih=975&dpr=1#imgrc=AYRa1RgNcMIynM");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Finnovation.massgeneralbrigham.org%2F&psig=AOvVaw1-aU9VafVfv0WsXljuKITf&ust=1682278518253000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLiQp_6dvv4CFQAAAAAdAAAAABAE");
+            "https://www.google.com/search?sxsrf=APwXEde8MECqt6J4IVl5nQVqOzgD4d3yng:1682640548016&q=brigham+and+women%27s+logo&tbm=isch&sa=X&ved=2ahUKEwjNsZjBpMv-AhWujYkEHZCLBDEQ0pQJegQICxAB&biw=1920&bih=975&dpr=1#imgrc=AYRa1RgNcMIynM");
   }
 
   @FXML
   public void mapClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/map?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void map2Clicked() {
     linkDisplay.setText("https://fontawesome.com/icons/map-location-dot?f=sharp&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/map-location-dot?f=sharp&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void mapBlueClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/map?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void mapEditorClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/map?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void menuClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/bars?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/bars?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void moveClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/car?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/car?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -362,7 +360,7 @@ public class CreditsController {
   @FXML
   public void profileClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/user?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/user?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -394,13 +392,13 @@ public class CreditsController {
   @FXML
   public void settingsClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/gear?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void settingsBlueClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
-    browser.getEngine().load("https://fontawesome.com/icons/gear?f=classic&s=regular");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -432,7 +430,7 @@ public class CreditsController {
   @FXML
   public void upClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/arrow-up?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/icons/arrow-up?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
