@@ -457,7 +457,7 @@ public class GraphicalMapEditorController {
         while (countMove < moves.size()) {
           for (int i = countMove; i < moves.size(); i++) {
             Move move = moves.get(i);
-            if (move.getNode() != null && move.getNode().getNodeID() == nodeid) {
+            if (move.getNode().getNodeID() == nodeid) {
               qdb.deleteMove(move.getMoveID());
               i -= 1;
               countMove -= 1;
