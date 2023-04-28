@@ -614,7 +614,7 @@ public class Qdb {
     return messageTable.retrieveConversations(username);
   }
 
-  public int getNumUnread(String username){
+  public int getNumUnread(String username) {
     return messageTable.getNumUnread(username);
   }
 
