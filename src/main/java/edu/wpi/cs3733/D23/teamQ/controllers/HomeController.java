@@ -60,7 +60,6 @@ public class HomeController implements Subscriber {
 
     calendar.getCalendarSources().clear();
 
-    Calendar serviceRequests = new Calendar("Service Requests");
     Calendar serviceRequestsBlank = new Calendar("Service Requests");
     Calendar serviceRequestsProgress = new Calendar("Service Requests");
     Calendar serviceRequestsDone = new Calendar("Service Requests");
@@ -68,8 +67,6 @@ public class HomeController implements Subscriber {
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
     CalendarSource SRD = new CalendarSource("Service Request Done");
-
-    CalendarSource SR = new CalendarSource("testing");
 
     serviceRequestsBlank.setStyle(Style.STYLE5);
     serviceRequestsProgress.setStyle(Style.STYLE3);
@@ -118,19 +115,18 @@ public class HomeController implements Subscriber {
     }
     m.getCalendars().add(moves);
     calendar.getCalendarSources().add(m);
-
-    Calendar birthdays = new Calendar("Birthdays");
-    CalendarSource b = new CalendarSource("testing 3");
-    birthdays.setStyle(Style.STYLE2);
-    Entry<String> temp = new Entry<>("Birthday Test");
-    //    temp.setStyle(Style.STYLE2);
-    birthdays.addEntry(temp);
-
-    temp.changeStartDate(java.time.LocalDate.now());
+    // birthday stuff below
+    //
+    //    Calendar birthdays = new Calendar("Birthdays");
+    //    CalendarSource b = new CalendarSource("testing 3");
+    //    birthdays.setStyle(Style.STYLE2);
+    //    Entry<String> temp = new Entry<>("Birthday Test");
+    //    birthdays.addEntry(temp);
+    //
     //    temp.changeStartDate(java.time.LocalDate.now());
-    temp.setFullDay(true);
-    b.getCalendars().add(birthdays);
-    calendar.getCalendarSources().add(b);
+    //    temp.setFullDay(true);
+    //    b.getCalendars().add(birthdays);
+    //    calendar.getCalendarSources().add(b);
   }
 
   public void saveNotes() {
