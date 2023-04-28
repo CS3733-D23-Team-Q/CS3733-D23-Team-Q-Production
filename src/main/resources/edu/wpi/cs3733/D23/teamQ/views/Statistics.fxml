@@ -29,7 +29,7 @@
             </StackPane>
             <MFXScrollPane fx:id="sp" fitToWidth="true" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
                <content>
-                  <VBox fx:id="vbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1320.0" />
+                  <VBox fx:id="vbox" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="924.0" prefWidth="1306.0" spacing="30.0" />
                </content>
             </MFXScrollPane>
          </children>
