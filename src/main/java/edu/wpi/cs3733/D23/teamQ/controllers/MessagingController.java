@@ -304,7 +304,7 @@ public class MessagingController implements Subscriber {
 
   public boolean update(List<String> context) {
     if (context.contains("message")) {
-      List<Message> recents = qdb.retrieveRecentMessages(LoginController.getUsername());
+      List<Message> recents = qdb.retrieveConversations(LoginController.getUsername());
       Message recent = recents.get(0);
       populateAccounts();
       if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
@@ -326,7 +326,7 @@ public class MessagingController implements Subscriber {
   public void populateAccounts() {
     accountVbox.getChildren().clear();
     Qdb qdb = Qdb.getInstance();
-    for (Message m : qdb.retrieveRecentMessages(LoginController.getUsername())) {
+    for (Message m : qdb.retrieveConversations(LoginController.getUsername())) {
       String person;
       String message = m.getMessage();
       String username;
