@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
+import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -74,8 +75,10 @@ public class PathfindingController {
   ToggleGroup dateToggle;
   List<Triple<Integer, Button, Integer>> cfpath;
   Text messageText;
+  List<Image> directions;
+  List<Label> textual;
 
-  @FXML HBox root;
+  @FXML GridPane root;
   @FXML Group parent;
   @FXML ImageView map;
   @FXML Button previousFloor;
@@ -94,11 +97,30 @@ public class PathfindingController {
   @FXML RadioMenuItem dfsSelect;
   @FXML RadioMenuItem djikstraSelect;
   @FXML Menu dateMenu;
-  @FXML TextArea textualPathfinding;
   @FXML TextField messageField;
+  @FXML MFXScrollPane textualPathfinding;
+  @FXML VBox textArea;
 
   @FXML
   public void initialize() throws IOException {
+    Image bottomleft = new Image("/Bottom-Left.png");
+    Image bottomright = new Image("/Bottom-Right.png");
+    Image down = new Image("/Down.png");
+    Image left = new Image("/Left.png");
+    Image right = new Image("/Right.png");
+    Image topleft = new Image("/Top-Left.png");
+    Image topright = new Image("/Top-Right.png");
+    Image up = new Image("/Up.png");
+    textual = new ArrayList<>();
+    directions = new ArrayList<>();
+    directions.add(bottomleft);
+    directions.add(bottomright);
+    directions.add(down);
+    directions.add(left);
+    directions.add(right);
+    directions.add(topleft);
+    directions.add(topright);
+    directions.add(up);
     cfpath = new ArrayList<>();
     dateToggle = new ToggleGroup();
     date = Date.valueOf("2023-01-01");
@@ -141,8 +163,8 @@ public class PathfindingController {
     pane = new GesturePane();
     pane.setContent(parent);
     pane.setFitMode(GesturePane.FitMode.COVER);
-    root.getChildren().add(pane);
-
+    root.add(pane, 0, 0);
+    GridPane.setRowSpan(pane, GridPane.REMAINING);
     pane.setOnMouseClicked(
         e -> {
           if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
@@ -543,7 +565,7 @@ public class PathfindingController {
       if (move > 0) {
         node.setDisable(false);
         node.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
-        image.setImage(new Image("/Up.png"));
+        image.setImage(new Image("/Up - elev.png"));
         image.fitWidthProperty().bind(node.widthProperty());
         image.fitHeightProperty().bind(node.heightProperty());
         node.setGraphic(image);
@@ -567,7 +589,7 @@ public class PathfindingController {
       if (move < 0) {
         node.setDisable(false);
         node.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
-        image.setImage(new Image("/Down.png"));
+        image.setImage(new Image("/Down - elev.png"));
         image.fitWidthProperty().bind(node.widthProperty());
         image.fitHeightProperty().bind(node.heightProperty());
         node.setGraphic(image);
@@ -607,19 +629,105 @@ public class PathfindingController {
         }
       }
     }
-
     if (path.size() == 0) {
       alert.alertBox("No solution", "Failed to find a path");
     }
     if (path.size() > 0) {
+      displayTextPF(path);
+      /*
       textualPathfinding.setText(toString(path));
       Text tempText = new Text(textualPathfinding.getText());
       tempText.setFont(textualPathfinding.getFont());
       double prefHeight = tempText.getLayoutBounds().getHeight();
       textualPathfinding.setMaxHeight(250);
       textualPathfinding.setPrefHeight(prefHeight);
+       */
     }
     return lines;
+  }
+
+  public int measureDirections(Node n, Node next) {
+    String direction = "";
+    int arrow = 0;
+    int dx = next.getXCoord() - n.getXCoord();
+    int dy = next.getYCoord() - n.getYCoord();
+    if (dx > 0) {
+      direction += "right";
+    } else {
+      direction += "left";
+    }
+    if (dy > 0) {
+      direction += "up";
+    } else {
+      direction += "down";
+    }
+    switch (direction) {
+      case "right":
+        arrow = 0;
+        break;
+      case "left":
+        arrow = 1;
+        break;
+      case "up":
+        arrow = 2;
+        break;
+      case "down":
+        arrow = 3;
+        break;
+      case "rightup":
+        arrow = 4;
+        break;
+      case "rightdown":
+        arrow = 5;
+        break;
+      case "leftup":
+        arrow = 6;
+        break;
+      case "leftdown":
+        arrow = 7;
+        break;
+    }
+    return arrow;
+  }
+
+  public void displayTextPF(List<Node> path) {
+    String direction = "";
+    direction = "Floor " + path.get(0).getFloor() + ": ";
+    Label text = new Label(direction);
+    textArea.getChildren().add(text);
+    textual.add(text);
+    direction = path.get(0).getLocation().getLongName();
+    for (int i = 1; i < path.size(); i++) {
+      Node n = path.get(i);
+      Node previous = path.get(i - 1);
+      int index = measureDirections(previous, n);
+      if (!previous.getFloor().equals(n.getFloor())) {
+        text = new Label(direction);
+        ImageView icon = new ImageView(directions.get(index));
+        icon.setFitWidth(22);
+        icon.setFitHeight(29);
+        text.setGraphic(icon);
+        textArea.getChildren().add(text);
+        textual.add(text);
+        text = new Label();
+        textArea.getChildren().add(text);
+        textual.add(text);
+        direction = "Floor " + n.getFloor() + ": ";
+        text = new Label(direction);
+        textArea.getChildren().add(text);
+        textual.add(text);
+        direction = n.getLocation().getLongName();
+      } else {
+        text = new Label(direction);
+        ImageView icon = new ImageView(directions.get(index));
+        icon.setFitWidth(22);
+        icon.setFitHeight(29);
+        text.setGraphic(icon);
+        textArea.getChildren().add(text);
+        textual.add(text);
+        direction = n.getLocation().getLongName();
+      }
+    }
   }
 
   public String toString(List<Node> path) {
@@ -826,7 +934,7 @@ public class PathfindingController {
     child.setDisable(false);
     child.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
     if (move < 0) {
-      image.setImage(new Image("/Down.png"));
+      image.setImage(new Image("/Down - elev.png"));
       child.setOnAction(
           e -> {
             try {
@@ -838,7 +946,7 @@ public class PathfindingController {
             }
           });
     } else {
-      image.setImage(new Image("/Up.png"));
+      image.setImage(new Image("/Up - elev.png"));
       child.setOnAction(
           e -> {
             try {
@@ -1080,10 +1188,19 @@ public class PathfindingController {
     addButtons(f);
   }
 
+  public void clearTextualPathfinding() {
+    for (Label l : textual) {
+      parent.getChildren().remove(l);
+    }
+  }
+
   public void clearButtonClicked() {
     List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
+    /*
     textualPathfinding.setText(null);
     textualPathfinding.setPrefHeight(Region.USE_COMPUTED_SIZE);
+     */
+    clearTextualPathfinding();
     removeLines(previousPath);
     start = null;
     target = null;
