@@ -24,6 +24,7 @@ import net.kurobako.gesturefx.GesturePane;
 
 public class HomeController implements Subscriber {
   Qdb qdb = Qdb.getInstance();
+
   @FXML GesturePane titleImage;
   @FXML Label title;
   @FXML Label datetime;
@@ -46,6 +47,16 @@ public class HomeController implements Subscriber {
     setAlerts();
     notesField.setText(account.getNotes());
     notesField.setStyle("-fx-font-family: Roboto");
+
+    refreshCalendar();
+  }
+
+  public void refreshCalendar() {
+    qdb.subscribe(this);
+    String username = LoginController.getLoginUsername();
+    Account account = qdb.retrieveAccount(username);
+
+    calendar.getCalendarSources().clear();
 
     Calendar serviceRequests = new Calendar("Service Requests");
 
@@ -121,9 +132,11 @@ public class HomeController implements Subscriber {
     if (context.contains("alert")) {
       setAlerts();
     }
-    if (context.contains("serviceRequest")) {
-      // set calendar
+    if (context.contains("serviceRequest") || context.contains("move")) {
+      refreshCalendar();
+      //      calendar.des();
     }
+
     updateTime();
     return true;
   }
