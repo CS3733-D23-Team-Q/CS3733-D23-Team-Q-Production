@@ -110,6 +110,8 @@ public class HomeController implements Subscriber {
     Calendar moves = new Calendar("Moves");
     CalendarSource m = new CalendarSource("testing 2");
 
+    moves.setStyle(Style.STYLE7);
+
     for (int i = 0; i < qdb.retrieveAllMoves().size(); i++) {
       int currMove = qdb.retrieveAllMoves().get(i).getMoveID();
       Entry<String> temp = new Entry<>("Move ID- " + currMove);
