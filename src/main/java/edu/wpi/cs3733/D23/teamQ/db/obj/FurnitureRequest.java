@@ -22,7 +22,7 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
       String time,
       int progress,
       String item) {
-    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
+    super(requestID, node, requester, assignee, specialInstructions, date, time, progress);
     this.item = item;
   }
 
@@ -35,7 +35,7 @@ public class FurnitureRequest extends ServiceRequest implements IServiceRequest 
       String time,
       int progress,
       String item) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, requester, assignee, specialInstructions, date, time, progress);
     this.item = item;
   }
 }
