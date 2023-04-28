@@ -1,4 +1,5 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
+import com.calendarfx.model.Calendar;
 
 public class Account {
   private String username;
@@ -19,6 +20,8 @@ public class Account {
   private String notes;
   private String todo;
 
+  private Calendar PersonalCalendar;
+
   public Account(
       String username,
       String password,
@@ -34,7 +37,10 @@ public class Account {
       String title,
       int phoneNumber,
       String notes,
-      String todo) {
+      String todo,
+
+      Calendar PersonalCalendar)
+          {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -50,6 +56,8 @@ public class Account {
     this.phoneNumber = phoneNumber;
     this.notes = notes;
     this.todo = todo;
+
+    this.PersonalCalendar = PersonalCalendar;
   }
 
   public Account(
@@ -66,7 +74,10 @@ public class Account {
       String title,
       int phoneNumber,
       String notes,
-      String todo) {
+      String todo,
+
+      Calendar PersonalCalendar)
+       {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -81,6 +92,8 @@ public class Account {
     this.phoneNumber = phoneNumber;
     this.notes = notes;
     this.todo = todo;
+
+    this.PersonalCalendar = PersonalCalendar;
   }
 
   public Account(String username) {
@@ -96,6 +109,8 @@ public class Account {
     this.lastName = null;
     this.title = null;
     this.phoneNumber = 0;
+
+    this.PersonalCalendar = null;
   }
 
   public String getUsername() {
@@ -216,6 +231,14 @@ public class Account {
 
   public void setTodo(String todo) {
     this.todo = todo;
+  }
+
+  public Calendar getPersonalCalendar(){
+    return PersonalCalendar;
+  }
+
+  public void setPersonalCalendar(Calendar PersonalCalendar){
+    this.PersonalCalendar = PersonalCalendar;
   }
 
   @Override
