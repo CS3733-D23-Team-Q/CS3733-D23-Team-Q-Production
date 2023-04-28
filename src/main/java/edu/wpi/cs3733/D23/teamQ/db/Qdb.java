@@ -555,7 +555,6 @@ public class Qdb {
   }
 
   public ServiceRequest retrieveLastRequest() {
-    serviceRequestTable.populate();
     return serviceRequestTable.getAllRows().get(serviceRequestTable.getAllRows().size() - 1);
   }
 
