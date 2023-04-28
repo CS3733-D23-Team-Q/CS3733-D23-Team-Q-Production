@@ -183,6 +183,7 @@ public class PathfindingController {
      */
   }
 
+  /*
   public void autoComplete(ComboBox<String> combobox) {
     TextField editor = combobox.getEditor();
     editor.setOnMouseClicked(
@@ -222,6 +223,7 @@ public class PathfindingController {
           });
     }
   }
+   */
 
   public List<String> getMatchingItems(String input) { // String[]
     /*
