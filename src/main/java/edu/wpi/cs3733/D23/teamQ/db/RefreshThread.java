@@ -36,9 +36,9 @@ public class RefreshThread implements Runnable {
         System.out.println("Updating from server --> " + toUpdate);
       }
       doUpdates();
-      toUpdate.clear();
       lastUpdate = System.currentTimeMillis();
       Thread.sleep(1000);
+      toUpdate.clear();
     }
   }
 
@@ -66,9 +66,9 @@ public class RefreshThread implements Runnable {
 
   private void doUpdates() {
     qdb.populate(toUpdate);
-    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
+    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
   }
 }
