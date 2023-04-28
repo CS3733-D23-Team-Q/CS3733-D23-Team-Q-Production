@@ -437,37 +437,37 @@ public class GraphicalMapEditorController {
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
       nodeid = Integer.parseInt(nodeidinput.getText());
-
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
 
-      while (countEdge < edges.size()) {
-        for (int i = countEdge; i < edges.size(); i++) {
-          Edge edge = edges.get(i);
-          if (edge.getStartNode().getNodeID() == nodeid
-              || edge.getEndNode().getNodeID() == nodeid) {
-            qdb.deleteEdge(edge.getEdgeID());
-            i -= 1;
-            countEdge -= 1;
+      if (!edges.isEmpty())
+        while (countEdge < edges.size()) {
+          for (int i = countEdge; i < edges.size(); i++) {
+            Edge edge = edges.get(i);
+            if (edge.getStartNode().getNodeID() == nodeid
+                || edge.getEndNode().getNodeID() == nodeid) {
+              qdb.deleteEdge(edge.getEdgeID());
+              i -= 1;
+              countEdge -= 1;
+            }
+            countEdge++;
           }
-          countEdge++;
         }
-      }
-      if(!moves.isEmpty())
-      while (countMove < moves.size()) {
-        for (int i = countMove; i < moves.size(); i++) {
-          Move move = moves.get(i);
-          if (move.getNode().getNodeID() == nodeid) {
-            qdb.deleteMove(move.getMoveID());
-            i -= 1;
-            countMove -= 1;
+      if (!moves.isEmpty())
+        while (countMove < moves.size()) {
+          for (int i = countMove; i < moves.size(); i++) {
+            Move move = moves.get(i);
+            if (move.getNode() != null && move.getNode().getNodeID() == nodeid) {
+              qdb.deleteMove(move.getMoveID());
+              i -= 1;
+              countMove -= 1;
+            }
+            countMove++;
           }
-          countMove++;
         }
-      }
 
-      qdb.deleteNode(nodeid);
       qdb.deleteLocation(nodeid);
+      qdb.deleteNode(nodeid);
     } else {
       InitialNode();
     }
