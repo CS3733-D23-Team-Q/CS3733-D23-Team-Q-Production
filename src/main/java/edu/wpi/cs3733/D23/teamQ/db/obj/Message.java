@@ -32,7 +32,7 @@ public class Message {
     return sender.getUsername() + "," + receiver.getUsername() + "," + message + "," + timeStamp;
   }
 
-  public boolean getRead(){
+  public boolean getRead() {
     return read;
   }
 }
