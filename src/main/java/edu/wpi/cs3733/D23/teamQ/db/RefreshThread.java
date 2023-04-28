@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
 
@@ -34,11 +33,12 @@ public class RefreshThread implements Runnable {
   public void run() {
     while (true) {
       if (checkUpdates().size() > 0) {
-        doUpdates();
-        toUpdate.clear();
-        lastUpdate = System.currentTimeMillis();
+        System.out.println("Updating from server --> " + toUpdate);
       }
-      Thread.sleep(2000);
+      doUpdates();
+      lastUpdate = System.currentTimeMillis();
+      Thread.sleep(1000);
+      toUpdate.clear();
     }
   }
 
@@ -66,9 +66,9 @@ public class RefreshThread implements Runnable {
 
   private void doUpdates() {
     qdb.populate(toUpdate);
-    Platform.runLater(() -> qdb.notifySubscribers(Arrays.stream(tableNames).toList()));
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
+    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
   }
 }
