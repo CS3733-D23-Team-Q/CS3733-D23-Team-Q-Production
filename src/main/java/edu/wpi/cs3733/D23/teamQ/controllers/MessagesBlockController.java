@@ -69,7 +69,7 @@ public class MessagesBlockController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) {
-    if (context.contains("alert")) {
+    if (context.contains("message")) {
       messagesAlertPane.setVisible(true);
       messagesAlertController.setNum("9");
     }
