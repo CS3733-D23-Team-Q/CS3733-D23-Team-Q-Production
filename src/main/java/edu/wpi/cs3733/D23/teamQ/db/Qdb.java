@@ -610,8 +610,12 @@ public class Qdb {
     return messageTable.retrieveMessages(p1, p2);
   }
 
-  public ObservableList<Message> retrieveRecentMessages(String username) {
-    return messageTable.retrieveRecentMessages(username);
+  public ObservableList<Message> retrieveConversations(String username) {
+    return messageTable.retrieveConversations(username);
+  }
+
+  public int getNumUnread(String username){
+    return messageTable.getNumUnread(username);
   }
 
   public boolean addMessage(Message message) {

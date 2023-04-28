@@ -31,4 +31,8 @@ public class Message {
   public String toString() {
     return sender.getUsername() + "," + receiver.getUsername() + "," + message + "," + timeStamp;
   }
+
+  public boolean getRead(){
+    return read;
+  }
 }

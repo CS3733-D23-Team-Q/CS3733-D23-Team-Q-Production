@@ -11,8 +11,11 @@ import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -22,6 +25,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import net.kurobako.gesturefx.GesturePane;
 
 public class HomeController implements Subscriber {
@@ -137,21 +142,33 @@ public class HomeController implements Subscriber {
   }
 
   private boolean setAlerts() {
+    Date today = new Date(System.currentTimeMillis());
     alertBox.getChildren().clear();
     List<Alert> alerts = qdb.retrieveAllAlerts();
     for (int i = alerts.size() - 1; i >= 0; i--) {
       Label l = new Label();
       Date d = new Date(alerts.get(i).getTimestamp());
+      boolean isToday = isSameDay(today, d);
       l.setText(d + ": " + alerts.get(i).getMessage());
       l.setPadding(new Insets(4, 6, 4, 6));
       l.setMaxWidth(512);
       l.setMinHeight(24);
       l.setWrapText(true);
-      l.setStyle(
-          "-fx-text-fill: #CE3C49; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #CE3C49; -fx-border-radius: 16");
+      if (isToday)
+        l.setStyle(
+            "-fx-text-fill: #CE3C49; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #CE3C49; -fx-border-radius: 16");
+      else
+        l.setStyle(
+            "-fx-text-fill: #012d5a; -fx-font-family: Roboto; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-color: #012d5a; -fx-border-radius: 16");
       alertBox.getChildren().add(l);
     }
     return true;
+  }
+
+  public static boolean isSameDay(Date date1, Date date2) {
+    LocalDate localDate1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate localDate2 = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    return localDate1.isEqual(localDate2);
   }
 
   public void updateTime() {
@@ -164,7 +181,10 @@ public class HomeController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) {
+    Qdb qdb = Qdb.getInstance();
     if (context.contains("alert")) {
+      Alert alert = qdb.retrieveAllAlerts().get(qdb.retrieveAllAlerts().size() - 1);
+      alertSound(alert.getMessage());
       setAlerts();
     }
     if (context.contains("serviceRequest") || context.contains("move")) {
@@ -174,5 +194,24 @@ public class HomeController implements Subscriber {
 
     updateTime();
     return true;
+  }
+
+  public void alertSound(String message) {
+    String path = getClass().getResource("/alert.wav").getPath();
+    ;
+    if (message.contains("Code Blue")) path = getClass().getResource("/Blue.wav").getPath();
+    if (message.contains("Code Red")) path = getClass().getResource("/Red.wav").getPath();
+    if (message.contains("Code Black")) path = getClass().getResource("/Black.wav").getPath();
+    if (message.contains("Code Gray")) path = getClass().getResource("/Gray.wav").getPath();
+    if (message.contains("Code Yellow")) path = getClass().getResource("/Yellow.wav").getPath();
+    if (message.contains("Code Orange")) path = getClass().getResource("/Orange.wav").getPath();
+    if (message.contains("Code Pink")) path = getClass().getResource("/Pink.wav").getPath();
+    if (message.contains("Code Purple")) path = getClass().getResource("/Purple.wav").getPath();
+    if (message.contains("Code Green")) path = getClass().getResource("/Green.wav").getPath();
+    if (message.contains("Code Silver")) path = getClass().getResource("/Silver.wav").getPath();
+
+    Media media = new Media(new File(path).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.play();
   }
 }
