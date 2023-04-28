@@ -30,7 +30,7 @@
                         <Insets left="125.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/default-profile.png" />
+                        <Image url="@../../../../../../default-profile.png" />
                      </image>
                   </ImageView>
                   <VBox prefHeight="200.0" prefWidth="100.0">
