@@ -134,6 +134,8 @@ public class ListServiceRequestController {
   @FXML MFXFilterComboBox medicalItemField;
   @FXML MFXTextField medicalQuantityField;
 
+  @FXML MFXTextField searchBox;
+
   private static ServiceRequest serviceRequestChange;
   private static FlowerRequest flowerRequest;
   private static ConferenceRequest conferenceRequest;
@@ -161,15 +163,28 @@ public class ListServiceRequestController {
 
   @FXML
   public void initialize() {
+    yourRequestsTable.setRowFactory(
+        tv -> {
+          TableRow<ServiceRequest> row = new TableRow<>();
+          row.setPrefHeight(50);
+          return row;
+        });
+
+    assignedRequestTable.setRowFactory(
+        tv -> {
+          TableRow<ServiceRequest> row = new TableRow<>();
+          row.setPrefHeight(50);
+          return row;
+        });
 
     toggleButton.setOnAction(
         event -> {
           if (toggleButton.isSelected()) {
-            yourRequestsTable.setItems(userRequestedOutstandingRequests);
-            assignedRequestTable.setItems(userAssignedOutstandingRequests);
+            yourRequestsTable.setItems(qdb.getUserRequestedOutstandingRows(username));
+            assignedRequestTable.setItems(qdb.getUserAssignedOutstandingRows(username));
           } else {
-            yourRequestsTable.setItems(userRequestedRequests);
-            assignedRequestTable.setItems(userAssignedRequests);
+            yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
+            assignedRequestTable.setItems(qdb.retrieveUserAssignServiceRequests(username));
           }
           yourRequestsTable.refresh();
           assignedRequestTable.refresh();
@@ -381,7 +396,7 @@ public class ListServiceRequestController {
               }
             });
 
-    yourRequestsTable.setItems(userRequestedRequests);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
 
     // Set data for assignedRequestTable
     assignedRequestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
@@ -415,7 +430,7 @@ public class ListServiceRequestController {
           return dateProperty;
         });
 
-    assignedRequestTable.setItems(userAssignedRequests);
+    assignedRequestTable.setItems(qdb.retrieveUserAssignServiceRequests(username));
   }
 
   public void confCancelClicked() {
@@ -463,6 +478,7 @@ public class ListServiceRequestController {
             conferenceRequest.getProgress().ordinal(),
             confFoodField.getText());
     qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
     yourRequestsTable.refresh();
     conferenceRequestEdit.setVisible(false);
   }
@@ -514,6 +530,7 @@ public class ListServiceRequestController {
             Integer.parseInt(flowerBouquetField.getText()));
 
     qdb.updateFlowerRequest(flowerRequest.getRequestID(), fr);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
     yourRequestsTable.refresh();
     flowerRequestEdit.setVisible(false);
   }
@@ -564,6 +581,7 @@ public class ListServiceRequestController {
             officeItemField.getText(),
             Integer.parseInt(officeQuantityField.getText()));
     qdb.updateOfficeSuppliesRequest(officeSuppliesRequest.getRequestID(), or);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
     yourRequestsTable.refresh();
     officeRequestEdit.setVisible(false);
   }
@@ -612,6 +630,7 @@ public class ListServiceRequestController {
             furnitureRequest.getProgress().ordinal(),
             furnitureChoiceField.getText());
     qdb.updateFurnitureRequest(furnitureRequest.getRequestID(), fr);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
     yourRequestsTable.refresh();
     furnitureRequestEdit.setVisible(false);
   }
@@ -666,6 +685,7 @@ public class ListServiceRequestController {
             mealEntreeField.getText(),
             mealSideField.getText());
     qdb.updateMealRequest(mealRequest.getRequestID(), mr);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
     yourRequestsTable.refresh();
     mealRequestEdit.setVisible(false);
   }
@@ -716,6 +736,7 @@ public class ListServiceRequestController {
             medicalItemField.getText(),
             Integer.parseInt(medicalQuantityField.getText()));
     qdb.updateMedicalSuppliesRequest(medicalSuppliesRequest.getRequestID(), mr);
+    yourRequestsTable.setItems(qdb.getUserRequestedRows(username));
     yourRequestsTable.refresh();
     medicalRequestEdit.setVisible(false);
   }
