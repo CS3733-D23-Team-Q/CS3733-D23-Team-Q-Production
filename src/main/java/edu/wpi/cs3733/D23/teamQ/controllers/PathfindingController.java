@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -181,10 +179,6 @@ public class PathfindingController {
           }
         });
     setUpAlgos();
-    /*
-    autoComplete(startSelect);
-    autoComplete(endSelect);
-     */
   }
 
   public void setUpAlgos() {
@@ -192,63 +186,6 @@ public class PathfindingController {
     algorithmSelect.getItems().add("bfs");
     algorithmSelect.getItems().add("dfs");
     algorithmSelect.getItems().add("djikstra");
-  }
-
-  /*
-  public void autoComplete(ComboBox<String> combobox) {
-    TextField editor = combobox.getEditor();
-    editor.setOnMouseClicked(
-        e -> {
-          // combobox.setValue(null);
-          // editor.setText(null);
-          combobox.show();
-        });
-    // add listener to the editor
-    combobox.setOnKeyReleased(
-        e -> {
-          combobox.setValue(null);
-          String input = editor.getText();
-          combobox.setItems(FXCollections.observableArrayList(getMatchingItems(input)));
-          combobox.show();
-        });
-    // set whenever an item is selected instead of setonaction
-    if (combobox.equals(startSelect)) {
-      combobox.setOnAction(
-          e -> {
-            editor.setText(combobox.getValue());
-            try {
-              startSelected();
-            } catch (IOException ex) {
-              throw new RuntimeException(ex);
-            }
-          });
-    } else {
-      combobox.setOnAction(
-          e -> {
-            editor.setText(combobox.getValue());
-            try {
-              endSelected();
-            } catch (IOException ex) {
-              throw new RuntimeException(ex);
-            }
-          });
-    }
-  }
-   */
-
-  public List<String> getMatchingItems(String input) { // String[]
-    /*
-    return FXCollections.observableArrayList(allSelections)
-        .filtered(item -> item.toLowerCase().contains(input.toLowerCase()))
-        .toArray(new String[0]);
-     */
-    FilteredList<String> filteredItems =
-        new FilteredList<>(FXCollections.observableList(allSelections));
-    if (input == null || input.isEmpty()) {
-      return allSelections;
-    }
-    filteredItems.setPredicate(item -> item.toLowerCase().startsWith(input.toLowerCase()));
-    return filteredItems;
   }
 
   public void addButtons(String f) {
@@ -296,7 +233,7 @@ public class PathfindingController {
         moveDates.add(d);
         dateSelect.getItems().add(d.toString());
         if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
-          dateSelect.setValue(d.toString());
+          dateSelect.getSelectionModel().selectItem(d.toString());
         }
       }
     }
