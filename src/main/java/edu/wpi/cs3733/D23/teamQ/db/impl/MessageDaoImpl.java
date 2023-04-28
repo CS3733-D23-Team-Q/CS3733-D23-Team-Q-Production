@@ -118,10 +118,10 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
     return messageList;
   }
 
-  public int getNumUnread(String username){
+  public int getNumUnread(String username) {
     int unread = 0;
     for (Message m : messages) {
-      if (!m.getRead() && m.getReceiver().equals(username)){
+      if (!m.getRead() && m.getReceiver().equals(username)) {
         unread++;
       }
     }
@@ -130,5 +130,9 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
 
   public static void sortByTimestamp(List<Message> list) {
     Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
+  }
+
+  public List<Message> getAllMessages(){
+    return messages;
   }
 }

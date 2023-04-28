@@ -614,8 +614,12 @@ public class Qdb {
     return messageTable.retrieveConversations(username);
   }
 
-  public int getNumUnread(String username){
+  public int getNumUnread(String username) {
     return messageTable.getNumUnread(username);
+  }
+
+  public List<Message> retrieveAllMessages(){
+    return messageTable.getAllMessages();
   }
 
   public boolean addMessage(Message message) {
