@@ -103,7 +103,7 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
     return messageList;
   }
 
-  public ObservableList<Message> retrieveRecentMessages(String person) {
+  public ObservableList<Message> retrieveConversations(String person) {
     ObservableList<Message> messageList = FXCollections.observableArrayList();
     for (Account a : accountTable.getAllRows()) {
       List<Message> recent = retrieveMessages(a.getUsername(), person);
@@ -114,13 +114,21 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
         }
       }
     }
-    SortByTimestampParameter.sortByTimestamp(messageList);
+    sortByTimestamp(messageList);
     return messageList;
   }
 
-  public class SortByTimestampParameter {
-    public static void sortByTimestamp(List<Message> list) {
-      Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
+  public int getNumUnread(String username){
+    int unread = 0;
+    for (Message m : messages) {
+      if (!m.getRead() && m.getReceiver().equals(username)){
+        unread++;
+      }
     }
+    return unread;
+  }
+
+  public static void sortByTimestamp(List<Message> list) {
+    Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
   }
 }
