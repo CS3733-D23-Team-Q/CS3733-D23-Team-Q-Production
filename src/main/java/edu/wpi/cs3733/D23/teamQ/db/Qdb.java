@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
@@ -614,7 +616,7 @@ public class Qdb {
     return messageTable.retrieveConversations(username);
   }
 
-  public int getNumUnread(String username){
+  public int getNumUnread(String username) {
     return messageTable.getNumUnread(username);
   }
 
@@ -655,6 +657,7 @@ public class Qdb {
           patientTransportRequestTable.populate();
       }
     }
+    Platform.runLater(() -> notifySubscribers(tableNames));
     return true;
   }
 

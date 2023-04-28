@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javafx.application.Platform;
+
 import lombok.SneakyThrows;
 
 public class RefreshThread implements Runnable {
@@ -69,6 +69,5 @@ public class RefreshThread implements Runnable {
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
-    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
   }
 }
