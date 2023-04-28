@@ -34,8 +34,7 @@ public class SettingsController {
           "Signs",
           "Service requests");
 
-  ObservableList<String> voiceList =
-      FXCollections.observableArrayList("Male", "Female");
+  ObservableList<String> voiceList = FXCollections.observableArrayList("Male", "Female");
   ObservableList<String> algorithmList =
       FXCollections.observableArrayList("A*", "Dijkstra", "BFS", "DFS", "Q*");
 
