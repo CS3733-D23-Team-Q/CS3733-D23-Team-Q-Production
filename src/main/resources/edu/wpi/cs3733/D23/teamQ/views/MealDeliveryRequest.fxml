@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -12,29 +13,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import net.kurobako.gesturefx.GesturePane?>
 
-<VBox prefHeight="900.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MealDeliveryRequestController">
    <children>
-      <StackPane prefHeight="129.0" prefWidth="1360.0">
+      <GesturePane fx:id="titlePane" hbarPolicy="NEVER" prefHeight="128.0" prefWidth="1360.0" vbarPolicy="NEVER" />
+      <HBox>
          <children>
-            <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
-               <image>
-                  <Image url="@../MealDeliveryTitle.jpg" />
-               </image>
-            </ImageView>
-            <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery Form " StackPane.alignment="CENTER">
+            <Label text="Meal Delivery Request Form" textFill="#012d5a">
                <font>
-                  <Font name="Roboto Bold" size="36.0" />
+                  <Font name="Roboto" size="36.0" />
                </font>
-            </Text>
+            </Label>
          </children>
          <padding>
-            <Insets bottom="30.0" />
+            <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
          </padding>
-      </StackPane>
-      <HBox minHeight="-Infinity" prefHeight="630.0" prefWidth="1360.0" VBox.vgrow="ALWAYS">
+      </HBox>
+      <HBox minHeight="-Infinity" prefHeight="700.0" prefWidth="1360.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox prefHeight="678.0" prefWidth="429.0" spacing="30.0">
                <children>
                   <VBox prefWidth="400.0">
@@ -68,7 +65,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXDatePicker fx:id="dateField" minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Select a Date" />
+                        <MFXDatePicker fx:id="dateField" prefHeight="40.0" prefWidth="400.0" promptText="Select a Date" />
                      </children>
                   </VBox>
                   <VBox>
@@ -88,15 +85,14 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXTextField fx:id="specialInstructionsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Special Instructions" />
+                        <MFXTextField fx:id="specialInstructionsField" prefHeight="120.0" prefWidth="400.0" promptText="Special Instructions" />
                      </children>
                   </VBox>
                </children>
                <padding>
-                  <Insets left="30.0" />
+                  <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="150.0" />
             <VBox prefHeight="639.0" prefWidth="400.0">
                <children>
                   <VBox>
@@ -215,11 +211,10 @@
                   <Insets right="30.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="1360.0" VBox.vgrow="ALWAYS" />
-      <HBox minHeight="-Infinity" prefWidth="1360.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" />
+      <HBox minHeight="-Infinity" prefHeight="48.0" prefWidth="1300.0">
          <children>
             <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
                <font>
