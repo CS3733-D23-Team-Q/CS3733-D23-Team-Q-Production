@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class ProfilePage1Controller {
@@ -24,6 +25,7 @@ public class ProfilePage1Controller {
   @FXML private Text email;
   @FXML private Text phone;
   @FXML private Text status;
+  @FXML private Circle statusCircle;
 
   public ProfilePage1Controller() throws SQLException {}
 
@@ -37,7 +39,15 @@ public class ProfilePage1Controller {
     displayUsername.setText(username);
     email.setText(account.getEmail());
     phone.setText(Integer.toString(account.getPhoneNumber()));
-    status.setText("Online");
+
+    statusCircle.setStroke(null);
+    if (account.isActive()) {
+      status.setText("Online");
+      statusCircle.setFill(javafx.scene.paint.Color.GREEN);
+    } else {
+      status.setText("Offline");
+      statusCircle.setFill(javafx.scene.paint.Color.RED);
+    }
 
     if (qdb.getProfileImageIndex(username) != -1) {
       Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
