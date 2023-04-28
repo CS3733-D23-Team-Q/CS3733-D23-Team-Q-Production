@@ -42,7 +42,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select and Assignee">
+                        <MFXFilterComboBox fx:id="assigneeField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select and Assignee">
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
@@ -59,7 +59,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Location">
+                        <MFXFilterComboBox fx:id="roomNumberField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Location">
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
@@ -76,7 +76,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXDatePicker prefHeight="40.0" prefWidth="450.0" promptText="Select a Date">
+                        <MFXDatePicker fx:id="dateField" prefHeight="40.0" prefWidth="450.0" promptText="Select a Date">
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
@@ -93,7 +93,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Time">
+                        <MFXFilterComboBox fx:id="timeField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Time">
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>
@@ -110,7 +110,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Special Instructions">
+                        <TextArea fx:id="specialInstructionsField" prefHeight="200.0" prefWidth="200.0" promptText="Special Instructions">
                            <VBox.margin>
                               <Insets left="100.0" right="130.0" />
                            </VBox.margin>
@@ -130,7 +130,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select an Entree">
+                        <MFXFilterComboBox fx:id="entreeField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select an Entree">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
@@ -160,7 +160,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Drink">
+                        <MFXFilterComboBox fx:id="drinkField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Drink">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
@@ -187,7 +187,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Side">
+                        <MFXFilterComboBox fx:id="sideField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Side">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
@@ -214,9 +214,9 @@
       <VBox VBox.vgrow="ALWAYS" />
       <HBox prefHeight="24.0" prefWidth="1360.0">
          <children>
-            <MFXButton prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #da1313;" text="Reset" textFill="WHITE">
+            <MFXButton fx:id="resetButton" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #da1313;" text="Reset" textFill="WHITE">
                <HBox.margin>
-                  <Insets left="100.0" />
+                  <Insets left="80.0" />
                </HBox.margin>
                <font>
                   <Font name="Roboto" size="16.0" />
@@ -224,13 +224,13 @@
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox>
                <children>
-                  <MFXButton prefHeight="20.0" prefWidth="80.0" text="Cancel" textFill="#012d5a">
+                  <MFXButton fx:id="cancelButton" prefHeight="20.0" prefWidth="80.0" text="Cancel" textFill="#012d5a">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="#f1f1f1">
+                  <MFXButton fx:id="submitButton" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="#f1f1f1">
                      <HBox.margin>
-                        <Insets left="30.0" right="100.0" />
+                        <Insets left="30.0" right="80.0" />
                      </HBox.margin>
                      <font>
                         <Font name="Roboto" size="16.0" />
