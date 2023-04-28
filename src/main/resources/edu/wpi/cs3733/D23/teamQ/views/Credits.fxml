@@ -84,6 +84,7 @@
                                     <MFXButton fx:id="greenCircle" onAction="#greenCircleClicked" prefHeight="36.0" prefWidth="320.0" text="Green Circle" />
                                     <MFXButton fx:id="home" onAction="#homeClicked" prefHeight="36.0" prefWidth="320.0" text="Home" />
                                     <MFXButton fx:id="homeBlue" onAction="#homeBlueClicked" prefHeight="36.0" prefWidth="320.0" text="HomeBlue" />
+                                    <MFXButton fx:id="janitor" onAction="#janitorClicked" prefHeight="36.0" prefWidth="320.0" text="Janitor" />
                                     <MFXButton fx:id="leftArrow" onAction="#leftArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Left Arrow" />
                                     <MFXButton fx:id="loc" onAction="#locClicked" prefHeight="36.0" prefWidth="320.0" text="Location" />
                                     <MFXButton fx:id="loginExit" onAction="#loginExitClicked" prefHeight="36.0" prefWidth="320.0" text="LoginExit" />
@@ -93,6 +94,8 @@
                                     <MFXButton fx:id="mapBlue" onAction="#mapBlueClicked" prefHeight="36.0" prefWidth="320.0" text="MapBlue" />
                                     <MFXButton fx:id="mapEditor" onAction="#mapEditorClicked" prefHeight="36.0" prefWidth="320.0" text="Map Editor" />
                                     <MFXButton fx:id="menu" onAction="#menuClicked" prefHeight="36.0" prefWidth="320.0" text="Menu" />
+                                    <MFXButton fx:id="messages" onAction="#messagesClicked" prefHeight="36.0" prefWidth="320.0" text="Messages" />
+                                    <MFXButton fx:id="messagesBlue" onAction="#messagesBlueClicked" prefHeight="36.0" prefWidth="320.0" text="MessagesBlue" />
                                     <MFXButton fx:id="move" onAction="#moveClicked" prefHeight="36.0" prefWidth="320.0" text="Move" />
                                     <MFXButton fx:id="node" onAction="#nodeClicked" prefHeight="36.0" prefWidth="320.0" text="Node" />
                                     <MFXButton fx:id="people" onAction="#peopleClicked" prefHeight="36.0" prefWidth="320.0" text="People" />
