@@ -167,7 +167,7 @@ public class CreditsController {
   // icons
   @FXML
   public void alertClicked() {
-    linkDisplay.setText("https://fontawesome.com/search?q=circle-&o=r");
+    linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
