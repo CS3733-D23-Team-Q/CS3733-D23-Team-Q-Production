@@ -52,7 +52,7 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
                 rst.getDate("date"),
                 rst.getString("time"),
                 rst.getInt("progress"),
-            rst.getString("type")));
+                rst.getString("type")));
       }
       conn.close();
       stm.close();

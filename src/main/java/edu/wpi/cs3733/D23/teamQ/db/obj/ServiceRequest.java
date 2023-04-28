@@ -72,6 +72,6 @@ public class ServiceRequest {
         + time
         + ","
         + progress.ordinal()
-            + type;
+        + type;
   }
 }

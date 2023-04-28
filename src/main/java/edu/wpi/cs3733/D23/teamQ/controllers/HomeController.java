@@ -83,7 +83,7 @@ public class HomeController implements Subscriber {
       ServiceRequest.Progress status =
           qdb.retrieveUserAssignServiceRequests(username).get(i).getProgress();
 
-      Entry<String> temp = new Entry<>(type +" ID Num-" + num);
+      Entry<String> temp = new Entry<>(type + " ID Num-" + num);
       if (status.equals(ServiceRequest.Progress.BLANK)) {
         serviceRequestsBlank.addEntry(temp);
       } else if (status.equals(ServiceRequest.Progress.PROCESSING)) {
