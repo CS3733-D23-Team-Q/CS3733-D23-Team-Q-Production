@@ -79,6 +79,8 @@ public class OfficeMoveController {
   }
 
   public void submitButtonClicked() {
+    System.out.println(newLocationField.getValue());
+    System.out.println();
 
     if (currentLocationField.getValue() != null
         && newLocationField.getValue() != null
@@ -86,7 +88,7 @@ public class OfficeMoveController {
       Move newMove =
           new Move(
               qdb.retrieveNode(Integer.parseInt(newLocationField.getValue().toString())),
-              newLocationField.getValue().toString(),
+              currentLocationField.getValue().toString(),
               Date.valueOf(dateField.getValue()));
 
       qdb.addMove(newMove);
