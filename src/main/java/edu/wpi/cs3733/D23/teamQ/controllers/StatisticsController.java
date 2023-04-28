@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
@@ -22,10 +21,8 @@ import javafx.scene.text.Font;
 public class StatisticsController {
   Qdb qdb = Qdb.getInstance();
 
-  @FXML
-  VBox vbox;
-  @FXML
-  MFXScrollPane sp;
+  @FXML VBox vbox;
+  @FXML MFXScrollPane sp;
 
   @FXML
   public void initialize() {
@@ -90,18 +87,18 @@ public class StatisticsController {
   public void serviceRequestPieChart() {
     Qdb qdb = Qdb.getInstance();
     PieChart.Data slice1 =
-            new PieChart.Data("Conference Room Requests", qdb.retrieveAllConferenceRequests().size());
+        new PieChart.Data("Conference Room Requests", qdb.retrieveAllConferenceRequests().size());
     PieChart.Data slice2 =
-            new PieChart.Data("Flower Requests", qdb.retrieveAllFlowerRequests().size());
+        new PieChart.Data("Flower Requests", qdb.retrieveAllFlowerRequests().size());
     PieChart.Data slice3 =
-            new PieChart.Data("Office Supply Requests", qdb.retrieveAllOfficeSuppliesRequests().size());
+        new PieChart.Data("Office Supply Requests", qdb.retrieveAllOfficeSuppliesRequests().size());
     PieChart.Data slice4 =
-            new PieChart.Data("Furniture Requests", qdb.retrieveAllFurnitureRequests().size());
+        new PieChart.Data("Furniture Requests", qdb.retrieveAllFurnitureRequests().size());
     PieChart.Data slice5 =
-            new PieChart.Data("Meal Delivery Requests", qdb.retrieveAllMealRequests().size());
+        new PieChart.Data("Meal Delivery Requests", qdb.retrieveAllMealRequests().size());
     PieChart.Data slice6 =
-            new PieChart.Data(
-                    "Medial Supply Requests", qdb.retrieveAllMedicalSuppliesRequests().size());
+        new PieChart.Data(
+            "Medial Supply Requests", qdb.retrieveAllMedicalSuppliesRequests().size());
 
     PieChart pieChart = new PieChart();
     pieChart.getData().add(slice1);
@@ -114,7 +111,7 @@ public class StatisticsController {
     srLabel.setFont(Font.font(16));
     vbox.getChildren().add(srLabel);
     Label srNum =
-            new Label("Total Service Requests: " + qdb.getAllServiceRequestsObservable().size());
+        new Label("Total Service Requests: " + qdb.getAllServiceRequestsObservable().size());
     srNum.setFont(Font.font(16));
     vbox.getChildren().add(srNum);
     vbox.getChildren().add(pieChart);
