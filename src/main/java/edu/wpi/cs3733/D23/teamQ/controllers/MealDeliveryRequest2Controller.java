@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import net.kurobako.gesturefx.GesturePane;
 
-public class MealDeliveryRequestController {
+public class MealDeliveryRequest2Controller {
   Qdb qdb = Qdb.getInstance();
   @FXML MFXFilterComboBox assigneeField;
   @FXML MFXFilterComboBox roomNumberField;
@@ -116,28 +116,28 @@ public class MealDeliveryRequestController {
   @FXML
   public void EntreeSelected(ActionEvent event) {
     if (entreeField.getValue().equals("Chicken")) {
-      Image titleImage = new Image(App.class.getResourceAsStream("kabobimage2.jpg"));
-      ImageView iv = new ImageView(titleImage);
+      Image chickenImage = new Image(App.class.getResourceAsStream("ChickenEntree.jpg"));
+      ImageView iv = new ImageView(chickenImage);
       EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Steak")) {
-      Image titleImage = new Image(App.class.getResourceAsStream("kabobimage2.jpg"));
-      ImageView iv = new ImageView(titleImage);
+      Image steakImage = new Image(App.class.getResourceAsStream("SteakEntree.jpg"));
+      ImageView iv = new ImageView(steakImage);
       EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Pork")) {
-      Image titleImage = new Image(App.class.getResourceAsStream("edu/wpi/cs3733/D23/teamQ/PorkEntree.jpg"));
-      ImageView iv = new ImageView(titleImage);
+      Image porkImage = new Image(App.class.getResourceAsStream("PorkEntree.jpg"));
+      ImageView iv = new ImageView(porkImage);
       EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Fish")) {
-      Image titleImage = new Image(App.class.getResourceAsStream("kabobimage2.jpg"));
-      ImageView iv = new ImageView(titleImage);
+      Image fishImage = new Image(App.class.getResourceAsStream("FishEntree.jpg"));
+      ImageView iv = new ImageView(fishImage);
       EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Vegetarian")) {
-      Image titleImage = new Image(App.class.getResourceAsStream("kabobimage2.jpg"));
-      ImageView iv = new ImageView(titleImage);
+      Image vegetarianImage = new Image(App.class.getResourceAsStream("VegetarianEntree.jpg"));
+      ImageView iv = new ImageView(vegetarianImage);
       EntreeImage.setImage(iv.getImage());
     }
   }
@@ -145,56 +145,48 @@ public class MealDeliveryRequestController {
   @FXML
   public void DrinkSelected(ActionEvent event) {
     if (drinkField.getValue().equals("Water")) {
-      WaterImage.setOpacity(1.0);
-      CokeImage.setOpacity(0.0);
-      CoffeeImage.setOpacity(0.0);
-      TeaImage.setOpacity(0.0);
+      Image waterImage = new Image(App.class.getResourceAsStream("edu/wpi/cs3733/D23/teamQ/WaterDrink.jpg"));
+      ImageView iv = new ImageView(waterImage);
+      DrinkImage.setImage(iv.getImage());
     }
     if (drinkField.getValue().equals("Coke")) {
-      WaterImage.setOpacity(0.0);
-      CokeImage.setOpacity(1.0);
-      CoffeeImage.setOpacity(0.0);
-      TeaImage.setOpacity(0.0);
+      Image cokeImage = new Image(App.class.getResourceAsStream("CokeDrink.jpg"));
+      ImageView iv = new ImageView(cokeImage);
+      DrinkImage.setImage(iv.getImage());
     }
     if (drinkField.getValue().equals("Coffee")) {
-      WaterImage.setOpacity(0.0);
-      CokeImage.setOpacity(0.0);
-      CoffeeImage.setOpacity(1.0);
-      TeaImage.setOpacity(0.0);
+      Image coffeeImage = new Image(App.class.getResourceAsStream("CoffeeDrink.jpg"));
+      ImageView iv = new ImageView(coffeeImage);
+      DrinkImage.setImage(iv.getImage());
     }
     if (drinkField.getValue().equals("Tea")) {
-      WaterImage.setOpacity(0.0);
-      CokeImage.setOpacity(0.0);
-      CoffeeImage.setOpacity(0.0);
-      TeaImage.setOpacity(1.0);
+      Image teaImage = new Image(App.class.getResourceAsStream("edu/wpi/cs3733/D23/teamQ/TeaDrink.jpg"));
+      ImageView iv = new ImageView(teaImage);
+      DrinkImage.setImage(iv.getImage());
     }
   }
 
   @FXML
   public void SideSelected(ActionEvent event) {
     if (sideField.getValue().equals("Fries")) {
-      FriesImage.setOpacity(1.0);
-      OnionRingsImage.setOpacity(0.0);
-      SoupImage.setOpacity(0.0);
-      SaladImage.setOpacity(0.0);
+      Image friesImage = new Image(App.class.getResourceAsStream("FriesSide.jpg"));
+      ImageView iv = new ImageView(friesImage);
+      SideImage.setImage(iv.getImage());
     }
     if (sideField.getValue().equals("Onion Rings")) {
-      FriesImage.setOpacity(0.0);
-      OnionRingsImage.setOpacity(1.0);
-      SoupImage.setOpacity(0.0);
-      SaladImage.setOpacity(0.0);
+      Image onionRingsImage = new Image(App.class.getResourceAsStream("OnionRingsSide.jpg"));
+      ImageView iv = new ImageView(onionRingsImage);
+      SideImage.setImage(iv.getImage());
     }
     if (sideField.getValue().equals("Soup")) {
-      FriesImage.setOpacity(0.0);
-      OnionRingsImage.setOpacity(0.0);
-      SoupImage.setOpacity(1.0);
-      SaladImage.setOpacity(0.0);
+      Image soupImage = new Image(App.class.getResourceAsStream("SoupSide.jpg"));
+      ImageView iv = new ImageView(soupImage);
+      SideImage.setImage(iv.getImage());
     }
     if (sideField.getValue().equals("Salad")) {
-      FriesImage.setOpacity(0.0);
-      OnionRingsImage.setOpacity(0.0);
-      SoupImage.setOpacity(0.0);
-      SaladImage.setOpacity(1.0);
+      Image saladImage = new Image(App.class.getResourceAsStream("edu/wpi/cs3733/D23/teamQ/SaladSide.jpg"));
+      ImageView iv = new ImageView(saladImage);
+      SideImage.setImage(iv.getImage());
     }
   }
 }

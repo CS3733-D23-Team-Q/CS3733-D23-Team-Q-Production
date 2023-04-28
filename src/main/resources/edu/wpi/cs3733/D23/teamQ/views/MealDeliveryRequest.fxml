@@ -163,7 +163,7 @@
                         </ImageView>
                         <ImageView fx:id="TeaImage" fitHeight="150.0" fitWidth="234.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../tea.jpg" />
+                              <Image url="@../TeaDrink.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -199,7 +199,7 @@
                               </ImageView>
                               <ImageView fx:id="SaladImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../../../../../../salad.jpg" />
+                                    <Image url="@../SaladSide.jpg" />
                                  </image>
                               </ImageView>
                            </children>
