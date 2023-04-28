@@ -90,11 +90,10 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO move(\"nodeID\", \"longName\", \"date\", \"moveID\") VALUES (?, ?, ?, ?)")) {
+                "INSERT INTO move(\"nodeID\", \"longName\", \"date\") VALUES (?, ?, ?)")) {
       stmt.setInt(1, m.getNode().getNodeID());
       stmt.setString(2, m.getLongName());
       stmt.setDate(3, m.getDate());
-      stmt.setInt(4, getAllRows().get(getAllRows().size() - 1).getMoveID() + 1);
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
