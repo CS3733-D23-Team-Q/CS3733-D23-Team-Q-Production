@@ -156,17 +156,9 @@ public class DirectoryController {
       if (account.getUsername().equals(loggedInUser)) {
         continue;
       }
-      if (qdb.getProfileImageIndex(account.getUsername()) != -1) {
-        ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
-        EmployeeData employeeData = new EmployeeData(account, pfp);
-        allData.add(employeeData);
-      } else {
-        Image image = new Image(getClass().getResourceAsStream("/default-profile.png"));
-        byte[] imageData = qdb.convertImageToBytea(image);
-        ProfileImage tempProfileImage = new ProfileImage(account.getUsername(), imageData);
-        EmployeeData employeeData = new EmployeeData(account, tempProfileImage);
-        allData.add(employeeData);
-      }
+      ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
+      EmployeeData employeeData = new EmployeeData(account, pfp);
+      allData.add(employeeData);
     }
     return allData;
   }
