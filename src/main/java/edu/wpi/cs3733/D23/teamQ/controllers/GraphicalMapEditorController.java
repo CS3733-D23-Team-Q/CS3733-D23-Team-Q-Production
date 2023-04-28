@@ -440,7 +440,6 @@ public class GraphicalMapEditorController {
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
 
-      if (!edges.isEmpty())
         while (countEdge < edges.size()) {
           for (int i = countEdge; i < edges.size(); i++) {
             Edge edge = edges.get(i);
@@ -453,7 +452,7 @@ public class GraphicalMapEditorController {
             countEdge++;
           }
         }
-      if (!moves.isEmpty())
+
         while (countMove < moves.size()) {
           for (int i = countMove; i < moves.size(); i++) {
             Move move = moves.get(i);
