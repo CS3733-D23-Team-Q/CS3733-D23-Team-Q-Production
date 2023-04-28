@@ -79,9 +79,6 @@ public class OfficeMoveController {
   }
 
   public void submitButtonClicked() {
-    System.out.println(newLocationField.getValue());
-    System.out.println();
-
     if (currentLocationField.getValue() != null
         && newLocationField.getValue() != null
         && dateField.getValue() != null) {
