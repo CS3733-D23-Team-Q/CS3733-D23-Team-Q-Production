@@ -51,7 +51,8 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
-                rst.getInt("progress")));
+                rst.getInt("progress"),
+                rst.getString("type")));
       }
       conn.close();
       stm.close();
@@ -234,7 +235,7 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ? "
+                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?, type = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -245,7 +246,8 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
       st.setDate(6, newRequest.getDate());
       st.setString(7, newRequest.getTime());
       st.setInt(8, newRequest.getProgress().ordinal());
-      st.setInt(9, requestID);
+      st.setString(9, newRequest.getType());
+      st.setInt(10, requestID);
       st.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -258,6 +260,7 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
     serviceRequests.get(index).setDate(newRequest.getDate());
     serviceRequests.get(index).setTime(newRequest.getTime());
     serviceRequests.get(index).setProgress(newRequest.getProgress());
+    serviceRequests.get(index).setType(newRequest.getType());
     return true;
   }
 }
