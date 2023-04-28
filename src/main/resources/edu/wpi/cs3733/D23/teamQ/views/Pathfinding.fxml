@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -19,11 +20,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
 <GridPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.PathfindingController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1041.2000122070312" minWidth="10.0" prefWidth="904.3999633789062" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="240.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -40,59 +43,111 @@
             </ImageView>
          </children>
       </Group>
-      <VBox prefHeight="200.0" prefWidth="300.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+      <VBox prefHeight="200.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: #012d5a;" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
          <children>
-            <Label text="Originating">
+            <Label prefHeight="18.0" prefWidth="337.0" text="Originating" textFill="#f1f1f1">
+               <font>
+                  <Font name="Roboto" size="14.0" />
+               </font>
                <VBox.margin>
                   <Insets left="20.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="startSelect" editable="true" prefHeight="25.0" prefWidth="307.0">
+            <MFXFilterComboBox fx:id="startSelect" floatMode="DISABLED" onAction="#startSelected" prefHeight="32.0" prefWidth="331.0" style="-fx-background-color: #f1f1f1;">
+               <font>
+                  <Font name="Roboto" size="12.0" />
+               </font>
+               <textFill>
+                  <Color red="0.003921568859368563" green="0.1764705926179886" blue="0.3529411852359772" opacity="0.8700000047683716" />
+               </textFill>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
-            </ComboBox>
-            <Label text="Destination">
+            </MFXFilterComboBox>
+            <Label text="Destination" textFill="WHITE">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Label>
-            <ComboBox fx:id="endSelect" editable="true" layoutX="30.0" layoutY="25.0" prefHeight="25.0" prefWidth="307.0">
+            <MFXFilterComboBox fx:id="endSelect" floatMode="DISABLED" onAction="#endSelected" prefHeight="32.0" prefWidth="340.0">
+               <font>
+                  <Font name="Roboto" size="12.0" />
+               </font>
+               <textFill>
+                  <Color red="0.003921568859368563" green="0.1764705926179886" blue="0.3529411852359772" opacity="0.8700000047683716" />
+               </textFill>
                <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
-            </ComboBox>
+            </MFXFilterComboBox>
             <TextField fx:id="messageField" promptText="Message">
                <VBox.margin>
                   <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <HBox prefHeight="0.0" prefWidth="300.0" spacing="15.0">
+            <HBox prefHeight="0.0" prefWidth="300.0">
                <children>
-                  <CheckBox fx:id="restCheck" mnemonicParsing="false" onAction="#restChecked" text="Restroom">
+                  <CheckBox fx:id="restCheck" mnemonicParsing="false" onAction="#restChecked" prefHeight="16.0" prefWidth="108.0" text="Restroom" textFill="WHITE">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
                   </CheckBox>
-                  <CheckBox fx:id="deptCheck" mnemonicParsing="false" onAction="#deptChecked" text="Department" />
-                  <CheckBox fx:id="labsCheck" mnemonicParsing="false" onAction="#labsChecked" text="Laboratory" />
+                  <CheckBox fx:id="deptCheck" mnemonicParsing="false" onAction="#deptChecked" prefHeight="16.0" prefWidth="118.0" text="Department" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </CheckBox>
+                  <CheckBox fx:id="labsCheck" mnemonicParsing="false" onAction="#labsChecked" prefHeight="16.0" prefWidth="112.0" text="Laboratory" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </CheckBox>
                </children>
             </HBox>
             <HBox prefHeight="0.0" prefWidth="300.0" spacing="14.0">
                <children>
-                  <CheckBox fx:id="retlCheck" mnemonicParsing="false" onAction="#retlChecked" text="Retail       " />
-                  <CheckBox fx:id="servCheck" mnemonicParsing="false" onAction="#servChecked" text="Service        " />
-                  <CheckBox fx:id="infoCheck" mnemonicParsing="false" onAction="#infoChecked" text="Information" />
+                  <CheckBox fx:id="retlCheck" mnemonicParsing="false" onAction="#retlChecked" prefHeight="16.0" prefWidth="67.0" text="Retail       " textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="servCheck" mnemonicParsing="false" onAction="#servChecked" prefHeight="16.0" prefWidth="194.0" text="Service        " textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="infoCheck" mnemonicParsing="false" onAction="#infoChecked" prefHeight="16.0" text="Information" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="12.0" />
+                     </font>
+                  </CheckBox>
                </children>
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </HBox>
-            <CheckBox fx:id="confCheck" mnemonicParsing="false" onAction="#confChecked" text="Conference Room">
+            <CheckBox fx:id="confCheck" mnemonicParsing="false" onAction="#confChecked" text="Conference Room" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
             </CheckBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+               <children>
+                  <MFXButton onAction="#clearButtonClicked" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-background-color: #f1f1f1;" text="Clear" textFill="#012d5a" />
+               </children>
+            </HBox>
             <MenuBar>
                <menus>
                   <Menu fx:id="dateMenu" mnemonicParsing="false" text="Date" />
@@ -109,12 +164,10 @@
                      </items>
                   </Menu>
                </menus>
-            </MenuBar>
-            <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="321.0" text="Clear" textAlignment="CENTER">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
-            </Button>
+            </MenuBar>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -123,26 +176,26 @@
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>
-                                    <Image url="@../../../../../../Chevron%20Left.png" />
+                                    <Image url="@../../../../../../White%20Chevron.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label text="Down Floor" textAlignment="CENTER" />
+                        <Label text="Down Floor" textAlignment="CENTER" textFill="WHITE" />
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Button fx:id="nextFloor" mnemonicParsing="false" onAction="#nextFloorClicked" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fitHeight="38.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                              <ImageView fitHeight="33.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                  <image>
-                                    <Image url="@../../../../../../Chevron%20Right.png" />
+                                    <Image url="@../../../../../../White%20Chevron.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label alignment="TOP_CENTER" text="Up Floor" />
+                        <Label alignment="TOP_CENTER" text="Up Floor" textFill="WHITE" />
                      </children>
                   </VBox>
                </children>
@@ -150,6 +203,14 @@
                   <Insets />
                </VBox.margin>
             </HBox>
+            <Label text="Textual Path:" textFill="#f1f1f1">
+               <font>
+                  <Font name="Roboto" size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
             <MFXScrollPane fx:id="textualPathfinding" prefHeight="190.0" prefWidth="260.0">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" />

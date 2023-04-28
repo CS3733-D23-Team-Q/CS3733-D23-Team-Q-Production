@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import java.io.IOException;
 import java.sql.Date;
@@ -90,8 +91,8 @@ public class PathfindingController {
   @FXML CheckBox confCheck;
   @FXML CheckBox retlCheck;
   @FXML CheckBox servCheck;
-  @FXML ComboBox<String> startSelect;
-  @FXML ComboBox<String> endSelect;
+  @FXML MFXFilterComboBox<String> startSelect;
+  @FXML MFXFilterComboBox<String> endSelect;
   @FXML RadioMenuItem aStarSelect;
   @FXML RadioMenuItem bfsSelect;
   @FXML RadioMenuItem dfsSelect;
@@ -176,8 +177,10 @@ public class PathfindingController {
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
         });
+    /*
     autoComplete(startSelect);
     autoComplete(endSelect);
+     */
   }
 
   public void autoComplete(ComboBox<String> combobox) {
@@ -1190,7 +1193,7 @@ public class PathfindingController {
 
   public void clearTextualPathfinding() {
     for (Label l : textual) {
-      parent.getChildren().remove(l);
+      textArea.getChildren().remove(l);
     }
   }
 
