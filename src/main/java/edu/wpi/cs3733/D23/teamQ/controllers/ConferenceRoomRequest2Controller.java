@@ -1,4 +1,4 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
-public class MedicalSuppliesRequestController2 {
+public class ConferenceRoomRequest2Controller {
 }
