@@ -9,9 +9,9 @@ public class MenuController {
   @FXML VBox spacer;
   @FXML HomeBlockController homeBlockController;
   @FXML PeopleBlockController peopleBlockController;
+  @FXML MessagesBlockController messagesBlockController;
   @FXML NavigationBlockController navigationBlockController;
   @FXML ServiceRequestBlockController srBlockController;
-  @FXML StatisticsBlockController statBlockController;
   @FXML SettingsBlockController settingsBlockController;
   @FXML SignoutBlockController signoutBlockController;
 
@@ -19,9 +19,9 @@ public class MenuController {
   public void initialize() {
     homeBlockController.setMCController(this);
     peopleBlockController.setMCController(this);
+    messagesBlockController.setMCController(this);
     navigationBlockController.setMCController(this);
     srBlockController.setMCController(this);
-    statBlockController.setMCController(this);
     settingsBlockController.setMCController(this);
     signoutBlockController.setMCController(this);
   }
@@ -36,29 +36,28 @@ public class MenuController {
     peopleBlockController.hideSM();
     navigationBlockController.hideSM();
     srBlockController.hideSM();
-    statBlockController.hideSM();
     settingsBlockController.hideSM();
     signoutBlockController.hideSM();
   }
 
   @FXML
   public void showAll() {
-    navigationBlockController.showBlock();
     peopleBlockController.showBlock();
+    messagesBlockController.showBlock();
+    navigationBlockController.showBlock();
     srBlockController.showBlock();
     settingsBlockController.showBlock();
     signoutBlockController.showBlock();
-    statBlockController.showBlock();
   }
 
   @FXML
   public void hideAll() {
-    navigationBlockController.hideBlock();
     peopleBlockController.hideBlock();
+    messagesBlockController.hideBlock();
+    navigationBlockController.hideBlock();
     srBlockController.hideBlock();
     settingsBlockController.hideBlock();
     signoutBlockController.hideBlock();
-    statBlockController.hideBlock();
   }
 
   @FXML

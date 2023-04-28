@@ -43,7 +43,7 @@ public class MessagesBlockController implements Subscriber {
 
   public void messagesClicked() {
     mc.showAll();
-    Navigation.navigate(Screen.HOME);
+    Navigation.navigate(Screen.MESSAGES);
     messagesAlertPane.setVisible(false);
   }
 
@@ -55,6 +55,16 @@ public class MessagesBlockController implements Subscriber {
 
   public void setMCController(MenuController MC) {
     mc = MC;
+  }
+
+  @FXML
+  public void hideBlock() {
+    messagesHB.setVisible(false);
+  }
+
+  @FXML
+  public void showBlock() {
+    messagesHB.setVisible(true);
   }
 
   @Override
