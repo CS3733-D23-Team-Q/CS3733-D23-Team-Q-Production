@@ -303,14 +303,11 @@ public class MessagingController implements Subscriber {
   }
 
   public boolean update(List<String> context) {
-    System.out.println("Update?");
     if (context.contains("message")) {
-      System.out.println("Yes");
       List<Message> recents = qdb.retrieveConversations(LoginController.getUsername());
       Message recent = recents.get(0);
       populateAccounts();
       if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
-        System.out.println("Recieved message(s)");
         populateMessages();
         populateAccounts();
         String path = getClass().getResource("/alert.wav").getPath();
