@@ -319,14 +319,6 @@ public class PathfindingController {
               dateSelected();
             });
       }
-      if (!moveDates.contains(d)) {
-        moveDates.add(d);
-        dateSelect.getItems().add(d.toString());
-        dateSelect.setOnAction(
-            e -> {
-              dateSelected();
-            });
-      }
     }
 
     for (Move m : dateMoves) {
