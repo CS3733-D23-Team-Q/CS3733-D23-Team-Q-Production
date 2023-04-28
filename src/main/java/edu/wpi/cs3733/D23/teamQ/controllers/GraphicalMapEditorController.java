@@ -442,8 +442,7 @@ public class GraphicalMapEditorController {
       List<Move> moves = qdb.retrieveAllMoves();
 
       while (countEdge < edges.size()) {
-        for (int i = 0; i < edges.size(); i++) {
-          countEdge = i + 1;
+        for (int i = countEdge; i < edges.size(); i++) {
           Edge edge = edges.get(i);
           if (edge.getStartNode().getNodeID() == nodeid
               || edge.getEndNode().getNodeID() == nodeid) {
@@ -451,24 +450,25 @@ public class GraphicalMapEditorController {
             i -= 1;
             countEdge -= 1;
           }
+          countEdge++;
         }
       }
 
       while (countMove < moves.size()) {
-        for (int i = 0; i < moves.size(); i++) {
-          countMove = i + 1;
+        for (int i = countMove; i < moves.size(); i++) {
           Move move = moves.get(i);
           if (move.getNode().getNodeID() == nodeid) {
             qdb.deleteMove(move.getMoveID());
             i -= 1;
             countMove -= 1;
           }
+          countMove++;
         }
       }
 
       qdb.deleteNode(nodeid);
       qdb.deleteLocation(nodeid);
-    } else{
+    } else {
       InitialNode();
     }
     refreshNodes();
