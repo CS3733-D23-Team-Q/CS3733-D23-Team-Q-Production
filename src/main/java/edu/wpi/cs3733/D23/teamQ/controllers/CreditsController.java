@@ -360,22 +360,14 @@ public class CreditsController {
 
   @FXML
   public void peopleClicked() {
-    linkDisplay.setText(
-        "https://fontawesome.com/icons/users?f=classic&s=solid");
-    browser
-        .getEngine()
-        .load(
-            "https://fontawesome.com/");
+    linkDisplay.setText("https://fontawesome.com/icons/users?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void peopleBlueClicked() {
-    linkDisplay.setText(
-        "https://fontawesome.com/icons/users?f=classic&s=solid  ");
-    browser
-        .getEngine()
-        .load(
-            "https://fontawesome.com/");
+    linkDisplay.setText("https://fontawesome.com/icons/users?f=classic&s=solid  ");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -392,22 +384,14 @@ public class CreditsController {
 
   @FXML
   public void srClicked() {
-    linkDisplay.setText(
-        "https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
-    browser
-        .getEngine()
-        .load(
-            "https://fontawesome.com/");
+    linkDisplay.setText("https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void srBlueClicked() {
-    linkDisplay.setText(
-        "https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
-    browser
-        .getEngine()
-        .load(
-            "https://fontawesome.com/");
+    linkDisplay.setText("https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
