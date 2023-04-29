@@ -34,7 +34,23 @@ import net.kurobako.gesturefx.GesturePane;
 
 public class GraphicalMapEditorController {
 
-  Node empty = new Node(-1, 0, 0, "empty", "empty", null);
+  private boolean toomuch = false;
+
+  private boolean aline = false;
+
+  private List<Button> AlineList = new ArrayList<>();
+
+  private Node empty = new Node(-1, 0, 0, "empty", "empty", null);
+
+  @FXML private Button AlineBtn;
+
+  @FXML private Button ClearNodeBtn;
+
+  @FXML private TextField NodeSelected;
+
+  @FXML private TextField NodeSelected2;
+
+  @FXML private Button SelectNodeBtn;
 
   @FXML private Button AddEdgeBtn;
 
@@ -294,30 +310,48 @@ public class GraphicalMapEditorController {
               endnode = qdb.retrieveNode(nodeID);
               endnodeOr = false;
             }
+
+            if (aline) {
+              AlineList.add(node);
+              node.setStyle(
+                  "-fx-background-radius: 5em;"
+                      + "-fx-min-width: 3px;"
+                      + "-fx-min-height: 3px;"
+                      + "-fx-max-width: 3px;"
+                      + "-fx-max-height: 3px;"
+                      + "-fx-background-insets: 0px;"
+                      + "-fx-background-color: #E2BE31");
+              if (!SelectedOr(node)) ;
+              showSelectedNodes(nodeID);
+            }
           });
       node.setOnMouseEntered(
           e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #37AC2B");
+            if (!aline || !SelectedOr(node))
+              node.setStyle(
+                  "-fx-background-radius: 5em;"
+                      + "-fx-min-width: 3px;"
+                      + "-fx-min-height: 3px;"
+                      + "-fx-max-width: 3px;"
+                      + "-fx-max-height: 3px;"
+                      + "-fx-background-insets: 0px;"
+                      + "-fx-background-color: #37AC2B");
             node.setCursor(Cursor.HAND);
           });
+
       node.setOnMouseExited(
           e -> {
-            node.setStyle(
-                "-fx-background-radius: 5em;"
-                    + "-fx-min-width: 3px;"
-                    + "-fx-min-height: 3px;"
-                    + "-fx-max-width: 3px;"
-                    + "-fx-max-height: 3px;"
-                    + "-fx-background-insets: 0px;"
-                    + "-fx-background-color: #3492D5");
+            if (!aline || !SelectedOr(node))
+              node.setStyle(
+                  "-fx-background-radius: 5em;"
+                      + "-fx-min-width: 3px;"
+                      + "-fx-min-height: 3px;"
+                      + "-fx-max-width: 3px;"
+                      + "-fx-max-height: 3px;"
+                      + "-fx-background-insets: 0px;"
+                      + "-fx-background-color: #3492D5");
           });
+
       node.setOnMousePressed(
           e -> {
             node.setStyle(
@@ -331,6 +365,7 @@ public class GraphicalMapEditorController {
             mouseX = e.getX();
             mouseY = e.getY();
           });
+
       node.setOnMouseDragged(
           e -> {
             node.setStyle(
@@ -440,30 +475,30 @@ public class GraphicalMapEditorController {
       List<Edge> edges = qdb.retrieveAllEdges();
       List<Move> moves = qdb.retrieveAllMoves();
 
-        while (countEdge < edges.size()) {
-          for (int i = countEdge; i < edges.size(); i++) {
-            Edge edge = edges.get(i);
-            if (edge.getStartNode().getNodeID() == nodeid
-                || edge.getEndNode().getNodeID() == nodeid) {
-              qdb.deleteEdge(edge.getEdgeID());
-              i -= 1;
-              countEdge -= 1;
-            }
-            countEdge++;
+      while (countEdge < edges.size()) {
+        for (int i = countEdge; i < edges.size(); i++) {
+          Edge edge = edges.get(i);
+          if (edge.getStartNode().getNodeID() == nodeid
+              || edge.getEndNode().getNodeID() == nodeid) {
+            qdb.deleteEdge(edge.getEdgeID());
+            i -= 1;
+            countEdge -= 1;
           }
+          countEdge++;
         }
+      }
 
-        while (countMove < moves.size()) {
-          for (int i = countMove; i < moves.size(); i++) {
-            Move move = moves.get(i);
-            if (move.getNode().getNodeID() == nodeid) {
-              qdb.deleteMove(move.getMoveID());
-              i -= 1;
-              countMove -= 1;
-            }
-            countMove++;
+      while (countMove < moves.size()) {
+        for (int i = countMove; i < moves.size(); i++) {
+          Move move = moves.get(i);
+          if (move.getNode().getNodeID() == nodeid) {
+            qdb.deleteMove(move.getMoveID());
+            i -= 1;
+            countMove -= 1;
           }
+          countMove++;
         }
+      }
 
       qdb.deleteLocation(nodeid);
       qdb.deleteNode(nodeid);
@@ -532,16 +567,17 @@ public class GraphicalMapEditorController {
     alert.clearLabelAlert(alerts, image1);
     nodeidinput.setText("");
     InitialNode();
-    button
-        .get(findButton(nodeid))
-        .setStyle(
-            "-fx-background-radius: 5em;"
-                + "-fx-min-width: 3px;"
-                + "-fx-min-height: 3px;"
-                + "-fx-max-width: 3px;"
-                + "-fx-max-height: 3px;"
-                + "-fx-background-insets: 0px;"
-                + "-fx-background-color: #3492D5");
+    if (findButton(nodeid) != -1)
+      button
+          .get(findButton(nodeid))
+          .setStyle(
+              "-fx-background-radius: 5em;"
+                  + "-fx-min-width: 3px;"
+                  + "-fx-min-height: 3px;"
+                  + "-fx-max-width: 3px;"
+                  + "-fx-max-height: 3px;"
+                  + "-fx-background-insets: 0px;"
+                  + "-fx-background-color: #3492D5");
   }
 
   /** if nodeid exist, display the node information on the map. Else call alert. */
@@ -600,16 +636,17 @@ public class GraphicalMapEditorController {
       pane.animate(Duration.millis(200))
           .interpolateWith(Interpolator.EASE_BOTH)
           .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-      button
-          .get(findButton(nodeid))
-          .setStyle(
-              "-fx-background-radius: 5em;"
-                  + "-fx-min-width: 3px;"
-                  + "-fx-min-height: 3px;"
-                  + "-fx-max-width: 3px;"
-                  + "-fx-max-height: 3px;"
-                  + "-fx-background-insets: 0px;"
-                  + "-fx-background-color: #37AC2B");
+      if (findButton(nodeid) != -1)
+        button
+            .get(findButton(nodeid))
+            .setStyle(
+                "-fx-background-radius: 5em;"
+                    + "-fx-min-width: 3px;"
+                    + "-fx-min-height: 3px;"
+                    + "-fx-max-width: 3px;"
+                    + "-fx-max-height: 3px;"
+                    + "-fx-background-insets: 0px;"
+                    + "-fx-background-color: #37AC2B");
     } else {
       InitialNode();
     }
@@ -634,13 +671,28 @@ public class GraphicalMapEditorController {
    * @return
    */
   int findButton(int id) {
-    int x = 0;
     for (int i = 0; i < NodeID.size(); i++) {
       if (NodeID.get(i) == id) {
-        x = i;
+        return i;
       }
     }
-    return x;
+    return -1;
+  }
+
+  /**
+   * return the index of the node in the nodeid list with given button
+   *
+   * @param btn
+   * @return
+   */
+  int findNodeID(Button btn) {
+    int x = -1;
+    for (int i = 0; i < button.size(); i++) {
+      if (button.get(i) == btn) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   // Below are all about turn to the page and the floors
@@ -669,8 +721,8 @@ public class GraphicalMapEditorController {
   void shownext() {
     startnodeinitial.clear();
     endnodeinitial.clear();
-    startnodeinitial.setPromptText("Click here to choose the start node");
-    endnodeinitial.setPromptText("Click here to choose the start node");
+    startnodeinitial.setPromptText("Click here to select the start node");
+    endnodeinitial.setPromptText("Click here to select the start node");
     startnodeOr = false;
     endnodeOr = false;
     startnode = empty;
@@ -688,8 +740,8 @@ public class GraphicalMapEditorController {
 
   /** turn on the last page */
   void showlast() {
-    startnodeinitial.setPromptText("Click here to choose the start node");
-    endnodeinitial.setPromptText("Click here to choose the start node");
+    startnodeinitial.setPromptText("Click here to select the start node");
+    endnodeinitial.setPromptText("Click here to select the start node");
     startnodeOr = false;
     endnodeOr = false;
     startnode = empty;
@@ -1250,6 +1302,130 @@ public class GraphicalMapEditorController {
     if ((!Texts.isEmpty()) && check) {
       parent.getChildren().addAll(Texts);
     }
+  }
+
+  // Below are all about straightening tool
+
+  /**
+   * Make the animation when the nodes be selected to aline
+   *
+   * @param nodeid
+   */
+  void showSelectedNodes(int nodeid) {
+    String selected = NodeSelected.getText();
+    String selected2 = NodeSelected2.getText();
+    if (selected == "") {
+      NodeSelected.setText(selected + nodeid);
+    } else if (selected.length() < 20) {
+      NodeSelected.setText(selected + ", " + nodeid);
+    } else if (selected.length() > 20 && selected2.length() < 20) {
+      if (selected2 == "") {
+        NodeSelected2.setText(selected2 + nodeid);
+      } else {
+        NodeSelected2.setText(selected2 + ", " + nodeid);
+      }
+    } else {
+      if (!toomuch) {
+        NodeSelected2.setText(selected2 + "...");
+        toomuch = true;
+      }
+    }
+  }
+
+  /**
+   * return true if the node has been selected, else return false
+   *
+   * @param node
+   * @return
+   */
+  boolean SelectedOr(Button node) {
+    for (int i = 0; i < AlineList.size(); i++) {
+      if (AlineList.get(i) == node) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Start to select nodes to be alined when click
+   *
+   * @param event
+   */
+  @FXML
+  void SelectedNodeClicked(MouseEvent event) {
+    aline = true;
+  }
+
+  /**
+   * clear all nodes to be selected when click
+   *
+   * @param event
+   */
+  @FXML
+  void ClearNodeClicked(MouseEvent event) {
+    refreshNodes();
+    AlineList.clear();
+    aline = false;
+    toomuch = false;
+    NodeSelected.setText("");
+    NodeSelected2.setText("");
+  }
+
+  /**
+   * Aline the selected nodes when click
+   *
+   * @param event
+   */
+  @FXML
+  void AlineClicked(MouseEvent event) {
+
+    // Least Square Regression Line y = a + bx
+    double sumX = 0;
+    double sumY = 0;
+    if (AlineList.isEmpty()) return;
+    for (int i = 0; i < AlineList.size(); i++) {
+      sumX += AlineList.get(i).getLayoutX();
+      sumY += AlineList.get(i).getLayoutY();
+    }
+    double meanX = sumX / AlineList.size();
+    double meanY = sumY / AlineList.size();
+    double upB = 0;
+    double downB = 0;
+    for (int i = 0; i < AlineList.size(); i++) {
+      double x = AlineList.get(i).getLayoutX();
+      double y = AlineList.get(i).getLayoutY();
+      upB += (x - meanX) * (y - meanY);
+      downB += (x - meanX) * (x - meanX);
+    }
+    if (downB == 0) return;
+    double b = upB / downB;
+    double a = meanY - b * meanX;
+
+    // Foot point (Perpendicular)
+    for (int i = 0; i < AlineList.size(); i++) {
+      double x = AlineList.get(i).getLayoutX();
+      double y = AlineList.get(i).getLayoutY();
+      double x2 = (x + b * y - a * b) / (b * b + 1);
+      double y2 = (b * b * y + b * x + a) / (b * b + 1);
+
+      int id = NodeID.get(findNodeID(AlineList.get(i)));
+      if (x2 != 0) AlineList.get(i).setLayoutX(x2);
+      if (y2 != 0) AlineList.get(i).setLayoutY(y2);
+    }
+
+    /* put in the loop
+    int currentX = (int) ((x2 + 1.5) * 5);
+    int currentY = (int) ((y2 + 1.5) * 5);
+    Node newNode = qdb.retrieveNode(id);
+    newNode.setXCoord(currentX);
+    newNode.setYCoord(currentY);
+    qdb.updateNode(id, newNode);
+
+    //out of loop
+    refreshNode();
+     */
+
+    AlineList.clear();
+    aline = false;
   }
 }
 
