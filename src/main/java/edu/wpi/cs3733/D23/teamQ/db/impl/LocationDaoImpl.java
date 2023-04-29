@@ -50,10 +50,10 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
    */
   public boolean updateRow(Integer nodeID, Location newLocation) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"nodeID\" SET \"nodeID\" = ?, \"longName\" = ?, \"shortName\" = ?, \"nodeType\" = ? "
-                                 + "WHERE \"nodeID\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"nodeID\" SET \"nodeID\" = ?, \"longName\" = ?, \"shortName\" = ?, \"nodeType\" = ? "
+                    + "WHERE \"nodeID\" = ?")) {
 
       st.setInt(1, nodeID);
       st.setString(2, newLocation.getLongName());
