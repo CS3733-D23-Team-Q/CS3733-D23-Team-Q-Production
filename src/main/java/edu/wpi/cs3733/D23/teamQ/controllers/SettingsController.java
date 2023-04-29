@@ -2,9 +2,12 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Settings;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,7 +54,24 @@ public class SettingsController {
     Color secondary = Color.web("7D7D7D", 1.0);
     soundToggle.setColors(main, secondary);
     this.soundToggle.setSelected(true);
-  };
+
+    voiceSelection
+        .valueProperty()
+        .addListener(
+            new ChangeListener<>() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                Settings.Voice voice = Settings.Voice.FEMALE;
+                if (((String) voiceSelection.getValue()).equals("Female"))
+                  voice = Settings.Voice.FEMALE;
+                if (((String) voiceSelection.getValue()).equals("Male"))
+                  voice = Settings.Voice.MALE;
+                if (((String) voiceSelection.getValue()).equals("Snoop Dog"))
+                  voice = Settings.Voice.SNOOP;
+                qdb.retrieveSettings(LoginController.getLoginUsername()).setVoice(voice);
+              }
+            });
+  }
 
   public void backButtonClicked() {
     Navigation.navigate(Screen.HOME);

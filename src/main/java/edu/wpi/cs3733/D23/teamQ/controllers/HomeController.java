@@ -201,21 +201,31 @@ public class HomeController implements Subscriber {
 
   public void alertSound(String message) {
     String path = getClass().getResource("/alert.wav").getPath();
-    ;
-    if (message.contains("Code Blue")) path = getClass().getResource("/blue" + ".wav").getPath();
-    if (message.contains("Code Red")) path = getClass().getResource("/red" + ".wav").getPath();
-    if (message.contains("Code Black")) path = getClass().getResource("/black" + ".wav").getPath();
-    if (message.contains("Code Gray")) path = getClass().getResource("/gray" + ".wav").getPath();
+    String voice = qdb.retrieveSettings(LoginController.getLoginUsername()).getVoice().toString();
+    String s1 = voice.substring(0, 1).toUpperCase();
+    String s2 = voice.substring(1).toLowerCase();
+    voice = s1 + s2;
+
+    if (message.contains("Code Blue"))
+      path = getClass().getResource("/blue" + voice + ".wav").getPath();
+    if (message.contains("Code Red"))
+      path = getClass().getResource("/red" + voice + ".wav").getPath();
+    if (message.contains("Code Black"))
+      path = getClass().getResource("/black" + voice + ".wav").getPath();
+    if (message.contains("Code Gray"))
+      path = getClass().getResource("/gray" + voice + ".wav").getPath();
     if (message.contains("Code Yellow"))
-      path = getClass().getResource("/yellow" + ".wav").getPath();
+      path = getClass().getResource("/yellow" + voice + ".wav").getPath();
     if (message.contains("Code Orange"))
-      path = getClass().getResource("/orange" + ".wav").getPath();
-    if (message.contains("Code Pink")) path = getClass().getResource("/pink" + ".wav").getPath();
+      path = getClass().getResource("/orange" + voice + ".wav").getPath();
+    if (message.contains("Code Pink"))
+      path = getClass().getResource("/pink" + voice + ".wav").getPath();
     if (message.contains("Code Purple"))
-      path = getClass().getResource("/purple" + ".wav").getPath();
-    if (message.contains("Code Green")) path = getClass().getResource("/green" + ".wav").getPath();
+      path = getClass().getResource("/purple" + voice + ".wav").getPath();
+    if (message.contains("Code Green"))
+      path = getClass().getResource("/green" + voice + ".wav").getPath();
     if (message.contains("Code Silver"))
-      path = getClass().getResource("/silver" + ".wav").getPath();
+      path = getClass().getResource("/silver" + voice + ".wav").getPath();
 
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
