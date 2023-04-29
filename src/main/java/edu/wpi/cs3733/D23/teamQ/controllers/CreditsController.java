@@ -245,26 +245,26 @@ public class CreditsController {
 
   @FXML
   public void exitClicked() {
-    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void exitBlueClicked() {
-    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void homeClicked() {
-    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
-    browser.getEngine().load("https://freeicons.io/material-icons-action/home-icon-15944");
+    linkDisplay.setText("https://fontawesome.com/icons/house?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void homeBlueClicked() {
-    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
-    browser.getEngine().load("https://freeicons.io/material-icons-action/home-icon-15944");
+    linkDisplay.setText("https://fontawesome.com/icons/house?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -340,21 +340,21 @@ public class CreditsController {
   @FXML
   public void peopleClicked() {
     linkDisplay.setText(
-        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+        "https://fontawesome.com/icons/users?f=classic&s=solid");
     browser
         .getEngine()
         .load(
-            "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+            "https://fontawesome.com/");
   }
 
   @FXML
   public void peopleBlueClicked() {
     linkDisplay.setText(
-        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+        "https://fontawesome.com/icons/users?f=classic&s=solid");
     browser
         .getEngine()
         .load(
-            "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+            "https://fontawesome.com/");
   }
 
   @FXML
