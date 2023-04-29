@@ -34,7 +34,6 @@ public class CreditsController {
   @FXML MFXButton exitBlue;
   @FXML MFXButton home;
   @FXML MFXButton homeBlue;
-  @FXML MFXButton janitor;
   @FXML MFXButton leftArrow;
   @FXML MFXButton loc;
   @FXML MFXButton loginExit;
@@ -44,8 +43,6 @@ public class CreditsController {
   @FXML MFXButton mapBlue;
   @FXML MFXButton mapEditor;
   @FXML MFXButton menu;
-  @FXML MFXButton messages;
-  @FXML MFXButton messagesBlue;
   @FXML MFXButton move;
   @FXML MFXButton node;
   @FXML MFXButton people;
@@ -54,8 +51,8 @@ public class CreditsController {
   @FXML MFXButton rightArrow;
   @FXML MFXButton sr;
   @FXML MFXButton srBlue;
-  @FXML MFXButton information;
-  @FXML MFXButton informationBlue;
+  @FXML MFXButton settings;
+  @FXML MFXButton settingsBlue;
   @FXML MFXButton snackSpread;
   @FXML MFXButton stat;
   @FXML MFXButton statBlue;
@@ -169,24 +166,6 @@ public class CreditsController {
 
   // icons
   @FXML
-  public void messagesClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/message?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/");
-  }
-
-  @FXML
-  public void messagesBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/message?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/");
-  }
-
-  @FXML
-  public void janitorClicked() {
-    linkDisplay.setText("https://minesweeperonline.com/");
-    browser.getEngine().load("https://minesweeperonline.com/");
-  }
-
-  @FXML
   public void alertClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
@@ -266,25 +245,25 @@ public class CreditsController {
 
   @FXML
   public void exitClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
+    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void exitBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
+    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void homeClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/house?f=classic&s=solid");
+    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
     browser.getEngine().load("https://freeicons.io/material-icons-action/home-icon-15944");
   }
 
   @FXML
   public void homeBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/house?f=classic&s=solid");
+    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
     browser.getEngine().load("https://freeicons.io/material-icons-action/home-icon-15944");
   }
 
@@ -318,7 +297,7 @@ public class CreditsController {
 
   @FXML
   public void mapClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=solid");
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
@@ -360,14 +339,22 @@ public class CreditsController {
 
   @FXML
   public void peopleClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/users?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/");
+    linkDisplay.setText(
+        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+    browser
+        .getEngine()
+        .load(
+            "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
   }
 
   @FXML
   public void peopleBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/users?f=classic&s=solid  ");
-    browser.getEngine().load("https://fontawesome.com/");
+    linkDisplay.setText(
+        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+    browser
+        .getEngine()
+        .load(
+            "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
   }
 
   @FXML
@@ -384,25 +371,33 @@ public class CreditsController {
 
   @FXML
   public void srClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
-    browser.getEngine().load("https://fontawesome.com/");
+    linkDisplay.setText(
+        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+    browser
+        .getEngine()
+        .load(
+            "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
   }
 
   @FXML
   public void srBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
+    linkDisplay.setText(
+        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+    browser
+        .getEngine()
+        .load(
+            "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+  }
+
+  @FXML
+  public void settingsClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
-  public void informationClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/circle-info?f=classic&s=solidr");
-    browser.getEngine().load("https://fontawesome.com/");
-  }
-
-  @FXML
-  public void informationBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/circle-info?f=classic&s=solid");
+  public void settingsBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
     browser.getEngine().load("https://fontawesome.com/");
   }
 

@@ -121,7 +121,7 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
   public int getNumUnread(String username) {
     int unread = 0;
     for (Message m : messages) {
-      if (!m.getRead() && m.getReceiver().getUsername().equals(username)) {
+      if (!m.getRead() && m.getReceiver().equals(username)) {
         unread++;
       }
     }

@@ -6,12 +6,14 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class NavigationSubmenuController {
-  @FXML VBox navigationSM;
-  @FXML MFXButton pathfinder;
+public class StatisticsSubmenuController {
+  @FXML VBox statisticsSM;
+  @FXML MFXButton statistics;
 
   @FXML
-  public void pathfinderClicked() {
-    Navigation.navigate(Screen.PATH_FINDING);
+  public void statisticsClicked() {
+    Navigation.navigate(Screen.STATISTICS);
   }
+
+  public void setMCController(MenuController menuController) {}
 }
