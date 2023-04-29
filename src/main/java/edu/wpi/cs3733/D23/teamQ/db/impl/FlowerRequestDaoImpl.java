@@ -123,7 +123,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"flowerRequest\"(\"nodeID\", requester, assignee, \"specialInstructions\", date, time, progress, \"typeOfFlower\", \"bouquetSize\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"flowerRequest\"(\"nodeID\", requester, assignee, \"specialInstructions\", date, time, progress, \"typeOfFlower\", \"bouquetSize\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)")) {
       stmt.setInt(1, request.getNode().getNodeID());
       stmt.setString(2, request.getRequester().getUsername());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -133,6 +133,7 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
       stmt.setInt(7, request.getProgress().ordinal());
       stmt.setString(8, request.getFlowerType());
       stmt.setInt(9, request.getNumberOfBouquets());
+      stmt.setString(10, request.getType());
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();

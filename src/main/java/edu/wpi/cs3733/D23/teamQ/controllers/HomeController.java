@@ -79,10 +79,11 @@ public class HomeController implements Subscriber {
 
     for (int i = 0; i < qdb.retrieveUserAssignServiceRequests(username).size(); i++) {
       int num = qdb.retrieveUserAssignServiceRequests(username).get(i).getRequestID();
+      String type = qdb.retrieveUserAssignServiceRequests(username).get(i).getType();
       ServiceRequest.Progress status =
           qdb.retrieveUserAssignServiceRequests(username).get(i).getProgress();
 
-      Entry<String> temp = new Entry<>("Service Request ID Num-" + num);
+      Entry<String> temp = new Entry<>(type + " ID Num-" + num);
       if (status.equals(ServiceRequest.Progress.BLANK)) {
         serviceRequestsBlank.addEntry(temp);
       } else if (status.equals(ServiceRequest.Progress.PROCESSING)) {
@@ -109,6 +110,8 @@ public class HomeController implements Subscriber {
     // adding moves to calendar
     Calendar moves = new Calendar("Moves");
     CalendarSource m = new CalendarSource("testing 2");
+
+    moves.setStyle(Style.STYLE7);
 
     for (int i = 0; i < qdb.retrieveAllMoves().size(); i++) {
       int currMove = qdb.retrieveAllMoves().get(i).getMoveID();
@@ -151,7 +154,7 @@ public class HomeController implements Subscriber {
       boolean isToday = isSameDay(today, d);
       l.setText(d + ": " + alerts.get(i).getMessage());
       l.setPadding(new Insets(4, 6, 4, 6));
-      l.setMaxWidth(512);
+      l.setMaxWidth(480);
       l.setMinHeight(24);
       l.setWrapText(true);
       if (isToday)

@@ -60,7 +60,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"conferenceRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, date = ?, time = ?, \"foodChoice\" = ? "
+                "UPDATE \"conferenceRequest\" SET \"requestID\" = ?, requester = ?, progress = ?, assignee = ?, \"nodeID\" = ?, \"specialInstructions\" = ?, date = ?, time = ?, \"foodChoice\" = ?, type =? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -72,7 +72,8 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
       st.setDate(7, newRequest.getDate());
       st.setString(8, newRequest.getTime());
       st.setString(9, newRequest.getFoodChoice());
-      st.setInt(10, requestID);
+      st.setString(10, newRequest.getType());
+      st.setInt(11, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {
@@ -87,6 +88,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     conferenceRequests.get(index).setDate(newRequest.getDate());
     conferenceRequests.get(index).setTime(newRequest.getTime());
     conferenceRequests.get(index).setFoodChoice(newRequest.getFoodChoice());
+    conferenceRequests.get(index).setType(newRequest.getType());
 
     return true;
   }
@@ -124,7 +126,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", date, time, \"foodChoice\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"conferenceRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", date, time, \"foodChoice\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -133,6 +135,7 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
       stmt.setDate(6, request.getDate());
       stmt.setString(7, request.getTime());
       stmt.setString(8, request.getFoodChoice());
+      stmt.setString(9, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
