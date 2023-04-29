@@ -67,7 +67,6 @@ public class PathfindingController {
   List<Pair<Integer, Button>> ffnodes;
   List<Pair<Integer, Button>> sfnodes;
   List<Pair<Integer, Button>> tfnodes;
-  List<String> allSelections;
   String algorithm;
   Date date;
   List<Date> moveDates;
@@ -92,11 +91,6 @@ public class PathfindingController {
   @FXML CheckBox servCheck;
   @FXML MFXFilterComboBox<String> startSelect;
   @FXML MFXFilterComboBox<String> endSelect;
-  // @FXML RadioMenuItem aStarSelect;
-  // @FXML RadioMenuItem bfsSelect;
-  // @FXML RadioMenuItem dfsSelect;
-  // @FXML RadioMenuItem djikstraSelect;
-  // @FXML Menu dateMenu;
   @FXML MFXComboBox<String> dateSelect;
   @FXML MFXComboBox<String> algorithmSelect;
   @FXML TextField messageField;
@@ -129,7 +123,6 @@ public class PathfindingController {
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
     algorithm = "aStar";
-    allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
     ffnodes = new ArrayList<>();
@@ -183,6 +176,7 @@ public class PathfindingController {
 
   public void setUpAlgos() {
     algorithmSelect.getItems().add("aStar");
+    algorithmSelect.getSelectionModel().selectItem("aStar");
     algorithmSelect.getItems().add("bfs");
     algorithmSelect.getItems().add("dfs");
     algorithmSelect.getItems().add("djikstra");
@@ -193,6 +187,7 @@ public class PathfindingController {
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Node> floorNodes = new ArrayList<>(); // fNodes
     List<Move> dateMoves = new ArrayList<>();
+    List<Node> moveNodes = new ArrayList<>();
 
     restText.removeAll(restText);
     deptText.removeAll(deptText);
@@ -212,6 +207,10 @@ public class PathfindingController {
     previousText.removeAll(previousText);
 
     startNodes.removeAll(startNodes);
+
+    nodeIds.removeAll(nodeIds);
+    startSelect.getItems().clear();
+    endSelect.getItems().clear();
 
     for (Move m : allMoves) {
       Date d = m.getDate();
@@ -238,56 +237,82 @@ public class PathfindingController {
       }
     }
 
-    for (Move m : dateMoves) {
+    // use movenodes as the base and add startnodes to it if movenodeid!=startnodeid
+    // if date.compareTo(2023-01-01)==0 just use startnodes
+    if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
       for (Node node : startNodes) {
-        if (node.getNodeID() == m.getNode().getNodeID()) {
-          node.getLocation().setLongName(m.getNode().getLocation().getLongName());
-          /*
-          for(Move m : dateMoves){
-            for(Node node : startNodes){
-                if(node.getNodeId() == m.getNodeID()){
-                    node.setXCoord(m.getMoveID().getXCoord());
-                    node.setYCoord(m.getMoveID().getYCoord());
-                    node.setFloor(m.getMoveID().getFloor());
-                    node.setBuilding(m.getMoveID().getBuilding());
-
-                }
-            }
+        for (Move m : dateMoves) {
+          if (node.getNodeID() == m.getNode().getNodeID()) {
+            Node moven = qdb.getNodeFromLocation(m.getLongName());
+            node.setLocation(moven.getLocation());
+            /*
+            node.getLocation()
+                .setLongName(m.getLongName()); //m.getNode().getLocation().getLongName()
+            //change the shortname and nodetype also
+             */
           }
-          for(Move m : dateMoves){
-            for(Node node : startNodes){
-                if(node.getNodeID() == m.getMoveID()){
-                    return;
-                }
-            }
-          }
-          startNodes.remove(node);
-           */
         }
       }
     }
 
-    boolean added = false;
+    //    for (Move m : dateMoves) {
+    //      Node moven = m.getNode();
+    //      moven.setLocation(qdb.getNodeFromLocation(m.getLongName()).getLocation());
+    //      moveNodes.add(moven);
+    //    }
+    //
+    //    if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
+    //      for (Node node : startNodes) { // moveNodes
+    //        for (Node moven : moveNodes) { //Move m : dateMoves
+    //          if (node.getNodeID() != moven.getNodeID()) {
+    //            moveNodes.add(node);
+    //            /*
+    //            node.getLocation()
+    //                .setLongName(m.getLongName()); //m.getNode().getLocation().getLongName()
+    //            //change the shortname and nodetype also
+    //             */
+    //          }
+    //        }
+    //      }
+    //    } else {
+    //      moveNodes = startNodes;
+    //    }
+
+    if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
+      for (Node node : startNodes) { // moveNodes
+        for (Move m : dateMoves) {
+          if (node.getNodeID() == m.getNode().getNodeID()) {
+            node.getLocation()
+                .setLongName(m.getLongName()); // m.getNode().getLocation().getLongName()
+            // change the shortname and nodetype also
+          }
+        }
+      }
+    }
+
+    boolean added = false; // no
     for (int i = 0; i < startNodes.size(); i++) { // Node n : nodes/moveNodes
       if (i == 0 && nodeIds.size() > 0) {
-        added = true;
+        added = true; // no
       }
-      Node n = startNodes.get(i);
+
+      Node n = startNodes.get(i); // moveNodes
       int nodeid = n.getNodeID();
-      Location location = qdb.retrieveLocation(nodeid);
+      Location location = n.getLocation(); // qdb.retrieveLocation(nodeid);
       String nodetype = location.getNodeType();
       String lname = location.getLongName();
       if (n.getFloor().equals(f)) {
         floorNodes.add(n);
       }
-      if (!added) {
-        if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
-          nodeIds.add(nodeid);
-          startSelect.getItems().add(lname);
-          endSelect.getItems().add(lname);
-          allSelections.add(lname);
-        }
+      // if (!added) { //need to be re-added every time
+      if (!nodetype.equals("HALL")
+          && !nodetype.equals("ELEV")
+          && !nodetype.equals("STAI")) { // short names were not changed
+        nodeIds.add(nodeid);
+        startSelect.getItems().add(lname);
+        endSelect.getItems().add(lname);
       }
+      // }
     }
     for (Node n : floorNodes) {
       double x = n.getXCoord() / 5 - 1.5;
@@ -328,11 +353,13 @@ public class PathfindingController {
       double x = n.getXCoord() / 5 - 1.5;
       double y = n.getYCoord() / 5 - 1.5;
       int nodeid = n.getNodeID();
-      Location location = qdb.retrieveLocation(nodeid);
+      Location location = n.getLocation(); // qdb.retrieveLocation(nodeid);
       String sname = location.getShortName();
       // String lname = location.getLongName();
       String nodetype = location.getNodeType();
-      if (!nodetype.equals("HALL") && !nodetype.equals("ELEV") && !nodetype.equals("STAI")) {
+      if (!nodetype.equals("HALL")
+          && !nodetype.equals("ELEV")
+          && !nodetype.equals("STAI")) { // short names were not changed
         text = new Text(x, y, sname);
         text.setFill(Color.BLUE);
         text.setStyle("-fx-font-size: 3px;");
@@ -1167,7 +1194,7 @@ public class PathfindingController {
     highlightedNodesp.removeAll(highlightedNodesp);
     startSelect.setValue(null);
     endSelect.setValue(null);
-    messageField.setText(null);
+    messageField.setText(""); // null
     parent.getChildren().remove(messageText);
   }
 }
