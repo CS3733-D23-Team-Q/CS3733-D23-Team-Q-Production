@@ -237,35 +237,14 @@ public class PathfindingController {
       }
     }
 
-    // use movenodes as the base and add startnodes to it if movenodeid!=startnodeid
-    // if date.compareTo(2023-01-01)==0 just use startnodes
-    if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
-      for (Node node : startNodes) {
-        for (Move m : dateMoves) {
-          if (node.getNodeID() == m.getNode().getNodeID()) {
-            Node moven = qdb.getNodeFromLocation(m.getLongName());
-            node.setLocation(moven.getLocation());
-            /*
-            node.getLocation()
-                .setLongName(m.getLongName()); //m.getNode().getLocation().getLongName()
-            //change the shortname and nodetype also
-             */
-          }
-        }
-      }
-    }
-
-    //    for (Move m : dateMoves) {
-    //      Node moven = m.getNode();
-    //      moven.setLocation(qdb.getNodeFromLocation(m.getLongName()).getLocation());
-    //      moveNodes.add(moven);
-    //    }
-    //
+    //    // use movenodes as the base and add startnodes to it if movenodeid!=startnodeid
+    //    // if date.compareTo(2023-01-01)==0 just use startnodes
     //    if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
-    //      for (Node node : startNodes) { // moveNodes
-    //        for (Node moven : moveNodes) { //Move m : dateMoves
-    //          if (node.getNodeID() != moven.getNodeID()) {
-    //            moveNodes.add(node);
+    //      for (Node node : startNodes) {
+    //        for (Move m : dateMoves) {
+    //          if (node.getNodeID() == m.getNode().getNodeID()) {
+    //            Node moven = qdb.getNodeFromLocation(m.getLongName());
+    //            node.setLocation(moven.getLocation());
     //            /*
     //            node.getLocation()
     //                .setLongName(m.getLongName()); //m.getNode().getLocation().getLongName()
@@ -274,13 +253,35 @@ public class PathfindingController {
     //          }
     //        }
     //      }
-    //    } else {
-    //      moveNodes = startNodes;
     //    }
 
+    for (Move m : dateMoves) {
+      Node moven = m.getNode();
+      moven.setLocation(qdb.getNodeFromLocation(m.getLongName()).getLocation());
+      moveNodes.add(moven);
+    }
+
     if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
-      for (Node node : startNodes) { // moveNodes
-        for (Move m : dateMoves) {
+      for (Node node : startNodes) {
+        for (Node moven : moveNodes) { // Move m : dateMoves
+          if (node.getNodeID() != moven.getNodeID()) {
+            moveNodes.add(node);
+            /*
+            node.getLocation()
+                .setLongName(m.getLongName()); //m.getNode().getLocation().getLongName()
+            //change the shortname and nodetype also
+             */
+          }
+        }
+      }
+    } else {
+      moveNodes = startNodes;
+    }
+
+    /*
+    if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
+      for (Node node : startNodes) {
+        for (Move m : dateMoves) { //moveNodes
           if (node.getNodeID() == m.getNode().getNodeID()) {
             node.getLocation()
                 .setLongName(m.getLongName()); // m.getNode().getLocation().getLongName()
@@ -289,14 +290,15 @@ public class PathfindingController {
         }
       }
     }
+     */
 
     boolean added = false; // no
-    for (int i = 0; i < startNodes.size(); i++) { // Node n : nodes/moveNodes
+    for (int i = 0; i < moveNodes.size(); i++) { // Node n : nodes/startNodes
       if (i == 0 && nodeIds.size() > 0) {
         added = true; // no
       }
 
-      Node n = startNodes.get(i); // moveNodes
+      Node n = moveNodes.get(i); // startNodes
       int nodeid = n.getNodeID();
       Location location = n.getLocation(); // qdb.retrieveLocation(nodeid);
       String nodetype = location.getNodeType();
