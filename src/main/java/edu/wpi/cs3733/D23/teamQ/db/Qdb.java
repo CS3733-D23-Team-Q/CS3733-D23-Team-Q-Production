@@ -44,6 +44,7 @@ public class Qdb {
   private MessageDaoImpl messageTable;
   private AlertDaoImpl alertTable;
   private SettingsDaoImpl settingsTable;
+  private DefaultLocationDaoImpl defaultLocationsTable;
 
   private Account messagingAccount = null;
 
@@ -82,6 +83,7 @@ public class Qdb {
     messageTable = MessageDaoImpl.getInstance(accountTable);
     alertTable = AlertDaoImpl.getInstance();
     settingsTable = SettingsDaoImpl.getInstance();
+    defaultLocationsTable = DefaultLocationDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -658,6 +660,8 @@ public class Qdb {
           patientTransportRequestTable.populate();
         case "settings":
           settingsTable.populate();
+        case "defaultLocation":
+          defaultLocationsTable.populate();
       }
     }
     Platform.runLater(() -> notifySubscribers(tableNames));
@@ -800,5 +804,29 @@ public class Qdb {
 
   public boolean addSettingsRow(Settings x) {
     return settingsTable.addRow(x);
+  }
+
+  public Location retrieveLocationFromLongName(String lName) {
+    return locationTable.retrieveLocationFromLongName(lName);
+  }
+
+  public List<DefaultLocation> getAllDefaultLocations() {
+    return defaultLocationsTable.getAllRows();
+  }
+
+  public DefaultLocation retrieveDefaultLocation(int id) {
+    return defaultLocationsTable.retrieveRow(id);
+  }
+
+  public boolean updateDefaultLocation(int id, DefaultLocation x) {
+    return defaultLocationsTable.updateRow(id, x);
+  }
+
+  public boolean deleteDefaultLocation(int id) {
+    return defaultLocationsTable.deleteRow(id);
+  }
+
+  public boolean addDefaultLocation(DefaultLocation x) {
+    return defaultLocationsTable.addRow(x);
   }
 }
