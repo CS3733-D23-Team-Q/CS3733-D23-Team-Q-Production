@@ -49,11 +49,28 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
    * @return true if successful
    */
   public boolean updateRow(Integer nodeID, Location newLocation) {
-    deleteRow(nodeID);
-    addRow(newLocation);
+    try (Connection connection = GenDao.connect();
+         PreparedStatement st =
+                 connection.prepareStatement(
+                         "UPDATE \"nodeID\" SET \"nodeID\" = ?, \"longName\" = ?, \"shortName\" = ?, \"nodeType\" = ? "
+                                 + "WHERE \"nodeID\" = ?")) {
+
+      st.setInt(1, nodeID);
+      st.setString(2, newLocation.getLongName());
+      st.setString(3, newLocation.getShortName());
+      st.setString(4, newLocation.getNodeType());
+      st.setInt(5, nodeID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     int index = this.getIndex(nodeID);
-    locations.set(index, newLocation);
+    locations.get(index).setLongName(newLocation.getLongName());
+    locations.get(index).setShortName(newLocation.getShortName());
+    locations.get(index).setNodeType(newLocation.getNodeType());
+
     return true;
   }
 
