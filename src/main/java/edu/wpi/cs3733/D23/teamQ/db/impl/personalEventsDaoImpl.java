@@ -176,4 +176,7 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
         }
         return is;
     }
+    public String getFileName() {
+        return fileName;
+    }
 }
