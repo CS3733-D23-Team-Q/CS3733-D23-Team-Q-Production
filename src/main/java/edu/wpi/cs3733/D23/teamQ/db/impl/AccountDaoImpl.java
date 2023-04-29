@@ -194,10 +194,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
                 rs.getString("title"),
                 rs.getInt("phoneNumber"),
                 rs.getString("notes"),
-                rs.getString("todo"),
-
-            rs.getCalendar("personalCalendar")
-            );
+                rs.getString("todo"));
         accounts.add(a);
       }
       con.close();

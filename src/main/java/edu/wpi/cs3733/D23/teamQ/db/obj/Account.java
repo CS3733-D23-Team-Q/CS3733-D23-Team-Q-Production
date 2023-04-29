@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 import com.calendarfx.model.Calendar;
 
+import java.util.List;
+
 public class Account {
   private String username;
   private String password;
@@ -20,7 +22,7 @@ public class Account {
   private String notes;
   private String todo;
 
-  private Calendar PersonalCalendar;
+
 
   public Account(
       String username,
@@ -37,9 +39,7 @@ public class Account {
       String title,
       int phoneNumber,
       String notes,
-      String todo,
-
-      Calendar PersonalCalendar)
+      String todo)
           {
     this.username = username;
     this.password = password;
@@ -57,7 +57,6 @@ public class Account {
     this.notes = notes;
     this.todo = todo;
 
-    this.PersonalCalendar = PersonalCalendar;
   }
 
   public Account(
@@ -74,9 +73,7 @@ public class Account {
       String title,
       int phoneNumber,
       String notes,
-      String todo,
-
-      Calendar PersonalCalendar)
+      String todo)
        {
     this.username = username;
     this.password = password;
@@ -93,7 +90,7 @@ public class Account {
     this.notes = notes;
     this.todo = todo;
 
-    this.PersonalCalendar = PersonalCalendar;
+
   }
 
   public Account(String username) {
@@ -110,7 +107,7 @@ public class Account {
     this.title = null;
     this.phoneNumber = 0;
 
-    this.PersonalCalendar = null;
+
   }
 
   public String getUsername() {
@@ -233,13 +230,7 @@ public class Account {
     this.todo = todo;
   }
 
-  public Calendar getPersonalCalendar(){
-    return PersonalCalendar;
-  }
 
-  public void setPersonalCalendar(Calendar PersonalCalendar){
-    this.PersonalCalendar = PersonalCalendar;
-  }
 
   @Override
   public String toString() {
