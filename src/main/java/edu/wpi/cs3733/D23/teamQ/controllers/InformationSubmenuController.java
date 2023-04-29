@@ -6,13 +6,19 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class SettingsSubmenuController {
-  @FXML VBox settingsSM;
+public class InformationSubmenuController {
+  @FXML VBox informationSM;
+  @FXML MFXButton createAlert;
   @FXML MFXButton settings;
-  @FXML MFXButton help;
+  @FXML MFXButton statistics;
   @FXML MFXButton about;
   @FXML MFXButton credits;
-  @FXML SettingsBlockController sbc;
+  @FXML InformationBlockController sbc;
+
+  @FXML
+  public void createAlertClicked() {
+    Navigation.navigate(Screen.CREATE_ALERT);
+  }
 
   @FXML
   public void settingsClicked() {
@@ -20,8 +26,8 @@ public class SettingsSubmenuController {
   }
 
   @FXML
-  public void helpClicked() {
-    Navigation.navigate(Screen.HELP);
+  public void statisticsClicked() {
+    Navigation.navigate(Screen.STATISTICS);
   }
 
   @FXML
@@ -37,7 +43,7 @@ public class SettingsSubmenuController {
   }
 
   @FXML
-  public void setSBC(SettingsBlockController sbc) {
+  public void setSBC(InformationBlockController sbc) {
     this.sbc = sbc;
   }
 }
