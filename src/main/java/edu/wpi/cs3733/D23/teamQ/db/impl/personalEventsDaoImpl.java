@@ -98,15 +98,14 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
         Connection conn = GenDao.connect();
         try {
             String query =
-                    "INSERT INTO \'personalEvent\' (title, \'persoonalEventID\',date, \'startTime\', \'endTime\', \'fullDay\', user) VALUES(?,?,?,?,?,?)";
+                    "INSERT INTO \'personalEvent\' (title, date, \'startTime\', \'endTime\', \'fullDay\', user) VALUES(?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setString(1, a.getTitle());
-            pst.setInt(2, a.getPersonalEventID());
-            pst.setDate(3, (Date) a.getDate());
-            pst.setString(4, a.getStartTime());
-            pst.setString(5, a.getEndTime());
-            pst.setBoolean(6, a.isFullDay());
-            pst.setString(7, a.getUser());
+            pst.setDate(2, (Date) a.getDate());
+            pst.setString(3, a.getStartTime());
+            pst.setString(4, a.getEndTime());
+            pst.setBoolean(5, a.isFullDay());
+            pst.setString(6, a.getUser());
             int rs = pst.executeUpdate();
             if (rs == 1) {
                 result = true;
