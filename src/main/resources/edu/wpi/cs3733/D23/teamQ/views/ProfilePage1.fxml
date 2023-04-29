@@ -155,7 +155,7 @@
                         </VBox>
                      </children>
                   </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="500.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;">
+                  <StackPane prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;">
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="400.0">
                            <children>
@@ -189,14 +189,40 @@
                         <Insets bottom="40.0" left="35.0" top="30.0" />
                      </HBox.margin>
                   </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="300.0" />
-                     </children>
+                  <VBox prefHeight="200.0" prefWidth="420.0">
                      <HBox.margin>
-                        <Insets bottom="40.0" left="50.0" top="30.0" />
+                        <Insets bottom="40.0" left="35.0" top="30.0" />
                      </HBox.margin>
-                  </StackPane>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;">
+                           <children>
+                              <Label fx:id="unreadMessages" style="-fx-text-fill: #012d5a;" text="You have 0 unread messages">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ebebeb; -fx-background-radius: 30;">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label fx:id="incompleteRequests" style="-fx-text-fill: #012d5a;" text="You have 0 incomplete assigned requests ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />

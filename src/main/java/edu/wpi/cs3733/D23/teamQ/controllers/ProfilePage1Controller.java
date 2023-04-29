@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -31,6 +32,8 @@ public class ProfilePage1Controller {
   @FXML private Text status;
   @FXML private Circle statusCircle;
   @FXML private VBox statsVbox;
+  @FXML private Label incompleteRequests;
+  @FXML private Label unreadMessages;
 
   public ProfilePage1Controller() throws SQLException {}
 
@@ -59,6 +62,17 @@ public class ProfilePage1Controller {
       profileImage.setImage(pfp);
     }
     serviceRequestPieChart();
+
+    int incompleteCount = 0;
+    List<ServiceRequest> assignedRequets = qdb.retrieveUserAssignServiceRequests(username);
+    for (int i = 0; i < assignedRequets.size(); i++) {
+      if (assignedRequets.get(i).getProgress().ordinal() != 2) {
+        incompleteCount++;
+      }
+    }
+
+    unreadMessages.setText("You have " + qdb.getNumUnread(username) + " unread messages");
+    incompleteRequests.setText("You have " + incompleteCount + " incomplete assigned requests");
   }
 
   public void editPressed() {
