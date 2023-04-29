@@ -227,4 +227,13 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
     }
     return id;
   }
+
+  public Location retrieveLocationFromLongName(String lName) {
+    for (Location location : locations) {
+      if (location.getLongName().equals(lName)) {
+        return location;
+      }
+    }
+    return null;
+  }
 }
