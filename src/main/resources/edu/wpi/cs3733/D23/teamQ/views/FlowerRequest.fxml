@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                      <image>
-                        <Image url="@../../../../../../plswork.jpg" />
+                        <Image url="@../FlowerRequestTitle.jpg" />
                      </image>
                      <StackPane.margin>
                         <Insets bottom="30.0" />
@@ -146,7 +146,7 @@
                      <children>
                         <ImageView fx:id="RosesImage" fitHeight="216.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../rosesbouquet.jpg" />
+                              <Image url="@../RosesBouquet.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="TulipsImage" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true">

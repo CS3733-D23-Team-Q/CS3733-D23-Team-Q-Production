@@ -32,7 +32,7 @@
       </HBox>
       <HBox minHeight="-Infinity" prefHeight="700.0" prefWidth="1360.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox prefHeight="678.0" prefWidth="429.0" spacing="30.0">
+            <VBox prefHeight="678.0" prefWidth="500.0" spacing="10.0">
                <children>
                   <VBox prefWidth="400.0">
                      <children>
@@ -48,7 +48,7 @@
                         </MFXFilterComboBox>
                      </children>
                   </VBox>
-                  <VBox>
+                  <VBox prefHeight="59.0" prefWidth="394.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
                            <font>
@@ -93,7 +93,7 @@
                   <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="639.0" prefWidth="400.0">
+            <VBox prefHeight="678.0" prefWidth="429.0" spacing="10.0">
                <children>
                   <VBox>
                      <children>
@@ -109,27 +109,27 @@
                      <children>
                         <ImageView fx:id="ChickenImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../ChickenEntree.jpg" />
+                              <Image url="@../../../../../../chicken.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="SteakImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../SteakEntree.jpg" />
+                              <Image url="@../../../../../../steak.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="PorkImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../PorkEntree.jpg" />
+                              <Image url="@../../../../../../pork.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="FishImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../FishEntree.jpg" />
+                              <Image url="@../../../../../../fish.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="VegetarianImage" fitHeight="150.0" fitWidth="246.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../VegetarianEntree.jpg" />
+                              <Image url="@../../../../../../vegetarian.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -158,12 +158,12 @@
                         </ImageView>
                         <ImageView fx:id="CoffeeImage" fitHeight="150.0" fitWidth="233.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../CoffeeDrink.jpg" />
+                              <Image url="@../../../../../../coffee.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="TeaImage" fitHeight="150.0" fitWidth="234.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../TeaDrink.jpg" />
+                              <Image url="@../../../../../../tea.jpg" />
                            </image>
                         </ImageView>
                      </children>
@@ -184,7 +184,7 @@
                            <children>
                               <ImageView fx:id="FriesImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../FriesSide.jpg" />
+                                    <Image url="@../../../../../../fries.jpg" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="OnionRingsImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
@@ -194,12 +194,12 @@
                               </ImageView>
                               <ImageView fx:id="SoupImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../SoupSide.jpg" />
+                                    <Image url="@../../../../../../soup.jpg" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="SaladImage" fitHeight="150.0" fitWidth="239.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../SaladSide.jpg" />
+                                    <Image url="@../../../../../../salad.jpg" />
                                  </image>
                               </ImageView>
                            </children>
@@ -208,7 +208,7 @@
                   </VBox>
                </children>
                <padding>
-                  <Insets right="30.0" />
+                  <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
          </children>

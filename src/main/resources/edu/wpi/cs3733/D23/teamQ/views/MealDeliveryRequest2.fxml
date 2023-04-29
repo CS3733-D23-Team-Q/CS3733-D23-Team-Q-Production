@@ -130,7 +130,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="entreeField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select an Entree">
+                        <MFXFilterComboBox fx:id="entreeField" floatMode="DISABLED" onAction="#EntreeSelected" prefHeight="40.0" prefWidth="450.0" promptText="Select an Entree">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
@@ -143,7 +143,7 @@
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </Text>
-                        <ImageView fx:id="EntreeImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="EntreeImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                            <VBox.margin>
                               <Insets left="255.0" />
                            </VBox.margin>
@@ -160,7 +160,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="drinkField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Drink">
+                        <MFXFilterComboBox fx:id="drinkField" floatMode="DISABLED" onAction="#DrinkSelected" prefHeight="40.0" prefWidth="450.0" promptText="Select a Drink">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
@@ -170,7 +170,7 @@
                               <Insets left="130.0" />
                            </VBox.margin>
                         </Text>
-                        <ImageView fx:id="DrinkImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="DrinkImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                            <VBox.margin>
                               <Insets left="255.0" />
                            </VBox.margin>
@@ -187,7 +187,7 @@
                               <Font name="Roboto Bold" size="16.0" />
                            </font>
                         </Text>
-                        <MFXFilterComboBox fx:id="sideField" floatMode="DISABLED" prefHeight="40.0" prefWidth="450.0" promptText="Select a Side">
+                        <MFXFilterComboBox fx:id="sideField" floatMode="DISABLED" onAction="#SideSelected" prefHeight="40.0" prefWidth="450.0" promptText="Select a Side">
                            <VBox.margin>
                               <Insets left="130.0" />
                            </VBox.margin>
@@ -200,7 +200,7 @@
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </Text>
-                        <ImageView fx:id="SideImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="SideImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                            <VBox.margin>
                               <Insets left="255.0" />
                            </VBox.margin>
@@ -214,7 +214,7 @@
       <VBox VBox.vgrow="ALWAYS" />
       <HBox prefHeight="24.0" prefWidth="1360.0">
          <children>
-            <MFXButton fx:id="resetButton" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #da1313;" text="Reset" textFill="WHITE">
+            <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #da1313;" text="Reset" textFill="WHITE">
                <HBox.margin>
                   <Insets left="80.0" />
                </HBox.margin>
@@ -224,11 +224,11 @@
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox>
                <children>
-                  <MFXButton fx:id="cancelButton" prefHeight="20.0" prefWidth="80.0" text="Cancel" textFill="#012d5a">
+                  <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="20.0" prefWidth="80.0" text="Cancel" textFill="#012d5a">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font></MFXButton>
-                  <MFXButton fx:id="submitButton" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="#f1f1f1">
+                  <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="#f1f1f1">
                      <HBox.margin>
                         <Insets left="30.0" right="80.0" />
                      </HBox.margin>

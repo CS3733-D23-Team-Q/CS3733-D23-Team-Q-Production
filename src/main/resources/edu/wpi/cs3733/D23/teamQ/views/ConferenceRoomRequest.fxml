@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
                <image>
-                  <Image url="@../../../../../../conferenceroom.jpg" />
+                  <Image url="@../ConferenceRequestTitle.jpg" />
                </image>
                <StackPane.margin>
                   <Insets />
