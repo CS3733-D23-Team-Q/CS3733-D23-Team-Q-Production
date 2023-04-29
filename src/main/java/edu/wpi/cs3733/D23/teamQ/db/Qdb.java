@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.db;
 
+import edu.wpi.cs3733.D23.teamQ.controllers.LoginController;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.impl.*;
@@ -622,6 +623,20 @@ public class Qdb {
   public boolean addMessage(Message message) {
     updateTimestamp("message");
     return messageTable.addRow(message);
+  }
+
+  public boolean updateMessage(Message m) {
+    return messageTable.updateRow(m);
+  }
+
+  public boolean setRead(String username) {
+    for (Message message1 : retrieveMessages(LoginController.getUsername(), username)) {
+      if (message1.getReceiver().equals(LoginController.getUsername())) {
+        message1.setRead(true);
+        updateMessage(message1);
+      }
+    }
+    return true;
   }
 
   public synchronized boolean populate(ArrayList<String> tableNames) {
