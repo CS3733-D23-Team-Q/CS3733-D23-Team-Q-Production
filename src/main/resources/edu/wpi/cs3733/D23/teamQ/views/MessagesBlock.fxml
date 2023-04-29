@@ -19,9 +19,6 @@
                   </ImageView>
                </graphic>
             </MFXButton>
-            <AnchorPane fx:id="messagesAlertPane" visible="false">
-               <fx:include fx:id="messagesAlert" source="MessagesAlert.fxml" visible="true" />
-            </AnchorPane>
          </children>
       </HBox>
    </children>
