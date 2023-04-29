@@ -54,8 +54,8 @@ public class CreditsController {
   @FXML MFXButton rightArrow;
   @FXML MFXButton sr;
   @FXML MFXButton srBlue;
-  @FXML MFXButton settings;
-  @FXML MFXButton settingsBlue;
+  @FXML MFXButton information;
+  @FXML MFXButton informationBlue;
   @FXML MFXButton snackSpread;
   @FXML MFXButton stat;
   @FXML MFXButton statBlue;
@@ -266,13 +266,13 @@ public class CreditsController {
 
   @FXML
   public void exitClicked() {
-    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void exitBlueClicked() {
-    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
@@ -318,7 +318,7 @@ public class CreditsController {
 
   @FXML
   public void mapClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
@@ -393,32 +393,32 @@ public class CreditsController {
   @FXML
   public void srClicked() {
     linkDisplay.setText(
-        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+        "https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
     browser
         .getEngine()
         .load(
-            "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+            "https://fontawesome.com/");
   }
 
   @FXML
   public void srBlueClicked() {
     linkDisplay.setText(
-        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+        "https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
     browser
         .getEngine()
         .load(
-            "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
+            "https://fontawesome.com/");
   }
 
   @FXML
-  public void settingsClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+  public void informationClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-info?f=classic&s=solidr");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
-  public void settingsBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+  public void informationBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-info?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 

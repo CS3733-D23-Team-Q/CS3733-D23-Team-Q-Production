@@ -84,6 +84,8 @@
                                     <MFXButton fx:id="greenCircle" onAction="#greenCircleClicked" prefHeight="36.0" prefWidth="320.0" text="Green Circle" />
                                     <MFXButton fx:id="home" onAction="#homeClicked" prefHeight="36.0" prefWidth="320.0" text="Home" />
                                     <MFXButton fx:id="homeBlue" onAction="#homeBlueClicked" prefHeight="36.0" prefWidth="320.0" text="HomeBlue" />
+                                    <MFXButton fx:id="information" onAction="#informationClicked" prefHeight="36.0" prefWidth="320.0" text="Information" />
+                                    <MFXButton fx:id="informationBlue" onAction="#informationBlueClicked" prefHeight="36.0" prefWidth="320.0" text="InformationBlue" />
                                     <MFXButton fx:id="janitor" onAction="#janitorClicked" prefHeight="36.0" prefWidth="320.0" text="Janitor" />
                                     <MFXButton fx:id="leftArrow" onAction="#leftArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Left Arrow" />
                                     <MFXButton fx:id="loc" onAction="#locClicked" prefHeight="36.0" prefWidth="320.0" text="Location" />
@@ -105,8 +107,6 @@
                                     <MFXButton fx:id="rightArrow" onAction="#rightArrowClicked" prefHeight="36.0" prefWidth="320.0" text="Right Arrow" />
                                     <MFXButton fx:id="sr" onAction="#srClicked" prefHeight="36.0" prefWidth="320.0" text="ServiceRequests" />
                                     <MFXButton fx:id="srBlue" onAction="#srBlueClicked" prefHeight="36.0" prefWidth="320.0" text="ServiceRequestsBlue" />
-                                    <MFXButton fx:id="settings" onAction="#settingsClicked" prefHeight="36.0" prefWidth="320.0" text="Settings" />
-                                    <MFXButton fx:id="settingsBlue" onAction="#settingsBlueClicked" prefHeight="36.0" prefWidth="320.0" text="SettingsBlue" />
                                     <MFXButton fx:id="stat" onAction="#statClicked" prefHeight="36.0" prefWidth="320.0" text="Statistics" />
                                     <MFXButton fx:id="statBlue" onAction="#statBlueClicked" prefHeight="36.0" prefWidth="320.0" text="StatisticsBlue" />
                                     <MFXButton fx:id="up" onAction="#upClicked" prefHeight="36.0" prefWidth="320.0" text="Up" />
