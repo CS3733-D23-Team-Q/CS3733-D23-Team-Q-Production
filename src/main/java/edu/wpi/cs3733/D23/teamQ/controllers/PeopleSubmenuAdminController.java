@@ -6,12 +6,13 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class PeopleSubmenuController {
+public class PeopleSubmenuAdminController {
   @FXML VBox peopleSM;
   @FXML MFXButton profile;
   @FXML MFXButton directory;
 
   @FXML MFXButton messages;
+  @FXML MFXButton createAlert;
 
   @FXML
   public void profileClicked() {
@@ -25,6 +26,11 @@ public class PeopleSubmenuController {
 
   @FXML
   public void directoryClicked() {
-    Navigation.navigate(Screen.DIRECTORY);
+    Navigation.navigate(Screen.ADMIN_DIRECTORY);
+  }
+
+  @FXML
+  public void createAlertClicked() {
+    Navigation.navigate(Screen.CREATE_ALERT);
   }
 }
