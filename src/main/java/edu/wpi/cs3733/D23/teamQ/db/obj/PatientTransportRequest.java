@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PatientTransportRequest extends ServiceRequest implements IServiceRequest {
+  private static final String type = "Patient Transport Request";
   private String item;
   private Type requestType = this.getClass();
 
@@ -22,7 +23,7 @@ public class PatientTransportRequest extends ServiceRequest implements IServiceR
       String time,
       int progress,
       String item) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, assignee, requester, specialInstructions, date, time, progress, type);
     this.item = item;
   }
 
@@ -35,7 +36,7 @@ public class PatientTransportRequest extends ServiceRequest implements IServiceR
       String time,
       int progress,
       String item) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, assignee, requester, specialInstructions, date, time, progress, type);
     this.item = item;
   }
 }

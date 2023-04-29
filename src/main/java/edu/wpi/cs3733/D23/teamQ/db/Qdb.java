@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
@@ -42,6 +43,7 @@ public class Qdb {
 
   private MessageDaoImpl messageTable;
   private AlertDaoImpl alertTable;
+  private SettingsDaoImpl settingsTable;
 
   private Account messagingAccount = null;
 
@@ -79,6 +81,7 @@ public class Qdb {
 
     messageTable = MessageDaoImpl.getInstance(accountTable);
     alertTable = AlertDaoImpl.getInstance();
+    settingsTable = SettingsDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -653,8 +656,11 @@ public class Qdb {
           medicalSuppliesRequestTable.populate();
           officeSuppliesRequestTable.populate();
           patientTransportRequestTable.populate();
+        case "settings":
+          settingsTable.populate();
       }
     }
+    Platform.runLater(() -> notifySubscribers(tableNames));
     return true;
   }
 
@@ -774,5 +780,25 @@ public class Qdb {
 
   public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
     return serviceRequestTable.getUserRequestedOutstandingRows(user);
+  }
+
+  public List<Settings> getAllSettings() {
+    return settingsTable.getAllRows();
+  }
+
+  public Settings retrieveSettings(String username) {
+    return settingsTable.retrieveRow(username);
+  }
+
+  public boolean updateSettingsRow(String username, Settings x) {
+    return settingsTable.updateRow(username, x);
+  }
+
+  public boolean deleteSettingsRow(String username) {
+    return settingsTable.deleteRow(username);
+  }
+
+  public boolean addSettingsRow(Settings x) {
+    return settingsTable.addRow(x);
   }
 }
