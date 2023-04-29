@@ -70,12 +70,15 @@ public class MessagesBlockController implements Subscriber {
   @Override
   public boolean update(List<String> context) {
     if (context.contains("message")) {
-      int numForUser = qdb.getNumUnread(LoginController.getLoginUsername());
-      if (numForUser > 0) {
-        if (numForUser < 9) messagesAlertController.setNum("" + numForUser);
-        else messagesAlertController.setNum("9+");
-        messagesAlertPane.setVisible(true);
+      int num = qdb.getNumUnread(LoginController.getLoginUsername());
+      if(num > 0 && num < 9)
+      {
+        messagesAlertController.setNum("" + num);
       }
+      else {
+        messagesAlertController.setNum("9+");
+      }
+      messagesAlertPane.setVisible(true);
     }
     return false;
   }
