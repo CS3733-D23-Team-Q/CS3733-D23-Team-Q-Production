@@ -26,7 +26,6 @@ public class MoveController implements IController {
     this.stage = stage;
   }
 
-
   private String path;
 
   @FXML private TextField ImportPath;
@@ -124,5 +123,4 @@ public class MoveController implements IController {
     }
     move.setItems(moves());
   }
-
 }
