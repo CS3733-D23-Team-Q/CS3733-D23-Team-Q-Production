@@ -119,7 +119,7 @@ public class PathfindingController {
     directions.add(up);
     cfpath = new ArrayList<>();
     dateToggle = new ToggleGroup();
-    date = Date.valueOf("2023-01-01");
+    date = getLatestDate();
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
     algorithm = "aStar";
@@ -182,6 +182,18 @@ public class PathfindingController {
     algorithmSelect.getItems().add("djikstra");
   }
 
+  public Date getLatestDate() {
+    List<Move> allMoves = qdb.retrieveAllMoves();
+    Date d1 = allMoves.get(0).getDate();
+    for (int i = 1; i < allMoves.size(); i++) {
+      Date d2 = allMoves.get(i).getDate();
+      if (d2.after(d1)) {
+        d1 = d2;
+      }
+    }
+    return d1;
+  }
+
   public void addButtons(String f) {
     // List<Node> allNodes = qdb.retrieveAllNodes();
     List<Move> allMoves = qdb.retrieveAllMoves();
@@ -231,28 +243,24 @@ public class PathfindingController {
         //if (k >= 200) {
             startn.setLocation(qdb.getNodeFromLocation(m.getLongName()).getLocation());
         //}
-         */
+        */
 
         List<Node> nodes = qdb.retrieveAllNodes();
         for (Node n : nodes) {
-          System.out.println(n.getLocation().getLongName());
           if (n.getLocation().getLongName().equals(m.getLongName())) {
             startn.setLocation(n.getLocation());
             break;
           }
         }
-
         startNodes.add(startn);
       }
+
       if (d.compareTo(date) == 0) {
         dateMoves.add(m);
       }
       if (!moveDates.contains(d)) {
         moveDates.add(d);
         dateSelect.getItems().add(d.toString());
-        if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
-          dateSelect.getSelectionModel().selectItem(d.toString());
-        }
       }
     }
 
@@ -270,7 +278,7 @@ public class PathfindingController {
       // System.out.println(m.getLongName() + "move before");
       moven.setLocation(qdb.getNodeFromLocation(m.getLongName()).getLocation());
       // System.out.println(moven.getLocation().getLongName() + "move after");
-       */
+      */
 
       List<Node> nodes = qdb.retrieveAllNodes();
       for (Node n : nodes) {
@@ -279,11 +287,12 @@ public class PathfindingController {
           break;
         }
       }
-
       moveNodes.add(moven);
     }
 
     currentNodes.addAll(moveNodes);
+
+
 
     if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
       for (Node node : startNodes) {
