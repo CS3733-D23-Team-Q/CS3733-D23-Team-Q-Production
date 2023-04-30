@@ -46,7 +46,7 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"message\" SET read = ?" + "WHERE timestamp = ?, receiver = ?")) {
+                "UPDATE message SET read = ? WHERE timestamp = ? AND receiver = ?")) {
 
       st.setBoolean(1, true);
       st.setLong(2, m.getTimeStamp());
