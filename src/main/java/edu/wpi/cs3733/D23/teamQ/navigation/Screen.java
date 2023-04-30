@@ -11,6 +11,7 @@ public enum Screen {
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
   PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
   PATH_FINDING_ADMIN("views/PathfindingAdmin.fxml", "Graphical Pathfinding"),
+  PATH_FINDING_SETTING("views/PathfindingSetting.fxml", "Graphical Pathfinding Setting"),
   SIGNAGE("views/Signage.fxml", "Signage"),
   ADD_SIGNAGE("views/SignageForm.fxml", "Add newSignage"),
   SELECT_SIGNAGE("views/SignageInput.fxml", "Display Signage"),
