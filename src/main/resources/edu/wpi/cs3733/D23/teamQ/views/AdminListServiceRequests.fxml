@@ -75,6 +75,7 @@
                   <TableView fx:id="requestsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="requestIDColumn" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Request ID" />
+                        <TableColumn fx:id="requestTypeColumn" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Request Type" />
                         <TableColumn fx:id="requesterColumn" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Requester" />
                         <TableColumn fx:id="assigneeColumn" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Assignee" />
                         <TableColumn fx:id="dateColumn" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Date/Time" />
