@@ -7,6 +7,7 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -117,8 +118,9 @@ public class Qdb {
     }
   }
 
-  public synchronized void notifySubscribers(List<String> context) {
+  public synchronized void notifySubscribers(List<String> context) throws URISyntaxException {
     for (Subscriber s : subscribers) {
+
       s.update(context);
     }
   }
@@ -664,7 +666,14 @@ public class Qdb {
           defaultLocationsTable.populate();
       }
     }
-    Platform.runLater(() -> notifySubscribers(tableNames));
+    Platform.runLater(
+        () -> {
+          try {
+            notifySubscribers(tableNames);
+          } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+          }
+        });
     return true;
   }
 

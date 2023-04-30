@@ -52,4 +52,44 @@ public class Settings {
       this.voice = null;
     }
   }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public boolean isTwoFactor() {
+    return twoFactor;
+  }
+
+  public void setTwoFactor(boolean twoFactor) {
+    this.twoFactor = twoFactor;
+  }
+
+  public boolean isSound() {
+    return sound;
+  }
+
+  public void setSound(boolean sound) {
+    this.sound = sound;
+  }
+
+  public Algorithm getAlgorithm() {
+    return algorithm;
+  }
+
+  public void setAlgorithm(Algorithm algorithm) {
+    this.algorithm = algorithm;
+  }
+
+  public Voice getVoice() {
+    return voice;
+  }
+
+  public void setVoice(Voice voice) {
+    this.voice = voice;
+  }
 }
