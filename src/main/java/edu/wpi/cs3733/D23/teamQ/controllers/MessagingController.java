@@ -219,7 +219,13 @@ public class MessagingController implements Subscriber {
   public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
-    messageReceived.setRead(true);
+    qdb.updateMessage(
+        new Message(
+            messageReceived.getSender(),
+            messageReceived.getReceiver(),
+            messageReceived.getMessage(),
+            messageReceived.getTimeStamp(),
+            true));
     String message = messageReceived.getMessage();
 
     //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()

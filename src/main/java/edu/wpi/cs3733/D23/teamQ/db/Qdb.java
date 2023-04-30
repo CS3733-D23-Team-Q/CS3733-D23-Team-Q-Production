@@ -630,6 +630,10 @@ public class Qdb {
     return messageTable.addRow(message);
   }
 
+  public boolean updateMessage(Message m) {
+    return messageTable.updateRow(m);
+  }
+
   public synchronized boolean populate(ArrayList<String> tableNames) {
     for (String tableName : tableNames) {
       switch (tableName) {
