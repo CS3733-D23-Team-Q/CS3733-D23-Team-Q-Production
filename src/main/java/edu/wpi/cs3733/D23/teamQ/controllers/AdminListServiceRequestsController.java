@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 public class AdminListServiceRequestsController {
   @FXML TableView<ServiceRequest> requestsTable;
   @FXML TableColumn<ServiceRequest, Integer> requestIDColumn;
+  @FXML TableColumn<ServiceRequest, String> requestTypeColumn;
   @FXML TableColumn<ServiceRequest, String> requesterColumn;
   @FXML TableColumn<ServiceRequest, String> assigneeColumn;
   @FXML TableColumn<ServiceRequest, String> dateColumn;
@@ -172,6 +173,7 @@ public class AdminListServiceRequestsController {
     medicalRequestEdit.setVisible(false);
 
     requestIDColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    requestTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 
     locationColumn.setCellValueFactory(
         cellData -> {
@@ -215,32 +217,30 @@ public class AdminListServiceRequestsController {
                 button.setOnAction(
                     event -> {
                       serviceRequestChange = serviceRequest;
-                      if (qdb.retrieveConferenceRequest(serviceRequest.getRequestID()) != null) {
+                      if (serviceRequest.getType().equals("Conference Request")) {
                         conferenceRequestEdit.setVisible(true);
                         ConferenceRequest cr =
                             qdb.retrieveConferenceRequest(serviceRequest.getRequestID());
                         setConferenceFields(cr);
                         conferenceRequest = cr;
-                      } else if (qdb.retrieveFlowerRequest(serviceRequest.getRequestID()) != null) {
+                      } else if (serviceRequest.getType().equals("Flower Request")) {
                         flowerRequestEdit.setVisible(true);
                         FlowerRequest fr = qdb.retrieveFlowerRequest(serviceRequest.getRequestID());
                         setFlowerFields(fr);
                         flowerRequest = fr;
-                      } else if (qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID())
-                          != null) {
+                      } else if (serviceRequest.getType().equals("Office Supplies Request")) {
                         officeRequestEdit.setVisible(true);
                         OfficeSuppliesRequest or =
                             qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID());
                         setOfficeFields(or);
                         officeSuppliesRequest = or;
-                      } else if (qdb.retrieveFurnitureRequest(serviceRequest.getRequestID())
-                          != null) {
+                      } else if (serviceRequest.getType().equals("Furniture Request")) {
                         furnitureRequestEdit.setVisible(true);
                         FurnitureRequest fr =
                             qdb.retrieveFurnitureRequest(serviceRequest.getRequestID());
                         setFurnitureFields(fr);
                         furnitureRequest = fr;
-                      } else if (qdb.retrieveMealRequest(serviceRequest.getRequestID()) != null) {
+                      } else if (serviceRequest.getType().equals("Meal Request")) {
                         mealRequestEdit.setVisible(true);
                         MealRequest mr = qdb.retrieveMealRequest(serviceRequest.getRequestID());
                         setMealFields(mr);
@@ -403,6 +403,8 @@ public class AdminListServiceRequestsController {
                         .getLongName()
                         .toLowerCase()
                         .contains(lowerCaseFilter)) {
+                      return true;
+                    } else if (sr.getType().toLowerCase().contains(lowerCaseFilter)) {
                       return true;
                     } else {
                       return false;

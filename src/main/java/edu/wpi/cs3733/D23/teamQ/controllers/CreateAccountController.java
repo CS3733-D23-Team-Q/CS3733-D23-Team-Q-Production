@@ -296,7 +296,7 @@ public class CreateAccountController extends SecondaryStage implements IControll
               null,
               null,
               null,
-              0,
+              "",
               null,
               null);
       qdb.addAccount(a);
