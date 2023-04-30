@@ -37,7 +37,8 @@ public class SettingsController {
           "Signs",
           "Service requests");
 
-  ObservableList<String> voiceList = FXCollections.observableArrayList("Male", "Female");
+  ObservableList<String> voiceList =
+      FXCollections.observableArrayList("Male", "Female", "Snoop Dogg");
   ObservableList<String> algorithmList =
       FXCollections.observableArrayList("A*", "Dijkstra", "BFS", "DFS", "Q*");
 
@@ -45,10 +46,12 @@ public class SettingsController {
   public void initialize() {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
-    this.voiceSelection.setValue("");
+    this.voiceSelection.setText(
+        qdb.retrieveSettings(LoginController.getLoginUsername()).getVoice().toString());
     this.voiceSelection.setItems(voiceList);
     tableField.setItems(tableList);
-    this.preferredAlgorithm.setValue("");
+    this.preferredAlgorithm.setText(
+        qdb.retrieveSettings(LoginController.getLoginUsername()).getAlgorithm().toString());
     this.preferredAlgorithm.setItems(algorithmList);
     Color main = Color.web("012D5A", 1.0);
     Color secondary = Color.web("7D7D7D", 1.0);
@@ -62,12 +65,9 @@ public class SettingsController {
               @Override
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Settings.Voice voice = Settings.Voice.FEMALE;
-                if (((String) voiceSelection.getValue()).equals("Female"))
-                  voice = Settings.Voice.FEMALE;
-                if (((String) voiceSelection.getValue()).equals("Male"))
-                  voice = Settings.Voice.MALE;
-                if (((String) voiceSelection.getValue()).equals("Snoop Dog"))
-                  voice = Settings.Voice.SNOOP;
+                if (voiceSelection.getText().equals("Female")) voice = Settings.Voice.FEMALE;
+                if (voiceSelection.getText().equals("Male")) voice = Settings.Voice.MALE;
+                if (voiceSelection.getText().equals("Snoop Dogg")) voice = Settings.Voice.SNOOP;
                 qdb.retrieveSettings(LoginController.getLoginUsername()).setVoice(voice);
               }
             });

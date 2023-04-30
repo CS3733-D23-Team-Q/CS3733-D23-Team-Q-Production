@@ -227,6 +227,8 @@ public class HomeController implements Subscriber {
     if (message.contains("Code Silver"))
       path = getClass().getResource("/silver" + voice + ".wav").getPath();
 
+    System.out.println(path);
+
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
     mediaPlayer.play();
