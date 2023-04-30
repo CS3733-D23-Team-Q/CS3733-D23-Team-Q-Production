@@ -56,7 +56,33 @@ public class SettingsController {
     Color main = Color.web("012D5A", 1.0);
     Color secondary = Color.web("7D7D7D", 1.0);
     soundToggle.setColors(main, secondary);
-    this.soundToggle.setSelected(true);
+    this.soundToggle.setSelected(
+        qdb.retrieveSettings(LoginController.getLoginUsername()).isSound());
+
+    soundToggle
+        .selectedProperty()
+        .addListener(
+            new ChangeListener<Boolean>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends Boolean> observable,
+                  Boolean oldValue,
+                  Boolean newValue) {
+
+                Settings settings =
+                    new Settings(
+                        LoginController.getLoginUsername(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
+                        newValue,
+                        qdb.retrieveSettings(LoginController.getLoginUsername())
+                            .getAlgorithm()
+                            .ordinal(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername())
+                            .getVoice()
+                            .ordinal());
+                qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
+              }
+            });
 
     voiceSelection
         .valueProperty()
@@ -79,6 +105,32 @@ public class SettingsController {
                             .getAlgorithm()
                             .ordinal(),
                         voice.ordinal());
+                qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
+              }
+            });
+
+    preferredAlgorithm
+        .valueProperty()
+        .addListener(
+            new ChangeListener<>() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                Settings.Algorithm algo = null;
+
+                if (newValue.toString().equals("ASTAR")) algo = Settings.Algorithm.ASTAR;
+                if (newValue.toString().equals("BFS")) algo = Settings.Algorithm.BFS;
+                if (newValue.toString().equals("DFS")) algo = Settings.Algorithm.DFS;
+                if (newValue.toString().equals("DIJKSTRA")) algo = Settings.Algorithm.DJIKSTRA;
+
+                Settings settings =
+                    new Settings(
+                        LoginController.getLoginUsername(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),
+                        algo.ordinal(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername())
+                            .getVoice()
+                            .ordinal());
                 qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
               }
             });
