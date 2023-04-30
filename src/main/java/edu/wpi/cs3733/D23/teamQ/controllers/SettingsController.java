@@ -117,7 +117,7 @@ public class SettingsController {
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Settings.Algorithm algo = null;
 
-                if (newValue.toString().equals("ASTAR")) algo = Settings.Algorithm.ASTAR;
+                if (newValue.toString().equals("A*")) algo = Settings.Algorithm.ASTAR;
                 if (newValue.toString().equals("BFS")) algo = Settings.Algorithm.BFS;
                 if (newValue.toString().equals("DFS")) algo = Settings.Algorithm.DFS;
                 if (newValue.toString().equals("DIJKSTRA")) algo = Settings.Algorithm.DJIKSTRA;
