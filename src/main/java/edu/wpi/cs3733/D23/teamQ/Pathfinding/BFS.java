@@ -13,40 +13,24 @@ public class BFS implements IPathfinding {
     Queue<Node> queue = new LinkedList<>();
     ArrayList<Node> returnList =
         new ArrayList<Node>(); // this list is the path that gets returned, with repeat visits
-
     String endFloor = target.getFloor();
     queue.add(start);
     visited.add(start);
-    returnList.add(start);
-
     while (!queue.isEmpty()) {
       Node n = queue.poll();
+      returnList.add(n);
       boolean nodeChosen = false;
-      if (n == target) {
-        for (int i = 0; i < returnList.size(); i++) {
-          if (i + 1 < returnList.size()
-              && !returnList.get(i).hasConnection(returnList.get(i + 1))) {
-            System.out.println();
-            System.out.println("OOPS at node " + returnList.get(i));
-            System.out.println();
-            System.out.println("Next node is " + returnList.get(i + 1));
-          }
-        }
+      if (n.equals(target)) {
         return returnList;
       }
       if (n.getLocation().getNodeType().equalsIgnoreCase("ELEV")
           && !n.getFloor().equalsIgnoreCase(endFloor)
           && !nodeChosen) { // branch to send to correct floor, if needed
-        ArrayList<Node> elevatorNodes = new ArrayList<Node>();
-        for (Edge edge : n.getEdges()) {
-          elevatorNodes.add(edge.getStartNode());
-          elevatorNodes.add(edge.getEndNode());
-        }
+        ArrayList<Node> elevatorNodes = getConnections(n);
         for (Node node : elevatorNodes) {
           if (node.getFloor().equalsIgnoreCase(endFloor) && !node.equals(n)) {
             visited.add(node);
             queue.add(node);
-            returnList.add(node);
             nodeChosen = true;
             break;
           }
@@ -55,99 +39,24 @@ public class BFS implements IPathfinding {
       if (n.getLocation().getNodeType().equalsIgnoreCase("ELEV")
           && n.getFloor().equalsIgnoreCase(endFloor)
           && !nodeChosen) { // branch to send to same floor, if needed
-        ArrayList<Node> elevatorNodes = new ArrayList<Node>();
-        for (Edge edge : n.getEdges()) {
-          elevatorNodes.add(edge.getStartNode());
-          elevatorNodes.add(edge.getEndNode());
-        }
+        ArrayList<Node> elevatorNodes = getConnections(n);
         for (Node node : elevatorNodes) {
           if (node.getFloor().equalsIgnoreCase(n.getFloor())
               && !visited.contains(node)
-              && !node.equals(n)) { // might have to exclude ele
-            visited.add(node); // vators as well
+              && !node.equals(n)) {
+            visited.add(node);
             queue.add(node);
-            returnList.add(node);
-            System.out.println();
-            System.out.println(
-                " nodes seen by ELEVATOR SAME FLOOR branch "
-                    + elevatorNodes
-                    + "AT NODE "
-                    + n.getNodeID()
-                    + " WITH SNAME "
-                    + n.getLocation().getShortName()
-                    + " AND WENT TO NODE "
-                    + node.getLocation().getNodeType()
-                    + " WITH NODE ID "
-                    + node.getNodeID()
-                    + " AND NAME "
-                    + node.getLocation().getShortName());
             nodeChosen = true;
             break;
-          }
-        }
-        System.out.println();
-        System.out.println(
-            " ALGORITHM TRIGGERED AT NODE "
-                + n
-                + " WITH PREVIOUS "
-                + returnList.get(returnList.size() - 1));
-        int i = 1;
-        ArrayList<Node> nodesRevisited = new ArrayList<Node>();
-        while (!nodeChosen) { // sometimes, elevators only lead to other elevators. In this case,
-          elevatorNodes.clear(); // we need to go one node back, and look for another unvisited one.
-          for (Edge ex : visited.get(visited.size() - i).getEdges()) {
-            elevatorNodes.add(ex.getStartNode());
-            elevatorNodes.add(ex.getEndNode());
-          }
-          // list of nodes we go back to
-          nodesRevisited.add(visited.get(visited.size() - i));
-          System.out.println("ADDED NODE " + visited.get(visited.size() - i));
-          i++;
-          for (Node node : elevatorNodes) {
-            if (!visited.contains(node)
-                && !node.equals(n)
-                && node.getFloor().equalsIgnoreCase(n.getFloor())
-                && !node.getLocation().getNodeType().equalsIgnoreCase("ELEV")) {
-              System.out.println();
-              System.out.println(
-                  "BEFORE ADDING TO LIST, PREVIOUS NODE IS "
-                      + returnList.get(returnList.size() - 1));
-              System.out.println();
-              returnList.addAll(nodesRevisited);
-              returnList.add(node);
-              visited.add(node);
-              queue.add(node);
-              System.out.println();
-              System.out.println(
-                  "nodes revisited by ELEVATOR branch "
-                      + " WITH PREVIOUS NODE "
-                      + returnList.get(returnList.size() - 1)
-                      // + nodesRevisited
-                      + "AT NODE "
-                      + n.getNodeID()
-                      + " AND WENT TO NODE "
-                      + node.getLocation().getNodeType()
-                      + " WITH NODE ID "
-                      + node.getNodeID()
-                      + " AND NAME "
-                      + node.getLocation().getShortName());
-              nodeChosen = true;
-              break;
-            }
           }
         }
       }
       if (n.getLocation().getNodeType().equalsIgnoreCase("STAI")
           && !n.getFloor().equalsIgnoreCase(endFloor)
           && !nodeChosen) { // branch to send to correct floor, if needed
-        ArrayList<Node> stairNodes = new ArrayList<Node>();
-        for (Edge edge : n.getEdges()) {
-          stairNodes.add(edge.getStartNode());
-          stairNodes.add(edge.getEndNode());
-        }
+        ArrayList<Node> stairNodes = getConnections(n);
         for (Node node : stairNodes) {
           if (node.getFloor().equalsIgnoreCase(endFloor) && !node.equals(n)) {
-            returnList.add(node);
             visited.add(node);
             queue.add(node);
             nodeChosen = true;
@@ -158,13 +67,11 @@ public class BFS implements IPathfinding {
       if (n.getLocation().getNodeType().equalsIgnoreCase("STAI")
           && n.getFloor().equalsIgnoreCase(endFloor)
           && !nodeChosen) { // branch to send to same floor, if needed
-        ArrayList<Node> stairNodes = new ArrayList<Node>();
-        for (Edge edge : n.getEdges()) {
-          stairNodes.add(edge.getStartNode());
-          stairNodes.add(edge.getEndNode());
-        }
+        ArrayList<Node> stairNodes = getConnections(n);
         for (Node node : stairNodes) {
-          if (node.getFloor().equalsIgnoreCase(n.getFloor()) && !node.equals(n)) {
+          if (node.getFloor().equalsIgnoreCase(n.getFloor())
+              && !node.equals(n)
+              && !visited.contains(node)) {
             returnList.add(node);
             visited.add(node);
             queue.add(node);
@@ -172,79 +79,77 @@ public class BFS implements IPathfinding {
             break;
           }
         }
-        int i = 1;
-        ArrayList<Node> nodesRevisited = new ArrayList<Node>();
-        while (!nodeChosen) { // sometimes, stairs only lead to other stairs. In this case,
-          stairNodes.clear(); // we need to go one node back, and look for another unvisited one.
-          for (Edge ex : visited.get(visited.size() - i).getEdges()) {
-            stairNodes.add(ex.getStartNode());
-            stairNodes.add(ex.getEndNode());
-          }
-          nodesRevisited.add(visited.get(visited.size() - i)); // list of nodes we go back to
-          i++;
-          for (Node node : stairNodes) {
-            if (!visited.contains(node)
-                && !node.getLocation().getNodeType().equalsIgnoreCase("STAI")
-                && !node.equals(n)) {
-              returnList.addAll(nodesRevisited);
-              returnList.add(node);
-              System.out.println();
-              System.out.println("Node revisted by STAIR branch " + nodesRevisited);
-              visited.add(node);
-              queue.add(node);
-              nodeChosen = true;
-              break;
-            }
-          }
-        }
       }
-      for (Edge edge :
-          n.getEdges()) { // normal situation choice branches, one for end nodes, one for start
+      for (Edge edge : n.getEdges()) { // normal situation choice branches, 1 4 end nodes, 1 4 start
         Node neighbor = edge.getEndNode();
         if (!visited.contains(neighbor)
             && n.getFloor().equalsIgnoreCase(neighbor.getFloor())
             && !neighbor.equals(n)
             && !nodeChosen) {
           visited.add(neighbor);
-          returnList.add(neighbor);
           queue.add(neighbor);
           nodeChosen = true;
+          break;
         }
         if (!visited.contains(edge.getStartNode())
             && n.getFloor().equalsIgnoreCase(edge.getStartNode().getFloor())
             && !n.equals(edge.getStartNode())
             && !nodeChosen) {
           visited.add(edge.getStartNode());
-          returnList.add(edge.getStartNode());
           queue.add(edge.getStartNode());
           nodeChosen = true;
+          break;
         }
       }
-      if (queue.isEmpty() && !n.equals(target)) { // if we run into a dead end
+      if (!nodeChosen) { // if we run into a dead end
         int i = 1;
         ArrayList<Node> nodesRevisited = new ArrayList<Node>();
         ArrayList<Node> backupNodes = new ArrayList<Node>();
         while (!nodeChosen) {
-          backupNodes.clear();
-          for (Edge ex : visited.get(visited.size() - i).getEdges()) {
-            backupNodes.add(ex.getStartNode());
-            backupNodes.add(ex.getEndNode());
-          }
-          nodesRevisited.add(visited.get(visited.size() - i));
+          backupNodes = getConnections(returnList.get(returnList.size() - i));
+          nodesRevisited.add(returnList.get(returnList.size() - i));
           i++;
+          if (i > 2000) {
+            ArrayList<Node> fixPath = new ArrayList<Node>();
+            ArrayList<Node> targetNodes = getConnections(target);
+            for (Node node : targetNodes) {
+              if (returnList.contains(node)) {
+                Node connectedNode = node;
+                for (int g = returnList.size() - 1; g > 0; g--) {
+                  fixPath.add(returnList.get(g));
+                  Node pathNode = returnList.get(g);
+                  if (pathNode.equals(connectedNode)) {
+                    returnList.addAll(fixPath);
+                    returnList.add(target);
+                    return returnList;
+                  }
+                }
+              }
+            }
+            for (Node node2 : targetNodes) {
+              ArrayList<Node> retracedPath = new ArrayList<Node>();
+              ArrayList<Node> connections2 = getConnections(node2);
+              for (Node node3 : connections2) {
+                if (returnList.contains(node3)) {
+                  for (int g = returnList.size() - 1; g > 0; g--) {
+                    retracedPath.add(returnList.get(g));
+                    if (returnList.get(g).equals(node3)) {
+                      returnList.addAll(retracedPath);
+                      returnList.add(node2);
+                      returnList.add(target);
+                      return returnList;
+                    }
+                  }
+                }
+              }
+            }
+            return returnList;
+          }
           for (Node node : backupNodes) {
             if (!visited.contains(node)
                 && node.getFloor().equalsIgnoreCase(n.getFloor())
                 && !node.equals(n)) {
               returnList.addAll(nodesRevisited);
-              returnList.add(node);
-              System.out.println();
-              System.out.println(
-                  "Nodes revisted by DEAD END branch happened at node "
-                      + n
-                      + nodesRevisited
-                      + " AND WENT TO "
-                      + node);
               visited.add(node);
               queue.add(node);
               nodeChosen = true;
@@ -255,5 +160,14 @@ public class BFS implements IPathfinding {
       }
     }
     return returnList;
+  }
+
+  public ArrayList<Node> getConnections(Node current) {
+    ArrayList<Node> nodesAvailable = new ArrayList<Node>();
+    for (Edge edgePath : current.getEdges()) {
+      nodesAvailable.add(edgePath.getStartNode());
+      nodesAvailable.add(edgePath.getEndNode());
+    }
+    return nodesAvailable;
   }
 }
