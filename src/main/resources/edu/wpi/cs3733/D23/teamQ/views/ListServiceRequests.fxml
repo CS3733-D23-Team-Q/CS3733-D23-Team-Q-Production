@@ -67,6 +67,7 @@
                   <TableView fx:id="yourRequestsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="yourRequestID" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Request ID" />
+                        <TableColumn fx:id="yourRequestType" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Request Type" />
                         <TableColumn fx:id="yourRequestAssignee" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Assignee" />
                         <TableColumn fx:id="yourRequestDate" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Date/Time" />
                         <TableColumn fx:id="yourRequestProgress" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Progress" />
@@ -100,6 +101,7 @@
                   <TableView fx:id="assignedRequestTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="assignedRequestID" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Request ID" />
+                        <TableColumn fx:id="assignedRequestType" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Request Type" />
                         <TableColumn fx:id="assignedRequestRequester" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Requester" />
                         <TableColumn fx:id="assignedRequestDate" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Date/Time" />
                         <TableColumn fx:id="assignedRequestLocation" prefWidth="75.0" style="-fx-alignment: CENTER; -fx-table-cell-border-color: transparent;" text="Location" />

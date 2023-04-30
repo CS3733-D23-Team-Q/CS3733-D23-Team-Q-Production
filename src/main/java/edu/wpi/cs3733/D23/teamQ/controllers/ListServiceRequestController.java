@@ -28,6 +28,7 @@ import javafx.scene.layout.VBox;
 public class ListServiceRequestController {
   @FXML TableView<ServiceRequest> yourRequestsTable;
   @FXML TableColumn<ServiceRequest, Integer> yourRequestID;
+  @FXML TableColumn<ServiceRequest, String> yourRequestType;
   @FXML TableColumn<ServiceRequest, String> yourRequestProgress;
   @FXML TableColumn<ServiceRequest, String> yourRequestLocation;
   @FXML TableColumn<ServiceRequest, String> yourRequestInstructions;
@@ -38,6 +39,7 @@ public class ListServiceRequestController {
 
   @FXML TableView<ServiceRequest> assignedRequestTable;
   @FXML TableColumn<ServiceRequest, Integer> assignedRequestID;
+  @FXML TableColumn<ServiceRequest, String> assignedRequestType;
   @FXML TableColumn<ServiceRequest, String> assignedRequestLocation;
   @FXML TableColumn<ServiceRequest, String> assignedRequestInstructions;
   @FXML TableColumn<ServiceRequest, String> assignedRequestRequester;
@@ -202,6 +204,7 @@ public class ListServiceRequestController {
     assignedRequestTable.setStyle("-fx-table-column-border-visible: false;");
 
     yourRequestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    yourRequestType.setCellValueFactory(new PropertyValueFactory<>("type"));
     yourRequestProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
 
     yourRequestLocation.setCellValueFactory(
@@ -400,7 +403,7 @@ public class ListServiceRequestController {
 
     // Set data for assignedRequestTable
     assignedRequestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-
+    assignedRequestType.setCellValueFactory(new PropertyValueFactory<>("type"));
     assignedRequestLocation.setCellValueFactory(
         cellData -> {
           StringProperty locationProperty = new SimpleStringProperty();
