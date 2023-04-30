@@ -53,8 +53,28 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
    * @return true if successful
    */
   public boolean updateRow(Integer moveID, Move newMove) {
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"move\" SET \"nodeID\" = ?, \"longName\" = ?, date = ?, \"moveID\" = ? "
+                    + "WHERE \"moveID\" = ?")) {
+
+      st.setInt(1, newMove.getNode().getNodeID());
+      st.setString(2, newMove.getLongName());
+      st.setDate(3, newMove.getDate());
+      st.setInt(4, moveID);
+      st.setInt(5, moveID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
     int index = this.getIndex(moveID);
-    moves.set(index, newMove);
+    moves.get(index).setNode(newMove.getNode());
+    moves.get(index).setDate(newMove.getDate());
+    moves.get(index).setLongName(newMove.getLongName());
+
     return true;
   }
 
