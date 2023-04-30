@@ -95,7 +95,7 @@ public class AdminAddProfileController {
             firstName.getText(),
             lastName.getText(),
             titleEdit.getText(),
-            Integer.parseInt(phone.getText()),
+            phone.getText(),
             null,
             null);
     qdb.addAccount(newAccount);

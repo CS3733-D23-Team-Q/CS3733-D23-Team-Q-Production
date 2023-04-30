@@ -64,7 +64,7 @@ public class ProfilePageController implements IController {
     } else {
       this.Title_Display.setText(account.getTitle());
     }
-    if (account.getPhoneNumber() == 0) {
+    if (account.getPhoneNumber().isEmpty()) {
       this.Phone_Number_Display.setText("empty");
     } else {
       this.Phone_Number_Display.setText(String.valueOf(account.getPhoneNumber()));
