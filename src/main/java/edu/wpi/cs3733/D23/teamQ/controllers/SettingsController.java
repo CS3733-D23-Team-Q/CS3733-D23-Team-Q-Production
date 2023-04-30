@@ -80,8 +80,6 @@ public class SettingsController {
                             .ordinal(),
                         voice.ordinal());
                 qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
-
-                System.out.println("Setting Voice to" + voice);
               }
             });
   }

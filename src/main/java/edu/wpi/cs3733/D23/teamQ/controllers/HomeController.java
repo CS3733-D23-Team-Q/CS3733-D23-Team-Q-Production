@@ -203,35 +203,40 @@ public class HomeController implements Subscriber {
 
   public void alertSound(String message) throws URISyntaxException {
     URI path = getClass().getResource("/alert.wav").toURI();
+
+    Media media = new Media(new File(path).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.play();
+
     String voice = qdb.retrieveSettings(LoginController.getLoginUsername()).getVoice().toString();
     String s1 = voice.substring(0, 1).toUpperCase();
     String s2 = voice.substring(1).toLowerCase();
     voice = s1 + s2;
-    System.out.println("THE VOICE IS" + voice);
 
     if (message.contains("Code Blue"))
       path = getClass().getResource("/blue" + voice + ".wav").toURI();
-    if (message.contains("Code Red"))
+    else if (message.contains("Code Red"))
       path = getClass().getResource("/red" + voice + ".wav").toURI();
-    if (message.contains("Code Black"))
+    else if (message.contains("Code Black"))
       path = getClass().getResource("/black" + voice + ".wav").toURI();
-    if (message.contains("Code Gray"))
+    else if (message.contains("Code Gray"))
       path = getClass().getResource("/gray" + voice + ".wav").toURI();
-    if (message.contains("Code Yellow"))
+    else if (message.contains("Code Yellow"))
       path = getClass().getResource("/yellow" + voice + ".wav").toURI();
-    if (message.contains("Code Orange"))
+    else if (message.contains("Code Orange"))
       path = getClass().getResource("/orange" + voice + ".wav").toURI();
-    if (message.contains("Code Pink"))
+    else if (message.contains("Code Pink"))
       path = getClass().getResource("/pink" + voice + ".wav").toURI();
-    if (message.contains("Code Purple"))
+    else if (message.contains("Code Purple"))
       path = getClass().getResource("/purple" + voice + ".wav").toURI();
-    if (message.contains("Code Green"))
+    else if (message.contains("Code Green"))
       path = getClass().getResource("/green" + voice + ".wav").toURI();
-    if (message.contains("Code Silver"))
+    else if (message.contains("Code Silver"))
       path = getClass().getResource("/silver" + voice + ".wav").toURI();
+    else path = getClass().getResource("/new" + voice + ".wav").toURI();
 
-    Media media = new Media(new File(path).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    media = new Media(new File(path).toURI().toString());
+    mediaPlayer = new MediaPlayer(media);
     mediaPlayer.play();
   }
 }

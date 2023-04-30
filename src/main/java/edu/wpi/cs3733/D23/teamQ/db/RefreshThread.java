@@ -42,7 +42,7 @@ public class RefreshThread implements Runnable {
       if (checkUpdates().size() > 0) {
         System.out.println("Updating from server --> " + toUpdate);
         for (String s : toUpdate) {
-          lastUpdates.set(tableNames.indexOf(s), System.currentTimeMillis() - 1000);
+          lastUpdates.set(tableNames.indexOf(s), System.currentTimeMillis() - 500);
         }
       }
       doUpdates();
