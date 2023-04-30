@@ -12,6 +12,8 @@ import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -201,6 +203,7 @@ public class PathfindingController {
     List<Move> dateMoves = new ArrayList<>();
     List<Node> moveNodes = new ArrayList<>();
     List<Node> currentNodes = new ArrayList<>();
+    List<Node> nodeswchanges = new ArrayList<>();
 
     restText.removeAll(restText);
     deptText.removeAll(deptText);
@@ -290,17 +293,53 @@ public class PathfindingController {
       moveNodes.add(moven);
     }
 
-    currentNodes.addAll(moveNodes);
+    Collections.sort(
+        moveDates,
+        new Comparator<Date>() {
+          public int compare(Date date1, Date date2) {
+            return date1.compareTo(date2);
+          }
+        });
+    List<Date> dateswofirst = new ArrayList<>();
+    dateswofirst.addAll(moveDates);
+    dateswofirst.remove(0);
+    List<Node> previousNodesm = new ArrayList<>();
+    for (Date movedate : dateswofirst) {
+      if (movedate.before(date)) {
+        previousNodesm = previousChange(movedate, previousNodesm);
+      }
+    }
 
+    // moveNodes = previousChange(date, previousNodesm);
 
+    nodeswchanges.addAll(moveNodes);
+
+    if (previousNodesm.size() > 0) {
+      for (Node node : previousNodesm) {
+        for (Node moven : moveNodes) {
+          if (!node.getLocation()
+              .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
+            // node.getLocation().equals(moven.getLocation()))
+            nodeswchanges.add(node);
+          }
+        }
+      }
+    }
+
+    currentNodes.addAll(nodeswchanges);
 
     if (date.compareTo(Date.valueOf("2023-01-01")) != 0) {
       for (Node node : startNodes) {
-        for (Node moven : moveNodes) { // Move m : dateMoves
-          if (!(node.getNodeID() == moven.getNodeID()
-              || node.getLocation().equals(moven.getLocation()))) {
-            currentNodes.add(node);
+        boolean add = true;
+        for (Node moven : nodeswchanges) { // Move m : dateMoves
+          if (node.getLocation()
+              .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
+            // node.getLocation().equals(moven.getLocation()))
+            add = false;
           }
+        }
+        if (add) {
+          currentNodes.add(node);
         }
       }
     } else {
@@ -384,6 +423,50 @@ public class PathfindingController {
         servText = addSpecificNode("\\bSERV\\b", nodetype, servText, text, nodeid);
       }
     }
+  }
+
+  public List<Node> previousChange(Date datein, List<Node> previousNodesm) {
+    List<Move> allMoves = qdb.retrieveAllMoves();
+    List<Move> dateMoves = new ArrayList<>();
+    List<Node> moveNodes = new ArrayList<>();
+    for (Move m : allMoves) {
+      Date d = m.getDate();
+      if (d.compareTo(datein) == 0) {
+        dateMoves.add(m);
+      }
+    }
+    for (Move m : dateMoves) {
+      Node moven =
+          new Node(
+              m.getNode().getNodeID(),
+              m.getNode().getXCoord(),
+              m.getNode().getYCoord(),
+              m.getNode().getFloor(),
+              m.getNode().getBuilding(),
+              m.getNode().getLocation());
+      List<Node> nodes = qdb.retrieveAllNodes();
+      for (Node n : nodes) {
+        if (n.getLocation().getLongName().equals(m.getLongName())) {
+          moven.setLocation(n.getLocation());
+          break;
+        }
+      }
+      moveNodes.add(moven);
+    }
+    List<Node> currentNodes = new ArrayList<>();
+    currentNodes.addAll(moveNodes);
+    if (previousNodesm.size() > 0) {
+      for (Node node : previousNodesm) {
+        for (Node moven : moveNodes) {
+          if (!node.getLocation()
+              .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
+            // node.getLocation().equals(moven.getLocation()))
+            currentNodes.add(node);
+          }
+        }
+      }
+    }
+    return currentNodes;
   }
 
   public List<Pair<Integer, Text>> addSpecificNode(
