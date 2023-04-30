@@ -731,22 +731,14 @@ public class CreditsController {
 
   @FXML
   public void mealTitleClicked() {
-    linkDisplay.setText(
-        "https://www.google.com/search?q=chicken+entre+horizontal+image&tbm=isch&chips=q:chicken+entre+horizontal+image,online_chips:grilled+chicken+breast:Y3kSzUh2YOQ%3D&hl=en&sa=X&ved=2ahUKEwi3tMTS4MD-AhXbA1kFHWnYCeoQ4lYoBnoECAEQOQ&biw=1519&bih=713#imgrc=Q0tUx17Z4ieqcM");
-    browser
-        .getEngine()
-        .load(
-            "https://www.google.com/search?q=chicken+entre+horizontal+image&tbm=isch&chips=q:chicken+entre+horizontal+image,online_chips:grilled+chicken+breast:Y3kSzUh2YOQ%3D&hl=en&sa=X&ved=2ahUKEwi3tMTS4MD-AhXbA1kFHWnYCeoQ4lYoBnoECAEQOQ&biw=1519&bih=713#imgrc=Q0tUx17Z4ieqcM");
+    linkDisplay.setText("https://www.delish.com/cooking/recipe-ideas/g3053/baked-pasta/");
+    browser.getEngine().load("https://www.delish.com/cooking/recipe-ideas/g3053/baked-pasta/");
   }
 
   @FXML
   public void medSuppliesClicked() {
-    linkDisplay.setText(
-        "https://www.freepik.com/free-photo/border-from-notebook-medical-supplies_2123810.htm#query=medical%20supplies&position=49&from_view=keyword&track=robertav1_2_sidr");
-    browser
-        .getEngine()
-        .load(
-            "https://www.freepik.com/free-photo/border-from-notebook-medical-supplies_2123810.htm#query=medical%20supplies&position=49&from_view=keyword&track=robertav1_2_sidr");
+    linkDisplay.setText("https://superoxy.life/product_tag/1068142237_.html");
+    browser.getEngine().load("https://superoxy.life/product_tag/1068142237_.html");
   }
 
   @FXML
@@ -762,11 +754,11 @@ public class CreditsController {
   @FXML
   public void ostClicked() {
     linkDisplay.setText(
-        "https://www.google.com/search?q=office+supplies+horizontal+image&tbm=isch&ved=2ahUKEwi525D5g8b-AhW8BFkFHVNRAwsQ2-cCegQIABAA&oq=office+supplies+horizontal+image&gs_lcp=CgNpbWcQAzIECCMQJ1AAWABguwJoAHAAeACAATKIATKSAQExmAEAqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=aE1IZLmHELyJ5NoP06KNWA&bih=975&biw=1920");
+        "https://www.dreamstime.com/school-office-sstationery-white-background-notebook-notepad-pen-pencils-paper-clips-stuff-long-banner-format-school-image123073836");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/search?q=office+supplies+horizontal+image&tbm=isch&ved=2ahUKEwi525D5g8b-AhW8BFkFHVNRAwsQ2-cCegQIABAA&oq=office+supplies+horizontal+image&gs_lcp=CgNpbWcQAzIECCMQJ1AAWABguwJoAHAAeACAATKIATKSAQExmAEAqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=aE1IZLmHELyJ5NoP06KNWA&bih=975&biw=1920");
+            "https://www.dreamstime.com/school-office-sstationery-white-background-notebook-notepad-pen-pencils-paper-clips-stuff-long-banner-format-school-image123073836");
   }
 
   @FXML

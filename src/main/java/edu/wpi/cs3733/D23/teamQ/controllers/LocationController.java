@@ -132,37 +132,6 @@ public class LocationController implements IController {
     locationname.setItems(locations());
   }
 
-  /*
-  @FXML
-  void exitClicked(ActionEvent event) {
-    Platform.exit();
-  }
-
-  @FXML
-  void edgeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Edge_Table);
-  }
-
-  @FXML
-  void homeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  void moveClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Move_Table);
-  }
-
-  @FXML
-  void mapClicked(ActionEvent event) {}
-
-  @FXML
-  void nodeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Node_Table);
-  }
-
-   */
-
   @FXML
   void setClicked(MouseEvent event) {
 
@@ -313,11 +282,4 @@ public class LocationController implements IController {
     }
     locationname.setItems(locations());
   }
-  /*
-   @FXML
-   void BackClicked(ActionEvent event) {
-     Navigation.navigate(Screen.MAP_EDITOR);
-   }
-
-  */
 }
