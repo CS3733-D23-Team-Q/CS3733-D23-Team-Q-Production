@@ -13,8 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
 
-import java.util.Set;
-
 public class SettingsController {
 
   Qdb qdb = Qdb.getInstance();
@@ -67,12 +65,22 @@ public class SettingsController {
               @Override
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Settings.Voice voice = null;
-                //Settings settings = new Settings(LoginController.getLoginUsername(), qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),qdb.retrieveSettings(LoginController.getLoginUsername()).getAlgorithm(),voice));
 
                 if (newValue.toString().equals("Female")) voice = Settings.Voice.FEMALE;
                 if (newValue.toString().equals("Male")) voice = Settings.Voice.MALE;
                 if (newValue.toString().equals("Snoop Dogg")) voice = Settings.Voice.SNOOP;
-                //qdb.updateSettingsRow(LoginController.getLoginUsername(), voice);
+
+                Settings settings =
+                    new Settings(
+                        LoginController.getLoginUsername(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername())
+                            .getAlgorithm()
+                            .ordinal(),
+                        voice.ordinal());
+                qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
+
                 System.out.println("Setting Voice to" + voice);
               }
             });

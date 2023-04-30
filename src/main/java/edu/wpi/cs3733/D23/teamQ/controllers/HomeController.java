@@ -12,6 +12,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -183,7 +185,7 @@ public class HomeController implements Subscriber {
   }
 
   @Override
-  public boolean update(List<String> context) {
+  public boolean update(List<String> context) throws URISyntaxException {
     Qdb qdb = Qdb.getInstance();
     if (context.contains("alert")) {
       Alert alert = qdb.retrieveAllAlerts().get(qdb.retrieveAllAlerts().size() - 1);
@@ -199,8 +201,8 @@ public class HomeController implements Subscriber {
     return true;
   }
 
-  public void alertSound(String message) {
-    String path = getClass().getResource("/alert.wav").getPath();
+  public void alertSound(String message) throws URISyntaxException {
+    URI path = getClass().getResource("/alert.wav").toURI();
     String voice = qdb.retrieveSettings(LoginController.getLoginUsername()).getVoice().toString();
     String s1 = voice.substring(0, 1).toUpperCase();
     String s2 = voice.substring(1).toLowerCase();
@@ -208,25 +210,25 @@ public class HomeController implements Subscriber {
     System.out.println("THE VOICE IS" + voice);
 
     if (message.contains("Code Blue"))
-      path = getClass().getResource("/blue" + voice + ".wav").getPath();
+      path = getClass().getResource("/blue" + voice + ".wav").toURI();
     if (message.contains("Code Red"))
-      path = getClass().getResource("/red" + voice + ".wav").getPath();
+      path = getClass().getResource("/red" + voice + ".wav").toURI();
     if (message.contains("Code Black"))
-      path = getClass().getResource("/black" + voice + ".wav").getPath();
+      path = getClass().getResource("/black" + voice + ".wav").toURI();
     if (message.contains("Code Gray"))
-      path = getClass().getResource("/gray" + voice + ".wav").getPath();
+      path = getClass().getResource("/gray" + voice + ".wav").toURI();
     if (message.contains("Code Yellow"))
-      path = getClass().getResource("/yellow" + voice + ".wav").getPath();
+      path = getClass().getResource("/yellow" + voice + ".wav").toURI();
     if (message.contains("Code Orange"))
-      path = getClass().getResource("/orange" + voice + ".wav").getPath();
+      path = getClass().getResource("/orange" + voice + ".wav").toURI();
     if (message.contains("Code Pink"))
-      path = getClass().getResource("/pink" + voice + ".wav").getPath();
+      path = getClass().getResource("/pink" + voice + ".wav").toURI();
     if (message.contains("Code Purple"))
-      path = getClass().getResource("/purple" + voice + ".wav").getPath();
+      path = getClass().getResource("/purple" + voice + ".wav").toURI();
     if (message.contains("Code Green"))
-      path = getClass().getResource("/green" + voice + ".wav").getPath();
+      path = getClass().getResource("/green" + voice + ".wav").toURI();
     if (message.contains("Code Silver"))
-      path = getClass().getResource("/silver" + voice + ".wav").getPath();
+      path = getClass().getResource("/silver" + voice + ".wav").toURI();
 
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
