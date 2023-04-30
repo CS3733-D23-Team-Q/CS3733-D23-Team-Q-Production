@@ -1,17 +1,22 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class FurnitureDeliveryRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -26,7 +31,7 @@ public class FurnitureDeliveryRequestController {
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML TextArea specialInstructionsField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList("Desk", "Desk Chair", "Couch", "Examination Table");
   @FXML MFXFilterComboBox itemRequestedField;
@@ -34,6 +39,9 @@ public class FurnitureDeliveryRequestController {
   @FXML Button resetButton;
   @FXML Button cancelButton;
   @FXML Button submitButton;
+
+  @FXML private ImageView ItemImage;
+  @FXML private GesturePane titlePane;
 
   @FXML
   public void initialize() {
@@ -45,6 +53,10 @@ public class FurnitureDeliveryRequestController {
     this.timeField.setItems(timeList);
     this.itemRequestedField.setValue("");
     this.itemRequestedField.setItems(itemList);
+
+    Image titleImage = new Image(App.class.getResourceAsStream("FurnitureRequestTitle.jpg"));
+    ImageView iv = new ImageView(titleImage);
+    titlePane.setContent(iv);
   }
 
   @FXML
@@ -55,11 +67,13 @@ public class FurnitureDeliveryRequestController {
     this.timeField.setValue("");
     this.itemRequestedField.setValue("");
     this.specialInstructionsField.clear();
+
+    ItemImage.setImage(null);
   }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -68,7 +82,7 @@ public class FurnitureDeliveryRequestController {
     FurnitureRequest newFR =
         new FurnitureRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(LoginController.getLoginUsername()),
+            qdb.retrieveAccount(LoginController.getUsername()),
             qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
@@ -76,6 +90,31 @@ public class FurnitureDeliveryRequestController {
             0,
             itemRequestedField.getValue().toString());
     qdb.addFurnitureRequest(newFR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getValue().equals("Desk")) {
+      Image deskImage = new Image(App.class.getResourceAsStream("Desk.jpg"));
+      ImageView iv = new ImageView(deskImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Desk Chair")) {
+      Image deskChairImage = new Image(App.class.getResourceAsStream("DeskChair.jpg"));
+      ImageView iv = new ImageView(deskChairImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Couch")) {
+      Image couchImage = new Image(App.class.getResourceAsStream("Couch.jpg"));
+      ImageView iv = new ImageView(couchImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Examination Table")) {
+      Image examinationTableImage =
+          new Image(App.class.getResourceAsStream("ExaminationTable.jpg"));
+      ImageView iv = new ImageView(examinationTableImage);
+      ItemImage.setImage(iv.getImage());
+    }
   }
 }

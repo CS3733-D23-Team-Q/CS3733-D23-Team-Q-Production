@@ -32,4 +32,6 @@ public interface GenDao<T, G> {
   public boolean addRow(T x);
 
   public boolean populate() throws SQLException;
+
+  public String getFileName();
 }

@@ -19,17 +19,8 @@ public class PeopleSubmenuController {
   }
 
   @FXML
-  public void messagesClicked() {
-    Navigation.navigate(Screen.MESSAGES);
-  }
-
-  @FXML
   public void directoryClicked() {
-    if (LoginController.isAdmin()) // checks if admin and if so can edit directory
-    {
-      Navigation.navigate(Screen.ADMIN_DIRECTORY);
-    } else {
-      Navigation.navigate(Screen.DIRECTORY);
-    }
+    if (LoginController.isAdmin()) Navigation.navigate(Screen.ADMIN_DIRECTORY);
+    else Navigation.navigate(Screen.DIRECTORY);
   }
 }

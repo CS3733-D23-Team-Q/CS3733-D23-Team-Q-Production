@@ -17,6 +17,7 @@ public class ServiceRequest {
   private Progress progress;
   private String assigneeUsername;
   private int nodeID;
+  private String type;
 
   public enum Progress {
     BLANK,
@@ -32,7 +33,8 @@ public class ServiceRequest {
       String specialInstructions,
       Date date,
       String time,
-      int progress) {
+      int progress,
+      String type) {
     this.requestID = requestID;
     if (progress == 0) {
       this.progress = Progress.BLANK;
@@ -51,5 +53,25 @@ public class ServiceRequest {
     this.time = time;
     this.nodeID = node.getNodeID();
     this.assigneeUsername = assignee.getUsername();
+    this.type = type;
+  }
+
+  public String toString() {
+    return requestID
+        + ","
+        + node.getNodeID()
+        + ","
+        + assignee.getUsername()
+        + ","
+        + requester.getUsername()
+        + ","
+        + specialInstructions
+        + ","
+        + date.toString()
+        + ","
+        + time
+        + ","
+        + progress.ordinal()
+        + type;
   }
 }

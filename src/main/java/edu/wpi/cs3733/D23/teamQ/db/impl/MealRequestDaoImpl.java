@@ -5,12 +5,15 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
+  private String fileName = "Meal_Requests.csv";
 
   public static synchronized MealRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -115,7 +118,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -126,6 +129,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
       stmt.setString(8, request.getDrink());
       stmt.setString(9, request.getEntree());
       stmt.setString(10, request.getSide());
+      stmt.setString(11, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

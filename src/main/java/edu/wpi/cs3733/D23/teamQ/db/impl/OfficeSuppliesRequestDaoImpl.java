@@ -5,13 +5,16 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
   private List<OfficeSuppliesRequest> officeSuppliesRequests =
       new ArrayList<OfficeSuppliesRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
+  private String fileName = "Office_Supplies_Requests.csv";
 
   public static synchronized OfficeSuppliesRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -65,6 +68,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       st.setString(6, newRequest.getItem());
       st.setInt(7, newRequest.getQuantity());
       st.setString(8, newRequest.getSpecialInstructions());
+      st.setInt(9, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {
@@ -116,7 +120,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"officeSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -126,6 +130,7 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
       stmt.setString(7, request.getTime());
       stmt.setString(8, request.getItem());
       stmt.setInt(9, request.getQuantity());
+      stmt.setString(10, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

@@ -3,16 +3,21 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ProfileImage;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import lombok.Getter;
 
+@Getter
 public class AccountDaoImpl implements GenDao<Account, String> {
   private static AccountDaoImpl single_instance = null;
   private List<Account> accounts = new ArrayList<Account>();
+  private String fileName = "Account.csv";
 
   public static synchronized AccountDaoImpl getInstance() {
     if (single_instance == null) {
@@ -44,7 +49,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
     Connection conn = GenDao.connect();
     try {
       String query =
-          "UPDATE account SET password = ?, email = ?, security_question_1 = ?, security_question_2 = ?, security_answer_1 = ?, security_answer_2 = ?, active = ?, \"IDNum\" = ?, \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\" = ? WHERE username = ?";
+          "UPDATE account SET password = ?, email = ?, security_question_1 = ?, security_question_2 = ?, security_answer_1 = ?, security_answer_2 = ?, active = ?, \"IDNum\" = ?, \"firstName\" = ?, \"lastName\" = ?, title = ?, \"phoneNumber\" = ?, notes = ?, todo = ? WHERE username = ?";
       PreparedStatement pst = conn.prepareStatement(query);
       pst.setString(1, a.getPassword());
       pst.setString(2, a.getEmail());
@@ -58,7 +63,9 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(10, a.getLastName());
       pst.setString(11, a.getTitle());
       pst.setInt(12, a.getPhoneNumber());
-      pst.setString(13, uname);
+      pst.setString(13, a.getNotes());
+      pst.setString(14, a.getTodo());
+      pst.setString(15, uname);
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
@@ -113,6 +120,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   }
 
   public boolean addRow(Account a) {
+    Qdb qdb = Qdb.getInstance();
     boolean result = false;
     Connection conn = GenDao.connect();
     try {
@@ -136,6 +144,12 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       if (rs == 1) {
         result = true;
         accounts.add(a);
+
+        Image image = new Image(AccountDaoImpl.class.getResourceAsStream("/default-profile.png"));
+        byte[] imageData = qdb.convertImageToBytea(image);
+        ProfileImage newProfileImage = new ProfileImage(a.getUsername(), imageData);
+        qdb.addProfileImage(newProfileImage);
+
         System.out.println("Account created successfully!");
       } else {
         System.out.println("Failed to create your account.");

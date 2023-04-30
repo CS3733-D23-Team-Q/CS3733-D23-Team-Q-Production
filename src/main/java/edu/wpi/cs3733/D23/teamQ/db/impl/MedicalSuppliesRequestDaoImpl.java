@@ -5,13 +5,16 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequest, Integer> {
   private List<MedicalSuppliesRequest> medicalSuppliesRequests =
       new ArrayList<MedicalSuppliesRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static MedicalSuppliesRequestDaoImpl single_instance = null;
+  private String fileName = "Medical_Supplies_Requests.csv";
 
   public static synchronized MedicalSuppliesRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -65,6 +68,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
       st.setString(6, newRequest.getItem());
       st.setInt(7, newRequest.getQuantity());
       st.setString(8, newRequest.getSpecialInstructions());
+      st.setInt(9, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {
@@ -115,7 +119,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"medicalSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"medicalSuppliesRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", \"quantity\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -125,6 +129,7 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
       stmt.setString(7, request.getTime());
       stmt.setString(8, request.getItem());
       stmt.setInt(9, request.getQuantity());
+      stmt.setString(10, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

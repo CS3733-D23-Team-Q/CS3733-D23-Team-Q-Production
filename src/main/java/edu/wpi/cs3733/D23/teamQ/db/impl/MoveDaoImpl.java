@@ -10,12 +10,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lombok.Getter;
 
+@Getter
 public class MoveDaoImpl implements GenDao<Move, Integer> {
   private List<Move> moves = new ArrayList<>();
   private int nextID = 0;
   private NodeDaoImpl nodeTable;
   private static MoveDaoImpl single_instance = null;
+  private String fileName = "Moves.csv";
 
   public static synchronized MoveDaoImpl getInstance(NodeDaoImpl nodeTable) {
     if (single_instance == null) single_instance = new MoveDaoImpl(nodeTable);
@@ -50,8 +53,28 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
    * @return true if successful
    */
   public boolean updateRow(Integer moveID, Move newMove) {
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"move\" SET \"nodeID\" = ?, \"longName\" = ?, date = ?, \"moveID\" = ? "
+                    + "WHERE \"moveID\" = ?")) {
+
+      st.setInt(1, newMove.getNode().getNodeID());
+      st.setString(2, newMove.getLongName());
+      st.setDate(3, newMove.getDate());
+      st.setInt(4, moveID);
+      st.setInt(5, moveID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
     int index = this.getIndex(moveID);
-    moves.set(index, newMove);
+    moves.get(index).setNode(newMove.getNode());
+    moves.get(index).setDate(newMove.getDate());
+    moves.get(index).setLongName(newMove.getLongName());
+
     return true;
   }
 
@@ -87,11 +110,10 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO move(\"nodeID\", \"longName\", \"date\", \"moveID\") VALUES (?, ?, ?, ?)")) {
+                "INSERT INTO move(\"nodeID\", \"longName\", \"date\") VALUES (?, ?, ?)")) {
       stmt.setInt(1, m.getNode().getNodeID());
       stmt.setString(2, m.getLongName());
       stmt.setDate(3, m.getDate());
-      stmt.setInt(4, getAllRows().get(getAllRows().size() - 1).getMoveID() + 1);
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

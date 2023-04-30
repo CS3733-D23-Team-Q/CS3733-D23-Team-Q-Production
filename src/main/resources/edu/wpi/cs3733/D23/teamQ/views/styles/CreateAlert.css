@@ -1,0 +1,174 @@
+.default-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: #012d5a;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.default-button:hover {
+    -fx-background-color: #012d5a;
+    -fx-text-fill: #f1f1f1;
+}
+
+.black-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: black;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.black-button:hover {
+    -fx-background-color: black;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.blue-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: blue;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.blue-button:hover {
+    -fx-background-color: blue;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.gray-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: gray;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.gray-button:hover {
+    -fx-background-color: gray;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.green-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: green;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.green-button:hover {
+    -fx-background-color: green;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.orange-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: orange;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.orange-button:hover {
+    -fx-background-color: orange;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.pink-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: pink;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.pink-button:hover {
+    -fx-background-color: pink;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.purple-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: purple;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.purple-button:hover {
+    -fx-background-color: purple;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.red-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: red;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.red-button:hover {
+    -fx-background-color: red;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.silver-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: silver;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.silver-button:hover {
+    -fx-background-color: silver;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}
+
+.yellow-button {
+    -fx-background-color: #f1f1f1;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16;
+    -fx-text-fill: #012d5a;
+    -fx-border-color: yellow;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+.yellow-button:hover {
+    -fx-background-color: yellow;
+    -fx-text-fill: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+}

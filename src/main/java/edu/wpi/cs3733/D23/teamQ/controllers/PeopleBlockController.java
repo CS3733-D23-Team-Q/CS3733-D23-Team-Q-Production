@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.App;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.awt.*;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +19,7 @@ public class PeopleBlockController {
   @FXML MenuController mc;
 
   @FXML
-  public void anchorEntered() {
+  public void anchorEntered() throws IOException {
     mc.closeAll();
     people.setStyle("-fx-background-color: #f1f1f1; -fx-text-fill: #012d5a");
     peopleIcon.setImage(new Image(App.class.getResourceAsStream("PeopleBlue.png")));

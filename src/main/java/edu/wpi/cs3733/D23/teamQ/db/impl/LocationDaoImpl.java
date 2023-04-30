@@ -12,10 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 
+@Getter
 public class LocationDaoImpl implements GenDao<Location, Integer> {
   private List<Location> locations = new ArrayList<Location>();
   private static LocationDaoImpl single_instance = null;
+  private String fileName = "Locations.csv";
 
   private LocationDaoImpl() {
     populate();
@@ -46,11 +49,28 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
    * @return true if successful
    */
   public boolean updateRow(Integer nodeID, Location newLocation) {
-    deleteRow(nodeID);
-    addRow(newLocation);
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"nodeID\" SET \"nodeID\" = ?, \"longName\" = ?, \"shortName\" = ?, \"nodeType\" = ? "
+                    + "WHERE \"nodeID\" = ?")) {
+
+      st.setInt(1, nodeID);
+      st.setString(2, newLocation.getLongName());
+      st.setString(3, newLocation.getShortName());
+      st.setString(4, newLocation.getNodeType());
+      st.setInt(5, nodeID);
+
+      st.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     int index = this.getIndex(nodeID);
-    locations.set(index, newLocation);
+    locations.get(index).setLongName(newLocation.getLongName());
+    locations.get(index).setShortName(newLocation.getShortName());
+    locations.get(index).setNodeType(newLocation.getNodeType());
+
     return true;
   }
 
@@ -223,5 +243,14 @@ public class LocationDaoImpl implements GenDao<Location, Integer> {
       }
     }
     return id;
+  }
+
+  public Location retrieveLocationFromLongName(String lName) {
+    for (Location location : locations) {
+      if (location.getLongName().equals(lName)) {
+        return location;
+      }
+    }
+    return null;
   }
 }

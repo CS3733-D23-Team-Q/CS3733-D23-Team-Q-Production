@@ -187,24 +187,19 @@ public class AdminDirectoryController {
     }
   }
 
-  public ObservableList<EmployeeData> populateData() {
-    ObservableList<EmployeeData> allData = FXCollections.observableArrayList();
+  public ObservableList<AdminDirectoryController.EmployeeData> populateData() {
+    ObservableList<AdminDirectoryController.EmployeeData> allData =
+        FXCollections.observableArrayList();
+    String loggedInUser = LoginController.getLoginUsername();
 
     for (Account account : allAccounts) {
-      if (account.getUsername().equals("admin")) {
+      if (account.getUsername().equals(loggedInUser)) {
         continue;
       }
-      if (qdb.getProfileImageIndex(account.getUsername()) != -1) {
-        ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
-        EmployeeData employeeData = new EmployeeData(account, pfp);
-        allData.add(employeeData);
-      } else {
-        Image image = new Image(getClass().getResourceAsStream("/default-profile.png"));
-        byte[] imageData = qdb.convertImageToBytea(image);
-        ProfileImage tempProfileImage = new ProfileImage(account.getUsername(), imageData);
-        EmployeeData employeeData = new EmployeeData(account, tempProfileImage);
-        allData.add(employeeData);
-      }
+      ProfileImage pfp = qdb.retrieveProfileImage(account.getUsername());
+      AdminDirectoryController.EmployeeData employeeData =
+          new AdminDirectoryController.EmployeeData(account, pfp);
+      allData.add(employeeData);
     }
     return allData;
   }

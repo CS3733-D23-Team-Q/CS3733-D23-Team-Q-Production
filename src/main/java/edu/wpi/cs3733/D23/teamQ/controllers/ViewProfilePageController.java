@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class ViewProfilePageController {
@@ -23,10 +24,13 @@ public class ViewProfilePageController {
   @FXML private Text status;
   @FXML private MFXButton backButton;
 
+  @FXML private MFXButton chatButton;
+  @FXML private Circle statusCircle;
+
   public void initialize() {
     String loggedInUser = LoginController.getLoginUsername();
     String username;
-    if (loggedInUser.equals("admin")) {
+    if (LoginController.isAdmin()) {
       username = AdminDirectoryController.getViewProfileUsername();
     } else {
       username = DirectoryController.getViewProfileUsername();
@@ -39,7 +43,15 @@ public class ViewProfilePageController {
     displayUsername.setText(username);
     email.setText(account.getEmail());
     phone.setText(Integer.toString(account.getPhoneNumber()));
-    status.setText("Online");
+
+    statusCircle.setStroke(null);
+    if (account.isActive()) {
+      status.setText("Online");
+      statusCircle.setFill(javafx.scene.paint.Color.GREEN);
+    } else {
+      status.setText("Offline");
+      statusCircle.setFill(javafx.scene.paint.Color.RED);
+    }
 
     if (qdb.getProfileImageIndex(username) != -1) {
       Image pfp = qdb.convertByteaToImage(qdb.retrieveProfileImage(username).getImageData());
@@ -56,11 +68,24 @@ public class ViewProfilePageController {
 
   public void backButtonPressed() {
     String username = LoginController.getLoginUsername();
-    System.out.println(username);
-    if (username.equals("admin")) {
+    if (LoginController.isAdmin()) {
       Navigation.navigate(Screen.ADMIN_DIRECTORY);
     } else {
       Navigation.navigate(Screen.DIRECTORY);
     }
+  }
+
+  public void chatButtonClicked() {
+
+    String loggedInUser = LoginController.getLoginUsername();
+    String username;
+    if (LoginController.isAdmin()) {
+      username = AdminDirectoryController.getViewProfileUsername();
+    } else {
+      username = DirectoryController.getViewProfileUsername();
+    }
+
+    qdb.setMessagingAccount(qdb.getAccountFromUsername(username));
+    Navigation.navigate(Screen.MESSAGES);
   }
 }

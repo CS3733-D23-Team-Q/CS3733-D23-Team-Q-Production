@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.sql.*;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +13,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ServiceRequestDaoImpl {
+public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
   private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
+  private String fileName = "Service_Requests.csv";
 
   private static ServiceRequestDaoImpl single_instance = null;
 
@@ -43,12 +46,13 @@ public class ServiceRequestDaoImpl {
             new ServiceRequest(
                 rst.getInt("requestID"),
                 nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
                 accountTable.retrieveRow(rst.getString("requester")),
+                accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
-                rst.getInt("progress")));
+                rst.getInt("progress"),
+                rst.getString("type")));
       }
       conn.close();
       stm.close();
@@ -93,13 +97,111 @@ public class ServiceRequestDaoImpl {
     return list;
   }
 
-  public List<ServiceRequest> getUserAssignedRows(String user) {
+  public ObservableList<ServiceRequest> getUserAssignedRows(String user) {
     ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
     for (int i = 0; i < serviceRequests.size(); i++) {
       if (serviceRequests.get(i).getAssignee().getUsername().equals(user)) {
         list.add(serviceRequests.get(i));
       }
     }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserAssignedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getAssignee().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getRequester().getUsername().equals(user)
+          && serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      list.add(serviceRequests.get(i));
+    }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
+    return list;
+  }
+
+  public ObservableList<ServiceRequest> getAllOutstandingRequestsObservable() {
+    ObservableList<ServiceRequest> list = FXCollections.observableArrayList();
+    for (int i = 0; i < serviceRequests.size(); i++) {
+      if (serviceRequests.get(i).getProgress().ordinal() != 2) {
+        list.add(serviceRequests.get(i));
+      }
+    }
+    Collections.sort(
+        list,
+        new Comparator<ServiceRequest>() {
+          @Override
+          public int compare(ServiceRequest o1, ServiceRequest o2) {
+            return o1.getRequestID() - o2.getRequestID();
+          }
+        });
     return list;
   }
 
@@ -124,11 +226,16 @@ public class ServiceRequestDaoImpl {
     return true;
   }
 
+  @Override
+  public boolean addRow(ServiceRequest x) {
+    return false;
+  }
+
   public boolean updateRow(Integer requestID, ServiceRequest newRequest) {
     try (Connection connection = GenDao.connect();
         PreparedStatement st =
             connection.prepareStatement(
-                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?"
+                "UPDATE \"serviceRequest\" SET \"requestID\" = ?, \"nodeID\" = ?, requester = ?, assignee = ?, \"specialInstructions\" = ?, date = ?, time = ?, progress = ?, type = ? "
                     + "WHERE \"requestID\" = ?")) {
 
       st.setInt(1, requestID);
@@ -139,6 +246,8 @@ public class ServiceRequestDaoImpl {
       st.setDate(6, newRequest.getDate());
       st.setString(7, newRequest.getTime());
       st.setInt(8, newRequest.getProgress().ordinal());
+      st.setString(9, newRequest.getType());
+      st.setInt(10, requestID);
       st.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -151,6 +260,7 @@ public class ServiceRequestDaoImpl {
     serviceRequests.get(index).setDate(newRequest.getDate());
     serviceRequests.get(index).setTime(newRequest.getTime());
     serviceRequests.get(index).setProgress(newRequest.getProgress());
+    serviceRequests.get(index).setType(newRequest.getType());
     return true;
   }
 }

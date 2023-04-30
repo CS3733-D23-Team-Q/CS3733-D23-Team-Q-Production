@@ -1,48 +1,38 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Message {
   private Account sender;
   private Account receiver;
   private String message;
-
   private long timeStamp;
+  private boolean read;
 
   public Message(Account sender, Account receiver, String message, long timeStamp) {
     this.sender = sender;
     this.receiver = receiver;
     this.message = message;
     this.timeStamp = timeStamp;
+    this.read = false;
   }
 
-  public Account getSender() {
-    return sender;
-  }
-
-  public void setSender(Account sender) {
+  public Message(Account sender, Account receiver, String message, long timeStamp, boolean read) {
     this.sender = sender;
-  }
-
-  public Account getReceiver() {
-    return receiver;
-  }
-
-  public void setReceiver(Account receiver) {
     this.receiver = receiver;
-  }
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
     this.message = message;
-  }
-
-  public long getTimeStamp() {
-    return timeStamp;
-  }
-
-  public void setTimeStamp(long timeStamp) {
     this.timeStamp = timeStamp;
+    this.read = read;
+  }
+
+  public String toString() {
+    return sender.getUsername() + "," + receiver.getUsername() + "," + message + "," + timeStamp;
+  }
+
+  public boolean getRead() {
+    return read;
   }
 }

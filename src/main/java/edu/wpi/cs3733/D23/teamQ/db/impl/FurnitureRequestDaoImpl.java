@@ -5,12 +5,15 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.FurnitureRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer> {
   private List<FurnitureRequest> furnitureRequests = new ArrayList<FurnitureRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static FurnitureRequestDaoImpl single_instance = null;
+  private String fileName = "Furniture_Requests.csv";
 
   public static synchronized FurnitureRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -65,6 +68,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
       st.setDate(7, newRequest.getDate());
       st.setString(8, newRequest.getTime());
       st.setString(9, newRequest.getItem());
+      st.setInt(10, requestID);
 
       st.executeUpdate();
     } catch (SQLException e) {
@@ -115,7 +119,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"furnitureRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\") VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"furnitureRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"item\", type) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -124,6 +128,7 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
       stmt.setDate(6, request.getDate());
       stmt.setString(7, request.getTime());
       stmt.setString(8, request.getItem());
+      stmt.setString(9, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

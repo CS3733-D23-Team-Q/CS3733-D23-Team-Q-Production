@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.FlowerRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -8,7 +9,12 @@ import io.github.palexdev.materialfx.controls.*;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class FlowerRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -25,13 +31,16 @@ public class FlowerRequestController {
   @FXML MFXFilterComboBox timeField;
   @FXML MFXFilterComboBox flowerTypeField;
   @FXML MFXTextField bouquetChoiceField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML TextArea specialInstructionsField;
   ObservableList<String> TypeOfFlowers =
       FXCollections.observableArrayList("Roses", "Daisies", "Tulips", "Sunflowers", "Lilies");
 
   @FXML MFXButton resetButton;
   @FXML MFXButton cancelButton;
   @FXML MFXButton submitButton;
+
+  @FXML private ImageView FlowerImage;
+  @FXML private GesturePane titlePane;
 
   /**
    * Initializes the Flower Request Choice Box's Switches screens to the Home page when Cancel
@@ -49,6 +58,10 @@ public class FlowerRequestController {
     this.roomNumberField.setItems(qdb.getAllLongNames(conf));
     this.flowerTypeField.setValue("");
     this.flowerTypeField.setItems(TypeOfFlowers);
+
+    Image titleImage = new Image(App.class.getResourceAsStream("FlowerRequestTitle.jpg"));
+    ImageView iv = new ImageView(titleImage);
+    titlePane.setContent(iv);
   }
 
   @FXML
@@ -60,11 +73,13 @@ public class FlowerRequestController {
     flowerTypeField.setValue("");
     bouquetChoiceField.clear();
     specialInstructionsField.clear();
+
+    FlowerImage.setImage(null);
   }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -84,6 +99,35 @@ public class FlowerRequestController {
             Integer.parseInt(bouquetChoiceField.getText()));
 
     qdb.addFlowerRequest(newFR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
+  }
+
+  @FXML
+  public void FlowerSelected(ActionEvent event) {
+    if (flowerTypeField.getValue().equals("Roses")) {
+      Image rosesImage = new Image(App.class.getResourceAsStream("RosesBouquet.jpg"));
+      ImageView iv = new ImageView(rosesImage);
+      FlowerImage.setImage(iv.getImage());
+    }
+    if (flowerTypeField.getValue().equals("Daisies")) {
+      Image daisiesImage = new Image(App.class.getResourceAsStream("DaisiesBouquet.jpg"));
+      ImageView iv = new ImageView(daisiesImage);
+      FlowerImage.setImage(iv.getImage());
+    }
+    if (flowerTypeField.getValue().equals("Tulips")) {
+      Image tulipsImage = new Image(App.class.getResourceAsStream("TulipsBouquet.jpg"));
+      ImageView iv = new ImageView(tulipsImage);
+      FlowerImage.setImage(iv.getImage());
+    }
+    if (flowerTypeField.getValue().equals("Sunflowers")) {
+      Image sunflowersImage = new Image(App.class.getResourceAsStream("SunflowersBouquet.jpg"));
+      ImageView iv = new ImageView(sunflowersImage);
+      FlowerImage.setImage(iv.getImage());
+    }
+    if (flowerTypeField.getValue().equals("Lilies")) {
+      Image liliesImage = new Image(App.class.getResourceAsStream("LiliesBouquet.jpg"));
+      ImageView iv = new ImageView(liliesImage);
+      FlowerImage.setImage(iv.getImage());
+    }
   }
 }

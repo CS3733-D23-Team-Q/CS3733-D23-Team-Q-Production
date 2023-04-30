@@ -29,8 +29,11 @@ public class ServiceRequestSubmenuController {
 
   @FXML
   public void editClicked() {
-    Navigation.navigate(Screen.LIST_REQUESTS);
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    if (LoginController.isAdmin()) {
+      Navigation.navigate(Screen.ADMIN_LIST_REQUESTS);
+    } else {
+      Navigation.navigate(Screen.LIST_REQUESTS);
+    }
   }
 
   @FXML

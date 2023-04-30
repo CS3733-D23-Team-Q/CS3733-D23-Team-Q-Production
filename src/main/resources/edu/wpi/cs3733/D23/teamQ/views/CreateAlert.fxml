@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.CreateAlertController">
+   <children>
+      <Label text="Create New Alert" textFill="#012d5a">
+         <font>
+            <Font name="Roboto Bold" size="24.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <VBox minHeight="-Infinity" prefWidth="384.0" spacing="226.0">
+               <children>
+                  <VBox spacing="12.0">
+                     <children>
+                        <Label text="Alert Text:" textFill="#012d5a">
+                           <font>
+                              <Font name="Roboto" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="input" maxWidth="-Infinity" prefHeight="192.0" prefWidth="384.0" promptText="Enter an alert here:" wrapText="true">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+                  <HBox minWidth="640.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <MFXButton fx:id="resetButton" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Reset" textFill="WHITE">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                        </MFXButton>
+                        <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <HBox spacing="16.0">
+                           <children>
+                              <MFXButton fx:id="cancelButton" onAction="#cancelButtonClicked" prefHeight="50.0" prefWidth="128.0" text="Cancel">
+                                 <font>
+                                    <Font name="Roboto" size="16.0" />
+                                 </font>
+                              </MFXButton>
+                              <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
+                                 <font>
+                                    <Font name="Roboto" size="16.0" />
+                                 </font>
+                              </MFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <VBox prefWidth="384.0" spacing="12.0">
+               <children>
+                  <Label text="Default Alert Templates" textFill="#012d5a">
+                     <font>
+                        <Font name="Roboto" size="24.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="12.0">
+                     <children>
+                        <MFXButton fx:id="black" onAction="#blackClicked" prefHeight="36.0" prefWidth="384.0" styleClass="black-button" stylesheets="@styles/CreateAlert.css" text="Code Black: Bomb Threat or Active Shooter" />
+                        <MFXButton fx:id="blue" onAction="#blueClicked" prefHeight="36.0" prefWidth="384.0" styleClass="blue-button" stylesheets="@styles/CreateAlert.css" text="Code Blue: Cardiac or Respiratory Arrest" />
+                        <MFXButton fx:id="gray" onAction="#grayClicked" prefHeight="36.0" prefWidth="384.0" styleClass="gray-button" stylesheets="@styles/CreateAlert.css" text="Code Gray: Severe Weather Event" />
+                        <MFXButton fx:id="green" onAction="#greenClicked" prefHeight="36.0" prefWidth="384.0" styleClass="green-button" stylesheets="@styles/CreateAlert.css" text="Code Green: Mass Casualty Event" />
+                        <MFXButton fx:id="orange" onAction="#orangeClicked" prefHeight="36.0" prefWidth="384.0" styleClass="orange-button" stylesheets="@styles/CreateAlert.css" text="Code Orange: Hazardous Material Release" />
+                        <MFXButton fx:id="pink" onAction="#pinkClicked" prefHeight="36.0" prefWidth="384.0" styleClass="pink-button" stylesheets="@styles/CreateAlert.css" text="Code Pink: Pediatric Emergency" />
+                        <MFXButton fx:id="purple" onAction="#purpleClicked" prefHeight="36.0" prefWidth="384.0" styleClass="purple-button" stylesheets="@styles/CreateAlert.css" text="Code Purple: Violent or Combative Patient" />
+                        <MFXButton fx:id="red" onAction="#redClicked" prefHeight="36.0" prefWidth="384.0" styleClass="red-button" stylesheets="@styles/CreateAlert.css" text="Code Red: Fire Emergency" />
+                        <MFXButton fx:id="silver" onAction="#silverClicked" prefHeight="36.0" prefWidth="384.0" styleClass="silver-button" stylesheets="@styles/CreateAlert.css" text="Code Silver: Security Threat" />
+                        <MFXButton fx:id="yellow" onAction="#yellowClicked" prefHeight="36.0" prefWidth="384.0" styleClass="yellow-button" stylesheets="@styles/CreateAlert.css" text="Code Yellow: Missing Patient" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="12.0" right="12.0" top="16.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="48.0" />
+   </padding>
+</VBox>

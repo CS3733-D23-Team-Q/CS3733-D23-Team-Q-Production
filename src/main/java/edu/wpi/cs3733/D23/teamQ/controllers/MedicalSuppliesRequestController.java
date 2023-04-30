@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import static edu.wpi.cs3733.D23.teamQ.controllers.ListServiceRequestController.getMedicalRequest;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MedicalSuppliesRequest;
@@ -16,6 +17,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class MedicalSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -30,16 +35,19 @@ public class MedicalSuppliesRequestController {
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML TextArea specialInstructionsField;
   @FXML MFXFilterComboBox itemRequestedField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList(
-          "bandaids", "cotton balls", "gauze", "tongue depressers", "sterile syringe");
+          "Bandaids", "Cotton Balls", "Gauze", "Tongue Depressers", "Sterile Syringe");
   @FXML MFXTextField quantityField;
 
   @FXML Button resetButton;
   @FXML Button cancelButton;
   @FXML Button submitButton;
+
+  @FXML private ImageView ItemImage;
+  @FXML private GesturePane titlePane;
 
   @FXML
   public void initialize() {
@@ -51,6 +59,10 @@ public class MedicalSuppliesRequestController {
     this.itemRequestedField.setItems(itemList);
     this.timeField.setValue("");
     this.timeField.setItems(timeList);
+
+    Image titleImage = new Image(App.class.getResourceAsStream("MedicalSuppliesTitle.jpg"));
+    ImageView iv = new ImageView(titleImage);
+    titlePane.setContent(iv);
   }
 
   @FXML
@@ -62,6 +74,8 @@ public class MedicalSuppliesRequestController {
     dateField.clear();
     specialInstructionsField.clear();
     quantityField.clear();
+
+    ItemImage.setImage(null);
   }
 
   @FXML
@@ -84,7 +98,7 @@ public class MedicalSuppliesRequestController {
             itemRequestedField.getValue().toString(),
             Integer.parseInt(quantityField.getText()));
     qdb.addMedicalSuppliesRequest(newMSR);
-    Navigation.navigateRight(Screen.SUBMISSION);
+    Navigation.navigate(Screen.SUBMISSION);
   }
 
   public void deleteButtonClicked(ActionEvent actionEvent) {
@@ -93,7 +107,7 @@ public class MedicalSuppliesRequestController {
   }
 
   public void backButtonClicked(ActionEvent actionEvent) {
-    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   public void updateButtonClicked(ActionEvent actionEvent) {
@@ -113,5 +127,34 @@ public class MedicalSuppliesRequestController {
             Integer.parseInt(quantityField.getText()));
 
     qdb.updateMedicalSuppliesRequest(getMedicalRequest().getRequestID(), newMedR);
+  }
+
+  @FXML
+  public void ItemSelected(ActionEvent event) {
+    if (itemRequestedField.getValue().equals("Bandaids")) {
+      Image bandaidsImage = new Image(App.class.getResourceAsStream("Bandaids.jpg"));
+      ImageView iv = new ImageView(bandaidsImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Cotton Balls")) {
+      Image cottonballsImage = new Image(App.class.getResourceAsStream("Cottonballs.jpg"));
+      ImageView iv = new ImageView(cottonballsImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Gauze")) {
+      Image gauzeImage = new Image(App.class.getResourceAsStream("Gauze.jpg"));
+      ImageView iv = new ImageView(gauzeImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Tongue Depressers")) {
+      Image tongueDepressersImage = new Image(App.class.getResourceAsStream("TongueDepresser.jpg"));
+      ImageView iv = new ImageView(tongueDepressersImage);
+      ItemImage.setImage(iv.getImage());
+    }
+    if (itemRequestedField.getValue().equals("Sterile Syringe")) {
+      Image syringeImage = new Image(App.class.getResourceAsStream("Syringe.jpg"));
+      ImageView iv = new ImageView(syringeImage);
+      ItemImage.setImage(iv.getImage());
+    }
   }
 }

@@ -5,13 +5,18 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.PatientTransportRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRequest, Integer> {
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
   private NodeDaoImpl nodeTable;
   private AccountDaoImpl accountTable;
   private static PatientTransportRequestDaoImpl single_instance = null;
+  private String fileName = "Patient_Transport_Requests.csv";
 
   public static synchronized PatientTransportRequestDaoImpl getInstance(
       AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
@@ -115,7 +120,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"transport\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"patientTransportRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"transport\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -124,6 +129,7 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
       stmt.setDate(6, request.getDate());
       stmt.setString(7, request.getTime());
       stmt.setString(8, request.getItem());
+      stmt.setString(9, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();
