@@ -69,7 +69,7 @@ public class MealDeliveryRequest2Controller {
     this.sideField.setValue("");
     this.sideField.setItems(sideList);
 
-    Image titleImage = new Image(App.class.getResourceAsStream("kabobimage2.jpg"));
+    Image titleImage = new Image(App.class.getResourceAsStream("MealDeliveryTitle.jpg"));
     ImageView iv = new ImageView(titleImage);
     titlePane.setContent(iv);
   }

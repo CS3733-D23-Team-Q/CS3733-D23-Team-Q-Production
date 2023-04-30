@@ -18,9 +18,9 @@
       <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
             <ImageView fitHeight="125.0" fitWidth="1360.0" StackPane.alignment="TOP_LEFT">
-               <image>
-                  <Image url="@../FurnitureRequestTitle.jpg" />
-               </image>
+<!--               <image>-->
+<!--                  <Image url="@../FurnitureRequestTitle.jpg" />-->
+<!--               </image>-->
             </ImageView>
             <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Furniture Delivery Form ">
                <font>
