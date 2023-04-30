@@ -10,6 +10,8 @@ import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -310,7 +312,12 @@ public class MessagingController implements Subscriber {
       if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
         populateMessages();
         populateAccounts();
-        String path = getClass().getResource("/alert.wav").getPath();
+        URI path = null;
+        try {
+          path = getClass().getResource("/alert.wav").toURI();
+        } catch (URISyntaxException e) {
+          throw new RuntimeException(e);
+        }
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
