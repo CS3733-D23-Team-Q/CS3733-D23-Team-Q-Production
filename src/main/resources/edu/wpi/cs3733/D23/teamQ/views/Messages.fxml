@@ -17,14 +17,14 @@
    <children>
       <HBox prefHeight="96.0" style="-fx-background-color: #b4b4b4;">
          <children>
-            <HBox alignment="CENTER" prefWidth="288.0" spacing="16.0" style="-fx-background-color: #e5e5e5;">
+            <HBox alignment="CENTER_LEFT" prefWidth="288.0" spacing="16.0" style="-fx-background-color: #e5e5e5;">
                <children>
                   <Label text="Messages" textFill="#012d5a">
                      <font>
                         <Font name="Roboto" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="composeButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#composeButtonClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="composeButton" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#composeButtonClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../pen-to-square-solid.png" />
                      </image>
@@ -68,7 +68,7 @@
             </MFXScrollPane>
             <VBox style="-fx-background-color: #f1f1f1;" HBox.hgrow="ALWAYS">
                <children>
-                  <MFXScrollPane fx:id="messageSP" hbarPolicy="NEVER" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
+                  <MFXScrollPane fx:id="messageSP" hbarPolicy="NEVER" prefWidth="1072.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="messageVbox" prefHeight="740.0" prefWidth="1072.0">
                            <padding>
@@ -80,7 +80,7 @@
                   <HBox alignment="CENTER" prefHeight="64.0" spacing="16.0">
                      <children>
                         <MFXTextField fx:id="messageField" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="868.0" HBox.hgrow="ALWAYS" />
-                        <ImageView fx:id="sendButton" fitHeight="42.0" fitWidth="41.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="sendButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../paper-plane-solid.png" />
                            </image>
