@@ -48,6 +48,7 @@ public class MessagingController implements Subscriber {
 
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
+  @FXML HBox profileHbox;
   @FXML ImageView composeButton;
   @FXML VBox accountVbox;
   @FXML MFXScrollPane accountSP;
@@ -132,11 +133,7 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void composeButtonClicked() {
-
-    personLabel.setVisible(false);
-    profilePicture.setVisible(false);
-    activeIndicator.setVisible(false);
-    peopleSelector.setVisible(true);
+    profileHbox.setVisible(true);
   }
 
   @FXML

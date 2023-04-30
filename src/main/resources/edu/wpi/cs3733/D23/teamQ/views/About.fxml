@@ -100,7 +100,7 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="ashley1" text="Ashley Jacobs" textFill="#012d5a">
+                                          <Label fx:id="ashley1" text="Ashley Jacob" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
@@ -200,7 +200,7 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="lydia1" text="Kelu (Lydia) Liu" textFill="#012d5a">
+                                          <Label fx:id="lydia1" text="Kelu Liu" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
@@ -231,7 +231,7 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="amy1" text="Yuran (Amy) Xue" textFill="#012d5a">
+                                          <Label fx:id="amy1" text="Yuran Xue" textFill="#012d5a">
                                              <font>
                                                 <Font name="Roboto" size="24.0" />
                                              </font>
