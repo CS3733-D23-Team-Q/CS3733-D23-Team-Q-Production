@@ -1,19 +1,22 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.MealRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class MealDeliveryRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -28,7 +31,7 @@ public class MealDeliveryRequestController {
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML TextArea specialInstructionsField;
 
   @FXML MFXFilterComboBox drinkField;
   @FXML MFXFilterComboBox entreeField;
@@ -38,6 +41,11 @@ public class MealDeliveryRequestController {
   @FXML Button cancelButton;
   @FXML Button submitButton;
 
+  @FXML private ImageView DrinkImage;
+  @FXML private ImageView EntreeImage;
+  @FXML private ImageView SideImage;
+  @FXML private GesturePane titlePane;
+
   ObservableList<String> drinkList =
       FXCollections.observableArrayList("Water", "Coke", "Coffee", "Tea");
   ObservableList<String> entreeList =
@@ -45,22 +53,6 @@ public class MealDeliveryRequestController {
 
   ObservableList<String> sideList =
       FXCollections.observableArrayList("Fries", "Onion Rings", "Soup", "Salad");
-
-  @FXML private ImageView WaterImage;
-  @FXML private ImageView CokeImage;
-  @FXML private ImageView CoffeeImage;
-  @FXML private ImageView TeaImage;
-
-  @FXML private ImageView ChickenImage;
-  @FXML private ImageView SteakImage;
-  @FXML private ImageView PorkImage;
-  @FXML private ImageView FishImage;
-  @FXML private ImageView VegetarianImage;
-
-  @FXML private ImageView FriesImage;
-  @FXML private ImageView OnionRingsImage;
-  @FXML private ImageView SoupImage;
-  @FXML private ImageView SaladImage;
 
   @FXML
   public void initialize() {
@@ -77,21 +69,9 @@ public class MealDeliveryRequestController {
     this.sideField.setValue("");
     this.sideField.setItems(sideList);
 
-    WaterImage.setOpacity(0.0);
-    CokeImage.setOpacity(0.0);
-    CoffeeImage.setOpacity(0.0);
-    TeaImage.setOpacity(0.0);
-
-    ChickenImage.setOpacity(0.0);
-    SteakImage.setOpacity(0.0);
-    PorkImage.setOpacity(0.0);
-    FishImage.setOpacity(0.0);
-    VegetarianImage.setOpacity(0.0);
-
-    FriesImage.setOpacity(0.0);
-    OnionRingsImage.setOpacity(0.0);
-    SoupImage.setOpacity(0.0);
-    SaladImage.setOpacity(0.0);
+    Image titleImage = new Image(App.class.getResourceAsStream("MealDeliveryTitle.jpg"));
+    ImageView iv = new ImageView(titleImage);
+    titlePane.setContent(iv);
   }
 
   @FXML
@@ -105,26 +85,14 @@ public class MealDeliveryRequestController {
     sideField.setValue("");
     specialInstructionsField.clear();
 
-    WaterImage.setOpacity(0.0);
-    CokeImage.setOpacity(0.0);
-    CoffeeImage.setOpacity(0.0);
-    TeaImage.setOpacity(0.0);
-
-    ChickenImage.setOpacity(0.0);
-    SteakImage.setOpacity(0.0);
-    PorkImage.setOpacity(0.0);
-    FishImage.setOpacity(0.0);
-    VegetarianImage.setOpacity(0.0);
-
-    FriesImage.setOpacity(0.0);
-    OnionRingsImage.setOpacity(0.0);
-    SoupImage.setOpacity(0.0);
-    SaladImage.setOpacity(0.0);
+    EntreeImage.setImage(null);
+    DrinkImage.setImage(null);
+    SideImage.setImage(null);
   }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -134,8 +102,8 @@ public class MealDeliveryRequestController {
     MealRequest newMR =
         new MealRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             (String) timeField.getValue(),
@@ -151,95 +119,77 @@ public class MealDeliveryRequestController {
   @FXML
   public void EntreeSelected(ActionEvent event) {
     if (entreeField.getValue().equals("Chicken")) {
-      ChickenImage.setOpacity(1.0);
-      SteakImage.setOpacity(0.0);
-      PorkImage.setOpacity(0.0);
-      FishImage.setOpacity(0.0);
-      VegetarianImage.setOpacity(0.0);
+      Image chickenImage = new Image(App.class.getResourceAsStream("ChickenEntree.jpg"));
+      ImageView iv = new ImageView(chickenImage);
+      EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Steak")) {
-      ChickenImage.setOpacity(0.0);
-      SteakImage.setOpacity(1.0);
-      PorkImage.setOpacity(0.0);
-      FishImage.setOpacity(0.0);
-      VegetarianImage.setOpacity(0.0);
+      Image steakImage = new Image(App.class.getResourceAsStream("SteakEntree.jpg"));
+      ImageView iv = new ImageView(steakImage);
+      EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Pork")) {
-      ChickenImage.setOpacity(0.0);
-      SteakImage.setOpacity(0.0);
-      PorkImage.setOpacity(1.0);
-      FishImage.setOpacity(0.0);
-      VegetarianImage.setOpacity(0.0);
+      Image porkImage = new Image(App.class.getResourceAsStream("PorkEntree.jpg"));
+      ImageView iv = new ImageView(porkImage);
+      EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Fish")) {
-      ChickenImage.setOpacity(0.0);
-      SteakImage.setOpacity(0.0);
-      PorkImage.setOpacity(0.0);
-      FishImage.setOpacity(1.0);
-      VegetarianImage.setOpacity(0.0);
+      Image fishImage = new Image(App.class.getResourceAsStream("FishEntree.jpg"));
+      ImageView iv = new ImageView(fishImage);
+      EntreeImage.setImage(iv.getImage());
     }
     if (entreeField.getValue().equals("Vegetarian")) {
-      ChickenImage.setOpacity(0.0);
-      SteakImage.setOpacity(0.0);
-      PorkImage.setOpacity(0.0);
-      FishImage.setOpacity(0.0);
-      VegetarianImage.setOpacity(1.0);
+      Image vegetarianImage = new Image(App.class.getResourceAsStream("VegetarianEntree.jpg"));
+      ImageView iv = new ImageView(vegetarianImage);
+      EntreeImage.setImage(iv.getImage());
     }
   }
 
   @FXML
   public void DrinkSelected(ActionEvent event) {
     if (drinkField.getValue().equals("Water")) {
-      WaterImage.setOpacity(1.0);
-      CokeImage.setOpacity(0.0);
-      CoffeeImage.setOpacity(0.0);
-      TeaImage.setOpacity(0.0);
+      Image waterImage = new Image(App.class.getResourceAsStream("WaterDrink.jpg"));
+      ImageView iv = new ImageView(waterImage);
+      DrinkImage.setImage(iv.getImage());
     }
     if (drinkField.getValue().equals("Coke")) {
-      WaterImage.setOpacity(0.0);
-      CokeImage.setOpacity(1.0);
-      CoffeeImage.setOpacity(0.0);
-      TeaImage.setOpacity(0.0);
+      Image cokeImage = new Image(App.class.getResourceAsStream("CokeDrink.jpg"));
+      ImageView iv = new ImageView(cokeImage);
+      DrinkImage.setImage(iv.getImage());
     }
     if (drinkField.getValue().equals("Coffee")) {
-      WaterImage.setOpacity(0.0);
-      CokeImage.setOpacity(0.0);
-      CoffeeImage.setOpacity(1.0);
-      TeaImage.setOpacity(0.0);
+      Image coffeeImage = new Image(App.class.getResourceAsStream("CoffeeDrink.jpg"));
+      ImageView iv = new ImageView(coffeeImage);
+      DrinkImage.setImage(iv.getImage());
     }
     if (drinkField.getValue().equals("Tea")) {
-      WaterImage.setOpacity(0.0);
-      CokeImage.setOpacity(0.0);
-      CoffeeImage.setOpacity(0.0);
-      TeaImage.setOpacity(1.0);
+      Image teaImage = new Image(App.class.getResourceAsStream("TeaDrink.jpg"));
+      ImageView iv = new ImageView(teaImage);
+      DrinkImage.setImage(iv.getImage());
     }
   }
 
   @FXML
   public void SideSelected(ActionEvent event) {
     if (sideField.getValue().equals("Fries")) {
-      FriesImage.setOpacity(1.0);
-      OnionRingsImage.setOpacity(0.0);
-      SoupImage.setOpacity(0.0);
-      SaladImage.setOpacity(0.0);
+      Image friesImage = new Image(App.class.getResourceAsStream("FriesSide.jpg"));
+      ImageView iv = new ImageView(friesImage);
+      SideImage.setImage(iv.getImage());
     }
     if (sideField.getValue().equals("Onion Rings")) {
-      FriesImage.setOpacity(0.0);
-      OnionRingsImage.setOpacity(1.0);
-      SoupImage.setOpacity(0.0);
-      SaladImage.setOpacity(0.0);
+      Image onionRingsImage = new Image(App.class.getResourceAsStream("OnionRingsSide.jpg"));
+      ImageView iv = new ImageView(onionRingsImage);
+      SideImage.setImage(iv.getImage());
     }
     if (sideField.getValue().equals("Soup")) {
-      FriesImage.setOpacity(0.0);
-      OnionRingsImage.setOpacity(0.0);
-      SoupImage.setOpacity(1.0);
-      SaladImage.setOpacity(0.0);
+      Image soupImage = new Image(App.class.getResourceAsStream("SoupSide.jpg"));
+      ImageView iv = new ImageView(soupImage);
+      SideImage.setImage(iv.getImage());
     }
     if (sideField.getValue().equals("Salad")) {
-      FriesImage.setOpacity(0.0);
-      OnionRingsImage.setOpacity(0.0);
-      SoupImage.setOpacity(0.0);
-      SaladImage.setOpacity(1.0);
+      Image saladImage = new Image(App.class.getResourceAsStream("SaladSide.jpg"));
+      ImageView iv = new ImageView(saladImage);
+      SideImage.setImage(iv.getImage());
     }
   }
 }
