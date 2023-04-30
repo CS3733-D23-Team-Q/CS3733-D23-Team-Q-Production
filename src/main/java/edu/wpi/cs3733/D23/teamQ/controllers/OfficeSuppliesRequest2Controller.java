@@ -57,7 +57,7 @@ public class OfficeSuppliesRequest2Controller {
     this.timeField.setValue("");
     this.timeField.setItems(timeList);
 
-    Image titleImage = new Image(App.class.getResourceAsStream("MedicalSuppliesTitle.jpg"));
+    Image titleImage = new Image(App.class.getResourceAsStream("OfficeSuppliesTitle.jpg"));
     ImageView iv = new ImageView(titleImage);
     titlePane.setContent(iv);
   }
