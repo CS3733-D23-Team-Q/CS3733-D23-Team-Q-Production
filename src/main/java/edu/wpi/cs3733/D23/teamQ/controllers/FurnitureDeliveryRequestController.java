@@ -82,8 +82,8 @@ public class FurnitureDeliveryRequestController {
     FurnitureRequest newFR =
         new FurnitureRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),

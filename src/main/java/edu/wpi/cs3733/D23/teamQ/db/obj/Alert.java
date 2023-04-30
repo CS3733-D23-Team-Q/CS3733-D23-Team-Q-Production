@@ -21,6 +21,30 @@ public class Alert {
     this.message = message;
   }
 
+  public int getAlertID() {
+    return alertID;
+  }
+
+  public void setAlertID(int alertID) {
+    this.alertID = alertID;
+  }
+
+  public long getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(long timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
   @Override
   public String toString() {
     return timestamp + "," + message + "," + alertID;

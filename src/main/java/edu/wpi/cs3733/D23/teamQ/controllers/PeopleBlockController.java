@@ -5,8 +5,6 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import java.awt.*;
 import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,21 +21,6 @@ public class PeopleBlockController {
   @FXML
   public void anchorEntered() throws IOException {
     mc.closeAll();
-    if (LoginController.isAdmin()) {
-      peopleSMPane.getChildren().clear();
-      String filename = "views/PeopleSubmenuAdmin.fxml";
-      final var resource = App.class.getResource(filename);
-      final FXMLLoader loader = new FXMLLoader(resource);
-      Node n = loader.load();
-      peopleSMPane.getChildren().add(n);
-    } else {
-      peopleSMPane.getChildren().clear();
-      String filename = "views/PeopleSubmenu.fxml";
-      final var resource = App.class.getResource(filename);
-      final FXMLLoader loader = new FXMLLoader(resource);
-      Node n = loader.load();
-      peopleSMPane.getChildren().add(n);
-    }
     people.setStyle("-fx-background-color: #f1f1f1; -fx-text-fill: #012d5a");
     peopleIcon.setImage(new Image(App.class.getResourceAsStream("PeopleBlue.png")));
     peopleSMPane.setVisible(true);

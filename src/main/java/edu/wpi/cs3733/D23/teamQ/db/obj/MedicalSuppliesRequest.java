@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRequest {
+  private static final String type = "Medical Supplies Request";
   private String item;
   private int quantity;
   private Type requestType = this.getClass();
@@ -24,7 +25,7 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
       int progress,
       String item,
       int quantity) {
-    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
+    super(requestID, node, requester, assignee, specialInstructions, date, time, progress, type);
     this.item = item;
     this.quantity = quantity;
   }
@@ -39,7 +40,7 @@ public class MedicalSuppliesRequest extends ServiceRequest implements IServiceRe
       int progress,
       String item,
       int quantity) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, requester, assignee, specialInstructions, date, time, progress, type);
     this.item = item;
     this.quantity = quantity;
   }

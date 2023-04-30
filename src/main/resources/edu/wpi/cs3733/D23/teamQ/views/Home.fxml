@@ -20,7 +20,16 @@
             <Label fx:id="title" text="Welcome Back User!" textFill="#012d5a">
                <font>
                   <Font name="Roboto" size="36.0" />
-               </font></Label>
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Label>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="datetime" text="Date/Time" textFill="#012d5a">
+               <font>
+                  <Font name="Roboto" size="24.0" />
+               </font>
+            </Label>
          </children>
          <padding>
             <Insets left="12.0" right="12.0" />
@@ -32,16 +41,16 @@
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox spacing="24.0">
                <children>
-                  <VBox prefHeight="642.0" prefWidth="640.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="642.0" prefWidth="640.0" spacing="8.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;">
                      <children>
                         <Label prefHeight="32.0" text="Alerts" textFill="#012d5a">
                            <font>
                               <Font name="Roboto" size="28.0" />
                            </font>
                         </Label>
-                        <MFXScrollPane prefHeight="610.0" prefWidth="384.0" style="-fx-background-color: #f1f1f1;">
+                        <MFXScrollPane prefHeight="610.0" prefWidth="640.0" style="-fx-background-color: #f1f1f1;" vbarPolicy="ALWAYS">
                            <content>
-                              <VBox fx:id="alertBox" prefHeight="610.0" spacing="4.0" />
+                              <VBox fx:id="alertBox" spacing="8.0" />
                            </content>
                         </MFXScrollPane>
                      </children>
@@ -49,14 +58,14 @@
                         <Insets bottom="4.0" left="8.0" right="4.0" top="4.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="642.0" prefWidth="384.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;">
+                  <VBox prefHeight="642.0" prefWidth="384.0" spacing="8.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;">
                      <children>
                         <Label prefHeight="32.0" text="Notes" textFill="#012d5a">
                            <font>
                               <Font name="Roboto" size="28.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="notesField" maxHeight="-Infinity" onMouseExited="#saveNotes" prefHeight="610.0" prefWidth="384.0" promptText="Write Here:">
+                        <TextArea fx:id="notesField" maxHeight="-Infinity" onMouseExited="#saveNotes" prefHeight="610.0" prefWidth="384.0" promptText="Write Here:" wrapText="true">
                            <effect>
                               <ColorAdjust brightness="-0.14">
                                  <input>
@@ -65,12 +74,12 @@
                               </ColorAdjust>
                            </effect>
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Roboto" size="14.0" />
                            </font>
                         </TextArea>
                      </children>
                      <padding>
-                        <Insets bottom="4.0" left="8.0" right="4.0" top="4.0" />
+                        <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
                      </padding>
                   </VBox>
                </children>
