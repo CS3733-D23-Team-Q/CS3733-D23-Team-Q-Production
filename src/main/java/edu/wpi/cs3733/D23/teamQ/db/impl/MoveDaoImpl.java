@@ -54,10 +54,10 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
    */
   public boolean updateRow(Integer moveID, Move newMove) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"move\" SET \"nodeID\" = ?, \"longName\" = ?, date = ?, \"moveID\" = ? "
-                                 + "WHERE \"moveID\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"move\" SET \"nodeID\" = ?, \"longName\" = ?, date = ?, \"moveID\" = ? "
+                    + "WHERE \"moveID\" = ?")) {
 
       st.setInt(1, newMove.getNode().getNodeID());
       st.setString(2, newMove.getLongName());

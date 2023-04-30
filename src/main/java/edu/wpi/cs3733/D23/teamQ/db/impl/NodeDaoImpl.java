@@ -57,10 +57,10 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
    */
   public boolean updateRow(Integer nodeID, Node newNode) {
     try (Connection connection = GenDao.connect();
-         PreparedStatement st =
-                 connection.prepareStatement(
-                         "UPDATE \"node\" SET \"nodeID\" = ?, xcoord = ?, ycoord = ?, floor = ?, building = ? "
-                                 + "WHERE \"nodeID\" = ?")) {
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE \"node\" SET \"nodeID\" = ?, xcoord = ?, ycoord = ?, floor = ?, building = ? "
+                    + "WHERE \"nodeID\" = ?")) {
 
       st.setInt(1, nodeID);
       st.setInt(2, newNode.getXCoord());
