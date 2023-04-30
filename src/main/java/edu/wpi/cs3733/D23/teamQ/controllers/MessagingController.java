@@ -38,6 +38,7 @@ import javafx.scene.text.TextFlow;
 
 public class MessagingController implements Subscriber {
   Account receiver;
+  @FXML VBox root;
   @FXML ImageView sendButton;
   @FXML VBox messageVbox;
   @FXML MFXTextField messageField;
@@ -61,6 +62,8 @@ public class MessagingController implements Subscriber {
     qdb.subscribe(this);
 
     populateAccounts();
+
+    root.setFocusTraversable(false);
 
     peopleSelector.setValue("");
     peopleSelector.setItems(qdb.getAllNames());
@@ -133,7 +136,7 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void composeButtonClicked() {
-    profileHbox.setVisible(true);
+    peopleSelector.setVisible(true);
   }
 
   @FXML
@@ -266,9 +269,7 @@ public class MessagingController implements Subscriber {
     messageVbox.getChildren().clear();
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
-    personLabel.setVisible(true);
-    profilePicture.setVisible(true);
-    activeIndicator.setVisible(true);
+    profileHbox.setVisible(true);
 
     if (!messageVbox.getChildren().isEmpty()) {
       messageVbox.getChildren().clear();

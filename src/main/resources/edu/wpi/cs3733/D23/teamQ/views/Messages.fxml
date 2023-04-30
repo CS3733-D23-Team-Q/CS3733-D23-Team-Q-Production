@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagingController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagingController">
    <children>
       <HBox prefHeight="96.0" style="-fx-background-color: #b4b4b4;">
          <children>
@@ -24,7 +24,7 @@
                         <Font name="Roboto" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="composeButton" onMouseClicked="#composeButtonClicked" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="composeButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#composeButtonClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../pen-to-square-solid.png" />
                      </image>
@@ -55,7 +55,7 @@
                </children>
             </StackPane>
          </children></HBox>
-      <HBox prefHeight="804.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
+      <HBox prefHeight="804.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
          <children>
             <MFXScrollPane fx:id="accountSP" hbarPolicy="NEVER" prefWidth="288.0" style="-fx-background-color: #e5e5e5;">
                <content>
@@ -79,7 +79,7 @@
                   </MFXScrollPane>
                   <HBox alignment="CENTER" prefHeight="64.0" spacing="16.0">
                      <children>
-                        <MFXTextField fx:id="messageField" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="740.0" HBox.hgrow="ALWAYS" />
+                        <MFXTextField fx:id="messageField" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="868.0" HBox.hgrow="ALWAYS" />
                         <ImageView fx:id="sendButton" fitHeight="42.0" fitWidth="41.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../paper-plane-solid.png" />
