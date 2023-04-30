@@ -19,7 +19,7 @@
         <GesturePane fx:id="titlePane" hbarPolicy="NEVER" prefHeight="128.0" prefWidth="1360.0" vbarPolicy="NEVER" />
         <HBox>
             <children>
-                <Label prefHeight="48.0" text="Flower Delivery Request" textFill="#012d5a">
+                <Label prefHeight="48.0" text="Flower Request" textFill="#012d5a">
                     <font>
                         <Font name="Roboto" size="36.0" />
                     </font>
@@ -158,9 +158,9 @@
                                         <Insets left="130.0" />
                                     </VBox.margin>
                                 </Text>
-                                <ImageView fx:id="FlowerImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                                <ImageView fx:id="FlowerImage" fitHeight="250.0" fitWidth="300.0" pickOnBounds="true">
                                     <VBox.margin>
-                                        <Insets left="255.0" />
+                                        <Insets left="205.0" top="10.0" />
                                     </VBox.margin>
                                 </ImageView>
                             </children>
