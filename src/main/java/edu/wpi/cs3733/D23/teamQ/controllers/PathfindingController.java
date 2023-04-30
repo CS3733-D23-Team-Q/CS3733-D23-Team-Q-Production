@@ -316,12 +316,16 @@ public class PathfindingController {
 
     if (previousNodesm.size() > 0) {
       for (Node node : previousNodesm) {
+        boolean add = true;
         for (Node moven : moveNodes) {
-          if (!node.getLocation()
+          if (node.getLocation()
               .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
             // node.getLocation().equals(moven.getLocation()))
-            nodeswchanges.add(node);
+            add = false;
           }
+        }
+        if (add) {
+          nodeswchanges.add(node);
         }
       }
     }
@@ -457,12 +461,16 @@ public class PathfindingController {
     currentNodes.addAll(moveNodes);
     if (previousNodesm.size() > 0) {
       for (Node node : previousNodesm) {
+        boolean add = true;
         for (Node moven : moveNodes) {
           if (!node.getLocation()
               .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
             // node.getLocation().equals(moven.getLocation()))
-            currentNodes.add(node);
+            add = false;
           }
+        }
+        if (add) {
+          currentNodes.add(node);
         }
       }
     }
