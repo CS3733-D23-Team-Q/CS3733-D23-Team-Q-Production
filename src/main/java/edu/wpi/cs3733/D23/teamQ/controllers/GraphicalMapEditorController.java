@@ -200,6 +200,18 @@ public class GraphicalMapEditorController {
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
         });
+    AlineBtn.setOnMouseEntered(
+        e -> {
+          AlineBtn.setCursor(Cursor.HAND);
+        });
+    ClearNodeBtn.setOnMouseEntered(
+        e -> {
+          ClearNodeBtn.setCursor(Cursor.HAND);
+        });
+    SelectNodeBtn.setOnMouseEntered(
+        e -> {
+          SelectNodeBtn.setCursor(Cursor.HAND);
+        });
     AddEdgeBtn.setOnMouseEntered(
         e -> {
           AddEdgeBtn.setCursor(Cursor.HAND);
@@ -1406,26 +1418,20 @@ public class GraphicalMapEditorController {
       double y = AlineList.get(i).getLayoutY();
       double x2 = (x + b * y - a * b) / (b * b + 1);
       double y2 = (b * b * y + b * x + a) / (b * b + 1);
-
       int id = NodeID.get(findNodeID(AlineList.get(i)));
-      if (x2 != 0) AlineList.get(i).setLayoutX(x2);
-      if (y2 != 0) AlineList.get(i).setLayoutY(y2);
+      int currentX = (int) ((x2 + 1.5) * 5);
+      int currentY = (int) ((y2 + 1.5) * 5);
+      Node newNode = qdb.retrieveNode(id);
+      newNode.setXCoord(currentX);
+      newNode.setYCoord(currentY);
+      qdb.updateNode(id, newNode);
     }
-
-    /* put in the loop
-    int currentX = (int) ((x2 + 1.5) * 5);
-    int currentY = (int) ((y2 + 1.5) * 5);
-    Node newNode = qdb.retrieveNode(id);
-    newNode.setXCoord(currentX);
-    newNode.setYCoord(currentY);
-    qdb.updateNode(id, newNode);
-
-    //out of loop
-    refreshNode();
-     */
-
+    refreshNodes();
     AlineList.clear();
     aline = false;
+    toomuch = false;
+    NodeSelected.setText("");
+    NodeSelected2.setText("");
   }
 }
 
