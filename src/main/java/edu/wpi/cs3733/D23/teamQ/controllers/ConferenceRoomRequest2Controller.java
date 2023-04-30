@@ -113,5 +113,8 @@ public class ConferenceRoomRequest2Controller {
       ImageView iv = new ImageView(snackImage);
       FoodImage.setImage(iv.getImage());
     }
+    if (foodField.getValue().equals("No food")) {
+      FoodImage.setImage(null);
+    }
   }
 }
