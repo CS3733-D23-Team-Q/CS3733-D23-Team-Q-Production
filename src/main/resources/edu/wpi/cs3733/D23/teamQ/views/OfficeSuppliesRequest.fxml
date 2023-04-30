@@ -144,12 +144,12 @@
                      <children>
                         <ImageView fx:id="PrinterPaperImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../PrinterPaper.jpg" />
+                              <Image url="@../PrinterPaper.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="PencilImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../Pencils.jpg" />
+                              <Image url="@../Pencils.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="PenImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
@@ -159,12 +159,12 @@
                         </ImageView>
                         <ImageView fx:id="HighlighterImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../highlihgtersfd.jpg" />
+                              <Image url="@../Highlighters.jpg" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="NotepadImage" fitHeight="209.0" fitWidth="340.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../Notepad.jpg" />
+                              <Image url="@../Notepad.jpg" />
                            </image>
                         </ImageView>
                      </children>

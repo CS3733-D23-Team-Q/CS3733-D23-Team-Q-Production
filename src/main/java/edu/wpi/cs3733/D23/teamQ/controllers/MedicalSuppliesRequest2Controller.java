@@ -60,7 +60,7 @@ public class MedicalSuppliesRequest2Controller {
     this.timeField.setValue("");
     this.timeField.setItems(timeList);
 
-    Image titleImage = new Image(App.class.getResourceAsStream("FlowerRequestTitle.jpg"));
+    Image titleImage = new Image(App.class.getResourceAsStream("MedicalSuppliesTitle.jpg"));
     ImageView iv = new ImageView(titleImage);
     titlePane.setContent(iv);
   }
