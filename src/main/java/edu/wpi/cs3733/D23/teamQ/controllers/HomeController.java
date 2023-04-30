@@ -205,6 +205,7 @@ public class HomeController implements Subscriber {
     String s1 = voice.substring(0, 1).toUpperCase();
     String s2 = voice.substring(1).toLowerCase();
     voice = s1 + s2;
+    System.out.println("THE VOICE IS" + voice);
 
     if (message.contains("Code Blue"))
       path = getClass().getResource("/blue" + voice + ".wav").getPath();
@@ -226,8 +227,6 @@ public class HomeController implements Subscriber {
       path = getClass().getResource("/green" + voice + ".wav").getPath();
     if (message.contains("Code Silver"))
       path = getClass().getResource("/silver" + voice + ".wav").getPath();
-
-    System.out.println(path);
 
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);

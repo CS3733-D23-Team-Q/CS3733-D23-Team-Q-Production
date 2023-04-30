@@ -64,11 +64,12 @@ public class SettingsController {
             new ChangeListener<>() {
               @Override
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                Settings.Voice voice = Settings.Voice.FEMALE;
-                if (voiceSelection.getText().equals("Female")) voice = Settings.Voice.FEMALE;
-                if (voiceSelection.getText().equals("Male")) voice = Settings.Voice.MALE;
-                if (voiceSelection.getText().equals("Snoop Dogg")) voice = Settings.Voice.SNOOP;
+                Settings.Voice voice = null;
+                if (newValue.toString().equals("Female")) voice = Settings.Voice.FEMALE;
+                if (newValue.toString().equals("Male")) voice = Settings.Voice.MALE;
+                if (newValue.toString().equals("Snoop Dogg")) voice = Settings.Voice.SNOOP;
                 qdb.retrieveSettings(LoginController.getLoginUsername()).setVoice(voice);
+                System.out.println("Setting Voice to" + voice);
               }
             });
   }
