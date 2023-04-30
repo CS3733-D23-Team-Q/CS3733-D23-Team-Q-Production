@@ -7,11 +7,13 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
@@ -42,6 +44,8 @@ public class Qdb {
 
   private MessageDaoImpl messageTable;
   private AlertDaoImpl alertTable;
+  private SettingsDaoImpl settingsTable;
+  private DefaultLocationDaoImpl defaultLocationsTable;
   private personalEventsDaoImpl personalEventsTable;
 
   private Account messagingAccount = null;
@@ -80,6 +84,8 @@ public class Qdb {
 
     messageTable = MessageDaoImpl.getInstance(accountTable);
     alertTable = AlertDaoImpl.getInstance();
+    settingsTable = SettingsDaoImpl.getInstance();
+    defaultLocationsTable = DefaultLocationDaoImpl.getInstance();
     personalEventsTable = personalEventsDaoImpl.getInstance();
   }
 
@@ -114,8 +120,9 @@ public class Qdb {
     }
   }
 
-  public synchronized void notifySubscribers(List<String> context) {
+  public synchronized void notifySubscribers(List<String> context) throws URISyntaxException {
     for (Subscriber s : subscribers) {
+
       s.update(context);
     }
   }
@@ -662,10 +669,22 @@ public class Qdb {
           medicalSuppliesRequestTable.populate();
           officeSuppliesRequestTable.populate();
           patientTransportRequestTable.populate();
+        case "settings":
+          settingsTable.populate();
+        case "defaultLocation":
+          defaultLocationsTable.populate();
         case "personalEvent":
           personalEventsTable.populate();
       }
     }
+    Platform.runLater(
+        () -> {
+          try {
+            notifySubscribers(tableNames);
+          } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+          }
+        });
     return true;
   }
 
@@ -787,5 +806,49 @@ public class Qdb {
 
   public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
     return serviceRequestTable.getUserRequestedOutstandingRows(user);
+  }
+
+  public List<Settings> getAllSettings() {
+    return settingsTable.getAllRows();
+  }
+
+  public Settings retrieveSettings(String username) {
+    return settingsTable.retrieveRow(username);
+  }
+
+  public boolean updateSettingsRow(String username, Settings x) {
+    return settingsTable.updateRow(username, x);
+  }
+
+  public boolean deleteSettingsRow(String username) {
+    return settingsTable.deleteRow(username);
+  }
+
+  public boolean addSettingsRow(Settings x) {
+    return settingsTable.addRow(x);
+  }
+
+  public Location retrieveLocationFromLongName(String lName) {
+    return locationTable.retrieveLocationFromLongName(lName);
+  }
+
+  public List<DefaultLocation> getAllDefaultLocations() {
+    return defaultLocationsTable.getAllRows();
+  }
+
+  public DefaultLocation retrieveDefaultLocation(int id) {
+    return defaultLocationsTable.retrieveRow(id);
+  }
+
+  public boolean updateDefaultLocation(int id, DefaultLocation x) {
+    return defaultLocationsTable.updateRow(id, x);
+  }
+
+  public boolean deleteDefaultLocation(int id) {
+    return defaultLocationsTable.deleteRow(id);
+  }
+
+  public boolean addDefaultLocation(DefaultLocation x) {
+    return defaultLocationsTable.addRow(x);
   }
 }

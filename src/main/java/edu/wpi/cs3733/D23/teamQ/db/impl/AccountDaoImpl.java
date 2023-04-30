@@ -65,7 +65,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(9, a.getFirstName());
       pst.setString(10, a.getLastName());
       pst.setString(11, a.getTitle());
-      pst.setInt(12, a.getPhoneNumber());
+      pst.setString(12, a.getPhoneNumber());
       pst.setString(13, a.getNotes());
       pst.setString(14, a.getTodo());
       pst.setString(15, uname);
@@ -142,7 +142,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(10, a.getFirstName());
       pst.setString(11, a.getLastName());
       pst.setString(12, a.getTitle());
-      pst.setInt(13, a.getPhoneNumber());
+      pst.setString(13, a.getPhoneNumber());
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
@@ -192,7 +192,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
                 rs.getString("firstName"),
                 rs.getString("lastName"),
                 rs.getString("title"),
-                rs.getInt("phoneNumber"),
+                rs.getString("phoneNumber"),
                 rs.getString("notes"),
                 rs.getString("todo"));
         accounts.add(a);

@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -82,18 +81,20 @@ public class EditDirectoryController {
         });
 
     /** input the phoneNumber to the table */
-    PhoneNumber.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Account, Number>, ObservableValue<Number>>() {
-          @Override
-          public ObservableValue<Number> call(TableColumn.CellDataFeatures<Account, Number> param) {
-            SimpleIntegerProperty phoneNumbers =
-                new SimpleIntegerProperty(param.getValue().getPhoneNumber());
-            return phoneNumbers;
-          }
-        });
-
-    /** set the information tableview */
-    account.setItems(Accounts());
+    //    PhoneNumber.setCellValueFactory(
+    //        new Callback<TableColumn.CellDataFeatures<Account, String>, ObservableValue<Number>>()
+    // {
+    //          @Override
+    //          public ObservableValue<Number> call(TableColumn.CellDataFeatures<Account, String>
+    // param) {
+    //            SimpleStringProperty phoneNumbers =
+    //                new SimpleStringProperty(param.getValue().getPhoneNumber());
+    //            return phoneNumbers;
+    //          }
+    //        });
+    //
+    //    /** set the information tableview */
+    //    account.setItems(Accounts());
   }
 
   public void mapClicked(ActionEvent actionEvent) {}
