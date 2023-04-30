@@ -65,21 +65,36 @@ public class Djikstra implements IPathfinding {
           }
         }
       }
-      /* if (chosen == null) {
-        ArrayList<Node> altNodes = new ArrayList<Node>(); // backup block
-        for (Edge edge : closedList.get(closedList.size() - 1).getEdges()) {
-          altNodes.add(edge.getStartNode());
-          altNodes.add(edge.getEndNode());
-        }
-        for (Node node2 : altNodes) {
-          if (!closedList.contains(node2) && !node2.equals(current)) { // "ELEV", STAI
-            chosen = node2;
+      if (chosen == null) {
+        ArrayList<Node> path2 = new ArrayList<Node>();
+        int i = 1;
+        while (chosen == null) {
+          ArrayList<Node> altNodes = new ArrayList<Node>(); // backup block
+          for (Edge edge : path.get(path.size() - i).getEdges()) {
+            altNodes.add(edge.getStartNode());
+            altNodes.add(edge.getEndNode());
+          }
+          path2.add(path.get(path.size() - i));
+          i++;
+          double lowestLocalCost2 = 10000000.0;
+          int g = 0;
+          for (Node node2 : altNodes) {
+            g++;
+            if (!closedList.contains(node2) && !node2.equals(current)) {
+              double xDist = Math.abs(end.getXCoord() - node2.getXCoord());
+              double yDist = Math.abs(end.getYCoord() - node2.getYCoord());
+              double weight = Math.sqrt(xDist * xDist + yDist * yDist);
+              if (weight < lowestLocalCost2) {
+                lowestLocalCost2 = weight;
+                chosen = node2;
+              }
+            }
+          }
+          if (chosen != null) {
+            path.addAll(path2);
+            path.add(chosen);
           }
         }
-      }*/
-      if (chosen == null) {
-        System.out.println("COUNTERMEAUSRES LULW AT NODE " + current);
-        return path;
       }
       if (!openList.contains(chosen)) {
         openList.add(chosen);
