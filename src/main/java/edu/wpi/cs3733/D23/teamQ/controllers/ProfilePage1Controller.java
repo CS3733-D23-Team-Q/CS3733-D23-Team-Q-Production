@@ -46,7 +46,7 @@ public class ProfilePage1Controller {
     title.setText(account.getTitle());
     displayUsername.setText(username);
     email.setText(account.getEmail());
-    phone.setText(Integer.toString(account.getPhoneNumber()));
+    phone.setText(account.getPhoneNumber());
 
     statusCircle.setStroke(null);
     if (account.isActive()) {
