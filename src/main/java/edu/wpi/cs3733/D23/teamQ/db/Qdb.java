@@ -617,6 +617,10 @@ public class Qdb {
     return messageTable.retrieveMessages(p1, p2);
   }
 
+  public ObservableList<Message> retrieveAllMessages() {
+    return messageTable.getAllMessages();
+  }
+
   public ObservableList<Message> retrieveConversations(String username) {
     return messageTable.retrieveConversations(username);
   }

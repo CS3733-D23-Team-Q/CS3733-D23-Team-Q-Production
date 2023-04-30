@@ -151,4 +151,13 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
   public static void sortByTimestamp(List<Message> list) {
     Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
   }
+
+  public ObservableList<Message> getAllMessages() {
+    ObservableList<Message> m = FXCollections.observableArrayList();
+
+    for (Message k : messages) {
+      m.add(k);
+    }
+    return m;
+  }
 }
