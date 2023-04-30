@@ -235,7 +235,7 @@
                                     <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="88.0" text="Seleted Nodes" textFill="#142a53" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="88.0" text="Nodes Selected" textFill="#142a53" />
                                     <TextField fx:id="NodeSelected" alignment="CENTER" editable="false" onMouseClicked="#ChooseStartNodeClicked" promptText="Please select nodes" style="-fx-font-size: 10;" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="10.0" />
