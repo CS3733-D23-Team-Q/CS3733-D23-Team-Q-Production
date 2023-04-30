@@ -19,12 +19,8 @@ public class PeopleSubmenuController {
   }
 
   @FXML
-  public void messagesClicked() {
-    Navigation.navigate(Screen.MESSAGES);
-  }
-
-  @FXML
   public void directoryClicked() {
-    Navigation.navigate(Screen.DIRECTORY);
+    if (LoginController.isAdmin()) Navigation.navigate(Screen.ADMIN_DIRECTORY);
+    else Navigation.navigate(Screen.DIRECTORY);
   }
 }
