@@ -118,7 +118,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
     try (Connection conn = GenDao.connect();
         PreparedStatement stmt =
             conn.prepareStatement(
-                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO \"mealRequest\"(requester, progress, assignee, \"nodeID\", \"specialInstructions\", \"date\", \"time\", \"drink\", \"entree\", \"side\", type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)")) {
       stmt.setString(1, request.getRequester().getUsername());
       stmt.setInt(2, request.getProgress().ordinal());
       stmt.setString(3, request.getAssignee().getUsername());
@@ -129,6 +129,7 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
       stmt.setString(8, request.getDrink());
       stmt.setString(9, request.getEntree());
       stmt.setString(10, request.getSide());
+      stmt.setString(11, request.getType());
       stmt.executeUpdate();
     } catch (SQLException ex) {
       ex.printStackTrace();

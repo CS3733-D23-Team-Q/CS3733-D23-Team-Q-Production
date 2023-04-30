@@ -1,19 +1,22 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ConferenceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class ConferenceRoomRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -29,16 +32,17 @@ public class ConferenceRoomRequestController {
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
   @FXML MFXFilterComboBox foodField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML TextArea specialInstructionsField;
   ObservableList<String> foodOptionsList =
       FXCollections.observableArrayList(
           "Brunch spread", "Dinner spread", "Snack spread", "No food");
+
   @FXML Button resetButton;
   @FXML Button cancelButton;
   @FXML Button submitButton;
-  @FXML private ImageView BrunchFood;
-  @FXML private ImageView DinnerFood;
-  @FXML private ImageView SnackFood;
+
+  @FXML private ImageView FoodImage;
+  @FXML private GesturePane titlePane;
 
   @FXML
   public void initialize() {
@@ -52,9 +56,9 @@ public class ConferenceRoomRequestController {
     this.foodField.setValue("");
     this.foodField.setItems(foodOptionsList);
 
-    BrunchFood.setOpacity(0.0);
-    DinnerFood.setOpacity(0.0);
-    SnackFood.setOpacity(0.0);
+    Image titleImage = new Image(App.class.getResourceAsStream("ConferenceRequestTitle.jpg"));
+    ImageView iv = new ImageView(titleImage);
+    titlePane.setContent(iv);
   }
 
   @FXML
@@ -66,14 +70,12 @@ public class ConferenceRoomRequestController {
     foodField.setValue("");
     specialInstructionsField.clear();
 
-    BrunchFood.setOpacity(0.0);
-    DinnerFood.setOpacity(0.0);
-    SnackFood.setOpacity(0.0);
+    FoodImage.setImage(null);
   }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -82,8 +84,8 @@ public class ConferenceRoomRequestController {
     ConferenceRequest cr =
         new ConferenceRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             (String) timeField.getValue(),
@@ -97,19 +99,22 @@ public class ConferenceRoomRequestController {
   @FXML
   public void FoodSelected(ActionEvent event) {
     if (foodField.getValue().equals("Brunch spread")) {
-      BrunchFood.setOpacity(1.0);
-      DinnerFood.setOpacity(0.0);
-      SnackFood.setOpacity(0.0);
+      Image brunchImage = new Image(App.class.getResourceAsStream("BrunchSpread.jpg"));
+      ImageView iv = new ImageView(brunchImage);
+      FoodImage.setImage(iv.getImage());
     }
     if (foodField.getValue().equals("Dinner spread")) {
-      BrunchFood.setOpacity(0.0);
-      DinnerFood.setOpacity(1.0);
-      SnackFood.setOpacity(0.0);
+      Image dinnerImage = new Image(App.class.getResourceAsStream("DinnerSpread.jpg"));
+      ImageView iv = new ImageView(dinnerImage);
+      FoodImage.setImage(iv.getImage());
     }
     if (foodField.getValue().equals("Snack spread")) {
-      BrunchFood.setOpacity(0.0);
-      DinnerFood.setOpacity(0.0);
-      SnackFood.setOpacity(1.0);
+      Image snackImage = new Image(App.class.getResourceAsStream("SnackSpread.jpg"));
+      ImageView iv = new ImageView(snackImage);
+      FoodImage.setImage(iv.getImage());
+    }
+    if (foodField.getValue().equals("No food")) {
+      FoodImage.setImage(null);
     }
   }
 }

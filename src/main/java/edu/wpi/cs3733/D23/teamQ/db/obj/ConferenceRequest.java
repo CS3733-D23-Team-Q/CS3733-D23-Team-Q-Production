@@ -6,9 +6,10 @@ import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class ConferenceRequest extends ServiceRequest implements IServiceRequest {
+  private static final String type = "Conference Request";
   private String dateTime;
   private String foodChoice;
   private Type requestType = this.getClass();
@@ -23,7 +24,7 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String time,
       int progress,
       String foodChoice) {
-    super(requestID, node, assignee, requester, specialInstructions, date, time, progress);
+    super(requestID, node, requester, assignee, specialInstructions, date, time, progress, type);
     this.foodChoice = foodChoice;
   }
 
@@ -36,7 +37,7 @@ public class ConferenceRequest extends ServiceRequest implements IServiceRequest
       String time,
       int progress,
       String foodChoice) {
-    super(0, node, assignee, requester, specialInstructions, date, time, progress);
+    super(0, node, requester, assignee, specialInstructions, date, time, progress, type);
     this.foodChoice = foodChoice;
   }
 }

@@ -479,7 +479,7 @@ public class GraphicalMapEditorController {
       }
 
       qdb.deleteLocation(nodeid);
-      qdb.deleteNode(nodeid);
+      // qdb.deleteNode(nodeid);
       refreshNodes();
     } else {
       InitialNode();
