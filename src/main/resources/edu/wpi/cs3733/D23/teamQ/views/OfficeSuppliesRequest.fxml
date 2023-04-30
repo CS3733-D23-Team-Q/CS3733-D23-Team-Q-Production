@@ -23,11 +23,17 @@
                     <font>
                         <Font name="Roboto" size="36.0" />
                     </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="100.0" top="5.0" />
+               </HBox.margin>
                 </Label>
             </children>
             <padding>
-                <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+                <Insets bottom="4.0" right="16.0" top="4.0" />
             </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
         </HBox>
         <HBox prefHeight="700.0" prefWidth="1360.0">
             <children>
@@ -155,7 +161,7 @@
                                 </MFXTextField>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Selected:">
                                     <VBox.margin>
-                                        <Insets left="130.0" />
+                                        <Insets left="130.0" top="5.0" />
                                     </VBox.margin>
                                 </Text>
                                 <ImageView fx:id="ItemImage" fitHeight="250.0" fitWidth="300.0" pickOnBounds="true">
