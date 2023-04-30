@@ -107,7 +107,7 @@ public class MedicalSuppliesRequest2Controller {
   }
 
   public void backButtonClicked(ActionEvent actionEvent) {
-    Navigation.navigate(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   public void updateButtonClicked(ActionEvent actionEvent) {

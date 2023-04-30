@@ -75,7 +75,7 @@ public class ConferenceRoomRequest2Controller {
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
