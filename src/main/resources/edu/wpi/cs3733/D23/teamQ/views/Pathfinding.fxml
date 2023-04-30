@@ -167,7 +167,7 @@
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </MFXComboBox>
-            <MFXComboBox fx:id="algorithmSelect" minHeight="28.0" onAction="#algorithmSelected" prefHeight="28.0" prefWidth="320.0" promptText="Algorithm">
+            <MFXComboBox fx:id="algorithmSelect" minHeight="28.0" onAction="#algorithmSelected" prefHeight="28.0" prefWidth="320.0" text="aStar">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
