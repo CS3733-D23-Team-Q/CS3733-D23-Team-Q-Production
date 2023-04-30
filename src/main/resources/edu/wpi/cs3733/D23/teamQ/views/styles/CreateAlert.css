@@ -18,13 +18,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: black;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .black-button:hover {
-    -fx-background-color: black;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -34,13 +34,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: blue;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .blue-button:hover {
-    -fx-background-color: blue;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -50,13 +50,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: gray;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .gray-button:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -66,13 +66,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: green;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .green-button:hover {
-    -fx-background-color: green;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -82,13 +82,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: orange;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .orange-button:hover {
-    -fx-background-color: orange;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -98,13 +98,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: pink;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .pink-button:hover {
-    -fx-background-color: pink;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -114,13 +114,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: purple;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .purple-button:hover {
-    -fx-background-color: purple;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -130,13 +130,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: red;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .red-button:hover {
-    -fx-background-color: red;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -146,13 +146,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: silver;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .silver-button:hover {
-    -fx-background-color: silver;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
@@ -162,13 +162,13 @@
     -fx-font-family: Roboto;
     -fx-font-size: 16;
     -fx-text-fill: #012d5a;
-    -fx-border-color: yellow;
+    -fx-border-color: #012d5a;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
 }
 
 .yellow-button:hover {
-    -fx-background-color: yellow;
+    -fx-background-color: #012d5a;
     -fx-text-fill: #f1f1f1;
     -fx-border-color: #f1f1f1;
 }
