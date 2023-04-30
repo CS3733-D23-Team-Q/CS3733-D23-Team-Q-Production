@@ -39,6 +39,7 @@ public class RefreshThread implements Runnable {
     }
 
     while (true) {
+      toUpdate.clear();
       if (checkUpdates().size() > 0) {
         System.out.println("Updating from server --> " + toUpdate);
         for (String s : toUpdate) {
@@ -48,7 +49,6 @@ public class RefreshThread implements Runnable {
       doUpdates();
 
       Thread.sleep(1000);
-      toUpdate.clear();
     }
   }
 
