@@ -29,7 +29,7 @@
                      <children>
                         <VBox prefHeight="108.0" prefWidth="296.0" spacing="12.0">
                            <children>
-                              <MFXTextField fx:id="usernameField" minHeight="-Infinity" onKeyPressed="#usernameEntered" prefHeight="36.0" prefWidth="296.0" promptText="Username or Email">
+                              <MFXTextField fx:id="usernameField" minHeight="-Infinity" onKeyPressed="#usernameEntered" prefHeight="36.0" prefWidth="296.0" promptText="Username" >
                                  <font>
                                     <Font name="Roboto" size="12.0" />
                                  </font>
