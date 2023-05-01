@@ -718,15 +718,15 @@ public class PathfindingController {
     int arrow = 0;
     int dx = next.getXCoord() - n.getXCoord();
     int dy = next.getYCoord() - n.getYCoord();
-    if (dx > 10) {
+    if (dx > 5) {
       direction += "right";
-    } else if (dx < -10) {
+    } else if (dx < -5) {
       direction += "left";
     }
-    if (dy > 0) {
-      direction += "up";
-    } else {
+    if (dy > 5) {
       direction += "down";
+    } else if (dy < -5) {
+      direction += "up";
     }
     switch (direction) {
       case "right":
@@ -790,14 +790,14 @@ public class PathfindingController {
 
   public void displayTextPF(List<Node> path) {
     String direction = "";
-    direction = "Floor " + path.get(0).getFloor() + ": ";
+    direction = "Floor " + path.get(path.size() - 1).getFloor() + ": ";
     Label text = new Label(direction);
     textArea.getChildren().add(text);
     textual.add(text);
-    direction = path.get(0).getLocation().getLongName();
-    for (int i = 1; i < path.size(); i++) {
+    direction = path.get(path.size() - 1).getLocation().getLongName();
+    for (int i = path.size() - 2; i >= 0; i--) {
       Node n = path.get(i);
-      Node previous = path.get(i - 1);
+      Node previous = path.get(i + 1);
       int index = measureDirections(previous, n);
       if (!previous.getFloor().equals(n.getFloor())) {
         text = new Label(textDirections(index) + direction);
