@@ -39,7 +39,7 @@ public class StatisticsController {
 
   public void messages() {
     Map<String, Integer> messageCounts = new HashMap<>();
-    for (Message message : qdb.retrieveMessages("wmerry", "cam40419")) {
+    for (Message message : qdb.retrieveAllMessages()) {
       String date = new SimpleDateFormat("MMM-dd-yyy").format(new Date(message.getTimeStamp()));
       if (!messageCounts.containsKey(date)) {
         messageCounts.put(date, 0);

@@ -34,6 +34,8 @@ import net.kurobako.gesturefx.GesturePane;
 
 public class GraphicalMapEditorController {
 
+  private boolean first = false;
+
   private boolean toomuch = false;
 
   private boolean aline = false;
@@ -323,7 +325,7 @@ public class GraphicalMapEditorController {
               endnodeOr = false;
             }
 
-            if (aline) {
+            if (aline && !AlineList.contains(node)) {
               AlineList.add(node);
               node.setStyle(
                   "-fx-background-radius: 5em;"
@@ -333,13 +335,16 @@ public class GraphicalMapEditorController {
                       + "-fx-max-height: 3px;"
                       + "-fx-background-insets: 0px;"
                       + "-fx-background-color: #E2BE31");
-              if (!SelectedOr(node)) ;
+              if (first) {
+                NodeSelected.setText("");
+                first = false;
+              }
               showSelectedNodes(nodeID);
             }
           });
       node.setOnMouseEntered(
           e -> {
-            if (!aline || !SelectedOr(node))
+            if (!aline || !AlineList.contains(node))
               node.setStyle(
                   "-fx-background-radius: 5em;"
                       + "-fx-min-width: 3px;"
@@ -353,7 +358,7 @@ public class GraphicalMapEditorController {
 
       node.setOnMouseExited(
           e -> {
-            if (!aline || !SelectedOr(node))
+            if (!aline || !AlineList.contains(node))
               node.setStyle(
                   "-fx-background-radius: 5em;"
                       + "-fx-min-width: 3px;"
@@ -1345,19 +1350,6 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * return true if the node has been selected, else return false
-   *
-   * @param node
-   * @return
-   */
-  boolean SelectedOr(Button node) {
-    for (int i = 0; i < AlineList.size(); i++) {
-      if (AlineList.get(i) == node) return true;
-    }
-    return false;
-  }
-
-  /**
    * Start to select nodes to be alined when click
    *
    * @param event
@@ -1365,6 +1357,8 @@ public class GraphicalMapEditorController {
   @FXML
   void SelectedNodeClicked(MouseEvent event) {
     aline = true;
+    first = true;
+    NodeSelected.setText("Please select nodes by clicking them");
   }
 
   /**
@@ -1408,23 +1402,24 @@ public class GraphicalMapEditorController {
       upB += (x - meanX) * (y - meanY);
       downB += (x - meanX) * (x - meanX);
     }
-    if (downB == 0) return;
-    double b = upB / downB;
-    double a = meanY - b * meanX;
+    if (downB != 0 && upB != 0) {
+      double b = upB / downB;
+      double a = meanY - b * meanX;
 
-    // Foot point (Perpendicular)
-    for (int i = 0; i < AlineList.size(); i++) {
-      double x = AlineList.get(i).getLayoutX();
-      double y = AlineList.get(i).getLayoutY();
-      double x2 = (x + b * y - a * b) / (b * b + 1);
-      double y2 = (b * b * y + b * x + a) / (b * b + 1);
-      int id = NodeID.get(findNodeID(AlineList.get(i)));
-      int currentX = (int) ((x2 + 1.5) * 5);
-      int currentY = (int) ((y2 + 1.5) * 5);
-      Node newNode = qdb.retrieveNode(id);
-      newNode.setXCoord(currentX);
-      newNode.setYCoord(currentY);
-      qdb.updateNode(id, newNode);
+      // Foot point (Perpendicular)
+      for (int i = 0; i < AlineList.size(); i++) {
+        double x = AlineList.get(i).getLayoutX();
+        double y = AlineList.get(i).getLayoutY();
+        double x2 = (x + b * y - a * b) / (b * b + 1);
+        double y2 = (b * b * y + b * x + a) / (b * b + 1);
+        int id = NodeID.get(findNodeID(AlineList.get(i)));
+        int currentX = (int) ((x2 + 1.5) * 5);
+        int currentY = (int) ((y2 + 1.5) * 5);
+        Node newNode = qdb.retrieveNode(id);
+        newNode.setXCoord(currentX);
+        newNode.setYCoord(currentY);
+        qdb.updateNode(id, newNode);
+      }
     }
     refreshNodes();
     AlineList.clear();
