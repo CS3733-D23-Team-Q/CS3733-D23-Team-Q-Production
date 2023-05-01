@@ -812,7 +812,29 @@ public class PathfindingController {
         textual.add(text);
         direction = "Floor " + n.getFloor() + ": ";
         text = new Label(direction);
+        /*
+        if (i == path.size() - 2) {
+          HBox hbox = new HBox();
+          hbox.setSpacing(5);
+          hbox.getChildren().add(text);
+          icon = new ImageView(new Image("/Start.png"));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          hbox.getChildren().add(icon);
+          textArea.getChildren().add(hbox);
+        } else if (i == 0) {
+          HBox hbox = new HBox();
+          hbox.setSpacing(5);
+          hbox.getChildren().add(text);
+          icon = new ImageView(new Image("/Target.png"));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          hbox.getChildren().add(icon);
+          textArea.getChildren().add(hbox);
+        } else {
+         */
         textArea.getChildren().add(text);
+        // }
         textual.add(text);
         direction = n.getLocation().getLongName();
       } else {
@@ -821,7 +843,29 @@ public class PathfindingController {
         icon.setFitWidth(22);
         icon.setFitHeight(29);
         text.setGraphic(icon);
+        /*
+        if (i == path.size() - 2) {
+          HBox hbox = new HBox();
+          hbox.setSpacing(5);
+          hbox.getChildren().add(text);
+          icon = new ImageView(new Image("/Start.png"));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          hbox.getChildren().add(icon);
+          textArea.getChildren().add(hbox);
+        } else if (i == 0) {
+          HBox hbox = new HBox();
+          hbox.setSpacing(5);
+          hbox.getChildren().add(text);
+          icon = new ImageView(new Image("/Target.png"));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          hbox.getChildren().add(icon);
+          textArea.getChildren().add(hbox);
+        } else {
+         */
         textArea.getChildren().add(text);
+        // }
         textual.add(text);
         direction = n.getLocation().getLongName();
       }
