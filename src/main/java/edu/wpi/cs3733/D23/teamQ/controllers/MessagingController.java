@@ -219,7 +219,15 @@ public class MessagingController implements Subscriber {
   public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
-    messageReceived.setRead(true);
+    if (!messageReceived.getRead()) {
+      qdb.updateMessage(
+          new Message(
+              messageReceived.getSender(),
+              messageReceived.getReceiver(),
+              messageReceived.getMessage(),
+              messageReceived.getTimeStamp(),
+              true));
+    }
     String message = messageReceived.getMessage();
 
     //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
@@ -313,7 +321,7 @@ public class MessagingController implements Subscriber {
         String path = getClass().getResource("/alert.wav").getPath();
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+        if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()) mediaPlayer.play();
         return true;
       } else {
         return false;
@@ -369,7 +377,6 @@ public class MessagingController implements Subscriber {
       Line line = new Line(0, 0, 300, 0);
       line.setFill(Color.GRAY);
       line.setStrokeWidth(0.5);
-      //   hbox.getChildren().add(profileImage);
       hbox.getChildren().add(vbox);
       accountVbox.getChildren().add(line);
       accountVbox.getChildren().add(hbox);
