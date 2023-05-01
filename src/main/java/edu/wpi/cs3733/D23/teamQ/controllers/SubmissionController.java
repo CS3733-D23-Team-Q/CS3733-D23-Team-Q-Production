@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class SubmissionController {
+public class  SubmissionController {
 
   @FXML Label requestID;
 
