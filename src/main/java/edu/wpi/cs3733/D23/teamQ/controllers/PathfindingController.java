@@ -718,9 +718,9 @@ public class PathfindingController {
     int arrow = 0;
     int dx = next.getXCoord() - n.getXCoord();
     int dy = next.getYCoord() - n.getYCoord();
-    if (dx > 0) {
+    if (dx > 10) {
       direction += "right";
-    } else {
+    } else if (dx < -10) {
       direction += "left";
     }
     if (dy > 0) {
