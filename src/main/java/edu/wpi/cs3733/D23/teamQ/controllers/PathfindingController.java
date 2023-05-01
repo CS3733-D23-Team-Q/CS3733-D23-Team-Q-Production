@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.*;
@@ -26,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -77,7 +80,6 @@ public class PathfindingController {
   List<Triple<Integer, Button, Integer>> cfpath;
   Text messageText;
   List<Image> directions;
-  List<Label> textual;
 
   @FXML GridPane root;
   @FXML Group parent;
@@ -109,7 +111,6 @@ public class PathfindingController {
     Image topleft = new Image("/Top-Left.png");
     Image topright = new Image("/Top-Right.png");
     Image up = new Image("/Up.png");
-    textual = new ArrayList<>();
     directions = new ArrayList<>();
     directions.add(right);
     directions.add(left);
@@ -792,84 +793,69 @@ public class PathfindingController {
     String direction = "";
     direction = "Floor " + path.get(path.size() - 1).getFloor() + ": ";
     Label text = new Label(direction);
+    VBox.setMargin(text, new Insets(10, 0, 0, 0));
     textArea.getChildren().add(text);
-    textual.add(text);
     direction = path.get(path.size() - 1).getLocation().getLongName();
     for (int i = path.size() - 2; i >= 0; i--) {
       Node n = path.get(i);
       Node previous = path.get(i + 1);
-      int index = measureDirections(previous, n);
+      int index = 0;
+      if (i != 0) {
+        index = measureDirections(path.get(i), path.get(i - 1));
+      }
       if (!previous.getFloor().equals(n.getFloor())) {
-        text = new Label(textDirections(index) + direction);
-        ImageView icon = new ImageView(directions.get(index));
-        icon.setFitWidth(22);
-        icon.setFitHeight(29);
-        text.setGraphic(icon);
+        if (i == path.size() - 2) {
+          text = new Label(direction);
+          ImageView icon = new ImageView(new Image("/Start.png"));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          text.setGraphic(icon);
+        } else {
+          text = new Label(textDirections(index) + direction);
+          ImageView icon = new ImageView(directions.get(index));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          text.setGraphic(icon);
+        }
         textArea.getChildren().add(text);
-        textual.add(text);
         text = new Label();
         textArea.getChildren().add(text);
-        textual.add(text);
         direction = "Floor " + n.getFloor() + ": ";
         text = new Label(direction);
-        /*
-        if (i == path.size() - 2) {
-          HBox hbox = new HBox();
-          hbox.setSpacing(5);
-          hbox.getChildren().add(text);
-          icon = new ImageView(new Image("/Start.png"));
-          icon.setFitWidth(22);
-          icon.setFitHeight(29);
-          hbox.getChildren().add(icon);
-          textArea.getChildren().add(hbox);
-        } else if (i == 0) {
-          HBox hbox = new HBox();
-          hbox.setSpacing(5);
-          hbox.getChildren().add(text);
-          icon = new ImageView(new Image("/Target.png"));
-          icon.setFitWidth(22);
-          icon.setFitHeight(29);
-          hbox.getChildren().add(icon);
-          textArea.getChildren().add(hbox);
-        } else {
-         */
         textArea.getChildren().add(text);
-        // }
-        textual.add(text);
         direction = n.getLocation().getLongName();
       } else {
-        text = new Label(textDirections(index) + direction);
-        ImageView icon = new ImageView(directions.get(index));
-        icon.setFitWidth(22);
-        icon.setFitHeight(29);
-        text.setGraphic(icon);
-        /*
         if (i == path.size() - 2) {
-          HBox hbox = new HBox();
-          hbox.setSpacing(5);
-          hbox.getChildren().add(text);
-          icon = new ImageView(new Image("/Start.png"));
+          text = new Label(direction);
+          ImageView icon = new ImageView(new Image("/Start.png"));
           icon.setFitWidth(22);
           icon.setFitHeight(29);
-          hbox.getChildren().add(icon);
-          textArea.getChildren().add(hbox);
-        } else if (i == 0) {
-          HBox hbox = new HBox();
-          hbox.setSpacing(5);
-          hbox.getChildren().add(text);
-          icon = new ImageView(new Image("/Target.png"));
-          icon.setFitWidth(22);
-          icon.setFitHeight(29);
-          hbox.getChildren().add(icon);
-          textArea.getChildren().add(hbox);
+          text.setGraphic(icon);
         } else {
-         */
+          text = new Label(textDirections(index) + direction);
+          ImageView icon = new ImageView(directions.get(index));
+          icon.setFitWidth(22);
+          icon.setFitHeight(29);
+          text.setGraphic(icon);
+        }
         textArea.getChildren().add(text);
-        // }
-        textual.add(text);
         direction = n.getLocation().getLongName();
       }
     }
+    text = new Label(direction);
+    int index = measureDirections(path.get(1), path.get(0));
+    ImageView icon = new ImageView(directions.get(index));
+    icon.setFitWidth(22);
+    icon.setFitHeight(29);
+    text.setGraphic(icon);
+    HBox hbox = new HBox();
+    hbox.setSpacing(5);
+    hbox.getChildren().add(text);
+    icon = new ImageView(new Image("/Target.png"));
+    icon.setFitWidth(22);
+    icon.setFitHeight(29);
+    hbox.getChildren().add(icon);
+    textArea.getChildren().add(hbox);
   }
 
   public String whichFloorS() {
@@ -1319,9 +1305,8 @@ public class PathfindingController {
   }
 
   public void clearTextualPathfinding() {
-    for (Label l : textual) {
-      textArea.getChildren().remove(l);
-    }
+    ObservableList children = textArea.getChildren();
+    textArea.getChildren().removeAll(children);
   }
 
   public void clearButtonClicked() {
