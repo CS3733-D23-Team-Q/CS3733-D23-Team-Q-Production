@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -24,7 +25,10 @@
    <children>
       <Group fx:id="parent" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
-            <ImageView fx:id="imageView" fitHeight="680.0" fitWidth="1000.0" layoutX="-1.0" layoutY="-0.1" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="680.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../01_thefirstfloor.png" />
+               </image></ImageView>
          </children>
       </Group>
       <VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="348.0" style="-fx-background-color: #142A53;" GridPane.columnIndex="1">
