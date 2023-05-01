@@ -50,7 +50,7 @@
                   <Insets left="20.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <MFXFilterComboBox fx:id="startSelect" floatMode="DISABLED" minHeight="28.0" onAction="#startSelected" prefHeight="28.0" prefWidth="331.0" style="-fx-background-color: #f1f1f1;">
+            <MFXFilterComboBox fx:id="startSelect" allowEdit="true" floatMode="DISABLED" minHeight="28.0" onAction="#startSelected" prefHeight="28.0" prefWidth="331.0" style="-fx-background-color: #f1f1f1;">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
@@ -69,7 +69,7 @@
                   <Font name="Roboto" size="14.0" />
                </font>
             </Label>
-            <MFXFilterComboBox fx:id="endSelect" floatMode="DISABLED" minHeight="28.0" onAction="#endSelected" prefHeight="28.0" prefWidth="340.0">
+            <MFXFilterComboBox fx:id="endSelect" allowEdit="true" floatMode="DISABLED" minHeight="28.0" onAction="#endSelected" prefHeight="28.0" prefWidth="340.0">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
