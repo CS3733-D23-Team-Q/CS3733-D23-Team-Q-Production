@@ -57,7 +57,7 @@ public class EditProfileController {
     firstName.setText(account.getFirstName());
     lastName.setText(account.getLastName());
     email.setText(account.getEmail());
-    phone.setText(Integer.toString(account.getPhoneNumber()));
+    phone.setText(account.getPhoneNumber());
     titleEdit.setText(account.getTitle());
     securityAnswer1.setText(account.getSecurityAnswer1());
     securityAnswer2.setText(account.getSecurityAnswer2());
@@ -98,7 +98,7 @@ public class EditProfileController {
             firstName.getText(),
             lastName.getText(),
             titleEdit.getText(),
-            Integer.parseInt(phone.getText()),
+            phone.getText(),
             account.getNotes(),
             account.getTodo());
 
