@@ -6,18 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DefaultLocation {
-  int defaultLocationID;
+  String username;
   Location startingLocation;
-  Location[] kiosks;
 
-  public DefaultLocation(int defaultLocationID, Location startingLocation, Location[] kiosks) {
-    this.defaultLocationID = defaultLocationID;
+  public DefaultLocation(String username, Location startingLocation) {
+    this.username = username;
     this.startingLocation = startingLocation;
-    this.kiosks = kiosks;
-  }
-
-  public DefaultLocation(Location startingLocation, Location[] kiosks) {
-    this.startingLocation = startingLocation;
-    this.kiosks = kiosks;
   }
 }
