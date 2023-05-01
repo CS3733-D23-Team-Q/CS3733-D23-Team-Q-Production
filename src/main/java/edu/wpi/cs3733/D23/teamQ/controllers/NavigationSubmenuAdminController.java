@@ -19,7 +19,7 @@ public class NavigationSubmenuAdminController {
 
   @FXML
   public void pathfinderClicked() {
-    Navigation.navigate(Screen.PATH_FINDING_ADMIN);
+    Navigation.navigate(Screen.PATH_FINDING);
     // Navigation.navigate(Screen.PATH_FINDING_ADMIN);
   }
 

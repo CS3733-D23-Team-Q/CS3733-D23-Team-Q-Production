@@ -100,9 +100,11 @@ public class PathfindingController {
   @FXML TextField messageField;
   @FXML MFXScrollPane textualPathfinding;
   @FXML VBox textArea;
+  @FXML Label floorLabel;
 
   @FXML
   public void initialize() throws IOException {
+    floorLabel.setText("Floor " + whichFloorS());
     Image bottomleft = new Image("/Bottom-Left.png");
     Image bottomright = new Image("/Bottom-Right.png");
     Image down = new Image("/Down.png");
@@ -937,6 +939,7 @@ public class PathfindingController {
     if (floor > 0) {
       floor--;
       f = whichFloorS();
+      floorLabel.setText("Floor " + whichFloorS());
     }
     Image previous = floors.get(floor);
     map.setImage(previous);
@@ -991,6 +994,7 @@ public class PathfindingController {
     if (floor < 4) {
       floor++;
       f = whichFloorS();
+      floorLabel.setText("Floor " + whichFloorS());
     }
 
     Image next = floors.get(floor);
@@ -1333,5 +1337,9 @@ public class PathfindingController {
     endSelect.setValue(null);
     messageField.setText(""); // null
     parent.getChildren().remove(messageText);
+  }
+
+  public void settingButtonClicked() throws IOException {
+    PathfindingSettingController.display();
   }
 }

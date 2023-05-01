@@ -10,7 +10,6 @@ public enum Screen {
   //  GRAPHICAL_MAP_EDITOR("views/GraphicalMapEditor.fxml", "Graphical Map Editor"),
   PATH_TEXT("views/PathText.fxml", "Textual Path"),
   PATH_FINDING("views/Pathfinding.fxml", "Graphical Pathfinding"),
-  PATH_FINDING_ADMIN("views/PathfindingAdmin.fxml", "Graphical Pathfinding"),
   PATH_FINDING_SETTING("views/PathfindingSetting.fxml", "Graphical Pathfinding Settings"),
   SIGNAGE("views/Signage.fxml", "Signage"),
   ADD_SIGNAGE("views/SignageForm.fxml", "Add newSignage"),
