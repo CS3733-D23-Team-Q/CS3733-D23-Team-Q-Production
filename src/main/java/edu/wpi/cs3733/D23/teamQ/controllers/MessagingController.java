@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import static java.lang.System.currentTimeMillis;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.RefreshThread;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
@@ -38,6 +39,7 @@ import javafx.scene.text.TextFlow;
 
 public class MessagingController implements Subscriber {
   Account receiver;
+  RefreshThread refreshThread = new RefreshThread();
   @FXML ImageView sendButton;
   @FXML VBox messageVbox;
   @FXML MFXTextField messageField;
@@ -318,10 +320,17 @@ public class MessagingController implements Subscriber {
       if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
         populateMessages();
         populateAccounts();
-        String path = getClass().getResource("/alert.wav").getPath();
-        Media media = new Media(new File(path).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()) mediaPlayer.play();
+
+        if (refreshThread.isDebounce()) {
+
+          refreshThread.setDebounce(false);
+          String path = getClass().getResource("/alert.wav").getPath();
+          Media media = new Media(new File(path).toURI().toString());
+          MediaPlayer mediaPlayer = new MediaPlayer(media);
+          if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound())
+            mediaPlayer.play();
+          refreshThread.debounceReset();
+        }
         return true;
       } else {
         return false;
