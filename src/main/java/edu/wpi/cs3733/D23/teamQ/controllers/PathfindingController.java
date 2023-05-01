@@ -40,6 +40,7 @@ import net.kurobako.gesturefx.*;
 import org.apache.commons.lang3.tuple.Triple;
 
 public class PathfindingController {
+  String username = LoginController.getUsername();
   Qdb qdb = Qdb.getInstance();
   Context pathfindingAlgorithmSelection = new Context();
   BFS bfs = new BFS();
@@ -82,6 +83,7 @@ public class PathfindingController {
   List<Image> directions;
   List<Node> current;
   static List<Node> latest = new ArrayList<>();
+  Location defaultsl;
 
   @FXML GridPane root;
   @FXML Group parent;
@@ -106,6 +108,10 @@ public class PathfindingController {
 
   @FXML
   public void initialize() throws IOException {
+    defaultsl = null;
+    if (qdb.getDefaultLocationIndex(username) != -1) {
+      defaultsl = qdb.retrieveDefaultLocation(username).getStartingLocation();
+    }
     current = new ArrayList<>();
     floorLabel.setText("Floor " + whichFloorS());
     Image bottomleft = new Image("/Bottom-Left.png");
@@ -159,7 +165,16 @@ public class PathfindingController {
     floors.add(ff); // 2
     floors.add(sf); // 3
     floors.add(tf); // 4
-    floor = 2;
+    if (defaultsl != null) {
+      List<Node> latestNodes = getLatestNodes();
+      for (Node n : latestNodes) {
+        if (n.getLocation().equals(defaultsl)) {
+          floor = whichFloorI(n.getFloor());
+        }
+      }
+    } else {
+      floor = 2;
+    }
     ready4Second = false;
     previousPath = new ArrayList<>();
     addButtons("1");
@@ -393,6 +408,14 @@ public class PathfindingController {
       node.setDisable(true);
       parent.getChildren().add(node);
       node.toFront();
+      if (defaultsl != null) {
+        if (n.getLocation().getLongName().equals(defaultsl.getLongName())) {
+          start = n;
+          ready4Second = true;
+          highlight(node, "red");
+          highlightedNodesp.add(0, Triple.of(node, floor, nodeid));
+        }
+      }
       previousNodes.add(node);
       switch (f) {
         case "L1":
