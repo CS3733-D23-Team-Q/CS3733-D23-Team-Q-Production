@@ -173,7 +173,7 @@
                               </VBox>
                               <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#viewMoreStatsClicked" style="-fx-text-fill: #012d5a; -fx-background-color: transparent;" text="View More &gt;">
+                                    <Button mnemonicParsing="false" onAction="#viewMoreStatsClicked" style="-fx-border-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16; -fx-text-fill: #012d5a; -fx-background-color: transparent;" text="View More">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="20.0" />
                                        </HBox.margin>
