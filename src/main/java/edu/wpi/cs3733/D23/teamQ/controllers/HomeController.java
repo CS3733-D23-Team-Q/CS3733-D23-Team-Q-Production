@@ -136,13 +136,13 @@ public class HomeController implements Subscriber {
     //    b.getCalendars().add(birthdays);
     //    calendar.getCalendarSources().add(b);
 
-    //database personal calendar
+    // database personal calendar
     Calendar personal = new Calendar();
-    //title of event, time start, time end, date
+    // title of event, time start, time end, date
 
   }
 
-  public void personalEventAdd(){
+  /*  public void personalEventAdd(){
     qdb.subscribe(this);
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
@@ -172,7 +172,7 @@ public class HomeController implements Subscriber {
     personal.getCalendars().add(personalCal);
     calendar.getCalendarSources().add(personal);
 
-  }
+  }*/
 
   public void saveNotes() {
     String username = LoginController.getLoginUsername();

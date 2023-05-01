@@ -383,12 +383,29 @@ public class Qdb {
     return moveTable.importCSV(filename);
   }
 
-  public personalEvent retrievePersonalEvent(int personalEventID){return personalEventsTable.retrieveRow(personalEventID);}
-  public boolean updatePersonalEvent(int id, personalEvent p){return personalEventsTable.updateRow(id, p);}
-  public boolean deletePersonalEvent(int id){return personalEventsTable.deleteRow(id);}
-  public boolean addPersonalEvent(personalEvent p){ return personalEventsTable.addRow(p);}
-  public ArrayList<personalEvent> retrieveAllPersonalEvents(){ return (ArrayList<personalEvent>) personalEventsTable.getAllRows();}
-  public ArrayList<Integer> retrieveUserPersonalEvents(String user){ return (ArrayList<Integer>) personalEventsTable.getIndexes(user);}
+  public personalEvent retrievePersonalEvent(int personalEventID) {
+    return personalEventsTable.retrieveRow(personalEventID);
+  }
+
+  public boolean updatePersonalEvent(int id, personalEvent p) {
+    return personalEventsTable.updateRow(id, p);
+  }
+
+  public boolean deletePersonalEvent(int id) {
+    return personalEventsTable.deleteRow(id);
+  }
+
+  public boolean addPersonalEvent(personalEvent p) {
+    return personalEventsTable.addRow(p);
+  }
+
+  public ArrayList<personalEvent> retrieveAllPersonalEvents() {
+    return (ArrayList<personalEvent>) personalEventsTable.getAllRows();
+  }
+
+  public ArrayList<Integer> retrieveUserPersonalEvents(String user) {
+    return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
+  }
 
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
