@@ -47,7 +47,7 @@
                         <fx:include fx:id="newEvent" source="NewEvent.fxml" visible="false" />
                      </children>
                   </StackPane>
-                  <MFXButton fx:id="newEventButton" text="Test" />
+                  <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" text="Test" />
                </children>
             </VBox>
 

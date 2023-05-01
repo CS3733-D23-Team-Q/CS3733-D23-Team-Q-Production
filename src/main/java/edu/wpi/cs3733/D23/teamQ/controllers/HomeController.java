@@ -13,6 +13,8 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import edu.wpi.cs3733.D23.teamQ.db.obj.personalEvent;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.File;
 import java.net.URI;
@@ -227,6 +229,10 @@ public class HomeController implements Subscriber {
     Account account = qdb.retrieveAccount(username);
     account.setNotes(notesField.getText());
     qdb.updateAccount(username, account);
+  }
+
+  public void newEventClick() {
+    Navigation.navigate(Screen.NEW_EVENT);
   }
 
   //  @FXML
