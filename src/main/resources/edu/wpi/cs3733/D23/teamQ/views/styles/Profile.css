@@ -48,3 +48,11 @@
     -fx-min-height: 20px;
     -fx-font-weight: bold;
 }
+
+.add-button {
+    -fx-background-color: #b4b4b4;
+}
+
+.add-button:hover {
+    -fx-background-color: #0167b1;
+}
