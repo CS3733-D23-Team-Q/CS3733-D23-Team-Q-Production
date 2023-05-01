@@ -18,6 +18,17 @@ import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 public class Qdb {
+
+  private String server;
+
+  public String getServer() {
+    return server;
+  }
+
+  public void setServer(String server) {
+    this.server = server;
+  }
+
   private ArrayList<Subscriber> subscribers = new ArrayList<>();
 
   private AccountDaoImpl accountTable;

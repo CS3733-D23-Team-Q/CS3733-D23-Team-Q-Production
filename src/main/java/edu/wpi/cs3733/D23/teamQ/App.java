@@ -57,11 +57,11 @@ public class App extends Application {
     primaryStage.setWidth(screenBounds.getWidth());
     primaryStage.setHeight(screenBounds.getHeight());
                */
-    primaryStage.setFullScreen(true);
+    primaryStage.setFullScreen(false);
     rController.showMenu(false);
     rootBorder.setLeft(null);
     rootBorder.setRight(null);
-    Navigation.navigate(Screen.LOGIN);
+    Navigation.navigate(Screen.SPLASH);
 
     primaryStage.show();
   }

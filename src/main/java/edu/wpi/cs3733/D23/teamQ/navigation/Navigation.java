@@ -11,6 +11,28 @@ import javafx.stage.Stage;
 
 public class Navigation {
 
+  public static void navigateLogin(final Screen screen) {
+    final String filename = screen.getFilename();
+    try {
+      final var resource = App.class.getResource(filename);
+      final FXMLLoader loader = new FXMLLoader(resource);
+
+      Stage primaryStage = App.getPrimaryStage();
+
+      Node n = loader.load();
+      App.getRootBorder().setRight(null);
+      App.getRootCenter().getChildren().clear();
+      App.getRootCenter().getChildren().add(n);
+      AnchorPane.setTopAnchor(n, 0.0);
+      AnchorPane.setLeftAnchor(n, 0.0);
+      AnchorPane.setRightAnchor(n, 0.0);
+      AnchorPane.setBottomAnchor(n, 0.0);
+      primaryStage.setFullScreen(true);
+    } catch (IOException | NullPointerException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void navigate(final Screen screen) {
     final String filename = screen.getFilename();
 
