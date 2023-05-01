@@ -80,6 +80,7 @@ public class PathfindingController {
   List<Triple<Integer, Button, Integer>> cfpath;
   Text messageText;
   List<Image> directions;
+  List<Node> current;
 
   @FXML GridPane root;
   @FXML Group parent;
@@ -104,6 +105,7 @@ public class PathfindingController {
 
   @FXML
   public void initialize() throws IOException {
+    current = new ArrayList<>();
     floorLabel.setText("Floor " + whichFloorS());
     Image bottomleft = new Image("/Bottom-Left.png");
     Image bottomright = new Image("/Bottom-Right.png");
@@ -352,6 +354,8 @@ public class PathfindingController {
     } else {
       currentNodes = startNodes;
     }
+
+    current = currentNodes;
 
     for (int i = 0; i < currentNodes.size(); i++) { // Node n : nodes/startNodes/moveNodes
       Node n = currentNodes.get(i); // startNodes/moveNodes
@@ -791,7 +795,19 @@ public class PathfindingController {
     return direction;
   }
 
+  public List<Node> nameConversion(List<Node> path) {
+    for (Node node : path) {
+      for (Node n : current) {
+        if (node.getNodeID() == n.getNodeID()) {
+          node.setLocation(n.getLocation());
+        }
+      }
+    }
+    return path;
+  }
+
   public void displayTextPF(List<Node> path) {
+    path = nameConversion(path);
     String direction = "";
     direction = "Floor " + path.get(path.size() - 1).getFloor() + ": ";
     Label text = new Label(direction);
