@@ -111,14 +111,14 @@ public class PathfindingController {
     Image up = new Image("/Up.png");
     textual = new ArrayList<>();
     directions = new ArrayList<>();
-    directions.add(bottomleft);
-    directions.add(bottomright);
-    directions.add(down);
-    directions.add(left);
     directions.add(right);
-    directions.add(topleft);
-    directions.add(topright);
+    directions.add(left);
     directions.add(up);
+    directions.add(down);
+    directions.add(topright);
+    directions.add(bottomright);
+    directions.add(topleft);
+    directions.add(bottomleft);
     cfpath = new ArrayList<>();
     dateToggle = new ToggleGroup();
     date = getLatestDate();
@@ -757,6 +757,37 @@ public class PathfindingController {
     return arrow;
   }
 
+  public String textDirections(int index) {
+    String direction = "";
+    switch (index) {
+      case 0:
+        direction = "Turn right to ";
+        break;
+      case 1:
+        direction = "Turn left to ";
+        break;
+      case 2:
+        direction = "Go straight up to ";
+        break;
+      case 3:
+        direction = "Head down to ";
+        break;
+      case 4:
+        direction = "Turn right up to ";
+        break;
+      case 5:
+        direction = "Turn right down to ";
+        break;
+      case 6:
+        direction = "Turn left up to ";
+        break;
+      case 7:
+        direction = "Turn left down to ";
+        break;
+    }
+    return direction;
+  }
+
   public void displayTextPF(List<Node> path) {
     String direction = "";
     direction = "Floor " + path.get(0).getFloor() + ": ";
@@ -769,7 +800,7 @@ public class PathfindingController {
       Node previous = path.get(i - 1);
       int index = measureDirections(previous, n);
       if (!previous.getFloor().equals(n.getFloor())) {
-        text = new Label(direction);
+        text = new Label(textDirections(index) + direction);
         ImageView icon = new ImageView(directions.get(index));
         icon.setFitWidth(22);
         icon.setFitHeight(29);
@@ -785,7 +816,7 @@ public class PathfindingController {
         textual.add(text);
         direction = n.getLocation().getLongName();
       } else {
-        text = new Label(direction);
+        text = new Label(textDirections(index) + direction);
         ImageView icon = new ImageView(directions.get(index));
         icon.setFitWidth(22);
         icon.setFitHeight(29);
