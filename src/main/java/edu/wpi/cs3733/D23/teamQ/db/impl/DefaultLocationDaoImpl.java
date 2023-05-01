@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.DefaultLocation;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +36,14 @@ public class DefaultLocationDaoImpl implements GenDao<DefaultLocation, String> {
     throw new RuntimeException("No DefaultLocation found with username " + username);
   }
 
-
   public List<DefaultLocation> getAllRows() {
     return defaultLocations;
   }
-
 
   public DefaultLocation retrieveRow(String username) {
     int index = this.getIndex(username);
     return defaultLocations.get(index);
   }
-
 
   public boolean updateRow(String username, DefaultLocation x) {
     try (Connection connection = GenDao.connect();
