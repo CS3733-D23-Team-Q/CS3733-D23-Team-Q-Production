@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.SecondaryStage;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.obj.DefaultLocation;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 public class PathfindingSettingController extends SecondaryStage {
   static Stage stage;
+  String username = LoginController.getUsername();
   Qdb qdb = Qdb.getInstance();
   boolean isStartSelected;
   @FXML MFXFilterComboBox<String> startLocSelect;
@@ -55,10 +57,20 @@ public class PathfindingSettingController extends SecondaryStage {
   }
 
   public void saveButtonClicked() {
-    if(isStartSelected){
+    if (isStartSelected) {
       String startLocs = startLocSelect.getValue();
-      Location startLocl = qdb.getNodeFromLocation(startLocs).getLocation();
-
+      if (startLocs.equals("null")) {
+        if (qdb.getDefaultLocationIndex(username) != -1) {
+          qdb.deleteDefaultLocation(username);
+        }
+      } else {
+        Location startLocl = qdb.getNodeFromLocation(startLocs).getLocation();
+        if (qdb.getDefaultLocationIndex(username) != -1) {
+          qdb.updateDefaultLocation(username, new DefaultLocation(username, startLocl));
+        } else {
+          qdb.addDefaultLocation(new DefaultLocation(username, startLocl));
+        }
+      }
     }
   }
 }
