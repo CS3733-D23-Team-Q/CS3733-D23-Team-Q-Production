@@ -113,7 +113,6 @@ public class PathfindingController {
       defaultsl = qdb.retrieveDefaultLocation(username).getStartingLocation();
     }
     current = new ArrayList<>();
-    floorLabel.setText("Floor " + whichFloorS());
     Image bottomleft = new Image("/Bottom-Left.png");
     Image bottomright = new Image("/Bottom-Right.png");
     Image down = new Image("/Down.png");
@@ -165,19 +164,30 @@ public class PathfindingController {
     floors.add(ff); // 2
     floors.add(sf); // 3
     floors.add(tf); // 4
+    previousPath = new ArrayList<>();
+    floor = 2;
+    floorLabel.setText("Floor " + whichFloorS());
     if (defaultsl != null) {
-      List<Node> latestNodes = getLatestNodes();
+      List<Node> latestNodes = getLatestNodesb();
       for (Node n : latestNodes) {
         if (n.getLocation().equals(defaultsl)) {
-          floor = whichFloorI(n.getFloor());
+          int f = whichFloorI(n.getFloor());
+          int crossFloors = Math.abs(f - floor);
+          if (f < floor) {
+            for (int i = 0; i < crossFloors; i++) {
+              previousFloorClicked();
+            }
+          }
+          if (f > floor) {
+            for (int i = 0; i < crossFloors; i++) {
+              nextFloorClicked();
+            }
+          }
         }
       }
-    } else {
-      floor = 2;
     }
     ready4Second = false;
-    previousPath = new ArrayList<>();
-    addButtons("1");
+    addButtons(whichFloorS());
     pane = new GesturePane();
     pane.setContent(parent);
     pane.setFitMode(GesturePane.FitMode.COVER);
@@ -409,7 +419,7 @@ public class PathfindingController {
       parent.getChildren().add(node);
       node.toFront();
       if (defaultsl != null) {
-        if (n.getLocation().getLongName().equals(defaultsl.getLongName())) {
+        if (n.getLocation().equals(defaultsl)) {
           start = n;
           ready4Second = true;
           highlight(node, "red");
@@ -1388,5 +1398,108 @@ public class PathfindingController {
 
   public static List<Node> getLatestNodes() {
     return latest;
+  }
+
+  public List<Node> getLatestNodesb() {
+    List<Node> latestNodes = new ArrayList<>();
+    List<Move> allMoves = qdb.retrieveAllMoves();
+    List<Move> dateMoves = new ArrayList<>();
+    List<Node> moveNodes = new ArrayList<>();
+    List<Node> currentNodes = new ArrayList<>();
+    List<Node> nodeswchanges = new ArrayList<>();
+    for (Move m : allMoves) {
+      Date d = m.getDate();
+      if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
+        Node startn =
+            new Node(
+                m.getNode().getNodeID(),
+                m.getNode().getXCoord(),
+                m.getNode().getYCoord(),
+                m.getNode().getFloor(),
+                m.getNode().getBuilding(),
+                m.getNode().getLocation());
+        List<Node> nodes = qdb.retrieveAllNodes();
+        for (Node n : nodes) {
+          if (n.getLocation().getLongName().equals(m.getLongName())) {
+            startn.setLocation(n.getLocation());
+            break;
+          }
+        }
+        startNodes.add(startn);
+      }
+      if (d.compareTo(getLatestDate()) == 0) {
+        dateMoves.add(m);
+      }
+      if (!moveDates.contains(d)) {
+        moveDates.add(d);
+        dateSelect.getItems().add(d.toString());
+      }
+    }
+    for (Move m : dateMoves) {
+      Node moven =
+          new Node(
+              m.getNode().getNodeID(),
+              m.getNode().getXCoord(),
+              m.getNode().getYCoord(),
+              m.getNode().getFloor(),
+              m.getNode().getBuilding(),
+              m.getNode().getLocation());
+      List<Node> nodes = qdb.retrieveAllNodes();
+      for (Node n : nodes) {
+        if (n.getLocation().getLongName().equals(m.getLongName())) {
+          moven.setLocation(n.getLocation());
+          break;
+        }
+      }
+      moveNodes.add(moven);
+    }
+    Collections.sort(
+        moveDates,
+        new Comparator<Date>() {
+          public int compare(Date date1, Date date2) {
+            return date1.compareTo(date2);
+          }
+        });
+    List<Date> dateswofirst = new ArrayList<>();
+    dateswofirst.addAll(moveDates);
+    dateswofirst.remove(0);
+    List<Node> previousNodesm = new ArrayList<>();
+    for (Date movedate : dateswofirst) {
+      if (movedate.before(date)) {
+        previousNodesm = previousChange(movedate, previousNodesm);
+      }
+    }
+
+    nodeswchanges.addAll(moveNodes);
+
+    if (previousNodesm.size() > 0) {
+      for (Node node : previousNodesm) {
+        boolean add = true;
+        for (Node moven : moveNodes) {
+          if (node.getLocation().equals(moven.getLocation())) {
+            add = false;
+          }
+        }
+        if (add) {
+          nodeswchanges.add(node);
+        }
+      }
+    }
+
+    currentNodes.addAll(nodeswchanges);
+
+    for (Node node : startNodes) {
+      boolean add = true;
+      for (Node moven : nodeswchanges) {
+        if (node.getLocation().equals(moven.getLocation())) {
+          add = false;
+        }
+      }
+      if (add) {
+        currentNodes.add(node);
+      }
+    }
+    latestNodes = currentNodes;
+    return latestNodes;
   }
 }
