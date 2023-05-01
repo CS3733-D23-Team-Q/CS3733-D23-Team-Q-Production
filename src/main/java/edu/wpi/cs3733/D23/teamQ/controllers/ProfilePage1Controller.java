@@ -119,7 +119,7 @@ public class ProfilePage1Controller implements Subscriber {
 
   @Override
   public boolean update(List<String> context) throws URISyntaxException {
-    if(context.contains("account")) {
+    if (context.contains("account")) {
       boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
       if (isActive) {
         status.setText("Online");
