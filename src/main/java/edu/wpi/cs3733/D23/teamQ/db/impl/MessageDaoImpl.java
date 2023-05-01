@@ -42,6 +42,26 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
     return false;
   }
 
+  public boolean updateRow(Message m) {
+    try (Connection connection = GenDao.connect();
+        PreparedStatement st =
+            connection.prepareStatement(
+                "UPDATE message SET read = ? WHERE timestamp = ? AND receiver = ?")) {
+
+      st.setBoolean(1, true);
+      st.setLong(2, m.getTimeStamp());
+      st.setString(3, m.getReceiver().getUsername());
+
+      st.executeUpdate();
+      connection.close();
+      st.close();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
   @Override
   public boolean deleteRow(Integer ID) throws SQLException {
     return false;
@@ -130,5 +150,14 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
 
   public static void sortByTimestamp(List<Message> list) {
     Collections.sort(list, (o1, o2) -> Long.compare(o2.getTimeStamp(), o1.getTimeStamp()));
+  }
+
+  public ObservableList<Message> getAllMessages() {
+    ObservableList<Message> m = FXCollections.observableArrayList();
+
+    for (Message k : messages) {
+      m.add(k);
+    }
+    return m;
   }
 }

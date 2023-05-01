@@ -16,7 +16,7 @@ public class Settings {
     ASTAR,
     DFS,
     BFS,
-    DIJKSTRA
+    DJIKSTRA
   }
 
   public enum Voice {
@@ -37,7 +37,7 @@ public class Settings {
     } else if (algorithm == 2) {
       this.algorithm = Algorithm.BFS;
     } else if (algorithm == 3) {
-      this.algorithm = Algorithm.DIJKSTRA;
+      this.algorithm = Algorithm.DJIKSTRA;
     } else {
       this.algorithm = null;
     }

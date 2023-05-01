@@ -3,110 +3,162 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MapEditorHelpController">
+<VBox prefHeight="762.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MapEditorHelpController">
    <children>
-      <AnchorPane prefHeight="650.0" prefWidth="700.0">
+      <AnchorPane prefHeight="754.0" prefWidth="913.0">
          <children>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="36.0" prefHeight="29.0" prefWidth="479.0" text="Double-click the mouse: Zoom in the map.">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142a53" height="41.0" stroke="BLACK" strokeType="INSIDE" width="805.0" />
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="79.0" prefHeight="29.0" prefWidth="479.0" text="Double-click the mouse: Zoom in the map.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="152.0" prefHeight="29.0" prefWidth="471.0" text="Drag the node: Edit the X-coord and Y-coord of nodes.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="165.0" prefHeight="29.0" prefWidth="471.0" text="Drag the node: Edit the X-coord and Y-coord of nodes.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="181.0" prefHeight="29.0" prefWidth="479.0" text="Find: Find the node on the map (Blue), and display the information.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="213.0" prefHeight="29.0" prefWidth="479.0" text="Find: Find the node on the map (Blue), and display the information.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="210.0" prefHeight="29.0" prefWidth="479.0" text="Delete: Detele the node with nodeID.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="234.0" prefHeight="29.0" prefWidth="479.0" text="Delete: Detele the node with nodeID.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="239.0" prefHeight="29.0" prefWidth="495.0" text="Set: Update the node and find the node on the map (Blue).">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="256.0" prefHeight="29.0" prefWidth="495.0" text="Set: Update the node and find the node on the map (Blue).">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="268.0" prefHeight="29.0" prefWidth="479.0" text="Add: Add a new node and find the node on the map (Blue).">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="278.0" prefHeight="29.0" prefWidth="479.0" text="Add: Add a new node and find the node on the map (Blue).">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="297.0" prefHeight="29.0" prefWidth="479.0" text="Clear: Clear the node information table, and deselete the node.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="300.0" prefHeight="29.0" prefWidth="479.0" text="Clear: Clear the node information table, and deselete the node.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="413.0" prefHeight="29.0" prefWidth="479.0" text="Display edges: Display all edges on this floor.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="417.0" prefHeight="29.0" prefWidth="479.0" text="Display edges: Display all edges on this floor.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="442.0" prefHeight="29.0" prefWidth="479.0" text="Hide edges: Hide all edges.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="439.0" prefHeight="29.0" prefWidth="479.0" text="Hide edges: Hide all edges.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="529.0" prefHeight="29.0" prefWidth="479.0" text="Last Floor: Turn on page to the last Floor.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="633.0" prefHeight="29.0" prefWidth="479.0" text="Last Floor: Turn on page to the last Floor.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="558.0" prefHeight="29.0" prefWidth="479.0" text="Next Floor: Turn on page to the next Floor.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="653.0" prefHeight="29.0" prefWidth="479.0" text="Next Floor: Turn on page to the next Floor.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="587.0" prefHeight="29.0" prefWidth="479.0" text="Floor orders: 1st floor -&gt; 2nd floor -&gt; 3rd floor -&gt; L1 floor -&gt; L2 floor">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="100.0" prefHeight="29.0" prefWidth="479.0" text="Ctrl+Mouse Wheel Up: Zoom in the map.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="65.0" prefHeight="29.0" prefWidth="479.0" text="Ctrl+Mouse Wheel Up: Zoom in the map.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="123.0" prefHeight="29.0" prefWidth="479.0" text="Ctrl+Mouse Wheel Down: Zoom out the map.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="94.0" prefHeight="29.0" prefWidth="479.0" text="Ctrl+Mouse Wheel Down: Zoom out the map.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="144.0" prefHeight="29.0" prefWidth="479.0" text="Long press and drag: Move the map.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="123.0" prefHeight="29.0" prefWidth="479.0" text="Long press and drag: Move the map.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="348.0" prefHeight="29.0" prefWidth="515.0" text="Start Node: Click the textfield, then click the node to input the start node.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="326.0" prefHeight="29.0" prefWidth="515.0" text="Start Node: Click the textfield, then click the node to input the start node.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="370.0" prefHeight="29.0" prefWidth="515.0" text="End Node: Click the textfield, then click the node to input the end node.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="355.0" prefHeight="29.0" prefWidth="515.0" text="End Node: Click the textfield, then click the node to input the end node.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="394.0" prefHeight="29.0" prefWidth="573.0" text="Add Edges: Add an edge with the start node and the end node, and display edges.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="384.0" prefHeight="29.0" prefWidth="573.0" text="Add Edges: Add an edge with the start node and the end node, and display edges.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="591.0" prefHeight="29.0" prefWidth="604.0" text="Display Location Name: Display the location name of nodes by choosing node type.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="471.0" prefHeight="29.0" prefWidth="604.0" text="Display Location Name: Display the location name of nodes by choosing node type.">
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="612.0" prefHeight="29.0" prefWidth="604.0" text="Open the Table: Open the table by choosing table type.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="53.0" layoutY="500.0" prefHeight="29.0" prefWidth="604.0" text="Open the Table: Open the table by choosing table type.">
+            <Label alignment="CENTER" layoutX="1.0" layoutY="5.0" prefHeight="29.0" prefWidth="804.0" text="Help" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="673.0" prefHeight="29.0" prefWidth="479.0" text="Floor orders: 1st floor -&gt; 2nd floor -&gt; 3rd floor -&gt; L1 floor -&gt; L2 floor">
                <font>
                   <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="484.0" prefHeight="29.0" prefWidth="479.0" text="Nodes Selected: Display the nodes be selected to aline.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="44.0" layoutY="56.0" prefHeight="29.0" prefWidth="479.0" text="Map:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="41.0" layoutY="190.0" prefHeight="29.0" prefWidth="479.0" text="Node:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="44.0" layoutY="324.0" prefHeight="29.0" prefWidth="479.0" text="Edge:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="45.0" layoutY="461.0" prefHeight="29.0" prefWidth="479.0" text="Straightening Tool">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="506.0" prefHeight="29.0" prefWidth="479.0" text="Select: Start to select nodes by clicking the nodes. ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="529.0" prefHeight="29.0" prefWidth="479.0" text="Clear: Clear the selected nodes and stop selecting nodes.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="71.0" layoutY="551.0" prefHeight="29.0" prefWidth="479.0" text="Aline: Aline the selected nodes.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="45.0" layoutY="570.0" prefHeight="29.0" prefWidth="479.0" text="Others:">
+               <font>
+                  <Font size="16.0" />
                </font>
             </Label>
          </children>
