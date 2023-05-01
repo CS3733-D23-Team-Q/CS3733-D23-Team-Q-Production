@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.PathfindingSettingController">
    <children>
-      <Label text="Starting Location" />
-      <MFXComboBox prefHeight="40.0" prefWidth="241.0" />
-      <Label text="Kiosk Location" />
-      <MFXComboBox prefHeight="40.0" prefWidth="242.0" />
-      <MFXButton prefHeight="28.0" prefWidth="82.0" style="-fx-background-color: #012D5A;" textFill="WHITE" />
+      <Label prefHeight="17.0" prefWidth="240.0" text="Starting Location">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font>
+      </Label>
+      <MFXFilterComboBox fx:id="startLocSelect" minHeight="35.0" onAction="#startLocSelected" prefHeight="35.0" prefWidth="240.0" />
+      <Label prefHeight="17.0" prefWidth="240.0" text="Kiosk Location">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font>
+      </Label>
+      <MFXFilterComboBox fx:id="kioskLocSelect" minHeight="35.0" onAction="#kioskLocSelected" prefHeight="35.0" prefWidth="240.0" />
+      <MFXButton onAction="#addButtonClicked" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #012D5A; -fx-font-family: Roboto;" text="Add" textFill="WHITE">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Roboto" size="12.0" />
+         </font>
+      </MFXButton>
    </children>
 </VBox>
