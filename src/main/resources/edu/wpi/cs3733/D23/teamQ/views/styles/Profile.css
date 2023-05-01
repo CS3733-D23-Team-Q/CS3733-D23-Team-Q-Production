@@ -18,3 +18,41 @@
     -fx-pref-height: 0;
     -fx-min-height: 0;
 }
+
+.grey-button {
+    -fx-background-color: #cbcbcb;
+    -fx-text-fill: #4d4d4d;
+    -fx-min-width: 100px;
+    -fx-background-radius: 20;
+    -fx-font-size: 12.5;
+    -fx-min-height: 20px;
+    -fx-font-weight: bold;
+}
+
+.yellow-button {
+    -fx-background-color: #ecec0b;
+    -fx-text-fill: #000000;
+    -fx-min-width: 100px;
+    -fx-background-radius: 20;
+    -fx-font-size: 12.5;
+    -fx-min-height: 20px;
+    -fx-font-weight: bold;
+}
+
+.green-button {
+    -fx-background-color: #01c701;
+    -fx-text-fill: #ffffff;
+    -fx-min-width: 100px;
+    -fx-background-radius: 20;
+    -fx-font-size: 12.5;
+    -fx-min-height: 20px;
+    -fx-font-weight: bold;
+}
+
+.add-button {
+    -fx-background-color: #b4b4b4;
+}
+
+.add-button:hover {
+    -fx-background-color: #0167b1;
+}

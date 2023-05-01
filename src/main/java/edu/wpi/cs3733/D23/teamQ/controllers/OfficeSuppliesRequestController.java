@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
+import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.OfficeSuppliesRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
@@ -13,7 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class OfficeSuppliesRequestController {
   Qdb qdb = Qdb.getInstance();
@@ -28,7 +32,7 @@ public class OfficeSuppliesRequestController {
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
   @FXML MFXFilterComboBox timeField;
-  @FXML MFXTextField specialInstructionsField;
+  @FXML TextArea specialInstructionsField;
   @FXML MFXFilterComboBox itemRequestedField;
   ObservableList<String> itemList =
       FXCollections.observableArrayList(
@@ -39,11 +43,8 @@ public class OfficeSuppliesRequestController {
   @FXML Button cancelButton;
   @FXML Button submitButton;
 
-  @FXML private ImageView PrinterPaperImage;
-  @FXML private ImageView PencilImage;
-  @FXML private ImageView PenImage;
-  @FXML private ImageView HighlighterImage;
-  @FXML private ImageView NotepadImage;
+  @FXML private ImageView ItemImage;
+  @FXML private GesturePane titlePane;
 
   @FXML
   public void initialize() {
@@ -56,11 +57,9 @@ public class OfficeSuppliesRequestController {
     this.timeField.setValue("");
     this.timeField.setItems(timeList);
 
-    PrinterPaperImage.setOpacity(0.0);
-    PencilImage.setOpacity(0.0);
-    PenImage.setOpacity(0.0);
-    HighlighterImage.setOpacity(0.0);
-    NotepadImage.setOpacity(0.0);
+    Image titleImage = new Image(App.class.getResourceAsStream("OfficeSuppliesTitle.jpg"));
+    ImageView iv = new ImageView(titleImage);
+    titlePane.setContent(iv);
   }
 
   @FXML
@@ -73,16 +72,12 @@ public class OfficeSuppliesRequestController {
     specialInstructionsField.clear();
     quantityField.clear();
 
-    PrinterPaperImage.setOpacity(0.0);
-    PencilImage.setOpacity(0.0);
-    PenImage.setOpacity(0.0);
-    HighlighterImage.setOpacity(0.0);
-    NotepadImage.setOpacity(0.0);
+    ItemImage.setImage(null);
   }
 
   @FXML
   public void cancelButtonClicked() {
-    Navigation.navigateRight(Screen.SERVICE_PLACEHOLDER);
+    Navigation.navigate(Screen.HOME);
   }
 
   @FXML
@@ -93,8 +88,8 @@ public class OfficeSuppliesRequestController {
     OfficeSuppliesRequest newOSR =
         new OfficeSuppliesRequest(
             qdb.getNodeFromLocation(roomNumberField.getValue().toString()),
-            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             qdb.retrieveAccount(LoginController.getUsername()),
+            qdb.retrieveAccount(assigneeField.getValue().toString().split(",")[0]),
             specialInstructionsField.getText(),
             Date.valueOf(dateField.getValue()),
             timeField.getText(),
@@ -108,39 +103,29 @@ public class OfficeSuppliesRequestController {
   @FXML
   public void ItemSelected(ActionEvent event) {
     if (itemRequestedField.getValue().equals("Printer Paper (by ream)")) {
-      PrinterPaperImage.setOpacity(1.0);
-      PencilImage.setOpacity(0.0);
-      PenImage.setOpacity(0.0);
-      HighlighterImage.setOpacity(0.0);
-      NotepadImage.setOpacity(0.0);
+      Image printerPaperImage = new Image(App.class.getResourceAsStream("PrinterPaper.jpg"));
+      ImageView iv = new ImageView(printerPaperImage);
+      ItemImage.setImage(iv.getImage());
     }
     if (itemRequestedField.getValue().equals("Pencil")) {
-      PrinterPaperImage.setOpacity(0.0);
-      PencilImage.setOpacity(1.0);
-      PenImage.setOpacity(0.0);
-      HighlighterImage.setOpacity(0.0);
-      NotepadImage.setOpacity(0.0);
+      Image pencilsImage = new Image(App.class.getResourceAsStream("Pencils.jpg"));
+      ImageView iv = new ImageView(pencilsImage);
+      ItemImage.setImage(iv.getImage());
     }
     if (itemRequestedField.getValue().equals("Pen")) {
-      PrinterPaperImage.setOpacity(0.0);
-      PencilImage.setOpacity(0.0);
-      PenImage.setOpacity(1.0);
-      HighlighterImage.setOpacity(0.0);
-      NotepadImage.setOpacity(0.0);
+      Image pensImage = new Image(App.class.getResourceAsStream("Pens.jpg"));
+      ImageView iv = new ImageView(pensImage);
+      ItemImage.setImage(iv.getImage());
     }
     if (itemRequestedField.getValue().equals("Highlighter")) {
-      PrinterPaperImage.setOpacity(0.0);
-      PencilImage.setOpacity(0.0);
-      PenImage.setOpacity(0.0);
-      HighlighterImage.setOpacity(1.0);
-      NotepadImage.setOpacity(0.0);
+      Image highlightersImage = new Image(App.class.getResourceAsStream("Highlighters.jpg"));
+      ImageView iv = new ImageView(highlightersImage);
+      ItemImage.setImage(iv.getImage());
     }
     if (itemRequestedField.getValue().equals("Notepad")) {
-      PrinterPaperImage.setOpacity(0.0);
-      PencilImage.setOpacity(0.0);
-      PenImage.setOpacity(0.0);
-      HighlighterImage.setOpacity(0.0);
-      NotepadImage.setOpacity(1.0);
+      Image notepadImage = new Image(App.class.getResourceAsStream("Notepad.jpg"));
+      ImageView iv = new ImageView(notepadImage);
+      ItemImage.setImage(iv.getImage());
     }
   }
 }

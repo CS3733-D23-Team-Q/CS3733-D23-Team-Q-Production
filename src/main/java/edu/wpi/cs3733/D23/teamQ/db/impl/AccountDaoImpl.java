@@ -3,12 +3,14 @@ package edu.wpi.cs3733.D23.teamQ.db.impl;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.dao.GenDao;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
+import edu.wpi.cs3733.D23.teamQ.db.obj.ProfileImage;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import lombok.Getter;
 
 @Getter
@@ -60,7 +62,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(9, a.getFirstName());
       pst.setString(10, a.getLastName());
       pst.setString(11, a.getTitle());
-      pst.setInt(12, a.getPhoneNumber());
+      pst.setString(12, a.getPhoneNumber());
       pst.setString(13, a.getNotes());
       pst.setString(14, a.getTodo());
       pst.setString(15, uname);
@@ -118,6 +120,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
   }
 
   public boolean addRow(Account a) {
+    Qdb qdb = Qdb.getInstance();
     boolean result = false;
     Connection conn = GenDao.connect();
     try {
@@ -136,11 +139,17 @@ public class AccountDaoImpl implements GenDao<Account, String> {
       pst.setString(10, a.getFirstName());
       pst.setString(11, a.getLastName());
       pst.setString(12, a.getTitle());
-      pst.setInt(13, a.getPhoneNumber());
+      pst.setString(13, a.getPhoneNumber());
       int rs = pst.executeUpdate();
       if (rs == 1) {
         result = true;
         accounts.add(a);
+
+        Image image = new Image(AccountDaoImpl.class.getResourceAsStream("/default-profile.png"));
+        byte[] imageData = qdb.convertImageToBytea(image);
+        ProfileImage newProfileImage = new ProfileImage(a.getUsername(), imageData);
+        qdb.addProfileImage(newProfileImage);
+
         System.out.println("Account created successfully!");
       } else {
         System.out.println("Failed to create your account.");
@@ -180,7 +189,7 @@ public class AccountDaoImpl implements GenDao<Account, String> {
                 rs.getString("firstName"),
                 rs.getString("lastName"),
                 rs.getString("title"),
-                rs.getInt("phoneNumber"),
+                rs.getString("phoneNumber"),
                 rs.getString("notes"),
                 rs.getString("todo"));
         accounts.add(a);

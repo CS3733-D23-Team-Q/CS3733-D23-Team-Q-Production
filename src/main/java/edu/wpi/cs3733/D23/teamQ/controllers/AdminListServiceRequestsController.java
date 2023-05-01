@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -24,12 +26,13 @@ import javafx.scene.layout.VBox;
 public class AdminListServiceRequestsController {
   @FXML TableView<ServiceRequest> requestsTable;
   @FXML TableColumn<ServiceRequest, Integer> requestIDColumn;
+  @FXML TableColumn<ServiceRequest, String> requestTypeColumn;
   @FXML TableColumn<ServiceRequest, String> requesterColumn;
   @FXML TableColumn<ServiceRequest, String> assigneeColumn;
   @FXML TableColumn<ServiceRequest, String> dateColumn;
   @FXML TableColumn<ServiceRequest, String> locationColumn;
   @FXML TableColumn<ServiceRequest, String> instructionsColumn;
-  @FXML TableColumn<ServiceRequest, ServiceRequest.Progress> progressColumn;
+  @FXML TableColumn<ServiceRequest, MFXButton> progressColumn;
   @FXML TableColumn<ServiceRequest, MFXButton> editButtonColumn;
   @FXML TableColumn<ServiceRequest, MFXButton> deleteButtonColumn;
 
@@ -122,6 +125,7 @@ public class AdminListServiceRequestsController {
   @FXML MFXTextField medicalQuantityField;
 
   @FXML MFXToggleButton toggleButton;
+  @FXML MFXTextField searchBox;
 
   private static ServiceRequest serviceRequestChange;
   private static FlowerRequest flowerRequest;
@@ -136,16 +140,28 @@ public class AdminListServiceRequestsController {
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getLoginUsername();
 
-  ObservableList<ServiceRequest> allRequests = qdb.getAllServiceRequestsObservable();
-  ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
+  // ObservableList<ServiceRequest> allRequests = qdb.getAllServiceRequestsObservable();
+  // ObservableList<ServiceRequest> allOutstandingRequests = qdb.getAllOutstandingServingRequests();
 
   public void initialize() {
+    requestsTable.setRowFactory(
+        tv -> {
+          TableRow<ServiceRequest> row = new TableRow<>();
+          row.setPrefHeight(50);
+          return row;
+        });
+
+    final FilteredList<ServiceRequest>[] filteredRequests = new FilteredList[] {null};
     toggleButton.setOnAction(
         event -> {
+          filteredRequests[0] =
+              new FilteredList<>(qdb.getAllOutstandingServingRequests(), b -> true);
           if (toggleButton.isSelected()) {
-            requestsTable.setItems(allOutstandingRequests);
+            requestsTable.setItems(qdb.getAllOutstandingServingRequests());
           } else {
-            requestsTable.setItems(allRequests);
+            requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+            filteredRequests[0] =
+                new FilteredList<>(qdb.getAllServiceRequestsObservable(), b -> true);
           }
           requestsTable.refresh();
         });
@@ -157,6 +173,8 @@ public class AdminListServiceRequestsController {
     medicalRequestEdit.setVisible(false);
 
     requestIDColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    requestTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+
     locationColumn.setCellValueFactory(
         cellData -> {
           ServiceRequest serviceRequest = cellData.getValue();
@@ -199,32 +217,30 @@ public class AdminListServiceRequestsController {
                 button.setOnAction(
                     event -> {
                       serviceRequestChange = serviceRequest;
-                      if (qdb.retrieveConferenceRequest(serviceRequest.getRequestID()) != null) {
+                      if (serviceRequest.getType().equals("Conference Request")) {
                         conferenceRequestEdit.setVisible(true);
                         ConferenceRequest cr =
                             qdb.retrieveConferenceRequest(serviceRequest.getRequestID());
                         setConferenceFields(cr);
                         conferenceRequest = cr;
-                      } else if (qdb.retrieveFlowerRequest(serviceRequest.getRequestID()) != null) {
+                      } else if (serviceRequest.getType().equals("Flower Request")) {
                         flowerRequestEdit.setVisible(true);
                         FlowerRequest fr = qdb.retrieveFlowerRequest(serviceRequest.getRequestID());
                         setFlowerFields(fr);
                         flowerRequest = fr;
-                      } else if (qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID())
-                          != null) {
+                      } else if (serviceRequest.getType().equals("Office Supplies Request")) {
                         officeRequestEdit.setVisible(true);
                         OfficeSuppliesRequest or =
                             qdb.retrieveOfficeSuppliesRequest(serviceRequest.getRequestID());
                         setOfficeFields(or);
                         officeSuppliesRequest = or;
-                      } else if (qdb.retrieveFurnitureRequest(serviceRequest.getRequestID())
-                          != null) {
+                      } else if (serviceRequest.getType().equals("Furniture Request")) {
                         furnitureRequestEdit.setVisible(true);
                         FurnitureRequest fr =
                             qdb.retrieveFurnitureRequest(serviceRequest.getRequestID());
                         setFurnitureFields(fr);
                         furnitureRequest = fr;
-                      } else if (qdb.retrieveMealRequest(serviceRequest.getRequestID()) != null) {
+                      } else if (serviceRequest.getType().equals("Meal Request")) {
                         mealRequestEdit.setVisible(true);
                         MealRequest mr = qdb.retrieveMealRequest(serviceRequest.getRequestID());
                         setMealFields(mr);
@@ -290,37 +306,62 @@ public class AdminListServiceRequestsController {
           };
         });
 
-    //    progressColumn.setCellFactory(
-    //        column -> {
-    //          return new TableCell<ServiceRequest, ServiceRequest.Progress>() {
-    //            private final MFXComboBox<ServiceRequest.Progress> comboBox = new MFXComboBox<>();
-    //
-    //            {
-    //              comboBox.setPrefHeight(20);
-    //              comboBox.setItems(progressValues);
-    //              comboBox.setOnAction(
-    //                  event -> {
-    //                    ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-    //                    serviceRequest.setProgress(comboBox.getValue());
-    //                    qdb.updateServiceRequest(serviceRequest.getRequestID(), serviceRequest);
-    //                    requestsTable.refresh();
-    //                  });
-    //            }
-    //
-    //            @Override
-    //            protected void updateItem(ServiceRequest.Progress item, boolean empty) {
-    //              super.updateItem(item, empty);
-    //              if (empty) {
-    //                setGraphic(null);
-    //              } else {
-    //                ServiceRequest serviceRequest = getTableView().getItems().get(getIndex());
-    //                comboBox.setValue(serviceRequest.getProgress());
-    //                setGraphic(comboBox);
-    //              }
-    //            }
-    //          };
-    //        });
-    progressColumn.setCellValueFactory(new PropertyValueFactory<>("progress"));
+    progressColumn.setCellFactory(
+        column ->
+            new TableCell<ServiceRequest, MFXButton>() {
+              private final MFXButton button = new MFXButton();
+
+              {
+                button.setOnAction(
+                    event -> {
+                      ServiceRequest request = getTableView().getItems().get(getIndex());
+                      switch (request.getProgress()) {
+                        case BLANK:
+                          request.setProgress(ServiceRequest.Progress.PROCESSING);
+                          button.getStyleClass().setAll("yellow-button");
+                          button.setText("PROCESSING");
+                          break;
+                        case PROCESSING:
+                          request.setProgress(ServiceRequest.Progress.DONE);
+                          button.getStyleClass().setAll("green-button");
+                          button.setText("DONE");
+                          break;
+                        case DONE:
+                          request.setProgress(ServiceRequest.Progress.BLANK);
+                          button.getStyleClass().setAll("grey-button");
+                          button.setText("BLANK");
+                          break;
+                      }
+                      qdb.updateServiceRequest(request.getRequestID(), request); // Update database
+                    });
+              }
+
+              @Override
+              protected void updateItem(MFXButton item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                  setGraphic(null);
+                } else {
+                  ServiceRequest request = getTableView().getItems().get(getIndex());
+                  button.getStyleClass().setAll(getButtonStyle(request.getProgress()));
+                  button.setText(request.getProgress().name());
+                  setGraphic(button);
+                }
+              }
+
+              private String getButtonStyle(ServiceRequest.Progress progress) {
+                switch (progress) {
+                  case BLANK:
+                    return "grey-button";
+                  case PROCESSING:
+                    return "yellow-button";
+                  case DONE:
+                    return "green-button";
+                  default:
+                    return "";
+                }
+              }
+            });
 
     requesterColumn.setCellValueFactory(
         cellData -> {
@@ -331,7 +372,51 @@ public class AdminListServiceRequestsController {
           return requesterProperty;
         });
 
-    requestsTable.setItems(allRequests);
+    filteredRequests[0] = new FilteredList<>(qdb.getAllServiceRequestsObservable(), b -> true);
+
+    searchBox
+        .textProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              filteredRequests[0].setPredicate(
+                  sr -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                      return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (String.valueOf(sr.getRequestID()).contains(lowerCaseFilter)) {
+                      return true;
+                    } else if (sr.getRequester()
+                        .getUsername()
+                        .toLowerCase()
+                        .contains(lowerCaseFilter)) {
+                      return true;
+                    } else if (sr.getAssignee()
+                        .getUsername()
+                        .toLowerCase()
+                        .contains(lowerCaseFilter)) {
+                      return true;
+                    } else if (sr.getNode()
+                        .getLocation()
+                        .getLongName()
+                        .toLowerCase()
+                        .contains(lowerCaseFilter)) {
+                      return true;
+                    } else if (sr.getType().toLowerCase().contains(lowerCaseFilter)) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  });
+
+              SortedList<ServiceRequest> sortedRequests = new SortedList<>(filteredRequests[0]);
+              sortedRequests.comparatorProperty().bind(requestsTable.comparatorProperty());
+              requestsTable.setItems(sortedRequests);
+            }));
+
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
   }
 
   public void confCancelClicked() {
@@ -379,6 +464,8 @@ public class AdminListServiceRequestsController {
             conferenceRequest.getProgress().ordinal(),
             confFoodField.getText());
     qdb.updateConferenceRequest(conferenceRequest.getRequestID(), cr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+    searchBox.clear();
     requestsTable.refresh();
     conferenceRequestEdit.setVisible(false);
   }
@@ -430,6 +517,8 @@ public class AdminListServiceRequestsController {
             Integer.parseInt(flowerBouquetField.getText()));
 
     qdb.updateFlowerRequest(flowerRequest.getRequestID(), fr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+    searchBox.clear();
     requestsTable.refresh();
     flowerRequestEdit.setVisible(false);
   }
@@ -480,6 +569,7 @@ public class AdminListServiceRequestsController {
             officeItemField.getText(),
             Integer.parseInt(officeQuantityField.getText()));
     qdb.updateOfficeSuppliesRequest(officeSuppliesRequest.getRequestID(), or);
+    searchBox.clear();
     requestsTable.refresh();
     officeRequestEdit.setVisible(false);
   }
@@ -528,6 +618,8 @@ public class AdminListServiceRequestsController {
             furnitureRequest.getProgress().ordinal(),
             furnitureChoiceField.getText());
     qdb.updateFurnitureRequest(furnitureRequest.getRequestID(), fr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+    searchBox.clear();
     requestsTable.refresh();
     furnitureRequestEdit.setVisible(false);
   }
@@ -582,6 +674,8 @@ public class AdminListServiceRequestsController {
             mealEntreeField.getText(),
             mealSideField.getText());
     qdb.updateMealRequest(mealRequest.getRequestID(), mr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+    searchBox.clear();
     requestsTable.refresh();
     mealRequestEdit.setVisible(false);
   }
@@ -632,6 +726,8 @@ public class AdminListServiceRequestsController {
             medicalItemField.getText(),
             Integer.parseInt(medicalQuantityField.getText()));
     qdb.updateMedicalSuppliesRequest(medicalSuppliesRequest.getRequestID(), mr);
+    requestsTable.setItems(qdb.getAllServiceRequestsObservable());
+    searchBox.clear();
     requestsTable.refresh();
     medicalRequestEdit.setVisible(false);
   }

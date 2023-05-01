@@ -14,7 +14,7 @@ public class Account {
   private String firstName;
   private String lastName;
   private String title;
-  private int phoneNumber;
+  private String phoneNumber;
 
   private String notes;
   private String todo;
@@ -32,7 +32,7 @@ public class Account {
       String firstName,
       String lastName,
       String title,
-      int phoneNumber,
+      String phoneNumber,
       String notes,
       String todo) {
     this.username = username;
@@ -64,7 +64,7 @@ public class Account {
       String firstName,
       String lastName,
       String title,
-      int phoneNumber,
+      String phoneNumber,
       String notes,
       String todo) {
     this.username = username;
@@ -95,7 +95,7 @@ public class Account {
     this.firstName = null;
     this.lastName = null;
     this.title = null;
-    this.phoneNumber = 0;
+    this.phoneNumber = "";
   }
 
   public String getUsername() {
@@ -194,11 +194,11 @@ public class Account {
     this.title = t;
   }
 
-  public int getPhoneNumber() {
+  public String getPhoneNumber() {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(int PN) {
+  public void setPhoneNumber(String PN) {
     this.phoneNumber = PN;
   }
 
