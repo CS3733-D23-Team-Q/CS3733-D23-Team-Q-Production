@@ -18,7 +18,7 @@
          </font>
       </Label>
       <MFXFilterComboBox fx:id="startLocSelect" minHeight="35.0" onAction="#startLocSelected" prefHeight="35.0" prefWidth="240.0" />
-      <Label prefHeight="17.0" prefWidth="240.0" text="Kiosk Location">
+      <Label prefHeight="17.0" prefWidth="240.0" text="Kiosk Location(s)">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>

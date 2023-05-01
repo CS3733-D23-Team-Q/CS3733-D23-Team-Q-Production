@@ -60,12 +60,16 @@ public class DefaultLocationDaoImpl implements GenDao<DefaultLocation, Integer> 
       st.setString(2, x.getStartingLocation().getLongName());
 
       ArrayList<String> longNames = new ArrayList<>();
-      for (Location kiosk : x.getKiosks()) {
-        longNames.add(kiosk.getLongName());
+      if (x.getKiosks() != null) {
+        for (Location kiosk : x.getKiosks()) {
+          longNames.add(kiosk.getLongName());
+        }
+        String[] longNamesArray = longNames.toArray(new String[longNames.size()]);
+        Array sqlArray = connection.createArrayOf("text", longNamesArray);
+        st.setArray(3, sqlArray);
+      } else {
+        st.setArray(3, null);
       }
-      String[] longNamesArray = longNames.toArray(new String[longNames.size()]);
-      Array sqlArray = connection.createArrayOf("text", longNamesArray);
-      st.setArray(3, sqlArray);
       st.setInt(4, ID);
 
       st.executeUpdate();
@@ -140,19 +144,25 @@ public class DefaultLocationDaoImpl implements GenDao<DefaultLocation, Integer> 
       Statement statement = connection.createStatement();
       ResultSet rs = statement.executeQuery(query);
       while (rs.next()) {
-
-        Array kiosks = rs.getArray("kiosks");
-        String[] kioskList = (String[]) kiosks.getArray();
-        Location[] locations = new Location[kioskList.length];
-        for (int i = 0; i < kioskList.length; i++) {
-          locations[i] = locationDao.retrieveLocationFromLongName(kioskList[i]);
+        Location[] locations;
+        Location location;
+        if (rs.getArray("kiosks") != null) {
+          Array kiosks = rs.getArray("kiosks");
+          String[] kioskList = (String[]) kiosks.getArray();
+          locations = new Location[kioskList.length];
+          for (int i = 0; i < kioskList.length; i++) {
+            locations[i] = locationDao.retrieveLocationFromLongName(kioskList[i]);
+          }
+        } else {
+          locations = null;
         }
-
+        if (rs.getString("startingLocation") != null) {
+          location = locationDao.retrieveLocationFromLongName(rs.getString("startingLocation"));
+        } else {
+          location = null;
+        }
         DefaultLocation dl =
-            new DefaultLocation(
-                rs.getInt("defaultLocationID"),
-                locationDao.retrieveLocationFromLongName(rs.getString("startingLocation")),
-                locations);
+            new DefaultLocation(rs.getInt("defaultLocationID"), location, locations);
         defaultLocations.add(dl);
       }
       connection.close();
