@@ -643,6 +643,10 @@ public class Qdb {
     return messageTable.retrieveMessages(p1, p2);
   }
 
+  public ObservableList<Message> retrieveAllMessages() {
+    return messageTable.getAllMessages();
+  }
+
   public ObservableList<Message> retrieveConversations(String username) {
     return messageTable.retrieveConversations(username);
   }
@@ -654,6 +658,10 @@ public class Qdb {
   public boolean addMessage(Message message) {
     updateTimestamp("message");
     return messageTable.addRow(message);
+  }
+
+  public boolean updateMessage(Message m) {
+    return messageTable.updateRow(m);
   }
 
   public synchronized boolean populate(ArrayList<String> tableNames) {
@@ -853,16 +861,16 @@ public class Qdb {
     return defaultLocationsTable.getAllRows();
   }
 
-  public DefaultLocation retrieveDefaultLocation(int id) {
-    return defaultLocationsTable.retrieveRow(id);
+  public DefaultLocation retrieveDefaultLocation(String username) {
+    return defaultLocationsTable.retrieveRow(username);
   }
 
-  public boolean updateDefaultLocation(int id, DefaultLocation x) {
-    return defaultLocationsTable.updateRow(id, x);
+  public boolean updateDefaultLocation(String username, DefaultLocation x) {
+    return defaultLocationsTable.updateRow(username, x);
   }
 
-  public boolean deleteDefaultLocation(int id) {
-    return defaultLocationsTable.deleteRow(id);
+  public boolean deleteDefaultLocation(String username) {
+    return defaultLocationsTable.deleteRow(username);
   }
 
   public boolean addDefaultLocation(DefaultLocation x) {
