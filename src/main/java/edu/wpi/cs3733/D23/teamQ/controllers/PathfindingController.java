@@ -81,6 +81,7 @@ public class PathfindingController {
   Text messageText;
   List<Image> directions;
   List<Node> current;
+  static List<Node> latest = new ArrayList<>();
 
   @FXML GridPane root;
   @FXML Group parent;
@@ -356,6 +357,9 @@ public class PathfindingController {
     }
 
     current = currentNodes;
+    if (date.compareTo(getLatestDate()) == 0) {
+      latest = currentNodes;
+    }
 
     for (int i = 0; i < currentNodes.size(); i++) { // Node n : nodes/startNodes/moveNodes
       Node n = currentNodes.get(i); // startNodes/moveNodes
@@ -1357,5 +1361,9 @@ public class PathfindingController {
 
   public void settingButtonClicked() throws IOException {
     PathfindingSettingController.display();
+  }
+
+  public static List<Node> getLatestNodes() {
+    return latest;
   }
 }
