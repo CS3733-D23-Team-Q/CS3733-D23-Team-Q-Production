@@ -138,43 +138,43 @@ public class HomeController implements Subscriber {
     //    b.getCalendars().add(birthdays);
     //    calendar.getCalendarSources().add(b);
 
-    //database personal calendar
+    // database personal calendar
     Calendar personal = new Calendar();
-    //title of event, time start, time end, date
+    // title of event, time start, time end, date
 
   }
 
-//  public void personalEventAdd(){
-//    qdb.subscribe(this);
-//    String username = LoginController.getLoginUsername();
-//    Account account = qdb.retrieveAccount(username);
-//
-//    Calendar personalCal = new Calendar("Person Calendar");
-//    CalendarSource personal = new CalendarSource("Service Request Blank");
-//    personalCal.setStyle(Style.STYLE5);
-//
-//
-//    for (int i = 0; i<account.getPersonalCalendar(); i++){
-//      Entry<String> temp = new Entry<>(getPersonalCalendar());
-//
-//      temp.changeStartDate(account.getPersonalCalendar().get(i).getDate().toLocalDate());
-//      temp.changeEndDate(account.getPersonalCalendar().get(i).getDate().toLocalDate());
-//
-//      if (account.getPersonalCalendar().get(i).fullDayProperty()){
-//        temp.setFullDay(true);
-//      }
-//      else{
-//        temp.changeStartTime(
-//                LocalTime.parse(account.getPersonalCalendar(username).get(i).getTime()));
-//        temp.changeEndTime(
-//                LocalTime.parse(account.getPersonalCalendar(username).get(i).getTime()));
-//      }
-//
-//    }
-//    personal.getCalendars().add(personalCal);
-//    calendar.getCalendarSources().add(personal);
-//
-//  }
+  //  public void personalEventAdd(){
+  //    qdb.subscribe(this);
+  //    String username = LoginController.getLoginUsername();
+  //    Account account = qdb.retrieveAccount(username);
+  //
+  //    Calendar personalCal = new Calendar("Person Calendar");
+  //    CalendarSource personal = new CalendarSource("Service Request Blank");
+  //    personalCal.setStyle(Style.STYLE5);
+  //
+  //
+  //    for (int i = 0; i<account.getPersonalCalendar(); i++){
+  //      Entry<String> temp = new Entry<>(getPersonalCalendar());
+  //
+  //      temp.changeStartDate(account.getPersonalCalendar().get(i).getDate().toLocalDate());
+  //      temp.changeEndDate(account.getPersonalCalendar().get(i).getDate().toLocalDate());
+  //
+  //      if (account.getPersonalCalendar().get(i).fullDayProperty()){
+  //        temp.setFullDay(true);
+  //      }
+  //      else{
+  //        temp.changeStartTime(
+  //                LocalTime.parse(account.getPersonalCalendar(username).get(i).getTime()));
+  //        temp.changeEndTime(
+  //                LocalTime.parse(account.getPersonalCalendar(username).get(i).getTime()));
+  //      }
+  //
+  //    }
+  //    personal.getCalendars().add(personalCal);
+  //    calendar.getCalendarSources().add(personal);
+  //
+  //  }
 
   public void saveNotes() {
     String username = LoginController.getLoginUsername();

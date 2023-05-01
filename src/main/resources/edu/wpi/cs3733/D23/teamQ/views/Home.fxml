@@ -37,7 +37,9 @@
       </HBox>
       <HBox>
          <children>
-            <CalendarView fx:id="calendar" minWidth="-Infinity" onMouseExited="#personalEventAdd" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />
+            <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />
+
+            <!--            <CalendarView fx:id="calendar" minWidth="-Infinity" onMouseExited="#personalEventAdd" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />-->
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox spacing="24.0">
                <children>

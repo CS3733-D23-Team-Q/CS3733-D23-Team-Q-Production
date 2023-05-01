@@ -1,7 +1,4 @@
 package edu.wpi.cs3733.D23.teamQ.db.obj;
-import com.calendarfx.model.Calendar;
-
-import java.util.List;
 
 public class Account {
   private String username;
@@ -17,12 +14,10 @@ public class Account {
   private String firstName;
   private String lastName;
   private String title;
-  private int phoneNumber;
+  private String phoneNumber;
 
   private String notes;
   private String todo;
-
-
 
   public Account(
       String username,
@@ -37,10 +32,9 @@ public class Account {
       String firstName,
       String lastName,
       String title,
-      int phoneNumber,
+      String phoneNumber,
       String notes,
-      String todo)
-          {
+      String todo) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -56,7 +50,6 @@ public class Account {
     this.phoneNumber = phoneNumber;
     this.notes = notes;
     this.todo = todo;
-
   }
 
   public Account(
@@ -71,10 +64,9 @@ public class Account {
       String firstName,
       String lastName,
       String title,
-      int phoneNumber,
+      String phoneNumber,
       String notes,
-      String todo)
-       {
+      String todo) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -89,8 +81,6 @@ public class Account {
     this.phoneNumber = phoneNumber;
     this.notes = notes;
     this.todo = todo;
-
-
   }
 
   public Account(String username) {
@@ -105,9 +95,7 @@ public class Account {
     this.firstName = null;
     this.lastName = null;
     this.title = null;
-    this.phoneNumber = 0;
-
-
+    this.phoneNumber = "";
   }
 
   public String getUsername() {
@@ -206,11 +194,11 @@ public class Account {
     this.title = t;
   }
 
-  public int getPhoneNumber() {
+  public String getPhoneNumber() {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(int PN) {
+  public void setPhoneNumber(String PN) {
     this.phoneNumber = PN;
   }
 
@@ -229,8 +217,6 @@ public class Account {
   public void setTodo(String todo) {
     this.todo = todo;
   }
-
-
 
   @Override
   public String toString() {
