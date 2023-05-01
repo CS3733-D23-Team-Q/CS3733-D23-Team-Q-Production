@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Label" textFill="#012d5a">
+         <font>
+            <Font name="Roboto Regular" size="36.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="100.0" top="25.0" />
+         </VBox.margin>
+      </Label>
+      <VBox prefHeight="40.0" prefWidth="450.0">
+         <children>
+            <Label text="Title">
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+            </Label>
+            <MFXTextField fx:id="TitleField" prefHeight="40.0" prefWidth="450.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="100.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox prefHeight="66.0" prefWidth="600.0">
+         <children>
+            <Label text="Date">
+               <font>
+                  <Font name="Roboto Regular" size="16.0" />
+               </font>
+            </Label>
+            <MFXDatePicker fx:id="DateField" prefHeight="40.0" prefWidth="450.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="100.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox prefHeight="70.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="225.0">
+                     <children>
+                        <Label text="End Time">
+                           <font>
+                              <Font name="Roboto Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXFilterComboBox fx:id="StartField" prefHeight="40.0" prefWidth="209.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="225.0">
+                     <children>
+                        <Label text="End Time">
+                           <font>
+                              <Font name="Roboto Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <MFXFilterComboBox fx:id="EndField" prefHeight="40.0" prefWidth="225.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="28.0" prefWidth="600.0">
+         <children>
+            <Label prefHeight="22.0" prefWidth="60.0" text="Color">
+               <font>
+                  <Font name="Roboto Regular" size="16.0" />
+               </font>
+            </Label>
+            <MFXFilterComboBox fx:id="ColorField" prefHeight="40.0" prefWidth="450.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="100.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

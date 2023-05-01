@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.calendarfx.view.CalendarView?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -8,6 +9,7 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import net.kurobako.gesturefx.GesturePane?>
@@ -37,7 +39,17 @@
       </HBox>
       <HBox>
          <children>
-            <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <StackPane fx:id="stackPane">
+                     <children>
+                        <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
+                        <fx:include fx:id="newEvent" source="NewEvent.fxml" visible="false" />
+                     </children>
+                  </StackPane>
+                  <MFXButton fx:id="newEventButton" text="Test" />
+               </children>
+            </VBox>
 
             <!--            <CalendarView fx:id="calendar" minWidth="-Infinity" onMouseExited="#personalEventAdd" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />-->
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />

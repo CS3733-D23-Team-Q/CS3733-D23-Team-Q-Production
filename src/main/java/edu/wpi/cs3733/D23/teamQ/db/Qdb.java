@@ -413,6 +413,11 @@ public class Qdb {
   public ArrayList<Integer> retrieveUserPersonalEvents(String user) {
     return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
   }
+  // public ArrayList<personalEvent> retrieveUserPersonalEvents(String user) {
+  //    return personalEventsTable.getUserAssignedRow(user);
+  //  return (ArrayList<personalEvent>) personalEventsTable.getIndexes(user);
+  //  return serviceRequestTable.getUserAssignedRows(user);
+  // }
 
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);

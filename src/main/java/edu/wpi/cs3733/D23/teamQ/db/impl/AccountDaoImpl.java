@@ -73,7 +73,8 @@ public class AccountDaoImpl implements GenDao<Account, String> {
         accounts.set(index, a);
         System.out.println("Updated successfully!");
       } else {
-        System.out.println("Failed to update.");}
+        System.out.println("Failed to update.");
+      }
       conn.close();
       pst.close();
     } catch (Exception e) {

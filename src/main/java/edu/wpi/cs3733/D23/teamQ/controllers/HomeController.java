@@ -12,6 +12,8 @@ import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.personalEvent;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -27,6 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -41,6 +45,11 @@ public class HomeController implements Subscriber {
   @FXML VBox alertBox;
   @FXML TextArea notesField;
   @FXML CalendarView calendar;
+  @FXML MFXButton newEventButton;
+
+  @FXML StackPane stackPane;
+  @FXML VBox newEvent;
+  @FXML NewEventController newEventController;
 
   RefreshThread refreshThread = new RefreshThread();
 
@@ -61,6 +70,7 @@ public class HomeController implements Subscriber {
     notesField.setStyle("-fx-font-family: Roboto");
 
     refreshCalendar();
+    //    newEventController.setHC(this);
   }
 
   public void refreshCalendar() {
@@ -73,10 +83,12 @@ public class HomeController implements Subscriber {
     Calendar serviceRequestsBlank = new Calendar("Service Requests - Blank");
     Calendar serviceRequestsProgress = new Calendar("Service Requests - In Progress");
     Calendar serviceRequestsDone = new Calendar("Service Requests - Done");
+    Calendar personalCalendar = new Calendar("Personal Calendar");
 
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
     CalendarSource SRD = new CalendarSource("Service Request Done");
+    CalendarSource PC = new CalendarSource("Personal Calendar");
 
     serviceRequestsBlank.setStyle(Style.STYLE5);
     serviceRequestsProgress.setStyle(Style.STYLE3);
@@ -110,7 +122,32 @@ public class HomeController implements Subscriber {
     SRP.getCalendars().add(serviceRequestsProgress);
     SRD.getCalendars().add(serviceRequestsDone);
 
-    calendar.getCalendarSources().addAll(SRB, SRP, SRD);
+    ArrayList<Integer> index = qdb.retrieveUserPersonalEvents(username);
+
+    for (int i = 0; i < index.size(); i++) {
+      personalEvent curr = qdb.retrievePersonalEvent(index.get(i));
+      int currId = curr.getPersonalEventID();
+      String title = curr.getTitle();
+
+      Entry<String> temp = new Entry<>(title + " ID Num-" + currId);
+
+      if (temp.isFullDay()) {
+        temp.setFullDay(true);
+      }
+      temp.changeStartDate(
+          qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
+
+      LocalDate locDate = curr.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+      temp.changeStartDate(locDate);
+      temp.changeEndDate(locDate);
+      temp.changeStartTime(LocalTime.parse(curr.getStartTime()));
+      temp.changeEndTime(LocalTime.parse(curr.getStartTime()));
+    }
+
+    PC.getCalendars().add(personalCalendar);
+
+    calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
 
     // adding moves to calendar
     Calendar moves = new Calendar("Moves");
@@ -179,12 +216,24 @@ public class HomeController implements Subscriber {
   //
   //  }
 
+  //  @FXML
+  //  public void newEventClick() {
+  //    newEvent.setVisible(true);
+  //    calendar.setVisible(false);
+  //  }
+
   public void saveNotes() {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
     account.setNotes(notesField.getText());
     qdb.updateAccount(username, account);
   }
+
+  //  @FXML
+  //  public void showCal() {
+  //    calendar.setVisible(true);
+  //    stackPane.setVisible(false);
+  //  }
 
   private boolean setAlerts() {
     Date today = new Date(System.currentTimeMillis());
