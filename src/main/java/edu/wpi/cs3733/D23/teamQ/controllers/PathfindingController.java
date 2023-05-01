@@ -707,6 +707,7 @@ public class PathfindingController {
       alert.alertBox("No solution", "Failed to find a path");
     }
     if (path.size() > 0) {
+      clearTextualPathfinding();
       displayTextPF(path);
     }
     return lines;
@@ -794,23 +795,6 @@ public class PathfindingController {
         direction = n.getLocation().getLongName();
       }
     }
-  }
-
-  public String toString(List<Node> path) {
-    String direction = "";
-    direction +=
-        "Floor " + path.get(0).getFloor() + ": " + "\n" + path.get(0).getLocation().getLongName();
-    for (int i = 1; i < path.size(); i++) {
-      Node n = path.get(i);
-      Node previous = path.get(i - 1);
-      if (!previous.getFloor().equals(n.getFloor())) {
-        direction +=
-            " -> " + "\n\nFloor " + n.getFloor() + ": " + "\n" + n.getLocation().getLongName();
-      } else {
-        direction += " -> \n" + n.getLocation().getLongName();
-      }
-    }
-    return direction;
   }
 
   public String whichFloorS() {
