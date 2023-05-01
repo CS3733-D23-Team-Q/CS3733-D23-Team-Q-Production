@@ -104,7 +104,11 @@ public class PathfindingController {
     date = Date.valueOf("2023-01-01");
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
-    algorithm = "aStar";
+    algorithm =
+        qdb.retrieveSettings(LoginController.getLoginUsername())
+            .getAlgorithm()
+            .toString()
+            .toLowerCase();
     allSelections = new ArrayList<>();
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
