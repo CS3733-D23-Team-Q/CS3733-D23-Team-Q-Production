@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 public class RefreshThread implements Runnable {
   private List<Long> lastUpdates = new ArrayList<>();
   Qdb qdb = Qdb.getInstance();
+  boolean debounce = true;
 
   private List<String> tableNames =
       List.of(
@@ -80,5 +81,25 @@ public class RefreshThread implements Runnable {
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
+  }
+
+  public boolean isDebounce() {
+    return debounce;
+  }
+
+  public void setDebounce(boolean debounce) {
+    this.debounce = debounce;
+  }
+
+  public void debounceReset() {
+    TimerTask debounceResetTask =
+        new TimerTask() {
+          @Override
+          public void run() {
+            debounce = true;
+          }
+        };
+    Timer timer = new Timer();
+    timer.schedule(debounceResetTask, 5000); // 1 second debounce interval
   }
 }

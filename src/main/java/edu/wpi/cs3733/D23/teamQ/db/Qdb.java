@@ -617,6 +617,10 @@ public class Qdb {
     return messageTable.retrieveMessages(p1, p2);
   }
 
+  public ObservableList<Message> retrieveAllMessages() {
+    return messageTable.getAllMessages();
+  }
+
   public ObservableList<Message> retrieveConversations(String username) {
     return messageTable.retrieveConversations(username);
   }
@@ -628,6 +632,10 @@ public class Qdb {
   public boolean addMessage(Message message) {
     updateTimestamp("message");
     return messageTable.addRow(message);
+  }
+
+  public boolean updateMessage(Message m) {
+    return messageTable.updateRow(m);
   }
 
   public synchronized boolean populate(ArrayList<String> tableNames) {
