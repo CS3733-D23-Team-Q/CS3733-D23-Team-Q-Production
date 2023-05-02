@@ -1409,10 +1409,6 @@ public class PathfindingController {
     parent.getChildren().remove(messageText);
   }
 
-  public void settingButtonClicked() throws IOException {
-    PathfindingSettingController.display();
-  }
-
   public static List<Node> getLatestNodes() {
     return latest;
   }
@@ -1519,4 +1515,10 @@ public class PathfindingController {
     latestNodes = currentNodes;
     return latestNodes;
   }
+
+  /*
+  public void settingButtonClicked() throws IOException {
+    PathfindingSettingController.display();
+  }
+   */
 }
