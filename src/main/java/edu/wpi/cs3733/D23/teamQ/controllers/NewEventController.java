@@ -62,6 +62,7 @@ public class NewEventController {
     personalEvent pe =
         new personalEvent(
             TitleField.getText(),
+
             // get perrsonaleventID
             Date.valueOf(DateField.getValue()),
             (String) StartField.getValue(),
