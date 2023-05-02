@@ -129,6 +129,7 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void composeButtonClicked() {
+    profileHbox.setVisible(false);
     peopleSelector.setVisible(true);
   }
 
