@@ -3,13 +3,13 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import static java.lang.System.currentTimeMillis;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.RefreshThread;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -27,8 +27,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -219,7 +217,15 @@ public class MessagingController implements Subscriber {
   public void populateReceived(Message messageReceived) {
 
     Qdb qdb = Qdb.getInstance();
-    messageReceived.setRead(true);
+    if (!messageReceived.getRead()) {
+      qdb.updateMessage(
+          new Message(
+              messageReceived.getSender(),
+              messageReceived.getReceiver(),
+              messageReceived.getMessage(),
+              messageReceived.getTimeStamp(),
+              true));
+    }
     String message = messageReceived.getMessage();
 
     //    if (qdb.retrieveMessages(LoginController.getUsername(), receiver.getUsername()).isEmpty()
@@ -308,10 +314,6 @@ public class MessagingController implements Subscriber {
       if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
         populateMessages();
         populateAccounts();
-        String path = getClass().getResource("/alert.wav").getPath();
-        Media media = new Media(new File(path).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
         return true;
       } else {
         return false;
@@ -367,7 +369,6 @@ public class MessagingController implements Subscriber {
       Line line = new Line(0, 0, 300, 0);
       line.setFill(Color.GRAY);
       line.setStrokeWidth(0.5);
-      //   hbox.getChildren().add(profileImage);
       hbox.getChildren().add(vbox);
       accountVbox.getChildren().add(line);
       accountVbox.getChildren().add(hbox);

@@ -39,7 +39,7 @@ public class StatisticsController {
 
   public void messages() {
     Map<String, Integer> messageCounts = new HashMap<>();
-    for (Message message : qdb.retrieveMessages("wmerry", "cam40419")) {
+    for (Message message : qdb.retrieveAllMessages()) {
       String date = new SimpleDateFormat("MMM-dd-yyy").format(new Date(message.getTimeStamp()));
       if (!messageCounts.containsKey(date)) {
         messageCounts.put(date, 0);
@@ -113,7 +113,7 @@ public class StatisticsController {
     pieChart.getData().add(slice4);
     pieChart.getData().add(slice5);
     pieChart.getData().add(slice6);
-    Label srLabel = new Label("Service Requests by type");
+    Label srLabel = new Label("Service Requests by Type");
     srLabel.setFont(Font.font(16));
     vbox.getChildren().add(srLabel);
     Label srNum =

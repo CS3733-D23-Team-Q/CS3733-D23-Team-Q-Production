@@ -18,6 +18,9 @@ public class SignoutSubmenuController {
   public void signoutClicked() {
     Navigation.logout();
     qdb.getAccountFromUsername(LoginController.getLoginUsername()).setActive(false);
+    qdb.updateAccount(
+        LoginController.getLoginUsername(),
+        qdb.getAccountFromUsername(LoginController.getLoginUsername()));
   }
 
   @FXML
@@ -25,6 +28,10 @@ public class SignoutSubmenuController {
     Platform.exit();
     Main.refresh.stop();
     qdb.getAccountFromUsername(LoginController.getLoginUsername()).setActive(false);
+    qdb.getAccountFromUsername(LoginController.getLoginUsername()).setActive(false);
+    qdb.updateAccount(
+        LoginController.getLoginUsername(),
+        qdb.getAccountFromUsername(LoginController.getLoginUsername()));
   }
 
   @FXML

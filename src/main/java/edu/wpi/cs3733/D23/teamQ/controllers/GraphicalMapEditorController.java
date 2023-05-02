@@ -10,7 +10,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Move;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,8 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 public class GraphicalMapEditorController {
+
+  private boolean first = false;
 
   private boolean toomuch = false;
 
@@ -116,17 +117,14 @@ public class GraphicalMapEditorController {
   @FXML private Label WhichFloor;
   List<Button> button = new ArrayList<>();
 
-  File[] file = {
-    new File("src/main/resources/01_thefirstfloor.png"),
-    new File("src/main/resources/02_thesecondfloor.png"),
-    new File("src/main/resources/03_thethirdfloor.png"),
-    new File("src/main/resources/00_thelowerlevel1.png"),
-    new File("src/main/resources/00_thelowerlevel2.png")
-  };
+  Image l1 = new Image("/00_thelowerlevel1.png");
+  Image l2 = new Image("/00_thelowerlevel2.png");
+  Image ff = new Image("/01_thefirstfloor.png");
+  Image sf = new Image("/02_thesecondfloor.png");
+  Image tf = new Image("/03_thethirdfloor.png");
 
-  String[] images = new String[file.length];
+  List<Image> image = new ArrayList<>();
 
-  Image[] image = new Image[images.length];
   int currentIndex = 0;
   @FXML private ImageView imageView;
 
@@ -200,6 +198,14 @@ public class GraphicalMapEditorController {
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
         });
+    image.add(ff);
+    image.add(sf);
+    image.add(tf);
+    image.add(l1);
+    image.add(l2);
+
+    imageView.setImage(image.get(currentIndex));
+    WhichFloor.setText("The First Floor");
     AlineBtn.setOnMouseEntered(
         e -> {
           AlineBtn.setCursor(Cursor.HAND);
@@ -265,15 +271,6 @@ public class GraphicalMapEditorController {
         e -> {
           HelpBtn.setCursor(Cursor.HAND);
         });
-    for (int i = 0; i < file.length; i++) {
-      images[i] = file[i].toURI().toString();
-    }
-
-    for (int i = 0; i < images.length; i++) {
-      image[i] = new Image(images[i]);
-    }
-    imageView.setImage(image[currentIndex]);
-    WhichFloor.setText("The First Floor");
   }
 
   /**
@@ -323,7 +320,7 @@ public class GraphicalMapEditorController {
               endnodeOr = false;
             }
 
-            if (aline) {
+            if (aline && !AlineList.contains(node)) {
               AlineList.add(node);
               node.setStyle(
                   "-fx-background-radius: 5em;"
@@ -333,13 +330,16 @@ public class GraphicalMapEditorController {
                       + "-fx-max-height: 3px;"
                       + "-fx-background-insets: 0px;"
                       + "-fx-background-color: #E2BE31");
-              if (!SelectedOr(node)) ;
+              if (first) {
+                NodeSelected.setText("");
+                first = false;
+              }
               showSelectedNodes(nodeID);
             }
           });
       node.setOnMouseEntered(
           e -> {
-            if (!aline || !SelectedOr(node))
+            if (!aline || !AlineList.contains(node))
               node.setStyle(
                   "-fx-background-radius: 5em;"
                       + "-fx-min-width: 3px;"
@@ -353,7 +353,7 @@ public class GraphicalMapEditorController {
 
       node.setOnMouseExited(
           e -> {
-            if (!aline || !SelectedOr(node))
+            if (!aline || !AlineList.contains(node))
               node.setStyle(
                   "-fx-background-radius: 5em;"
                       + "-fx-min-width: 3px;"
@@ -637,7 +637,7 @@ public class GraphicalMapEditorController {
         currentIndex = findFloor(floor);
         if (!button.isEmpty()) parent.getChildren().removeAll(button);
         button = addButtons(Floor(currentIndex));
-        imageView.setImage(image[currentIndex]);
+        imageView.setImage(image.get(currentIndex));
         setFloor(currentIndex);
       }
       alert.clearLabelAlert(alerts, image1);
@@ -742,11 +742,11 @@ public class GraphicalMapEditorController {
     HideEdges();
     clearLocationName();
     currentIndex++;
-    if (currentIndex >= file.length) {
+    if (currentIndex >= image.size()) {
       currentIndex = 0;
     }
     refreshNodes();
-    imageView.setImage(image[currentIndex]);
+    imageView.setImage(image.get(currentIndex));
     setFloor(currentIndex);
   }
 
@@ -764,11 +764,11 @@ public class GraphicalMapEditorController {
     if (currentIndex >= 0) {
       refreshNodes();
       button = addButtons(Floor(currentIndex));
-      imageView.setImage(image[currentIndex]);
+      imageView.setImage(image.get(currentIndex));
     } else {
       currentIndex = 4;
       refreshNodes();
-      imageView.setImage(image[currentIndex]);
+      imageView.setImage(image.get(currentIndex));
     }
     setFloor(currentIndex);
   }
@@ -1345,19 +1345,6 @@ public class GraphicalMapEditorController {
   }
 
   /**
-   * return true if the node has been selected, else return false
-   *
-   * @param node
-   * @return
-   */
-  boolean SelectedOr(Button node) {
-    for (int i = 0; i < AlineList.size(); i++) {
-      if (AlineList.get(i) == node) return true;
-    }
-    return false;
-  }
-
-  /**
    * Start to select nodes to be alined when click
    *
    * @param event
@@ -1365,6 +1352,8 @@ public class GraphicalMapEditorController {
   @FXML
   void SelectedNodeClicked(MouseEvent event) {
     aline = true;
+    first = true;
+    NodeSelected.setText("Please select nodes by clicking them");
   }
 
   /**
@@ -1408,23 +1397,24 @@ public class GraphicalMapEditorController {
       upB += (x - meanX) * (y - meanY);
       downB += (x - meanX) * (x - meanX);
     }
-    if (downB == 0) return;
-    double b = upB / downB;
-    double a = meanY - b * meanX;
+    if (downB != 0 && upB != 0) {
+      double b = upB / downB;
+      double a = meanY - b * meanX;
 
-    // Foot point (Perpendicular)
-    for (int i = 0; i < AlineList.size(); i++) {
-      double x = AlineList.get(i).getLayoutX();
-      double y = AlineList.get(i).getLayoutY();
-      double x2 = (x + b * y - a * b) / (b * b + 1);
-      double y2 = (b * b * y + b * x + a) / (b * b + 1);
-      int id = NodeID.get(findNodeID(AlineList.get(i)));
-      int currentX = (int) ((x2 + 1.5) * 5);
-      int currentY = (int) ((y2 + 1.5) * 5);
-      Node newNode = qdb.retrieveNode(id);
-      newNode.setXCoord(currentX);
-      newNode.setYCoord(currentY);
-      qdb.updateNode(id, newNode);
+      // Foot point (Perpendicular)
+      for (int i = 0; i < AlineList.size(); i++) {
+        double x = AlineList.get(i).getLayoutX();
+        double y = AlineList.get(i).getLayoutY();
+        double x2 = (x + b * y - a * b) / (b * b + 1);
+        double y2 = (b * b * y + b * x + a) / (b * b + 1);
+        int id = NodeID.get(findNodeID(AlineList.get(i)));
+        int currentX = (int) ((x2 + 1.5) * 5);
+        int currentY = (int) ((y2 + 1.5) * 5);
+        Node newNode = qdb.retrieveNode(id);
+        newNode.setXCoord(currentX);
+        newNode.setYCoord(currentY);
+        qdb.updateNode(id, newNode);
+      }
     }
     refreshNodes();
     AlineList.clear();

@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +19,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
-public class ProfilePage1Controller {
+public class ProfilePage1Controller implements Subscriber {
 
   Qdb qdb = Qdb.getInstance();
   @FXML private HBox myHBox;
   @FXML private ImageView profileImage;
-  @FXML private Text fullName;
-  @FXML private Text title;
-  @FXML private Text displayUsername;
-  @FXML private Text email;
-  @FXML private Text phone;
-  @FXML private Text status;
+  @FXML private Label fullName;
+  @FXML private Label title;
+  @FXML private Label displayUsername;
+  @FXML private Label email;
+  @FXML private Label phone;
+  @FXML private Label status;
   @FXML private Circle statusCircle;
   @FXML private VBox statsVbox;
   @FXML private Label incompleteRequests;
@@ -40,6 +41,7 @@ public class ProfilePage1Controller {
   public void initialize() throws IOException, SQLException {
     String username = LoginController.getLoginUsername();
     Qdb qdb = Qdb.getInstance();
+    qdb.subscribe(this);
     Account account = qdb.retrieveAccount(username);
 
     fullName.setText(account.getFirstName() + " " + account.getLastName());
@@ -51,10 +53,10 @@ public class ProfilePage1Controller {
     statusCircle.setStroke(null);
     if (account.isActive()) {
       status.setText("Online");
-      statusCircle.setFill(javafx.scene.paint.Color.GREEN);
+      statusCircle.setStyle("-fx-fill: #37AC2B");
     } else {
       status.setText("Offline");
-      statusCircle.setFill(javafx.scene.paint.Color.RED);
+      statusCircle.setStyle("-fx-fill: #CE3C49");
     }
 
     if (qdb.getProfileImageIndex(username) != -1) {
@@ -112,5 +114,20 @@ public class ProfilePage1Controller {
 
   public void viewMoreStatsClicked() {
     Navigation.navigate(Screen.STATISTICS);
+  }
+
+  @Override
+  public boolean update(List<String> context) throws URISyntaxException {
+    if (context.contains("account")) {
+      boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
+      if (isActive) {
+        status.setText("Online");
+        statusCircle.setStyle("-fx-fill: #37AC2B");
+      } else {
+        status.setText("Offline");
+        statusCircle.setStyle("-fx-fill: #CE3C49");
+      }
+    }
+    return false;
   }
 }
