@@ -11,11 +11,8 @@ import edu.wpi.cs3733.D23.teamQ.db.RefreshThread;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
+import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
-import edu.wpi.cs3733.D23.teamQ.db.obj.personalEvent;
-import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -46,8 +42,6 @@ public class HomeController implements Subscriber {
   @FXML VBox alertBox;
   @FXML TextArea notesField;
   @FXML CalendarView calendar;
-  @FXML MFXButton newEventButton;
-  @FXML MFXButton refreshButton;
 
   RefreshThread refreshThread = new RefreshThread();
 
@@ -68,7 +62,6 @@ public class HomeController implements Subscriber {
     notesField.setStyle("-fx-font-family: Roboto");
 
     refreshCalendar();
-    //    newEventController.setHC(this);
   }
 
   public void refreshCalendar() {
@@ -78,15 +71,13 @@ public class HomeController implements Subscriber {
 
     calendar.getCalendarSources().clear();
 
-    Calendar serviceRequestsBlank = new Calendar("Service Requests - Blank");
-    Calendar serviceRequestsProgress = new Calendar("Service Requests - In Progress");
-    Calendar serviceRequestsDone = new Calendar("Service Requests - Done");
-    Calendar personalCalendar = new Calendar("Personal Calendar");
+    Calendar serviceRequestsBlank = new Calendar("Service Requests");
+    Calendar serviceRequestsProgress = new Calendar("Service Requests");
+    Calendar serviceRequestsDone = new Calendar("Service Requests");
 
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
     CalendarSource SRD = new CalendarSource("Service Request Done");
-    CalendarSource PC = new CalendarSource("Personal Calendar");
 
     serviceRequestsBlank.setStyle(Style.STYLE5);
     serviceRequestsProgress.setStyle(Style.STYLE3);
@@ -120,32 +111,7 @@ public class HomeController implements Subscriber {
     SRP.getCalendars().add(serviceRequestsProgress);
     SRD.getCalendars().add(serviceRequestsDone);
 
-    ArrayList<Integer> index = qdb.retrieveUserPersonalEvents(username);
-
-    for (int i = 0; i < index.size(); i++) {
-      personalEvent curr = qdb.retrievePersonalEvent(index.get(i));
-      int currId = curr.getPersonalEventID();
-      String title = curr.getTitle();
-
-      Entry<String> temp = new Entry<>(title + " ID Num-" + currId);
-
-      if (temp.isFullDay()) {
-        temp.setFullDay(true);
-      }
-      temp.changeStartDate(
-          qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
-
-      LocalDate locDate = curr.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-      temp.changeStartDate(locDate);
-      temp.changeEndDate(locDate);
-      temp.changeStartTime(LocalTime.parse(curr.getStartTime()));
-      temp.changeEndTime(LocalTime.parse(curr.getStartTime()));
-    }
-
-    PC.getCalendars().add(personalCalendar);
-
-    calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
+    calendar.getCalendarSources().addAll(SRB, SRP, SRD);
 
     // adding moves to calendar
     Calendar moves = new Calendar("Moves");
@@ -163,63 +129,25 @@ public class HomeController implements Subscriber {
     }
     m.getCalendars().add(moves);
     calendar.getCalendarSources().add(m);
-
-    // database personal calendar
-    Calendar personal = new Calendar();
-    // title of event, time start, time end, date
-
+    // birthday stuff below
+    //
+    //    Calendar birthdays = new Calendar("Birthdays");
+    //    CalendarSource b = new CalendarSource("testing 3");
+    //    birthdays.setStyle(Style.STYLE2);
+    //    Entry<String> temp = new Entry<>("Birthday Test");
+    //    birthdays.addEntry(temp);
+    //
+    //    temp.changeStartDate(java.time.LocalDate.now());
+    //    temp.setFullDay(true);
+    //    b.getCalendars().add(birthdays);
+    //    calendar.getCalendarSources().add(b);
   }
-
-  //  public void personalEventAdd(){
-  //    qdb.subscribe(this);
-  //    String username = LoginController.getLoginUsername();
-  //    Account account = qdb.retrieveAccount(username);
-  //
-  //    Calendar personalCal = new Calendar("Person Calendar");
-  //    CalendarSource personal = new CalendarSource("Service Request Blank");
-  //    personalCal.setStyle(Style.STYLE5);
-  //
-  //
-  //    for (int i = 0; i<account.getPersonalCalendar(); i++){
-  //      Entry<String> temp = new Entry<>(getPersonalCalendar());
-  //
-  //      temp.changeStartDate(account.getPersonalCalendar().get(i).getDate().toLocalDate());
-  //      temp.changeEndDate(account.getPersonalCalendar().get(i).getDate().toLocalDate());
-  //
-  //      if (account.getPersonalCalendar().get(i).fullDayProperty()){
-  //        temp.setFullDay(true);
-  //      }
-  //      else{
-  //        temp.changeStartTime(
-  //                LocalTime.parse(account.getPersonalCalendar(username).get(i).getTime()));
-  //        temp.changeEndTime(
-  //                LocalTime.parse(account.getPersonalCalendar(username).get(i).getTime()));
-  //      }
-  //
-  //    }
-  //    personal.getCalendars().add(personalCal);
-  //    calendar.getCalendarSources().add(personal);
-  //
-  //  }
 
   public void saveNotes() {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
     account.setNotes(notesField.getText());
     qdb.updateAccount(username, account);
-  }
-
-  public void newEventClick() {
-    Navigation.navigate(Screen.NEW_EVENT);
-    System.out.println("before refresh");
-    refreshCalendar();
-    System.out.println("after refresh");
-  }
-
-  public void refreshButtonClicked() {
-    System.out.println("before refresh button");
-    refreshCalendar();
-    System.out.println("after refresh button");
   }
 
   private boolean setAlerts() {
@@ -268,10 +196,26 @@ public class HomeController implements Subscriber {
       alertSound(alert.getMessage());
       setAlerts();
     }
-    if (context.contains("serviceRequest")
-        || context.contains("move")
-        || context.contains("personalEvent")) {
+    if (context.contains("message")) {
+      List<Message> recents = qdb.retrieveConversations(LoginController.getUsername());
+      Message recent = recents.get(0);
+      if (recent.getReceiver().getUsername().equals(LoginController.getUsername())) {
+        if (refreshThread.isDebounce()) {
+
+          refreshThread.setDebounce(false);
+          String path = getClass().getResource("/alert.wav").getPath();
+          Media media = new Media(new File(path).toURI().toString());
+          MediaPlayer mediaPlayer = new MediaPlayer(media);
+          if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()
+              && qdb.retrieveAccount(LoginController.getLoginUsername()).isActive())
+            mediaPlayer.play();
+          refreshThread.debounceReset();
+        }
+      }
+    }
+    if (context.contains("serviceRequest") || context.contains("move")) {
       refreshCalendar();
+      //      calendar.des();
     }
 
     updateTime();
@@ -316,7 +260,8 @@ public class HomeController implements Subscriber {
       Media media = new Media(new File(path).toURI().toString());
       MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-      if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()) mediaPlayer.play();
+      if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()
+          && qdb.retrieveAccount(LoginController.getLoginUsername()).isActive()) mediaPlayer.play();
 
       refreshThread.debounceReset();
     }

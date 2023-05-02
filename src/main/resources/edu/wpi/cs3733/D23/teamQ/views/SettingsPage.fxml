@@ -35,12 +35,26 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Two Factor Authentication:">
+                  <Label text="Sound" textFill="#012d5a">
+                     <font>
+                        <Font name="Roboto" size="20.0" />
+                     </font>
+                  </Label>
+                  <MFXToggleButton fx:id="soundToggle" />
+               </children>
+               <padding>
+                  <Insets left="100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <Label text="Default Starting Location">
                      <font>
                         <Font name="Roboto Light" size="20.0" />
                      </font>
                   </Label>
-                  <MFXButton fx:id="setupButton" onAction="#setupButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Setup" textFill="WHITE">
+                  <MFXFilterComboBox fx:id="startLocSelect" onAction="#startLocSelected" prefWidth="200.0" />
+                  <MFXButton onAction="#saveButtonClicked" prefHeight="50.0" prefWidth="128.0" style="-fx-background-color: #012D5A;" text="Save" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
@@ -52,22 +66,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Sound">
+                  <Label text="Preferred Algorithm" textFill="#012d5a">
                      <font>
-                        <Font name="Roboto Light" size="20.0" />
-                     </font>
-                  </Label>
-                  <MFXToggleButton fx:id="soundToggle" />
-               </children>
-               <padding>
-                  <Insets left="100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Label text="Prefered Alogrithm">
-                     <font>
-                        <Font name="Roboto Light" size="20.0" />
+                        <Font name="Roboto" size="20.0" />
                      </font>
                   </Label>
                   <MFXComboBox fx:id="preferredAlgorithm" prefWidth="200.0" />
@@ -78,9 +79,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Voice Selection">
+                  <Label text="Voice Selection" textFill="#012d5a">
                      <font>
-                        <Font name="Roboto Light" size="20.0" />
+                        <Font name="Roboto" size="20.0" />
                      </font>
                   </Label>
                   <MFXComboBox fx:id="voiceSelection" prefWidth="200.0" />
@@ -91,9 +92,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Export CSV">
+                  <Label text="Export CSV" textFill="#012d5a">
                      <font>
-                        <Font name="Roboto Light" size="20.0" />
+                        <Font name="Roboto" size="20.0" />
                      </font>
                   </Label>
                   <MFXFilterComboBox fx:id="tableField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="160.0" />
