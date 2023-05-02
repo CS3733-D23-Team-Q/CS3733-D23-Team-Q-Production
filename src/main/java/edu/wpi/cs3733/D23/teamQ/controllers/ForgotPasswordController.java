@@ -8,6 +8,10 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Question;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -20,20 +24,20 @@ public class ForgotPasswordController extends SecondaryStage implements IControl
   CreateAccountController CAController = new CreateAccountController();
   Alert alert = new Alert();
   Confirm confirm = new Confirm();
-  @FXML ChoiceBox<String> questionChoice1;
-  @FXML ChoiceBox<String> questionChoice2;
-  @FXML TextField usernameField;
+  @FXML MFXComboBox questionChoice1;
+  @FXML MFXComboBox questionChoice2;
+  @FXML MFXTextField usernameField;
   @FXML Label usernameAlert;
   @FXML ImageView usernameAlertImage;
-  @FXML TextField answer1Field;
-  @FXML TextField answer2Field;
-  @FXML PasswordField NPField;
+  @FXML MFXTextField answer1Field;
+  @FXML MFXTextField answer2Field;
+  @FXML MFXPasswordField NPField;
   @FXML Label NPAlert;
   @FXML ImageView NPAlertImage;
-  @FXML PasswordField CPField;
+  @FXML MFXPasswordField CPField;
   @FXML Label CPAlert;
   @FXML ImageView CPAlertImage;
-  @FXML Button CPButton;
+  @FXML MFXButton CPButton;
 
   public ForgotPasswordController() throws IOException {}
 
@@ -104,8 +108,8 @@ public class ForgotPasswordController extends SecondaryStage implements IControl
   public void securityQReact(
       String username, String newPassword, String repassword, String answer1, String answer2)
       throws IOException {
-    String question1 = questionChoice1.getValue();
-    String question2 = questionChoice2.getValue();
+    String question1 = (String) questionChoice1.getValue();
+    String question2 = (String) questionChoice2.getValue();
     if (qdb.getQuestionIndex(question1) != -1 || qdb.getQuestionIndex(question2) != -1) {
       securityAReact(username, newPassword, repassword, answer1, answer2);
     } else {
@@ -118,8 +122,8 @@ public class ForgotPasswordController extends SecondaryStage implements IControl
   public void securityAReact(
       String username, String newPassword, String repassword, String answer1, String answer2)
       throws IOException {
-    String question1 = questionChoice1.getValue();
-    String question2 = questionChoice2.getValue();
+    String question1 = (String) questionChoice1.getValue();
+    String question2 = (String) questionChoice2.getValue();
     int question1id = qdb.retrieveQuestion(question1).getId();
     int question2id = qdb.retrieveQuestion(question2).getId();
     Account a = qdb.retrieveAccount(username);
