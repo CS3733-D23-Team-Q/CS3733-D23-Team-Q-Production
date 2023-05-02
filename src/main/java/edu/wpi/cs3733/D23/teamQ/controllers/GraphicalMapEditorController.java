@@ -479,7 +479,6 @@ public class GraphicalMapEditorController {
    */
   @FXML
   void deleteclicked(MouseEvent event) {
-    /*
     int countEdge = 0;
     int countMove = 0;
     if (nodeIDAlertone(nodeidinput, alerts, image1)) {
@@ -519,7 +518,6 @@ public class GraphicalMapEditorController {
     }
     refreshNodes();
     setEdges();
-       */
   }
 
   /**
