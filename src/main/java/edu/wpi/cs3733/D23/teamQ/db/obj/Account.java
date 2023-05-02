@@ -97,7 +97,6 @@ public class Account {
     this.title = null;
 
     this.phoneNumber = "";
-
   }
 
   public String getUsername() {

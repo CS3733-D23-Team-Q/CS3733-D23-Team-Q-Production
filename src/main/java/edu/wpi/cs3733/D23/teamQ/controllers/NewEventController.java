@@ -61,7 +61,7 @@ public class NewEventController {
     System.out.println("before pe");
     personalEvent pe =
         new personalEvent(
-            TitleField.toString(),
+            TitleField.getText(),
             // get perrsonaleventID
             Date.valueOf(DateField.getValue()),
             (String) StartField.getValue(),
@@ -71,5 +71,4 @@ public class NewEventController {
     qdb.addPersonalEvent(pe);
     Navigation.navigate(Screen.HOME);
   }
-
 }

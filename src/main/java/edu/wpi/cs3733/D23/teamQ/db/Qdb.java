@@ -415,7 +415,6 @@ public class Qdb {
     return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
   }
 
-
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }

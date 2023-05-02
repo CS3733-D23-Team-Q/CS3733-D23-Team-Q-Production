@@ -85,12 +85,13 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
   }
 
   public boolean addRow(personalEvent a) {
+    System.out.printf("made it to add row");
     Qdb qdb = Qdb.getInstance();
     boolean result = false;
     Connection conn = GenDao.connect();
     try {
       String query =
-          "INSERT INTO \'personalEvent\' (title, date, \'startTime\', \'endTime\', \'fullDay\', user) VALUES(?,?,?,?,?,?)";
+          "INSERT INTO \"personalEvent\"(title, date, \"startTime\", \"endTime\", \"fullDay\", \"user\") VALUES(?,?,?,?,?,?)";
       PreparedStatement pst = conn.prepareStatement(query);
       pst.setString(1, a.getTitle());
       pst.setDate(2, (Date) a.getDate());

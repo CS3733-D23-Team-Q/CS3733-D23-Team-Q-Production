@@ -170,7 +170,6 @@ public class HomeController implements Subscriber {
 
   }
 
-
   //  public void personalEventAdd(){
   //    qdb.subscribe(this);
   //    String username = LoginController.getLoginUsername();
@@ -202,7 +201,6 @@ public class HomeController implements Subscriber {
   //    calendar.getCalendarSources().add(personal);
   //
   //  }
-
 
   public void saveNotes() {
     String username = LoginController.getLoginUsername();
