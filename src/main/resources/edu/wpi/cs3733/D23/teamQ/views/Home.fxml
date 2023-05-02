@@ -41,11 +41,21 @@
             <VBox HBox.hgrow="ALWAYS">
                <children>
                   <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="8.0" prefWidth="640.0">
                      <children>
-                        <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" text="Test" />
                         <MFXButton fx:id="refreshButton" onMouseClicked="#refreshButtonClicked" text="Refresh" />
+                        <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" prefHeight="33.0" prefWidth="175.0" style="-fx-background-color: #012D5A;" text="Create New Event" textFill="#f1f1f1">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </MFXButton>
                      </children>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
