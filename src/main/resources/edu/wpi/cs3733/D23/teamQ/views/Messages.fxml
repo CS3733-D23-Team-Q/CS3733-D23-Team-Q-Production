@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -57,7 +57,7 @@
          </children></HBox>
       <HBox prefHeight="804.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
          <children>
-            <MFXScrollPane fx:id="accountSP" hbarPolicy="NEVER" prefWidth="288.0" style="-fx-background-color: #e5e5e5;">
+            <ScrollPane fx:id="accountSP" hbarPolicy="NEVER" prefHeight="804.0" prefWidth="288.0" style="-fx-background-color: #e5e5e5;">
                <content>
                   <VBox fx:id="accountVbox" prefWidth="280.0">
                      <padding>
@@ -65,10 +65,10 @@
                      </padding>
                   </VBox>
                </content>
-            </MFXScrollPane>
+            </ScrollPane>
             <VBox style="-fx-background-color: #f1f1f1;" HBox.hgrow="ALWAYS">
                <children>
-                  <MFXScrollPane fx:id="messageSP" hbarPolicy="NEVER" prefWidth="1072.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
+                  <ScrollPane fx:id="messageSP" hbarPolicy="NEVER" prefHeight="740.0" prefWidth="1072.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="messageVbox" prefHeight="740.0" prefWidth="1072.0">
                            <padding>
@@ -76,7 +76,7 @@
                            </padding>
                         </VBox>
                      </content>
-                  </MFXScrollPane>
+                  </ScrollPane>
                   <HBox alignment="CENTER" prefHeight="64.0" spacing="16.0">
                      <children>
                         <MFXTextField fx:id="messageField" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="868.0" HBox.hgrow="ALWAYS" />
