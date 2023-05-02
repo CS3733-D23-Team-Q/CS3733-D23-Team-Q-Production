@@ -638,46 +638,45 @@ public class Qdb {
     return messageTable.updateRow(m);
   }
 
-  public synchronized boolean populate(ArrayList<String> tableNames) {
-    for (String tableName : tableNames) {
-      switch (tableName) {
-        case "account":
-          accountTable.populate();
-        case "edge":
-          edgeTable.populate();
-        case "locationName":
-          locationTable.populate();
-        case "move":
-          moveTable.populate();
-        case "node":
-          nodeTable.populate();
-        case "profileImage":
-          profileImageTable.populate();
-        case "message":
-          messageTable.populate();
-        case "sign":
-          signTable.populate();
-        case "alert":
-          alertTable.populate();
-        case "serviceRequest":
-          serviceRequestTable.populate();
-          conferenceRequestTable.populate();
-          flowerRequestTable.populate();
-          furnitureRequestTable.populate();
-          mealRequestTable.populate();
-          medicalSuppliesRequestTable.populate();
-          officeSuppliesRequestTable.populate();
-          patientTransportRequestTable.populate();
-        case "settings":
-          settingsTable.populate();
-        case "defaultLocation":
-          defaultLocationsTable.populate();
+  public synchronized boolean populate(ArrayList<String> toUpdate) {
+    for (String tableName : toUpdate) {
+      if (tableName.equals("account")) {
+        accountTable.populate();
+      } else if (tableName.equals("edge")) {
+        edgeTable.populate();
+      } else if (tableName.equals("locationName")) {
+        locationTable.populate();
+      } else if (tableName.equals("move")) {
+        moveTable.populate();
+      } else if (tableName.equals("node")) {
+        nodeTable.populate();
+      } else if (tableName.equals("profileImage")) {
+        profileImageTable.populate();
+      } else if (tableName.equals("message")) {
+        messageTable.populate();
+      } else if (tableName.equals("sign")) {
+        signTable.populate();
+      } else if (tableName.equals("alert")) {
+        alertTable.populate();
+      } else if (tableName.equals("serviceRequest")) {
+        serviceRequestTable.populate();
+        conferenceRequestTable.populate();
+        flowerRequestTable.populate();
+        furnitureRequestTable.populate();
+        mealRequestTable.populate();
+        medicalSuppliesRequestTable.populate();
+        officeSuppliesRequestTable.populate();
+        patientTransportRequestTable.populate();
+      } else if (tableName.equals("settings")) {
+        settingsTable.populate();
+      } else if (tableName.equals("defaultLocation")) {
+        defaultLocationsTable.populate();
       }
     }
     Platform.runLater(
         () -> {
           try {
-            notifySubscribers(tableNames);
+            notifySubscribers(toUpdate);
           } catch (URISyntaxException e) {
             throw new RuntimeException(e);
           }
