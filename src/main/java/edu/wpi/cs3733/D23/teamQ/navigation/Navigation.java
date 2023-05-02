@@ -7,27 +7,34 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Navigation {
 
-  public static void navigateLogin(final Screen screen) {
-    final String filename = screen.getFilename();
+  public static void navigateLogin() {
     try {
-      final var resource = App.class.getResource(filename);
+      final var resource = App.class.getResource("views/Root.fxml");
       final FXMLLoader loader = new FXMLLoader(resource);
 
       Stage primaryStage = App.getPrimaryStage();
+      BorderPane scene = loader.load();
+      App.setRootBorder(scene);
+      App.setrController(loader.getController());
+      App.setRootCenter(App.getRController().rootCenter);
+      App.setRootRight(App.getRController().rootRight);
 
-      Node n = loader.load();
-      App.getRootBorder().setRight(null);
-      App.getRootCenter().getChildren().clear();
-      App.getRootCenter().getChildren().add(n);
-      AnchorPane.setTopAnchor(n, 0.0);
-      AnchorPane.setLeftAnchor(n, 0.0);
-      AnchorPane.setRightAnchor(n, 0.0);
-      AnchorPane.setBottomAnchor(n, 0.0);
+      //     Node n = loader.load();
+      //      App.getRootBorder().setRight(null);
+      //      App.getRootCenter().getChildren().clear();
+      //      App.getRootCenter().getChildren().add(n);
+      //      AnchorPane.setTopAnchor(n, 0.0);
+      //      AnchorPane.setLeftAnchor(n, 0.0);
+      //      AnchorPane.setRightAnchor(n, 0.0);
+      //      AnchorPane.setBottomAnchor(n, 0.0);
+      primaryStage.setScene(new Scene(scene));
       primaryStage.setFullScreen(true);
+      noMenuNavigate(Screen.LOGIN);
     } catch (IOException | NullPointerException e) {
       e.printStackTrace();
     }
