@@ -124,17 +124,18 @@ public class SettingsController {
                 if (newValue.toString().equals("BFS")) algo = Settings.Algorithm.BFS;
                 if (newValue.toString().equals("DFS")) algo = Settings.Algorithm.DFS;
                 if (newValue.toString().equals("DIJKSTRA")) algo = Settings.Algorithm.DJIKSTRA;
-
-                Settings settings =
-                    new Settings(
-                        LoginController.getLoginUsername(),
-                        qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
-                        qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),
-                        algo.ordinal(),
-                        qdb.retrieveSettings(LoginController.getLoginUsername())
-                            .getVoice()
-                            .ordinal());
-                qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
+                if (algo != null) {
+                  Settings settings =
+                      new Settings(
+                          LoginController.getLoginUsername(),
+                          qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
+                          qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),
+                          algo.ordinal(),
+                          qdb.retrieveSettings(LoginController.getLoginUsername())
+                              .getVoice()
+                              .ordinal());
+                  qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
+                }
               }
             });
 
@@ -203,6 +204,4 @@ public class SettingsController {
       }
     }
   }
-
-  public void setupButtonClicked() {}
 }
