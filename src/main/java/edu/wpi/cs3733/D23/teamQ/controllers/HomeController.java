@@ -32,7 +32,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -48,10 +47,6 @@ public class HomeController implements Subscriber {
   @FXML TextArea notesField;
   @FXML CalendarView calendar;
   @FXML MFXButton newEventButton;
-
-  @FXML StackPane stackPane;
-  @FXML VBox newEvent;
-  @FXML NewEventController newEventController;
 
   RefreshThread refreshThread = new RefreshThread();
 

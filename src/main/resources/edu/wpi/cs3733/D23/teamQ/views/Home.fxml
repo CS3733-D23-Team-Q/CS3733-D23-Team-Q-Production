@@ -41,16 +41,10 @@
          <children>
             <VBox HBox.hgrow="ALWAYS">
                <children>
-                  <StackPane fx:id="stackPane">
-                     <children>
-                        <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
-                        <fx:include fx:id="newEvent" source="NewEvent.fxml" visible="false" />
-                     </children>
-                  </StackPane>
+                  <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
                   <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" text="Test" />
                </children>
             </VBox>
-
             <!--            <CalendarView fx:id="calendar" minWidth="-Infinity" onMouseExited="#personalEventAdd" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />-->
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox spacing="24.0">
