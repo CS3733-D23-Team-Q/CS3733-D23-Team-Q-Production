@@ -93,7 +93,7 @@
                   <Insets left="20.0" />
                </HBox.margin>
             </MFXButton>
-            <MFXButton fx:id="submitButton" onAction="#submitButtonClicked" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="#f1f1f1">
+            <MFXButton fx:id="submitButton" onMouseClicked="#submitButtonClicked" prefHeight="20.0" prefWidth="80.0" style="-fx-background-color: #012D5A;" text="Submit" textFill="#f1f1f1">
                <HBox.margin>
                   <Insets left="30.0" right="80.0" />
                </HBox.margin>
