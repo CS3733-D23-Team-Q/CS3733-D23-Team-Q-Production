@@ -167,8 +167,10 @@ public class PathfindingController {
     previousPath = new ArrayList<>();
     floor = 2;
     floorLabel.setText("Floor " + whichFloorS());
+    ready4Second = false;
     if (defaultsl != null) {
-      List<Node> latestNodes = getLatestNodesb();
+      getLatestNodesb();
+      List<Node> latestNodes = latest;
       for (Node n : latestNodes) {
         if (n.getLocation().equals(defaultsl)) {
           int f = whichFloorI(n.getFloor());
@@ -185,9 +187,9 @@ public class PathfindingController {
           }
         }
       }
+    } else {
+      addButtons(whichFloorS());
     }
-    ready4Second = false;
-    addButtons(whichFloorS());
     pane = new GesturePane();
     pane.setContent(parent);
     pane.setFitMode(GesturePane.FitMode.COVER);
@@ -418,8 +420,9 @@ public class PathfindingController {
       node.setDisable(true);
       parent.getChildren().add(node);
       node.toFront();
-      if (defaultsl != null) {
+      if (defaultsl != null && highlightedNodesp.size() == 0) {
         if (n.getLocation().equals(defaultsl)) {
+          System.out.println("floor" + floor);
           start = n;
           ready4Second = true;
           highlight(node, "red");
@@ -992,6 +995,7 @@ public class PathfindingController {
     if (floor > 0) {
       floor--;
       f = whichFloorS();
+      System.out.println(floor + f);
       floorLabel.setText("Floor " + whichFloorS());
     }
     Image previous = floors.get(floor);
@@ -1008,6 +1012,7 @@ public class PathfindingController {
     confChecked();
     retlChecked();
     servChecked();
+    System.out.println(highlightedNodesp.size());
     // if on the same floor
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
@@ -1209,6 +1214,7 @@ public class PathfindingController {
         }
         highlightedNodes.removeAll(highlightedNodes);
       }
+
       cfnodes = setCF(cfnodes);
       if (highlightedNodesp.size() > 0) {
         for (int i = 0; i < highlightedNodesp.size(); i++) {
@@ -1285,6 +1291,18 @@ public class PathfindingController {
         }
         highlightedNodesp.remove(highlightedNodesp.get(1));
       }
+
+      /*
+      cfnodes = setCF(cfnodes);
+      if (highlightedNodesp.size() == 2) {
+        for (int j = 0; j < cfnodes.size(); j++) {
+          if (cfnodes.get(j).getKey().equals(highlightedNodesp.get(1).getRight())) {
+            unhighlight(cfnodes.get(j).getValue());
+          }
+        }
+        highlightedNodesp.remove(highlightedNodesp.get(1));
+      }
+       */
 
       if (nodef < floor) {
         for (int i = 0; i < crossFloors; i++) {
@@ -1392,15 +1410,17 @@ public class PathfindingController {
     parent.getChildren().remove(messageText);
   }
 
+  /*
   public void settingButtonClicked() throws IOException {
     PathfindingSettingController.display();
   }
+   */
 
   public static List<Node> getLatestNodes() {
     return latest;
   }
 
-  public List<Node> getLatestNodesb() {
+  public void getLatestNodesb() {
     List<Node> latestNodes = new ArrayList<>();
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Move> dateMoves = new ArrayList<>();
@@ -1499,7 +1519,7 @@ public class PathfindingController {
         currentNodes.add(node);
       }
     }
-    latestNodes = currentNodes;
-    return latestNodes;
+    latest = currentNodes;
+    // return latestNodes;
   }
 }
