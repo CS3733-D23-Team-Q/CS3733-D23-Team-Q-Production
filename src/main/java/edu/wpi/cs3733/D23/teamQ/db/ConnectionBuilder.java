@@ -9,7 +9,6 @@ public class ConnectionBuilder {
   static String password = "teamq140";
 
   public static Connection buildConnection() {
-    System.out.println(url);
     Connection con = null;
     try {
       Class.forName("org.postgresql.Driver");
