@@ -15,7 +15,7 @@
 
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagingController">
    <children>
-      <HBox prefHeight="96.0" style="-fx-background-color: #b4b4b4;">
+      <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="96.0" style="-fx-background-color: #b4b4b4;">
          <children>
             <HBox alignment="CENTER" prefWidth="288.0" spacing="16.0" style="-fx-background-color: #e5e5e5;">
                <children>
