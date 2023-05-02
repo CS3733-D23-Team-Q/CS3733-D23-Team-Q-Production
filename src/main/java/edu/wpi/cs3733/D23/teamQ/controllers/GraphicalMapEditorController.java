@@ -741,11 +741,11 @@ public class GraphicalMapEditorController {
     endnode = empty;
     HideEdges();
     clearLocationName();
-      AlineList.clear();
-      aline = false;
-      toomuch = false;
-      NodeSelected.setText("");
-      NodeSelected2.setText("");
+    AlineList.clear();
+    aline = false;
+    toomuch = false;
+    NodeSelected.setText("");
+    NodeSelected2.setText("");
     currentIndex++;
     if (currentIndex >= image.size()) {
       currentIndex = 0;
@@ -765,11 +765,11 @@ public class GraphicalMapEditorController {
     endnode = empty;
     HideEdges();
     clearLocationName();
-      AlineList.clear();
-      aline = false;
-      toomuch = false;
-      NodeSelected.setText("");
-      NodeSelected2.setText("");
+    AlineList.clear();
+    aline = false;
+    toomuch = false;
+    NodeSelected.setText("");
+    NodeSelected2.setText("");
     currentIndex--;
     if (currentIndex >= 0) {
       refreshNodes();
