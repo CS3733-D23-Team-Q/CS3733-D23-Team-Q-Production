@@ -33,7 +33,7 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
     Connection conn = GenDao.connect();
     try {
       String query =
-          "UPDATE \"personalEvent\" SET title = ?, date = ?, \"startTime\" = ?, \"endTime\" = ?, \"fullDay\" = ?, user = ? WHERE \"personalEventID\" = ?";
+          "UPDATE \"personalEvent\" SET title = ?, date = ?, \"startTime\" = ?, \"endTime\" = ?, \"fullDay\" = ?, \"user\" = ? WHERE \"personalEventID\" = ?";
       PreparedStatement pst = conn.prepareStatement(query);
       pst.setString(1, a.getTitle());
       pst.setDate(2, (Date) a.getDate());
@@ -123,7 +123,7 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
     try {
       Connection con = GenDao.connect();
       personalEvents.clear();
-      String query = "SELECT * FROM \'personalEvent\'";
+      String query = "SELECT * FROM \"personalEvent\";";
       Statement st = con.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next()) {

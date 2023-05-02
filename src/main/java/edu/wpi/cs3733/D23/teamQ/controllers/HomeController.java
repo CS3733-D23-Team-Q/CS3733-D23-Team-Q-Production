@@ -15,12 +15,11 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -124,7 +123,7 @@ public class HomeController implements Subscriber {
       }
       temp.changeStartDate(
           qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
-      LocalDate locDate = curr.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+      LocalDate locDate = ((java.sql.Date) curr.getDate()).toLocalDate();
       temp.changeStartDate(locDate);
       temp.changeEndDate(locDate);
       temp.changeStartTime(LocalTime.parse(curr.getStartTime()));
@@ -195,8 +194,8 @@ public class HomeController implements Subscriber {
   }
 
   public static boolean isSameDay(Date date1, Date date2) {
-    LocalDate localDate1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    LocalDate localDate2 = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate localDate1 = date1.toLocalDate();
+    LocalDate localDate2 = date2.toLocalDate();
     return localDate1.isEqual(localDate2);
   }
 
@@ -246,7 +245,9 @@ public class HomeController implements Subscriber {
         }
       }
     }
-    if (context.contains("serviceRequest") || context.contains("move")) {
+    if (context.contains("serviceRequest")
+        || context.contains("move")
+        || context.contains("personalEvent")) {
       refreshCalendar();
       //      calendar.des();
     }
