@@ -9,7 +9,6 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import net.kurobako.gesturefx.GesturePane?>
@@ -42,7 +41,12 @@
             <VBox HBox.hgrow="ALWAYS">
                <children>
                   <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
-                  <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" text="Test" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" text="Test" />
+                        <MFXButton fx:id="refreshButton" onMouseClicked="#refreshButtonClicked" text="Refresh" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <!--            <CalendarView fx:id="calendar" minWidth="-Infinity" onMouseExited="#personalEventAdd" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />-->

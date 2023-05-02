@@ -47,6 +47,7 @@ public class HomeController implements Subscriber {
   @FXML TextArea notesField;
   @FXML CalendarView calendar;
   @FXML MFXButton newEventButton;
+  @FXML MFXButton refreshButton;
 
   RefreshThread refreshThread = new RefreshThread();
 
@@ -162,18 +163,6 @@ public class HomeController implements Subscriber {
     }
     m.getCalendars().add(moves);
     calendar.getCalendarSources().add(m);
-    // birthday stuff below
-    //
-    //    Calendar birthdays = new Calendar("Birthdays");
-    //    CalendarSource b = new CalendarSource("testing 3");
-    //    birthdays.setStyle(Style.STYLE2);
-    //    Entry<String> temp = new Entry<>("Birthday Test");
-    //    birthdays.addEntry(temp);
-    //
-    //    temp.changeStartDate(java.time.LocalDate.now());
-    //    temp.setFullDay(true);
-    //    b.getCalendars().add(birthdays);
-    //    calendar.getCalendarSources().add(b);
 
     // database personal calendar
     Calendar personal = new Calendar();
@@ -213,12 +202,6 @@ public class HomeController implements Subscriber {
   //
   //  }
 
-  //  @FXML
-  //  public void newEventClick() {
-  //    newEvent.setVisible(true);
-  //    calendar.setVisible(false);
-  //  }
-
   public void saveNotes() {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
@@ -228,13 +211,16 @@ public class HomeController implements Subscriber {
 
   public void newEventClick() {
     Navigation.navigate(Screen.NEW_EVENT);
+    System.out.println("before refresh");
+    refreshCalendar();
+    System.out.println("after refresh");
   }
 
-  //  @FXML
-  //  public void showCal() {
-  //    calendar.setVisible(true);
-  //    stackPane.setVisible(false);
-  //  }
+  public void refreshButtonClicked() {
+    System.out.println("before refresh button");
+    refreshCalendar();
+    System.out.println("after refresh button");
+  }
 
   private boolean setAlerts() {
     Date today = new Date(System.currentTimeMillis());
@@ -282,7 +268,9 @@ public class HomeController implements Subscriber {
       alertSound(alert.getMessage());
       setAlerts();
     }
-    if (context.contains("serviceRequest") || context.contains("move")) {
+    if (context.contains("serviceRequest")
+        || context.contains("move")
+        || context.contains("personalEvent")) {
       refreshCalendar();
     }
 

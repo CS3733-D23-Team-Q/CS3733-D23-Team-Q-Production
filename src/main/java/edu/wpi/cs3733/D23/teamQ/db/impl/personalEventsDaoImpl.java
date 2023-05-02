@@ -85,6 +85,7 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
   }
 
   public boolean addRow(personalEvent a) {
+
     Qdb qdb = Qdb.getInstance();
     boolean result = false;
     Connection conn = GenDao.connect();

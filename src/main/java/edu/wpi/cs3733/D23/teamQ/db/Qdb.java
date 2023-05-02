@@ -403,7 +403,8 @@ public class Qdb {
   }
 
   public boolean addPersonalEvent(personalEvent p) {
-    return personalEventsTable.addRow(p);
+    personalEventsTable.addRow(p);
+    return true;
   }
 
   public ArrayList<personalEvent> retrieveAllPersonalEvents() {

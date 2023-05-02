@@ -3,10 +3,9 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.personalEvent;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXCheckbox;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import io.github.palexdev.materialfx.controls.*;
 import java.sql.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,15 +14,13 @@ import javafx.fxml.FXML;
 public class NewEventController {
   Qdb qdb = Qdb.getInstance();
 
-  @FXML MFXFilterComboBox TitleField;
+  @FXML MFXTextField TitleField;
   @FXML MFXDatePicker DateField;
   @FXML MFXFilterComboBox StartField;
   @FXML MFXFilterComboBox EndField;
-  @FXML MFXFilterComboBox ColorField;
   @FXML MFXCheckbox FullDayCheckBox;
-  @FXML MFXButton SubmitButton;
-  @FXML MFXButton CancelButton;
-  //  @FXML HomeController hc;
+  @FXML MFXButton submitButton;
+  @FXML MFXButton cancelButton;
 
   ObservableList<String> timeList =
       FXCollections.observableArrayList(
@@ -33,63 +30,46 @@ public class NewEventController {
           "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
           "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00");
 
-  ObservableList<String> colorList =
-      FXCollections.observableArrayList(
-          "Green", "Blue", "Yellow", "Purple", "Red", "Orange", "Brown");
-
   @FXML
   public void initialize() {
-    Qdb qdb = Qdb.getInstance();
-    String username = LoginController.getLoginUsername();
-    Account account = qdb.retrieveAccount(username);
-
     this.StartField.setValue("");
     this.StartField.setItems(timeList);
     this.EndField.setValue("");
     this.EndField.setItems(timeList);
-    this.ColorField.setValue("");
-    this.ColorField.setItems(colorList);
+    this.FullDayCheckBox.setSelected(false);
   }
 
   @FXML
   public void resetButtonClicked() {
-    TitleField.setValue("");
+    TitleField.clear();
     DateField.clear();
     StartField.setValue("");
     EndField.setValue("");
-    ColorField.setValue("");
     FullDayCheckBox.setSelected(false);
   }
 
-  //  @FXML
-  //  public void cancelButtonClicked() {
-  //    hc.showCal();
-  //  }
+  @FXML
+  public void cancelButtonClicked() {
+    Navigation.navigate(Screen.HOME);
+  }
 
   @FXML
   public void submitButtonClicked() {
     Qdb qdb = Qdb.getInstance();
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
-    //    if (FullDayCheckBox.isSelected()){
-    //
-    //    }
+    System.out.println("before pe");
     personalEvent pe =
         new personalEvent(
-            (String) TitleField.getValue(),
+            TitleField.toString(),
             // get perrsonaleventID
             Date.valueOf(DateField.getValue()),
             (String) StartField.getValue(),
             (String) EndField.getValue(),
             FullDayCheckBox.isSelected(),
             username);
-
     qdb.addPersonalEvent(pe);
-    //    hc.showCal();
+    Navigation.navigate(Screen.HOME);
   }
 
-  //  @FXML
-  //  public void setHC(HomeController hc) {
-  //    this.hc = hc;
-  //  }
 }
