@@ -461,7 +461,7 @@ public class PathfindingController {
           && !nodetype.equals("STAI")) { // short names were not changed
         text = new Text(x, y, sname);
         text.setFill(Color.BLUE);
-        text.setStyle("-fx-font-size: 3px;");
+        text.setStyle("-fx-font-size: 6px;");
         // parent.getChildren().add(text);
         previousText.add(text);
         restText = addSpecificNode("\\b(REST|BATH)\\b", nodetype, restText, text, nodeid);
@@ -744,7 +744,7 @@ public class PathfindingController {
         if (messageField != null) {
           messageText = new Text(ax, ay, messageField.getText());
           messageText.setFill(Color.RED);
-          messageText.setStyle("-fx-font-size: 8px;");
+          messageText.setStyle("-fx-font-size: 12px;");
           parent.getChildren().add(messageText);
         }
       }
@@ -1098,13 +1098,13 @@ public class PathfindingController {
     String border = "-fx-border-color: ";
     border = border + color + ";";
     child.setDisable(false);
-    child.setStyle("-fx-background-color: lightblue;" + "-fx-background-insets: 0px;" + border);
+    child.setStyle("-fx-background-color: lightblue; -fx-background-insets: 0px;" + border);
   }
 
   public void highlighte(Button child, int move) {
     ImageView image = new ImageView();
     child.setDisable(false);
-    child.setStyle("-fx-background-color: yellow;" + "-fx-background-insets: 0px;");
+    child.setStyle("-fx-background-color: yellow; -fx-background-insets: 0px;");
     if (move < 0) {
       image.setImage(new Image("/Down - elev.png"));
       child.setOnAction(
@@ -1137,7 +1137,7 @@ public class PathfindingController {
   }
 
   public void unhighlight(Button child) {
-    child.setStyle("-fx-background-insets: 0px;" + "-fx-border-color: black;");
+    child.setStyle("-fx-background-insets: 0px; -fx-border-color: black;");
     child.setStyle("-fx-background-color: transparent;");
     child.setDisable(true);
     child.setGraphic(null);
@@ -1176,6 +1176,7 @@ public class PathfindingController {
       // highlightt(nodes, color);
       for (Pair<Integer, Text> p : nodes) {
         Text text = p.getValue();
+        text.setStyle("-fx-font-size: 6");
         parent.getChildren().add(text);
       }
     } else {
