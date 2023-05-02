@@ -18,8 +18,8 @@ public class SettingsController {
 
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getUsername();
-  boolean isStartSelected;
-  @FXML MFXFilterComboBox<String> startLocSelect;
+  //boolean isStartSelected;
+  //@FXML MFXFilterComboBox<String> startLocSelect;
   @FXML MFXToggleButton soundToggle;
 
   @FXML MFXFilterComboBox tableField;
@@ -138,6 +138,7 @@ public class SettingsController {
               }
             });
 
+    /*
     List<Node> latestNodes = PathfindingController.getLatestNodes();
     List<String> lnames = new ArrayList<>();
     for (Node n : latestNodes) {
@@ -157,6 +158,7 @@ public class SettingsController {
       startLocSelect.getItems().add(lname);
     }
     isStartSelected = false;
+     */
   }
 
   public void backButtonClicked() {
@@ -179,6 +181,7 @@ public class SettingsController {
     }
   }
 
+  /*
   public void startLocSelected() {
     String startLoc = startLocSelect.getValue();
     if (startLoc != null && !startLoc.equals("")) {
@@ -203,6 +206,7 @@ public class SettingsController {
       }
     }
   }
+   */
 
   public void setupButtonClicked() {}
 }
