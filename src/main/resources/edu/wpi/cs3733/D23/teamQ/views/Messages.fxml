@@ -79,7 +79,10 @@
                   </ScrollPane>
                   <HBox alignment="CENTER" prefHeight="64.0" spacing="16.0">
                      <children>
-                        <MFXTextField fx:id="messageField" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="868.0" HBox.hgrow="ALWAYS" />
+                        <MFXTextField fx:id="messageField" minHeight="-Infinity" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="868.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font></MFXTextField>
                         <ImageView fx:id="sendButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../paper-plane-solid.png" />
