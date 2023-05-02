@@ -28,7 +28,7 @@
             <Pane fx:id="nodesPane" />
          </Group>
       </GesturePane>
-      <VBox prefHeight="900.0" prefWidth="296.0" spacing="10.0" style="-fx-background-color: #012d5a;" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+      <VBox minWidth="-Infinity" prefHeight="900.0" prefWidth="296.0" spacing="10.0" style="-fx-background-color: #012d5a;" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
          <children>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0">
                <children>
