@@ -39,6 +39,13 @@ public class RefreshThread implements Runnable {
       }
     }
 
+    for (String s : tableNames) {
+      toUpdate.add(s);
+    }
+
+    qdb.populate(toUpdate);
+    toUpdate.clear();
+
     while (true) {
       if (checkUpdates().size() > 0) {
         System.out.println("Updating from server --> " + toUpdate);
