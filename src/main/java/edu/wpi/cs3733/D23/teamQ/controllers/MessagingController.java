@@ -36,7 +36,6 @@ import javafx.scene.text.TextFlow;
 
 public class MessagingController implements Subscriber {
   Account receiver;
-  RefreshThread refreshThread = new RefreshThread();
   @FXML ImageView sendButton;
   @FXML VBox messageVbox;
   @FXML MFXTextField messageField;
