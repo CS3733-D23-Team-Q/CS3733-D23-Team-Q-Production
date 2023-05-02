@@ -17,7 +17,7 @@
    <children>
       <HBox prefHeight="96.0" style="-fx-background-color: #b4b4b4;">
          <children>
-            <HBox alignment="CENTER_LEFT" prefWidth="288.0" spacing="16.0" style="-fx-background-color: #e5e5e5;">
+            <HBox alignment="CENTER" prefWidth="288.0" spacing="16.0" style="-fx-background-color: #e5e5e5;">
                <children>
                   <Label text="Messages" textFill="#012d5a">
                      <font>
