@@ -26,7 +26,8 @@ public class SplashScreenController {
     String serverSelected = databaseField.getText();
     switch (serverSelected) {
       case "AWS":
-        serverSelected = "jdbc:postgresql://teamq1.cthn9p80jqzf.us-east-1.rds.amazonaws.com:5432/teamq";
+        serverSelected =
+            "jdbc:postgresql://teamq1.cthn9p80jqzf.us-east-1.rds.amazonaws.com:5432/teamq";
       case "WPI Hosted Database":
         serverSelected = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
     }

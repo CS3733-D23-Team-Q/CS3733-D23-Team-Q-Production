@@ -15,7 +15,6 @@ public interface GenDao<T, G> {
     try {
       Class.forName("org.postgresql.Driver");
       con = DriverManager.getConnection(url, user, password);
-      System.out.println(url);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
