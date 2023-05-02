@@ -333,7 +333,7 @@ public class MessagingController implements Subscriber {
       String username;
       ImageView profileImage = new ImageView();
 
-      if (message.length() > 40) message = message.substring(0, 40) + "...";
+      if (message.length() > 20) message = message.substring(0, 20) + "...";
 
       if (m.getSender().getUsername().equals(LoginController.getUsername())) {
         person = m.getReceiver().getFirstName() + " " + m.getReceiver().getLastName();

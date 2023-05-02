@@ -268,7 +268,7 @@
                <children>
                   <Button fx:id="SelectNodeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#SelectedNodeClicked" prefHeight="31.0" prefWidth="154.0" style="-fx-font-size: 14; -fx-background-color: #142A53;" text="Select " textFill="WHITE" />
                   <Button fx:id="ClearNodeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#ClearNodeClicked" prefHeight="31.0" prefWidth="154.0" style="-fx-font-size: 14; -fx-background-color: #142A53;" text="Clear " textFill="WHITE" GridPane.columnIndex="1" />
-                  <Button fx:id="AlineBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#AlineClicked" prefHeight="31.0" prefWidth="154.0" style="-fx-font-size: 14; -fx-background-color: #142A53;" text="Aline" textFill="WHITE" GridPane.columnIndex="2" />
+                  <Button fx:id="AlineBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#AlineClicked" prefHeight="31.0" prefWidth="154.0" style="-fx-font-size: 14; -fx-background-color: #142A53;" text="Align" textFill="WHITE" GridPane.columnIndex="2" />
                </children>
             </GridPane>
             <GridPane alignment="CENTER" prefHeight="64.0" prefWidth="366.0">
