@@ -25,7 +25,6 @@ public class SettingsController {
   @FXML MFXFilterComboBox tableField;
   @FXML MFXTextField filenameField;
   @FXML MFXButton submitButton;
-  @FXML MFXButton setupButton;
   @FXML MFXComboBox preferredAlgorithm;
   @FXML MFXComboBox voiceSelection;
 
