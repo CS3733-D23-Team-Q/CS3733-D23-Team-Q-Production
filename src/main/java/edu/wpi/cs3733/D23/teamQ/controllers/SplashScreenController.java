@@ -11,8 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 public class SplashScreenController {
-  public static String server = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
-
   @FXML MFXButton submitButton;
   @FXML MFXComboBox databaseField;
 
@@ -28,16 +26,11 @@ public class SplashScreenController {
     String serverSelected = databaseField.getText();
     switch (serverSelected) {
       case "AWS":
-        server = "jdbc:postgresql://teamq1.cthn9p80jqzf.us-east-1.rds.amazonaws.com:5432/teamq";
+        serverSelected = "jdbc:postgresql://teamq1.cthn9p80jqzf.us-east-1.rds.amazonaws.com:5432/teamq";
       case "WPI Hosted Database":
-        server = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
+        serverSelected = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
     }
     if (!databaseField.getText().isEmpty()) Navigation.navigateLogin(Screen.LOGIN);
     refresh.start();
-  }
-
-  public static String getServer() {
-    System.out.println(server);
-    return server;
   }
 }
