@@ -10,21 +10,16 @@ import lombok.Getter;
 @Getter
 public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
   private List<MealRequest> mealRequests = new ArrayList<MealRequest>();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static MealRequestDaoImpl single_instance = null;
   private String fileName = "Meal_Requests.csv";
 
-  public static synchronized MealRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new MealRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized MealRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new MealRequestDaoImpl();
 
     return single_instance;
   }
 
-  private MealRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private MealRequestDaoImpl() {
     populate();
   }
 
@@ -148,9 +143,9 @@ public class MealRequestDaoImpl implements GenDao<MealRequest, Integer> {
         mealRequests.add(
             new MealRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),

@@ -18,17 +18,15 @@ import lombok.Getter;
 @Getter
 public class NodeDaoImpl implements GenDao<Node, Integer> {
   private List<Node> nodes = new ArrayList<>();
-  private LocationDaoImpl locationTable;
   private static NodeDaoImpl single_instance = null;
   private String fileName = "Nodes.csv";
 
-  private NodeDaoImpl(LocationDaoImpl locationTable) {
-    this.locationTable = locationTable;
+  private NodeDaoImpl() {
     populate();
   }
 
-  public static synchronized NodeDaoImpl getInstance(LocationDaoImpl locationTable) {
-    if (single_instance == null) single_instance = new NodeDaoImpl(locationTable);
+  public static synchronized NodeDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new NodeDaoImpl();
 
     return single_instance;
   }
@@ -142,7 +140,7 @@ public class NodeDaoImpl implements GenDao<Node, Integer> {
                 rs.getInt("ycoord"),
                 rs.getString("floor"),
                 rs.getString("building"),
-                locationTable.retrieveRow(nodeID)));
+                LocationDaoImpl.getInstance().retrieveRow(nodeID)));
       }
       conn.close();
       pst.close();

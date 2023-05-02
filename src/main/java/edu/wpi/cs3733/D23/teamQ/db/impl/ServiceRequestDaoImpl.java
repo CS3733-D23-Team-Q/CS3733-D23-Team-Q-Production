@@ -15,23 +15,17 @@ import lombok.Setter;
 @Setter
 public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
   private ObservableList<ServiceRequest> serviceRequests = FXCollections.observableArrayList();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private String fileName = "Service_Requests.csv";
 
   private static ServiceRequestDaoImpl single_instance = null;
 
-  public static synchronized ServiceRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new ServiceRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized ServiceRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new ServiceRequestDaoImpl();
 
     return single_instance;
   }
 
-  private ServiceRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private ServiceRequestDaoImpl() {
     populate();
   }
 
@@ -45,9 +39,9 @@ public class ServiceRequestDaoImpl implements GenDao<ServiceRequest, Integer> {
         serviceRequests.add(
             new ServiceRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee").split(",")[0]),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee").split(",")[0]),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),

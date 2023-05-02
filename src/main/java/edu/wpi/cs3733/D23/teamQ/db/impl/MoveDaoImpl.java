@@ -16,18 +16,16 @@ import lombok.Getter;
 public class MoveDaoImpl implements GenDao<Move, Integer> {
   private List<Move> moves = new ArrayList<>();
   private int nextID = 0;
-  private NodeDaoImpl nodeTable;
   private static MoveDaoImpl single_instance = null;
   private String fileName = "Moves.csv";
 
-  public static synchronized MoveDaoImpl getInstance(NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new MoveDaoImpl(nodeTable);
+  public static synchronized MoveDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new MoveDaoImpl();
 
     return single_instance;
   }
 
-  private MoveDaoImpl(NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
+  private MoveDaoImpl() {
     populate();
     if (moves.size() != 0) {
       nextID = moves.get(moves.size() - 1).getMoveID() + 1;
@@ -139,7 +137,7 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
         moves.add(
             new Move(
                 rst.getInt("moveID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
                 rst.getString("longName"),
                 rst.getDate("date")));
       }
@@ -228,7 +226,9 @@ public class MoveDaoImpl implements GenDao<Move, Integer> {
         String[] vars = row.split(",");
         Move m =
             new Move(
-                nodeTable.retrieveRow(Integer.parseInt(vars[0])), vars[1], Date.valueOf(vars[2]));
+                NodeDaoImpl.getInstance().retrieveRow(Integer.parseInt(vars[0])),
+                vars[1],
+                Date.valueOf(vars[2]));
         addRow(m);
       }
       myReader.close();

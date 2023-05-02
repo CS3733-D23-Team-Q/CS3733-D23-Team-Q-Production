@@ -10,22 +10,16 @@ import lombok.Getter;
 @Getter
 public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer> {
   private List<FurnitureRequest> furnitureRequests = new ArrayList<FurnitureRequest>();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static FurnitureRequestDaoImpl single_instance = null;
   private String fileName = "Furniture_Requests.csv";
 
-  public static synchronized FurnitureRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new FurnitureRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized FurnitureRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new FurnitureRequestDaoImpl();
 
     return single_instance;
   }
 
-  private FurnitureRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private FurnitureRequestDaoImpl() {
     populate();
   }
 
@@ -147,9 +141,9 @@ public class FurnitureRequestDaoImpl implements GenDao<FurnitureRequest, Integer
         furnitureRequests.add(
             new FurnitureRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
