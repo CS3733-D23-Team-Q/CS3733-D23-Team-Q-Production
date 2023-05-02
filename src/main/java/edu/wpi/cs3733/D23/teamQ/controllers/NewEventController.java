@@ -73,6 +73,6 @@ public class NewEventController {
     qdb.addPersonalEvent(pe);
     System.out.println("after add");
     Navigation.navigate(Screen.HOME);
-    //hi
+    // hi
   }
 }
