@@ -13,22 +13,15 @@ import lombok.Setter;
 public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRequest, Integer> {
   private List<PatientTransportRequest> patientTransportRequests =
       new ArrayList<PatientTransportRequest>();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static PatientTransportRequestDaoImpl single_instance = null;
   private String fileName = "Patient_Transport_Requests.csv";
 
-  public static synchronized PatientTransportRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new PatientTransportRequestDaoImpl(accountTable, nodeTable);
-
+  public static synchronized PatientTransportRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new PatientTransportRequestDaoImpl();
     return single_instance;
   }
 
-  private PatientTransportRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private PatientTransportRequestDaoImpl() {
     populate();
   }
 
@@ -148,9 +141,9 @@ public class PatientTransportRequestDaoImpl implements GenDao<PatientTransportRe
         patientTransportRequests.add(
             new PatientTransportRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
