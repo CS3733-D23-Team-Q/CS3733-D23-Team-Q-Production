@@ -1209,6 +1209,7 @@ public class PathfindingController {
         }
         highlightedNodes.removeAll(highlightedNodes);
       }
+
       cfnodes = setCF(cfnodes);
       if (highlightedNodesp.size() > 0) {
         for (int i = 0; i < highlightedNodesp.size(); i++) {
