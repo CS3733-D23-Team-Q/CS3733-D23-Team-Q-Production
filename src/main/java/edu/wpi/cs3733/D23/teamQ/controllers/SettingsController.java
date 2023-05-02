@@ -5,8 +5,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.*;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,8 +16,8 @@ public class SettingsController {
 
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getUsername();
-  boolean isStartSelected;
-  @FXML MFXFilterComboBox<String> startLocSelect;
+  // boolean isStartSelected;
+  // @FXML MFXFilterComboBox<String> startLocSelect;
   @FXML MFXToggleButton soundToggle;
 
   @FXML MFXFilterComboBox tableField;
@@ -143,6 +141,7 @@ public class SettingsController {
               }
             });
 
+    /*
     List<Node> latestNodes = PathfindingController.getLatestNodes();
     List<String> lnames = new ArrayList<>();
     for (Node n : latestNodes) {
@@ -162,6 +161,7 @@ public class SettingsController {
       startLocSelect.getItems().add(lname);
     }
     isStartSelected = false;
+     */
   }
 
   public void backButtonClicked() {
@@ -184,6 +184,7 @@ public class SettingsController {
     }
   }
 
+  /*
   public void startLocSelected() {
     String startLoc = startLocSelect.getValue();
     if (startLoc != null && !startLoc.equals("")) {
@@ -208,6 +209,7 @@ public class SettingsController {
       }
     }
   }
+   */
 
   public void setupButtonClicked() {}
 }
