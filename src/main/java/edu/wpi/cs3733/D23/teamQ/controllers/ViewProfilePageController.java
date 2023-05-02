@@ -6,22 +6,22 @@ import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 public class ViewProfilePageController {
   Qdb qdb = Qdb.getInstance();
   @FXML private HBox myHBox;
   @FXML private ImageView profileImage;
-  @FXML private Text fullName;
-  @FXML private Text title;
-  @FXML private Text displayUsername;
-  @FXML private Text email;
-  @FXML private Text phone;
-  @FXML private Text status;
+  @FXML private Label fullName;
+  @FXML private Label title;
+  @FXML private Label displayUsername;
+  @FXML private Label email;
+  @FXML private Label phone;
+  @FXML private Label status;
   @FXML private MFXButton backButton;
 
   @FXML private MFXButton chatButton;
