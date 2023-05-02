@@ -217,14 +217,14 @@ public class AdminDirectoryController implements Subscriber {
   }
 
   public boolean update(List<String> context) throws URISyntaxException {
-    if(context.contains("account")) {
-        statusColumn.setCellValueFactory(
-                cellData -> {
-                    AdminDirectoryController.EmployeeData employeeData = cellData.getValue();
-                    boolean status = employeeData.getAccount().isActive();
-                    String statusString = status ? "Online" : "Offline";
-                    return new SimpleStringProperty(statusString);
-                });
+    if (context.contains("account")) {
+      statusColumn.setCellValueFactory(
+          cellData -> {
+            AdminDirectoryController.EmployeeData employeeData = cellData.getValue();
+            boolean status = employeeData.getAccount().isActive();
+            String statusString = status ? "Online" : "Offline";
+            return new SimpleStringProperty(statusString);
+          });
     }
     return false;
   }

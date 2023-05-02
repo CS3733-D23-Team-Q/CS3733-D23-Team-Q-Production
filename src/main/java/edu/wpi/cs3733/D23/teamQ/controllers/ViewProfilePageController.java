@@ -30,6 +30,8 @@ public class ViewProfilePageController implements Subscriber {
   @FXML private MFXButton chatButton;
   @FXML private Circle statusCircle;
 
+  Account a;
+
   public void initialize() {
     String loggedInUser = LoginController.getLoginUsername();
     qdb.subscribe(this);
@@ -41,6 +43,7 @@ public class ViewProfilePageController implements Subscriber {
     }
 
     Account account = qdb.retrieveAccount(username);
+    a = account;
 
     fullName.setText(account.getFirstName() + " " + account.getLastName());
     title.setText(account.getTitle());
@@ -95,11 +98,14 @@ public class ViewProfilePageController implements Subscriber {
 
   public boolean update(List<String> context) throws URISyntaxException {
     if (context.contains("account")) {
-      boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
-      if (isActive) {
+      String s = a.getUsername();
+      if (qdb.getAccountFromUsername(s).isActive()) {
+        System.out.println("ACTIVE");
         status.setText("Online");
         statusCircle.setStyle("-fx-fill: #37AC2B");
-      } else {
+      }
+      if (!(qdb.getAccountFromUsername(s).isActive())) {
+        System.out.println("NOT ACTIVE");
         status.setText("Offline");
         statusCircle.setStyle("-fx-fill: #CE3C49");
       }

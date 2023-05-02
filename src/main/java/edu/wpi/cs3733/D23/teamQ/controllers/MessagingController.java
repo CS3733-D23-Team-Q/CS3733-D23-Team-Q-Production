@@ -300,10 +300,11 @@ public class MessagingController implements Subscriber {
 
   public boolean update(List<String> context) {
     if (context.contains("account")) {
-      boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
-      if (isActive) {
+      String s = receiver.getUsername();
+      if (qdb.getAccountFromUsername(s).isActive()) {
         activeIndicator.setStyle("-fx-fill: #37AC2B");
-      } else {
+      }
+      if (!(qdb.getAccountFromUsername(s).isActive())) {
         activeIndicator.setStyle("-fx-fill: #CE3C49");
       }
     }

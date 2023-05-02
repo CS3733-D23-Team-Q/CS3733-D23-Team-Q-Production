@@ -43,8 +43,8 @@ public class RefreshThread implements Runnable {
       toUpdate.add(s);
     }
 
-//    qdb.populate(toUpdate);
-//    toUpdate.clear();
+    //    qdb.populate(toUpdate);
+    //    toUpdate.clear();
 
     while (true) {
       if (checkUpdates().size() > 0) {
