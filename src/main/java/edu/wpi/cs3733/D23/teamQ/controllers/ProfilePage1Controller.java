@@ -19,19 +19,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 public class ProfilePage1Controller implements Subscriber {
 
   Qdb qdb = Qdb.getInstance();
   @FXML private HBox myHBox;
   @FXML private ImageView profileImage;
-  @FXML private Text fullName;
-  @FXML private Text title;
-  @FXML private Text displayUsername;
-  @FXML private Text email;
-  @FXML private Text phone;
-  @FXML private Text status;
+  @FXML private Label fullName;
+  @FXML private Label title;
+  @FXML private Label displayUsername;
+  @FXML private Label email;
+  @FXML private Label phone;
+  @FXML private Label status;
   @FXML private Circle statusCircle;
   @FXML private VBox statsVbox;
   @FXML private Label incompleteRequests;

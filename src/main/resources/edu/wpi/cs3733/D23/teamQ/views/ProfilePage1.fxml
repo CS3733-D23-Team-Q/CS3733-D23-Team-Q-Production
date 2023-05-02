@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" stylesheets="@styles/Profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.ProfilePage1Controller">
    <children>
@@ -35,24 +34,24 @@
                         <Image url="@../../../../../../default-profile.png" />
                      </image>
                   </ImageView>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox>
                      <children>
-                        <Text fx:id="fullName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="name" text="Full Name">
+                        <Label fx:id="fullName" styleClass="name" text="Full Name" textFill="#012d5a">
                            <font>
                               <Font size="48.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="30.0" top="185.0" />
                            </VBox.margin>
-                        </Text>
-                        <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
+                        </Label>
+                        <Label fx:id="title" text="Title" textFill="#012d5a">
                            <VBox.margin>
                               <Insets left="30.0" top="5.0" />
                            </VBox.margin>
                            <font>
                               <Font size="26.0" />
                            </font>
-                        </Text>
+                        </Label>
                      </children>
                   </VBox>
                </children>
@@ -66,24 +65,24 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
                            <children>
-                              <HBox prefHeight="30.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                                  <children>
                                     <Circle fx:id="statusCircle" fill="WHITE" radius="12.0" stroke="BLACK" strokeType="INSIDE">
                                        <HBox.margin>
                                           <Insets left="53.0" top="40.0" />
                                        </HBox.margin>
                                     </Circle>
-                                    <Text fx:id="status" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+                                    <Label fx:id="status" text="Status" textFill="#012d5a">
                                        <HBox.margin>
                                           <Insets left="11.0" top="40.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font size="20.0" />
                                        </font>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="30.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
@@ -93,17 +92,17 @@
                                           <Image url="@../Username.png" />
                                        </image>
                                     </ImageView>
-                                    <Text fx:id="displayUsername" strokeType="OUTSIDE" strokeWidth="0.0" text="username">
+                                    <Label fx:id="displayUsername" text="username" textFill="#012d5a">
                                        <HBox.margin>
                                           <Insets left="10.0" top="30.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font size="20.0" />
                                        </font>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="30.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
@@ -113,17 +112,17 @@
                                           <Image url="@../Phone.png" />
                                        </image>
                                     </ImageView>
-                                    <Text fx:id="phone" strokeType="OUTSIDE" strokeWidth="0.0" text="phone number">
+                                    <Label fx:id="phone" text="phone number" textFill="#012d5a">
                                        <HBox.margin>
                                           <Insets left="10.0" top="30.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font size="20.0" />
                                        </font>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="30.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
@@ -133,14 +132,14 @@
                                           <Image url="@../Email.png" />
                                        </image>
                                     </ImageView>
-                                    <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" text="email">
+                                    <Label fx:id="email" text="email" textFill="#012d5a">
                                        <HBox.margin>
                                           <Insets left="10.0" top="30.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font size="20.0" />
                                        </font>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </HBox>
                               <MFXButton contentDisplay="TOP" onAction="#editPressed" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #012d5a; -fx-background-radius: 15;" text="Edit Profile" textFill="WHITE">
