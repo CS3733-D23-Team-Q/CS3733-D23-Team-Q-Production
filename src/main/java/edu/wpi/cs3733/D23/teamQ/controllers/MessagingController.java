@@ -298,6 +298,14 @@ public class MessagingController implements Subscriber {
   }
 
   public boolean update(List<String> context) {
+    if (context.contains("account")) {
+      boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
+      if (isActive) {
+        activeIndicator.setStyle("-fx-fill: #37AC2B");
+      } else {
+        activeIndicator.setStyle("-fx-fill: #CE3C49");
+      }
+    }
     if (context.contains("message")) {
       List<Message> recents = qdb.retrieveConversations(LoginController.getUsername());
       Message recent = recents.get(0);

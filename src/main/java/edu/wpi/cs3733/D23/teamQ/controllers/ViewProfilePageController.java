@@ -1,10 +1,13 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import java.net.URISyntaxException;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,7 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
-public class ViewProfilePageController {
+public class ViewProfilePageController implements Subscriber {
   Qdb qdb = Qdb.getInstance();
   @FXML private HBox myHBox;
   @FXML private ImageView profileImage;
@@ -29,6 +32,7 @@ public class ViewProfilePageController {
 
   public void initialize() {
     String loggedInUser = LoginController.getLoginUsername();
+    qdb.subscribe(this);
     String username;
     if (LoginController.isAdmin()) {
       username = AdminDirectoryController.getViewProfileUsername();
@@ -87,5 +91,19 @@ public class ViewProfilePageController {
 
     qdb.setMessagingAccount(qdb.getAccountFromUsername(username));
     Navigation.navigate(Screen.MESSAGES);
+  }
+
+  public boolean update(List<String> context) throws URISyntaxException {
+    if (context.contains("account")) {
+      boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
+      if (isActive) {
+        status.setText("Online");
+        statusCircle.setStyle("-fx-fill: #37AC2B");
+      } else {
+        status.setText("Offline");
+        statusCircle.setStyle("-fx-fill: #CE3C49");
+      }
+    }
+    return false;
   }
 }
