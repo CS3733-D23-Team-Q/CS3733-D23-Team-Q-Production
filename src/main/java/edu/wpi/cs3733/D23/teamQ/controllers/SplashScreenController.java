@@ -4,7 +4,6 @@ import static edu.wpi.cs3733.D23.teamQ.Main.refresh;
 
 import edu.wpi.cs3733.D23.teamQ.db.ConnectionBuilder;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
-import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.collections.FXCollections;
@@ -32,7 +31,7 @@ public class SplashScreenController {
       serverSelected = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
     }
     ConnectionBuilder.setUrl(serverSelected);
-    if (!databaseField.getText().isEmpty()) Navigation.navigateLogin(Screen.LOGIN);
+    if (!databaseField.getText().isEmpty()) Navigation.navigateLogin();
     refresh.start();
   }
 }

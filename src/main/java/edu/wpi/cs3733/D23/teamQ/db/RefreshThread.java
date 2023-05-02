@@ -10,7 +10,6 @@ import lombok.SneakyThrows;
 
 public class RefreshThread implements Runnable {
   private List<Long> lastUpdates = new ArrayList<>();
-  Qdb qdb = Qdb.getInstance();
   boolean debounce = true;
 
   private List<String> tableNames =
@@ -33,6 +32,7 @@ public class RefreshThread implements Runnable {
 
   @SneakyThrows
   public void run() {
+    Qdb qdb = Qdb.getInstance();
     if (lastUpdates.isEmpty()) {
       for (int i = 0; i < tableNames.size(); i++) {
         lastUpdates.add(System.currentTimeMillis());
@@ -53,7 +53,7 @@ public class RefreshThread implements Runnable {
           lastUpdates.set(tableNames.indexOf(s), System.currentTimeMillis() - 1000);
         }
       }
-      doUpdates();
+      doUpdates(qdb);
 
       Thread.sleep(1000);
       toUpdate.clear();
@@ -83,7 +83,7 @@ public class RefreshThread implements Runnable {
     return toUpdate;
   }
 
-  private void doUpdates() {
+  private void doUpdates(Qdb qdb) {
     qdb.populate(toUpdate);
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
