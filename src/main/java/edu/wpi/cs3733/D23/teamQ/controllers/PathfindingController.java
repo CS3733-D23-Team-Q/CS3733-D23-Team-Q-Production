@@ -170,7 +170,8 @@ public class PathfindingController {
     floorLabel.setText("Floor " + whichFloorS());
     ready4Second = false;
     if (defaultsl != null) {
-      List<Node> latestNodes = getLatestNodesb();
+      getLatestNodesb();
+      List<Node> latestNodes = latest;
       for (Node n : latestNodes) {
         if (n.getLocation().equals(defaultsl)) {
           int f = whichFloorI(n.getFloor());
@@ -1409,15 +1410,17 @@ public class PathfindingController {
     parent.getChildren().remove(messageText);
   }
 
+  /*
   public void settingButtonClicked() throws IOException {
     PathfindingSettingController.display();
   }
+   */
 
   public static List<Node> getLatestNodes() {
     return latest;
   }
 
-  public List<Node> getLatestNodesb() {
+  public void getLatestNodesb() {
     List<Node> latestNodes = new ArrayList<>();
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Move> dateMoves = new ArrayList<>();
@@ -1516,7 +1519,7 @@ public class PathfindingController {
         currentNodes.add(node);
       }
     }
-    latestNodes = currentNodes;
-    return latestNodes;
+    latest = currentNodes;
+    // return latestNodes;
   }
 }
