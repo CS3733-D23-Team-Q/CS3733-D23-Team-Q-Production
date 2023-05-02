@@ -406,6 +406,7 @@ public class Qdb {
 
     return personalEventsTable.addRow(p);
   }
+  //hi
 
   public ArrayList<personalEvent> retrieveAllPersonalEvents() {
     return (ArrayList<personalEvent>) personalEventsTable.getAllRows();
