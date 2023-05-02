@@ -9,7 +9,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.Location;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Node;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,17 +116,14 @@ public class GraphicalMapEditorController {
   @FXML private Label WhichFloor;
   List<Button> button = new ArrayList<>();
 
-  File[] file = {
-    new File("src/main/resources/01_thefirstfloor.png"),
-    new File("src/main/resources/02_thesecondfloor.png"),
-    new File("src/main/resources/03_thethirdfloor.png"),
-    new File("src/main/resources/00_thelowerlevel1.png"),
-    new File("src/main/resources/00_thelowerlevel2.png")
-  };
+  Image l1 = new Image("/00_thelowerlevel1.png");
+  Image l2 = new Image("/00_thelowerlevel2.png");
+  Image ff = new Image("/01_thefirstfloor.png");
+  Image sf = new Image("/02_thesecondfloor.png");
+  Image tf = new Image("/03_thethirdfloor.png");
 
-  String[] images = new String[file.length];
+  List<Image> image = new ArrayList<>();
 
-  Image[] image = new Image[images.length];
   int currentIndex = 0;
   @FXML private ImageView imageView;
 
@@ -201,6 +197,14 @@ public class GraphicalMapEditorController {
                 .zoomBy(pane.getCurrentScale(), pivotOnTarget);
           }
         });
+    image.add(ff);
+    image.add(sf);
+    image.add(tf);
+    image.add(l1);
+    image.add(l2);
+
+    imageView.setImage(image.get(currentIndex));
+    WhichFloor.setText("The First Floor");
     AlineBtn.setOnMouseEntered(
         e -> {
           AlineBtn.setCursor(Cursor.HAND);
@@ -266,15 +270,6 @@ public class GraphicalMapEditorController {
         e -> {
           HelpBtn.setCursor(Cursor.HAND);
         });
-    for (int i = 0; i < file.length; i++) {
-      images[i] = file[i].toURI().toString();
-    }
-
-    for (int i = 0; i < images.length; i++) {
-      image[i] = new Image(images[i]);
-    }
-    imageView.setImage(image[currentIndex]);
-    WhichFloor.setText("The First Floor");
   }
 
   /**
@@ -643,7 +638,7 @@ public class GraphicalMapEditorController {
         currentIndex = findFloor(floor);
         if (!button.isEmpty()) parent.getChildren().removeAll(button);
         button = addButtons(Floor(currentIndex));
-        imageView.setImage(image[currentIndex]);
+        imageView.setImage(image.get(currentIndex));
         setFloor(currentIndex);
       }
       alert.clearLabelAlert(alerts, image1);
@@ -748,11 +743,11 @@ public class GraphicalMapEditorController {
     HideEdges();
     clearLocationName();
     currentIndex++;
-    if (currentIndex >= file.length) {
+    if (currentIndex >= image.size()) {
       currentIndex = 0;
     }
     refreshNodes();
-    imageView.setImage(image[currentIndex]);
+    imageView.setImage(image.get(currentIndex));
     setFloor(currentIndex);
   }
 
@@ -770,11 +765,11 @@ public class GraphicalMapEditorController {
     if (currentIndex >= 0) {
       refreshNodes();
       button = addButtons(Floor(currentIndex));
-      imageView.setImage(image[currentIndex]);
+      imageView.setImage(image.get(currentIndex));
     } else {
       currentIndex = 4;
       refreshNodes();
-      imageView.setImage(image[currentIndex]);
+      imageView.setImage(image.get(currentIndex));
     }
     setFloor(currentIndex);
   }
