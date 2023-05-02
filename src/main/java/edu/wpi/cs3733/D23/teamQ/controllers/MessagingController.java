@@ -3,12 +3,10 @@ package edu.wpi.cs3733.D23.teamQ.controllers;
 import static java.lang.System.currentTimeMillis;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
-import edu.wpi.cs3733.D23.teamQ.db.RefreshThread;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -30,25 +28,26 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class MessagingController implements Subscriber {
   Account receiver;
+  @FXML VBox root;
   @FXML ImageView sendButton;
   @FXML VBox messageVbox;
   @FXML MFXTextField messageField;
-  @FXML MFXScrollPane messageSP;
+  @FXML ScrollPane messageSP;
   @FXML MFXFilterComboBox peopleSelector;
 
   @FXML Label personLabel;
 
   @FXML ImageView profilePicture;
   @FXML Circle activeIndicator;
+  @FXML HBox profileHbox;
   @FXML ImageView composeButton;
   @FXML VBox accountVbox;
-  @FXML MFXScrollPane accountSP;
+  @FXML ScrollPane accountSP;
 
   Qdb qdb = Qdb.getInstance();
 
@@ -130,10 +129,6 @@ public class MessagingController implements Subscriber {
 
   @FXML
   public void composeButtonClicked() {
-
-    personLabel.setVisible(false);
-    profilePicture.setVisible(false);
-    activeIndicator.setVisible(false);
     peopleSelector.setVisible(true);
   }
 
@@ -169,10 +164,9 @@ public class MessagingController implements Subscriber {
       Text text = new Text(message);
       TextFlow textFlow = new TextFlow(text);
       textFlow.setStyle(
-          "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
+          "-fx-background-color: #0167B1; -fx-font-size: 14; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
       text.setStyle("-fx-font-family: Roboto");
       text.setFill(Color.WHITE);
-      text.setFont(Font.font(14));
       hbox.getChildren().add(textFlow);
       messageVbox.getChildren().add(hbox);
 
@@ -206,10 +200,9 @@ public class MessagingController implements Subscriber {
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
     textFlow.setStyle(
-        "-fx-background-color: #0167B1; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
+        "-fx-background-color: #0167B1; -fx-font-size: 14; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.WHITE);
-    text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
   }
@@ -246,10 +239,9 @@ public class MessagingController implements Subscriber {
     Text text = new Text(message);
     TextFlow textFlow = new TextFlow(text);
     textFlow.setStyle(
-        "-fx-background-color: #B4B4B4; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
+        "-fx-background-color: #B4B4B4; -fx-font-size: 14; -fx-background-radius: 20px; -fx-padding: 12 20 12 20;");
     text.setStyle("-fx-font-family: Roboto");
     text.setFill(Color.BLACK);
-    text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
   }
@@ -264,9 +256,8 @@ public class MessagingController implements Subscriber {
 
     Text text = new Text(timeString);
     TextFlow textFlow = new TextFlow(text);
-    text.setStyle("-fx-font-family: Roboto; -fx-font-weight: bold;");
+    text.setStyle("-fx-font-family: Roboto; -fx-font-size: 14; -fx-font-weight: bold;");
     text.setFill(Color.BLACK);
-    text.setFont(Font.font(14));
     hbox.getChildren().add(textFlow);
     messageVbox.getChildren().add(hbox);
   }
@@ -275,9 +266,7 @@ public class MessagingController implements Subscriber {
     messageVbox.getChildren().clear();
     peopleSelector.setVisible(false);
     personLabel.setText(receiver.getFirstName() + " " + receiver.getLastName());
-    personLabel.setVisible(true);
-    profilePicture.setVisible(true);
-    activeIndicator.setVisible(true);
+    profileHbox.setVisible(true);
 
     if (!messageVbox.getChildren().isEmpty()) {
       messageVbox.getChildren().clear();
@@ -362,10 +351,8 @@ public class MessagingController implements Subscriber {
       hbox.setPadding(new Insets(4, 16, 4, 16));
       Text ptext = new Text(person);
       Text mtext = new Text(message);
-      ptext.setFont(Font.font(18));
-      mtext.setFont(Font.font(12));
-      ptext.setStyle("-fx-font-family: Roboto; -fx-font-weight: bold;");
-      mtext.setStyle("-fx-font-family: Roboto; ");
+      ptext.setStyle("-fx-font-family: Roboto; -fx-font-size: 18; -fx-font-weight: bold;");
+      mtext.setStyle("-fx-font-family: Roboto; -fx-font-size: 12");
       vbox.getChildren().add(ptext);
       vbox.getChildren().add(mtext);
       Line line = new Line(0, 0, 300, 0);
