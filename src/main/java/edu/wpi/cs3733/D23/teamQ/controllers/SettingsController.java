@@ -43,7 +43,7 @@ public class SettingsController {
   ObservableList<String> voiceList =
       FXCollections.observableArrayList("Male", "Female", "Snoop Dogg");
   ObservableList<String> algorithmList =
-      FXCollections.observableArrayList("A*", "Dijkstra", "BFS", "DFS", "Q*");
+      FXCollections.observableArrayList("ASTAR", "DJIKSTRA", "BFS", "DFS", "Q*");
 
   @FXML
   public void initialize() {
@@ -118,24 +118,28 @@ public class SettingsController {
             new ChangeListener<>() {
               @Override
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                Settings.Algorithm algo = null;
+                Settings.Algorithm algo =
+                    Settings.Algorithm.valueOf(preferredAlgorithm.getValue().toString());
 
-                if (newValue.toString().equals("A*")) algo = Settings.Algorithm.ASTAR;
-                if (newValue.toString().equals("BFS")) algo = Settings.Algorithm.BFS;
-                if (newValue.toString().equals("DFS")) algo = Settings.Algorithm.DFS;
-                if (newValue.toString().equals("DIJKSTRA")) algo = Settings.Algorithm.DJIKSTRA;
-                if (algo != null) {
-                  Settings settings =
-                      new Settings(
-                          LoginController.getLoginUsername(),
-                          qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
-                          qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),
-                          algo.ordinal(),
-                          qdb.retrieveSettings(LoginController.getLoginUsername())
-                              .getVoice()
-                              .ordinal());
-                  qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
-                }
+                //                if (newValue.toString().equals("A*")) algo =
+                // Settings.Algorithm.ASTAR;
+                //                if (newValue.toString().equals("BFS")) algo =
+                // Settings.Algorithm.BFS;
+                //                if (newValue.toString().equals("DFS")) algo =
+                // Settings.Algorithm.DFS;
+                //                if (newValue.toString().equals("DIJKSTRA")) algo =
+                // Settings.Algorithm.DJIKSTRA;
+
+                Settings settings =
+                    new Settings(
+                        LoginController.getLoginUsername(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isTwoFactor(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername()).isSound(),
+                        algo.ordinal(),
+                        qdb.retrieveSettings(LoginController.getLoginUsername())
+                            .getVoice()
+                            .ordinal());
+                qdb.updateSettingsRow(LoginController.getLoginUsername(), settings);
               }
             });
 
@@ -204,4 +208,6 @@ public class SettingsController {
       }
     }
   }
+
+  public void setupButtonClicked() {}
 }
