@@ -406,7 +406,7 @@ public class Qdb {
 
     return personalEventsTable.addRow(p);
   }
-  //hi
+  // hi
 
   public ArrayList<personalEvent> retrieveAllPersonalEvents() {
     return (ArrayList<personalEvent>) personalEventsTable.getAllRows();
@@ -877,5 +877,9 @@ public class Qdb {
 
   public boolean addDefaultLocation(DefaultLocation x) {
     return defaultLocationsTable.addRow(x);
+  }
+
+  public int getDefaultLocationIndex(String username) {
+    return defaultLocationsTable.getIndex(username);
   }
 }

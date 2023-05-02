@@ -9,10 +9,9 @@ import edu.wpi.cs3733.D23.teamQ.App;
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
 import edu.wpi.cs3733.D23.teamQ.db.RefreshThread;
 import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Alert;
-import edu.wpi.cs3733.D23.teamQ.db.obj.Message;
-import edu.wpi.cs3733.D23.teamQ.db.obj.ServiceRequest;
+import edu.wpi.cs3733.D23.teamQ.db.obj.*;
+import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
+import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -74,10 +74,12 @@ public class HomeController implements Subscriber {
     Calendar serviceRequestsBlank = new Calendar("Service Requests");
     Calendar serviceRequestsProgress = new Calendar("Service Requests");
     Calendar serviceRequestsDone = new Calendar("Service Requests");
+    Calendar personalCalendar = new Calendar("Personal Calendar");
 
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
     CalendarSource SRD = new CalendarSource("Service Request Done");
+    CalendarSource PC = new CalendarSource("Personal Calendar");
 
     serviceRequestsBlank.setStyle(Style.STYLE5);
     serviceRequestsProgress.setStyle(Style.STYLE3);
@@ -111,7 +113,25 @@ public class HomeController implements Subscriber {
     SRP.getCalendars().add(serviceRequestsProgress);
     SRD.getCalendars().add(serviceRequestsDone);
 
-    calendar.getCalendarSources().addAll(SRB, SRP, SRD);
+    ArrayList<Integer> index = qdb.retrieveUserPersonalEvents(username);
+    for (int i = 0; i < index.size(); i++) {
+      personalEvent curr = qdb.retrievePersonalEvent(index.get(i));
+      int currId = curr.getPersonalEventID();
+      String title = curr.getTitle();
+      Entry<String> temp = new Entry<>(title + " ID Num-" + currId);
+      if (temp.isFullDay()) {
+        temp.setFullDay(true);
+      }
+      temp.changeStartDate(
+          qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
+      LocalDate locDate = curr.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+      temp.changeStartDate(locDate);
+      temp.changeEndDate(locDate);
+      temp.changeStartTime(LocalTime.parse(curr.getStartTime()));
+      temp.changeEndTime(LocalTime.parse(curr.getStartTime()));
+    }
+    PC.getCalendars().add(personalCalendar);
+    calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
 
     // adding moves to calendar
     Calendar moves = new Calendar("Moves");
@@ -178,6 +198,19 @@ public class HomeController implements Subscriber {
     LocalDate localDate1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     LocalDate localDate2 = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     return localDate1.isEqual(localDate2);
+  }
+
+  public void refreshButtonClicked() {
+    System.out.println("before refresh button");
+    refreshCalendar();
+    System.out.println("after refresh button");
+  }
+
+  public void newEventClick() {
+    Navigation.navigate(Screen.NEW_EVENT);
+    System.out.println("before refresh");
+    refreshCalendar();
+    System.out.println("after refresh");
   }
 
   public void updateTime() {
