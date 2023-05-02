@@ -27,8 +27,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -48,7 +48,6 @@ public class PathfindingController {
   DFS dfs = new DFS();
   Djikstra djikstra = new Djikstra();
   Alert alert = new Alert();
-  GesturePane pane;
   boolean ready4Second;
   Node start;
   Node target;
@@ -85,9 +84,11 @@ public class PathfindingController {
   static List<Node> latest = new ArrayList<>();
   Location defaultsl;
 
-  @FXML GridPane root;
+  @FXML GesturePane pane;
+  @FXML HBox root;
   @FXML Group parent;
-  @FXML ImageView map;
+  @FXML ImageView mapImage;
+  @FXML Pane nodesPane;
   @FXML Button previousFloor;
   @FXML Button nextFloor;
   @FXML CheckBox restCheck;
@@ -189,11 +190,9 @@ public class PathfindingController {
     } else {
       addButtons(whichFloorS());
     }
-    pane = new GesturePane();
-    pane.setContent(parent);
-    pane.setFitMode(GesturePane.FitMode.COVER);
-    root.add(pane, 0, 0);
-    GridPane.setRowSpan(pane, GridPane.REMAINING);
+    ImageView iv = new ImageView(ff);
+    pane.setContent(iv);
+    pane.zoomTo(0, 0, Point2D.ZERO);
     pane.setOnMouseClicked(
         e -> {
           if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
@@ -998,7 +997,7 @@ public class PathfindingController {
       floorLabel.setText("Floor " + whichFloorS());
     }
     Image previous = floors.get(floor);
-    map.setImage(previous);
+    mapImage.setImage(previous);
 
     removeText();
     removeButtons();
@@ -1055,7 +1054,7 @@ public class PathfindingController {
     }
 
     Image next = floors.get(floor);
-    map.setImage(next);
+    mapImage.setImage(next);
 
     removeText();
     removeButtons();

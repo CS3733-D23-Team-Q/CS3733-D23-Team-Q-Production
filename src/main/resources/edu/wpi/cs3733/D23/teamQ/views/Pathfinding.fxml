@@ -12,35 +12,23 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import net.kurobako.gesturefx.GesturePane?>
 
-<GridPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.PathfindingController">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1041.2000122070312" minWidth="10.0" prefWidth="904.3999633789062" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="240.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-   </rowConstraints>
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.PathfindingController">
    <children>
-      <Group fx:id="parent" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
-         <children>
-            <ImageView fx:id="map" fitHeight="680.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../01_thefirstfloor.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
-      <VBox prefHeight="200.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #012d5a;" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+      <GesturePane fx:id="pane" fitMode="COVER" prefHeight="900.0" HBox.hgrow="ALWAYS">
+         <Group fx:id="parent">
+            <ImageView fx:id="mapImage" />
+            <Pane fx:id="nodesPane" />
+         </Group>
+      </GesturePane>
+      <VBox prefHeight="900.0" prefWidth="296.0" spacing="10.0" style="-fx-background-color: #012d5a;" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
          <children>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0">
                <children>
@@ -254,4 +242,4 @@
          </children>
       </VBox>
    </children>
-</GridPane>
+</HBox>
