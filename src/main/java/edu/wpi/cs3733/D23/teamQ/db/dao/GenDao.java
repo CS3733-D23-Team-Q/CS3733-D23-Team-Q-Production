@@ -1,12 +1,13 @@
 package edu.wpi.cs3733.D23.teamQ.db.dao;
 
+import edu.wpi.cs3733.D23.teamQ.controllers.SplashScreenController;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
 public interface GenDao<T, G> {
-  static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
+  static final String url = SplashScreenController.getServer();
   static final String user = "teamq";
   static final String password = "teamq140";
 
@@ -15,6 +16,7 @@ public interface GenDao<T, G> {
     try {
       Class.forName("org.postgresql.Driver");
       con = DriverManager.getConnection(url, user, password);
+      System.out.println(url);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
