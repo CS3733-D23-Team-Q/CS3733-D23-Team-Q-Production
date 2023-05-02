@@ -36,8 +36,6 @@ public class ProfilePage1Controller implements Subscriber {
   @FXML private Label incompleteRequests;
   @FXML private Label unreadMessages;
 
-  public ProfilePage1Controller() throws SQLException {}
-
   public void initialize() throws IOException, SQLException {
     String username = LoginController.getLoginUsername();
     Qdb qdb = Qdb.getInstance();
@@ -116,7 +114,6 @@ public class ProfilePage1Controller implements Subscriber {
     Navigation.navigate(Screen.STATISTICS);
   }
 
-  @Override
   public boolean update(List<String> context) throws URISyntaxException {
     if (context.contains("account")) {
       boolean isActive = qdb.getAccountFromUsername(LoginController.getLoginUsername()).isActive();
