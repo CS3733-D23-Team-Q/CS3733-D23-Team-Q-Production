@@ -26,14 +26,14 @@ public class DefaultLocationDaoImpl implements GenDao<DefaultLocation, String> {
     return single_instance;
   }
 
-  private int getIndex(String username) {
+  public int getIndex(String username) {
     for (int i = 0; i < defaultLocations.size(); i++) {
       DefaultLocation dl = defaultLocations.get(i);
       if (dl.getUsername().equals(username)) {
         return i;
       }
     }
-    throw new RuntimeException("No DefaultLocation found with username " + username);
+    return -1;
   }
 
   public List<DefaultLocation> getAllRows() {

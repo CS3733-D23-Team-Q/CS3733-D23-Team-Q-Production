@@ -845,4 +845,8 @@ public class Qdb {
   public boolean addDefaultLocation(DefaultLocation x) {
     return defaultLocationsTable.addRow(x);
   }
+
+  public int getDefaultLocationIndex(String username) {
+    return defaultLocationsTable.getIndex(username);
+  }
 }

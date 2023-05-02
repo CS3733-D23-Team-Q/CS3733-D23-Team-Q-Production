@@ -81,7 +81,8 @@ public class AboutController {
 
   @FXML
   public void ashleyShow() {
-    ashley1.setText("Andrew Garfield Spiderman fan");
+    ashley1.setText("Favorite color is Purple");
+    ashley1.setStyle("-fx-text-fill: purple");
     ashley2.setText("");
     ashley3.setText("");
   }
@@ -89,6 +90,7 @@ public class AboutController {
   @FXML
   public void ashleyHide() {
     ashley1.setText("Ashley Jacobs");
+    ashley1.setStyle("-fx-text-fill: #012d5a");
     ashley2.setText("Scrum");
     ashley3.setText("Computer Science, 2025");
   }
@@ -109,7 +111,7 @@ public class AboutController {
 
   @FXML
   public void joshShow() {
-    josh1.setText("Favorite Book: Name of the Wind");
+    josh1.setText("Made this page");
     josh2.setText("");
     josh3.setText("");
   }

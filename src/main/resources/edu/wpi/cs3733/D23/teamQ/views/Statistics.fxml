@@ -12,7 +12,7 @@
    <children>
       <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
          <children>
-            <StackPane maxHeight="-Infinity" maxWidth="275.0" prefHeight="100.0" prefWidth="275.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;">
+            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="36.0" prefWidth="320.0" style="-fx-background-color: #012d5a; -fx-background-radius: 16; -fx-border-radius: 16;" VBox.vgrow="NEVER">
                <children>
                   <Text fill="#f1f1f1" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics">
                      <font>
