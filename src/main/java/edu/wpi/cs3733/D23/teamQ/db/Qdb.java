@@ -46,6 +46,7 @@ public class Qdb {
   private AlertDaoImpl alertTable;
   private SettingsDaoImpl settingsTable;
   private DefaultLocationDaoImpl defaultLocationsTable;
+  private personalEventsDaoImpl personalEventsTable;
 
   private Account messagingAccount = null;
 
@@ -85,6 +86,7 @@ public class Qdb {
     alertTable = AlertDaoImpl.getInstance();
     settingsTable = SettingsDaoImpl.getInstance();
     defaultLocationsTable = DefaultLocationDaoImpl.getInstance();
+    personalEventsTable = personalEventsDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -388,6 +390,32 @@ public class Qdb {
     return moveTable.importCSV(filename);
   }
 
+  public personalEvent retrievePersonalEvent(int personalEventID) {
+    return personalEventsTable.retrieveRow(personalEventID);
+  }
+
+  public boolean updatePersonalEvent(int id, personalEvent p) {
+    return personalEventsTable.updateRow(id, p);
+  }
+
+  public boolean deletePersonalEvent(int id) {
+    return personalEventsTable.deleteRow(id);
+  }
+
+  public boolean addPersonalEvent(personalEvent p) {
+
+    return personalEventsTable.addRow(p);
+  }
+  //hi
+
+  public ArrayList<personalEvent> retrieveAllPersonalEvents() {
+    return (ArrayList<personalEvent>) personalEventsTable.getAllRows();
+  }
+
+  public ArrayList<Integer> retrieveUserPersonalEvents(String user) {
+    return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
+  }
+
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }
@@ -638,45 +666,48 @@ public class Qdb {
     return messageTable.updateRow(m);
   }
 
-  public synchronized boolean populate(ArrayList<String> toUpdate) {
-    for (String tableName : toUpdate) {
-      if (tableName.equals("account")) {
-        accountTable.populate();
-      } else if (tableName.equals("edge")) {
-        edgeTable.populate();
-      } else if (tableName.equals("locationName")) {
-        locationTable.populate();
-      } else if (tableName.equals("move")) {
-        moveTable.populate();
-      } else if (tableName.equals("node")) {
-        nodeTable.populate();
-      } else if (tableName.equals("profileImage")) {
-        profileImageTable.populate();
-      } else if (tableName.equals("message")) {
-        messageTable.populate();
-      } else if (tableName.equals("sign")) {
-        signTable.populate();
-      } else if (tableName.equals("alert")) {
-        alertTable.populate();
-      } else if (tableName.equals("serviceRequest")) {
-        serviceRequestTable.populate();
-        conferenceRequestTable.populate();
-        flowerRequestTable.populate();
-        furnitureRequestTable.populate();
-        mealRequestTable.populate();
-        medicalSuppliesRequestTable.populate();
-        officeSuppliesRequestTable.populate();
-        patientTransportRequestTable.populate();
-      } else if (tableName.equals("settings")) {
-        settingsTable.populate();
-      } else if (tableName.equals("defaultLocation")) {
-        defaultLocationsTable.populate();
+  public synchronized boolean populate(ArrayList<String> tableNames) {
+    for (String tableName : tableNames) {
+      switch (tableName) {
+        case "account":
+          accountTable.populate();
+        case "edge":
+          edgeTable.populate();
+        case "locationName":
+          locationTable.populate();
+        case "move":
+          moveTable.populate();
+        case "node":
+          nodeTable.populate();
+        case "profileImage":
+          profileImageTable.populate();
+        case "message":
+          messageTable.populate();
+        case "sign":
+          signTable.populate();
+        case "alert":
+          alertTable.populate();
+        case "serviceRequest":
+          serviceRequestTable.populate();
+          conferenceRequestTable.populate();
+          flowerRequestTable.populate();
+          furnitureRequestTable.populate();
+          mealRequestTable.populate();
+          medicalSuppliesRequestTable.populate();
+          officeSuppliesRequestTable.populate();
+          patientTransportRequestTable.populate();
+        case "settings":
+          settingsTable.populate();
+        case "defaultLocation":
+          defaultLocationsTable.populate();
+        case "personalEvent":
+          personalEventsTable.populate();
       }
     }
     Platform.runLater(
         () -> {
           try {
-            notifySubscribers(toUpdate);
+            notifySubscribers(tableNames);
           } catch (URISyntaxException e) {
             throw new RuntimeException(e);
           }
@@ -782,6 +813,8 @@ public class Qdb {
         return signTable;
       case "Service requests":
         return serviceRequestTable;
+      case "Personal Events":
+        return personalEventsTable;
     }
     return null;
   }
@@ -844,9 +877,5 @@ public class Qdb {
 
   public boolean addDefaultLocation(DefaultLocation x) {
     return defaultLocationsTable.addRow(x);
-  }
-
-  public int getDefaultLocationIndex(String username) {
-    return defaultLocationsTable.getIndex(username);
   }
 }
