@@ -69,7 +69,9 @@ public class NewEventController {
             (String) EndField.getValue(),
             FullDayCheckBox.isSelected(),
             username);
+    System.out.println("before add");
     qdb.addPersonalEvent(pe);
+    System.out.println("after add");
     Navigation.navigate(Screen.HOME);
   }
 }
