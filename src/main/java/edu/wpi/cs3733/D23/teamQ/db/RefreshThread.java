@@ -5,38 +5,49 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import javafx.application.Platform;
+import java.util.*;
 import lombok.SneakyThrows;
 
 public class RefreshThread implements Runnable {
-  private long lastUpdate = System.currentTimeMillis();
+  private List<Long> lastUpdates = new ArrayList<>();
   Qdb qdb = Qdb.getInstance();
+  boolean debounce = true;
 
-  private String[] tableNames = {
-    "account",
-    "edge",
-    "locationName",
-    "move",
-    "node",
-    "profileImage",
-    "security_question",
-    "serviceRequest",
-    "message",
-    "alert",
-    "sign"
-  };
+  private List<String> tableNames =
+      List.of(
+          new String[] {
+            "account",
+            "edge",
+            "locationName",
+            "move",
+            "node",
+            "profileImage",
+            "security_question",
+            "serviceRequest",
+            "message",
+            "alert",
+            "sign"
+          });
 
   private ArrayList<String> toUpdate = new ArrayList<>();
 
   @SneakyThrows
   public void run() {
+    if (lastUpdates.isEmpty()) {
+      for (int i = 0; i < tableNames.size(); i++) {
+        lastUpdates.add(System.currentTimeMillis());
+      }
+    }
+
     while (true) {
       if (checkUpdates().size() > 0) {
         System.out.println("Updating from server --> " + toUpdate);
+        for (String s : toUpdate) {
+          lastUpdates.set(tableNames.indexOf(s), System.currentTimeMillis() - 1000);
+        }
       }
       doUpdates();
-      lastUpdate = System.currentTimeMillis();
+
       Thread.sleep(1000);
       toUpdate.clear();
     }
@@ -50,6 +61,7 @@ public class RefreshThread implements Runnable {
       while (rs.next()) {
         for (String tableName : tableNames) {
           if (rs.getString("tableName").equals(tableName)) {
+            long lastUpdate = lastUpdates.get(tableNames.indexOf(tableName));
             if (rs.getLong("updated_timestamp") > lastUpdate) {
               toUpdate.add(tableName);
             }
@@ -69,6 +81,25 @@ public class RefreshThread implements Runnable {
     for (String tableName : toUpdate) {
       System.out.println("Updated " + tableName + " from client server.");
     }
-    Platform.runLater(() -> qdb.notifySubscribers(toUpdate));
+  }
+
+  public boolean isDebounce() {
+    return debounce;
+  }
+
+  public void setDebounce(boolean debounce) {
+    this.debounce = debounce;
+  }
+
+  public void debounceReset() {
+    TimerTask debounceResetTask =
+        new TimerTask() {
+          @Override
+          public void run() {
+            debounce = true;
+          }
+        };
+    Timer timer = new Timer();
+    timer.schedule(debounceResetTask, 5000); // 1 second debounce interval
   }
 }

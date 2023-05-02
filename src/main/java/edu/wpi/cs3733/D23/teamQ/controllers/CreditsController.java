@@ -34,6 +34,7 @@ public class CreditsController {
   @FXML MFXButton exitBlue;
   @FXML MFXButton home;
   @FXML MFXButton homeBlue;
+  @FXML MFXButton janitor;
   @FXML MFXButton leftArrow;
   @FXML MFXButton loc;
   @FXML MFXButton loginExit;
@@ -43,6 +44,8 @@ public class CreditsController {
   @FXML MFXButton mapBlue;
   @FXML MFXButton mapEditor;
   @FXML MFXButton menu;
+  @FXML MFXButton messages;
+  @FXML MFXButton messagesBlue;
   @FXML MFXButton move;
   @FXML MFXButton node;
   @FXML MFXButton people;
@@ -51,8 +54,8 @@ public class CreditsController {
   @FXML MFXButton rightArrow;
   @FXML MFXButton sr;
   @FXML MFXButton srBlue;
-  @FXML MFXButton settings;
-  @FXML MFXButton settingsBlue;
+  @FXML MFXButton information;
+  @FXML MFXButton informationBlue;
   @FXML MFXButton snackSpread;
   @FXML MFXButton stat;
   @FXML MFXButton statBlue;
@@ -166,6 +169,24 @@ public class CreditsController {
 
   // icons
   @FXML
+  public void messagesClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/message?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
+  }
+
+  @FXML
+  public void messagesBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/message?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
+  }
+
+  @FXML
+  public void janitorClicked() {
+    linkDisplay.setText("https://minesweeperonline.com/");
+    browser.getEngine().load("https://minesweeperonline.com/");
+  }
+
+  @FXML
   public void alertClicked() {
     linkDisplay.setText("https://fontawesome.com/icons/circle-exclamation?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
@@ -245,25 +266,25 @@ public class CreditsController {
 
   @FXML
   public void exitClicked() {
-    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void exitBlueClicked() {
-    linkDisplay.setText("https://freeicons.io/controls-icons/exit-icon-39607");
+    linkDisplay.setText("https://fontawesome.com/icons/right-from-bracket?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void homeClicked() {
-    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
+    linkDisplay.setText("https://fontawesome.com/icons/house?f=classic&s=solid");
     browser.getEngine().load("https://freeicons.io/material-icons-action/home-icon-15944");
   }
 
   @FXML
   public void homeBlueClicked() {
-    linkDisplay.setText("https://freeicons.io/material-icons-action/home-icon-15944");
+    linkDisplay.setText("https://fontawesome.com/icons/house?f=classic&s=solid");
     browser.getEngine().load("https://freeicons.io/material-icons-action/home-icon-15944");
   }
 
@@ -297,7 +318,7 @@ public class CreditsController {
 
   @FXML
   public void mapClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=regular");
+    linkDisplay.setText("https://fontawesome.com/icons/map?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
@@ -339,22 +360,14 @@ public class CreditsController {
 
   @FXML
   public void peopleClicked() {
-    linkDisplay.setText(
-        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
-    browser
-        .getEngine()
-        .load(
-            "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+    linkDisplay.setText("https://fontawesome.com/icons/users?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
   public void peopleBlueClicked() {
-    linkDisplay.setText(
-        "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
-    browser
-        .getEngine()
-        .load(
-            "https://freeicons.io/public-relations/public-people-target-audience-group-icon-132938");
+    linkDisplay.setText("https://fontawesome.com/icons/users?f=classic&s=solid  ");
+    browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
@@ -371,33 +384,25 @@ public class CreditsController {
 
   @FXML
   public void srClicked() {
-    linkDisplay.setText(
-        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
-    browser
-        .getEngine()
-        .load(
-            "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
-  }
-
-  @FXML
-  public void srBlueClicked() {
-    linkDisplay.setText(
-        "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
-    browser
-        .getEngine()
-        .load(
-            "https://freeicons.io/essential-web-4/clipboard-document-office-form-application-icon-40409");
-  }
-
-  @FXML
-  public void settingsClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+    linkDisplay.setText("https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
   @FXML
-  public void settingsBlueClicked() {
-    linkDisplay.setText("https://fontawesome.com/icons/gear?f=classic&s=regular");
+  public void srBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/clipboard-check?f=classic&s=solid");
+    browser.getEngine().load("https://fontawesome.com/");
+  }
+
+  @FXML
+  public void informationClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-info?f=classic&s=solidr");
+    browser.getEngine().load("https://fontawesome.com/");
+  }
+
+  @FXML
+  public void informationBlueClicked() {
+    linkDisplay.setText("https://fontawesome.com/icons/circle-info?f=classic&s=solid");
     browser.getEngine().load("https://fontawesome.com/");
   }
 
@@ -726,22 +731,14 @@ public class CreditsController {
 
   @FXML
   public void mealTitleClicked() {
-    linkDisplay.setText(
-        "https://www.google.com/search?q=chicken+entre+horizontal+image&tbm=isch&chips=q:chicken+entre+horizontal+image,online_chips:grilled+chicken+breast:Y3kSzUh2YOQ%3D&hl=en&sa=X&ved=2ahUKEwi3tMTS4MD-AhXbA1kFHWnYCeoQ4lYoBnoECAEQOQ&biw=1519&bih=713#imgrc=Q0tUx17Z4ieqcM");
-    browser
-        .getEngine()
-        .load(
-            "https://www.google.com/search?q=chicken+entre+horizontal+image&tbm=isch&chips=q:chicken+entre+horizontal+image,online_chips:grilled+chicken+breast:Y3kSzUh2YOQ%3D&hl=en&sa=X&ved=2ahUKEwi3tMTS4MD-AhXbA1kFHWnYCeoQ4lYoBnoECAEQOQ&biw=1519&bih=713#imgrc=Q0tUx17Z4ieqcM");
+    linkDisplay.setText("https://www.delish.com/cooking/recipe-ideas/g3053/baked-pasta/");
+    browser.getEngine().load("https://www.delish.com/cooking/recipe-ideas/g3053/baked-pasta/");
   }
 
   @FXML
   public void medSuppliesClicked() {
-    linkDisplay.setText(
-        "https://www.freepik.com/free-photo/border-from-notebook-medical-supplies_2123810.htm#query=medical%20supplies&position=49&from_view=keyword&track=robertav1_2_sidr");
-    browser
-        .getEngine()
-        .load(
-            "https://www.freepik.com/free-photo/border-from-notebook-medical-supplies_2123810.htm#query=medical%20supplies&position=49&from_view=keyword&track=robertav1_2_sidr");
+    linkDisplay.setText("https://superoxy.life/product_tag/1068142237_.html");
+    browser.getEngine().load("https://superoxy.life/product_tag/1068142237_.html");
   }
 
   @FXML
@@ -757,11 +754,11 @@ public class CreditsController {
   @FXML
   public void ostClicked() {
     linkDisplay.setText(
-        "https://www.google.com/search?q=office+supplies+horizontal+image&tbm=isch&ved=2ahUKEwi525D5g8b-AhW8BFkFHVNRAwsQ2-cCegQIABAA&oq=office+supplies+horizontal+image&gs_lcp=CgNpbWcQAzIECCMQJ1AAWABguwJoAHAAeACAATKIATKSAQExmAEAqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=aE1IZLmHELyJ5NoP06KNWA&bih=975&biw=1920");
+        "https://www.dreamstime.com/school-office-sstationery-white-background-notebook-notepad-pen-pencils-paper-clips-stuff-long-banner-format-school-image123073836");
     browser
         .getEngine()
         .load(
-            "https://www.google.com/search?q=office+supplies+horizontal+image&tbm=isch&ved=2ahUKEwi525D5g8b-AhW8BFkFHVNRAwsQ2-cCegQIABAA&oq=office+supplies+horizontal+image&gs_lcp=CgNpbWcQAzIECCMQJ1AAWABguwJoAHAAeACAATKIATKSAQExmAEAqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=aE1IZLmHELyJ5NoP06KNWA&bih=975&biw=1920");
+            "https://www.dreamstime.com/school-office-sstationery-white-background-notebook-notepad-pen-pencils-paper-clips-stuff-long-banner-format-school-image123073836");
   }
 
   @FXML

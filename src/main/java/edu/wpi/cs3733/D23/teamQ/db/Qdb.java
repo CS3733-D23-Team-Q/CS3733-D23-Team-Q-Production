@@ -7,11 +7,13 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
@@ -42,6 +44,8 @@ public class Qdb {
 
   private MessageDaoImpl messageTable;
   private AlertDaoImpl alertTable;
+  private SettingsDaoImpl settingsTable;
+  private DefaultLocationDaoImpl defaultLocationsTable;
   private personalEventsDaoImpl personalEventsTable;
 
   private Account messagingAccount = null;
@@ -80,6 +84,8 @@ public class Qdb {
 
     messageTable = MessageDaoImpl.getInstance(accountTable);
     alertTable = AlertDaoImpl.getInstance();
+    settingsTable = SettingsDaoImpl.getInstance();
+    defaultLocationsTable = DefaultLocationDaoImpl.getInstance();
     personalEventsTable = personalEventsDaoImpl.getInstance();
   }
 
@@ -114,8 +120,9 @@ public class Qdb {
     }
   }
 
-  public synchronized void notifySubscribers(List<String> context) {
+  public synchronized void notifySubscribers(List<String> context) throws URISyntaxException {
     for (Subscriber s : subscribers) {
+
       s.update(context);
     }
   }
@@ -396,6 +403,7 @@ public class Qdb {
   }
 
   public boolean addPersonalEvent(personalEvent p) {
+
     return personalEventsTable.addRow(p);
   }
 
@@ -406,6 +414,7 @@ public class Qdb {
   public ArrayList<Integer> retrieveUserPersonalEvents(String user) {
     return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
   }
+
 
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
@@ -636,6 +645,10 @@ public class Qdb {
     return messageTable.retrieveMessages(p1, p2);
   }
 
+  public ObservableList<Message> retrieveAllMessages() {
+    return messageTable.getAllMessages();
+  }
+
   public ObservableList<Message> retrieveConversations(String username) {
     return messageTable.retrieveConversations(username);
   }
@@ -647,6 +660,10 @@ public class Qdb {
   public boolean addMessage(Message message) {
     updateTimestamp("message");
     return messageTable.addRow(message);
+  }
+
+  public boolean updateMessage(Message m) {
+    return messageTable.updateRow(m);
   }
 
   public synchronized boolean populate(ArrayList<String> tableNames) {
@@ -679,10 +696,22 @@ public class Qdb {
           medicalSuppliesRequestTable.populate();
           officeSuppliesRequestTable.populate();
           patientTransportRequestTable.populate();
+        case "settings":
+          settingsTable.populate();
+        case "defaultLocation":
+          defaultLocationsTable.populate();
         case "personalEvent":
           personalEventsTable.populate();
       }
     }
+    Platform.runLater(
+        () -> {
+          try {
+            notifySubscribers(tableNames);
+          } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+          }
+        });
     return true;
   }
 
@@ -804,5 +833,49 @@ public class Qdb {
 
   public ObservableList<ServiceRequest> getUserRequestedOutstandingRows(String user) {
     return serviceRequestTable.getUserRequestedOutstandingRows(user);
+  }
+
+  public List<Settings> getAllSettings() {
+    return settingsTable.getAllRows();
+  }
+
+  public Settings retrieveSettings(String username) {
+    return settingsTable.retrieveRow(username);
+  }
+
+  public boolean updateSettingsRow(String username, Settings x) {
+    return settingsTable.updateRow(username, x);
+  }
+
+  public boolean deleteSettingsRow(String username) {
+    return settingsTable.deleteRow(username);
+  }
+
+  public boolean addSettingsRow(Settings x) {
+    return settingsTable.addRow(x);
+  }
+
+  public Location retrieveLocationFromLongName(String lName) {
+    return locationTable.retrieveLocationFromLongName(lName);
+  }
+
+  public List<DefaultLocation> getAllDefaultLocations() {
+    return defaultLocationsTable.getAllRows();
+  }
+
+  public DefaultLocation retrieveDefaultLocation(String username) {
+    return defaultLocationsTable.retrieveRow(username);
+  }
+
+  public boolean updateDefaultLocation(String username, DefaultLocation x) {
+    return defaultLocationsTable.updateRow(username, x);
+  }
+
+  public boolean deleteDefaultLocation(String username) {
+    return defaultLocationsTable.deleteRow(username);
+  }
+
+  public boolean addDefaultLocation(DefaultLocation x) {
+    return defaultLocationsTable.addRow(x);
   }
 }

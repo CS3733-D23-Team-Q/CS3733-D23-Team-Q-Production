@@ -141,36 +141,6 @@ public class NodeController implements IController {
     /** set the node tableview */
     node.setItems(nodes());
   }
-  /*
-
-  @FXML
-  void edgeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Edge_Table);
-  }
-
-  @FXML
-  void homeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  void locationClicked(ActionEvent event) {
-    Navigation.navigate(Screen.LocationName_Table);
-  }
-
-  @FXML
-  void mapClicked(ActionEvent event) {}
-
-  @FXML
-  void moveClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Move_Table);
-  }
-
-  public void exitClicked(ActionEvent actionEvent) {
-    Platform.exit();
-  }
-
-   */
 
   @FXML
   void AddClicked(MouseEvent event) throws SQLException {
@@ -390,11 +360,4 @@ public class NodeController implements IController {
     }
     node.setItems(nodes());
   }
-  /*
-   @FXML
-   void BackClicked(ActionEvent event) {
-     Navigation.navigate(Screen.MAP_EDITOR);
-   }
-
-  */
 }

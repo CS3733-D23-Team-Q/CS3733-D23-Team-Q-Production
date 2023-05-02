@@ -9,9 +9,15 @@ import javafx.scene.layout.VBox;
 public class NavigationSubmenuController {
   @FXML VBox navigationSM;
   @FXML MFXButton pathfinder;
+  @FXML MFXButton signage;
 
   @FXML
   public void pathfinderClicked() {
     Navigation.navigate(Screen.PATH_FINDING);
+  }
+
+  @FXML
+  public void signageClicked() {
+    Navigation.navigate(Screen.SELECT_SIGNAGE);
   }
 }

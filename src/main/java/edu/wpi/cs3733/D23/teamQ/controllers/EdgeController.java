@@ -19,6 +19,8 @@ import javafx.util.Callback;
 
 public class EdgeController implements IController {
 
+  Qdb qdb = Qdb.getInstance();
+
   static Stage stage;
 
   public void setStage(Stage stage) {
@@ -27,24 +29,8 @@ public class EdgeController implements IController {
 
   private String path;
   Alert alert = new Alert();
-  /*
-
-  private int newEdgeID;
-  private Node newEndNode;
-  private Node newStartNode;
-
-   */
 
   @FXML private TextField ImportPath;
-  /*
-
-  @FXML private TextField EdgeIDInput;
-
-  @FXML private TextField EndNodeInput;
-
-  @FXML private TextField StartNodeInput;
-
-   */
 
   @FXML private TableView<Edge> edge;
 
@@ -53,8 +39,6 @@ public class EdgeController implements IController {
   @FXML private TableColumn<Edge, Number> EndNode;
 
   @FXML private TableColumn<Edge, Number> EdgeID;
-
-  Qdb qdb = Qdb.getInstance();
 
   /** used to put Edges from database arraylist to observablelist */
   public ObservableList<Edge> edges() {
@@ -101,37 +85,6 @@ public class EdgeController implements IController {
     edge.setItems(edges());
   }
 
-  /*
-  @FXML
-  void exitClicked(ActionEvent event) {
-    Platform.exit();
-  }
-
-  @FXML
-  void moveClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Move_Table);
-  }
-
-  @FXML
-  void homeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.HOME);
-  }
-
-  @FXML
-  void locationClicked(ActionEvent event) {
-    Navigation.navigate(Screen.LocationName_Table);
-  }
-
-  @FXML
-  void mapClicked(ActionEvent event) {}
-
-  @FXML
-  void nodeClicked(ActionEvent event) {
-    Navigation.navigate(Screen.Node_Table);
-  }
-
-   */
-
   @FXML
   void ExportClicked(MouseEvent event) throws IOException {
     path = ImportPath.getText();
@@ -155,12 +108,4 @@ public class EdgeController implements IController {
     }
     edge.setItems(edges());
   }
-  /*
-
-  @FXML
-  void BackClicked(ActionEvent event) {
-    Navigation.navigate(Screen.MAP_EDITOR_TABLE);
-  }
-
-   */
 }
