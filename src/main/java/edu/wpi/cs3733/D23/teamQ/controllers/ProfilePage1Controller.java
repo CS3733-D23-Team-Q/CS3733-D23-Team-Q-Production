@@ -70,8 +70,7 @@ public class ProfilePage1Controller implements Subscriber {
         incompleteCount++;
       }
     }
-
-    unreadMessages.setText("You have " + qdb.getNumUnread(username) + " unread messages");
+    unreadMessages.setText("You have " + qdb.getNumUnread(username) + " unread message(s)");
     incompleteRequests.setText("You have " + incompleteCount + " incomplete assigned requests");
   }
 

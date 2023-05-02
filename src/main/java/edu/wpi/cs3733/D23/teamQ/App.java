@@ -49,7 +49,7 @@ public class App extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
     App.primaryStage = primaryStage;
-    primaryStage.setTitle("Splash Screen");
+    primaryStage.setTitle("Team Q");
 
     final FXMLLoader loader = new FXMLLoader(App.class.getResource("views/SplashScreen.fxml"));
     primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F5"));

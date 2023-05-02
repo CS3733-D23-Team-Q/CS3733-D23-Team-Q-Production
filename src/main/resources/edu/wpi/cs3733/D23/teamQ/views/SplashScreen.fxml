@@ -15,7 +15,7 @@
             <Image url="@../TextLogo.png" />
          </image>
       </ImageView>
-      <Label layoutX="195.0" layoutY="158.0" text="Select your desired Database">
+      <Label layoutX="195.0" layoutY="158.0" text="Select your desired database">
          <font>
             <Font name="Roboto Bold" size="16.0" />
          </font></Label>
