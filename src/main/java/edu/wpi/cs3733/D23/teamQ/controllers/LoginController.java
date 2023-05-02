@@ -68,7 +68,7 @@ public class LoginController {
 
   @FXML
   public void exitClicked() {
-    //Main.refresh.stop();
+    Main.refresh.stop();
     Platform.exit();
   }
 

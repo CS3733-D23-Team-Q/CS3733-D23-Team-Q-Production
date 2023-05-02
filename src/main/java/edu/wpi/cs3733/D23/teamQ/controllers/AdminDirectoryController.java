@@ -1,10 +1,12 @@
 package edu.wpi.cs3733.D23.teamQ.controllers;
 
 import edu.wpi.cs3733.D23.teamQ.db.Qdb;
+import edu.wpi.cs3733.D23.teamQ.db.dao.Subscriber;
 import edu.wpi.cs3733.D23.teamQ.db.obj.Account;
 import edu.wpi.cs3733.D23.teamQ.db.obj.ProfileImage;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,7 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.Getter;
 
-public class AdminDirectoryController {
+public class AdminDirectoryController implements Subscriber {
   @FXML TableView<EmployeeData> directoryTable;
   @FXML TableColumn<EmployeeData, Image> profileImageColumn;
   @FXML TableColumn<EmployeeData, String> nameColumn;
@@ -34,6 +36,7 @@ public class AdminDirectoryController {
   private static String viewProfileUsername;
 
   public void initialize() {
+    qdb.subscribe(this);
     profileImageColumn.setCellValueFactory(
         cellData ->
             new SimpleObjectProperty<>(
@@ -211,5 +214,18 @@ public class AdminDirectoryController {
   @FXML
   void addButtonClicked(ActionEvent event) {
     Navigation.navigate(Screen.ADMIN_ADD_PROFILE);
+  }
+
+  public boolean update(List<String> context) throws URISyntaxException {
+    if (context.contains("account")) {
+      statusColumn.setCellValueFactory(
+          cellData -> {
+            AdminDirectoryController.EmployeeData employeeData = cellData.getValue();
+            boolean status = employeeData.getAccount().isActive();
+            String statusString = status ? "Online" : "Offline";
+            return new SimpleStringProperty(statusString);
+          });
+    }
+    return false;
   }
 }

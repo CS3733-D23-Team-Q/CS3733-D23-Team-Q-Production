@@ -11,22 +11,16 @@ import lombok.Getter;
 public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integer> {
   private List<ConferenceRequest> conferenceRequests = new ArrayList<ConferenceRequest>();
   private int nextID = 0;
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static ConferenceRequestDaoImpl single_instance = null;
   private String fileName = "Conference_Room_Requests.csv";
 
-  public static synchronized ConferenceRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new ConferenceRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized ConferenceRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new ConferenceRequestDaoImpl();
 
     return single_instance;
   }
 
-  private ConferenceRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private ConferenceRequestDaoImpl() {
     populate();
     if (conferenceRequests.size() != 0) {
       nextID = conferenceRequests.get(conferenceRequests.size() - 1).getRequestID() + 1;
@@ -154,9 +148,9 @@ public class ConferenceRequestDaoImpl implements GenDao<ConferenceRequest, Integ
         conferenceRequests.add(
             new ConferenceRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
