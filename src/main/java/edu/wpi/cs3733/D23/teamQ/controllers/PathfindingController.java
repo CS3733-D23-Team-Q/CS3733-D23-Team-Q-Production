@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -85,6 +86,9 @@ public class PathfindingController {
   static List<Node> latest = new ArrayList<>();
   Location defaultsl;
 
+  ObservableList<String> algorithmsList =
+      FXCollections.observableArrayList("aStar", "bfs", "dfs", "djikstra");
+
   @FXML GridPane root;
   @FXML Group parent;
   @FXML ImageView map;
@@ -135,7 +139,22 @@ public class PathfindingController {
     date = getLatestDate();
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
-    algorithm = "aStar";
+
+    switch (qdb.retrieveSettings(username).getAlgorithm().ordinal()) {
+      case 0:
+        algorithm = "aStar";
+        pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
+      case 1:
+        algorithm = "dfs";
+        pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
+      case 2:
+        algorithm = "bfs";
+        pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
+      case 3:
+        algorithm = "djikstra";
+        pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
+    }
+
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
     ffnodes = new ArrayList<>();
@@ -210,11 +229,9 @@ public class PathfindingController {
   }
 
   public void setUpAlgos() {
-    algorithmSelect.getItems().add("aStar");
-    algorithmSelect.getSelectionModel().selectItem("aStar");
-    algorithmSelect.getItems().add("bfs");
-    algorithmSelect.getItems().add("dfs");
-    algorithmSelect.getItems().add("djikstra");
+    System.out.println(algorithm);
+    algorithmSelect.setText(algorithm);
+    algorithmSelect.setItems(algorithmsList);
   }
 
   public Date getLatestDate() {
