@@ -234,21 +234,8 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-            </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#settingButtonClicked" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Setting%20-%20white.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
                <padding>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="20.0" />
                </padding>
             </HBox>
          </children>
