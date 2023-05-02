@@ -195,6 +195,19 @@ public class HomeController implements Subscriber {
       alertSound(alert.getMessage());
       setAlerts();
     }
+    if (context.contains("message")) {
+      if (refreshThread.isDebounce()) {
+
+        refreshThread.setDebounce(false);
+        String path = getClass().getResource("/alert.wav").getPath();
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()
+            && qdb.retrieveAccount(LoginController.getLoginUsername()).isActive())
+          mediaPlayer.play();
+        refreshThread.debounceReset();
+      }
+    }
     if (context.contains("serviceRequest") || context.contains("move")) {
       refreshCalendar();
       //      calendar.des();
@@ -242,7 +255,8 @@ public class HomeController implements Subscriber {
       Media media = new Media(new File(path).toURI().toString());
       MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-      if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()) mediaPlayer.play();
+      if (qdb.retrieveSettings(LoginController.getLoginUsername()).isSound()
+          && qdb.retrieveAccount(LoginController.getLoginUsername()).isActive()) mediaPlayer.play();
 
       refreshThread.debounceReset();
     }
