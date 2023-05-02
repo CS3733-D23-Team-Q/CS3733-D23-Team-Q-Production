@@ -11,6 +11,7 @@ public interface GenDao<T, G> {
   static final String password = "teamq140";
 
   public static Connection connect() {
+    System.out.println(url);
     Connection con = null;
     try {
       Class.forName("org.postgresql.Driver");

@@ -16,13 +16,15 @@ public class Navigation {
     try {
       final var resource = App.class.getResource("views/Root.fxml");
       final FXMLLoader loader = new FXMLLoader(resource);
-
       Stage primaryStage = App.getPrimaryStage();
       BorderPane scene = loader.load();
       App.setRootBorder(scene);
       App.setrController(loader.getController());
       App.setRootCenter(App.getRController().rootCenter);
       App.setRootRight(App.getRController().rootRight);
+
+      App.getRootBorder().setLeft(null);
+      App.getRootBorder().setRight(null);
 
       //     Node n = loader.load();
       //      App.getRootBorder().setRight(null);
