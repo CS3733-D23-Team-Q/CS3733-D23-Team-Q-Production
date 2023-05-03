@@ -28,7 +28,7 @@
                   <Font name="Roboto" size="16.0" />
                </font>
             </Label>
-            <MFXTextField fx:id="TitleField" prefHeight="40.0" prefWidth="450.0" />
+            <MFXTextField fx:id="TitleField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="36.0" prefWidth="450.0" />
          </children>
          <VBox.margin>
             <Insets left="100.0" />
@@ -41,7 +41,7 @@
                   <Font name="Roboto" size="16.0" />
                </font>
             </Label>
-            <MFXDatePicker fx:id="DateField" prefHeight="40.0" prefWidth="450.0" />
+            <MFXDatePicker fx:id="DateField" prefHeight="36.0" prefWidth="450.0" />
          </children>
          <VBox.margin>
             <Insets left="100.0" />

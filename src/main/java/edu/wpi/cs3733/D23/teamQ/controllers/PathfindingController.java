@@ -1232,12 +1232,14 @@ public class PathfindingController {
       // highlightt(nodes, color);
       for (Pair<Integer, Text> p : nodes) {
         Text text = p.getValue();
+        text.setStyle("-fx-font-size: 8");
         parent.getChildren().add(text);
       }
     } else {
       // unhighlightt(nodes);
       for (Pair<Integer, Text> p : nodes) {
         Text text = p.getValue();
+        text.setStyle("-fx-font-size: 8");
         parent.getChildren().remove(text);
       }
     }
