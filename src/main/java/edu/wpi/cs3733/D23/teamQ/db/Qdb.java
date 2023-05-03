@@ -46,6 +46,7 @@ public class Qdb {
   private AlertDaoImpl alertTable;
   private SettingsDaoImpl settingsTable;
   private DefaultLocationDaoImpl defaultLocationsTable;
+  private personalEventsDaoImpl personalEventsTable;
 
   private Account messagingAccount = null;
 
@@ -83,6 +84,7 @@ public class Qdb {
     alertTable = AlertDaoImpl.getInstance();
     settingsTable = SettingsDaoImpl.getInstance();
     defaultLocationsTable = DefaultLocationDaoImpl.getInstance();
+    personalEventsTable = personalEventsDaoImpl.getInstance();
   }
 
   private boolean updateTimestamp(String tableName) {
@@ -386,6 +388,36 @@ public class Qdb {
     return moveTable.importCSV(filename);
   }
 
+  public personalEvent retrievePersonalEvent(int personalEventID) {
+    return personalEventsTable.retrieveRow(personalEventID);
+  }
+
+  public boolean updatePersonalEvent(int id, personalEvent p) {
+    return personalEventsTable.updateRow(id, p);
+  }
+
+  public boolean deletePersonalEvent(int id) {
+    return personalEventsTable.deleteRow(id);
+  }
+
+  public boolean addPersonalEvent(personalEvent p) {
+
+    return personalEventsTable.addRow(p);
+  }
+  // hi
+
+  public ArrayList<personalEvent> retrieveAllPersonalEvents() {
+    return (ArrayList<personalEvent>) personalEventsTable.getAllRows();
+  }
+
+  public ArrayList<Integer> retrieveUserPersonalEvents(String user) {
+    return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
+  }
+
+  public ArrayList<personalEvent> retrieveEventsFromUsername(String username) {
+    return personalEventsTable.getEvents(username);
+  }
+
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }
@@ -669,6 +701,8 @@ public class Qdb {
         patientTransportRequestTable.populate();
       } else if (tableName.equals("settings")) {
         settingsTable.populate();
+      } else if (tableName.equals("personalEvent")) {
+        personalEventsTable.populate();
       }
     }
     Platform.runLater(
@@ -780,6 +814,8 @@ public class Qdb {
         return signTable;
       case "Service requests":
         return serviceRequestTable;
+      case "Personal Events":
+        return personalEventsTable;
     }
     return null;
   }
