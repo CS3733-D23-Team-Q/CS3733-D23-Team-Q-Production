@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D23.teamQ.navigation;
 
 public enum Screen {
   ROOT("views/Root.fxml", "Root"),
+  SPLASH("views/SplashScreen.fxml", "Splash Screen"),
+
   HOME("views/Home.fxml", "Home"),
   LOGIN("views/LoginPage.fxml", "Login"),
   CREATE_ACCOUNT("views/CreateAccount.fxml", "Create Account"),
@@ -66,7 +68,8 @@ public enum Screen {
 
   ABOUT("views/About.fxml", "About"),
   CREDITS("views/Credits.fxml", "Credits"),
-  CREATE_ALERT("views/CreateAlert.fxml", "Create Alert");
+  CREATE_ALERT("views/CreateAlert.fxml", "Create Alert"),
+  NEW_EVENT("views/NewEvent.fxml", "New Event");
 
   private final String filename;
   private final String title;

@@ -26,7 +26,9 @@ public class Djikstra implements IPathfinding {
               && !current.getFloor().equalsIgnoreCase(end.getFloor())) {
         ArrayList<Node> elevatorTargets = getConnections(current);
         for (Node node : elevatorTargets) {
-          if (node.getFloor().equalsIgnoreCase(end.getFloor()) && !node.equals(current)) {
+          if (node.getFloor().equalsIgnoreCase(end.getFloor())
+              && !node.equals(current)
+              && node.getBuilding().equalsIgnoreCase(current.getBuilding())) {
             Node chosenElev = node;
             openList.add(chosenElev);
             openList.remove(current);

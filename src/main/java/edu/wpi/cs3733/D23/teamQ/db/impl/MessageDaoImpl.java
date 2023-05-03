@@ -12,18 +12,16 @@ import lombok.Getter;
 @Getter
 public class MessageDaoImpl implements GenDao<Message, Integer> {
   private List<Message> messages = new ArrayList<>();
-  private AccountDaoImpl accountTable;
   private static MessageDaoImpl single_instance = null;
   private String fileName = "Messages.csv";
 
-  public static synchronized MessageDaoImpl getInstance(AccountDaoImpl accountTable) {
-    if (single_instance == null) single_instance = new MessageDaoImpl(accountTable);
+  public static synchronized MessageDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new MessageDaoImpl();
 
     return single_instance;
   }
 
-  private MessageDaoImpl(AccountDaoImpl accountTable) {
-    this.accountTable = accountTable;
+  private MessageDaoImpl() {
     populate();
   }
 
@@ -92,8 +90,8 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
       while (rst.next()) {
         messages.add(
             new Message(
-                accountTable.retrieveRow(rst.getString("sender")),
-                accountTable.retrieveRow(rst.getString("receiver")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("sender")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("receiver")),
                 rst.getString("message"),
                 rst.getLong("timestamp"),
                 rst.getBoolean("read")));
@@ -125,7 +123,7 @@ public class MessageDaoImpl implements GenDao<Message, Integer> {
 
   public ObservableList<Message> retrieveConversations(String person) {
     ObservableList<Message> messageList = FXCollections.observableArrayList();
-    for (Account a : accountTable.getAllRows()) {
+    for (Account a : AccountDaoImpl.getInstance().getAllRows()) {
       List<Message> recent = retrieveMessages(a.getUsername(), person);
       if (recent.size() > 0) {
         Message m = recent.get(recent.size() - 1);

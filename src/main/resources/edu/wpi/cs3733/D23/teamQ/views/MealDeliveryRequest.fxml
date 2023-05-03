@@ -54,7 +54,7 @@
                   </VBox>
                   <VBox prefWidth="680.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
                            <VBox.margin>
                               <Insets left="100.0" />
                            </VBox.margin>

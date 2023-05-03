@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.calendarfx.view.CalendarView?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -37,8 +38,20 @@
       </HBox>
       <HBox>
          <children>
-            <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" HBox.hgrow="ALWAYS" />
-            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
+                  <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" prefHeight="33.0" prefWidth="163.0" style="-fx-background-color: #012D5A;" text="Create New Event" textFill="#f1f1f1">
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="470.0" />
+                     </VBox.margin>
+                  </MFXButton>
+               </children>
+            </VBox>
+            <HBox HBox.hgrow="ALWAYS" />
             <HBox spacing="24.0">
                <children>
                   <VBox prefHeight="642.0" prefWidth="640.0" spacing="8.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;">

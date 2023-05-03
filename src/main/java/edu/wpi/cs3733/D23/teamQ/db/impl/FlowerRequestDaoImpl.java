@@ -13,22 +13,16 @@ import lombok.Getter;
 @Getter
 public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
   private List<FlowerRequest> flowerRequests = new ArrayList<FlowerRequest>();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static FlowerRequestDaoImpl single_instance = null;
   private String fileName = "Flower_Requests.csv";
 
-  public static synchronized FlowerRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new FlowerRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized FlowerRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new FlowerRequestDaoImpl();
 
     return single_instance;
   }
 
-  private FlowerRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private FlowerRequestDaoImpl() {
     populate();
   }
 
@@ -153,9 +147,9 @@ public class FlowerRequestDaoImpl implements GenDao<FlowerRequest, Integer> {
         flowerRequests.add(
             new FlowerRequest(
                 rs.getInt("requestID"),
-                nodeTable.retrieveRow(rs.getInt("nodeID")),
-                accountTable.retrieveRow(rs.getString("requester")),
-                accountTable.retrieveRow(rs.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rs.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rs.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rs.getString("assignee")),
                 rs.getString("specialInstructions"),
                 rs.getDate("date"),
                 rs.getString("time"),

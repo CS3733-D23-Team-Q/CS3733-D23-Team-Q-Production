@@ -95,6 +95,7 @@ public class Account {
     this.firstName = null;
     this.lastName = null;
     this.title = null;
+
     this.phoneNumber = "";
   }
 

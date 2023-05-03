@@ -1,24 +1,13 @@
 package edu.wpi.cs3733.D23.teamQ.db.dao;
 
+import edu.wpi.cs3733.D23.teamQ.db.ConnectionBuilder;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
 public interface GenDao<T, G> {
-  static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamqdb";
-  static final String user = "teamq";
-  static final String password = "teamq140";
-
-  public static Connection connect() {
-    Connection con = null;
-    try {
-      Class.forName("org.postgresql.Driver");
-      con = DriverManager.getConnection(url, user, password);
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-    return con;
+  static Connection connect() {
+    return ConnectionBuilder.buildConnection();
   }
 
   public List<T> getAllRows();
@@ -31,7 +20,7 @@ public interface GenDao<T, G> {
 
   public boolean addRow(T x);
 
-  public boolean populate() throws SQLException;
+  public boolean populate();
 
   public String getFileName();
 }

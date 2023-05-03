@@ -1,108 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1320.0" style="-fx-background-color: #F1F1F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagingController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1360.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D23.teamQ.controllers.MessagingController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="96.0" style="-fx-background-color: #b4b4b4;">
          <children>
-            <VBox prefHeight="200.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefWidth="288.0" spacing="16.0" style="-fx-background-color: #e5e5e5;">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <Label text="Messages" textFill="#012d5a">
+                     <font>
+                        <Font name="Roboto" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="composeButton" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#composeButtonClicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../pen-to-square-solid.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <StackPane HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox fx:id="profileHbox" alignment="CENTER" prefHeight="100.0" prefWidth="1001.0" spacing="40.0" style="-fx-background-color: #B4B4B4;" visible="false">
                      <children>
-                        <Label text="Messages" textFill="#0167b1">
+                        <ImageView fx:id="profilePicture" fitHeight="83.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Circle fx:id="activeIndicator" fill="#f1f1f1" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <Label fx:id="personLabel" text="PERSON">
                            <font>
                               <Font name="Roboto" size="24.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="composeButton" fitHeight="33.0" fitWidth="28.0" onMouseClicked="#composeButtonClicked" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../pen-to-square-regular.png" />
-                           </image>
-                        </ImageView>
                      </children>
                      <padding>
-                        <Insets left="70.0" />
+                        <Insets left="30.0" />
                      </padding>
                   </HBox>
-                  <MFXScrollPane fx:id="accountSP" hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="810.0" prefWidth="300.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
-                     <content>
-                        <VBox fx:id="accountVbox" maxWidth="-Infinity" prefHeight="796.0" prefWidth="300.0" />
-                     </content>
-                  </MFXScrollPane>
+                  <MFXFilterComboBox fx:id="peopleSelector" prefHeight="48.0" prefWidth="1040.0" visible="false" />
                </children>
-            </VBox>
-            <Line endY="900.0" stroke="#b4b4b4" HBox.hgrow="ALWAYS" />
-            <VBox prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+            </StackPane>
+         </children></HBox>
+      <HBox prefHeight="804.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
+         <children>
+            <ScrollPane fx:id="accountSP" hbarPolicy="NEVER" prefHeight="804.0" prefWidth="288.0" style="-fx-background-color: #e5e5e5;">
+               <content>
+                  <VBox fx:id="accountVbox" prefWidth="280.0">
+                     <padding>
+                        <Insets right="8.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <VBox style="-fx-background-color: #f1f1f1;" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <StackPane alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="827.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1001.0" spacing="40.0" style="-fx-background-color: #B4B4B4;" StackPane.alignment="CENTER">
-                                 <children>
-                                    <ImageView fx:id="profilePicture" fitHeight="83.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
-                                       <HBox.margin>
-                                          <Insets left="30.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <Circle fx:id="activeIndicator" fill="#f1f1f1" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" />
-                                    <Label fx:id="personLabel" text="PERSON" visible="false">
-                                       <font>
-                                          <Font name="Roboto" size="24.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets left="30.0" />
-                                 </padding>
-                              </HBox>
-                              <MFXFilterComboBox fx:id="peopleSelector" prefHeight="55.0" prefWidth="1025.0" style="-fx-border-color: #0167B1;" visible="false" StackPane.alignment="CENTER">
-                                 <padding>
-                                    <Insets right="20.0" />
-                                 </padding></MFXFilterComboBox>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <MFXScrollPane fx:id="messageSP" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="695.0" style="-fx-background-color: #F1F1F1;" VBox.vgrow="ALWAYS">
+                  <ScrollPane fx:id="messageSP" hbarPolicy="NEVER" prefHeight="740.0" prefWidth="1072.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox fx:id="messageVbox" prefHeight="729.0" prefWidth="1153.0" />
+                        <VBox fx:id="messageVbox" prefHeight="740.0" prefWidth="1072.0">
+                           <padding>
+                              <Insets right="8.0" />
+                           </padding>
+                        </VBox>
                      </content>
-                  </MFXScrollPane>
-                  <HBox spacing="20.0">
+                  </ScrollPane>
+                  <HBox alignment="CENTER" prefHeight="64.0" spacing="16.0">
                      <children>
-                        <MFXTextField fx:id="messageField" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="40.0" prefWidth="825.0" promptText="Message" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </MFXTextField>
-                        <ImageView fx:id="sendButton" fitHeight="42.0" fitWidth="41.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
+                        <MFXTextField fx:id="messageField" minHeight="-Infinity" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="868.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Roboto" size="16.0" />
+                           </font></MFXTextField>
+                        <ImageView fx:id="sendButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#sendButtonClicked" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../paper-plane-solid.png" />
                            </image>
                         </ImageView>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="20.0" />
-                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="12.0" top="12.0" />
+                     </padding>
                   </HBox>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+               </children></VBox>
+         </children></HBox>
    </children>
-</AnchorPane>
+</VBox>

@@ -621,8 +621,8 @@ public class GraphicalMapEditorController {
    * @return boolean
    */
   public boolean nodeIDExist(int nodeID) {
-    for (int i = 0; i < Qdb.getInstance().retrieveAllNodes().size(); i++) {
-      if (nodeID == Qdb.getInstance().retrieveAllNodes().get(i).getNodeID()) return true;
+    for (int i = 0; i < qdb.retrieveAllNodes().size(); i++) {
+      if (nodeID == qdb.retrieveAllNodes().get(i).getNodeID()) return true;
     }
     return false;
   }
@@ -741,6 +741,11 @@ public class GraphicalMapEditorController {
     endnode = empty;
     HideEdges();
     clearLocationName();
+    AlineList.clear();
+    aline = false;
+    toomuch = false;
+    NodeSelected.setText("");
+    NodeSelected2.setText("");
     currentIndex++;
     if (currentIndex >= image.size()) {
       currentIndex = 0;
@@ -760,6 +765,11 @@ public class GraphicalMapEditorController {
     endnode = empty;
     HideEdges();
     clearLocationName();
+    AlineList.clear();
+    aline = false;
+    toomuch = false;
+    NodeSelected.setText("");
+    NodeSelected2.setText("");
     currentIndex--;
     if (currentIndex >= 0) {
       refreshNodes();
