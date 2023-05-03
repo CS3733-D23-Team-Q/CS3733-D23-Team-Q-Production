@@ -286,7 +286,7 @@
                </rowConstraints>
                <children>
                   <ComboBox fx:id="NodeTypeChoose" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="142.0" style="-fx-background-color: #F1F1F1;" styleClass="button-slider" stylesheets="@styles/Home.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                  <Button fx:id="DisplayLocationBtn" mnemonicParsing="false" onMouseClicked="#DisplayLocationClicked" prefHeight="32.0" prefWidth="199.0" style="-fx-background-color: #142A53;" text="Display Locaton Name" textFill="WHITE" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                  <Button fx:id="DisplayLocationBtn" mnemonicParsing="false" onMouseClicked="#DisplayLocationClicked" prefHeight="32.0" prefWidth="199.0" style="-fx-background-color: #142A53;" text="Display Location Name" textFill="WHITE" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
