@@ -48,6 +48,16 @@ public class ProfilePage1Controller implements Subscriber {
     email.setText(account.getEmail());
     phone.setText(account.getPhoneNumber());
 
+    unreadMessages.setOnMouseClicked(
+        event -> {
+          Navigation.navigate(Screen.MESSAGES);
+        });
+    incompleteRequests.setOnMouseClicked(
+        event -> {
+          if (LoginController.isAdmin()) Navigation.navigate(Screen.ADMIN_LIST_REQUESTS);
+          else Navigation.navigate(Screen.LIST_REQUESTS);
+        });
+
     statusCircle.setStroke(null);
     if (account.isActive()) {
       status.setText("Online");

@@ -118,7 +118,7 @@ public class HomeController implements Subscriber {
     for (personalEvent event : events) {
       int currId = event.getPersonalEventID();
       String title = event.getTitle();
-      Entry<String> temp = new Entry<>(title + " ID Num-" + currId);
+      Entry<String> temp = new Entry<>(title);
       LocalDate locDate = ((java.sql.Date) event.getDate()).toLocalDate();
       temp.changeStartDate(locDate);
       temp.changeEndDate(locDate);

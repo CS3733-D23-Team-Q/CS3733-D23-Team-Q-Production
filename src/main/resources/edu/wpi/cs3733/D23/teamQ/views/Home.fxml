@@ -36,12 +36,12 @@
             <Insets left="12.0" right="12.0" />
          </padding>
       </HBox>
-      <HBox>
+      <HBox spacing="12.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0">
                <children>
                   <CalendarView fx:id="calendar" minWidth="-Infinity" prefHeight="674.0" prefWidth="640.0" style="-fx-background-color: #1;" />
-                  <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" prefHeight="33.0" prefWidth="163.0" style="-fx-background-color: #012D5A;" text="Create New Event" textFill="#f1f1f1">
+                  <MFXButton fx:id="newEventButton" onMouseClicked="#newEventClick" prefHeight="33.0" prefWidth="163.0" style="-fx-background-color: #012D5A; -fx-background-radius: 16; -fx-border-radius: 16;" text="Create New Event" textFill="#f1f1f1">
                      <font>
                         <Font name="Roboto" size="16.0" />
                      </font>
