@@ -113,21 +113,19 @@ public class HomeController implements Subscriber {
     SRB.getCalendars().add(serviceRequestsBlank);
     SRP.getCalendars().add(serviceRequestsProgress);
     SRD.getCalendars().add(serviceRequestsDone);
-    System.out.println(SRD.toString());
 
     ArrayList<personalEvent> events = qdb.retrieveEventsFromUsername(username);
     for (personalEvent event : events) {
       int currId = event.getPersonalEventID();
       String title = event.getTitle();
       Entry<String> temp = new Entry<>(title + " ID Num-" + currId);
-      if (temp.isFullDay()) {
-        temp.setFullDay(true);
-      }
       LocalDate locDate = ((java.sql.Date) event.getDate()).toLocalDate();
       temp.changeStartDate(locDate);
       temp.changeEndDate(locDate);
 
-      if (temp.isFullDay() == false && event.getStartTime().length() > 0) {
+      System.out.println("temp check box status " + event.isFullDay());
+
+      if (event.isFullDay() == false && event.getStartTime().length() > 0) {
         String hourS = event.getStartTime().substring(0, 2);
 
         int hour = Integer.parseInt(hourS);
@@ -143,11 +141,12 @@ public class HomeController implements Subscriber {
         LocalTime classEnd = LocalTime.of(hour, min);
         temp.changeStartTime(classStart);
         temp.changeEndTime(classEnd);
+      } else {
+        temp.setFullDay(true);
       }
       personalCalendar.addEntry(temp);
     }
     PC.getCalendars().add(personalCalendar);
-    System.out.println(PC.toString());
     calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
 
     // adding moves to calendar

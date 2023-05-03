@@ -61,6 +61,7 @@ public class NewEventController {
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
     System.out.println("before pe");
+    System.out.println("check box is " + FullDayCheckBox.isSelected());
     personalEvent pe =
         new personalEvent(
             TitleField.getText(),
@@ -71,9 +72,7 @@ public class NewEventController {
             (String) EndField.getValue(),
             FullDayCheckBox.isSelected(),
             username);
-    System.out.println("before add");
     qdb.addPersonalEvent(pe);
-    System.out.println("after add");
     Navigation.navigate(Screen.HOME);
     qdb.notifySubscribers(List.of(new String[] {"personalEvent"}));
     // hi
