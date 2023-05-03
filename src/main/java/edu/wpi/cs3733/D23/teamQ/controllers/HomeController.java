@@ -122,9 +122,7 @@ public class HomeController implements Subscriber {
       LocalDate locDate = ((java.sql.Date) event.getDate()).toLocalDate();
       temp.changeStartDate(locDate);
       temp.changeEndDate(locDate);
-
-      System.out.println("temp check box status " + event.isFullDay());
-
+      
       if (event.isFullDay() == false && event.getStartTime().length() > 0) {
         String hourS = event.getStartTime().substring(0, 2);
 
