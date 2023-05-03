@@ -171,7 +171,7 @@ public class PathfindingController {
     if (defaultsl != null) {
       List<Node> latestNodes = getLatestNodesb();
       for (Node n : latestNodes) {
-        if (n.getLocation().equals(defaultsl)) {
+        if (n.getLocation().getLongName().equals(defaultsl.getLongName())) {
           int f = whichFloorI(n.getFloor());
           int crossFloors = Math.abs(f - floor);
           if (f < floor) {
@@ -304,10 +304,6 @@ public class PathfindingController {
       }
     }
 
-    if (dateSelect.getValue() == null) {
-      dateSelect.selectItem(getLatestDate().toString());
-    }
-
     for (Move m : dateMoves) {
       Node moven =
           new Node(
@@ -429,7 +425,7 @@ public class PathfindingController {
       parent.getChildren().add(node);
       node.toFront();
       if (defaultsl != null) {
-        if (n.getLocation().equals(defaultsl)) {
+        if (n.getLocation().getLongName().equals(defaultsl.getLongName())) {
           if (highlightedNodesp.size() == 0) {
             start = n;
             ready4Second = true;
@@ -1259,6 +1255,7 @@ public class PathfindingController {
       ready4Second = true;
       start = n;
       target = null;
+      endSelect.setValue(null);
       removeLines(previousPath);
       parent.getChildren().remove(messageText);
       // }
