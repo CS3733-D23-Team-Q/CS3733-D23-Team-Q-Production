@@ -119,6 +119,7 @@ public class SignDaoImpl implements GenDao<Sign, Integer> {
 
   public boolean populate() {
     try {
+      signs.clear();
       Connection conn = GenDao.connect();
       Statement stm = conn.createStatement();
       ResultSet rs = stm.executeQuery("Select * From \"sign\"");
