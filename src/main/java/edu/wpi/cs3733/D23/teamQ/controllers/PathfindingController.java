@@ -140,19 +140,20 @@ public class PathfindingController {
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
 
-    switch (qdb.retrieveSettings(username).getAlgorithm().ordinal()) {
-      case 0:
-        algorithm = "aStar";
-        pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
-      case 1:
-        algorithm = "dfs";
-        pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
-      case 2:
-        algorithm = "bfs";
-        pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
-      case 3:
-        algorithm = "djikstra";
-        pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
+    int algorithmOrdinal = qdb.retrieveSettings(username).getAlgorithm().ordinal();
+
+    if (algorithmOrdinal == 0) {
+      algorithm = "aStar";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
+    } else if (algorithmOrdinal == 1) {
+      algorithm = "dfs";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
+    } else if (algorithmOrdinal == 2) {
+      algorithm = "bfs";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
+    } else {
+      algorithm = "djikstra";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
     }
 
     l1nodes = new ArrayList<>();
@@ -229,7 +230,6 @@ public class PathfindingController {
   }
 
   public void setUpAlgos() {
-    System.out.println(algorithm);
     algorithmSelect.setText(algorithm);
     algorithmSelect.setItems(algorithmsList);
   }
