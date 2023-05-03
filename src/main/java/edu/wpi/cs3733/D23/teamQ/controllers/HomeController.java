@@ -73,8 +73,8 @@ public class HomeController implements Subscriber {
     Calendar serviceRequestsBlank = new Calendar("Service Requests");
     Calendar serviceRequestsProgress = new Calendar("Service Requests");
     Calendar serviceRequestsDone = new Calendar("Service Requests");
-    //    Calendar personalCalendar = new Calendar("Personal Calendar");
-    Calendar personalCalendar = new Calendar("Service Requests");
+    Calendar personalCalendar = new Calendar("Personal Calendar");
+    //    Calendar personalCalendar = new Calendar("Service Requests");
 
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
