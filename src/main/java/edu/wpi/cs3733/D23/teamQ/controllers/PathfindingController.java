@@ -1244,7 +1244,8 @@ public class PathfindingController {
   public void startSelected() throws IOException {
     List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     String lname = startSelect.getValue();
-    if (lname != null && !lname.equals("")) {
+    if (startSelect.getSelectionModel().getSelectedIndex()
+        != -1) { // lname != null && !lname.equals("")
       int index = startSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
       Node n = qdb.retrieveNode(nodeid);
@@ -1312,7 +1313,8 @@ public class PathfindingController {
     List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     String f = whichFloorS();
     String lname = endSelect.getValue();
-    if (lname != null && !lname.equals("")) {
+    if (endSelect.getSelectionModel().getSelectedIndex()
+        != -1) { // lname != null && !lname.equals("")
       int index = endSelect.getSelectionModel().getSelectedIndex();
       int nodeid = nodeIds.get(index);
       Node n = qdb.retrieveNode(nodeid);
