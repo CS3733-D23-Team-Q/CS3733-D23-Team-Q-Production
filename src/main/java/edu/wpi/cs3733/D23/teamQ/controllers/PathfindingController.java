@@ -1255,6 +1255,7 @@ public class PathfindingController {
       ready4Second = true;
       start = n;
       target = null;
+      endSelect.setValue(null);
       removeLines(previousPath);
       parent.getChildren().remove(messageText);
       // }
