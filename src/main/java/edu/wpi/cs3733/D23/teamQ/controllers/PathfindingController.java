@@ -257,8 +257,13 @@ public class PathfindingController {
     startNodes.removeAll(startNodes);
 
     nodeIds.removeAll(nodeIds);
+
+    String previousStart = startSelect.getValue();
+    String previousEnd = endSelect.getValue();
     startSelect.getItems().clear();
     endSelect.getItems().clear();
+    startSelect.setValue(previousStart);
+    endSelect.setValue(previousEnd);
 
     // int k = 0;
     for (Move m : allMoves) {
@@ -419,13 +424,15 @@ public class PathfindingController {
       node.setDisable(true);
       parent.getChildren().add(node);
       node.toFront();
-      if (defaultsl != null && highlightedNodesp.size() == 0) {
+      if (defaultsl != null) {
         if (n.getLocation().equals(defaultsl)) {
-          System.out.println("floor" + floor);
-          start = n;
-          ready4Second = true;
-          highlight(node, "red");
-          highlightedNodesp.add(0, Triple.of(node, floor, nodeid));
+          if (highlightedNodesp.size() == 0) {
+            start = n;
+            ready4Second = true;
+            highlight(node, "red");
+            highlightedNodesp.add(0, Triple.of(node, floor, nodeid));
+          }
+          startSelect.selectItem(n.getLocation().getLongName());
         }
       }
       previousNodes.add(node);
@@ -994,7 +1001,6 @@ public class PathfindingController {
     if (floor > 0) {
       floor--;
       f = whichFloorS();
-      System.out.println(floor + f);
       floorLabel.setText("Floor " + whichFloorS());
     }
     Image previous = floors.get(floor);
@@ -1011,7 +1017,6 @@ public class PathfindingController {
     confChecked();
     retlChecked();
     servChecked();
-    System.out.println(highlightedNodesp.size());
     // if on the same floor
     if (highlightedNodes.size() > 0) {
       for (int i = 0; i < highlightedNodes.size(); i++) {
