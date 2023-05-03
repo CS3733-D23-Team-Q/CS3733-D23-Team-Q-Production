@@ -73,8 +73,8 @@ public class HomeController implements Subscriber {
     Calendar serviceRequestsBlank = new Calendar("Service Requests");
     Calendar serviceRequestsProgress = new Calendar("Service Requests");
     Calendar serviceRequestsDone = new Calendar("Service Requests");
-    Calendar personalCalendar = new Calendar("Personal Calendar");
-    //    Calendar personalCalendar = new Calendar("Service Requests");
+    //    Calendar personalCalendar = new Calendar("Personal Calendar");
+    Calendar personalCalendar = new Calendar("Service Requests");
 
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
@@ -109,7 +109,6 @@ public class HomeController implements Subscriber {
           LocalTime.parse(qdb.retrieveUserAssignServiceRequests(username).get(i).getTime()));
       temp.changeEndTime(
           LocalTime.parse(qdb.retrieveUserAssignServiceRequests(username).get(i).getTime()));
-      System.out.println("god time " + temp.getEndTime());
     }
     SRB.getCalendars().add(serviceRequestsBlank);
     SRP.getCalendars().add(serviceRequestsProgress);
@@ -148,6 +147,7 @@ public class HomeController implements Subscriber {
       personalCalendar.addEntry(temp);
     }
     PC.getCalendars().add(personalCalendar);
+    System.out.println(PC.toString());
     calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
 
     // adding moves to calendar
@@ -166,6 +166,7 @@ public class HomeController implements Subscriber {
     }
     m.getCalendars().add(moves);
     calendar.getCalendarSources().add(m);
+
     // birthday stuff below
     //
     //    Calendar birthdays = new Calendar("Birthdays");
@@ -215,6 +216,12 @@ public class HomeController implements Subscriber {
     LocalDate localDate1 = date1.toLocalDate();
     LocalDate localDate2 = date2.toLocalDate();
     return localDate1.isEqual(localDate2);
+  }
+
+  public void refreshButtonClicked() {
+    System.out.println("before refresh button");
+    refreshCalendar();
+    System.out.println("after refresh button");
   }
 
   public void newEventClick() {
