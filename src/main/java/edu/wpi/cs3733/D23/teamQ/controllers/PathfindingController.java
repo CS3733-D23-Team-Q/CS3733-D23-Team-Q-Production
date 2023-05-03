@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -86,9 +85,6 @@ public class PathfindingController {
   static List<Node> latest = new ArrayList<>();
   Location defaultsl;
 
-  ObservableList<String> algorithmsList =
-      FXCollections.observableArrayList("aStar", "bfs", "dfs", "djikstra");
-
   @FXML GridPane root;
   @FXML Group parent;
   @FXML ImageView map;
@@ -139,23 +135,7 @@ public class PathfindingController {
     date = getLatestDate();
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
-
-    int algorithmOrdinal = qdb.retrieveSettings(username).getAlgorithm().ordinal();
-
-    if (algorithmOrdinal == 0) {
-      algorithm = "aStar";
-      pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
-    } else if (algorithmOrdinal == 1) {
-      algorithm = "dfs";
-      pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
-    } else if (algorithmOrdinal == 2) {
-      algorithm = "bfs";
-      pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
-    } else {
-      algorithm = "djikstra";
-      pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
-    }
-
+    algorithm = "aStar";
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
     ffnodes = new ArrayList<>();
@@ -189,8 +169,7 @@ public class PathfindingController {
     floorLabel.setText("Floor " + whichFloorS());
     ready4Second = false;
     if (defaultsl != null) {
-      getLatestNodesb();
-      List<Node> latestNodes = latest;
+      List<Node> latestNodes = getLatestNodesb();
       for (Node n : latestNodes) {
         if (n.getLocation().equals(defaultsl)) {
           int f = whichFloorI(n.getFloor());
@@ -216,22 +195,25 @@ public class PathfindingController {
     root.add(pane, 0, 0);
     GridPane.setRowSpan(pane, GridPane.REMAINING);
     pane.setOnMouseClicked(
-        e -> {
-          if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
-            Point2D pivotOnTarget =
-                pane.targetPointAt(new Point2D(e.getX(), e.getY()))
-                    .orElse(pane.targetPointAtViewportCentre());
-            pane.animate(Duration.millis(200))
-                .interpolateWith(Interpolator.EASE_BOTH)
-                .zoomBy(pane.getCurrentScale(), pivotOnTarget);
-          }
-        });
+            e -> {
+              if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
+                Point2D pivotOnTarget =
+                        pane.targetPointAt(new Point2D(e.getX(), e.getY()))
+                                .orElse(pane.targetPointAtViewportCentre());
+                pane.animate(Duration.millis(200))
+                        .interpolateWith(Interpolator.EASE_BOTH)
+                        .zoomBy(pane.getCurrentScale(), pivotOnTarget);
+              }
+            });
     setUpAlgos();
   }
 
   public void setUpAlgos() {
-    algorithmSelect.setText(algorithm);
-    algorithmSelect.setItems(algorithmsList);
+    algorithmSelect.getItems().add("aStar");
+    algorithmSelect.getSelectionModel().selectItem("aStar");
+    algorithmSelect.getItems().add("bfs");
+    algorithmSelect.getItems().add("dfs");
+    algorithmSelect.getItems().add("djikstra");
   }
 
   public Date getLatestDate() {
@@ -289,13 +271,13 @@ public class PathfindingController {
       Date d = m.getDate();
       if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
         Node startn =
-            new Node(
-                m.getNode().getNodeID(),
-                m.getNode().getXCoord(),
-                m.getNode().getYCoord(),
-                m.getNode().getFloor(),
-                m.getNode().getBuilding(),
-                m.getNode().getLocation()); // Node startn = m.getNode();
+                new Node(
+                        m.getNode().getNodeID(),
+                        m.getNode().getXCoord(),
+                        m.getNode().getYCoord(),
+                        m.getNode().getFloor(),
+                        m.getNode().getBuilding(),
+                        m.getNode().getLocation()); // Node startn = m.getNode();
 
         /*
         //if (k >= 200) {
@@ -324,13 +306,13 @@ public class PathfindingController {
 
     for (Move m : dateMoves) {
       Node moven =
-          new Node(
-              m.getNode().getNodeID(),
-              m.getNode().getXCoord(),
-              m.getNode().getYCoord(),
-              m.getNode().getFloor(),
-              m.getNode().getBuilding(),
-              m.getNode().getLocation()); // Node moven = m.getNode();
+              new Node(
+                      m.getNode().getNodeID(),
+                      m.getNode().getXCoord(),
+                      m.getNode().getYCoord(),
+                      m.getNode().getFloor(),
+                      m.getNode().getBuilding(),
+                      m.getNode().getLocation()); // Node moven = m.getNode();
 
       /*
       // System.out.println(m.getLongName() + "move before");
@@ -349,12 +331,12 @@ public class PathfindingController {
     }
 
     Collections.sort(
-        moveDates,
-        new Comparator<Date>() {
-          public int compare(Date date1, Date date2) {
-            return date1.compareTo(date2);
-          }
-        });
+            moveDates,
+            new Comparator<Date>() {
+              public int compare(Date date1, Date date2) {
+                return date1.compareTo(date2);
+              }
+            });
     List<Date> dateswofirst = new ArrayList<>();
     dateswofirst.addAll(moveDates);
     dateswofirst.remove(0);
@@ -374,7 +356,7 @@ public class PathfindingController {
         boolean add = true;
         for (Node moven : moveNodes) {
           if (node.getLocation()
-              .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
+                  .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
             // node.getLocation().equals(moven.getLocation()))
             add = false;
           }
@@ -392,7 +374,7 @@ public class PathfindingController {
         boolean add = true;
         for (Node moven : nodeswchanges) { // Move m : dateMoves
           if (node.getLocation()
-              .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
+                  .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
             // node.getLocation().equals(moven.getLocation()))
             add = false;
           }
@@ -420,8 +402,8 @@ public class PathfindingController {
         floorNodes.add(n);
       }
       if (!nodetype.equals("HALL")
-          && !nodetype.equals("ELEV")
-          && !nodetype.equals("STAI")) { // short names were not changed
+              && !nodetype.equals("ELEV")
+              && !nodetype.equals("STAI")) { // short names were not changed
         nodeIds.add(nodeid);
         startSelect.getItems().add(lname);
         endSelect.getItems().add(lname);
@@ -482,8 +464,8 @@ public class PathfindingController {
       // String lname = location.getLongName();
       String nodetype = location.getNodeType();
       if (!nodetype.equals("HALL")
-          && !nodetype.equals("ELEV")
-          && !nodetype.equals("STAI")) { // short names were not changed
+              && !nodetype.equals("ELEV")
+              && !nodetype.equals("STAI")) { // short names were not changed
         text = new Text(x, y, sname);
         text.setFill(Color.BLUE);
         text.setStyle("-fx-font-size: 3px;");
@@ -512,13 +494,13 @@ public class PathfindingController {
     }
     for (Move m : dateMoves) {
       Node moven =
-          new Node(
-              m.getNode().getNodeID(),
-              m.getNode().getXCoord(),
-              m.getNode().getYCoord(),
-              m.getNode().getFloor(),
-              m.getNode().getBuilding(),
-              m.getNode().getLocation());
+              new Node(
+                      m.getNode().getNodeID(),
+                      m.getNode().getXCoord(),
+                      m.getNode().getYCoord(),
+                      m.getNode().getFloor(),
+                      m.getNode().getBuilding(),
+                      m.getNode().getLocation());
       List<Node> nodes = qdb.retrieveAllNodes();
       for (Node n : nodes) {
         if (n.getLocation().getLongName().equals(m.getLongName())) {
@@ -535,7 +517,7 @@ public class PathfindingController {
         boolean add = true;
         for (Node moven : moveNodes) {
           if (!node.getLocation()
-              .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
+                  .equals(moven.getLocation())) { // !(node.getNodeID() == moven.getNodeID() ||
             // node.getLocation().equals(moven.getLocation()))
             add = false;
           }
@@ -549,7 +531,7 @@ public class PathfindingController {
   }
 
   public List<Pair<Integer, Text>> addSpecificNode(
-      String pattern, String input, List<Pair<Integer, Text>> nodes, Text node, int nodeid) {
+          String pattern, String input, List<Pair<Integer, Text>> nodes, Text node, int nodeid) {
     Pattern pattern1 = Pattern.compile(pattern);
     Matcher matcher1 = pattern1.matcher(input);
     if (matcher1.find()) {
@@ -600,13 +582,13 @@ public class PathfindingController {
   }
 
   public List<Line> drawLinesf(Node start, Node target, String floor)
-      throws IOException { // add a string to specify the algorithm (no)
+          throws IOException { // add a string to specify the algorithm (no)
     List<Node> path = new ArrayList<>();
     List<Pair<Integer, Button>> cfnodes = new ArrayList<>();
     cfnodes = setCF(cfnodes);
     if (algorithm.equals("aStar")) {
       pathfindingAlgorithmSelection.setPathfindingAlgorithm(
-          aStar); // if a*, call this function (instead, create a String algorithm global variable
+              aStar); // if a*, call this function (instead, create a String algorithm global variable
       // that changes whenever the button is clicked)
       path = pathfindingAlgorithmSelection.run(start, target);
     } else if (algorithm.equals("bfs")) {
@@ -716,20 +698,20 @@ public class PathfindingController {
         node.setGraphic(image);
         node.toFront();
         highlightedNodes.add(
-            Triple.of(
-                node,
-                whichFloorI(floor),
-                move)); // unhighlightednodes and removeall before every drawlinesf
+                Triple.of(
+                        node,
+                        whichFloorI(floor),
+                        move)); // unhighlightednodes and removeall before every drawlinesf
         node.setOnAction(
-            e -> {
-              try {
-                for (int j = 0; j < Math.abs(move); j++) {
-                  nextFloorClicked();
-                }
-              } catch (IOException ex) {
-                throw new RuntimeException(ex);
-              }
-            });
+                e -> {
+                  try {
+                    for (int j = 0; j < Math.abs(move); j++) {
+                      nextFloorClicked();
+                    }
+                  } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                  }
+                });
       }
       if (move < 0) {
         node.setDisable(false);
@@ -741,15 +723,15 @@ public class PathfindingController {
         node.toFront();
         highlightedNodes.add(Triple.of(node, whichFloorI(floor), move)); // whichFloorI(floor)
         node.setOnAction(
-            e -> {
-              try {
-                for (int j = 0; j < Math.abs(move); j++) {
-                  previousFloorClicked();
-                }
-              } catch (IOException ex) {
-                throw new RuntimeException(ex);
-              }
-            });
+                e -> {
+                  try {
+                    for (int j = 0; j < Math.abs(move); j++) {
+                      previousFloorClicked();
+                    }
+                  } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                  }
+                });
       }
     }
 
@@ -1131,27 +1113,27 @@ public class PathfindingController {
     if (move < 0) {
       image.setImage(new Image("/Down - elev.png"));
       child.setOnAction(
-          e -> {
-            try {
-              for (int j = 0; j < Math.abs(move); j++) {
-                previousFloorClicked();
-              }
-            } catch (IOException ex) {
-              throw new RuntimeException(ex);
-            }
-          });
+              e -> {
+                try {
+                  for (int j = 0; j < Math.abs(move); j++) {
+                    previousFloorClicked();
+                  }
+                } catch (IOException ex) {
+                  throw new RuntimeException(ex);
+                }
+              });
     } else {
       image.setImage(new Image("/Up - elev.png"));
       child.setOnAction(
-          e -> {
-            try {
-              for (int j = 0; j < Math.abs(move); j++) {
-                nextFloorClicked();
-              }
-            } catch (IOException ex) {
-              throw new RuntimeException(ex);
-            }
-          });
+              e -> {
+                try {
+                  for (int j = 0; j < Math.abs(move); j++) {
+                    nextFloorClicked();
+                  }
+                } catch (IOException ex) {
+                  throw new RuntimeException(ex);
+                }
+              });
     }
     image.fitWidthProperty().bind(child.widthProperty());
     image.fitHeightProperty().bind(child.heightProperty());
@@ -1266,11 +1248,11 @@ public class PathfindingController {
           Button node = cfnodes.get(i).getValue();
           node.setDisable(false);
           node.setStyle(
-              "-fx-background-color: lightblue;"
-                  + "-fx-border-color: red;"
-                  + "-fx-background-insets: 0px;");
+                  "-fx-background-color: lightblue;"
+                          + "-fx-border-color: red;"
+                          + "-fx-background-insets: 0px;");
           highlightedNodesp.add(
-              0, Triple.of(node, floor, nodeid)); // int index = parent.getChildren().indexOf(node);
+                  0, Triple.of(node, floor, nodeid)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
@@ -1343,11 +1325,11 @@ public class PathfindingController {
           Button node = cfnodes.get(i).getValue();
           node.setDisable(false);
           node.setStyle(
-              "-fx-background-color: lightblue;"
-                  + "-fx-border-color: red;"
-                  + "-fx-background-insets: 0px;");
+                  "-fx-background-color: lightblue;"
+                          + "-fx-border-color: red;"
+                          + "-fx-background-insets: 0px;");
           highlightedNodesp.add(
-              1, Triple.of(node, floor, nodeid)); // int index = parent.getChildren().indexOf(node);
+                  1, Triple.of(node, floor, nodeid)); // int index = parent.getChildren().indexOf(node);
         }
       }
     }
@@ -1358,29 +1340,29 @@ public class PathfindingController {
     if (algo != null && !algo.equals("")) {
       switch (algo) {
         case "aStar":
-          {
-            clearButtonClicked();
-            algorithm = "aStar";
-          }
-          break;
+        {
+          clearButtonClicked();
+          algorithm = "aStar";
+        }
+        break;
         case "bfs":
-          {
-            clearButtonClicked();
-            algorithm = "bfs";
-          }
-          break;
+        {
+          clearButtonClicked();
+          algorithm = "bfs";
+        }
+        break;
         case "dfs":
-          {
-            clearButtonClicked();
-            algorithm = "dfs";
-          }
-          break;
+        {
+          clearButtonClicked();
+          algorithm = "dfs";
+        }
+        break;
         case "djikstra":
-          {
-            clearButtonClicked();
-            algorithm = "djikstra";
-          }
-          break;
+        {
+          clearButtonClicked();
+          algorithm = "djikstra";
+        }
+        break;
       }
     }
   }
@@ -1440,7 +1422,7 @@ public class PathfindingController {
     return latest;
   }
 
-  public void getLatestNodesb() {
+  public List<Node> getLatestNodesb() {
     List<Node> latestNodes = new ArrayList<>();
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Move> dateMoves = new ArrayList<>();
@@ -1451,13 +1433,13 @@ public class PathfindingController {
       Date d = m.getDate();
       if (d.compareTo(Date.valueOf("2023-01-01")) == 0) {
         Node startn =
-            new Node(
-                m.getNode().getNodeID(),
-                m.getNode().getXCoord(),
-                m.getNode().getYCoord(),
-                m.getNode().getFloor(),
-                m.getNode().getBuilding(),
-                m.getNode().getLocation());
+                new Node(
+                        m.getNode().getNodeID(),
+                        m.getNode().getXCoord(),
+                        m.getNode().getYCoord(),
+                        m.getNode().getFloor(),
+                        m.getNode().getBuilding(),
+                        m.getNode().getLocation());
         List<Node> nodes = qdb.retrieveAllNodes();
         for (Node n : nodes) {
           if (n.getLocation().getLongName().equals(m.getLongName())) {
@@ -1477,13 +1459,13 @@ public class PathfindingController {
     }
     for (Move m : dateMoves) {
       Node moven =
-          new Node(
-              m.getNode().getNodeID(),
-              m.getNode().getXCoord(),
-              m.getNode().getYCoord(),
-              m.getNode().getFloor(),
-              m.getNode().getBuilding(),
-              m.getNode().getLocation());
+              new Node(
+                      m.getNode().getNodeID(),
+                      m.getNode().getXCoord(),
+                      m.getNode().getYCoord(),
+                      m.getNode().getFloor(),
+                      m.getNode().getBuilding(),
+                      m.getNode().getLocation());
       List<Node> nodes = qdb.retrieveAllNodes();
       for (Node n : nodes) {
         if (n.getLocation().getLongName().equals(m.getLongName())) {
@@ -1494,12 +1476,12 @@ public class PathfindingController {
       moveNodes.add(moven);
     }
     Collections.sort(
-        moveDates,
-        new Comparator<Date>() {
-          public int compare(Date date1, Date date2) {
-            return date1.compareTo(date2);
-          }
-        });
+            moveDates,
+            new Comparator<Date>() {
+              public int compare(Date date1, Date date2) {
+                return date1.compareTo(date2);
+              }
+            });
     List<Date> dateswofirst = new ArrayList<>();
     dateswofirst.addAll(moveDates);
     dateswofirst.remove(0);
@@ -1539,7 +1521,7 @@ public class PathfindingController {
         currentNodes.add(node);
       }
     }
-    latest = currentNodes;
-    // return latestNodes;
+    latestNodes = currentNodes;
+    return latestNodes;
   }
 }
