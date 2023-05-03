@@ -238,7 +238,6 @@ public class HomeController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) throws URISyntaxException {
-    System.out.println(context);
     Qdb qdb = Qdb.getInstance();
     if (context.contains("alert")) {
       Alert alert = qdb.retrieveAllAlerts().get(qdb.retrieveAllAlerts().size() - 1);
