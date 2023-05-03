@@ -304,6 +304,10 @@ public class PathfindingController {
       }
     }
 
+    if (dateSelect.getValue() == null) {
+      dateSelect.selectItem(getLatestDate().toString());
+    }
+
     for (Move m : dateMoves) {
       Node moven =
           new Node(
