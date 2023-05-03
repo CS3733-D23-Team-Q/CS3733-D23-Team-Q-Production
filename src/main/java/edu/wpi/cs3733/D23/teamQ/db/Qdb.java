@@ -63,25 +63,23 @@ public class Qdb {
   private Qdb() {
     accountTable = AccountDaoImpl.getInstance();
     locationTable = LocationDaoImpl.getInstance();
-    nodeTable = NodeDaoImpl.getInstance(locationTable);
-    edgeTable = EdgeDaoImpl.getInstance(nodeTable);
-    moveTable = MoveDaoImpl.getInstance(nodeTable);
+    nodeTable = NodeDaoImpl.getInstance();
+    edgeTable = EdgeDaoImpl.getInstance();
+    moveTable = MoveDaoImpl.getInstance();
     questionTable = QuestionDaoImpl.getInstance();
-    conferenceRequestTable = ConferenceRequestDaoImpl.getInstance(accountTable, nodeTable);
-    flowerRequestTable = FlowerRequestDaoImpl.getInstance(accountTable, nodeTable);
-    mealRequestTable = MealRequestDaoImpl.getInstance(accountTable, nodeTable);
-    furnitureRequestTable = FurnitureRequestDaoImpl.getInstance(accountTable, nodeTable);
-    patientTransportRequestTable =
-        PatientTransportRequestDaoImpl.getInstance(accountTable, nodeTable);
-    officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
-    medicalSuppliesRequestTable =
-        MedicalSuppliesRequestDaoImpl.getInstance(accountTable, nodeTable);
-    serviceRequestTable = ServiceRequestDaoImpl.getInstance(accountTable, nodeTable);
+    conferenceRequestTable = ConferenceRequestDaoImpl.getInstance();
+    flowerRequestTable = FlowerRequestDaoImpl.getInstance();
+    mealRequestTable = MealRequestDaoImpl.getInstance();
+    furnitureRequestTable = FurnitureRequestDaoImpl.getInstance();
+    patientTransportRequestTable = PatientTransportRequestDaoImpl.getInstance();
+    officeSuppliesRequestTable = OfficeSuppliesRequestDaoImpl.getInstance();
+    medicalSuppliesRequestTable = MedicalSuppliesRequestDaoImpl.getInstance();
+    serviceRequestTable = ServiceRequestDaoImpl.getInstance();
     profileImageTable = ProfileImageDaoImpl.getInstance();
 
     signTable = SignDaoImpl.getInstance();
 
-    messageTable = MessageDaoImpl.getInstance(accountTable);
+    messageTable = MessageDaoImpl.getInstance();
     alertTable = AlertDaoImpl.getInstance();
     settingsTable = SettingsDaoImpl.getInstance();
     defaultLocationsTable = DefaultLocationDaoImpl.getInstance();
@@ -638,46 +636,45 @@ public class Qdb {
     return messageTable.updateRow(m);
   }
 
-  public synchronized boolean populate(ArrayList<String> tableNames) {
-    for (String tableName : tableNames) {
-      switch (tableName) {
-        case "account":
-          accountTable.populate();
-        case "edge":
-          edgeTable.populate();
-        case "locationName":
-          locationTable.populate();
-        case "move":
-          moveTable.populate();
-        case "node":
-          nodeTable.populate();
-        case "profileImage":
-          profileImageTable.populate();
-        case "message":
-          messageTable.populate();
-        case "sign":
-          signTable.populate();
-        case "alert":
-          alertTable.populate();
-        case "serviceRequest":
-          serviceRequestTable.populate();
-          conferenceRequestTable.populate();
-          flowerRequestTable.populate();
-          furnitureRequestTable.populate();
-          mealRequestTable.populate();
-          medicalSuppliesRequestTable.populate();
-          officeSuppliesRequestTable.populate();
-          patientTransportRequestTable.populate();
-        case "settings":
-          settingsTable.populate();
-        case "defaultLocation":
-          defaultLocationsTable.populate();
+  public synchronized boolean populate(ArrayList<String> toUpdate) {
+    for (String tableName : toUpdate) {
+      if (tableName.equals("account")) {
+        accountTable.populate();
+      } else if (tableName.equals("move")
+          || tableName.equals("edge")
+          || tableName.equals("node")
+          || tableName.equals("defaultLocation")
+          || tableName.equals("locationName")) {
+        moveTable.populate();
+        nodeTable.populate();
+        locationTable.populate();
+        defaultLocationsTable.populate();
+        edgeTable.populate();
+      } else if (tableName.equals("profileImage")) {
+        profileImageTable.populate();
+      } else if (tableName.equals("message")) {
+        messageTable.populate();
+      } else if (tableName.equals("sign")) {
+        signTable.populate();
+      } else if (tableName.equals("alert")) {
+        alertTable.populate();
+      } else if (tableName.equals("serviceRequest")) {
+        serviceRequestTable.populate();
+        conferenceRequestTable.populate();
+        flowerRequestTable.populate();
+        furnitureRequestTable.populate();
+        mealRequestTable.populate();
+        medicalSuppliesRequestTable.populate();
+        officeSuppliesRequestTable.populate();
+        patientTransportRequestTable.populate();
+      } else if (tableName.equals("settings")) {
+        settingsTable.populate();
       }
     }
     Platform.runLater(
         () -> {
           try {
-            notifySubscribers(tableNames);
+            notifySubscribers(toUpdate);
           } catch (URISyntaxException e) {
             throw new RuntimeException(e);
           }

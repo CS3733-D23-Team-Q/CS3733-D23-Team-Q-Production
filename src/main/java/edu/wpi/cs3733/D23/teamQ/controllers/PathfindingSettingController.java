@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 
 public class PathfindingSettingController extends SecondaryStage {
   static Stage stage;
-  String username = LoginController.getUsername();
   Qdb qdb = Qdb.getInstance();
+  String username = LoginController.getUsername();
   boolean isStartSelected;
   @FXML MFXFilterComboBox<String> startLocSelect;
 

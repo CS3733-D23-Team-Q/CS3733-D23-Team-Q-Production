@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -85,6 +86,9 @@ public class PathfindingController {
   static List<Node> latest = new ArrayList<>();
   Location defaultsl;
 
+  ObservableList<String> algorithmsList =
+      FXCollections.observableArrayList("aStar", "bfs", "dfs", "djikstra");
+
   @FXML GridPane root;
   @FXML Group parent;
   @FXML ImageView map;
@@ -135,7 +139,23 @@ public class PathfindingController {
     date = getLatestDate();
     moveDates = new ArrayList<>();
     startNodes = new ArrayList<>();
-    algorithm = "aStar";
+
+    int algorithmOrdinal = qdb.retrieveSettings(username).getAlgorithm().ordinal();
+
+    if (algorithmOrdinal == 0) {
+      algorithm = "aStar";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(aStar);
+    } else if (algorithmOrdinal == 1) {
+      algorithm = "dfs";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(dfs);
+    } else if (algorithmOrdinal == 2) {
+      algorithm = "bfs";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(bfs);
+    } else {
+      algorithm = "djikstra";
+      pathfindingAlgorithmSelection.setPathfindingAlgorithm(djikstra);
+    }
+
     l1nodes = new ArrayList<>();
     l2nodes = new ArrayList<>();
     ffnodes = new ArrayList<>();
@@ -169,7 +189,8 @@ public class PathfindingController {
     floorLabel.setText("Floor " + whichFloorS());
     ready4Second = false;
     if (defaultsl != null) {
-      List<Node> latestNodes = getLatestNodesb();
+      getLatestNodesb();
+      List<Node> latestNodes = latest;
       for (Node n : latestNodes) {
         if (n.getLocation().equals(defaultsl)) {
           int f = whichFloorI(n.getFloor());
@@ -209,11 +230,8 @@ public class PathfindingController {
   }
 
   public void setUpAlgos() {
-    algorithmSelect.getItems().add("aStar");
-    algorithmSelect.getSelectionModel().selectItem("aStar");
-    algorithmSelect.getItems().add("bfs");
-    algorithmSelect.getItems().add("dfs");
-    algorithmSelect.getItems().add("djikstra");
+    algorithmSelect.setText(algorithm);
+    algorithmSelect.setItems(algorithmsList);
   }
 
   public Date getLatestDate() {
@@ -1422,7 +1440,7 @@ public class PathfindingController {
     return latest;
   }
 
-  public List<Node> getLatestNodesb() {
+  public void getLatestNodesb() {
     List<Node> latestNodes = new ArrayList<>();
     List<Move> allMoves = qdb.retrieveAllMoves();
     List<Move> dateMoves = new ArrayList<>();
@@ -1521,7 +1539,7 @@ public class PathfindingController {
         currentNodes.add(node);
       }
     }
-    latestNodes = currentNodes;
-    return latestNodes;
+    latest = currentNodes;
+    // return latestNodes;
   }
 }

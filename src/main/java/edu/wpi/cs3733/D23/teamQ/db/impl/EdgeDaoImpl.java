@@ -17,20 +17,18 @@ import lombok.Getter;
 public class EdgeDaoImpl implements GenDao<Edge, Integer> {
   private List<Edge> edges = new ArrayList<>();
   private int nextID = 0;
-  private NodeDaoImpl nodeTable;
   private static EdgeDaoImpl single_instance = null;
   private String fileName = "Edges.csv";
 
-  private EdgeDaoImpl(NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
+  private EdgeDaoImpl() {
     populate();
     if (edges.size() != 0) {
       nextID = edges.get(edges.size() - 1).getEdgeID() + 1;
     }
   }
 
-  public static synchronized EdgeDaoImpl getInstance(NodeDaoImpl nodeTable) {
-    if (single_instance == null) single_instance = new EdgeDaoImpl(nodeTable);
+  public static synchronized EdgeDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new EdgeDaoImpl();
 
     return single_instance;
   }
@@ -121,8 +119,8 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
       Statement stm = conn.createStatement();
       ResultSet rst = stm.executeQuery("Select * From \"edge\"");
       while (rst.next()) {
-        Node startNode = nodeTable.retrieveRow(rst.getInt("startNode"));
-        Node endNode = nodeTable.retrieveRow(rst.getInt("endNode"));
+        Node startNode = NodeDaoImpl.getInstance().retrieveRow(rst.getInt("startNode"));
+        Node endNode = NodeDaoImpl.getInstance().retrieveRow(rst.getInt("endNode"));
         Edge e = new Edge(rst.getInt("edgeID"), startNode, endNode);
         edges.add(e);
         try {
@@ -210,8 +208,8 @@ public class EdgeDaoImpl implements GenDao<Edge, Integer> {
         Edge e =
             new Edge(
                 Integer.parseInt(vars[1]),
-                nodeTable.retrieveRow(Integer.parseInt(vars[2])),
-                nodeTable.retrieveRow(Integer.parseInt(vars[2])));
+                NodeDaoImpl.getInstance().retrieveRow(Integer.parseInt(vars[2])),
+                NodeDaoImpl.getInstance().retrieveRow(Integer.parseInt(vars[2])));
         addRow(e);
       }
       myReader.close();
