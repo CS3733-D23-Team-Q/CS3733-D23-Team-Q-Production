@@ -11,22 +11,16 @@ import lombok.Getter;
 public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesRequest, Integer> {
   private List<OfficeSuppliesRequest> officeSuppliesRequests =
       new ArrayList<OfficeSuppliesRequest>();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static OfficeSuppliesRequestDaoImpl single_instance = null;
   private String fileName = "Office_Supplies_Requests.csv";
 
-  public static synchronized OfficeSuppliesRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new OfficeSuppliesRequestDaoImpl(accountTable, nodeTable);
+  public static synchronized OfficeSuppliesRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new OfficeSuppliesRequestDaoImpl();
 
     return single_instance;
   }
 
-  private OfficeSuppliesRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private OfficeSuppliesRequestDaoImpl() {
     populate();
   }
 
@@ -149,9 +143,9 @@ public class OfficeSuppliesRequestDaoImpl implements GenDao<OfficeSuppliesReques
         officeSuppliesRequests.add(
             new OfficeSuppliesRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),

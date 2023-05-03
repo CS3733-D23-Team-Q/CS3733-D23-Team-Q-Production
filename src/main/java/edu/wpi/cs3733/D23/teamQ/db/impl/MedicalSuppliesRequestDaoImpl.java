@@ -11,22 +11,15 @@ import lombok.Getter;
 public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequest, Integer> {
   private List<MedicalSuppliesRequest> medicalSuppliesRequests =
       new ArrayList<MedicalSuppliesRequest>();
-  private NodeDaoImpl nodeTable;
-  private AccountDaoImpl accountTable;
   private static MedicalSuppliesRequestDaoImpl single_instance = null;
   private String fileName = "Medical_Supplies_Requests.csv";
 
-  public static synchronized MedicalSuppliesRequestDaoImpl getInstance(
-      AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    if (single_instance == null)
-      single_instance = new MedicalSuppliesRequestDaoImpl(accountTable, nodeTable);
-
+  public static synchronized MedicalSuppliesRequestDaoImpl getInstance() {
+    if (single_instance == null) single_instance = new MedicalSuppliesRequestDaoImpl();
     return single_instance;
   }
 
-  private MedicalSuppliesRequestDaoImpl(AccountDaoImpl accountTable, NodeDaoImpl nodeTable) {
-    this.nodeTable = nodeTable;
-    this.accountTable = accountTable;
+  private MedicalSuppliesRequestDaoImpl() {
     populate();
   }
 
@@ -148,9 +141,9 @@ public class MedicalSuppliesRequestDaoImpl implements GenDao<MedicalSuppliesRequ
         medicalSuppliesRequests.add(
             new MedicalSuppliesRequest(
                 rst.getInt("requestID"),
-                nodeTable.retrieveRow(rst.getInt("nodeID")),
-                accountTable.retrieveRow(rst.getString("requester")),
-                accountTable.retrieveRow(rst.getString("assignee")),
+                NodeDaoImpl.getInstance().retrieveRow(rst.getInt("nodeID")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("requester")),
+                AccountDaoImpl.getInstance().retrieveRow(rst.getString("assignee")),
                 rst.getString("specialInstructions"),
                 rst.getDate("date"),
                 rst.getString("time"),
