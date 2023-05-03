@@ -45,6 +45,7 @@
                   <Button fx:id="newEventButton" mnemonicParsing="false" onMouseClicked="#newEventClick" text="Create New Event" />
                </children>
             </VBox>
+            <HBox HBox.hgrow="ALWAYS" />
             <HBox spacing="24.0">
                <children>
                   <VBox prefHeight="642.0" prefWidth="640.0" spacing="8.0" style="-fx-border-color: #012d5a; -fx-border-radius: 16;">

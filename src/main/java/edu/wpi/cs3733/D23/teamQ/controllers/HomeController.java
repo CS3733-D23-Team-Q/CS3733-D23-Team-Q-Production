@@ -127,11 +127,10 @@ public class HomeController implements Subscriber {
       temp.changeStartDate(locDate);
       temp.changeEndDate(locDate);
       temp.changeStartTime(LocalTime.parse(event.getStartTime()));
-      temp.changeEndTime(LocalTime.parse(event.getStartTime()));
-      System.out.println(temp.toString());
+      temp.changeEndTime(LocalTime.parse(event.getEndTime()));
+      personalCalendar.addEntry(temp);
     }
     PC.getCalendars().add(personalCalendar);
-    System.out.println(PC.toString());
     calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
 
     // adding moves to calendar
