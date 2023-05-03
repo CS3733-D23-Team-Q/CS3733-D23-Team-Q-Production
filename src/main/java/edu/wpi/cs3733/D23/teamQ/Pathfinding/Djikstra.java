@@ -22,13 +22,12 @@ public class Djikstra implements IPathfinding {
       Node chosen = null;
       if (current.getLocation().getNodeType().equalsIgnoreCase("ELEV") // choice block for swithcing
               && !current.getFloor().equalsIgnoreCase(end.getFloor()) // floors
-              || current.getLocation().getNodeType().equalsIgnoreCase("STAI")
+          || current.getLocation().getNodeType().equalsIgnoreCase("STAI")
               && !current.getFloor().equalsIgnoreCase(end.getFloor())) {
         ArrayList<Node> elevatorTargets = getConnections(current);
         for (Node node : elevatorTargets) {
-          if (node.getFloor().equalsIgnoreCase(end.getFloor())
-                  && !node.equals(current)
-                  && node.getBuilding().equalsIgnoreCase(current.getBuilding())) {
+          if (node.getFloor().equalsIgnoreCase(end.getFloor()) && !node.equals(current)
+             && node.getBuilding().equalsIgnoreCase(current.getBuilding())) {
             Node chosenElev = node;
             openList.add(chosenElev);
             openList.remove(current);
@@ -40,11 +39,11 @@ public class Djikstra implements IPathfinding {
       }
       if (!nextChosen) {
         for (Edge thisOne :
-                current.getEdges()) { // main choice block for start nodes, used to calc distance
+            current.getEdges()) { // main choice block for start nodes, used to calc distance
           if (!closedList.contains(thisOne.getStartNode())
-                  && thisOne.getStartNode().getFloor().equalsIgnoreCase(current.getFloor())
-                  && !thisOne.getStartNode().equals(current)
-                  && !closedList.contains(thisOne.getStartNode())) {
+              && thisOne.getStartNode().getFloor().equalsIgnoreCase(current.getFloor())
+              && !thisOne.getStartNode().equals(current)
+              && !closedList.contains(thisOne.getStartNode())) {
             double xDist = Math.abs(end.getXCoord() - thisOne.getStartNode().getXCoord());
             double yDist = Math.abs(end.getYCoord() - thisOne.getStartNode().getYCoord());
             double weight = Math.sqrt(xDist * xDist + yDist * yDist);
@@ -54,9 +53,9 @@ public class Djikstra implements IPathfinding {
             }
           } else if (!closedList.contains(
                   thisOne.getEndNode()) // main choice block for end nodes, used to cacl
-                  && !thisOne.getEndNode().equals(current) // distance
-                  && !path.contains(thisOne.getEndNode())
-                  && thisOne.getEndNode().getFloor().equalsIgnoreCase(current.getFloor())) {
+              && !thisOne.getEndNode().equals(current) // distance
+              && !path.contains(thisOne.getEndNode())
+              && thisOne.getEndNode().getFloor().equalsIgnoreCase(current.getFloor())) {
             double xDist = Math.abs(end.getXCoord() - thisOne.getEndNode().getXCoord());
             double yDist = Math.abs(end.getYCoord() - thisOne.getEndNode().getYCoord());
             double weight = Math.sqrt(xDist * xDist + yDist * yDist);
@@ -82,9 +81,7 @@ public class Djikstra implements IPathfinding {
           int g = 0;
           for (Node node2 : altNodes) {
             g++;
-            if (!closedList.contains(node2)
-                    && !node2.equals(current)
-                    && node2.getFloor().equalsIgnoreCase(current.getFloor())) {
+            if (!closedList.contains(node2) && !node2.equals(current)) {
               double xDist = Math.abs(end.getXCoord() - node2.getXCoord());
               double yDist = Math.abs(end.getYCoord() - node2.getYCoord());
               double weight = Math.sqrt(xDist * xDist + yDist * yDist);
