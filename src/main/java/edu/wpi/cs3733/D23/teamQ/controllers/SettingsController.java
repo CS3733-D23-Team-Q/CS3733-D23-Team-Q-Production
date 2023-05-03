@@ -5,8 +5,6 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.*;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.*;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,8 +16,8 @@ public class SettingsController {
 
   Qdb qdb = Qdb.getInstance();
   String username = LoginController.getUsername();
-  boolean isStartSelected;
-  @FXML MFXFilterComboBox<String> startLocSelect;
+  // boolean isStartSelected;
+  // @FXML MFXFilterComboBox<String> startLocSelect;
   @FXML MFXToggleButton soundToggle;
 
   @FXML MFXFilterComboBox tableField;
@@ -43,7 +41,7 @@ public class SettingsController {
   ObservableList<String> voiceList =
       FXCollections.observableArrayList("Male", "Female", "Snoop Dogg");
   ObservableList<String> algorithmList =
-      FXCollections.observableArrayList("A*", "Dijkstra", "BFS", "DFS", "Q*");
+      FXCollections.observableArrayList("ASTAR", "DJIKSTRA", "BFS", "DFS", "Q*");
 
   @FXML
   public void initialize() {
@@ -118,12 +116,17 @@ public class SettingsController {
             new ChangeListener<>() {
               @Override
               public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                Settings.Algorithm algo = null;
+                Settings.Algorithm algo =
+                    Settings.Algorithm.valueOf(preferredAlgorithm.getValue().toString());
 
-                if (newValue.toString().equals("A*")) algo = Settings.Algorithm.ASTAR;
-                if (newValue.toString().equals("BFS")) algo = Settings.Algorithm.BFS;
-                if (newValue.toString().equals("DFS")) algo = Settings.Algorithm.DFS;
-                if (newValue.toString().equals("DIJKSTRA")) algo = Settings.Algorithm.DJIKSTRA;
+                //                if (newValue.toString().equals("A*")) algo =
+                // Settings.Algorithm.ASTAR;
+                //                if (newValue.toString().equals("BFS")) algo =
+                // Settings.Algorithm.BFS;
+                //                if (newValue.toString().equals("DFS")) algo =
+                // Settings.Algorithm.DFS;
+                //                if (newValue.toString().equals("DIJKSTRA")) algo =
+                // Settings.Algorithm.DJIKSTRA;
 
                 Settings settings =
                     new Settings(
@@ -138,6 +141,7 @@ public class SettingsController {
               }
             });
 
+    /*
     List<Node> latestNodes = PathfindingController.getLatestNodes();
     List<String> lnames = new ArrayList<>();
     for (Node n : latestNodes) {
@@ -157,6 +161,7 @@ public class SettingsController {
       startLocSelect.getItems().add(lname);
     }
     isStartSelected = false;
+     */
   }
 
   public void backButtonClicked() {
@@ -179,6 +184,7 @@ public class SettingsController {
     }
   }
 
+  /*
   public void startLocSelected() {
     String startLoc = startLocSelect.getValue();
     if (startLoc != null && !startLoc.equals("")) {
@@ -203,6 +209,7 @@ public class SettingsController {
       }
     }
   }
+   */
 
   public void setupButtonClicked() {}
 }
