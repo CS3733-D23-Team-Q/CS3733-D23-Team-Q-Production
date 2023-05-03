@@ -73,7 +73,8 @@ public class HomeController implements Subscriber {
     Calendar serviceRequestsBlank = new Calendar("Service Requests");
     Calendar serviceRequestsProgress = new Calendar("Service Requests");
     Calendar serviceRequestsDone = new Calendar("Service Requests");
-    Calendar personalCalendar = new Calendar("Personal Calendar");
+    //    Calendar personalCalendar = new Calendar("Personal Calendar");
+    Calendar personalCalendar = new Calendar("Service Requests");
 
     CalendarSource SRB = new CalendarSource("Service Request Blank");
     CalendarSource SRP = new CalendarSource("Service Request Progress");
@@ -83,6 +84,7 @@ public class HomeController implements Subscriber {
     serviceRequestsBlank.setStyle(Style.STYLE5);
     serviceRequestsProgress.setStyle(Style.STYLE3);
     serviceRequestsDone.setStyle(Style.STYLE1);
+    personalCalendar.setStyle(Style.STYLE2);
 
     for (int i = 0; i < qdb.retrieveUserAssignServiceRequests(username).size(); i++) {
       int num = qdb.retrieveUserAssignServiceRequests(username).get(i).getRequestID();
@@ -111,25 +113,25 @@ public class HomeController implements Subscriber {
     SRB.getCalendars().add(serviceRequestsBlank);
     SRP.getCalendars().add(serviceRequestsProgress);
     SRD.getCalendars().add(serviceRequestsDone);
+    System.out.println(SRD.toString());
 
-    ArrayList<Integer> index = qdb.retrieveUserPersonalEvents(username);
-    for (int i = 0; i < index.size(); i++) {
-      personalEvent curr = qdb.retrievePersonalEvent(index.get(i));
-      int currId = curr.getPersonalEventID();
-      String title = curr.getTitle();
+    ArrayList<personalEvent> events = qdb.retrieveEventsFromUsername(username);
+    for (personalEvent event : events) {
+      int currId = event.getPersonalEventID();
+      String title = event.getTitle();
       Entry<String> temp = new Entry<>(title + " ID Num-" + currId);
       if (temp.isFullDay()) {
         temp.setFullDay(true);
       }
-      temp.changeStartDate(
-          qdb.retrieveUserAssignServiceRequests(username).get(i).getDate().toLocalDate());
-      LocalDate locDate = ((java.sql.Date) curr.getDate()).toLocalDate();
+      LocalDate locDate = ((java.sql.Date) event.getDate()).toLocalDate();
       temp.changeStartDate(locDate);
       temp.changeEndDate(locDate);
-      temp.changeStartTime(LocalTime.parse(curr.getStartTime()));
-      temp.changeEndTime(LocalTime.parse(curr.getStartTime()));
+      temp.changeStartTime(LocalTime.parse(event.getStartTime()));
+      temp.changeEndTime(LocalTime.parse(event.getStartTime()));
+      System.out.println(temp.toString());
     }
     PC.getCalendars().add(personalCalendar);
+    System.out.println(PC.toString());
     calendar.getCalendarSources().addAll(SRB, SRP, SRD, PC);
 
     // adding moves to calendar
@@ -222,6 +224,7 @@ public class HomeController implements Subscriber {
 
   @Override
   public boolean update(List<String> context) throws URISyntaxException {
+    System.out.println(context);
     Qdb qdb = Qdb.getInstance();
     if (context.contains("alert")) {
       Alert alert = qdb.retrieveAllAlerts().get(qdb.retrieveAllAlerts().size() - 1);

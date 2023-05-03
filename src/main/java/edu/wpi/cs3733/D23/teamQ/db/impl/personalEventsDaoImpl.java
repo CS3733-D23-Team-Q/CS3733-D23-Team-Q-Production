@@ -169,6 +169,16 @@ public class personalEventsDaoImpl implements GenDao<personalEvent, Integer> {
     return is;
   }
 
+  public ArrayList<personalEvent> getEvents(String user) {
+    ArrayList<personalEvent> events = new ArrayList<personalEvent>();
+    for (personalEvent e : personalEvents) {
+      if (e.getUser().equals(user)) {
+        events.add(e);
+      }
+    }
+    return events;
+  }
+
   public String getFileName() {
     return fileName;
   }

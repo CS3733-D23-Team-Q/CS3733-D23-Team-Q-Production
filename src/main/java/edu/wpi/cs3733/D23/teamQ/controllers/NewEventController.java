@@ -6,7 +6,9 @@ import edu.wpi.cs3733.D23.teamQ.db.obj.personalEvent;
 import edu.wpi.cs3733.D23.teamQ.navigation.Navigation;
 import edu.wpi.cs3733.D23.teamQ.navigation.Screen;
 import io.github.palexdev.materialfx.controls.*;
+import java.net.URISyntaxException;
 import java.sql.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,7 +56,7 @@ public class NewEventController {
   }
 
   @FXML
-  public void submitButtonClicked() {
+  public void submitButtonClicked() throws URISyntaxException {
     Qdb qdb = Qdb.getInstance();
     String username = LoginController.getLoginUsername();
     Account account = qdb.retrieveAccount(username);
@@ -73,6 +75,7 @@ public class NewEventController {
     qdb.addPersonalEvent(pe);
     System.out.println("after add");
     Navigation.navigate(Screen.HOME);
+    qdb.notifySubscribers(List.of(new String[] {"personalEvent"}));
     // hi
   }
 }

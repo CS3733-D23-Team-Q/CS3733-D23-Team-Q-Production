@@ -414,6 +414,10 @@ public class Qdb {
     return (ArrayList<Integer>) personalEventsTable.getIndexes(user);
   }
 
+  public ArrayList<personalEvent> retrieveEventsFromUsername(String username) {
+    return personalEventsTable.getEvents(username);
+  }
+
   public Question retrieveQuestion(int ID) {
     return questionTable.retrieveRow(ID);
   }
@@ -697,7 +701,7 @@ public class Qdb {
         patientTransportRequestTable.populate();
       } else if (tableName.equals("settings")) {
         settingsTable.populate();
-      } else if (tableName.equals("personalEvent")){
+      } else if (tableName.equals("personalEvent")) {
         personalEventsTable.populate();
       }
     }
